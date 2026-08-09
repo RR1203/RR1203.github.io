@@ -19,7 +19,15 @@
 <body>
 
   <nav class="topnav">
+
+    <!-- Reading progress: fills as the visitor moves down the page -->
+    <div class="scroll-progress"><i></i></div>
+
     <div class="nav-inner">
+      <a class="nav-brand" href="#home" aria-label="Hannes Meilicke - home">
+        <span class="mono">HM</span>
+        <span class="brand-name">Hannes Meilicke</span>
+      </a>
       <div class="nav-links">
         <a href="#home" class="active">Home</a>
         <a href="#about">About</a>
@@ -32,6 +40,11 @@
   </nav>
 
   <header id="home" class="hero">
+
+    <!-- Quiet drifting network behind the type. Purely decorative,
+         switched off for reduced-motion visitors. -->
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+
     <div class="hero-inner">
 
       <!-- Add a file named photo.jpg to the repository to show your portrait here.
@@ -78,7 +91,9 @@
       </div>
 
     </div>
-  </header>
+    <a class="scroll-cue" href="#about"><span>Scroll</span><i></i></a>
+
+</header>
 
   <main>
 
@@ -96,7 +111,15 @@
           <img src="images/about.jpg" alt="Hannes Meilicke at work" loading="lazy" onerror="this.parentNode.style.display='none'">
         </figure>
       </div>
-    </section>
+    
+    <ul class="tags">
+      <li>Childhood adversity</li>
+      <li>Stress responsivity</li>
+      <li>Depression</li>
+      <li>Translational neuroscience</li>
+    </ul>
+
+  </section>
 
     <section id="research" class="reveal reveal-soft">
       <h2>Research</h2>
@@ -254,9 +277,29 @@
     </div>
   </section>
 
-  <footer>
+    <!-- Section rail: quick jump dots, hidden on narrow screens -->
+  <nav class="rail" aria-label="Section navigation">
+    <a href="#home"><span class="lbl">Home</span><span class="dot"></span></a>
+    <a href="#about"><span class="lbl">About</span><span class="dot"></span></a>
+    <a href="#research"><span class="lbl">Research</span><span class="dot"></span></a>
+    <a href="#publications"><span class="lbl">Publications</span><span class="dot"></span></a>
+    <a href="#cv"><span class="lbl">CV</span><span class="dot"></span></a>
+    <a href="#contact"><span class="lbl">Contact</span><span class="dot"></span></a>
+  </nav>
+
+<footer>
+  <div class="foot-inner">
     <p>&copy; 2026 Hannes Meilicke</p>
-  </footer>
+    <div class="foot-links">
+      <a href="https://scholar.google.com/citations?user=iULM0bQAAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar</a>
+      <a href="https://orcid.org/0009-0002-7678-2857" target="_blank" rel="noopener">ORCID</a>
+      <a href="https://www.researchgate.net/profile/Hannes-Meilicke" target="_blank" rel="noopener">ResearchGate</a>
+      <a href="https://www.linkedin.com/in/hannes-meilicke-2099ba257/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#contact">Message</a>
+      <a href="#home">Back to top</a>
+    </div>
+  </div>
+</footer>
 
   <script>
     /* Fade blocks in and out while scrolling.
@@ -389,6 +432,199 @@
       update();
     }());
   </script>
+
+<script>
+/* ---------------------------------------------------------
+   v6 interface behaviour
+   1. reading progress bar and glass navigation
+   2. section rail (right hand dots)
+   3. CV timeline that fills while you read
+   4. light that follows the cursor on the research cards
+   5. the quiet connectome behind the hero
+   Everything degrades gracefully: without JavaScript the page
+   simply stays still, and motion is switched off for visitors
+   who ask for reduced motion.
+--------------------------------------------------------- */
+(function () {
+  var D = document;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var nav = D.querySelector('.topnav');
+  var bar = D.querySelector('.scroll-progress i');
+  var railLinks = [].slice.call(D.querySelectorAll('.rail a'));
+  var railSecs = railLinks.map(function (a) { return D.querySelector(a.getAttribute('href')); });
+  var timeline = D.querySelector('.cv-timeline');
+  var entries = [].slice.call(D.querySelectorAll('.cv-entry'));
+
+  function onScroll() {
+    var y = window.scrollY || window.pageYOffset;
+    var max = D.documentElement.scrollHeight - window.innerHeight;
+    if (bar) { bar.style.width = (max > 0 ? Math.min(100, (y / max) * 100) : 0) + '%'; }
+    if (nav) { nav.classList.toggle('is-stuck', y > 12); }
+
+    var mark = y + window.innerHeight * 0.42, idx = 0;
+    railSecs.forEach(function (s, i) { if (s && s.offsetTop <= mark) { idx = i; } });
+    railLinks.forEach(function (a, i) { a.classList.toggle('active', i === idx); });
+
+    if (timeline) {
+      var r = timeline.getBoundingClientRect();
+      var p = Math.max(0, Math.min(r.height - 16, window.innerHeight * 0.62 - r.top));
+      timeline.style.setProperty('--cvp', p + 'px');
+      entries.forEach(function (e) {
+        e.classList.toggle('lit', e.getBoundingClientRect().top < window.innerHeight * 0.62);
+      });
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  [].slice.call(D.querySelectorAll('.theme-card')).forEach(function (card) {
+    card.addEventListener('mousemove', function (ev) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (ev.clientY - r.top) + 'px');
+    });
+  });
+
+  /* ---- the connectome ---- */
+  (function () {
+    var c = D.querySelector('.hero-canvas');
+    var hero = D.querySelector('.hero');
+    if (!c || !hero || reduced || !c.getContext) { return; }
+
+    var ctx = c.getContext('2d');
+    var w = 0, h = 0, dpr = 1, nodes = [], pulses = [], raf = null, running = false;
+    var mouse = { x: -9999, y: -9999, on: false };
+    var LINK = 158;
+
+    function build() {
+      var count = Math.round(Math.max(24, Math.min(64, (w * h) / 17000)));
+      nodes = [];
+      for (var i = 0; i < count; i++) {
+        nodes.push({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.17, vy: (Math.random() - 0.5) * 0.17,
+          r: Math.random() * 1.5 + 0.9, tw: Math.random() * 6.28
+        });
+      }
+    }
+
+    function resize() {
+      var r = c.getBoundingClientRect();
+      if (!r.width || !r.height) { return; }
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = r.width; h = r.height;
+      c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      build();
+    }
+
+    function spawn() {
+      if (!nodes.length) { return; }
+      var a = Math.floor(Math.random() * nodes.length), best = -1, bd = LINK;
+      for (var j = 0; j < nodes.length; j++) {
+        if (j === a) { continue; }
+        var dx = nodes[a].x - nodes[j].x, dy = nodes[a].y - nodes[j].y;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        if (d < bd && Math.random() < 0.5) { bd = d; best = j; }
+      }
+      if (best > -1 && pulses.length < 7) {
+        pulses.push({ a: a, b: best, t: 0, sp: 0.006 + Math.random() * 0.008 });
+      }
+    }
+
+    var last = 0, acc = 0;
+    function frame(ts) {
+      raf = requestAnimationFrame(frame);
+      if (!last) { last = ts; }
+      var dt = Math.min(50, ts - last); last = ts; acc += dt;
+      if (acc > 820) { acc = 0; spawn(); }
+
+      ctx.clearRect(0, 0, w, h);
+      var i, j, n, m, dx, dy, d;
+
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        n.x += n.vx; n.y += n.vy; n.tw += 0.012;
+        if (n.x < -20) { n.x = w + 20; }
+        if (n.x > w + 20) { n.x = -20; }
+        if (n.y < -20) { n.y = h + 20; }
+        if (n.y > h + 20) { n.y = -20; }
+        if (mouse.on) {
+          dx = mouse.x - n.x; dy = mouse.y - n.y; d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 190 && d > 1) { n.x += dx / d * 0.22; n.y += dy / d * 0.22; }
+        }
+      }
+
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        for (j = i + 1; j < nodes.length; j++) {
+          m = nodes[j]; dx = n.x - m.x; dy = n.y - m.y;
+          if (dx > LINK || dx < -LINK || dy > LINK || dy < -LINK) { continue; }
+          d = Math.sqrt(dx * dx + dy * dy);
+          if (d > LINK) { continue; }
+          var a = (1 - d / LINK) * 0.20;
+          if (mouse.on) {
+            var mx = (n.x + m.x) / 2 - mouse.x, my = (n.y + m.y) / 2 - mouse.y;
+            var md = Math.sqrt(mx * mx + my * my);
+            if (md < 200) { a += (1 - md / 200) * 0.28; }
+          }
+          ctx.strokeStyle = 'rgba(127,208,196,' + a.toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y); ctx.stroke();
+        }
+      }
+
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var tw = 0.42 + Math.sin(n.tw) * 0.16;
+        if (mouse.on) {
+          dx = mouse.x - n.x; dy = mouse.y - n.y; d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 200) { tw += (1 - d / 200) * 0.5; }
+        }
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(196,228,236,' + Math.min(1, tw).toFixed(3) + ')';
+        ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill();
+      }
+
+      for (i = pulses.length - 1; i >= 0; i--) {
+        var p = pulses[i]; p.t += p.sp;
+        if (p.t >= 1) { pulses.splice(i, 1); continue; }
+        var A = nodes[p.a], B = nodes[p.b];
+        if (!A || !B) { pulses.splice(i, 1); continue; }
+        var x = A.x + (B.x - A.x) * p.t, y = A.y + (B.y - A.y) * p.t;
+        var fade = Math.sin(p.t * Math.PI);
+        var g = ctx.createRadialGradient(x, y, 0, x, y, 9);
+        g.addColorStop(0, 'rgba(163,226,217,' + (0.85 * fade).toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(163,226,217,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(x, y, 9, 0, 6.2832); ctx.fill();
+      }
+    }
+
+    function start() { if (running) { return; } running = true; last = 0; raf = requestAnimationFrame(frame); }
+    function stop() { if (!running) { return; } running = false; cancelAnimationFrame(raf); }
+
+    resize();
+    window.addEventListener('resize', resize);
+    hero.addEventListener('mousemove', function (ev) {
+      var r = c.getBoundingClientRect();
+      mouse.x = ev.clientX - r.left; mouse.y = ev.clientY - r.top; mouse.on = true;
+    });
+    hero.addEventListener('mouseleave', function () {
+      mouse.on = false; mouse.x = -9999; mouse.y = -9999;
+    });
+    D.addEventListener('visibilitychange', function () { if (D.hidden) { stop(); } else { start(); } });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { start(); } else { stop(); }
+      }, { threshold: 0 }).observe(c);
+    }
+    start();
+  }());
+}());
+</script>
 
 </body>
 </html>
