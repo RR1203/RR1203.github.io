@@ -729,3 +729,70 @@ footer p {
   transition: opacity 1.15s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               transform 1.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
+/* ============================================================
+   Brand logos: each icon carries its own colours (v2)
+   ============================================================ */
+.hero-social .pill-icon {
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  flex: 0 0 auto;
+}
+.hero-social .pill-icon svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+  fill: initial;
+  stroke: initial;
+}
+.hero-social .pill {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 7px 22px 7px 9px;
+  gap: 12px;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.hero-social .pill:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.34);
+  transform: translateY(-2px);
+}
+.hero-social .pill-label {
+  color: #d8dde4;
+}
+
+/* ---- invisible reCAPTCHA ---- */
+.grecaptcha-badge {
+  visibility: hidden;
+}
+#recaptcha {
+  min-height: 0;
+  height: 0;
+  margin: 0;
+}
+.captcha-wrap {
+  display: block;
+  text-align: center;
+  margin: 26px 0 4px;
+}
+.captcha-note {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.42);
+  margin: 0;
+}
+.captcha-note a {
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: underline;
+}
+.captcha-note a:hover {
+  color: #ffffff;
+}
