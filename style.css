@@ -1115,3 +1115,61 @@ main a:not(.btn):hover{color:var(--accent)}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
 }
+
+
+/* =========================================================
+   v5 - Image slots + texture
+   Every image block hides itself when the file is missing,
+   so the page looks unchanged until a picture is added.
+   Files expected (all optional):
+     photo.jpg              square portrait, hero
+     images/about.jpg       4:5 portrait, About section
+     images/research-1..3.jpg  16:9, research cards
+     images/pub-2026.jpg etc.  1:1, publication thumbnails
+     images/cv-1..4.png     institution marks, CV timeline
+     images/band.jpg        wide 21:9 band above Contact
+   ========================================================= */
+
+.img-frame{margin:0;overflow:hidden;border-radius:16px;border:1px solid var(--card-border);background:rgba(255,255,255,.03);line-height:0}
+.img-frame img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* About: text beside a portrait --------------------------- */
+.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:56px;align-items:start}
+.about-grid > p{margin:0;max-width:58ch;font-size:19px;line-height:1.75;color:var(--muted)}
+.about-photo{aspect-ratio:4/5;width:100%}
+
+/* Research cards: optional image at the top --------------- */
+.card-media{margin:-28px -26px 22px;border:0;border-radius:16px 16px 0 0;aspect-ratio:16/9;overflow:hidden;line-height:0}
+.card-media img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.72)}
+
+/* Publications: optional square thumbnail ----------------- */
+.pubs li{grid-template-columns:92px 1fr auto}
+.pub-thumb{width:120px;aspect-ratio:1/1;border-radius:12px;align-self:start}
+
+/* CV: optional institution mark --------------------------- */
+.cv-mark{width:36px;height:36px;margin:0 0 12px;border:0;background:none;line-height:0}
+.cv-mark img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) brightness(1.7);opacity:.85}
+
+/* Wide image band above the contact section --------------- */
+.image-band{position:relative;height:clamp(200px,30vw,360px);overflow:hidden}
+.image-band img{width:100%;height:100%;object-fit:cover;display:block;opacity:.5}
+.image-band::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,var(--navy),rgba(11,24,42,.3) 45%,var(--charcoal))}
+
+/* Texture: soft accent glow behind the hero --------------- */
+.hero{position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(680px 420px at 22% 34%,rgba(127,208,196,.10),transparent 70%)}
+
+/* Texture: very fine grain over the whole page ------------ */
+body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+@media (max-width:900px){
+  .about-grid{grid-template-columns:minmax(0,1fr);gap:34px}
+  .about-photo{max-width:320px}
+  .pubs li{grid-template-columns:92px 1fr}
+  .pub-thumb{display:none}
+}
+
+/* Optional helper: add class="slot-preview" to <body> to see
+   dashed outlines of every empty image slot while editing. */
+.slot-preview .img-frame,.slot-preview .card-media,.slot-preview .cv-mark,.slot-preview .image-band,.slot-preview .hero-photo{display:block!important;position:relative;border:1px dashed rgba(127,208,196,.75)!important;background:rgba(127,208,196,.07)!important}
+.slot-preview .image-band::after{opacity:.25}
