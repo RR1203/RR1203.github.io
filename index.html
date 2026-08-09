@@ -33,6 +33,169 @@
 
       <div class="hero-text">
         <h1>Hannes Meilicke</h1>
+        <hr class="rule">
+        <p class="line">Physician &amp; Psychiatric Researcher</p>
+        <p class="line">[Your Position] at [Your Institution]</p>
+        <p class="line">Research on childhood adversity, stress responsivity,<br>depression and translational neuroscience</p>
+        <p class="line"><a href="#publications">Publications</a> &middot; <a href="cv.pdf">CV</a> &middot; <a href="#contact">Contact</a></p>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <section id="about">
+      <h2>About</h2>
+      <div class="h2-rule"></div>
+      <p>
+        I am a physician and psychiatric researcher interested in childhood
+        adversity, stress responsivity, depression, and translational
+        neuroscience.
+      </p>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+      <div class="h2-rule"></div>
+      <p>
+        My research focuses on understanding the biological and psychological
+        mechanisms underlying psychiatric disorders, with particular interests
+        in stress, adversity, neuroimaging, and psychiatric heterogeneity.
+      </p>
+    </section>
+
+    <section id="publications">
+      <h2>Publications</h2>
+      <div class="h2-rule"></div>
+      <ol class="pubs">
+        <li>Publication title. <em>Journal Name</em>, 2026.</li>
+        <li>Publication title. <em>Journal Name</em>, 2025.</li>
+      </ol>
+    </section>
+
+    <section id="cv">
+      <h2>CV</h2>
+      <div class="h2-rule"></div>
+      <p class="centered"><a href="cv.pdf">Download my CV</a></p>
+    </section>
+
+  </main>
+
+  <section id="contact" class="contact">
+    <div class="contact-inner">
+      <h2>Message</h2>
+      <div class="h2-rule"></div>
+
+      <!-- Messages are delivered through FormSubmit without leaving this page.
+           The first time somebody submits the form you receive a one-off
+           activation email from FormSubmit; click the link in it once and every
+           later message arrives in your inbox automatically. -->
+      <form id="message-form" class="message-form" action="https://formsubmit.co/ajax/hannes.meilicke@gmail.com" method="POST">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="subject" placeholder="Subject">
+        <textarea name="message" placeholder="Message" rows="6" required></textarea>
+        <input type="hidden" name="_subject" value="New message from hannes-meilicke.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
+        <button type="submit">Submit</button>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="links">
+        <a href="https://github.com/RR1203">GitHub</a>
+        <a href="#">Google Scholar</a>
+        <a href="#">ORCID</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Hannes Meilicke</p>
+  </footer>
+
+  <script>
+    (function () {
+      var form = document.getElementById('message-form');
+      if (!form) { return; }
+      var status = document.getElementById('form-status');
+      var button = form.querySelector('button');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        status.className = 'form-status';
+        status.textContent = '';
+        button.disabled = true;
+        button.textContent = 'Sending...';
+
+        fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        })
+          .then(function (response) {
+            return response.json().catch(function () { return {}; });
+          })
+          .then(function (data) {
+            if (data && (data.success === true || data.success === 'true')) {
+              form.reset();
+              status.className = 'form-status success is-visible';
+              status.textContent = 'Message sent successfully';
+            } else {
+              status.className = 'form-status error is-visible';
+              status.textContent = 'Sorry, the message could not be sent. Please try again later.';
+            }
+          })
+          .catch(function () {
+            status.className = 'form-status error is-visible';
+            status.textContent = 'Sorry, the message could not be sent. Please try again later.';
+          })
+          .then(function () {
+            button.disabled = false;
+            button.textContent = 'Submit';
+          });
+      });
+    })();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hannes Meilicke | Physician &amp; Psychiatric Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Playfair+Display:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="topnav">
+    <div class="nav-inner">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#cv">CV</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header id="home" class="hero">
+    <div class="hero-inner">
+
+      <!-- Add a file named photo.jpg to the repository to show your portrait here.
+           If the file is missing, this block simply hides itself. -->
+      <div class="hero-photo">
+        <img src="photo.jpg" alt="Hannes Meilicke" onerror="this.parentNode.style.display='none'">
+      </div>
+
+      <div class="hero-text">
+        <h1>Hannes Meilicke</h1>
         <p class="email">Email: hannes.meilicke@gmail.com</p>
         <hr class="rule">
         <p class="line">Physician &amp; Psychiatric Researcher</p>
