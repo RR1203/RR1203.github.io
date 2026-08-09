@@ -891,3 +891,93 @@ footer p {
     height: 21px !important;
   }
 }
+
+/* ============================================================
+   Hero profile icons v3.1 - captioned circles
+   ============================================================ */
+.hero-social {
+  gap: 26px;
+  align-items: flex-start;
+}
+
+.hero-social .pill {
+  width: auto !important;
+  height: auto !important;
+  flex-direction: column;
+  gap: 10px;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  transform: none !important;
+  color: #c3cedb;
+}
+
+.hero-social .pill-icon {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, border-color 0.25s ease,
+              transform 0.25s ease;
+}
+
+.hero-social .pill:hover {
+  color: #ffffff;
+}
+
+.hero-social .pill:hover .pill-icon {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  transform: translateY(-3px);
+}
+
+.hero-social .pill-label {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  clip-path: none;
+  white-space: nowrap;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.85;
+  transition: opacity 0.25s ease;
+}
+
+.hero-social .pill:hover .pill-label {
+  opacity: 1;
+}
+
+@media (max-width: 620px) {
+  .hero-social {
+    gap: 14px 18px;
+  }
+
+  .hero-social .pill-icon {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .hero-social .pill-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-social {
+    gap: 14px;
+  }
+
+  .hero-social .pill-label {
+    font-size: 10px;
+  }
+}
