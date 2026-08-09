@@ -602,3 +602,130 @@ footer p {
   fill: none;
   stroke: #ffffff;
 }
+
+/* ---------------------------------------------------------
+   Profile buttons in the hero (icon + name)
+   --------------------------------------------------------- */
+
+.nav-inner {
+  justify-content: center;
+}
+
+.hero-social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 42px;
+}
+
+.hero-social .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 7px 20px 7px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+              transform 0.2s ease, color 0.2s ease;
+}
+
+.hero-social .pill:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+.pill-icon {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill-label {
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.pill.s-scholar .pill-icon {
+  background: #4285f4;
+}
+
+.pill.s-scholar .pill-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: #ffffff;
+}
+
+.pill.s-orcid .pill-icon {
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.pill.s-orcid .pill-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: #a6ce39;
+}
+
+.pill.s-rg .pill-icon {
+  background: #00ccbb;
+}
+
+.pill.s-rg .pill-icon .social-text {
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.pill.s-linkedin .pill-icon {
+  background: #ffffff;
+}
+
+.pill.s-linkedin .pill-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: #0a66c2;
+}
+
+.pill.s-mail .pill-icon {
+  background: #6b7684;
+}
+
+.pill.s-mail .pill-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #ffffff;
+}
+
+@media (max-width: 620px) {
+  .hero-social {
+    gap: 9px;
+  }
+
+  .pill-label {
+    font-size: 16px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Gentle reveal for whole sections: starts early, leaves late
+   --------------------------------------------------------- */
+
+.reveal-soft {
+  transform: translateY(26px);
+  transition: opacity 1.15s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 1.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
