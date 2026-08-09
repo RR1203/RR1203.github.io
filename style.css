@@ -102,14 +102,14 @@ a:hover {
 
 .hero-text {
   flex: 1 1 420px;
-  max-width: 520px;
+  max-width: 620px;
   text-align: center;
 }
 
 h1 {
   font-family: "Playfair Display", Georgia, serif;
   font-weight: 500;
-  font-size: clamp(42px, 6vw, 76px);
+  font-size: clamp(42px, 6vw, 68px);
   line-height: 1.05;
   letter-spacing: 1px;
   margin: 0 0 30px;
@@ -184,7 +184,7 @@ p {
   margin-bottom: 16px;
 }
 
-/* Contact ------------------------------------------------- */
+/* Contact and message form -------------------------------- */
 
 .contact {
   background: var(--charcoal-light);
@@ -197,8 +197,72 @@ p {
   text-align: center;
 }
 
+.message-form {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.message-form input[type="email"],
+.message-form input[type="text"],
+.message-form textarea {
+  width: 100%;
+  background: #ffffff;
+  color: #1c1c1c;
+  border: 0;
+  border-bottom: 3px solid #d3d3d3;
+  padding: 16px 20px;
+  font-family: inherit;
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.message-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.message-form input::placeholder,
+.message-form textarea::placeholder {
+  color: #6d6d6d;
+}
+
+.message-form input:focus,
+.message-form textarea:focus {
+  outline: 0;
+  border-bottom-color: #8f98a8;
+}
+
+.message-form .honey {
+  display: none;
+}
+
+.message-form button {
+  margin: 26px auto 0;
+  background: none;
+  border: 0;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 26px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+.message-form button:hover {
+  opacity: 0.7;
+}
+
+.contact-details {
+  margin-top: 34px;
+  font-style: italic;
+}
+
 .contact .links {
-  margin-top: 26px;
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
