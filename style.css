@@ -1173,3 +1173,167 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
    dashed outlines of every empty image slot while editing. */
 .slot-preview .img-frame,.slot-preview .card-media,.slot-preview .cv-mark,.slot-preview .image-band,.slot-preview .hero-photo{display:block!important;position:relative;border:1px dashed rgba(127,208,196,.75)!important;background:rgba(127,208,196,.07)!important}
 .slot-preview .image-band::after{opacity:.25}
+
+
+/* =========================================================
+   v6 - Atmosphere, structure and motion
+   Adds: reading progress, glass navigation with monogram,
+   a drifting connectome behind the hero, numbered sections,
+   a section rail, a CV timeline that fills while reading,
+   cursor light on the research cards and a wider footer.
+   ========================================================= */
+
+:root{ --accent-2:#8fb6ff; --hair:rgba(255,255,255,.10); }
+
+::selection{background:rgba(127,208,196,.30);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+html{scrollbar-color:rgba(255,255,255,.22) #0a1626}
+::-webkit-scrollbar{width:11px}
+::-webkit-scrollbar-track{background:#0a1626}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:9px;border:3px solid #0a1626}
+::-webkit-scrollbar-thumb:hover{background:rgba(127,208,196,.55)}
+
+/* Reading progress bar on the top edge --------------------- */
+.scroll-progress{position:absolute;inset:0 0 auto 0;height:2px;pointer-events:none;overflow:hidden}
+.scroll-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 10px rgba(127,208,196,.6)}
+
+/* Navigation: glass bar with a monogram -------------------- */
+.topnav{background:rgba(11,24,42,.55);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);border-bottom:1px solid transparent;transition:background .35s ease,border-color .35s ease}
+.topnav.is-stuck{background:rgba(11,24,42,.88);border-bottom-color:var(--hair)}
+.nav-inner{max-width:1150px;padding:13px 32px;justify-content:space-between;align-items:center;gap:12px 28px}
+.nav-brand{display:inline-flex;align-items:center;gap:13px;text-decoration:none;color:#fff;flex:0 0 auto}
+.nav-brand .mono{width:38px;height:38px;border-radius:50%;border:1px solid rgba(127,208,196,.5);display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",Georgia,serif;font-size:14px;letter-spacing:.08em;color:var(--accent);transition:background .3s ease,transform .3s ease,border-color .3s ease}
+.nav-brand:hover{opacity:1}
+.nav-brand:hover .mono{background:rgba(127,208,196,.15);border-color:var(--accent);transform:translateY(-1px)}
+.nav-brand .brand-name{font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.nav-links{gap:12px 28px}
+.nav-links a{font-size:14px;letter-spacing:.14em;text-transform:uppercase;position:relative;border-bottom:0!important;padding-bottom:5px;opacity:.66}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--accent);transition:right .3s cubic-bezier(.22,.61,.36,1)}
+.nav-links a:hover::after,.nav-links a.active::after{right:0}
+.nav-links a.active{opacity:1;color:#fff}
+@media (max-width:760px){.nav-brand .brand-name{display:none}.nav-links a{font-size:12px;letter-spacing:.1em}}
+
+/* Hero: the drifting connectome ---------------------------- */
+.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero-canvas{position:absolute;inset:0;z-index:-1;width:100%;height:100%;display:block;pointer-events:none;
+  -webkit-mask-image:radial-gradient(78% 92% at 80% 44%,#000 8%,rgba(0,0,0,.35) 55%,transparent 78%);
+  mask-image:radial-gradient(78% 92% at 80% 44%,#000 8%,rgba(0,0,0,.35) 55%,transparent 78%)}
+
+/* Hero: staggered entrance --------------------------------- */
+.hero-text > *{animation:heroUp .95s cubic-bezier(.22,.61,.36,1) both}
+.hero-text .hero-eyebrow{animation-delay:.05s}
+.hero-text h1{animation-delay:.15s}
+.hero-text .hero-lede{animation-delay:.26s}
+.hero-text .hero-affil{animation-delay:.34s}
+.hero-text .hero-actions{animation-delay:.42s}
+.hero-text .hero-social{animation-delay:.52s}
+@keyframes heroUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* Hero: quiet scroll cue ----------------------------------- */
+.scroll-cue{position:absolute;right:36px;bottom:34px;display:flex;flex-direction:column;align-items:center;gap:14px;text-decoration:none;color:rgba(255,255,255,.42);font-size:10px;letter-spacing:.3em;text-transform:uppercase;transition:color .3s ease;z-index:1}
+.scroll-cue span{writing-mode:vertical-rl}
+.scroll-cue i{width:1px;height:58px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;left:0;width:1px;height:34%;background:var(--accent);animation:cueRun 2.6s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes cueRun{0%{top:-38%}100%{top:104%}}
+.scroll-cue:hover{color:#fff;opacity:1}
+@media (max-width:960px){.scroll-cue{display:none}}
+
+/* Sections: numbered eyebrows and softer dividers ---------- */
+main{counter-reset:sec}
+main > section{counter-increment:sec;position:relative}
+main > section > h2::before{content:"0" counter(sec);display:block;font-size:12px;letter-spacing:.28em;color:var(--accent);opacity:.9;margin-bottom:13px}
+.contact h2::before{content:"05";display:block;font-size:12px;letter-spacing:.28em;color:var(--accent);opacity:.9;margin-bottom:13px}
+main section + section{border-top:0!important}
+main > section + section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.17) 15%,rgba(255,255,255,.17) 85%,transparent)}
+
+/* Section rail --------------------------------------------- */
+.rail{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;gap:19px;align-items:flex-end}
+.rail a{display:flex;align-items:center;gap:11px;text-decoration:none;color:rgba(255,255,255,.45);font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.rail a:hover{opacity:1;color:#fff}
+.rail .lbl{opacity:0;transform:translateX(8px);transition:opacity .3s ease,transform .3s ease;white-space:nowrap}
+.rail a:hover .lbl,.rail a.active .lbl{opacity:1;transform:none}
+.rail .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
+.rail a:hover .dot{background:var(--accent)}
+.rail a.active{color:#fff}
+.rail a.active .dot{background:var(--accent);transform:scale(1.5);box-shadow:0 0 0 4px rgba(127,208,196,.15)}
+@media (max-width:1240px){.rail{display:none}}
+
+/* About: flexible layout, drop cap, focus tags ------------- */
+.about-grid{display:flex!important;flex-wrap:wrap;gap:56px;align-items:flex-start}
+.about-grid > p{flex:1 1 430px;margin:0;max-width:60ch;font-size:20px;line-height:1.8;color:var(--muted)}
+.about-grid > p::first-letter{font-family:"Playfair Display",Georgia,serif;font-size:68px;line-height:.78;float:left;padding:8px 15px 0 0;color:var(--accent)}
+.about-photo{flex:0 0 320px;max-width:320px}
+.tags{list-style:none;display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:34px 0 0}
+.tags li{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);border:1px solid var(--card-border);border-radius:999px;padding:9px 17px;background:rgba(255,255,255,.03);transition:border-color .28s ease,color .28s ease,background .28s ease,transform .28s ease}
+.tags li:hover{border-color:var(--accent);color:var(--accent);background:rgba(127,208,196,.08);transform:translateY(-2px)}
+
+/* Research cards: light follows the cursor ----------------- */
+.theme-card{position:relative;overflow:hidden}
+.theme-card::before{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .4s ease;background:radial-gradient(280px 220px at var(--mx,50%) var(--my,0%),rgba(127,208,196,.17),transparent 70%)}
+.theme-card:hover::before{opacity:1}
+.theme-card h3{transition:color .3s ease}
+.theme-card:hover h3{color:var(--accent-strong)}
+.theme-num{position:relative;z-index:1}
+
+/* Publications: calm hover with inset hairlines ------------ */
+.pubs li{position:relative;padding-left:16px;padding-right:16px;margin-left:-16px;margin-right:-16px;border-radius:12px;transition:background .3s ease;border-top-color:transparent!important;border-bottom-color:transparent!important}
+.pubs li:hover{background:rgba(255,255,255,.04)}
+.pubs li::after{content:"";position:absolute;top:0;left:16px;right:16px;height:1px;background:rgba(255,255,255,.11)}
+.pubs li:last-child::before{content:"";position:absolute;bottom:0;left:16px;right:16px;height:1px;background:rgba(255,255,255,.11)}
+.pub-title{transition:color .3s ease}
+.pubs li:hover .pub-title{color:var(--accent-strong)}
+
+/* CV timeline: the line fills as you read ------------------ */
+.cv-timeline::before{background:rgba(255,255,255,.13)}
+.cv-timeline::after{content:"";position:absolute;left:151px;top:8px;width:1px;height:var(--cvp,0px);background:linear-gradient(to bottom,rgba(127,208,196,.25),var(--accent));box-shadow:0 0 12px rgba(127,208,196,.45)}
+.cv-entry::before{background:rgba(255,255,255,.26);transition:background .45s ease,box-shadow .45s ease,transform .45s ease}
+.cv-entry.lit::before{background:var(--accent);box-shadow:0 0 0 4px var(--navy),0 0 16px rgba(127,208,196,.65);transform:scale(1.15)}
+@media (max-width:900px){.cv-timeline::after{left:5px}}
+
+/* Primary buttons: a single quiet sheen -------------------- */
+.btn-primary,#cv .centered a{position:relative;overflow:hidden}
+.btn-primary::after,#cv .centered a::after{content:"";position:absolute;top:0;left:-45%;width:38%;height:100%;transform:skewX(-18deg);opacity:0;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent)}
+.btn-primary:hover::after,#cv .centered a:hover::after{opacity:1;animation:sheen .85s ease}
+@keyframes sheen{from{left:-45%}to{left:125%}}
+
+/* Contact: stays in the navy family ------------------------ */
+.contact{background:linear-gradient(180deg,#102135 0%,#0c1a2c 100%);border-top:1px solid var(--hair);position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(620px 380px at 82% 18%,rgba(127,208,196,.09),transparent 70%)}
+.contact-inner{position:relative}
+.message-form input[type="email"],
+.message-form input[type="text"],
+.message-form textarea{background:rgba(255,255,255,.05)!important;color:#f2f5f8!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:12px;padding:15px 18px;font-size:18px;transition:border-color .25s ease,background .25s ease,box-shadow .25s ease}
+.message-form input::placeholder,.message-form textarea::placeholder{color:rgba(255,255,255,.45)!important}
+.message-form input:focus,.message-form textarea:focus{outline:none!important;border-color:var(--accent)!important;background:rgba(255,255,255,.08)!important;box-shadow:0 0 0 4px rgba(127,208,196,.14)}
+.message-form textarea{min-height:170px}
+@media (min-width:1020px){
+  .contact-inner{display:grid;grid-template-columns:minmax(280px,400px) minmax(0,1fr);gap:0 90px;align-items:start}
+  .contact-inner > h2{grid-column:1;grid-row:1}
+  .contact-inner > .h2-rule{grid-column:1;grid-row:2}
+  .contact-inner > .contact-lede{grid-column:1;grid-row:3;margin:0}
+  .contact-inner > .message-form{grid-column:2;grid-row:1 / span 4;max-width:620px;width:100%}
+}
+
+/* Footer ---------------------------------------------------- */
+footer{border-top:1px solid var(--hair);padding:42px 0 46px;text-align:left}
+.foot-inner{max-width:1150px;margin:0 auto;padding:0 32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 30px}
+.foot-links{display:flex;flex-wrap:wrap;gap:12px 24px}
+.foot-links a{color:rgba(255,255,255,.58);text-decoration:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase;transition:color .25s ease}
+.foot-links a:hover{color:var(--accent);opacity:1}
+footer p{margin:0;font-size:13px;letter-spacing:.12em;color:rgba(255,255,255,.5)}
+
+@media (max-width:620px){
+  .about-grid{gap:32px}
+  .about-grid > p::first-letter{font-size:54px}
+  .foot-inner{padding:0 22px;justify-content:flex-start}
+}
+
+/* Print ----------------------------------------------------- */
+@media print{
+  .topnav,.rail,.scroll-cue,.hero-canvas,.image-band,.contact,.scroll-progress{display:none!important}
+  body{background:#fff;color:#111}
+  body::after{display:none}
+  h1,h2,h3,.hero-text h1{color:#111}
+  p,.cv-body p,main > section > p{color:#333}
+  .reveal,.reveal.is-in{opacity:1;transform:none}
+}
