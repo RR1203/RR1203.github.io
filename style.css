@@ -1366,3 +1366,10 @@ body.simple footer{margin-top:auto}
   .simple-main{padding:64px 22px 84px}
   .simple-main h2{margin-top:38px}
 }
+
+
+/* --- v7.1 corrections --- */
+.simple-main{max-width:1150px}
+.simple-main a.btn,.simple-main a.btn-primary{color:#0b182a}
+.simple-main a.btn-ghost{color:var(--text)}
+.simple-main a.btn-ghost:hover{color:var(--accent)}
