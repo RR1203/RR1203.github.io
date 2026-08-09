@@ -1,58 +1,221 @@
+/* ---------------------------------------------------------
+   Personal academic site - dark editorial style
+   --------------------------------------------------------- */
+
+:root {
+  --navy: #0b182a;
+  --charcoal: #2f2e2e;
+  --charcoal-light: #3f4045;
+  --text: #ffffff;
+  --muted: #d8d5d0;
+  --rule: rgba(255, 255, 255, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    color: #222;
+  margin: 0;
+  background: var(--navy);
+  color: var(--text);
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 20px;
+a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
 }
 
-header {
-    padding: 50px 0 30px;
-    border-bottom: 1px solid #ddd;
+a:hover {
+  opacity: 0.65;
+}
+
+/* Navigation ---------------------------------------------- */
+
+.topnav {
+  background: var(--charcoal);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav-inner {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 40px;
+}
+
+.nav-inner a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 22px;
+  letter-spacing: 0.6px;
+}
+
+.nav-inner a:hover,
+.nav-inner a.active {
+  color: #ffffff;
+  opacity: 1;
+}
+
+/* Hero ---------------------------------------------------- */
+
+.hero {
+  padding: 60px 24px 80px;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 55px;
+}
+
+.hero-photo {
+  flex: 0 1 340px;
+  max-width: 340px;
+  margin-top: 120px;
+}
+
+.hero-photo img {
+  width: 100%;
+  display: block;
+  filter: grayscale(100%);
+}
+
+.hero-text {
+  flex: 1 1 420px;
+  max-width: 520px;
+  text-align: center;
 }
 
 h1 {
-    margin-bottom: 5px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1.05;
+  letter-spacing: 1px;
+  margin: 0 0 30px;
 }
 
-.subtitle {
-    color: #666;
+.email {
+  letter-spacing: 3px;
+  font-size: 20px;
+  margin: 0 0 26px;
 }
 
-nav {
-    margin-top: 25px;
+.rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  width: 290px;
+  max-width: 80%;
+  margin: 0 auto 28px;
 }
 
-nav a {
-    margin-right: 20px;
-    color: #333;
-    text-decoration: none;
+.line {
+  font-style: italic;
+  margin: 0 0 22px;
 }
 
-nav a:hover {
-    text-decoration: underline;
-}
+/* Sections ------------------------------------------------ */
 
 main {
-    padding: 40px 0;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 24px 30px;
 }
 
 section {
-    margin-bottom: 50px;
+  padding: 46px 0;
+}
+
+main section + section {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 h2 {
-    margin-bottom: 15px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  font-size: 34px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #e9e6e1;
+  margin: 0 0 14px;
 }
 
+.h2-rule {
+  width: 90px;
+  height: 4px;
+  background: var(--rule);
+  margin: 0 auto 32px;
+}
+
+p {
+  margin: 0 0 18px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.pubs {
+  padding-left: 22px;
+}
+
+.pubs li {
+  margin-bottom: 16px;
+}
+
+/* Contact ------------------------------------------------- */
+
+.contact {
+  background: var(--charcoal-light);
+  padding: 60px 24px 70px;
+}
+
+.contact-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact .links {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+}
+
+/* Footer -------------------------------------------------- */
+
 footer {
-    border-top: 1px solid #ddd;
-    padding: 25px 0;
-    color: #777;
-    font-size: 14px;
+  background: var(--navy);
+  text-align: center;
+  padding: 28px 24px 36px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+footer p {
+  margin: 0;
 }
