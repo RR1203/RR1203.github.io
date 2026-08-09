@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Hannes Meilicke">
+ <title>Hannes Meilicke</title>
+ <rect width="64" height="64" rx="14" fill="#0b182a"/>
+ <circle cx="32" cy="32" r="24" fill="none" stroke="#7fd0c4" stroke-opacity="0.55" stroke-width="1.6"/>
+ <text x="32" y="41" text-anchor="middle" font-family="Georgia, Times New Roman, serif" font-size="23" letter-spacing="0.5" fill="#7fd0c4">HM</text>
+</svg>
