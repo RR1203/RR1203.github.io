@@ -9,6 +9,8 @@
   --text: #ffffff;
   --muted: #d8d5d0;
   --rule: rgba(255, 255, 255, 0.55);
+  --green: #5fc98a;
+  --red: #ea9a94;
 }
 
 * {
@@ -113,12 +115,6 @@ h1 {
   line-height: 1.05;
   letter-spacing: 1px;
   margin: 0 0 30px;
-}
-
-.email {
-  letter-spacing: 3px;
-  font-size: 20px;
-  margin: 0 0 26px;
 }
 
 .rule {
@@ -256,13 +252,45 @@ p {
   opacity: 0.7;
 }
 
-.contact-details {
-  margin-top: 34px;
-  font-style: italic;
+.message-form button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+/* Status message shown after sending ---------------------- */
+
+.form-status {
+  display: none;
+  margin: 16px auto 0;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.form-status.is-visible {
+  display: block;
+}
+
+.form-status.success {
+  color: var(--green);
+}
+
+.form-status.error {
+  color: var(--red);
+}
+
+.form-status.success::before {
+  content: "✓";
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 26px;
+  line-height: 1;
+  vertical-align: -2px;
+  color: var(--green);
 }
 
 .contact .links {
-  margin-top: 10px;
+  margin-top: 34px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
