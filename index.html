@@ -85,11 +85,17 @@
     <section id="about" class="reveal reveal-soft">
       <h2>About</h2>
       <div class="h2-rule"></div>
-      <p>
-        I am a physician and psychiatric researcher interested in childhood
-        adversity, stress responsivity, depression, and translational
-        neuroscience.
-      </p>
+      <div class="about-grid">
+        <p>
+          I am a physician and psychiatric researcher interested in childhood
+          adversity, stress responsivity, depression, and translational
+          neuroscience.
+        </p>
+        <!-- Optional photo: add images/about.jpg (4:5 portrait). If the file is missing this block hides itself. -->
+        <figure class="img-frame about-photo">
+          <img src="images/about.jpg" alt="Hannes Meilicke at work" loading="lazy" onerror="this.parentNode.style.display='none'">
+        </figure>
+      </div>
     </section>
 
     <section id="research" class="reveal reveal-soft">
@@ -103,16 +109,25 @@
 
       <div class="theme-grid">
         <article class="theme-card">
+          <figure class="card-media">
+            <img src="images/research-1.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+          </figure>
           <span class="theme-num">01</span>
           <h3>Childhood adversity &amp; stress</h3>
           <p>How early-life adversity shapes stress responsivity, and why some people prove resilient while others do not.</p>
         </article>
         <article class="theme-card">
+          <figure class="card-media">
+            <img src="images/research-2.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+          </figure>
           <span class="theme-num">02</span>
           <h3>Depression &amp; heterogeneity</h3>
           <p>Why the same diagnosis looks so different from person to person, and what that means for treatment and prognosis.</p>
         </article>
         <article class="theme-card">
+          <figure class="card-media">
+            <img src="images/research-3.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+          </figure>
           <span class="theme-num">03</span>
           <h3>Translational neuroscience</h3>
           <p>Connecting neuroimaging and biological markers with the questions that matter in day-to-day clinical psychiatry.</p>
@@ -131,6 +146,9 @@
             <p class="pub-meta"><em>Journal Name</em></p>
             <p class="pub-links"><a href="#">DOI</a><a href="#">PDF</a></p>
           </div>
+          <figure class="img-frame pub-thumb">
+            <img src="images/pub-2026.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+          </figure>
         </li>
         <li>
           <div class="pub-year">2025</div>
@@ -139,6 +157,9 @@
             <p class="pub-meta"><em>Journal Name</em></p>
             <p class="pub-links"><a href="#">DOI</a><a href="#">PDF</a></p>
           </div>
+          <figure class="img-frame pub-thumb">
+            <img src="images/pub-2025.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+          </figure>
         </li>
       </ol>
       <p class="pubs-more"><a href="https://scholar.google.com/citations?user=iULM0bQAAAAJ&amp;hl=en" target="_blank" rel="noopener">See all publications on Google Scholar</a></p>
@@ -155,7 +176,9 @@
       <div class="cv-timeline">
 
         <article class="cv-entry reveal">
-          <div class="cv-period">[Year &ndash; Year]</div>
+          <div class="cv-period">
+            <figure class="cv-mark"><img src="images/cv-1.png" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></figure>
+            [Year &ndash; Year]</div>
           <div class="cv-body">
             <h3>[Title of this stage.]</h3>
             <p>[Short description of what you did during this period.]</p>
@@ -163,7 +186,9 @@
         </article>
 
         <article class="cv-entry reveal">
-          <div class="cv-period">[Year &ndash; Year]</div>
+          <div class="cv-period">
+            <figure class="cv-mark"><img src="images/cv-2.png" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></figure>
+            [Year &ndash; Year]</div>
           <div class="cv-body">
             <h3>[Title of this stage.]</h3>
             <p>[Short description of what you did during this period.]</p>
@@ -171,7 +196,9 @@
         </article>
 
         <article class="cv-entry reveal">
-          <div class="cv-period">[Year &ndash; Year]</div>
+          <div class="cv-period">
+            <figure class="cv-mark"><img src="images/cv-3.png" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></figure>
+            [Year &ndash; Year]</div>
           <div class="cv-body">
             <h3>[Title of this stage.]</h3>
             <p>[Short description of what you did during this period.]</p>
@@ -179,7 +206,9 @@
         </article>
 
         <article class="cv-entry reveal">
-          <div class="cv-period">[Since Year]</div>
+          <div class="cv-period">
+            <figure class="cv-mark"><img src="images/cv-4.png" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></figure>
+            [Since Year]</div>
           <div class="cv-body">
             <h3>[Title of this stage.]</h3>
             <p>[Short description of what you did during this period.]</p>
@@ -192,6 +221,11 @@
     </section>
 
   </main>
+
+  <!-- Optional wide image band: add images/band.jpg (about 21:9). Hides itself if missing. -->
+  <div class="image-band">
+    <img src="images/band.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+  </div>
 
   <section id="contact" class="contact">
     <div class="contact-inner">
