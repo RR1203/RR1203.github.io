@@ -33,7 +33,7 @@
 
       <div class="hero-text">
         <h1>Hannes Meilicke</h1>
-        <p class="email">Email: your.email@example.com</p>
+        <p class="email">Email: hannes.meilicke@gmail.com</p>
         <hr class="rule">
         <p class="line">Physician &amp; Psychiatric Researcher</p>
         <p class="line">[Your Position] at [Your Institution]</p>
@@ -85,10 +85,26 @@
 
   <section id="contact" class="contact">
     <div class="contact-inner">
-      <h2>Contact</h2>
+      <h2>Message</h2>
       <div class="h2-rule"></div>
-      <p>Email: your.email@example.com</p>
-      <p>[Your Department], [Your Institution]</p>
+
+      <!-- Messages are delivered to hannes.meilicke@gmail.com through FormSubmit.
+           The first time somebody submits the form you will receive a one-off
+           activation email from FormSubmit; click the link in it once and every
+           later message arrives in your inbox automatically. -->
+      <form class="message-form" action="https://formsubmit.co/hannes.meilicke@gmail.com" method="POST">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="subject" placeholder="Subject">
+        <textarea name="message" placeholder="Message" rows="6" required></textarea>
+        <input type="hidden" name="_subject" value="New message from hannes-meilicke.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_next" value="https://hannes-meilicke.com/#contact">
+        <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
+        <button type="submit">Submit</button>
+      </form>
+
+      <p class="contact-details">Or write directly to hannes.meilicke@gmail.com</p>
       <p class="links">
         <a href="https://github.com/RR1203">GitHub</a>
         <a href="#">Google Scholar</a>
