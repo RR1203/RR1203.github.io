@@ -1516,3 +1516,28 @@ body.simple footer{margin-top:auto}
    subset in fonts.css). Nothing else on the site uses it.
    --------------------------------------------------------- */
 .hero-text h1{font-family:'Fraunces Hero','Playfair Display',Georgia,serif;font-weight:600;letter-spacing:-.03em;line-height:1.02}
+
+
+/* =========================================================
+   v11 - Hero name mark
+   Two quiet marks sit with the name in the header: an arc
+   rising out of the gap between the two words, and a pulse
+   line woven along the baseline, both fading out at their
+   ends. Everything is inline SVG drawn in em units, so it
+   scales with the clamped h1 size and the page still makes
+   no third-party requests.
+   ========================================================= */
+.hero-name{position:relative;display:inline-block}
+.hero-name .hn-text{position:relative;z-index:2;white-space:nowrap}
+.hero-name svg{position:absolute;z-index:1;display:block;pointer-events:none;overflow:visible}
+.hero-name .hn-arc{left:50%;transform:translateX(-50%);bottom:.14em;width:2.2281em;height:.9em}
+.hero-name .hn-pulse{left:-.9em;bottom:-.27em;width:8.1381em;height:.7em}
+
+/* Very narrow phones: shrink the name so one line still fits */
+@media (max-width:335px){
+  .hero-text h1{font-size:calc((100vw - 90px) / 6.34)}
+}
+
+@media print{
+  .hero-name svg{display:none}
+}
