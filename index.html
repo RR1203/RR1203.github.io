@@ -402,10 +402,11 @@
         <input type="hidden" name="_captcha" value="false">
         <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
 
-        <div class="captcha-wrap">
-          <div id="recaptcha"></div>
-          <p class="captcha-note">Protected by reCAPTCHA &middot; Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy&nbsp;Policy</a> &amp; <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms</a> apply.</p>
-        </div>
+        <label class="human-check">
+          <input type="checkbox" id="human-check" required>
+          <span class="human-check-box" aria-hidden="true"></span>
+          <span class="human-check-text">I am not a robot</span>
+        </label>
 
         <button type="submit">Submit</button>
         <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
@@ -470,17 +471,14 @@
       watch(soft, { threshold: 0, rootMargin: '30% 0px 35% 0px' });
     })();
 
-    /* Contact form: invisible reCAPTCHA v2 + AJAX submit, visitor stays on the page. */
+    /* Contact form: simple human confirmation + AJAX submit, visitor stays on the page. */
     (function () {
-      var RECAPTCHA_SITE_KEY = '6LcOSn8tAAAAAF4c5XfSDx-Uo2_TeErW7onLA89x';
-
       var form = document.getElementById('message-form');
       var button = form.querySelector('button[type="submit"]');
       var statusLine = document.getElementById('form-status');
-      var holder = document.getElementById('recaptcha');
       var honey = form.querySelector('input[name="_honey"]');
+      var humanCheck = document.getElementById('human-check');
       var loadedAt = Date.now();
-      var widgetId = null;
 
       function show(message, ok) {
         statusLine.textContent = message;
@@ -492,30 +490,9 @@
         button.textContent = 'Submit';
       }
 
-      window.onRecaptchaReady = function () {
-        widgetId = grecaptcha.render(holder, {
-          sitekey: RECAPTCHA_SITE_KEY,
-          size: 'invisible',
-          badge: 'bottomright',
-          callback: function (token) { send(token); },
-          'error-callback': function () {
-            resetButton();
-            show('The security check could not be completed. Please try again.', false);
-          },
-          'expired-callback': function () { grecaptcha.reset(widgetId); }
-        });
-      };
-
-      var tag = document.createElement('script');
-      tag.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaReady&render=explicit';
-      tag.async = true;
-      tag.defer = true;
-      document.head.appendChild(tag);
-
-      function send(token) {
+      function send() {
         var data = new FormData(form);
         data.delete('g-recaptcha-response');
-        if (token) { data.append('g-recaptcha-response', token); }
         fetch(form.action, {
           method: 'POST',
           body: data,
@@ -533,26 +510,23 @@
         .catch(function () {
           show('Sorry, the message could not be sent. Please try again later.', false);
         })
-        .then(function () {
-          resetButton();
-          if (widgetId !== null && window.grecaptcha) { grecaptcha.reset(widgetId); }
-        });
+        .then(resetButton);
       }
 
       form.addEventListener('submit', function (event) {
         event.preventDefault();
         if (honey && honey.value) { return; }
+        if (!humanCheck.checked) {
+          show('Please confirm that you are not a robot.', false);
+          return;
+        }
         if (Date.now() - loadedAt < 2500) {
           show('Please take a moment before sending.', false);
           return;
         }
         button.disabled = true;
         button.textContent = 'Sending\u2026';
-        if (widgetId !== null && window.grecaptcha) {
-          grecaptcha.execute(widgetId);
-        } else {
-          send(null);
-        }
+        send();
       });
     })();
   </script>
