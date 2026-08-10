@@ -1509,3 +1509,10 @@ body.simple footer{margin-top:auto}
 .piece-body p{font-size:18px!important}
 .piece-quote{font-size:21px;padding-left:20px}
 }
+
+/* ---------------------------------------------------------
+   Hero name typeface
+   The name in the header is set in Fraunces (self-hosted
+   subset in fonts.css). Nothing else on the site uses it.
+   --------------------------------------------------------- */
+.hero-text h1{font-family:'Fraunces Hero','Playfair Display',Georgia,serif;font-weight:600;letter-spacing:-.03em;line-height:1.02}
