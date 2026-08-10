@@ -472,7 +472,7 @@
 
     /* Contact form: invisible reCAPTCHA v2 + AJAX submit, visitor stays on the page. */
     (function () {
-      var RECAPTCHA_SITE_KEY = '6LebjXwtAAAAAERKmqPLmFaq4P4VXucBk7lSkEf_';
+      var RECAPTCHA_SITE_KEY = '6LcOSn8tAAAAAF4c5XfSDx-Uo2_TeErW7onLA89x';
 
       var form = document.getElementById('message-form');
       var button = form.querySelector('button[type="submit"]');
@@ -514,6 +514,7 @@
 
       function send(token) {
         var data = new FormData(form);
+        data.delete('g-recaptcha-response');
         if (token) { data.append('g-recaptcha-response', token); }
         fetch(form.action, {
           method: 'POST',
