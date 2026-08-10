@@ -1373,3 +1373,37 @@ body.simple footer{margin-top:auto}
 .simple-main a.btn,.simple-main a.btn-primary{color:#0b182a}
 .simple-main a.btn-ghost{color:var(--text)}
 .simple-main a.btn-ghost:hover{color:var(--accent)}
+
+/* ===========================================================
+   v8 - real content
+   affiliation line, multi-paragraph About, publication groups,
+   education timeline and clinical electives
+   =========================================================== */
+
+.affil-prev{display:block;margin-top:8px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,213,208,.48)}
+
+/* About: several paragraphs, one drop cap ------------------ */
+.about-grid > .about-copy{flex:1 1 430px;max-width:62ch}
+.about-copy p{margin:0 0 22px;font-size:20px;line-height:1.8;color:var(--muted)}
+.about-copy p:last-child{margin-bottom:0}
+.about-copy p:first-child::first-letter{font-family:"Playfair Display",Georgia,serif;font-size:68px;line-height:.78;float:left;padding:8px 15px 0 0;color:var(--accent)}
+
+/* Publications: grouped by kind ---------------------------- */
+.pub-group{font-family:"Playfair Display",Georgia,serif;font-weight:500;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:52px 0 0;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.09);max-width:860px}
+.pub-group:first-of-type{margin-top:30px}
+.pub-group + .pubs{margin-top:0}
+.pubs li:first-child::after{opacity:0}
+.pub-authors{margin:0 0 8px;font-size:16px;line-height:1.65;color:rgba(216,213,208,.6)}
+.pubs .me{color:#eef1f5;font-weight:600}
+.pub-note{font-style:italic;color:rgba(216,213,208,.5)}
+.pub-links .pub-note{font-size:15px}
+
+/* Clinical electives -------------------------------------- */
+.cv-sub-head{font-family:"Playfair Display",Georgia,serif;font-weight:500;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:62px 0 6px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.09);max-width:900px}
+.electives{list-style:none;margin:0;padding:0;max-width:900px}
+.electives li{display:flex;gap:30px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.electives li:last-child{border-bottom:none}
+.electives .el-when{flex:0 0 160px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(216,213,208,.55);padding-top:5px}
+.electives .el-what b{display:block;font-weight:500;font-size:19px;color:#eef1f5}
+.electives .el-what i{display:block;font-style:normal;font-size:16px;color:rgba(216,213,208,.6);margin-top:3px}
+@media (max-width:680px){.electives li{flex-direction:column;gap:5px}.electives .el-when{flex:none;padding-top:0}}
