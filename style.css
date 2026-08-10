@@ -448,13 +448,27 @@ footer p {
 .human-check {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 22px;
-  background: #f9f9f9;
-  border: 1px solid #d3d3d3;
-  border-radius: 3px;
+  gap: 13px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
   cursor: pointer;
   user-select: none;
+  transition: background .25s ease, border-color .25s ease;
+}
+
+.human-check:hover {
+  background: rgba(255, 255, 255, 0.065);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.human-check:focus-within {
+  border-color: var(--accent);
+}
+
+.human-check:has(input:checked) {
+  background: rgba(255, 255, 255, 0.055);
 }
 
 .human-check input {
@@ -469,27 +483,95 @@ footer p {
 .human-box {
   position: relative;
   display: inline-block;
-  width: 26px;
-  height: 26px;
-  background: #ffffff;
-  border: 2px solid #b7b7b7;
-  border-radius: 2px;
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  transition: border-color .3s ease, background .3s ease;
 }
 
-.human-check input:checked + .human-box::after {
-  content: "\2713";
+/* the tick itself, drawn on with stroke-dashoffset (path length ~19.5) */
+.human-box svg {
   position: absolute;
-  top: -7px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  opacity: 0;
+}
+
+/* click -> spinner runs ~0.78s -> box lights up and dips -> tick draws in */
+.human-check input:checked + .human-box::after {
+  content: "";
+  position: absolute;
   left: 2px;
-  font-size: 25px;
-  line-height: 1;
-  color: #1a9c5b;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-top-color: var(--accent);
+  opacity: 0;
+  animation: hc-spin .55s linear infinite, hc-spin-life .78s ease forwards;
+}
+
+.human-check input:checked + .human-box {
+  animation: hc-box .45s ease .66s forwards, hc-pop .42s ease .66s;
+}
+
+.human-check input:checked + .human-box svg {
+  animation: hc-draw .46s cubic-bezier(.2, .75, .3, 1) .74s forwards;
+}
+
+@keyframes hc-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hc-spin-life {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes hc-box {
+  to { border-color: var(--accent); background: rgba(255, 255, 255, 0.07); }
+}
+
+@keyframes hc-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(.88); }
+  100% { transform: scale(1); }
+}
+
+@keyframes hc-draw {
+  0% { opacity: 1; stroke-dashoffset: 20; }
+  100% { opacity: 1; stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .human-check input:checked + .human-box::after { display: none; }
+  .human-check input:checked + .human-box { animation: none; border-color: var(--accent); }
+  .human-check input:checked + .human-box svg { animation: none; opacity: 1; stroke-dashoffset: 0; }
 }
 
 .human-label {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   font-size: 15px;
-  color: #3c4043;
+  letter-spacing: .02em;
+  color: var(--muted);
+  transition: color .3s ease;
+}
+
+.human-check:has(input:checked) .human-label {
+  color: var(--text);
 }
 
 /* ---------------------------------------------------------
@@ -1541,3 +1623,8 @@ body.simple footer{margin-top:auto}
 @media print{
   .hero-name svg{display:none}
 }
+
+
+/* Download CV button aligned to the timeline rail --------- */
+#cv .centered{margin-left:151px}
+@media (max-width:900px){#cv .centered{margin-left:5px}}
