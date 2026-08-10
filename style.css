@@ -1407,3 +1407,14 @@ body.simple footer{margin-top:auto}
 .electives .el-what b{display:block;font-weight:500;font-size:19px;color:#eef1f5}
 .electives .el-what i{display:block;font-style:normal;font-size:16px;color:rgba(216,213,208,.6);margin-top:3px}
 @media (max-width:680px){.electives li{flex-direction:column;gap:5px}.electives .el-when{flex:none;padding-top:0}}
+
+/* CV structure: sub-points and country flags --------------- */
+.flag{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:.8em;line-height:1;margin-left:.4em;vertical-align:.05em;opacity:.92}
+.cv-body h3 .flag{font-size:.68em;margin-left:.45em;vertical-align:.12em}
+.cv-points{list-style:none;margin:12px 0 0;padding:0;max-width:64ch}
+.cv-points>li{display:flex;gap:20px;padding:9px 0;border-top:1px solid rgba(255,255,255,.07)}
+.cv-points>li:first-child{border-top:0;padding-top:2px}
+.cv-points .pt-when{flex:0 0 108px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);opacity:.7;padding-top:4px}
+.cv-points .pt-what b{display:block;font-weight:500;font-size:18px;color:#eef1f5}
+.cv-points .pt-what i{display:block;font-style:normal;font-size:15.5px;line-height:1.55;color:rgba(216,213,208,.62);margin-top:3px}
+@media (max-width:680px){.cv-points>li{flex-direction:column;gap:4px}.cv-points .pt-when{flex:none;padding-top:0}}
