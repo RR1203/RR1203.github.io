@@ -1341,18 +1341,24 @@
       });
     }(btns[i]));
   }
-  var down = false, sx = 0, sl = 0, moved = false, last = 0, vel = 0, lt = 0, raf = 0;
+  var down = false, sx = 0, sl = 0, moved = false, last = 0, vel = 0, lt = 0, raf = 0, pid = null, caught = false;
   rail.addEventListener('pointerdown', function (e) {
     if (e.pointerType === 'mouse' && e.button !== 0) { return; }
     down = true; moved = false; sx = e.clientX; sl = rail.scrollLeft;
     last = e.clientX; lt = performance.now(); vel = 0;
     cancelAnimationFrame(raf);
-    rail.setPointerCapture(e.pointerId);
+    pid = e.pointerId; caught = false;
   });
   rail.addEventListener('pointermove', function (e) {
     if (!down) { return; }
     var dx = e.clientX - sx;
-    if (Math.abs(dx) > 4) { rail.classList.add('dragging'); moved = true; }
+    if (Math.abs(dx) > 4) {
+      rail.classList.add('dragging');
+      moved = true;
+      /* Same rule as the year rail: the pointer is only captured once
+         it has really moved, so a click on a card still counts. */
+      if (!caught) { try { rail.setPointerCapture(pid); } catch (err) {} caught = true; }
+    }
     rail.scrollLeft = sl - dx;
     var now = performance.now(), dt = now - lt;
     if (dt > 0) { vel = (e.clientX - last) / dt; last = e.clientX; lt = now; }
@@ -1424,16 +1430,23 @@
         rail.scrollBy({ left: Number(b.getAttribute("data-yrail-step")) * stepWidth(), behavior: "smooth" });
       });
     });
-    var down = false, startX = 0, startLeft = 0, moved = false;
+    var down = false, startX = 0, startLeft = 0, moved = false, pid = null, caught = false;
     rail.addEventListener("pointerdown", function (e) {
       if (e.pointerType === "mouse" && e.button !== 0) { return; }
       down = true; moved = false; startX = e.clientX; startLeft = rail.scrollLeft;
-      rail.setPointerCapture(e.pointerId);
+      pid = e.pointerId; caught = false;
     });
     rail.addEventListener("pointermove", function (e) {
       if (!down) { return; }
       var dx = e.clientX - startX;
-      if (Math.abs(dx) > 4) { rail.classList.add("dragging"); moved = true; }
+      if (Math.abs(dx) > 4) {
+        rail.classList.add("dragging");
+        moved = true;
+        /* The rail only takes hold of the pointer once the finger has
+           really travelled. A plain click therefore stays with the year
+           chip underneath it and the year opens. */
+        if (!caught) { try { rail.setPointerCapture(pid); } catch (err) {} caught = true; }
+      }
       rail.scrollLeft = startLeft - dx;
     });
     var release = function () {
