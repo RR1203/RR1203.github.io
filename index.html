@@ -230,12 +230,28 @@
 
       </div>
       <p class="media-note">More pieces will appear here over time.</p>
+
+      <!-- Reading notes: one page per year, writing/books-YYYY.html -->
+      <div class="reading">
+        <h3 class="reading-head">Reading notes</h3>
+        <p class="reading-lede">One post per year: every book I read and what I took from it.</p>
+        <div class="reading-grid">
+          <a class="reading-card" href="writing/books-2025.html"><span class="ry">2025</span><span class="rt">Books I read in 2025</span><span class="rc">In progress</span></a>
+          <a class="reading-card" href="writing/books-2024.html"><span class="ry">2024</span><span class="rt">Books I read in 2024</span><span class="rc">Coming soon</span></a>
+          <a class="reading-card" href="writing/books-2023.html"><span class="ry">2023</span><span class="rt">Books I read in 2023</span><span class="rc">Coming soon</span></a>
+          <a class="reading-card" href="writing/books-2022.html"><span class="ry">2022</span><span class="rt">Books I read in 2022</span><span class="rc">Coming soon</span></a>
+          <a class="reading-card" href="writing/books-2021.html"><span class="ry">2021</span><span class="rt">Books I read in 2021</span><span class="rc">Coming soon</span></a>
+        </div>
+      </div>
     </section>
 
     <section id="publications" class="reveal reveal-soft">
       <h2>Publications</h2>
       <div class="h2-rule"></div>
-      <h3 class="pub-group">Peer-reviewed articles</h3>
+      <!-- Each group is a <details> block: click the heading to fold it open or shut.
+           Change the number in .pf-count when you add an item. -->
+      <details class="pub-fold" open>
+        <summary><span class="pf-title">Peer-reviewed articles</span><span class="pf-count">2</span><svg class="pf-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
 <ol class="pubs">
 <li>
 <div class="pub-year">2026</div>
@@ -256,7 +272,9 @@
 </div>
 </li>
 </ol>
-<h3 class="pub-group">Conference contributions</h3>
+      </details>
+<details class="pub-fold">
+        <summary><span class="pf-title">Conference contributions</span><span class="pf-count">6</span><svg class="pf-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
 <ol class="pubs">
 <li>
 <div class="pub-year">2026</div>
@@ -310,6 +328,7 @@
 </div>
 </li>
 </ol>
+      </details>
 
       <p class="pubs-more"><a href="https://scholar.google.com/citations?user=iULM0bQAAAAJ&amp;hl=en" target="_blank" rel="noopener">See all publications on Google Scholar</a></p>
     </section>
