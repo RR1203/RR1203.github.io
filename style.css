@@ -2056,3 +2056,34 @@ body.simple footer{margin-top:auto}
 .cv-pix .pix:hover{transform:none}
 .ypanel.is-open{animation:none}
 }
+
+
+/* ==========================================================
+   v13
+   1. the last letter of the name is painted in full again
+   2. the ten books move strictly one step at a time
+   ========================================================== */
+
+/* The name is set with negative letter spacing and painted
+   through background-clip:text, so the gradient box ended a
+   fraction before the outline of the final e. A little padding
+   on the right gives the letter room to finish. */
+.hero-text h1 .hn-text{padding-right:.1em}
+
+/* The book itself is the step forward. */
+.cd.is-js .cd-stage{cursor:pointer;transition:border-color .35s ease}
+.cd.is-js:not(.is-last) .cd-stage:hover{border-top-color:rgba(127,208,196,.5)}
+.cd.is-js.is-last .cd-stage{cursor:default}
+
+/* The ticks are a read-out of where the year has got to, not a
+   way of jumping: nothing can be skipped between ten and one. */
+.cd.is-js .cd-ticks{pointer-events:none}
+.cd.is-js .cd-ticks button{cursor:default}
+.cd.is-js .cd-ticks button:disabled{opacity:1}
+
+/* Of the two round buttons the next one carries the weight. */
+.cd-nav button:not(:disabled){border-color:rgba(127,208,196,.4);color:#d6efe9}
+.cd-nav button[data-cd-step="1"]:not(:disabled){background:rgba(127,208,196,.13);
+  border-color:rgba(127,208,196,.62);color:#eafcf8}
+.cd-nav button[data-cd-step="1"]:not(:disabled):hover{background:rgba(127,208,196,.2);
+  border-color:var(--accent)}
