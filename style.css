@@ -2493,3 +2493,13 @@ body.simple footer{margin-top:auto}
   .cd-num-band{font-size:46px}
   .cd-num-word{font-size:23px}
 }
+
+
+/* ============================================================
+   v23 - a quicker turn of the card, a tighter row of icons
+   ============================================================ */
+.cd.is-js .cd-item{transition:opacity .18s ease,transform .26s cubic-bezier(.22,.61,.36,1)}
+@media(prefers-reduced-motion:reduce){
+.cd.is-js .cd-item{transition:opacity .12s linear;transform:none}
+}
+.hero-social{gap:12px}
