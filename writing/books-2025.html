@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My ten most influential books of 2025 | Hannes Meilicke</title>
-<meta name="description" content="The ten books from 2025 that influenced me most, counted down from ten to one.">
+<meta name="description" content="The books from 2025 that influenced me most, counted down from the honorable mentions to number one.">
 <meta property="og:title" content="My ten most influential books of 2025">
-<meta property="og:description" content="The ten books from 2025 that influenced me most, counted down from ten to one.">
+<meta property="og:description" content="The books from 2025 that influenced me most, counted down from the honorable mentions to number one.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hannes-meilicke.com/writing/books-2025.html">
 <meta property="og:image" content="https://hannes-meilicke.com/og.jpg">
@@ -66,7 +66,7 @@
     <div class="cd-stage">
       <ol class="cd-list">
 
-        <li class="cd-item cd-extra" data-rank="Honorable mentions">
+        <li class="cd-item cd-extra" data-card="Honorable mentions" data-slug="honorable-mentions">
           <p class="cd-rank"><span class="cd-no">Before the ten</span><span class="cd-num cd-num-word">Honorable<br>mentions</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
@@ -255,9 +255,10 @@
       });
       if(prev){prev.disabled=(i===0);}
       if(next){next.disabled=(i===items.length-1);}
-      if(live){live.textContent="Number "+rank(i)+" of "+items.length;}
+      var card=items[i].getAttribute("data-card");
+      if(live){live.textContent=card?(card+", card "+(i+1)+" of "+items.length):("Number "+rank(i)+" of "+items.length);}
       if(fromUser&&window.history&&history.replaceState){
-        try{history.replaceState(null,"","#no-"+rank(i));}catch(err){}
+        try{history.replaceState(null,"","#no-"+(items[i].getAttribute("data-slug")||rank(i)));}catch(err){}
       }
     }
     cd.classList.add("is-js");
