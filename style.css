@@ -2122,3 +2122,43 @@ body.simple footer{margin-top:auto}
 @media(prefers-reduced-motion:reduce){
   .heroes>li:hover .ih-name{transform:none}
 }
+
+/* ---- v15 -----------------------------------------------------------------
+   Three things. The rows no longer blink when the pointer crosses the gap
+   between two items. A tile no longer grows far enough to reach over its
+   neighbour and take the hover away from it. And anything that opens or
+   closes on a click stops turning into selected text when it is clicked
+   twice.                                                                 */
+
+/* The old rules dimmed everything as soon as the pointer was anywhere
+   inside the list, so the empty space between two items counted as well
+   and the whole row flickered on the way across. :has() asks the honest
+   question instead: dim the others only while one of them really is
+   under the pointer. */
+.yrail:hover .ychip:not(:hover):not([aria-expanded="true"]){opacity:1}
+.yrail:has(.ychip:hover) .ychip:not(:hover):not([aria-expanded="true"]){opacity:.55}
+.cv-pix:hover .pix{opacity:1}
+.cv-pix:has(.pix:hover) .pix{opacity:.5}
+.cv-pix:has(.pix:hover) .pix:hover{opacity:1}
+.heroes:hover>li:not(:hover){opacity:1}
+.heroes:has(>li:hover)>li:not(:hover){opacity:.62}
+
+/* A little more air between the pictures, and a growth that stays inside
+   that air. The enlarged tile can no longer cover the one next to it, so
+   the pointer is never handed back and forth at the seam. */
+.cv-pix{gap:18px}
+.cv-pix .pix:hover{transform:scale(1.26) translateY(-3px)}
+@media (max-width:900px){.cv-pix .pix:hover{transform:scale(1.13)}}
+
+/* One step of the countdown is slow enough to be read. While it runs the
+   arrows and the book itself stop taking presses, so the ten cannot be
+   clicked away in a second. */
+.cd.is-js .cd-item{transition:opacity .55s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
+.cd-nav button{transition:opacity .3s ease,background .3s ease,border-color .3s ease,color .3s ease}
+.cd.is-busy .cd-nav button,.cd.is-busy .cd-stage{pointer-events:none}
+.cd.is-busy .cd-nav button:not(:disabled){opacity:.5}
+.cd.is-busy .cd-stage{cursor:default}
+
+/* Nothing that opens or closes on a click should become selected text. */
+.heroes-fold>summary,.pub-fold>summary,.ychip,.ychip *,.yp-close,
+.cd-stage,.cd-nav button,.cd-ticks button{-webkit-user-select:none;user-select:none}
