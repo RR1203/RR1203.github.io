@@ -1580,10 +1580,11 @@
     openYear = year;
   };
   chips.forEach(function (c) {
-    c.addEventListener("click", function (e) {
-      /* A double click on a year is still just one click: it opens or
-         closes the panel and never selects the year as text. */
-      if (e.detail > 1) { return; }
+    c.addEventListener("click", function () {
+      /* Every click counts, however quickly they come: one opens the
+         year, the next shuts it again. The chip is marked unselectable
+         in the stylesheet, so a fast double click never leaves the
+         year sitting there as marked text. */
       openUp(c.getAttribute("data-year"));
     });
   });
@@ -1607,15 +1608,15 @@
 </script>
 
 <script>
-/* A fold opens or closes with one click. Without this the second half
-   of a double click would open it straight back up and leave the
-   heading selected, so that half is simply thrown away. */
+/* A fold answers every click at once, however fast the clicks come:
+   one opens it, the next shuts it, and none of them is ever thrown
+   away. The only thing taken off a quick second click is the text
+   selection the browser would otherwise leave on the heading, and
+   cancelling the press alone does that: the click that follows still
+   reaches the fold, so nothing is swallowed and nothing is delayed. */
 (function () {
   [].slice.call(document.querySelectorAll("details > summary")).forEach(function (s) {
     s.addEventListener("mousedown", function (e) {
-      if (e.detail > 1) { e.preventDefault(); }
-    });
-    s.addEventListener("click", function (e) {
       if (e.detail > 1) { e.preventDefault(); }
     });
   });
