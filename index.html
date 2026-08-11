@@ -24,6 +24,11 @@
 </head>
 <body>
 
+  <!-- The chapter wash. One backdrop, pinned to the window, that fades to
+       a new shade whenever a new chapter of the page reaches the middle of
+       the screen. The shades live in style.css under .chapter-wash. -->
+  <div class="chapter-wash" aria-hidden="true"></div>
+
   <nav class="topnav">
 
     <!-- Reading progress: fills as the visitor moves down the page -->
@@ -1640,6 +1645,46 @@
   window.addEventListener("resize", set);
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(set); }
   if (window.ResizeObserver) { new window.ResizeObserver(set).observe(el); }
+}());
+</script>
+
+<script>
+/* Which chapter are we in? Whichever section has already passed the line a
+   little above the middle of the screen. Its name goes on to the wash, and
+   the stylesheet takes care of the fade from one shade to the next. The
+   reading is taken once per frame at most, so scrolling stays cheap. */
+(function () {
+  var wash = document.querySelector(".chapter-wash");
+  if (!wash) { return; }
+  var names = ["home", "about", "writing", "research", "cv", "contact"];
+  var parts = [];
+  names.forEach(function (n) {
+    var el = document.getElementById(n);
+    if (el) { parts.push({ name: n, el: el }); }
+  });
+  if (!parts.length) { return; }
+  var current = "";
+  var pending = false;
+  function pick() {
+    pending = false;
+    var line = window.innerHeight * 0.42;
+    var name = parts[0].name;
+    parts.forEach(function (p) {
+      if (p.el.getBoundingClientRect().top <= line) { name = p.name; }
+    });
+    if (name !== current) {
+      current = name;
+      wash.setAttribute("data-chapter", name);
+    }
+  }
+  function queue() {
+    if (pending) { return; }
+    pending = true;
+    window.requestAnimationFrame(pick);
+  }
+  pick();
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("resize", queue);
 }());
 </script>
 
