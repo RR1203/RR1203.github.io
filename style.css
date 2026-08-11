@@ -2087,3 +2087,38 @@ body.simple footer{margin-top:auto}
   border-color:rgba(127,208,196,.62);color:#eafcf8}
 .cd-nav button[data-cd-step="1"]:not(:disabled):hover{background:rgba(127,208,196,.2);
   border-color:var(--accent)}
+
+
+/* ==========================================================
+   v14
+   Every intellectual hero answers to the cursor: the name
+   lifts a little, the row warms, the rest of the list steps
+   back. Nothing moves out of place, so the column stays calm.
+   ========================================================== */
+
+.heroes>li{position:relative;transition:opacity .4s ease}
+.heroes>li::before{content:"";position:absolute;inset:5px -16px;border-radius:12px;
+  background:linear-gradient(90deg,rgba(127,208,196,.1),rgba(127,208,196,.02) 62%,
+    rgba(127,208,196,0) 100%);
+  opacity:0;transition:opacity .4s ease;pointer-events:none}
+.heroes>li:hover::before{opacity:1}
+.heroes>li>*{position:relative}
+
+.heroes .ih-name{display:inline-block;transform-origin:left center;
+  transition:transform .45s cubic-bezier(.22,.61,.36,1),color .35s ease,
+    text-shadow .45s ease}
+.heroes>li:hover .ih-name{transform:scale(1.055);color:#fff;
+  text-shadow:0 0 26px rgba(127,208,196,.3)}
+.heroes .ih-role,.heroes .ih-for{transition:opacity .35s ease,color .35s ease}
+.heroes>li:hover .ih-role{opacity:1;color:var(--accent-strong)}
+.heroes>li:hover .ih-for{opacity:.95}
+.heroes:hover>li:not(:hover){opacity:.62}
+
+@media(hover:none){
+  .heroes>li::before{display:none}
+  .heroes:hover>li:not(:hover){opacity:1}
+  .heroes>li:hover .ih-name{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .heroes>li:hover .ih-name{transform:none}
+}
