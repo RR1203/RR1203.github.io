@@ -2280,3 +2280,36 @@ body.simple footer{margin-top:auto}
 .cd-item[data-rank="3"] .cd-cover::after{content:"";position:absolute;
   left:-6px;right:-6px;top:100%;height:26px;margin-top:6px;
   background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23bd7f42%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E") center/100% 100% no-repeat;pointer-events:none}
+
+/* ---------------------------------------------------------------
+   v18 - a wash of colour for every chapter
+   Each chapter of the page owns a shade. The wash below is pinned to
+   the window and sits behind everything on it, and it fades from one
+   shade to the next as the reader travels down. Every shade stays in
+   the same dark family as the rest of the page - a little cooler, a
+   little warmer, a little deeper - so a new chapter announces itself
+   quietly. The script at the foot of index.html names whichever
+   chapter holds the middle of the screen; the fade itself is the
+   transition below.
+   --------------------------------------------------------------- */
+.chapter-wash {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #0b182a;
+  transition: background-color 900ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chapter-wash[data-chapter="home"] { background-color: #0b182a; }
+.chapter-wash[data-chapter="about"] { background-color: #0b1e2b; }
+.chapter-wash[data-chapter="writing"] { background-color: #121a33; }
+.chapter-wash[data-chapter="research"] { background-color: #0a2029; }
+.chapter-wash[data-chapter="cv"] { background-color: #151c26; }
+.chapter-wash[data-chapter="contact"] { background-color: #0b182a; }
+
+/* A reader who has asked for less movement still gets the change of
+   chapter, only faster and with less of a drift. */
+@media (prefers-reduced-motion: reduce) {
+  .chapter-wash { transition-duration: 300ms; }
+}
