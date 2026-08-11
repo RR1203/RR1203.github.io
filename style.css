@@ -2447,3 +2447,49 @@ body.simple footer{margin-top:auto}
 .foot-fine{max-width:1150px;margin:20px auto 0;padding:0 32px}
 .foot-fine p{margin:0;max-width:78ch;font-size:12px;line-height:1.6;letter-spacing:.04em;color:rgba(255,255,255,.36)}
 @media (max-width:620px){.foot-fine{padding:0 22px}}
+
+/* ----------------------------------------------------------------
+   v22 - the cards that come before number ten
+   A countdown can open with cards that carry no single rank: the
+   honorable mentions, and the band from fifteen to eleven. They keep
+   the shape of a book card, but the numeral column takes a word or a
+   span of figures, no jacket stands beside it, and the body holds a
+   short list instead of one title. Where two books share one place,
+   a small mark sits between them.
+   ---------------------------------------------------------------- */
+.cd-num-band{font-size:56px;letter-spacing:-.02em}
+.cd-num-word{font-size:25px;line-height:1.16;letter-spacing:0;
+  color:rgba(127,208,196,.62)}
+@supports (-webkit-text-stroke:1px #fff){
+  .cd-num-word{-webkit-text-stroke:0;color:rgba(127,208,196,.62)}
+}
+@media (min-width:641px){
+  .cd-extra{grid-template-columns:158px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-extra{grid-template-columns:126px minmax(0,1fr)}
+}
+.cd-extra .cd-body{padding-top:4px}
+.cd-extra-list{list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 34px}
+.cd-extra-list li{margin:0;padding-left:16px;position:relative}
+.cd-extra-list li::before{content:"";position:absolute;left:0;top:.7em;width:8px;
+  height:1px;background:var(--accent);opacity:.55}
+.cd-extra-book{display:block;font-family:"Playfair Display",Georgia,serif;
+  font-size:16px;line-height:1.42;color:#fff}
+.cd-extra-by{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);opacity:.72}
+.cd-plus{margin:14px 0 0;font-family:"Playfair Display",Georgia,serif;font-size:16px;
+  color:var(--accent);opacity:.6}
+.cd-plus + .cd-title{margin-top:8px}
+.ypanel .cd-extra-list{gap:16px 26px}
+.ypanel .cd-extra-book{font-size:15px}
+.ypanel .cd-num-band{font-size:46px}
+.ypanel .cd-num-word{font-size:21px}
+@media (max-width:720px){
+  .cd-extra-list{grid-template-columns:minmax(0,1fr);gap:16px 0}
+}
+@media (max-width:640px){
+  .cd-num-band{font-size:46px}
+  .cd-num-word{font-size:23px}
+}
