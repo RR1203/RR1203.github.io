@@ -2162,3 +2162,57 @@ body.simple footer{margin-top:auto}
 /* Nothing that opens or closes on a click should become selected text. */
 .heroes-fold>summary,.pub-fold>summary,.ychip,.ychip *,.yp-close,
 .cd-stage,.cd-nav button,.cd-ticks button{-webkit-user-select:none;user-select:none}
+
+/* ---- v16 -----------------------------------------------------------------
+   The real cause of the flickering cursor, the profile row on an even
+   pitch, and a countdown that travels across its box.                   */
+
+/* Why the cursor used to stutter along the lower edge of a card: the card
+   lifted itself out from under the pointer. A pixel or two above its bottom
+   edge the hover began, the card rose, the pointer fell outside it, the
+   hover ended, the card dropped back under the pointer, and round it went
+   several times a second. Growing cannot do that, because every edge moves
+   outwards and the pointer can only ever stay inside. The lift is now a
+   very slight swell and the shadow does the rest of the work. */
+.btn:hover{transform:scale(1.035)}
+#cv .centered a:hover{transform:scale(1.035)}
+.message-form button[type=submit]:hover{transform:scale(1.03)}
+.theme-card:hover{transform:scale(1.012)}
+.media-card:hover{transform:scale(1.014)}
+.reading-card:hover{transform:scale(1.012)}
+.ychip:hover{transform:scale(1.045)}
+@media (prefers-reduced-motion:reduce){
+.btn:hover,#cv .centered a:hover,.message-form button[type=submit]:hover,
+.theme-card:hover,.media-card:hover,.reading-card:hover,.ychip:hover{transform:none}
+}
+
+/* The five profile marks sit on one even pitch. Each is given the same
+   share of the row, so the circles are equally spaced whatever the length
+   of the word underneath, and each word stays centred under its circle.
+   The ring is a little tighter around the glyph. */
+@media (min-width:901px){
+  .hero-social{gap:0;flex-wrap:nowrap;max-width:600px;justify-content:space-between}
+  .hero-social .pill{flex:1 1 0;min-width:0}
+}
+.hero-social .pill-icon{width:47px!important;height:47px!important}
+
+/* Ten to one reads as a journey across the box: a book still to come waits
+   off to the left, a book already read has moved off to the right, so every
+   step carries the eye rightwards. Forward is unhurried; turning back is
+   quick, more a glance over the shoulder than a walk. The delay on
+   visibility keeps the departing book on screen long enough to be seen
+   leaving. */
+.cd.is-js .cd-item{transform:translateX(-56px);pointer-events:none;
+  transition:opacity .5s ease,transform .8s cubic-bezier(.16,.72,.24,1),visibility 0s linear .8s}
+.cd.is-js .cd-item.is-done{transform:translateX(56px)}
+.cd.is-js .cd-item.is-current{transform:none;pointer-events:auto;
+  transition:opacity .5s ease,transform .8s cubic-bezier(.16,.72,.24,1),visibility 0s linear 0s}
+.cd.is-js.is-back .cd-item{transition:opacity .26s ease,transform .34s cubic-bezier(.3,.75,.3,1),visibility 0s linear .34s}
+.cd.is-js.is-back .cd-item.is-current{transition:opacity .26s ease,transform .34s cubic-bezier(.3,.75,.3,1),visibility 0s linear 0s}
+@media (prefers-reduced-motion:reduce){
+.cd.is-js .cd-item,.cd.is-js .cd-item.is-done{transform:none}
+}
+
+/* No single word left alone on a line of its own. */
+#writing>p{max-width:70ch}
+#about>p,#writing>p,#research>p{text-wrap:pretty}
