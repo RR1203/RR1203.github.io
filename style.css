@@ -2302,10 +2302,10 @@ body.simple footer{margin-top:auto}
 }
 
 .chapter-wash[data-chapter="home"] { background-color: #0b182a; }
-.chapter-wash[data-chapter="about"] { background-color: #0b1e2b; }
-.chapter-wash[data-chapter="writing"] { background-color: #121a33; }
-.chapter-wash[data-chapter="research"] { background-color: #0a2029; }
-.chapter-wash[data-chapter="cv"] { background-color: #151c26; }
+.chapter-wash[data-chapter="about"] { background-color: #0a2434; }
+.chapter-wash[data-chapter="writing"] { background-color: #141634; }
+.chapter-wash[data-chapter="research"] { background-color: #082a30; }
+.chapter-wash[data-chapter="cv"] { background-color: #1c2230; }
 .chapter-wash[data-chapter="contact"] { background-color: #0b182a; }
 
 /* A reader who has asked for less movement still gets the change of
