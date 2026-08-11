@@ -1841,3 +1841,218 @@ body.simple footer{margin-top:auto}
 @media(prefers-reduced-motion:reduce){
   .cd.is-js .cd-item{transition:opacity .2s linear;transform:none}
 }
+
+
+/* =========================================================
+   v12 - Hero name in colour, research focus that answers the
+         cursor, the reading-notes year rail and its panels,
+         and rows of pictures in the CV.
+   ========================================================= */
+
+/* Hero: the name in colour, the two marks framing it -------
+   The arc no longer cuts across the letters. It is a wide,
+   flat dome above them, while the pulse runs below the
+   descenders with its spike sitting in the gap between the
+   two words. Both are stretched to the width of the name, so
+   they stay in step at every size. */
+.hero-text h1 .hn-text{
+  background:linear-gradient(96deg,#ffffff 0%,#f6fdfb 26%,#bfeade 54%,#93d3f0 78%,#a9bdf7 100%);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent}
+.hero-name .hn-arc{top:-.34em;bottom:auto;left:0;transform:none;width:100%;height:.40em}
+.hero-name .hn-pulse{left:0;bottom:-.34em;width:100%;height:.60em}
+@media print{.hero-text h1 .hn-text{background:none;color:#111;-webkit-text-fill-color:#111}}
+
+/* Hero: the role first, the research line underneath ------- */
+.hero-affil{margin:0 0 16px}
+.hero-lede{max-width:46ch;font-size:clamp(20px,1.9vw,25px);line-height:1.45;
+  text-wrap:balance;margin:0 0 36px}
+.hero-text .hero-affil{animation-delay:.26s}
+.hero-text .hero-lede{animation-delay:.34s}
+
+/* Research focus: every topic answers the cursor -----------
+   The row keeps its keylines. On hover the other topics step
+   back, a gradient rule draws itself in from the left, a
+   soft light follows the pointer and the one-line gloss
+   fades up. The gloss keeps its space in the layout, so
+   nothing moves while the cursor travels along the row. */
+.tags li{position:relative;overflow:hidden;padding:22px 20px 20px;
+  transition:opacity .35s ease,background .35s ease}
+.tags li::before{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .55s cubic-bezier(.22,.61,.36,1)}
+.tags li::after{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;
+  transition:opacity .45s ease;
+  background:radial-gradient(150px 120px at var(--tx,50%) var(--ty,50%),
+    rgba(127,208,196,.17),transparent 70%)}
+.tags:hover li{opacity:.45}
+.tags li:hover{opacity:1;background:rgba(127,208,196,.05)}
+.tags li:hover::before{transform:scaleX(1)}
+.tags li:hover::after{opacity:1}
+.tags .t-no{display:block;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.14em;color:var(--accent);opacity:.4;margin-bottom:11px;
+  transition:opacity .35s ease}
+.tags li:hover .t-no{opacity:1}
+.tags .t-name{display:block;font-size:11.5px;letter-spacing:.17em;line-height:1.55;
+  color:var(--muted);transition:transform .45s cubic-bezier(.22,.61,.36,1),color .35s ease}
+.tags li:hover .t-name{transform:translateY(-2px);color:#fff}
+.tags .t-note{display:block;margin-top:9px;font-size:12.5px;letter-spacing:.01em;
+  text-transform:none;line-height:1.5;color:var(--muted);opacity:0;transform:translateY(7px);
+  transition:opacity .5s ease,transform .5s cubic-bezier(.22,.61,.36,1)}
+.tags li:hover .t-note{opacity:.7;transform:none}
+.tags li:first-child{padding-left:0}
+.tags li:last-child{padding-right:0}
+@media (max-width:900px){
+.tags li,.tags:hover li{opacity:1}
+.tags li{padding:16px 0!important}
+.tags .t-note{opacity:.7;transform:none}
+}
+@media (hover:none){
+.tags:hover li{opacity:1}
+.tags .t-note{opacity:.7;transform:none}
+.tags li::before{transform:scaleX(1)}
+}
+
+/* Intellectual heroes: nation and what they are known for -- */
+.ih-for{font-size:.8rem;line-height:1.5;color:var(--muted);opacity:.6}
+.ih-for em{font-style:italic}
+
+/* Reading notes: the row of years -------------------------- */
+.reading{margin-top:64px}
+.reading-head{font-family:'Playfair Display',Georgia,serif;font-size:14px;font-weight:500;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.yrail-wrap{position:relative}
+.yrail{display:flex;flex-wrap:nowrap;gap:12px;overflow-x:auto;overflow-y:hidden;
+  padding:16px 2px 18px;scroll-snap-type:x proximity;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;cursor:grab;
+  scrollbar-width:thin;scrollbar-color:rgba(216,213,208,.28) transparent}
+.yrail.dragging{cursor:grabbing;scroll-behavior:auto;scroll-snap-type:none}
+.yrail.dragging *{pointer-events:none}
+.yrail::-webkit-scrollbar{height:3px}
+.yrail::-webkit-scrollbar-track{background:rgba(255,255,255,.06);border-radius:2px}
+.yrail::-webkit-scrollbar-thumb{background:rgba(216,213,208,.3);border-radius:2px}
+.yrail::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+.ychip{position:relative;flex:0 0 128px;scroll-snap-align:start;overflow:hidden;
+  display:flex;flex-direction:column;align-items:flex-start;gap:7px;
+  padding:16px 16px 15px;border:1px solid rgba(255,255,255,.11);border-radius:10px;
+  background:rgba(255,255,255,.022);color:inherit;font:inherit;text-align:left;cursor:pointer;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s ease,
+    background .3s ease,box-shadow .3s ease,opacity .3s ease}
+.ychip .yc-year{font-family:'Playfair Display',Georgia,serif;font-size:28px;line-height:1;
+  color:var(--accent);transition:color .3s ease}
+.ychip .yc-state{font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(216,213,208,.5)}
+.ychip .yc-mark{position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.ychip:hover{transform:translateY(-3px);border-color:rgba(127,208,196,.45);
+  background:rgba(255,255,255,.05);box-shadow:0 12px 26px rgba(0,0,0,.28)}
+.ychip:hover .yc-mark{transform:scaleX(1)}
+.ychip:hover .yc-year{color:var(--accent-strong)}
+.yrail:hover .ychip:not(:hover):not([aria-expanded="true"]){opacity:.55}
+.ychip[aria-expanded="true"]{opacity:1;transform:translateY(-3px);
+  border-color:rgba(127,208,196,.7);background:rgba(127,208,196,.10)}
+.ychip[aria-expanded="true"] .yc-mark{transform:scaleX(1)}
+.ychip[aria-expanded="true"] .yc-year{color:var(--accent-strong)}
+.yrail-wrap::before,.yrail-wrap::after{content:"";position:absolute;top:0;bottom:18px;
+  width:52px;pointer-events:none;opacity:0;transition:opacity .35s ease;z-index:3}
+.yrail-wrap::before{left:0;background:linear-gradient(to right,var(--navy),rgba(11,24,42,0))}
+.yrail-wrap::after{right:0;background:linear-gradient(to left,var(--navy),rgba(11,24,42,0))}
+.yrail-wrap.can-l::before{opacity:1}
+.yrail-wrap.can-r::after{opacity:1}
+.yrail-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:-8px}
+.yrail-nav button{width:34px;height:34px;border-radius:50%;background:transparent;
+  border:1px solid var(--hair);color:var(--muted);cursor:pointer;display:grid;place-items:center;
+  font:inherit;transition:border-color .3s,color .3s,transform .3s,opacity .3s}
+.yrail-nav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent);
+  transform:translateY(-1px)}
+.yrail-nav button:disabled{opacity:.28;cursor:default}
+.yrail-nav svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.6}
+
+/* Reading notes: the panel a year opens ------------------- */
+.ypanel{position:relative;margin-top:16px;padding:26px 30px 30px;
+  border:1px solid rgba(127,208,196,.26);border-radius:14px;
+  background:linear-gradient(180deg,rgba(127,208,196,.055),rgba(255,255,255,.018));
+  box-shadow:0 22px 46px rgba(0,0,0,.28)}
+.ypanel[hidden]{display:none}
+.ypanel.is-open{animation:ypIn .5s cubic-bezier(.22,.61,.36,1) both}
+@keyframes ypIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+.yp-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.yp-eyebrow{margin:0!important;font-family:'Playfair Display',Georgia,serif;font-size:34px;
+  line-height:1;color:var(--accent-strong)}
+.yp-close{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:transparent;
+  border:1px solid var(--hair);color:var(--muted);cursor:pointer;display:grid;place-items:center;
+  transition:border-color .3s,color .3s,transform .35s}
+.yp-close:hover{border-color:var(--accent);color:var(--accent);transform:rotate(90deg)}
+.yp-close svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round}
+.yp-note{margin:16px 0 0!important;max-width:64ch;font-size:17px!important;
+  line-height:1.75!important;color:var(--muted)!important}
+.yp-note.is-placeholder{opacity:.45;font-style:italic}
+.yp-more{margin:16px 0 0!important}
+.yp-more a{display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);text-decoration:none}
+.yp-more a i{font-style:normal;transition:transform .3s ease}
+.yp-more a:hover i{transform:translateX(5px)}
+.ypanel .cd{margin-top:24px}
+.ypanel .cd-item{grid-template-columns:126px minmax(0,1fr);gap:0 30px}
+.ypanel .cd-num{font-size:88px}
+.ypanel .cd-title{font-size:24px}
+.ypanel .cd-foot{margin-top:30px}
+@media (max-width:700px){
+.ypanel{padding:22px 20px 26px}
+.ypanel .cd-item{grid-template-columns:minmax(0,1fr)}
+.ypanel .cd-num{font-size:64px}
+.yp-eyebrow{font-size:28px}
+}
+
+/* CV: rows of pictures that grow under the cursor ----------
+   Markup, inside .cv-body:
+     <div class="cv-pix" data-cols="3">
+       <span class="pix"><img src="images/cv-....jpg" alt=""
+         loading="lazy" onerror="this.style.display='none'"></span>
+       ... one span per picture ...
+     </div>
+   data-cols is how many sit in the row. Until a file is
+   added the frame shows a quiet cross, so the row is visible
+   while the pictures are still missing. */
+.cv-pix{display:grid;gap:10px;margin:22px 0 2px}
+.cv-pix[data-cols="1"]{grid-template-columns:repeat(1,1fr);max-width:150px}
+.cv-pix[data-cols="2"]{grid-template-columns:repeat(2,1fr);max-width:300px}
+.cv-pix[data-cols="3"]{grid-template-columns:repeat(3,1fr);max-width:440px}
+.cv-pix[data-cols="4"]{grid-template-columns:repeat(4,1fr);max-width:560px}
+.cv-pix[data-cols="5"]{grid-template-columns:repeat(5,1fr);max-width:600px}
+.cv-pix .pix{position:relative;display:block;aspect-ratio:1/1;border-radius:7px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(140deg,rgba(127,208,196,.13),rgba(143,182,255,.07));
+  transition:transform .5s cubic-bezier(.28,1.35,.5,1),box-shadow .5s ease,
+    border-color .5s ease,opacity .35s ease;
+  will-change:transform;cursor:zoom-in}
+.cv-pix .pix::before,.cv-pix .pix::after{content:"";position:absolute;left:50%;top:50%;
+  background:rgba(127,208,196,.45);transition:transform .55s cubic-bezier(.22,.61,.36,1)}
+.cv-pix .pix::before{width:15px;height:1px;transform:translate(-50%,-50%)}
+.cv-pix .pix::after{width:1px;height:15px;transform:translate(-50%,-50%)}
+.cv-pix .pix img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;
+  display:block;transform:none;filter:saturate(.78);transition:filter .45s ease}
+.cv-pix:hover .pix{opacity:.5}
+.cv-pix .pix:hover{opacity:1;z-index:5;transform:scale(1.45) translateY(-4px);
+  box-shadow:0 24px 46px rgba(0,0,0,.5);border-color:rgba(127,208,196,.55)}
+.cv-pix .pix:hover img{filter:saturate(1)}
+.cv-pix .pix:hover::before{transform:translate(-50%,-50%) rotate(90deg)}
+.cv-pix .pix:hover::after{transform:translate(-50%,-50%) rotate(90deg)}
+@media (max-width:900px){
+.cv-pix[data-cols="5"]{grid-template-columns:repeat(3,1fr);max-width:none}
+.cv-pix[data-cols="4"]{grid-template-columns:repeat(2,1fr);max-width:none}
+.cv-pix .pix:hover{transform:scale(1.18)}
+}
+@media (hover:none){
+.cv-pix:hover .pix{opacity:1}
+.cv-pix .pix:hover{transform:none;box-shadow:none;border-color:rgba(255,255,255,.10)}
+}
+@media (prefers-reduced-motion:reduce){
+.cv-pix .pix,.cv-pix .pix::before,.cv-pix .pix::after{transition:none}
+.cv-pix .pix:hover{transform:none}
+.ypanel.is-open{animation:none}
+}
