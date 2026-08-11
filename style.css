@@ -2216,3 +2216,67 @@ body.simple footer{margin-top:auto}
 /* No single word left alone on a line of its own. */
 #writing>p{max-width:76ch}
 #about>p,#writing>p,#research>p{text-wrap:pretty}
+
+/* ---- v17 -----------------------------------------------------------------
+   The five profile marks keep to the width of the name above them, and
+   every book in a top ten is given a jacket: an empty frame while there is
+   no picture yet, with a drawn crown over the first, silver around the
+   second and bronze beneath the third.                                   */
+
+/* index.html measures the name and hands its width over as --hero-w. Each
+   mark owns a fifth of the row and sits in the middle of its share, so the
+   row is widened by half a share on either side and pulled back by the same
+   amount: that is what brings the first circle under the H of Hannes and
+   the last one under the e of Meilicke, with four equal gaps between. */
+@media (min-width:901px){
+  .hero-social{
+    --hs-pull:calc((var(--hero-w,600px)/5 - 47px)/1.6);
+    width:calc(var(--hero-w,600px) + 2 * var(--hs-pull));
+    max-width:none;
+    margin-left:calc(0px - var(--hs-pull));
+    gap:0;flex-wrap:nowrap;justify-content:space-between;
+  }
+  .hero-social .pill{flex:1 1 0;min-width:0}
+  /* Each word has a narrower column to stand in than before, so it is set
+     a size smaller and is allowed to fall onto a second line. */
+  .hero-social .pill-label{white-space:normal;text-align:center;
+    font-size:9px;letter-spacing:.11em;line-height:1.45}
+}
+
+/* ---- a jacket for every book --------------------------------------------
+   The frame is drawn while the shelf is still empty. A picture goes inside
+   the span and needs nothing else:
+   <span class="cd-jacket"><img src="/images/books/2025-01.jpg" alt=""></span>
+   The columns are only turned on where there is room for them; on a narrow
+   screen the rank, the jacket and the words still sit one above the other. */
+@media (min-width:641px){
+  .cd-item{grid-template-columns:158px 108px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-item{grid-template-columns:126px 104px minmax(0,1fr)}
+}
+.cd-cover{position:relative;width:100%;max-width:108px}
+.ypanel .cd-cover{max-width:104px}
+.cd-jacket{display:block;width:100%;aspect-ratio:2/3;border-radius:4px;
+  overflow:hidden;border:1px solid rgba(255,255,255,.10);
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2044%2034%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-opacity%3D%22.3%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M22%207.6%20C21.6%2015%2021.6%2022%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C17%205%2011%204.2%205%205.2%20C5%2012%205%2019%205%2025.8%20C11%2025.2%2017%2026.2%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C27%205%2033%204.2%2039%205.2%20C39%2012%2039%2019%2039%2025.8%20C33%2025.2%2027%2026.2%2022%2029%22%2F%3E%3C%2Fsvg%3E"),
+    linear-gradient(90deg,transparent 6px,rgba(255,255,255,.10) 6px,rgba(255,255,255,.10) 7px,transparent 7px),
+    linear-gradient(140deg,rgba(127,208,196,.13),rgba(143,182,255,.07));
+  background-repeat:no-repeat,no-repeat,no-repeat;
+  background-position:center,left top,center;
+  background-size:40px 31px,100% 100%,100% 100%;
+  box-shadow:0 10px 22px rgba(0,0,0,.28)}
+.cd-jacket img{display:block;width:100%;height:100%;object-fit:cover}
+.cd-jacket:has(img){background-image:none}
+
+/* First, second and third are marked by hand around the jacket: a crown
+   above number one, silver drawn around number two, bronze under three. */
+.cd-item[data-rank="1"] .cd-cover::before{content:"";position:absolute;
+  left:50%;top:-30px;width:52px;height:26px;transform:translateX(-50%);
+  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2060%2030%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.5%22%20stroke-width%3D%221%22%20transform%3D%22translate(1.2%201.7)%22%3E%3Cpath%20d%3D%22M8%2025%20C7%2019%206.4%2013%206%207.6%20C10.6%2012.4%2014.2%2016%2017.8%2019.6%20C21.6%2014%2025.6%208.4%2029.6%202.8%20C33.6%208.4%2037.6%2014%2041.4%2019.6%20C45%2016%2048.6%2012.4%2053.2%207.6%20C52.8%2013%2052.2%2019%2051.2%2025%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%2025%20C7%2019%206.4%2013%206%207.6%20C10.6%2012.4%2014.2%2016%2017.8%2019.6%20C21.6%2014%2025.6%208.4%2029.6%202.8%20C33.6%208.4%2037.6%2014%2041.4%2019.6%20C45%2016%2048.6%2012.4%2053.2%207.6%20C52.8%2013%2052.2%2019%2051.2%2025%22%2F%3E%3Cpath%20d%3D%22M8%2025%20C20%2027.6%2040%2027.6%2051.2%2024.3%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%227.2%22%20r%3D%221.8%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2229.6%22%20cy%3D%222.4%22%20r%3D%222%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2253.2%22%20cy%3D%227.2%22%20r%3D%221.8%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;pointer-events:none}
+.cd-item[data-rank="2"] .cd-cover::after{content:"";position:absolute;
+  left:-13px;right:-13px;top:-7px;bottom:-7px;
+  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20130%20170%22%20fill%3D%22none%22%20stroke%3D%22%23c6ced9%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.5%201.3)%22%3E%3Cpath%20d%3D%22M12%2028%20C4.5%2062%204.5%20108%2012%20142%22%2F%3E%3Cpath%20d%3D%22M118%2028%20C125.5%2062%20125.5%20108%20118%20142%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M12%2028%20C4.5%2062%204.5%20108%2012%20142%22%2F%3E%3Cpath%20d%3D%22M118%2028%20C125.5%2062%20125.5%20108%20118%20142%22%2F%3E%3Cpath%20d%3D%22M12%2028%20C13.5%2024%2015.5%2021%2018%2018.5%22%2F%3E%3Cpath%20d%3D%22M12%20142%20C13.5%20146%2015.5%20149%2018%20151.5%22%2F%3E%3Cpath%20d%3D%22M118%2028%20C116.5%2024%20114.5%2021%20112%2018.5%22%2F%3E%3Cpath%20d%3D%22M118%20142%20C116.5%20146%20114.5%20149%20112%20151.5%22%2F%3E%3Cpath%20d%3D%22M6.5%2072%20C8.5%2073%2010.5%2073.6%2012.5%2073.8%22%2F%3E%3Cpath%20d%3D%22M6.5%20100%20C8.5%2099%2010.5%2098.4%2012.5%2098.2%22%2F%3E%3Cpath%20d%3D%22M123.5%2072%20C121.5%2073%20119.5%2073.6%20117.5%2073.8%22%2F%3E%3Cpath%20d%3D%22M123.5%20100%20C121.5%2099%20119.5%2098.4%20117.5%2098.2%22%2F%3E%3C%2Fsvg%3E") center/100% 100% no-repeat;pointer-events:none}
+.cd-item[data-rank="3"] .cd-cover::after{content:"";position:absolute;
+  left:-6px;right:-6px;top:100%;height:26px;margin-top:6px;
+  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23bd7f42%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E") center/100% 100% no-repeat;pointer-events:none}
