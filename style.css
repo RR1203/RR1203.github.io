@@ -2398,5 +2398,23 @@ body.simple footer{margin-top:auto}
    white starts on the Meilicke colours, so both words are tinted. */
 .hero-eyebrow{margin-bottom:0}
 .hero-text h1{margin-top:.57em}
-.hero-text h1 .hn-text{background:linear-gradient(96deg,#cbeee4 0%,#bfeade 14%,#93d3f0 62%,#a9bdf7 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hero-text h1 .hn-text{background:linear-gradient(96deg,#cbeee4 0%,#bfeade 6%,#93d3f0 46%,#a9bdf7 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 @media print{.hero-text h1 .hn-text{background:none;color:#111;-webkit-text-fill-color:#111}}
+
+/* ---------------------------------------------------------------
+   v19 - every chapter takes its own shade back, and takes it sooner
+   v18 above settled on one colour lifted a step at a time. The
+   older shades read better, so they return here: each chapter a
+   little cooler, a little warmer, a little deeper than the last,
+   all still in the dark family of the page. The fade between them
+   is cut to under half its length, so a new chapter lands instead
+   of drifting in. These rules sit after v18 and supersede it.
+   --------------------------------------------------------------- */
+.chapter-wash{background-color:#0b182a;transition:background-color 420ms cubic-bezier(.2,.8,.2,1)}
+.chapter-wash[data-chapter="home"]{background-color:#0b182a}
+.chapter-wash[data-chapter="about"]{background-color:#0a2434}
+.chapter-wash[data-chapter="writing"]{background-color:#141634}
+.chapter-wash[data-chapter="research"]{background-color:#082a30}
+.chapter-wash[data-chapter="cv"]{background-color:#1c2230}
+.chapter-wash[data-chapter="contact"]{background-color:#0b182a}
+@media (prefers-reduced-motion:reduce){.chapter-wash{transition-duration:180ms}}
