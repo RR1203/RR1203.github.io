@@ -120,17 +120,6 @@
           <img src="images/about.jpg" alt="Hannes Meilicke at work" loading="lazy" onerror="this.parentNode.style.display='none'">
         </figure>
       </div>
-    
-    <p class="focus-label">Research focus</p>
-    <!-- Research focus. Each topic carries a one-line gloss in .t-note,
-         which fades up under the cursor. -->
-    <ul class="tags">
-      <li><b class="t-no">01</b><span class="t-name">Childhood adversity</span><span class="t-note">Early stress as a lasting biological signal.</span></li>
-      <li><b class="t-no">02</b><span class="t-name">Stress responsivity</span><span class="t-note">How brain and body answer an acute challenge.</span></li>
-      <li><b class="t-no">03</b><span class="t-name">Major depressive disorder</span><span class="t-note">Chronicity, remission and relapse over time.</span></li>
-      <li><b class="t-no">04</b><span class="t-name">Neuroimaging &middot; fMRI &amp; MRS</span><span class="t-note">Network dynamics and neurometabolites.</span></li>
-      <li><b class="t-no">05</b><span class="t-name">Machine learning &amp; NLP</span><span class="t-note">Pattern and language in clinical data.</span></li>
-    </ul>
 
     <!-- ----------------------------------------------------------------
          Intellectual heroes
@@ -373,14 +362,14 @@
 
       <div class="yrail-wrap">
         <div class="yrail" data-yrail>
-          <button class="ychip" type="button" data-year="2025" aria-expanded="false" aria-controls="yr-2025"><span class="yc-year">2025</span><span class="yc-state">In progress</span><span class="yc-mark" aria-hidden="true"></span></button>
-          <button class="ychip" type="button" data-year="2024" aria-expanded="false" aria-controls="yr-2024"><span class="yc-year">2024</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
-          <button class="ychip" type="button" data-year="2023" aria-expanded="false" aria-controls="yr-2023"><span class="yc-year">2023</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
-          <button class="ychip" type="button" data-year="2022" aria-expanded="false" aria-controls="yr-2022"><span class="yc-year">2022</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
-          <button class="ychip" type="button" data-year="2021" aria-expanded="false" aria-controls="yr-2021"><span class="yc-year">2021</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
-          <button class="ychip" type="button" data-year="2020" aria-expanded="false" aria-controls="yr-2020"><span class="yc-year">2020</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
-          <button class="ychip" type="button" data-year="2019" aria-expanded="false" aria-controls="yr-2019"><span class="yc-year">2019</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
-          <button class="ychip" type="button" data-year="2018" aria-expanded="false" aria-controls="yr-2018"><span class="yc-year">2018</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2025" aria-expanded="false" aria-controls="yr-2025"><span class="yc-year">2025</span><span class="yc-state">Ten books</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2024" aria-expanded="false" aria-controls="yr-2024"><span class="yc-year">2024</span><span class="yc-state">Ten books</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2023" aria-expanded="false" aria-controls="yr-2023"><span class="yc-year">2023</span><span class="yc-state">Ten books</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2022" aria-expanded="false" aria-controls="yr-2022"><span class="yc-year">2022</span><span class="yc-state">Ten books</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2021" aria-expanded="false" aria-controls="yr-2021"><span class="yc-year">2021</span><span class="yc-state">Ten books</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2020" aria-expanded="false" aria-controls="yr-2020"><span class="yc-year">2020</span><span class="yc-state">Ten books</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2019" aria-expanded="false" aria-controls="yr-2019"><span class="yc-year">2019</span><span class="yc-state">Ten books</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2018" aria-expanded="false" aria-controls="yr-2018"><span class="yc-year">2018</span><span class="yc-state">Ten books</span><span class="yc-mark" aria-hidden="true"></span></button>
         </div>
       </div>
       <div class="yrail-nav">
@@ -1046,7 +1035,7 @@
         for (var k = 0; k < nodes.length; k++) { observer.observe(nodes[k]); }
       }
 
-      watch(quick, { threshold: 0.15, rootMargin: '-2% 0px -18% 0px' });
+      watch(quick, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
       watch(soft, { threshold: 0, rootMargin: '30% 0px 35% 0px' });
     })();
 
@@ -1162,10 +1151,10 @@
 
     if (timeline) {
       var r = timeline.getBoundingClientRect();
-      var p = Math.max(0, Math.min(r.height - 16, window.innerHeight * 0.6 - r.top));
+      var p = Math.max(0, Math.min(r.height - 16, window.innerHeight * 0.68 - r.top));
       timeline.style.setProperty('--cvp', p + 'px');
       entries.forEach(function (e) {
-        e.classList.toggle('lit', e.getBoundingClientRect().top < window.innerHeight * 0.6);
+        e.classList.toggle('lit', e.getBoundingClientRect().top < window.innerHeight * 0.68);
       });
     }
   }
@@ -1487,7 +1476,7 @@
       });
       if (prev) { prev.disabled = at === 0; }
       if (next) { next.disabled = at === items.length - 1; }
-cd.classList.toggle("is-last", at === items.length - 1);
+      cd.classList.toggle("is-last", at === items.length - 1);
       if (live) {
         live.textContent = "Number " + (items[at].getAttribute("data-rank") || (items.length - at)) + " of " + items.length;
       }
@@ -1496,13 +1485,13 @@ cd.classList.toggle("is-last", at === items.length - 1);
     if (prev) { prev.addEventListener("click", function () { draw(at - 1); }); }
     if (next) { next.addEventListener("click", function () { draw(at + 1); }); }
     /* The ticks only report how far the year has got: with no
-handler and no tab stop of their own, no book can be skipped
-on the way from ten down to one. */
-ticks.forEach(function (t) { t.disabled = true; t.tabIndex = -1; });
+       handler and no tab stop of their own, no book can be
+       skipped on the way from ten down to one. */
+    ticks.forEach(function (t) { t.disabled = true; t.tabIndex = -1; });
 
-/* The book itself is the step forward. */
-var stage = cd.querySelector(".cd-stage");
-if (stage) { stage.addEventListener("click", function () { draw(at + 1); }); }
+    /* The book itself is the step forward. */
+    var stage = cd.querySelector(".cd-stage");
+    if (stage) { stage.addEventListener("click", function () { draw(at + 1); }); }
     var x0 = null, y0 = null;
     cd.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
     cd.addEventListener("touchend", function (e) {
@@ -1562,16 +1551,6 @@ if (stage) { stage.addEventListener("click", function () { draw(at + 1); }); }
   });
 }());
 
-/* Research focus: a soft light follows the cursor along the row. */
-(function () {
-  [].slice.call(document.querySelectorAll(".tags li")).forEach(function (li) {
-    li.addEventListener("mousemove", function (ev) {
-      var r = li.getBoundingClientRect();
-      li.style.setProperty("--tx", (ev.clientX - r.left) + "px");
-      li.style.setProperty("--ty", (ev.clientY - r.top) + "px");
-    });
-  });
-}());
 </script>
 
 </body>
