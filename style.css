@@ -1685,3 +1685,60 @@ body.simple footer{margin-top:auto}
 .book-title{font-family:'Playfair Display',Georgia,serif;font-size:21px;margin:0 0 4px;color:var(--text)}
 .book-author{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:rgba(216,213,208,.6);margin:0 0 10px}
 .book-take{margin:0;color:var(--muted)}
+
+/* ---------------------------------------------------------------
+   Writing & Media: horizontal rail
+   The cards sit side by side and scroll horizontally. Drag with the
+   mouse, swipe on a trackpad, or use the two round buttons.
+   --------------------------------------------------------------- */
+.mrail-wrap{position:relative;margin-top:8px}
+.media-grid.mrail{display:flex;flex-direction:row;align-items:stretch;flex-wrap:nowrap;gap:26px;
+  overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;padding:2px 2px 20px;
+  scrollbar-width:thin;scrollbar-color:rgba(216,213,208,.28) transparent;cursor:grab}
+.media-grid.mrail.dragging{cursor:grabbing;scroll-behavior:auto;scroll-snap-type:none}
+.media-grid.mrail.dragging *{pointer-events:none}
+.media-grid.mrail::-webkit-scrollbar{height:3px}
+.media-grid.mrail::-webkit-scrollbar-track{background:rgba(255,255,255,.06);border-radius:2px}
+.media-grid.mrail::-webkit-scrollbar-thumb{background:rgba(216,213,208,.3);border-radius:2px}
+.media-grid.mrail::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+.media-grid.mrail>.media-card{flex:0 0 340px;scroll-snap-align:start}
+@media(max-width:700px){.media-grid.mrail>.media-card{flex:0 0 78vw}}
+.mrail-wrap::before,.mrail-wrap::after{content:"";position:absolute;top:0;bottom:20px;width:60px;
+  pointer-events:none;opacity:0;transition:opacity .35s ease;z-index:3}
+.mrail-wrap::before{left:0;background:linear-gradient(to right,var(--navy),rgba(11,24,42,0))}
+.mrail-wrap::after{right:0;background:linear-gradient(to left,var(--navy),rgba(11,24,42,0))}
+.mrail-wrap.can-l::before{opacity:1}
+.mrail-wrap.can-r::after{opacity:1}
+.mrail-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:-8px}
+.mrail-nav button{width:38px;height:38px;border-radius:50%;background:transparent;border:1px solid var(--hair);
+  color:var(--muted);cursor:pointer;display:grid;place-items:center;font:inherit;
+  transition:border-color .3s,color .3s,transform .3s,opacity .3s}
+.mrail-nav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.mrail-nav button:disabled{opacity:.28;cursor:default}
+.mrail-nav svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6}
+@media(prefers-reduced-motion:reduce){.media-grid.mrail{scroll-behavior:auto}}
+
+/* ---------------------------------------------------------------
+   Intellectual heroes (About)
+   --------------------------------------------------------------- */
+#heroes-block{margin-top:54px}
+#heroes-block .focus-label{margin-bottom:0}
+.heroes-fold{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin-top:14px}
+.heroes-fold>summary{list-style:none;cursor:pointer;padding:16px 2px;display:flex;align-items:center;gap:12px;
+  font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.heroes-fold>summary::-webkit-details-marker{display:none}
+.heroes-fold>summary:hover{color:var(--accent)}
+.heroes-fold .hf-count{font-size:.68rem;letter-spacing:.1em;padding:2px 9px;border:1px solid var(--hair);
+  border-radius:999px;color:var(--muted)}
+.heroes-fold .hf-chev{margin-left:auto;width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:1.6;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.heroes-fold[open] .hf-chev{transform:rotate(180deg)}
+.heroes{list-style:none;margin:0 0 10px;padding:0;max-width:760px}
+.heroes>li{padding:16px 0;border-top:1px solid var(--hair);display:grid;gap:6px}
+.heroes>li:first-child{border-top:none}
+.hero-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.hero-name{font-size:1.02rem;color:var(--text);margin:0;font-weight:500}
+.hero-role{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);opacity:.85}
+.hero-note{margin:0;font-size:.92rem;color:var(--muted);line-height:1.6}
+.hero-note.is-placeholder{opacity:.45;font-style:italic}
