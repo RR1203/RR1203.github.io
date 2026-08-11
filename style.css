@@ -2214,5 +2214,5 @@ body.simple footer{margin-top:auto}
 }
 
 /* No single word left alone on a line of its own. */
-#writing>p{max-width:70ch}
+#writing>p{max-width:76ch}
 #about>p,#writing>p,#research>p{text-wrap:pretty}
