@@ -42,13 +42,13 @@
   <p class="piece-meta"><span class="kind">Reading notes</span><span>2025</span></p>
   <h1>My ten most influential books of 2025</h1>
   <div class="h2-rule"></div>
-  <p class="piece-lede">Not everything I read &mdash; the ten books from 2025 that left the deepest mark, counted down from ten to one.</p>
+  <p class="piece-lede">Not everything I read &mdash; the books from 2025 that left the deepest mark, counted down from the honorable mentions to number one.</p>
 
   <!-- ----------------------------------------------------------------
        Ten-to-one countdown
        One <li class="cd-item"> per book. data-rank is the number shown
        and the order of the <li> elements is the order you click through,
-       so ten comes first and one comes last.
+       so the honorable mentions come first, then ten down to one.
        Fill .cd-title, .cd-author and .cd-take, then change
          class="cd-take is-placeholder"  ->  class="cd-take"
        so the text loses the faded italic look.
@@ -61,10 +61,24 @@
        ---------------------------------------------------------------- -->
   <div class="cd" data-cd>
 
-    <p class="cd-hint">Counting down from ten to one &mdash; use the arrows, the left and right arrow keys, or swipe.</p>
+    <p class="cd-hint">Counting down from the honorable mentions to number one &mdash; use the arrows, the left and right arrow keys, or swipe.</p>
 
     <div class="cd-stage">
       <ol class="cd-list">
+
+        <li class="cd-item cd-extra" data-rank="Honorable mentions">
+          <p class="cd-rank"><span class="cd-no">Before the ten</span><span class="cd-num cd-num-word">Honorable<br>mentions</span></p>
+          <div class="cd-body">
+            <ul class="cd-extra-list">
+              <li><span class="cd-extra-book">Introduction to Classical Chinese Philosophy</span><span class="cd-extra-by">Bryan W. Van Norden</span></li>
+              <li><span class="cd-extra-book">The Science of Happiness: Seven Lessons for Living Well</span><span class="cd-extra-by">Bruce Hood</span></li>
+              <li><span class="cd-extra-book">ADHD 2.0: New Science and Essential Strategies for Thriving with Distraction&mdash;from Childhood through Adulthood</span><span class="cd-extra-by">Edward M. Hallowell &amp; John J. Ratey</span></li>
+              <li><span class="cd-extra-book">Making Sense of Chaos: A Better Economics for a Better World</span><span class="cd-extra-by">J. Doyne Farmer</span></li>
+              <li><span class="cd-extra-book">Seven and a Half Lessons About the Brain</span><span class="cd-extra-by">Lisa Feldman Barrett</span></li>
+              <li><span class="cd-extra-book">Information Science: The Basics</span><span class="cd-extra-by">Judith Pintar &amp; David Hopping</span></li>
+            </ul>
+          </div>
+        </li>
 
         <li class="cd-item" data-rank="10">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p>
@@ -171,16 +185,17 @@
 
     <div class="cd-foot">
       <div class="cd-ticks">
-        <button type="button" data-cd-go="0" aria-label="Go to number 10"></button>
-        <button type="button" data-cd-go="1" aria-label="Go to number 9"></button>
-        <button type="button" data-cd-go="2" aria-label="Go to number 8"></button>
-        <button type="button" data-cd-go="3" aria-label="Go to number 7"></button>
-        <button type="button" data-cd-go="4" aria-label="Go to number 6"></button>
-        <button type="button" data-cd-go="5" aria-label="Go to number 5"></button>
-        <button type="button" data-cd-go="6" aria-label="Go to number 4"></button>
-        <button type="button" data-cd-go="7" aria-label="Go to number 3"></button>
-        <button type="button" data-cd-go="8" aria-label="Go to number 2"></button>
-        <button type="button" data-cd-go="9" aria-label="Go to number 1"></button>
+        <button type="button" data-cd-go="0" aria-label="Go to the honorable mentions"></button>
+        <button type="button" data-cd-go="1" aria-label="Go to number 10"></button>
+        <button type="button" data-cd-go="2" aria-label="Go to number 9"></button>
+        <button type="button" data-cd-go="3" aria-label="Go to number 8"></button>
+        <button type="button" data-cd-go="4" aria-label="Go to number 7"></button>
+        <button type="button" data-cd-go="5" aria-label="Go to number 6"></button>
+        <button type="button" data-cd-go="6" aria-label="Go to number 5"></button>
+        <button type="button" data-cd-go="7" aria-label="Go to number 4"></button>
+        <button type="button" data-cd-go="8" aria-label="Go to number 3"></button>
+        <button type="button" data-cd-go="9" aria-label="Go to number 2"></button>
+        <button type="button" data-cd-go="10" aria-label="Go to number 1"></button>
       </div>
       <div class="cd-nav">
         <button type="button" data-cd-step="-1" aria-label="Previous book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,5 8,12 15,19"/></svg></button>
@@ -190,18 +205,6 @@
 
     <p class="cd-live" role="status" aria-live="polite"></p>
   </div>
-
-  <section class="cd-hm" aria-labelledby="hm-heading">
-    <h2 class="cd-hm-title" id="hm-heading">Honorable mentions</h2>
-    <ul class="cd-hm-list">
-      <li><span class="cd-hm-book">Introduction to Classical Chinese Philosophy</span><span class="cd-hm-by">Bryan W. Van Norden</span></li>
-      <li><span class="cd-hm-book">The Science of Happiness: Seven Lessons for Living Well</span><span class="cd-hm-by">Bruce Hood</span></li>
-      <li><span class="cd-hm-book">ADHD 2.0: New Science and Essential Strategies for Thriving with Distraction&mdash;from Childhood through Adulthood</span><span class="cd-hm-by">Edward M. Hallowell &amp; John J. Ratey</span></li>
-      <li><span class="cd-hm-book">Making Sense of Chaos: A Better Economics for a Better World</span><span class="cd-hm-by">J. Doyne Farmer</span></li>
-      <li><span class="cd-hm-book">Seven and a Half Lessons About the Brain</span><span class="cd-hm-by">Lisa Feldman Barrett</span></li>
-      <li><span class="cd-hm-book">Information Science: The Basics</span><span class="cd-hm-by">Judith Pintar &amp; David Hopping</span></li>
-    </ul>
-  </section>
 
   <div class="piece-foot">
     <a class="btn btn-ghost" href="/#writing">More pieces</a>
