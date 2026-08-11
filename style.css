@@ -2418,3 +2418,21 @@ body.simple footer{margin-top:auto}
 .chapter-wash[data-chapter="cv"]{background-color:#1c2230}
 .chapter-wash[data-chapter="contact"]{background-color:#0b182a}
 @media (prefers-reduced-motion:reduce){.chapter-wash{transition-duration:180ms}}
+
+/* ----------------------------------------------------------------
+   v20 - the six that almost made the ten
+   Under the countdown sits one block for the honorable mentions:
+   two columns on a wide screen, one on a narrow one, a short rule
+   beside every book and the author set small underneath. The
+   heading is kept out of the numbered-section styling, so it takes
+   no counter and stays quieter than the title of the piece.
+   ---------------------------------------------------------------- */
+.cd-hm{margin:56px 0 0;border-top:1px solid var(--hair);padding-top:30px;counter-increment:none}
+.piece .cd-hm>.cd-hm-title{margin:0;font-family:"Playfair Display",Georgia,serif;font-size:24px;font-weight:400;line-height:1.25;letter-spacing:0;text-transform:none;color:var(--text)}
+.piece .cd-hm>.cd-hm-title::before{content:none}
+.cd-hm-list{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 38px}
+.cd-hm-list li{margin:0;padding-left:16px;position:relative}
+.cd-hm-list li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--accent);opacity:.55}
+.cd-hm-book{display:block;font-family:"Playfair Display",Georgia,serif;font-size:17px;line-height:1.45;color:var(--text)}
+.cd-hm-by{display:block;margin-top:5px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:720px){.cd-hm-list{grid-template-columns:minmax(0,1fr);gap:18px 0}}
