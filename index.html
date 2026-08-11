@@ -113,7 +113,7 @@
       <div class="about-grid">
 <div class="about-copy">
 <p>Physician and psychiatric researcher. I study how childhood adversity shapes the way the brain and the body answer stress &mdash; with neuroimaging, magnetic resonance spectroscopy and machine learning.</p>
-<p>MD thesis at Friedrich Schiller University Jena with Dr Lejla Colic and Prof Dr Martin Walter. Approbation as a physician, 2025.</p>
+<p>MD thesis at Friedrich Schiller University Jena with Dr Lejla Colic and Prof Dr Martin Walter. Approbation &mdash; the full German licence to practise medicine &mdash; in 2025.</p>
 </div>
         <!-- Optional photo: add images/about.jpg (4:5 portrait). If the file is missing this block hides itself. -->
         <figure class="img-frame about-photo">
@@ -1480,6 +1480,11 @@
       at = n;
       items.forEach(function (el, k) {
         el.classList.toggle("is-current", k === at);
+        /* Where a book waits: the ones still to come stand off to the
+           left, the ones already read off to the right, so the whole
+           run from ten to one travels rightwards across the box. */
+        el.classList.toggle("is-ahead", k > at);
+        el.classList.toggle("is-done", k < at);
         el.setAttribute("aria-hidden", k === at ? "false" : "true");
       });
       ticks.forEach(function (t, k) {
@@ -1502,13 +1507,17 @@
     var busy = false;
     var step = function (n) {
       if (busy || n === at || n < 0 || n > items.length - 1) { return; }
+      /* Forward takes its time, back is quick: going towards number one
+         should feel like an approach, turning round only like a glance. */
+      var back = n < at;
+      cd.classList.toggle("is-back", back);
       busy = true;
       cd.classList.add("is-busy");
       draw(n);
       window.setTimeout(function () {
         busy = false;
         cd.classList.remove("is-busy");
-      }, 640);
+      }, back ? 340 : 660);
     };
 
     if (prev) { prev.addEventListener("click", function () { step(at - 1); }); }
@@ -1538,7 +1547,11 @@
     draw(0);
     counters[panel.getAttribute("data-year")] = {
       move: function (d) { step(at + d); },
-      reset: function () { busy = false; cd.classList.remove("is-busy"); draw(0); }
+      reset: function () {
+        busy = false;
+        cd.classList.remove("is-busy", "is-back");
+        draw(0);
+      }
     };
   });
 
