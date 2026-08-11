@@ -2285,28 +2285,28 @@ body.simple footer{margin-top:auto}
    v18 - a wash of colour for every chapter
    Each chapter of the page owns a shade. The wash below is pinned to
    the window and sits behind everything on it, and it fades from one
-   shade to the next as the reader travels down. Every shade stays in
-   the same dark family as the rest of the page - a little cooler, a
-   little warmer, a little deeper - so a new chapter announces itself
-   quietly. The script at the foot of index.html names whichever
-   chapter holds the middle of the screen; the fade itself is the
-   transition below.
+   shade to the next as the reader travels down. It is one colour the
+   whole way, lifted a step at every chapter: the page opens at its
+   darkest and grows steadily lighter towards the end, so the descent
+   is felt rather than announced. The script at the foot of index.html
+   names whichever chapter holds the middle of the screen; the fade
+   itself is the transition below.
    --------------------------------------------------------------- */
 .chapter-wash {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-color: #0b182a;
+  background-color: #081321;
   transition: background-color 900ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.chapter-wash[data-chapter="home"] { background-color: #0b182a; }
-.chapter-wash[data-chapter="about"] { background-color: #0a2434; }
-.chapter-wash[data-chapter="writing"] { background-color: #141634; }
-.chapter-wash[data-chapter="research"] { background-color: #082a30; }
-.chapter-wash[data-chapter="cv"] { background-color: #1c2230; }
-.chapter-wash[data-chapter="contact"] { background-color: #0b182a; }
+.chapter-wash[data-chapter="home"] { background-color: #081321; }
+.chapter-wash[data-chapter="about"] { background-color: #0b1b2d; }
+.chapter-wash[data-chapter="writing"] { background-color: #0f2339; }
+.chapter-wash[data-chapter="research"] { background-color: #132b45; }
+.chapter-wash[data-chapter="cv"] { background-color: #173352; }
+.chapter-wash[data-chapter="contact"] { background-color: #173352; }
 
 /* A reader who has asked for less movement still gets the change of
    chapter, only faster and with less of a drift. */
@@ -2325,15 +2325,6 @@ body.simple footer{margin-top:auto}
    never comes to rest on a moving edge.
    --------------------------------------------------------------- */
 .hobbies { margin-top: 8px; }
-
-.hb-intro {
-  max-width: 64ch;
-  margin: 14px 0 0;
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: var(--muted);
-  opacity: .7;
-}
 
 .hb-grid {
   list-style: none;
