@@ -919,12 +919,14 @@
   if (!rail) { return; }
   var wrap = rail.parentNode;
   var btns = document.querySelectorAll('[data-mrail]');
+  var nav = document.querySelector('.mrail-nav');
   function step() {
     var c = rail.querySelector('.media-card');
     return (c ? c.getBoundingClientRect().width : 340) + 26;
   }
   function sync() {
     var max = rail.scrollWidth - rail.clientWidth - 1;
+    if (nav) { nav.style.display = max > 0 ? '' : 'none'; }
     wrap.classList.toggle('can-l', rail.scrollLeft > 4);
     wrap.classList.toggle('can-r', rail.scrollLeft < max);
     for (var i = 0; i < btns.length; i++) {
