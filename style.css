@@ -2436,3 +2436,14 @@ body.simple footer{margin-top:auto}
 .cd-hm-book{display:block;font-family:"Playfair Display",Georgia,serif;font-size:17px;line-height:1.45;color:var(--text)}
 .cd-hm-by{display:block;margin-top:5px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 @media (max-width:720px){.cd-hm-list{grid-template-columns:minmax(0,1fr);gap:18px 0}}
+
+/* ----------------------------------------------------------------
+   v21 - the fine print under the footer
+   A single quiet line below the footer row, for credits that belong
+   on the page but should not compete with anything on it. It sits
+   on the same measure as .foot-inner and drops to the same padding
+   on a narrow screen.
+   ---------------------------------------------------------------- */
+.foot-fine{max-width:1150px;margin:20px auto 0;padding:0 32px}
+.foot-fine p{margin:0;max-width:78ch;font-size:12px;line-height:1.6;letter-spacing:.04em;color:rgba(255,255,255,.36)}
+@media (max-width:620px){.foot-fine{padding:0 22px}}
