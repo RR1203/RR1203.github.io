@@ -65,9 +65,9 @@
              between the two words, and a pulse line woven along the baseline.
              Both are inline SVG, so no extra files and no third-party requests.
              Kept on one source line so no stray whitespace shifts the name. -->
-        <h1><span class="hero-name"><svg class="hn-arc" viewBox="0 0 222.81 90" aria-hidden="true" focusable="false"><defs><linearGradient id="hnArc" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="212.81" y2="0"><stop offset="0" stop-color="#7fd0c4" stop-opacity="0"/><stop offset=".2" stop-color="#7fd0c4" stop-opacity=".34"/><stop offset=".8" stop-color="#7fd0c4" stop-opacity=".34"/><stop offset="1" stop-color="#7fd0c4" stop-opacity="0"/></linearGradient></defs><path d="M10 90 Q111.41 -70 212.81 90" fill="none" stroke="url(#hnArc)" stroke-width="3.5" stroke-linecap="round"/></svg><svg class="hn-pulse" viewBox="0 0 813.81 70" aria-hidden="true" focusable="false"><defs><linearGradient id="hnPulse" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7fd0c4" stop-opacity="0"/><stop offset=".09" stop-color="#7fd0c4" stop-opacity="1"/><stop offset=".91" stop-color="#7fd0c4" stop-opacity="1"/><stop offset="1" stop-color="#7fd0c4" stop-opacity="0"/></linearGradient></defs><path d="M5 35 C162.76 31 276.7 38 341.8 35 l16.5 -23.5 l11.5 42.5 l12.5 -32.5 l9 12.25 C419.3 38.5 683.6 32.25 808.81 37.25" fill="none" stroke="url(#hnPulse)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hn-text">Hannes Meilicke</span></span></h1>
-        <p class="hero-lede">Childhood adversity, stress responsivity, depression and translational neuroscience.</p>
+        <h1><span class="hero-name"><svg class="hn-arc" viewBox="0 0 222.81 90" preserveAspectRatio="none" aria-hidden="true" focusable="false"><defs><linearGradient id="hnArc" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="212.81" y2="0"><stop offset="0" stop-color="#a9bdf7" stop-opacity="0"/><stop offset=".22" stop-color="#a9bdf7" stop-opacity=".5"/><stop offset=".78" stop-color="#8fb6ff" stop-opacity=".5"/><stop offset="1" stop-color="#8fb6ff" stop-opacity="0"/></linearGradient></defs><path d="M10 90 Q111.41 -70 212.81 90" fill="none" stroke="url(#hnArc)" stroke-width="5" stroke-linecap="round"/></svg><svg class="hn-pulse" viewBox="0 0 813.81 70" preserveAspectRatio="none" aria-hidden="true" focusable="false"><defs><linearGradient id="hnPulse" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7fd0c4" stop-opacity="0"/><stop offset=".09" stop-color="#7fd0c4" stop-opacity="1"/><stop offset=".55" stop-color="#8fd0ee" stop-opacity="1"/><stop offset=".91" stop-color="#a9bdf7" stop-opacity="1"/><stop offset="1" stop-color="#a9bdf7" stop-opacity="0"/></linearGradient></defs><path d="M5 35 C162.76 31 280 38 366.8 35 l16.5 -23.5 l11.5 42.5 l12.5 -32.5 l9 12.25 C440 38.5 690 32.25 808.81 37.25" fill="none" stroke="url(#hnPulse)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hn-text">Hannes Meilicke</span></span></h1>
         <p class="hero-affil">Research Fellow, Department of Psychiatry and Psychology, Mayo Clinic<span class="affil-prev">Previously Friedrich Schiller University Jena</span></p>
+        <p class="hero-lede">Childhood adversity, stress responsivity, depression and translational neuroscience.</p>
 
         <div class="hero-actions">
           <a class="btn btn-primary" href="#contact">Get in touch</a>
@@ -122,12 +122,14 @@
       </div>
     
     <p class="focus-label">Research focus</p>
+    <!-- Research focus. Each topic carries a one-line gloss in .t-note,
+         which fades up under the cursor. -->
     <ul class="tags">
-      <li>Childhood adversity</li>
-      <li>Stress responsivity</li>
-      <li>Major depressive disorder</li>
-      <li>Neuroimaging &middot; fMRI &amp; MRS</li>
-      <li>Machine learning &amp; NLP</li>
+      <li><b class="t-no">01</b><span class="t-name">Childhood adversity</span><span class="t-note">Early stress as a lasting biological signal.</span></li>
+      <li><b class="t-no">02</b><span class="t-name">Stress responsivity</span><span class="t-note">How brain and body answer an acute challenge.</span></li>
+      <li><b class="t-no">03</b><span class="t-name">Major depressive disorder</span><span class="t-note">Chronicity, remission and relapse over time.</span></li>
+      <li><b class="t-no">04</b><span class="t-name">Neuroimaging &middot; fMRI &amp; MRS</span><span class="t-note">Network dynamics and neurometabolites.</span></li>
+      <li><b class="t-no">05</b><span class="t-name">Machine learning &amp; NLP</span><span class="t-note">Pattern and language in clinical data.</span></li>
     </ul>
 
     <!-- ----------------------------------------------------------------
@@ -144,56 +146,56 @@
     ----------------------------------------------------------------- -->
     <div id="heroes-block">
       <p class="focus-label">My Intellectual heroes</p>
-      <p class="ih-disclaimer">Grouped by the questions they opened up for me rather than by their discipline. They are here because they taught me how to think &mdash; not as an endorsement of their politics, and several of them contradict each other flatly.</p>
+      <p class="ih-disclaimer">Grouped by the questions they opened, not by discipline. They taught me how to think, not what to think &mdash; and several of them contradict each other flatly.</p>
       <details class="heroes-fold" open>
         <summary>The mind and the human condition <span class="hf-count">12</span><svg class="hf-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="5,9 12,16 19,9"/></svg></summary>
         <ul class="heroes">
           <li>
-            <div class="ih-line"><span class="ih-name">Otto Kernberg</span><span class="ih-role">Psychoanalyst</span></div>
+            <div class="ih-line"><span class="ih-name">Otto Kernberg</span><span class="ih-role">Psychoanalyst</span><span class="ih-for">Austrian&ndash;American &middot; pioneer of transference-focused psychotherapy</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">C. G. Jung</span><span class="ih-role">Psychiatrist</span></div>
+            <div class="ih-line"><span class="ih-name">C. G. Jung</span><span class="ih-role">Psychiatrist</span><span class="ih-for">Swiss &middot; analytical psychology, the archetypes</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Daniel Kahneman</span><span class="ih-role">Psychologist</span></div>
+            <div class="ih-line"><span class="ih-name">Daniel Kahneman</span><span class="ih-role">Psychologist</span><span class="ih-for">Israeli&ndash;American &middot; author of <em>Thinking, Fast and Slow</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Antonio Damasio</span><span class="ih-role">Neuroscientist</span></div>
+            <div class="ih-line"><span class="ih-name">Antonio Damasio</span><span class="ih-role">Neuroscientist</span><span class="ih-for">Portuguese&ndash;American &middot; the somatic marker hypothesis</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Edward Bullmore</span><span class="ih-role">Psychiatrist &amp; neuroscientist</span></div>
+            <div class="ih-line"><span class="ih-name">Edward Bullmore</span><span class="ih-role">Psychiatrist &amp; neuroscientist</span><span class="ih-for">British &middot; brain networks; author of <em>The Inflamed Mind</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Randolph Nesse</span><span class="ih-role">Evolutionary psychiatrist</span></div>
+            <div class="ih-line"><span class="ih-name">Randolph Nesse</span><span class="ih-role">Evolutionary psychiatrist</span><span class="ih-for">American &middot; author of <em>Good Reasons for Bad Feelings</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Lisa Feldman Barrett</span><span class="ih-role">Psychologist &amp; neuroscientist</span></div>
+            <div class="ih-line"><span class="ih-name">Lisa Feldman Barrett</span><span class="ih-role">Psychologist &amp; neuroscientist</span><span class="ih-for">American &middot; the theory of constructed emotion</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Eric Kandel</span><span class="ih-role">Neuroscientist</span></div>
+            <div class="ih-line"><span class="ih-name">Eric Kandel</span><span class="ih-role">Neuroscientist</span><span class="ih-for">Austrian&ndash;American &middot; Nobel laureate, the biology of memory</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Mihaly Csikszentmihalyi</span><span class="ih-role">Psychologist</span></div>
+            <div class="ih-line"><span class="ih-name">Mihaly Csikszentmihalyi</span><span class="ih-role">Psychologist</span><span class="ih-for">Hungarian&ndash;American &middot; flow</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Sam Vaknin</span><span class="ih-role">Author on narcissism</span></div>
+            <div class="ih-line"><span class="ih-name">Sam Vaknin</span><span class="ih-role">Author on narcissism</span><span class="ih-for">Israeli &middot; author of <em>Malignant Self-Love</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Hartmut Rosa</span><span class="ih-role">Sociologist of acceleration &amp; resonance</span></div>
+            <div class="ih-line"><span class="ih-name">Hartmut Rosa</span><span class="ih-role">Sociologist of acceleration &amp; resonance</span><span class="ih-for">German &middot; acceleration and resonance</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Bent Flyvbjerg</span><span class="ih-role">Social scientist</span></div>
+            <div class="ih-line"><span class="ih-name">Bent Flyvbjerg</span><span class="ih-role">Social scientist</span><span class="ih-for">Danish &middot; phronesis; the risk inside large projects</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
         </ul>
@@ -202,43 +204,43 @@
         <summary>Philosophy, literature and strategy <span class="hf-count">10</span><svg class="hf-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="5,9 12,16 19,9"/></svg></summary>
         <ul class="heroes">
           <li>
-            <div class="ih-line"><span class="ih-name">Sun Tzu</span><span class="ih-role">Strategist</span></div>
+            <div class="ih-line"><span class="ih-name">Sun Tzu</span><span class="ih-role">Strategist</span><span class="ih-for">Chinese &middot; author of <em>The Art of War</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Confucius</span><span class="ih-role">Philosopher</span></div>
+            <div class="ih-line"><span class="ih-name">Confucius</span><span class="ih-role">Philosopher</span><span class="ih-for">Chinese &middot; the <em>Analects</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Karl Popper</span><span class="ih-role">Philosopher of science</span></div>
+            <div class="ih-line"><span class="ih-name">Karl Popper</span><span class="ih-role">Philosopher of science</span><span class="ih-for">Austrian&ndash;British &middot; falsification</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Roger Scruton</span><span class="ih-role">Philosopher</span></div>
+            <div class="ih-line"><span class="ih-name">Roger Scruton</span><span class="ih-role">Philosopher</span><span class="ih-for">British &middot; aesthetics and conservative thought</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Ren&eacute; Girard</span><span class="ih-role">Literary theorist</span></div>
+            <div class="ih-line"><span class="ih-name">Ren&eacute; Girard</span><span class="ih-role">Literary theorist</span><span class="ih-for">French &middot; mimetic desire &mdash; we want by imitation</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Hannah Arendt</span><span class="ih-role">Political theorist</span></div>
+            <div class="ih-line"><span class="ih-name">Hannah Arendt</span><span class="ih-role">Political theorist</span><span class="ih-for">German&ndash;American &middot; author of <em>The Origins of Totalitarianism</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">John Gray</span><span class="ih-role">Philosopher</span></div>
+            <div class="ih-line"><span class="ih-name">John Gray</span><span class="ih-role">Philosopher</span><span class="ih-for">British &middot; author of <em>Straw Dogs</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Nassim Nicholas Taleb</span><span class="ih-role">Essayist &amp; probability theorist</span></div>
+            <div class="ih-line"><span class="ih-name">Nassim Nicholas Taleb</span><span class="ih-role">Essayist &amp; practitioner</span><span class="ih-for">Lebanese&ndash;American &middot; former options trader &middot; <em>The Black Swan</em>, <em>Antifragile</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Hermann Hesse</span><span class="ih-role">Novelist</span></div>
+            <div class="ih-line"><span class="ih-name">Hermann Hesse</span><span class="ih-role">Novelist</span><span class="ih-for">German&ndash;Swiss &middot; author of <em>The Glass Bead Game</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Lev Tolstoy</span><span class="ih-role">Novelist</span></div>
+            <div class="ih-line"><span class="ih-name">Lev Tolstoy</span><span class="ih-role">Novelist</span><span class="ih-for">Russian &middot; author of <em>War and Peace</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
         </ul>
@@ -247,27 +249,27 @@
         <summary>Society, economics and politics <span class="hf-count">6</span><svg class="hf-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="5,9 12,16 19,9"/></svg></summary>
         <ul class="heroes">
           <li>
-            <div class="ih-line"><span class="ih-name">Noam Chomsky</span><span class="ih-role">Linguist &amp; political critic</span></div>
+            <div class="ih-line"><span class="ih-name">Noam Chomsky</span><span class="ih-role">Linguist &amp; political critic</span><span class="ih-for">American &middot; author of <em>Manufacturing Consent</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">David Graeber</span><span class="ih-role">Anthropologist</span></div>
+            <div class="ih-line"><span class="ih-name">David Graeber</span><span class="ih-role">Anthropologist</span><span class="ih-for">American &middot; author of <em>Debt: The First 5,000 Years</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Friedrich August von Hayek</span><span class="ih-role">Economist</span></div>
+            <div class="ih-line"><span class="ih-name">Friedrich August von Hayek</span><span class="ih-role">Economist</span><span class="ih-for">Austrian&ndash;British &middot; Nobel laureate, <em>The Road to Serfdom</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Branko Milanovi&#263;</span><span class="ih-role">Economist</span></div>
+            <div class="ih-line"><span class="ih-name">Branko Milanovi&#263;</span><span class="ih-role">Economist</span><span class="ih-for">Serbian&ndash;American &middot; global inequality, the elephant curve</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Yanis Varoufakis</span><span class="ih-role">Economist</span></div>
+            <div class="ih-line"><span class="ih-name">Yanis Varoufakis</span><span class="ih-role">Economist</span><span class="ih-for">Greek &middot; former finance minister of Greece</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Lee Kuan Yew</span><span class="ih-role">Statesman</span></div>
+            <div class="ih-line"><span class="ih-name">Lee Kuan Yew</span><span class="ih-role">Statesman</span><span class="ih-for">Singaporean &middot; founding prime minister of Singapore</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
         </ul>
@@ -279,7 +281,7 @@
     <section id="writing" class="reveal reveal-soft">
       <h2>Writing &amp; Media</h2>
       <div class="h2-rule"></div>
-      <p>Essays, opinion pieces, talks and video on psychiatry, medicine and adjacent questions. Every block opens the full piece.</p>
+      <p>Essays, opinion pieces, talks and video on psychiatry, medicine and adjacent questions.</p>
 
       <!-- ----------------------------------------------------------------
            Adding a piece: copy one <a class="media-card"> block and edit
@@ -348,21 +350,392 @@
         <button type="button" data-mrail="1" aria-label="More pieces"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,5 16,12 9,19"/></svg></button>
       </div>
 
-      <p class="media-note">More pieces will appear here over time.</p>
+      <!-- ----------------------------------------------------------------
+         Ten most influential books - one panel per year.
+         Click a year and it opens underneath: first the note on how
+         the year read, then the ten books, one at a time, from ten
+         down to one. Click the year again, the cross, Escape, or
+         anywhere outside to close it. The row of years scrolls
+         sideways - drag it, swipe it, or use the two round buttons.
 
-      <!-- Reading notes: one page per year, writing/books-YYYY.html -->
-      <div class="reading">
-        <h3 class="reading-head">Reading notes</h3>
-        <p class="reading-lede">One page per year: the ten books that influenced me most, counted down from ten to one.</p>
-        <div class="reading-grid">
-          <a class="reading-card" href="writing/books-2025.html"><span class="ry">2025</span><span class="rt">Ten most influential books</span><span class="rc">In progress</span></a>
-          <a class="reading-card" href="writing/books-2024.html"><span class="ry">2024</span><span class="rt">Ten most influential books</span><span class="rc">Coming soon</span></a>
-          <a class="reading-card" href="writing/books-2023.html"><span class="ry">2023</span><span class="rt">Ten most influential books</span><span class="rc">Coming soon</span></a>
-          <a class="reading-card" href="writing/books-2022.html"><span class="ry">2022</span><span class="rt">Ten most influential books</span><span class="rc">Coming soon</span></a>
-          <a class="reading-card" href="writing/books-2021.html"><span class="ry">2021</span><span class="rt">Ten most influential books</span><span class="rc">Coming soon</span></a>
+         To fill a year in:
+           .yp-note   two or three sentences on the year as a whole
+           .cd-title  the book
+           .cd-author author, year of publication
+           .cd-take   what it changed
+         Then delete  is-placeholder  from that class so the text
+         loses the faded, italic look. To add another year, copy a
+         .ychip and its .ypanel and change the four dates in the id,
+         the data-year, the label and the link.
+         ----------------------------------------------------------------- -->
+    <div class="reading" id="reading">
+      <h3 class="reading-head">Ten most influential books</h3>
+
+      <div class="yrail-wrap">
+        <div class="yrail" data-yrail>
+          <button class="ychip" type="button" data-year="2025" aria-expanded="false" aria-controls="yr-2025"><span class="yc-year">2025</span><span class="yc-state">In progress</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2024" aria-expanded="false" aria-controls="yr-2024"><span class="yc-year">2024</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2023" aria-expanded="false" aria-controls="yr-2023"><span class="yc-year">2023</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2022" aria-expanded="false" aria-controls="yr-2022"><span class="yc-year">2022</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2021" aria-expanded="false" aria-controls="yr-2021"><span class="yc-year">2021</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2020" aria-expanded="false" aria-controls="yr-2020"><span class="yc-year">2020</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2019" aria-expanded="false" aria-controls="yr-2019"><span class="yc-year">2019</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2018" aria-expanded="false" aria-controls="yr-2018"><span class="yc-year">2018</span><span class="yc-state">Coming soon</span><span class="yc-mark" aria-hidden="true"></span></button>
         </div>
       </div>
-    </section>
+      <div class="yrail-nav">
+        <button type="button" data-yrail-step="-1" aria-label="Later years"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,5 8,12 15,19"/></svg></button>
+        <button type="button" data-yrail-step="1" aria-label="Earlier years"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,5 16,12 9,19"/></svg></button>
+      </div>
+
+      <div class="ypanels">
+        <section class="ypanel" id="yr-2025" data-year="2025" aria-label="2025" hidden>
+          <div class="yp-top">
+            <p class="yp-eyebrow">2025</p>
+            <button class="yp-close" type="button" aria-label="Close 2025"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+          </div>
+          <p class="yp-note is-placeholder">How 2025 read &mdash; to be written. Two or three sentences: what I kept circling around, what changed my mind, what I put down half way.</p>
+          <p class="yp-more"><a href="writing/books-2025.html">The 2025 page<i aria-hidden="true">&rarr;</i></a></p>
+          <div class="cd" data-cd>
+            <div class="cd-stage">
+              <ol class="cd-list">
+                <li class="cd-item" data-rank="10"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p><div class="cd-body"><p class="cd-title">Title of number 10</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="9"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p><div class="cd-body"><p class="cd-title">Title of number 9</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="8"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p><div class="cd-body"><p class="cd-title">Title of number 8</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="7"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p><div class="cd-body"><p class="cd-title">Title of number 7</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="6"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p><div class="cd-body"><p class="cd-title">Title of number 6</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="5"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p><div class="cd-body"><p class="cd-title">Title of number 5</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="4"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p><div class="cd-body"><p class="cd-title">Title of number 4</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="3"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p><div class="cd-body"><p class="cd-title">Title of number 3</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="2"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p><div class="cd-body"><p class="cd-title">Title of number 2</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="1"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p><div class="cd-body"><p class="cd-title">Title of number 1</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+              </ol>
+            </div>
+            <div class="cd-foot">
+              <div class="cd-ticks">
+                <button type="button" data-cd-go="0" aria-label="Go to number 10"></button>
+                <button type="button" data-cd-go="1" aria-label="Go to number 9"></button>
+                <button type="button" data-cd-go="2" aria-label="Go to number 8"></button>
+                <button type="button" data-cd-go="3" aria-label="Go to number 7"></button>
+                <button type="button" data-cd-go="4" aria-label="Go to number 6"></button>
+                <button type="button" data-cd-go="5" aria-label="Go to number 5"></button>
+                <button type="button" data-cd-go="6" aria-label="Go to number 4"></button>
+                <button type="button" data-cd-go="7" aria-label="Go to number 3"></button>
+                <button type="button" data-cd-go="8" aria-label="Go to number 2"></button>
+                <button type="button" data-cd-go="9" aria-label="Go to number 1"></button>
+              </div>
+              <div class="cd-nav">
+                <button type="button" data-cd-step="-1" aria-label="Previous book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,5 8,12 15,19"/></svg></button>
+                <button type="button" data-cd-step="1" aria-label="Next book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,5 16,12 9,19"/></svg></button>
+              </div>
+            </div>
+            <p class="cd-live" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+        <section class="ypanel" id="yr-2024" data-year="2024" aria-label="2024" hidden>
+          <div class="yp-top">
+            <p class="yp-eyebrow">2024</p>
+            <button class="yp-close" type="button" aria-label="Close 2024"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+          </div>
+          <p class="yp-note is-placeholder">How 2024 read &mdash; to be written. Two or three sentences: what I kept circling around, what changed my mind, what I put down half way.</p>
+          <p class="yp-more"><a href="writing/books-2024.html">The 2024 page<i aria-hidden="true">&rarr;</i></a></p>
+          <div class="cd" data-cd>
+            <div class="cd-stage">
+              <ol class="cd-list">
+                <li class="cd-item" data-rank="10"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p><div class="cd-body"><p class="cd-title">Title of number 10</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="9"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p><div class="cd-body"><p class="cd-title">Title of number 9</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="8"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p><div class="cd-body"><p class="cd-title">Title of number 8</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="7"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p><div class="cd-body"><p class="cd-title">Title of number 7</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="6"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p><div class="cd-body"><p class="cd-title">Title of number 6</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="5"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p><div class="cd-body"><p class="cd-title">Title of number 5</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="4"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p><div class="cd-body"><p class="cd-title">Title of number 4</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="3"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p><div class="cd-body"><p class="cd-title">Title of number 3</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="2"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p><div class="cd-body"><p class="cd-title">Title of number 2</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="1"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p><div class="cd-body"><p class="cd-title">Title of number 1</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+              </ol>
+            </div>
+            <div class="cd-foot">
+              <div class="cd-ticks">
+                <button type="button" data-cd-go="0" aria-label="Go to number 10"></button>
+                <button type="button" data-cd-go="1" aria-label="Go to number 9"></button>
+                <button type="button" data-cd-go="2" aria-label="Go to number 8"></button>
+                <button type="button" data-cd-go="3" aria-label="Go to number 7"></button>
+                <button type="button" data-cd-go="4" aria-label="Go to number 6"></button>
+                <button type="button" data-cd-go="5" aria-label="Go to number 5"></button>
+                <button type="button" data-cd-go="6" aria-label="Go to number 4"></button>
+                <button type="button" data-cd-go="7" aria-label="Go to number 3"></button>
+                <button type="button" data-cd-go="8" aria-label="Go to number 2"></button>
+                <button type="button" data-cd-go="9" aria-label="Go to number 1"></button>
+              </div>
+              <div class="cd-nav">
+                <button type="button" data-cd-step="-1" aria-label="Previous book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,5 8,12 15,19"/></svg></button>
+                <button type="button" data-cd-step="1" aria-label="Next book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,5 16,12 9,19"/></svg></button>
+              </div>
+            </div>
+            <p class="cd-live" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+        <section class="ypanel" id="yr-2023" data-year="2023" aria-label="2023" hidden>
+          <div class="yp-top">
+            <p class="yp-eyebrow">2023</p>
+            <button class="yp-close" type="button" aria-label="Close 2023"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+          </div>
+          <p class="yp-note is-placeholder">How 2023 read &mdash; to be written. Two or three sentences: what I kept circling around, what changed my mind, what I put down half way.</p>
+          <p class="yp-more"><a href="writing/books-2023.html">The 2023 page<i aria-hidden="true">&rarr;</i></a></p>
+          <div class="cd" data-cd>
+            <div class="cd-stage">
+              <ol class="cd-list">
+                <li class="cd-item" data-rank="10"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p><div class="cd-body"><p class="cd-title">Title of number 10</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="9"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p><div class="cd-body"><p class="cd-title">Title of number 9</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="8"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p><div class="cd-body"><p class="cd-title">Title of number 8</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="7"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p><div class="cd-body"><p class="cd-title">Title of number 7</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="6"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p><div class="cd-body"><p class="cd-title">Title of number 6</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="5"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p><div class="cd-body"><p class="cd-title">Title of number 5</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="4"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p><div class="cd-body"><p class="cd-title">Title of number 4</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="3"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p><div class="cd-body"><p class="cd-title">Title of number 3</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="2"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p><div class="cd-body"><p class="cd-title">Title of number 2</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="1"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p><div class="cd-body"><p class="cd-title">Title of number 1</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+              </ol>
+            </div>
+            <div class="cd-foot">
+              <div class="cd-ticks">
+                <button type="button" data-cd-go="0" aria-label="Go to number 10"></button>
+                <button type="button" data-cd-go="1" aria-label="Go to number 9"></button>
+                <button type="button" data-cd-go="2" aria-label="Go to number 8"></button>
+                <button type="button" data-cd-go="3" aria-label="Go to number 7"></button>
+                <button type="button" data-cd-go="4" aria-label="Go to number 6"></button>
+                <button type="button" data-cd-go="5" aria-label="Go to number 5"></button>
+                <button type="button" data-cd-go="6" aria-label="Go to number 4"></button>
+                <button type="button" data-cd-go="7" aria-label="Go to number 3"></button>
+                <button type="button" data-cd-go="8" aria-label="Go to number 2"></button>
+                <button type="button" data-cd-go="9" aria-label="Go to number 1"></button>
+              </div>
+              <div class="cd-nav">
+                <button type="button" data-cd-step="-1" aria-label="Previous book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,5 8,12 15,19"/></svg></button>
+                <button type="button" data-cd-step="1" aria-label="Next book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,5 16,12 9,19"/></svg></button>
+              </div>
+            </div>
+            <p class="cd-live" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+        <section class="ypanel" id="yr-2022" data-year="2022" aria-label="2022" hidden>
+          <div class="yp-top">
+            <p class="yp-eyebrow">2022</p>
+            <button class="yp-close" type="button" aria-label="Close 2022"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+          </div>
+          <p class="yp-note is-placeholder">How 2022 read &mdash; to be written. Two or three sentences: what I kept circling around, what changed my mind, what I put down half way.</p>
+          <p class="yp-more"><a href="writing/books-2022.html">The 2022 page<i aria-hidden="true">&rarr;</i></a></p>
+          <div class="cd" data-cd>
+            <div class="cd-stage">
+              <ol class="cd-list">
+                <li class="cd-item" data-rank="10"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p><div class="cd-body"><p class="cd-title">Title of number 10</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="9"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p><div class="cd-body"><p class="cd-title">Title of number 9</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="8"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p><div class="cd-body"><p class="cd-title">Title of number 8</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="7"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p><div class="cd-body"><p class="cd-title">Title of number 7</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="6"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p><div class="cd-body"><p class="cd-title">Title of number 6</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="5"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p><div class="cd-body"><p class="cd-title">Title of number 5</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="4"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p><div class="cd-body"><p class="cd-title">Title of number 4</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="3"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p><div class="cd-body"><p class="cd-title">Title of number 3</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="2"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p><div class="cd-body"><p class="cd-title">Title of number 2</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="1"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p><div class="cd-body"><p class="cd-title">Title of number 1</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+              </ol>
+            </div>
+            <div class="cd-foot">
+              <div class="cd-ticks">
+                <button type="button" data-cd-go="0" aria-label="Go to number 10"></button>
+                <button type="button" data-cd-go="1" aria-label="Go to number 9"></button>
+                <button type="button" data-cd-go="2" aria-label="Go to number 8"></button>
+                <button type="button" data-cd-go="3" aria-label="Go to number 7"></button>
+                <button type="button" data-cd-go="4" aria-label="Go to number 6"></button>
+                <button type="button" data-cd-go="5" aria-label="Go to number 5"></button>
+                <button type="button" data-cd-go="6" aria-label="Go to number 4"></button>
+                <button type="button" data-cd-go="7" aria-label="Go to number 3"></button>
+                <button type="button" data-cd-go="8" aria-label="Go to number 2"></button>
+                <button type="button" data-cd-go="9" aria-label="Go to number 1"></button>
+              </div>
+              <div class="cd-nav">
+                <button type="button" data-cd-step="-1" aria-label="Previous book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,5 8,12 15,19"/></svg></button>
+                <button type="button" data-cd-step="1" aria-label="Next book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,5 16,12 9,19"/></svg></button>
+              </div>
+            </div>
+            <p class="cd-live" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+        <section class="ypanel" id="yr-2021" data-year="2021" aria-label="2021" hidden>
+          <div class="yp-top">
+            <p class="yp-eyebrow">2021</p>
+            <button class="yp-close" type="button" aria-label="Close 2021"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+          </div>
+          <p class="yp-note is-placeholder">How 2021 read &mdash; to be written. Two or three sentences: what I kept circling around, what changed my mind, what I put down half way.</p>
+          <p class="yp-more"><a href="writing/books-2021.html">The 2021 page<i aria-hidden="true">&rarr;</i></a></p>
+          <div class="cd" data-cd>
+            <div class="cd-stage">
+              <ol class="cd-list">
+                <li class="cd-item" data-rank="10"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p><div class="cd-body"><p class="cd-title">Title of number 10</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="9"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p><div class="cd-body"><p class="cd-title">Title of number 9</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="8"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p><div class="cd-body"><p class="cd-title">Title of number 8</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="7"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p><div class="cd-body"><p class="cd-title">Title of number 7</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="6"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p><div class="cd-body"><p class="cd-title">Title of number 6</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="5"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p><div class="cd-body"><p class="cd-title">Title of number 5</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="4"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p><div class="cd-body"><p class="cd-title">Title of number 4</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="3"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p><div class="cd-body"><p class="cd-title">Title of number 3</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="2"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p><div class="cd-body"><p class="cd-title">Title of number 2</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="1"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p><div class="cd-body"><p class="cd-title">Title of number 1</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+              </ol>
+            </div>
+            <div class="cd-foot">
+              <div class="cd-ticks">
+                <button type="button" data-cd-go="0" aria-label="Go to number 10"></button>
+                <button type="button" data-cd-go="1" aria-label="Go to number 9"></button>
+                <button type="button" data-cd-go="2" aria-label="Go to number 8"></button>
+                <button type="button" data-cd-go="3" aria-label="Go to number 7"></button>
+                <button type="button" data-cd-go="4" aria-label="Go to number 6"></button>
+                <button type="button" data-cd-go="5" aria-label="Go to number 5"></button>
+                <button type="button" data-cd-go="6" aria-label="Go to number 4"></button>
+                <button type="button" data-cd-go="7" aria-label="Go to number 3"></button>
+                <button type="button" data-cd-go="8" aria-label="Go to number 2"></button>
+                <button type="button" data-cd-go="9" aria-label="Go to number 1"></button>
+              </div>
+              <div class="cd-nav">
+                <button type="button" data-cd-step="-1" aria-label="Previous book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,5 8,12 15,19"/></svg></button>
+                <button type="button" data-cd-step="1" aria-label="Next book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,5 16,12 9,19"/></svg></button>
+              </div>
+            </div>
+            <p class="cd-live" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+        <section class="ypanel" id="yr-2020" data-year="2020" aria-label="2020" hidden>
+          <div class="yp-top">
+            <p class="yp-eyebrow">2020</p>
+            <button class="yp-close" type="button" aria-label="Close 2020"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+          </div>
+          <p class="yp-note is-placeholder">How 2020 read &mdash; to be written. Two or three sentences: what I kept circling around, what changed my mind, what I put down half way.</p>
+          <p class="yp-more"><a href="writing/books-2020.html">The 2020 page<i aria-hidden="true">&rarr;</i></a></p>
+          <div class="cd" data-cd>
+            <div class="cd-stage">
+              <ol class="cd-list">
+                <li class="cd-item" data-rank="10"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p><div class="cd-body"><p class="cd-title">Title of number 10</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="9"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p><div class="cd-body"><p class="cd-title">Title of number 9</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="8"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p><div class="cd-body"><p class="cd-title">Title of number 8</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="7"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p><div class="cd-body"><p class="cd-title">Title of number 7</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="6"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p><div class="cd-body"><p class="cd-title">Title of number 6</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="5"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p><div class="cd-body"><p class="cd-title">Title of number 5</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="4"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p><div class="cd-body"><p class="cd-title">Title of number 4</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="3"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p><div class="cd-body"><p class="cd-title">Title of number 3</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="2"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p><div class="cd-body"><p class="cd-title">Title of number 2</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="1"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p><div class="cd-body"><p class="cd-title">Title of number 1</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+              </ol>
+            </div>
+            <div class="cd-foot">
+              <div class="cd-ticks">
+                <button type="button" data-cd-go="0" aria-label="Go to number 10"></button>
+                <button type="button" data-cd-go="1" aria-label="Go to number 9"></button>
+                <button type="button" data-cd-go="2" aria-label="Go to number 8"></button>
+                <button type="button" data-cd-go="3" aria-label="Go to number 7"></button>
+                <button type="button" data-cd-go="4" aria-label="Go to number 6"></button>
+                <button type="button" data-cd-go="5" aria-label="Go to number 5"></button>
+                <button type="button" data-cd-go="6" aria-label="Go to number 4"></button>
+                <button type="button" data-cd-go="7" aria-label="Go to number 3"></button>
+                <button type="button" data-cd-go="8" aria-label="Go to number 2"></button>
+                <button type="button" data-cd-go="9" aria-label="Go to number 1"></button>
+              </div>
+              <div class="cd-nav">
+                <button type="button" data-cd-step="-1" aria-label="Previous book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,5 8,12 15,19"/></svg></button>
+                <button type="button" data-cd-step="1" aria-label="Next book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,5 16,12 9,19"/></svg></button>
+              </div>
+            </div>
+            <p class="cd-live" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+        <section class="ypanel" id="yr-2019" data-year="2019" aria-label="2019" hidden>
+          <div class="yp-top">
+            <p class="yp-eyebrow">2019</p>
+            <button class="yp-close" type="button" aria-label="Close 2019"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+          </div>
+          <p class="yp-note is-placeholder">How 2019 read &mdash; to be written. Two or three sentences: what I kept circling around, what changed my mind, what I put down half way.</p>
+          <p class="yp-more"><a href="writing/books-2019.html">The 2019 page<i aria-hidden="true">&rarr;</i></a></p>
+          <div class="cd" data-cd>
+            <div class="cd-stage">
+              <ol class="cd-list">
+                <li class="cd-item" data-rank="10"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p><div class="cd-body"><p class="cd-title">Title of number 10</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="9"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p><div class="cd-body"><p class="cd-title">Title of number 9</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="8"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p><div class="cd-body"><p class="cd-title">Title of number 8</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="7"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p><div class="cd-body"><p class="cd-title">Title of number 7</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="6"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p><div class="cd-body"><p class="cd-title">Title of number 6</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="5"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p><div class="cd-body"><p class="cd-title">Title of number 5</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="4"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p><div class="cd-body"><p class="cd-title">Title of number 4</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="3"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p><div class="cd-body"><p class="cd-title">Title of number 3</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="2"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p><div class="cd-body"><p class="cd-title">Title of number 2</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="1"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p><div class="cd-body"><p class="cd-title">Title of number 1</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+              </ol>
+            </div>
+            <div class="cd-foot">
+              <div class="cd-ticks">
+                <button type="button" data-cd-go="0" aria-label="Go to number 10"></button>
+                <button type="button" data-cd-go="1" aria-label="Go to number 9"></button>
+                <button type="button" data-cd-go="2" aria-label="Go to number 8"></button>
+                <button type="button" data-cd-go="3" aria-label="Go to number 7"></button>
+                <button type="button" data-cd-go="4" aria-label="Go to number 6"></button>
+                <button type="button" data-cd-go="5" aria-label="Go to number 5"></button>
+                <button type="button" data-cd-go="6" aria-label="Go to number 4"></button>
+                <button type="button" data-cd-go="7" aria-label="Go to number 3"></button>
+                <button type="button" data-cd-go="8" aria-label="Go to number 2"></button>
+                <button type="button" data-cd-go="9" aria-label="Go to number 1"></button>
+              </div>
+              <div class="cd-nav">
+                <button type="button" data-cd-step="-1" aria-label="Previous book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,5 8,12 15,19"/></svg></button>
+                <button type="button" data-cd-step="1" aria-label="Next book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,5 16,12 9,19"/></svg></button>
+              </div>
+            </div>
+            <p class="cd-live" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+        <section class="ypanel" id="yr-2018" data-year="2018" aria-label="2018" hidden>
+          <div class="yp-top">
+            <p class="yp-eyebrow">2018</p>
+            <button class="yp-close" type="button" aria-label="Close 2018"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+          </div>
+          <p class="yp-note is-placeholder">How 2018 read &mdash; to be written. Two or three sentences: what I kept circling around, what changed my mind, what I put down half way.</p>
+          <p class="yp-more"><a href="writing/books-2018.html">The 2018 page<i aria-hidden="true">&rarr;</i></a></p>
+          <div class="cd" data-cd>
+            <div class="cd-stage">
+              <ol class="cd-list">
+                <li class="cd-item" data-rank="10"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p><div class="cd-body"><p class="cd-title">Title of number 10</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="9"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p><div class="cd-body"><p class="cd-title">Title of number 9</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="8"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p><div class="cd-body"><p class="cd-title">Title of number 8</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="7"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p><div class="cd-body"><p class="cd-title">Title of number 7</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="6"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p><div class="cd-body"><p class="cd-title">Title of number 6</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="5"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p><div class="cd-body"><p class="cd-title">Title of number 5</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="4"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p><div class="cd-body"><p class="cd-title">Title of number 4</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="3"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p><div class="cd-body"><p class="cd-title">Title of number 3</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="2"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p><div class="cd-body"><p class="cd-title">Title of number 2</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+                <li class="cd-item" data-rank="1"><p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p><div class="cd-body"><p class="cd-title">Title of number 1</p><p class="cd-author">Author &middot; year of publication</p><p class="cd-take is-placeholder">What this one changed &mdash; to be written.</p></div></li>
+              </ol>
+            </div>
+            <div class="cd-foot">
+              <div class="cd-ticks">
+                <button type="button" data-cd-go="0" aria-label="Go to number 10"></button>
+                <button type="button" data-cd-go="1" aria-label="Go to number 9"></button>
+                <button type="button" data-cd-go="2" aria-label="Go to number 8"></button>
+                <button type="button" data-cd-go="3" aria-label="Go to number 7"></button>
+                <button type="button" data-cd-go="4" aria-label="Go to number 6"></button>
+                <button type="button" data-cd-go="5" aria-label="Go to number 5"></button>
+                <button type="button" data-cd-go="6" aria-label="Go to number 4"></button>
+                <button type="button" data-cd-go="7" aria-label="Go to number 3"></button>
+                <button type="button" data-cd-go="8" aria-label="Go to number 2"></button>
+                <button type="button" data-cd-go="9" aria-label="Go to number 1"></button>
+              </div>
+              <div class="cd-nav">
+                <button type="button" data-cd-step="-1" aria-label="Previous book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,5 8,12 15,19"/></svg></button>
+                <button type="button" data-cd-step="1" aria-label="Next book"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,5 16,12 9,19"/></svg></button>
+              </div>
+            </div>
+            <p class="cd-live" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
 
     <section id="research" class="reveal reveal-soft">
       <h2>Research &amp; Publications</h2>
@@ -498,6 +871,10 @@
 <div class="cv-body">
 <h3>Research fellowship, Mayo Clinic <span class="flag" role="img" aria-label="United States">&#127482;&#127480;</span></h3>
 <p>Department of Psychiatry and Psychology.</p>
+        <div class="cv-pix" data-cols="2">
+          <span class="pix"><img src="images/cv-mayo-1.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+          <span class="pix"><img src="images/cv-mayo-2.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        </div>
 </div>
 </article>
 <article class="cv-entry reveal">
@@ -533,6 +910,11 @@
 <li><span class="pt-when">2018 &ndash; 2025</span><span class="pt-what"><b>Friedrich Schiller University Jena <span class="flag" role="img" aria-label="Germany">&#127465;&#127466;</span></b><i>Clinical years (Klinik) &middot; second and third state examinations (M2, M3)</i></span></li>
 <li><span class="pt-when">2016 &ndash; 2018</span><span class="pt-what"><b>Goethe University Frankfurt <span class="flag" role="img" aria-label="Germany">&#127465;&#127466;</span></b><i>Preclinical years (Vorklinik) &middot; first state examination (M1, the &ldquo;Physikum&rdquo;)</i></span></li>
 </ul>
+        <div class="cv-pix" data-cols="3">
+          <span class="pix"><img src="images/cv-medicine-1.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+          <span class="pix"><img src="images/cv-medicine-2.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+          <span class="pix"><img src="images/cv-medicine-3.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        </div>
 </div>
 </article>
 <article class="cv-entry reveal">
@@ -540,6 +922,11 @@
 <div class="cv-body">
 <h3>Chinese language and culture <span class="flag" role="img" aria-label="China">&#127464;&#127475;</span></h3>
 <p>Shanghai International Studies University.</p>
+        <div class="cv-pix" data-cols="3">
+          <span class="pix"><img src="images/cv-shanghai-1.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+          <span class="pix"><img src="images/cv-shanghai-2.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+          <span class="pix"><img src="images/cv-shanghai-3.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        </div>
 </div>
 </article>
 <article class="cv-entry reveal">
@@ -547,6 +934,9 @@
 <div class="cv-body">
 <h3>Abitur, German school-leaving examination <span class="flag" role="img" aria-label="Germany">&#127465;&#127466;</span></h3>
 <p>Gustav von Schmoller Schule, Heilbronn.</p>
+        <div class="cv-pix" data-cols="1">
+          <span class="pix"><img src="images/cv-abitur-1.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        </div>
 </div>
 </article>
 
@@ -555,6 +945,13 @@
 <div class="cv-body">
 <h3>Heilbronn, Germany <span class="flag" role="img" aria-label="Germany">&#127465;&#127466;</span></h3>
 <p>Football with my friends until it got dark, piano at home, and long evenings with Pok&eacute;mon Ruby and The Legend of Zelda.</p>
+        <div class="cv-pix" data-cols="5">
+          <span class="pix"><img src="images/cv-heilbronn-1.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+          <span class="pix"><img src="images/cv-heilbronn-2.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+          <span class="pix"><img src="images/cv-heilbronn-3.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+          <span class="pix"><img src="images/cv-heilbronn-4.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+          <span class="pix"><img src="images/cv-heilbronn-5.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        </div>
 </div>
 </article>
 </div>
@@ -649,7 +1046,7 @@
         for (var k = 0; k < nodes.length; k++) { observer.observe(nodes[k]); }
       }
 
-      watch(quick, { threshold: 0.25, rootMargin: '-6% 0px -10% 0px' });
+      watch(quick, { threshold: 0.2, rootMargin: '-4% 0px -30% 0px' });
       watch(soft, { threshold: 0, rootMargin: '30% 0px 35% 0px' });
     })();
 
@@ -765,10 +1162,10 @@
 
     if (timeline) {
       var r = timeline.getBoundingClientRect();
-      var p = Math.max(0, Math.min(r.height - 16, window.innerHeight * 0.62 - r.top));
+      var p = Math.max(0, Math.min(r.height - 16, window.innerHeight * 0.55 - r.top));
       timeline.style.setProperty('--cvp', p + 'px');
       entries.forEach(function (e) {
-        e.classList.toggle('lit', e.getBoundingClientRect().top < window.innerHeight * 0.62);
+        e.classList.toggle('lit', e.getBoundingClientRect().top < window.innerHeight * 0.55);
       });
     }
   }
@@ -990,6 +1387,182 @@
     if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
   }, true);
   sync();
+}());
+</script>
+
+<script>
+/* ---------------------------------------------------------
+   Ten most influential books
+   1. the row of years scrolls sideways: drag it, swipe it,
+      or use the two round buttons
+   2. a year opens its panel underneath and stays marked;
+      clicking it again, the cross, Escape, or anywhere
+      outside closes it
+   3. inside an open panel the books come one at a time,
+      counted down from ten to one - buttons, ticks, the
+      left and right arrow keys, or a swipe
+   --------------------------------------------------------- */
+(function () {
+  var block = document.getElementById("reading");
+  if (!block) { return; }
+
+  /* ---- the row of years ---- */
+  var rail = block.querySelector("[data-yrail]");
+  var wrap = rail ? rail.parentNode : null;
+  var arrows = [].slice.call(block.querySelectorAll("[data-yrail-step]"));
+  var railNav = block.querySelector(".yrail-nav");
+
+  if (rail) {
+    var stepWidth = function () {
+      var c = rail.querySelector(".ychip");
+      return (c ? c.getBoundingClientRect().width : 130) + 12;
+    };
+    var sync = function () {
+      var max = rail.scrollWidth - rail.clientWidth - 1;
+      if (railNav) { railNav.style.display = max > 0 ? "" : "none"; }
+      wrap.classList.toggle("can-l", rail.scrollLeft > 4);
+      wrap.classList.toggle("can-r", rail.scrollLeft < max);
+      arrows.forEach(function (b) {
+        b.disabled = b.getAttribute("data-yrail-step") === "-1"
+          ? rail.scrollLeft <= 4
+          : rail.scrollLeft >= max;
+      });
+    };
+    rail.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+    arrows.forEach(function (b) {
+      b.addEventListener("click", function () {
+        rail.scrollBy({ left: Number(b.getAttribute("data-yrail-step")) * stepWidth(), behavior: "smooth" });
+      });
+    });
+    var down = false, startX = 0, startLeft = 0, moved = false;
+    rail.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse" && e.button !== 0) { return; }
+      down = true; moved = false; startX = e.clientX; startLeft = rail.scrollLeft;
+      rail.setPointerCapture(e.pointerId);
+    });
+    rail.addEventListener("pointermove", function (e) {
+      if (!down) { return; }
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > 4) { rail.classList.add("dragging"); moved = true; }
+      rail.scrollLeft = startLeft - dx;
+    });
+    var release = function () {
+      if (!down) { return; }
+      down = false;
+      rail.classList.remove("dragging");
+      sync();
+    };
+    rail.addEventListener("pointerup", release);
+    rail.addEventListener("pointercancel", release);
+    rail.addEventListener("click", function (e) {
+      if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+    }, true);
+    sync();
+  }
+
+  /* ---- one countdown per panel ---- */
+  var counters = {};
+  [].slice.call(block.querySelectorAll(".ypanel")).forEach(function (panel) {
+    var cd = panel.querySelector("[data-cd]");
+    if (!cd) { return; }
+    var items = [].slice.call(cd.querySelectorAll(".cd-item"));
+    if (items.length < 2) { return; }
+    var ticks = [].slice.call(cd.querySelectorAll("[data-cd-go]"));
+    var prev = cd.querySelector("[data-cd-step='-1']");
+    var next = cd.querySelector("[data-cd-step='1']");
+    var live = cd.querySelector(".cd-live");
+    var at = 0;
+    var draw = function (n) {
+      if (n < 0 || n > items.length - 1) { return; }
+      at = n;
+      items.forEach(function (el, k) {
+        el.classList.toggle("is-current", k === at);
+        el.setAttribute("aria-hidden", k === at ? "false" : "true");
+      });
+      ticks.forEach(function (t, k) {
+        t.classList.toggle("is-on", k === at);
+        t.classList.toggle("is-past", k < at);
+        if (k === at) { t.setAttribute("aria-current", "true"); } else { t.removeAttribute("aria-current"); }
+      });
+      if (prev) { prev.disabled = at === 0; }
+      if (next) { next.disabled = at === items.length - 1; }
+      if (live) {
+        live.textContent = "Number " + (items[at].getAttribute("data-rank") || (items.length - at)) + " of " + items.length;
+      }
+    };
+    cd.classList.add("is-js");
+    if (prev) { prev.addEventListener("click", function () { draw(at - 1); }); }
+    if (next) { next.addEventListener("click", function () { draw(at + 1); }); }
+    ticks.forEach(function (t, k) { t.addEventListener("click", function () { draw(k); }); });
+    var x0 = null, y0 = null;
+    cd.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    cd.addEventListener("touchend", function (e) {
+      if (x0 === null) { return; }
+      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy)) { draw(dx < 0 ? at + 1 : at - 1); }
+    });
+    draw(0);
+    counters[panel.getAttribute("data-year")] = {
+      move: function (d) { draw(at + d); },
+      reset: function () { draw(0); }
+    };
+  });
+
+  /* ---- opening and closing a year ---- */
+  var chips = [].slice.call(block.querySelectorAll(".ychip"));
+  var openYear = null;
+
+  var shut = function () {
+    if (!openYear) { return; }
+    var panel = document.getElementById("yr-" + openYear);
+    if (panel) { panel.classList.remove("is-open"); panel.hidden = true; }
+    chips.forEach(function (c) { c.setAttribute("aria-expanded", "false"); });
+    openYear = null;
+  };
+  var openUp = function (year) {
+    if (openYear === year) { shut(); return; }
+    shut();
+    var panel = document.getElementById("yr-" + year);
+    if (!panel) { return; }
+    panel.hidden = false;
+    panel.classList.add("is-open");
+    chips.forEach(function (c) {
+      c.setAttribute("aria-expanded", c.getAttribute("data-year") === year ? "true" : "false");
+    });
+    if (counters[year]) { counters[year].reset(); }
+    openYear = year;
+  };
+  chips.forEach(function (c) {
+    c.addEventListener("click", function () { openUp(c.getAttribute("data-year")); });
+  });
+  [].slice.call(block.querySelectorAll(".yp-close")).forEach(function (b) {
+    b.addEventListener("click", function (e) { e.stopPropagation(); shut(); });
+  });
+  document.addEventListener("click", function (e) {
+    if (openYear && !block.contains(e.target)) { shut(); }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (!openYear || e.metaKey || e.ctrlKey || e.altKey) { return; }
+    var t = e.target;
+    if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) { return; }
+    if (e.key === "Escape") { shut(); return; }
+    if (!counters[openYear]) { return; }
+    if (e.key === "ArrowRight") { counters[openYear].move(1); e.preventDefault(); }
+    else if (e.key === "ArrowLeft") { counters[openYear].move(-1); e.preventDefault(); }
+  });
+}());
+
+/* Research focus: a soft light follows the cursor along the row. */
+(function () {
+  [].slice.call(document.querySelectorAll(".tags li")).forEach(function (li) {
+    li.addEventListener("mousemove", function (ev) {
+      var r = li.getBoundingClientRect();
+      li.style.setProperty("--tx", (ev.clientX - r.left) + "px");
+      li.style.setProperty("--ty", (ev.clientY - r.top) + "px");
+    });
+  });
 }());
 </script>
 
