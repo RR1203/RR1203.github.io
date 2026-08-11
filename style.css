@@ -184,7 +184,7 @@ p {
 
 .contact {
   background: var(--charcoal-light);
-  padding: 60px 24px 70px;
+  padding: 60px 0 70px;
 }
 
 .contact-inner {
@@ -1646,3 +1646,42 @@ body.simple footer{margin-top:auto}
 /* Download CV button aligned to the timeline rail --------- */
 #cv .centered{margin-left:151px}
 @media (max-width:900px){#cv .centered{margin-left:5px}}
+
+
+/* Collapsible publication groups --------------------------- */
+.pub-fold{border-top:1px solid rgba(255,255,255,.10)}
+.pub-fold:last-of-type{border-bottom:1px solid rgba(255,255,255,.10)}
+.pub-fold > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:22px 2px}
+.pub-fold > summary::-webkit-details-marker{display:none}
+.pub-fold > summary::marker{content:""}
+.pf-title{font-family:'Playfair Display',Georgia,serif;font-size:23px;letter-spacing:.01em;color:var(--text);transition:color .25s ease}
+.pf-count{font:500 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;color:rgba(216,213,208,.7);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:5px 9px}
+.pf-chev{margin-left:auto;width:15px;height:15px;flex:none;stroke:var(--accent);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .32s cubic-bezier(.2,.7,.2,1)}
+.pub-fold[open] .pf-chev{transform:rotate(180deg)}
+.pub-fold > summary:hover .pf-title{color:var(--accent-strong)}
+.pub-fold > summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+.pub-fold .pubs{margin:0;padding:2px 0 26px 22px}
+.pubs-more{margin-top:26px}
+@media (prefers-reduced-motion:reduce){.pf-chev{transition:none}}
+
+/* Reading notes, one post per year ------------------------- */
+.reading{margin-top:64px}
+.reading-head{font-family:'Playfair Display',Georgia,serif;font-size:23px;margin:0 0 6px;color:var(--text)}
+.reading-lede{color:var(--muted);font-size:17px;margin:0 0 22px;max-width:56ch}
+.reading-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.reading-card{display:flex;flex-direction:column;gap:8px;text-decoration:none;border:1px solid rgba(255,255,255,.11);border-radius:8px;padding:18px 16px 16px;background:rgba(255,255,255,.022);transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s ease,background .3s ease}
+.reading-card:hover{transform:translateY(-3px);border-color:rgba(127,208,196,.45);background:rgba(255,255,255,.05)}
+.reading-card .ry{font-family:'Playfair Display',Georgia,serif;font-size:27px;line-height:1;color:var(--accent)}
+.reading-card .rt{font-size:14px;line-height:1.35;color:var(--text)}
+.reading-card .rc{font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(216,213,208,.5);margin-top:auto}
+@media (max-width:900px){.reading-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.reading-grid{grid-template-columns:1fr}}
+
+/* Book list on the reading-notes pages --------------------- */
+.book-list{list-style:none;padding:0;margin:34px 0 0;counter-reset:bk}
+.book-list .book{position:relative;padding:0 0 26px 46px;margin:0 0 26px;border-bottom:1px solid rgba(255,255,255,.09)}
+.book-list .book:last-child{border-bottom:0;margin-bottom:0}
+.book-list .book::before{counter-increment:bk;content:counter(bk,decimal-leading-zero);position:absolute;left:0;top:5px;font:500 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;color:var(--accent)}
+.book-title{font-family:'Playfair Display',Georgia,serif;font-size:21px;margin:0 0 4px;color:var(--text)}
+.book-author{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:rgba(216,213,208,.6);margin:0 0 10px}
+.book-take{margin:0;color:var(--muted)}
