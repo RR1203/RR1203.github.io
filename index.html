@@ -137,7 +137,7 @@
       <p class="focus-label">My Intellectual heroes</p>
       <p class="ih-disclaimer">Grouped by the questions they opened, not by discipline. They taught me how to think, not what to think &mdash; and several of them contradict each other flatly.</p>
       <details class="heroes-fold" open>
-        <summary>The mind and the human condition <span class="hf-count">12</span><svg class="hf-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="5,9 12,16 19,9"/></svg></summary>
+        <summary>Psychiatry and the human condition <span class="hf-count">12</span><svg class="hf-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="5,9 12,16 19,9"/></svg></summary>
         <ul class="heroes">
           <li>
             <div class="ih-line"><span class="ih-name">Otto Kernberg</span><span class="ih-role">Psychoanalyst</span><span class="ih-for">founder of transference-focused psychotherapy</span></div>
@@ -176,7 +176,7 @@
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Sam Vaknin</span><span class="ih-role">Author on narcissism</span><span class="ih-for">author of <em>Malignant Self-Love</em></span></div>
+            <div class="ih-line"><span class="ih-name">Sam Vaknin</span><span class="ih-for">author of <em>Malignant Self-Love: Narcissism Revisited</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
@@ -1495,8 +1495,24 @@
       }
     };
     cd.classList.add("is-js");
-    if (prev) { prev.addEventListener("click", function () { draw(at - 1); }); }
-    if (next) { next.addEventListener("click", function () { draw(at + 1); }); }
+
+    /* One step takes its time. While a book is still moving in, the
+       next press is ignored, so the ten cannot be flicked through in
+       a second and nothing slips past unread. */
+    var busy = false;
+    var step = function (n) {
+      if (busy || n === at || n < 0 || n > items.length - 1) { return; }
+      busy = true;
+      cd.classList.add("is-busy");
+      draw(n);
+      window.setTimeout(function () {
+        busy = false;
+        cd.classList.remove("is-busy");
+      }, 640);
+    };
+
+    if (prev) { prev.addEventListener("click", function () { step(at - 1); }); }
+    if (next) { next.addEventListener("click", function () { step(at + 1); }); }
     /* The ticks only report how far the year has got: with no
        handler and no tab stop of their own, no book can be
        skipped on the way from ten down to one. */
@@ -1504,19 +1520,25 @@
 
     /* The book itself is the step forward. */
     var stage = cd.querySelector(".cd-stage");
-    if (stage) { stage.addEventListener("click", function () { draw(at + 1); }); }
+    if (stage) {
+      stage.addEventListener("click", function (e) {
+        /* The second half of a double click must not count twice. */
+        if (e.detail > 1) { return; }
+        step(at + 1);
+      });
+    }
     var x0 = null, y0 = null;
     cd.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
     cd.addEventListener("touchend", function (e) {
       if (x0 === null) { return; }
       var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
       x0 = null;
-      if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy)) { draw(dx < 0 ? at + 1 : at - 1); }
+      if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy)) { step(dx < 0 ? at + 1 : at - 1); }
     });
     draw(0);
     counters[panel.getAttribute("data-year")] = {
-      move: function (d) { draw(at + d); },
-      reset: function () { draw(0); }
+      move: function (d) { step(at + d); },
+      reset: function () { busy = false; cd.classList.remove("is-busy"); draw(0); }
     };
   });
 
@@ -1545,7 +1567,12 @@
     openYear = year;
   };
   chips.forEach(function (c) {
-    c.addEventListener("click", function () { openUp(c.getAttribute("data-year")); });
+    c.addEventListener("click", function (e) {
+      /* A double click on a year is still just one click: it opens or
+         closes the panel and never selects the year as text. */
+      if (e.detail > 1) { return; }
+      openUp(c.getAttribute("data-year"));
+    });
   });
   [].slice.call(block.querySelectorAll(".yp-close")).forEach(function (b) {
     b.addEventListener("click", function (e) { e.stopPropagation(); shut(); });
@@ -1564,6 +1591,22 @@
   });
 }());
 
+</script>
+
+<script>
+/* A fold opens or closes with one click. Without this the second half
+   of a double click would open it straight back up and leave the
+   heading selected, so that half is simply thrown away. */
+(function () {
+  [].slice.call(document.querySelectorAll("details > summary")).forEach(function (s) {
+    s.addEventListener("mousedown", function (e) {
+      if (e.detail > 1) { e.preventDefault(); }
+    });
+    s.addEventListener("click", function (e) {
+      if (e.detail > 1) { e.preventDefault(); }
+    });
+  });
+}());
 </script>
 
 </body>
