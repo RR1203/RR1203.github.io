@@ -2367,3 +2367,79 @@ html{scroll-padding-top:84px}
 @media (max-width:960px){
   .about-photo{flex-shrink:1;min-width:0}
 }
+
+
+/* ============================================================
+   v34 - a telephone has no pointer
+   ============================================================ */
+/* Two things on this site were written for a mouse and behaved badly
+   under a finger.
+
+   The rows that scroll sideways were being scrolled twice over: once
+   by the browser, which does it properly, with weight and with a
+   slowing down at the end, and once again by a hand-written drag that
+   could not tell a finger from a mouse. Both pulled at the same row at
+   the same moment, so it ran at double speed, stuttered, and then
+   argued with itself about where to come to rest. The drag now belongs
+   to the mouse alone and on a touch screen the browser is left to it.
+   That correction sits in index.html, where the drag lives.
+
+   The pictures in the CV grew under the pointer. A finger cannot rest
+   on anything, so the first tap left a picture standing open at half
+   its growth, its neighbours dimmed, and there it stayed until
+   something else was touched: not an effect but a fault. So where
+   there is no hover the growing is put away altogether, and the tap is
+   given the meaning the zoom-in cursor always promised. The picture
+   opens at full size over the page; the cross, Escape, or a tap beside
+   it puts the picture away again. */
+@media (hover:none),(pointer:coarse){
+  .cv-pix .pix:hover{transform:none;box-shadow:none;border-color:var(--hair)}
+  .cv-pix .pix:hover img{filter:saturate(.78)}
+  .cv-pix:has(.pix:hover) .pix,.cv-pix:hover .pix{opacity:1}
+  .cv-pix .pix:hover::before{transform:translate(-50%,-50%)}
+  .cv-pix .pix:hover::after{transform:translate(-50%,-50%)}
+  .cv-pix .pix{cursor:pointer}
+  .cv-pix .pix:active{transform:scale(.97);transition-duration:.12s}
+}
+
+/* The row of links in the header is a sideways row too: a swipe that
+   runs out of it should not become the gesture that leaves the page. */
+.nav-links{overscroll-behavior-x:contain}
+
+/* The picture, opened over the page. The sheet is put in place once,
+   empty and out of sight, so that the first picture to be opened fades
+   in exactly like every one after it. */
+.pixbox{position:fixed;inset:0;z-index:1300;display:grid;place-items:center;padding:20px;
+  background:rgba(7,16,29,.94);opacity:0;visibility:hidden;pointer-events:none;
+  overscroll-behavior:contain;touch-action:pinch-zoom;
+  transition:opacity .3s ease,visibility 0s linear .3s}
+.pixbox.is-open{opacity:1;visibility:visible;pointer-events:auto;
+  transition:opacity .3s ease,visibility 0s}
+.pixbox img{display:block;width:auto;height:auto;
+  max-width:min(100%,1180px);max-height:calc(100vh - 40px);
+  border-radius:6px;border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 30px 70px rgba(0,0,0,.55);cursor:default;
+  transform:scale(.97);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.pixbox.is-open img{transform:scale(1)}
+.pixbox-x{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;
+  background:rgba(7,16,29,.72);border:1px solid rgba(255,255,255,.28);
+  color:var(--muted);font-family:inherit;font-size:20px;line-height:1;
+  cursor:pointer;display:grid;place-items:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.35);
+  transition:border-color .3s ease,color .3s ease}
+.pixbox-x:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:700px){
+  .pixbox{padding:14px}
+  .pixbox img{max-height:calc(100vh - 28px)}
+  .pixbox-x{top:8px;right:8px;width:40px;height:40px}
+}
+/* Where the browser can measure the screen that is really left over
+   once its own bars are counted, it should use that measure instead. */
+@supports (height:100dvh){
+  .pixbox img{max-height:calc(100dvh - 40px)}
+  @media (max-width:700px){.pixbox img{max-height:calc(100dvh - 28px)}}
+}
+@media (prefers-reduced-motion:reduce){
+  .pixbox,.pixbox.is-open{transition:opacity .01s linear,visibility 0s}
+  .pixbox img{transition:none;transform:none}
+}
