@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b182a">
 <title>My ten most influential books of 2018 | Hannes Meilicke</title>
 <meta name="description" content="The ten books from 2018 that influenced me most, with the honorable mentions, counted down to number one.">
 <meta property="og:title" content="My ten most influential books of 2018">
@@ -18,7 +19,9 @@
 </head>
 <body class="simple">
 
-<nav class="topnav is-stuck">
+<a class="skip-to" href="#main">Skip to the content</a>
+
+<nav class="topnav is-stuck" aria-label="Main">
   <div class="nav-inner">
     <a class="nav-brand" href="/" aria-label="Hannes Meilicke - home">
       <span class="mono">HM</span>
@@ -35,7 +38,7 @@
   </div>
 </nav>
 
-<main class="simple-main piece">
+<main class="simple-main piece" id="main">
 
   <a class="piece-back" href="/#writing"><span aria-hidden="true">&larr;</span> Writing &amp; Media</a>
 
@@ -217,6 +220,12 @@
     <p class="cd-live" role="status" aria-live="polite"></p>
   </div>
 
+  <!-- The years either side, so that one list leads on to the next
+       without having to go back through the front page. -->
+  <nav class="year-hop" aria-label="Other years">
+    <a class="yh-next" href="/writing/books-2019.html">2019 <span aria-hidden="true">&rarr;</span></a>
+  </nav>
+
   <div class="piece-foot">
     <a class="btn btn-ghost" href="/#writing">More pieces</a>
     <a class="btn btn-primary" href="/#contact">Get in touch</a>
@@ -298,5 +307,26 @@
   });
 })();
 </script>
+<!-- Sideways rows and the downward wheel. A row that scrolls
+     sideways is, as far as the browser is concerned, a box with
+     scrollbars of its own, and it swallows a downward turn of the
+     wheel rather than passing it on. Catch it and hand it back. -->
+<script>
+(function () {
+  var rails = document.querySelectorAll(".cd-extra-list");
+  if (!rails.length) { return; }
+  function pass(e) {
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) { return; }
+    if (this.scrollHeight - this.clientHeight > 2) { return; }
+    var unit = e.deltaMode === 1 ? 16 : (e.deltaMode === 2 ? window.innerHeight : 1);
+    e.preventDefault();
+    window.scrollBy(0, e.deltaY * unit);
+  }
+  for (var i = 0; i < rails.length; i++) {
+    rails[i].addEventListener("wheel", pass, { passive: false });
+  }
+}());
+</script>
+
 </body>
 </html>
