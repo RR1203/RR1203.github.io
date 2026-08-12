@@ -2516,3 +2516,34 @@ body.simple footer{margin-top:auto}
 .hero-social{gap:18px;flex-wrap:wrap;max-width:none;justify-content:flex-start}
 .hero-social .pill{flex:0 0 auto}
 }
+
+
+/* ============================================================
+   v24 - the countdown as a sliding door
+   ============================================================ */
+/* A book already shown waits off to the left, a book still to come waits
+   off to the right. Step forward and the card just read slides out to the
+   left while the next one arrives from the right; step back and the same
+   door runs the other way. The list is clipped at the column edge so the
+   cards have something to slide behind. The numeral travels a little
+   further than its card and grows as it lands, which makes every step feel
+   like an arrival, and the row of marks below fills up from the left as
+   number one comes nearer. */
+.cd.is-js .cd-list{overflow:hidden}
+.cd.is-js .cd-item{transform:translateX(-13%);
+  transition:opacity .26s ease,transform .48s cubic-bezier(.22,.61,.36,1),visibility 0s linear .48s}
+.cd.is-js .cd-item.is-current ~ .cd-item{transform:translateX(13%)}
+.cd.is-js .cd-item.is-current{transform:none;
+  transition:opacity .34s ease .1s,transform .48s cubic-bezier(.22,.61,.36,1),visibility 0s linear 0s}
+.cd.is-js .cd-item .cd-rank{transform:translateX(-46px) scale(.9);
+  transition:transform .58s cubic-bezier(.22,.61,.36,1)}
+.cd.is-js .cd-item.is-current ~ .cd-item .cd-rank{transform:translateX(46px) scale(.9)}
+.cd.is-js .cd-item.is-current .cd-rank{transform:none}
+/* The marks already passed read as ground covered. */
+.cd-ticks button.is-past::before{background:rgba(127,208,196,.62)}
+@media (prefers-reduced-motion:reduce){
+  .cd.is-js .cd-item,
+  .cd.is-js .cd-item.is-current ~ .cd-item,
+  .cd.is-js .cd-item .cd-rank,
+  .cd.is-js .cd-item.is-current ~ .cd-item .cd-rank{transform:none}
+}
