@@ -2459,3 +2459,48 @@ html{scroll-padding-top:84px}
    screens. */
 .pubs>li>div{min-width:0}
 .pub-title,.pub-authors,.pub-meta{overflow-wrap:break-word}
+
+/* ______________________________________________________________
+   Note to self, v36
+   The two pictures under the Abitur were shown too politely.
+
+   A picture opened over the page was allowed to be no larger than the
+   file itself, so on a wide screen a photograph of a hundred people sat
+   small in the middle of the glass and asked to be squinted at. It now
+   takes the whole height it is offered and grows into it, with a ceiling
+   so that it is never stretched so far that the grain of the file begins
+   to show. The proportion of the picture is handed to the sheet by the
+   script that opens it, so nothing is ever pulled out of shape.
+
+   And a frame in the row grows further under the pointer than it did:
+   half again as large, which is enough to see who is standing there.
+   __________________________________________________________ */
+
+/* A narrow margin is enough; the rest of the glass belongs to the
+   picture. */
+.pixbox{padding:16px}
+.pixbox img{width:min(100%,calc((100vh - 32px) * var(--pixar,1.5)),1400px);
+  height:auto;max-width:min(100%,1400px);max-height:calc(100vh - 32px)}
+@media (max-width:700px){
+  .pixbox{padding:10px}
+  .pixbox img{width:min(100%,calc((100vh - 20px) * var(--pixar,1.5)),1400px);
+    max-height:calc(100vh - 20px)}
+  .pixbox-x{top:6px;right:6px}
+}
+/* Where the browser can measure the screen that is really left over
+   once its own bars are counted, it should use that measure instead. */
+@supports (height:100dvh){
+  .pixbox img{width:min(100%,calc((100dvh - 32px) * var(--pixar,1.5)),1400px);
+    max-height:calc(100dvh - 32px)}
+  @media (max-width:700px){
+    .pixbox img{width:min(100%,calc((100dvh - 20px) * var(--pixar,1.5)),1400px);
+      max-height:calc(100dvh - 20px)}
+  }
+}
+
+/* Under the pointer a frame in the CV grows half again as large. */
+.cv-pix .pix:hover{transform:scale(1.55) translateY(-4px)}
+@media (max-width:900px){.cv-pix .pix:hover{transform:scale(1.3) translateY(-3px)}}
+/* Where there is no pointer there is still nothing to grow: a finger
+   opens the picture instead. */
+@media (hover:none),(pointer:coarse){.cv-pix .pix:hover{transform:none}}
