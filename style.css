@@ -2602,9 +2602,11 @@ html{scroll-padding-top:84px}
 .pixbox-prev{left:14px}
 .pixbox-next{right:14px}
 .pixbox-arrow[hidden]{display:none}
-.pixbox-count{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);
+.pixbox-count{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);
+  margin:0;padding:5px 11px 4px;border-radius:99px;
+  background:rgba(7,16,29,.72);border:1px solid rgba(255,255,255,.16);
   font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-  letter-spacing:.18em;color:rgba(216,213,208,.55);pointer-events:none}
+  letter-spacing:.18em;color:rgba(216,213,208,.72);pointer-events:none}
 .pixbox-count[hidden]{display:none}
 @media (max-width:700px){
   .pixbox-arrow{width:44px;height:44px}
