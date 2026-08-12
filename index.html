@@ -1042,8 +1042,9 @@
 <div class="cv-body">
 <h3>Abitur, German school-leaving examination <span class="flag" role="img" aria-label="Germany">&#127465;&#127466;</span></h3>
 <p>Gustav von Schmoller Schule, Heilbronn.</p>
-        <div class="cv-pix" data-cols="1">
-          <span class="pix"><img src="images/cv-abitur-1.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></span>
+        <div class="cv-pix" data-cols="2">
+          <span class="pix"><img src="images/cv-abitur-1.jpg" alt="The Abitur year group photographed outside the school" loading="lazy" onerror="this.style.display='none'"></span>
+          <span class="pix"><img src="images/cv-abitur-2.jpg" alt="Playing the piano on stage" loading="lazy" onerror="this.style.display='none'"></span>
         </div>
 </div>
 </article>
@@ -1465,7 +1466,12 @@
   }
   var down = false, sx = 0, sl = 0, moved = false, last = 0, vel = 0, lt = 0, raf = 0, pid = null, caught = false;
   rail.addEventListener('pointerdown', function (e) {
-    if (e.pointerType === 'mouse' && e.button !== 0) { return; }
+    /* A finger is not a mouse. On a touch screen the browser already
+       carries this row, with its own weight and its own slowing down at
+       the end; a second hand on the same wheel only makes it stutter,
+       and the two of them then disagree about where to come to rest.
+       So the drag below belongs to the mouse alone. */
+    if (e.pointerType !== 'mouse' || e.button !== 0) { return; }
     down = true; moved = false; sx = e.clientX; sl = rail.scrollLeft;
     last = e.clientX; lt = performance.now(); vel = 0;
     cancelAnimationFrame(raf);
@@ -1554,7 +1560,9 @@
     });
     var down = false, startX = 0, startLeft = 0, moved = false, pid = null, caught = false;
     rail.addEventListener("pointerdown", function (e) {
-      if (e.pointerType === "mouse" && e.button !== 0) { return; }
+      /* As with the media rail: a finger is not a mouse, and the
+         browser already carries this row on a touch screen. */
+      if (e.pointerType !== "mouse" || e.button !== 0) { return; }
       down = true; moved = false; startX = e.clientX; startLeft = rail.scrollLeft;
       pid = e.pointerId; caught = false;
     });
@@ -1837,6 +1845,93 @@
     }
     for (var i = 0; i < rails.length; i++) {
       rails[i].addEventListener("wheel", pass, { passive: false });
+    }
+  }());
+  </script>
+
+  <!-- A picture in the CV, and the finger that has no hover.
+       On a desktop a picture in the CV grows under the pointer. A
+       telephone has no pointer to grow under, so the first tap left a
+       picture standing open at half its growth until something else
+       was touched. The growing is therefore put away where there is no
+       hover (see style.css), and the tap is given the meaning the
+       zoom-in cursor always promised: the picture opens at full size
+       over the page. A mouse may click for the same thing. The cross,
+       Escape, or a click beside the picture puts it away again, and a
+       frame still waiting for its file opens nothing at all. -->
+  <script>
+  (function () {
+    var pix = document.querySelectorAll(".cv-pix .pix");
+    if (!pix.length) { return; }
+
+    var box = document.createElement("div");
+    box.className = "pixbox";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-modal", "true");
+    box.setAttribute("aria-label", "Picture at full size");
+    var shown = document.createElement("img");
+    shown.alt = "";
+    var cross = document.createElement("button");
+    cross.type = "button";
+    cross.className = "pixbox-x";
+    cross.setAttribute("aria-label", "Close the picture");
+    cross.textContent = "\u2715";
+    box.appendChild(shown);
+    box.appendChild(cross);
+    var opener = null;
+
+    function open(pic, from) {
+      shown.src = pic.getAttribute("src");
+      shown.alt = pic.getAttribute("alt") || "";
+      opener = from;
+      box.classList.add("is-open");
+      document.addEventListener("keydown", key);
+      cross.focus();
+    }
+
+    function close() {
+      if (!box.classList.contains("is-open")) { return; }
+      box.classList.remove("is-open");
+      document.removeEventListener("keydown", key);
+      if (opener && opener.focus) { opener.focus(); }
+      opener = null;
+    }
+
+    function key(e) {
+      if (e.key === "Escape" || e.keyCode === 27) { close(); }
+    }
+
+    /* A click beside the picture closes it; a click on the picture
+       itself does not, or nobody could look at it twice. */
+    box.addEventListener("click", close);
+    shown.addEventListener("click", function (e) { e.stopPropagation(); });
+    document.body.appendChild(box);
+
+    for (var i = 0; i < pix.length; i++) {
+      (function (p) {
+        var pic = p.querySelector("img");
+        if (!pic) { return; }
+        /* Only a frame with a picture really in it becomes something
+           that can be pressed, or the keyboard would stop at every
+           empty square on its way down the CV. */
+        function ready() {
+          p.setAttribute("tabindex", "0");
+          p.setAttribute("role", "button");
+          p.setAttribute("aria-label", (pic.getAttribute("alt") || "Picture") + ", open at full size");
+        }
+        if (pic.complete && pic.naturalWidth) { ready(); }
+        else { pic.addEventListener("load", ready); }
+        p.addEventListener("click", function () {
+          if (!pic.naturalWidth) { return; }
+          open(pic, p);
+        });
+        p.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " " || e.keyCode === 13 || e.keyCode === 32) {
+            e.preventDefault();
+            if (pic.naturalWidth) { open(pic, p); }
+          }
+        });
+      }(pix[i]));
     }
   }());
   </script>
