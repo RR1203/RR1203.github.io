@@ -2220,10 +2220,12 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;
    At the foot of a reading-notes page there was nowhere to go but
    back to the front. The lists are a sequence, so let them read
    like one: the year before on the left, the year after on the
-   right, and a hairline to keep them apart from the buttons.
+   right, and no rule of their own - the buttons below already
+   bring a hairline, and two lines so close together made a box
+   of what should be a quiet aside.
    --------------------------------------------------------------- */
 .year-hop{display:flex;align-items:center;gap:18px;
-  margin:66px 0 0;padding:22px 0 0;border-top:1px solid var(--hair)}
+  margin:58px 0 0;padding:0}
 .year-hop a{display:inline-flex;align-items:baseline;gap:10px;
   color:rgba(255,255,255,.58);text-decoration:none;
   font-size:12px;letter-spacing:.2em;text-transform:uppercase;
