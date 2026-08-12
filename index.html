@@ -90,7 +90,7 @@
         <div class="hero-social">
           <a class="pill s-scholar" href="https://scholar.google.com/citations?user=iULM0bQAAAAJ&amp;hl=en" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar">
             <span class="pill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.91V17h2V9z"/><path d="M5 13.18v4L12 21l7-3.82v-4L12 17z"/></svg></span>
-            <span class="pill-label">Google Scholar</span>
+            <span class="pill-label">Scholar</span>
           </a>
           <a class="pill s-orcid" href="https://orcid.org/0009-0002-7678-2857" target="_blank" rel="noopener" title="ORCID" aria-label="ORCID">
             <span class="pill-icon"><svg viewBox="68 47 139 140" aria-hidden="true"><path d="M86.3 186.2H70.9V79.1h15.4v107.1z"/><path d="M78.6 66.9c-5.6 0-10.1-4.6-10.1-10.1 0-5.6 4.5-10.1 10.1-10.1s10.1 4.6 10.1 10.1c0 5.5-4.5 10.1-10.1 10.1z"/><path fill-rule="evenodd" d="M108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7 0-21.5-13.7-39.7-43.7-39.7h-23.7v79.4z"/></svg></span>
@@ -1814,17 +1814,26 @@
        The page then seems to seize up wherever the pointer happens
        to be resting. So catch the wheel: if the turn was mostly
        vertical and the row has no vertical travel of its own to
-       give, hand it back to the page. -->
+       give, hand it back to the page. The page itself is set to
+       scroll smoothly, which is the right manner for a link to a
+       heading and quite wrong here: handed back a notch at a time,
+       every notch would begin its own small animation and the page
+       would appear to crawl or to stick. So the smooth setting is
+       lifted for the length of one notch and put back after. -->
   <script>
   (function () {
-    var rails = document.querySelectorAll(".media-grid.mrail, .yrail, .cd-extra-list");
+    var rails = document.querySelectorAll(".media-grid.mrail, .yrail, .cd-extra-list, .nav-links");
     if (!rails.length) { return; }
     function pass(e) {
       if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) { return; }
       if (this.scrollHeight - this.clientHeight > 2) { return; }
       var unit = e.deltaMode === 1 ? 16 : (e.deltaMode === 2 ? window.innerHeight : 1);
+      var root = document.documentElement;
+      var was = root.style.scrollBehavior;
       e.preventDefault();
+      root.style.scrollBehavior = "auto";
       window.scrollBy(0, e.deltaY * unit);
+      root.style.scrollBehavior = was;
     }
     for (var i = 0; i < rails.length; i++) {
       rails[i].addEventListener("wheel", pass, { passive: false });
