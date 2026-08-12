@@ -2510,3 +2510,9 @@ body.simple footer{margin-top:auto}
 .cd.is-js .cd-item,.cd.is-js .cd-item.is-done{transform:none}
 }
 .hero-social{gap:12px}
+/* On a wide screen the marks kept stretching to fill the column; let them
+   sit at their own width, close together, well inside the CV button. */
+@media (min-width:901px){
+.hero-social{gap:18px;flex-wrap:wrap;max-width:none;justify-content:flex-start}
+.hero-social .pill{flex:0 0 auto}
+}
