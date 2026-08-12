@@ -2443,3 +2443,19 @@ html{scroll-padding-top:84px}
   .pixbox,.pixbox.is-open{transition:opacity .01s linear,visibility 0s}
   .pixbox img{transition:none;transform:none}
 }
+
+
+/* ============================================================
+   v35 - one long German word
+   ============================================================ */
+/* A publication title in German carries the word
+   Kindheitstraumatisierung: twenty-four letters that will not break.
+   The second column of that list is asked to be at least as wide as
+   its longest unbreakable word, so on a three-hundred-and-twenty pixel
+   screen this one title pushed itself past the right edge and lost its
+   ending there. The column may now be narrower than the word, and the
+   word may break. Nothing at three hundred and ninety pixels or above
+   moves at all; only this one title, and only on the narrowest
+   screens. */
+.pubs>li>div{min-width:0}
+.pub-title,.pub-authors,.pub-meta{overflow-wrap:break-word}
