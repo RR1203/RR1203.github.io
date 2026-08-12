@@ -312,17 +312,23 @@
 <!-- Sideways rows and the downward wheel. A row that scrolls
      sideways is, as far as the browser is concerned, a box with
      scrollbars of its own, and it swallows a downward turn of the
-     wheel rather than passing it on. Catch it and hand it back. -->
+     wheel rather than passing it on. Catch it and hand it back, and
+     lift the smooth setting for the length of one notch, or every
+     notch would start its own animation and the page would crawl. -->
 <script>
 (function () {
-  var rails = document.querySelectorAll(".cd-extra-list");
+  var rails = document.querySelectorAll(".cd-extra-list, .nav-links");
   if (!rails.length) { return; }
   function pass(e) {
     if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) { return; }
     if (this.scrollHeight - this.clientHeight > 2) { return; }
     var unit = e.deltaMode === 1 ? 16 : (e.deltaMode === 2 ? window.innerHeight : 1);
+    var root = document.documentElement;
+    var was = root.style.scrollBehavior;
     e.preventDefault();
+    root.style.scrollBehavior = "auto";
     window.scrollBy(0, e.deltaY * unit);
+    root.style.scrollBehavior = was;
   }
   for (var i = 0; i < rails.length; i++) {
     rails[i].addEventListener("wheel", pass, { passive: false });
