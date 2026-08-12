@@ -2641,3 +2641,38 @@ body.simple footer{margin-top:auto}
 @media (prefers-reduced-motion:reduce){
   .cd.is-js .cd-item.is-done{transform:none}
 }
+
+
+/* ================================================================
+   v28 - one continuous door
+   ================================================================ */
+/* The step from one book to the next was two motions with a pause in
+   between: a slow slide, a fade that waited, and a different, quicker
+   rule for going back. Now it is one motion in both directions. The
+   card leaves and the next arrives on the same curve and in the same
+   time, the fades overlap so the box is never empty, and the numeral
+   travels with its card instead of trailing behind it. Everything is
+   short enough that holding the arrow reads as a run, not a queue. */
+.cd.is-js .cd-item{
+  will-change:transform,opacity;
+  transition:opacity .19s ease-out,transform .36s cubic-bezier(.28,.78,.22,1),visibility 0s linear .36s}
+.cd.is-js .cd-item.is-current{
+  transition:opacity .24s ease-in,transform .36s cubic-bezier(.28,.78,.22,1),visibility 0s linear 0s}
+.cd.is-js.is-back .cd-item{
+  transition:opacity .19s ease-out,transform .36s cubic-bezier(.28,.78,.22,1),visibility 0s linear .36s}
+.cd.is-js.is-back .cd-item.is-current{
+  transition:opacity .24s ease-in,transform .36s cubic-bezier(.28,.78,.22,1),visibility 0s linear 0s}
+.cd.is-js .cd-item .cd-rank{
+  transition:transform .38s cubic-bezier(.28,.78,.22,1)}
+/* The arrows stop dimming between steps, so a quick run does not flicker. */
+.cd.is-busy .cd-nav button:not(:disabled){opacity:1}
+@media (prefers-reduced-motion:reduce){
+  .cd.is-js .cd-item,
+  .cd.is-js .cd-item.is-done,
+  .cd.is-js .cd-item.is-current ~ .cd-item,
+  .cd.is-js .cd-item .cd-rank,
+  .cd.is-js .cd-item.is-current ~ .cd-item .cd-rank{transform:none;transition:opacity .12s linear}
+}
+
+/* One line is enough for the fine print. */
+.foot-fine p{max-width:none}
