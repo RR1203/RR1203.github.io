@@ -2614,3 +2614,95 @@ html{scroll-padding-top:84px}
   .pixbox-next{right:6px}
 }
 @media (prefers-reduced-motion:reduce){.pixbox-arrow{transition:none}}
+
+
+/* ==============================================================
+   v39 - Glass under the years, a firmer wall behind them, and a
+         row of pictures that knows where it ends
+   --------------------------------------------------------------
+   1. The wall of covers goes up once more, from four tenths to
+      not quite six, and is given its own colours back. It is a
+      picture of books, and it may look like one. The heading
+      then had nothing to stand on, so a soft dark ground is
+      laid under it - no edge, no box, only the covers going
+      quiet where the words run.
+
+   2. Which still left the years hard to read off the wall. Every
+      chip is a piece of glass now: it blurs whatever stands
+      behind it, keeps a bright hairline along the top edge where
+      the light would catch, and carries its own shadow. The
+      glass is dark rather than light, because everything written
+      on it is pale. The panel a year opens does the same, only
+      heavier, since whole paragraphs are read there. Where a
+      browser cannot blur, the glass becomes plain dark plate, so
+      that nothing is ever left floating over the covers.
+
+   3. A row of pictures at full size no longer runs round. It has
+      a first and a last, and the arrow with nowhere left to go
+      turns quiet.
+
+   4. A card under About can carry a photograph of the thing
+      itself, held well back behind the type in the same manner
+      as the wall of covers. A card whose picture is not in the
+      repository yet drops the frame and looks as it always did.
+   ============================================================== */
+
+/* 1 - the wall, stronger and in its own colours --------------- */
+.reading::before{opacity:.58;filter:saturate(1) contrast(1)}
+@media (prefers-contrast:more){.reading::before{opacity:.2}}
+.reading-head{position:relative}
+.reading-head::before{content:"";position:absolute;z-index:-1;
+left:-16px;right:-16px;top:-12px;bottom:-10px;border-radius:12px;
+background:radial-gradient(115% 150% at 24% 50%,rgba(6,14,26,.92),
+rgba(6,14,26,.62) 58%,rgba(6,14,26,0) 100%)}
+.reading-head,.reading .yrail-head,.reading .yc-year,.reading .yp-eyebrow,
+.reading .yp-note{text-shadow:0 1px 14px rgba(6,14,26,.92),0 0 4px rgba(6,14,26,.7)}
+
+/* 2 - the years and their notes on dark glass ----------------- */
+.ychip{border:1px solid rgba(255,255,255,.26);
+background:linear-gradient(168deg,rgba(14,30,52,.64),rgba(9,20,36,.5) 52%,rgba(14,30,52,.6));
+-webkit-backdrop-filter:blur(18px) saturate(150%) brightness(.9);
+backdrop-filter:blur(18px) saturate(150%) brightness(.9);
+box-shadow:0 14px 30px rgba(3,10,20,.45),
+inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 0 rgba(255,255,255,.06)}
+.ychip .yc-state{color:rgba(216,213,208,.82)}
+.ychip:hover{border-color:rgba(127,208,196,.6);
+background:linear-gradient(168deg,rgba(20,42,66,.7),rgba(12,26,46,.56) 52%,rgba(20,42,66,.66));
+box-shadow:0 18px 36px rgba(3,10,20,.52),inset 0 1px 0 rgba(255,255,255,.4)}
+.ychip[aria-expanded="true"]{border-color:rgba(127,208,196,.85);
+background:linear-gradient(168deg,rgba(29,72,78,.72),rgba(14,34,50,.58) 55%,rgba(24,58,68,.68));
+box-shadow:0 18px 36px rgba(3,10,20,.52),inset 0 1px 0 rgba(255,255,255,.4)}
+.ypanel{border:1px solid rgba(255,255,255,.22);
+background:linear-gradient(180deg,rgba(24,42,68,.74),rgba(11,24,42,.66));
+-webkit-backdrop-filter:blur(26px) saturate(150%);
+backdrop-filter:blur(26px) saturate(150%);
+box-shadow:0 28px 64px rgba(2,8,18,.5),inset 0 1px 0 rgba(255,255,255,.16)}
+@supports not ((-webkit-backdrop-filter:blur(2px)) or (backdrop-filter:blur(2px))){
+.ychip{background:linear-gradient(168deg,rgba(16,32,54,.92),rgba(11,24,42,.88))}
+.ychip:hover{background:linear-gradient(168deg,rgba(22,44,68,.94),rgba(14,30,50,.9))}
+.ychip[aria-expanded="true"]{background:linear-gradient(168deg,rgba(30,72,78,.94),rgba(16,36,54,.9))}
+.ypanel{background:linear-gradient(180deg,rgba(20,38,62,.96),rgba(11,24,42,.94))}
+}
+
+/* 3 - an arrow with nowhere to go ----------------------------- */
+.pixbox-arrow:disabled,.pixbox-arrow:disabled:hover{opacity:.2;cursor:default;
+border-color:rgba(255,255,255,.14);color:rgba(216,213,208,.6);
+transform:translateY(-50%)}
+
+/* 4 - a photograph behind the card ---------------------------- */
+.hb-item{overflow:hidden}
+.hb-item>a,.hb-item>.hb-mark,.hb-item>.hb-name,.hb-item>.hb-note{
+position:relative;z-index:1}
+.hb-shot{position:absolute;inset:0;z-index:0;border-radius:inherit;overflow:hidden;
+pointer-events:none}
+.hb-shot img{display:block;width:100%;height:100%;object-fit:cover;
+opacity:.5;filter:saturate(.9) contrast(.95);transform:scale(1.03);
+transition:transform 700ms cubic-bezier(.2,.7,.2,1),opacity 400ms ease,
+filter 400ms ease}
+.hb-shot::after{content:"";position:absolute;inset:0;
+background:linear-gradient(158deg,rgba(11,24,42,.56),rgba(11,24,42,.8) 62%,rgba(11,24,42,.9))}
+.hb-item:hover .hb-shot img{transform:scale(1.08);opacity:.62;filter:none}
+@media (prefers-reduced-motion:reduce){
+.hb-shot img{transition:none}
+.hb-item:hover .hb-shot img{transform:scale(1.03)}
+}
