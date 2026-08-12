@@ -2213,3 +2213,28 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;
 .message-form input:focus-visible,
 .message-form textarea:focus-visible{outline:2px solid var(--accent)!important;
   outline-offset:2px!important}
+
+/* ---------------------------------------------------------------
+   v30 - one year to the next
+
+   At the foot of a reading-notes page there was nowhere to go but
+   back to the front. The lists are a sequence, so let them read
+   like one: the year before on the left, the year after on the
+   right, and a hairline to keep them apart from the buttons.
+   --------------------------------------------------------------- */
+.year-hop{display:flex;align-items:center;gap:18px;
+  margin:66px 0 0;padding:22px 0 0;border-top:1px solid var(--hair)}
+.year-hop a{display:inline-flex;align-items:baseline;gap:10px;
+  color:rgba(255,255,255,.58);text-decoration:none;
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  transition:color .2s ease,transform .24s cubic-bezier(.22,.61,.36,1)}
+.year-hop a:hover{color:var(--accent)}
+.year-hop .yh-next{margin-left:auto}
+.year-hop .yh-prev:hover{transform:translateX(-4px)}
+.year-hop .yh-next:hover{transform:translateX(4px)}
+.year-hop span{opacity:.7}
+@media (prefers-reduced-motion:reduce){
+  .year-hop a{transition:color .2s ease}
+  .year-hop .yh-prev:hover,.year-hop .yh-next:hover{transform:none}
+}
+@media (max-width:520px){.year-hop{gap:12px;margin-top:48px}.year-hop a{letter-spacing:.14em}}
