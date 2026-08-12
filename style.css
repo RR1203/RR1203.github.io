@@ -2280,3 +2280,75 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;
   .hero-social .pill-label{position:static;left:auto;top:auto;transform:none;
     width:100%;font-size:clamp(7.5px,2.1vw,9px);letter-spacing:.02em}
 }
+
+
+/* ____________________________________________________________
+   v32 - the same site in the hand
+   ____________________________________________________________ */
+/* Opened on a phone the page had three faults worth naming. The bar
+   at the top broke onto a second and sometimes a third line and then
+   stood there, a hundred and forty pixels of it, over whatever one was
+   trying to read; it is a single line now, fifty-five pixels tall, its
+   type shrinking with the screen, and all six words still present.
+   Opening a year made the whole page scroll sideways: the cards of the
+   countdown are slid in from the right, and a card waiting off stage
+   counts as somewhere the page can be scrolled to, so the stage is now
+   a frame that clips whatever has not arrived yet. The twelve marks
+   below the cards, twenty-four pixels apiece, did not fit across a
+   narrow card either; they are smaller below six hundred and twenty
+   pixels and are allowed to fall onto a second line rather than push
+   the page wide. The rest is small work. The honorable mentions no
+   longer float in the middle of a tall card. Links in the footer are
+   given a finger of height. The hidden trap for spam robots in the
+   contact form is taken out of the flow, where it had been reaching a
+   whole screen width past the edge. Where a screen cannot hover, the
+   little lifts on tap are switched off so nothing stays raised after a
+   finger leaves it. And the plain pages measure themselves against the
+   small viewport, so the footer no longer hides behind the browser own
+   furniture. */
+html{scroll-padding-top:84px}
+@supports (min-height:100svh){body.simple{min-height:100svh}}
+@media (max-width:900px){
+  html{scroll-padding-top:66px}
+  .nav-inner{flex-wrap:nowrap;align-items:center;gap:0 16px;
+    padding-top:8px;padding-bottom:8px;
+    padding-left:max(18px,env(safe-area-inset-left));
+    padding-right:max(18px,env(safe-area-inset-right))}
+  .nav-brand{flex:0 0 auto}
+  .nav-links{flex:1 1 auto;min-width:0;flex-wrap:nowrap;justify-content:flex-end;
+    gap:0 16px;padding:0;margin:0}
+  .nav-links a{white-space:nowrap;font-size:clamp(9.5px,2.5vw,12px);
+    letter-spacing:.06em;padding-top:12px;padding-bottom:10px}
+  .foot-links a{padding-top:9px;padding-bottom:9px}
+  .pubs-more a{display:inline-block;padding-top:9px;padding-bottom:9px}
+}
+@media (max-width:430px){
+  .nav-inner{gap:0 10px;
+    padding-left:max(14px,env(safe-area-inset-left));
+    padding-right:max(14px,env(safe-area-inset-right))}
+  .nav-links{gap:0 11px;overflow-x:auto;overflow-y:hidden;
+    overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .nav-links::-webkit-scrollbar{display:none}
+}
+.cd-stage{overflow-x:clip;overflow-y:visible}
+.cd-ticks{flex-wrap:wrap;row-gap:6px}
+@media (max-width:760px){.cd-item{align-content:start}}
+@media (max-width:620px){
+  .cd-ticks{gap:4px 4px}
+  .cd-ticks button{width:20px;height:20px}
+  .cd-ticks button::before{width:12px}
+  .cd-ticks button.is-on::before{width:16px}
+}
+@media (max-width:400px){
+  .cd-ticks{gap:3px 3px}
+  .cd-ticks button{width:18px}
+  .cd-ticks button::before{width:11px}
+  .cd-ticks button.is-on::before{width:14px}
+}
+.message-form .honey{position:absolute!important;width:1px;max-width:1px;
+  height:0;padding:0;border:0;opacity:0;pointer-events:none;left:0;top:0}
+.media-grid.mrail,.yrail,.cd-extra-list{-webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain}
+@media (hover:none){
+  .pill:hover,.media-card:hover,.theme-card:hover,.ychip:hover{transform:none}
+}
