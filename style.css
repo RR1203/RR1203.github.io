@@ -2161,3 +2161,55 @@ body.simple footer{margin-top:auto}
 
 /* One line is enough for the fine print. */
 .foot-fine p{max-width:none}
+
+
+/* ---------------------------------------------------------------
+   v29 - the small courtesies
+
+   None of this changes what the page looks like when everything
+   goes right. It changes how the page behaves when someone
+   arrives with a keyboard instead of a mouse, with a reader
+   instead of eyes, or on a phone that insists on drawing its
+   own furniture.
+   --------------------------------------------------------------- */
+
+/* Say out loud that this is a dark document. The browser then
+   draws its own parts - scrollbars, the caret, the fields it
+   offers to fill in for you - in the same key, instead of
+   punching a white hole through the page. */
+:root{color-scheme:dark}
+
+/* Stop a phone enlarging the type of its own accord when it is
+   turned on its side, and stop a tap leaving a grey rectangle
+   behind it: give it the accent instead, faintly. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;
+  -webkit-tap-highlight-color:rgba(127,208,196,.18)}
+
+/* Present to a reader, absent to the eye. */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);
+  white-space:nowrap;border:0}
+
+/* The skip link. It waits just above the top of the window and
+   only steps down when it is tabbed to, so that someone moving
+   through the page by keyboard is not walked past the whole
+   navigation before reaching the first sentence. */
+.skip-to{position:fixed;left:22px;top:-72px;z-index:1200;
+  display:inline-block;padding:11px 22px;border-radius:999px;
+  background:var(--accent);color:#0d1622;
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;white-space:nowrap;
+  box-shadow:0 12px 34px rgba(0,0,0,.5);
+  transition:top .2s cubic-bezier(.22,.61,.36,1)}
+.skip-to:focus{top:14px}
+.skip-to:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.skip-to{transition:none}}
+
+/* The message fields used to answer a keyboard visitor with
+   nothing at all: the outline had been taken away and only a
+   border tint left behind, which this background swallows.
+   Give the ring back - but only when the focus arrived by key,
+   so that a click still lands quietly. */
+.message-form input:focus-visible,
+.message-form textarea:focus-visible{outline:2px solid var(--accent)!important;
+  outline-offset:2px!important}
