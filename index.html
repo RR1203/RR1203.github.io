@@ -1955,7 +1955,12 @@
       var out = [];
       for (var i = 0; i < all.length; i++) {
         var img = all[i].querySelector("img");
-        if (img && img.naturalWidth) { out.push(all[i]); }
+        /* A frame whose file is missing has put itself out of sight,
+           and is no part of the set. One that is merely still on its
+           way is kept, or a picture opened the moment it arrives
+           would not find its neighbours. */
+        if (img && (img.naturalWidth ||
+            (!img.complete && img.style.display !== "none"))) { out.push(all[i]); }
       }
       return out.length ? out : [frame];
     }
