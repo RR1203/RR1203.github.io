@@ -138,7 +138,7 @@
          an optional gloss in small caps, and one line underneath. The
          reading card is a link, because the books themselves sit further
          down the page - the small arrow comes from the stylesheet.
-         Two of the cards carry a photograph as well, lying behind the
+         Three of the cards carry a photograph as well, lying behind the
          type in the same manner as the wall of covers further down. A
          card whose picture is not in the repository drops the frame
          without a word and looks as it always did.
@@ -148,7 +148,7 @@
       <ul class="hb-grid">
 
         <li class="hb-item">
-          <span class="hb-shot" aria-hidden="true"><img src="images/hb-football.jpg"
+          <span class="hb-shot" aria-hidden="true"><img src="images/football.jpg"
             alt="" loading="lazy" onerror="this.parentNode.remove()"></span>
           <span class="hb-mark" aria-hidden="true">
             <svg viewBox="0 0 40 40"><path d="M20 4 C28.6 4.3 35.7 11.4 36 20 C36.3 28.6 28.6 36.1 20 36 C11.3 35.9 4.2 28.6 4 20 C3.8 11.3 11.4 4.2 20 4 Z"/><path d="M20 13.3 L25.7 17.5 L23.5 24.3 L16.5 24.3 L14.3 17.5 Z"/><path d="M20 13.3 L20 8.1"/><path d="M25.7 17.5 L31.4 15.3"/><path d="M14.3 17.5 L8.6 15.4"/><path d="M23.5 24.3 L26.9 29.7"/><path d="M16.5 24.3 L13.1 29.8"/></svg>
@@ -158,6 +158,8 @@
         </li>
 
         <li class="hb-item">
+          <span class="hb-shot" aria-hidden="true"><img src="images/workout-04-kroyer.jpg"
+            alt="" loading="lazy" onerror="this.parentNode.remove()"></span>
           <span class="hb-mark" aria-hidden="true">
             <svg viewBox="0 0 40 40"><path d="M13.4 20.2 C17 19.6 23 19.6 26.6 20.2"/><path d="M11.4 11.9 C10.9 17.3 10.9 22.8 11.4 28.1"/><path d="M28.6 11.9 C29.1 17.3 29.1 22.8 28.6 28.1"/><path d="M6.9 15.6 C6.5 18.5 6.5 21.5 6.9 24.4"/><path d="M33.1 15.6 C33.5 18.5 33.5 21.5 33.1 24.4"/></svg>
           </span>
@@ -174,7 +176,7 @@
         </li>
 
         <li class="hb-item hb-item-link">
-          <span class="hb-shot" aria-hidden="true"><img src="images/hb-reading.jpg"
+          <span class="hb-shot" aria-hidden="true"><img src="images/reading2.jpeg"
             alt="" loading="lazy" onerror="this.parentNode.remove()"></span>
           <a href="#reading">
             <span class="hb-mark" aria-hidden="true">
@@ -218,7 +220,7 @@
           <button class="ychip" type="button" data-year="2021" aria-expanded="false" aria-controls="yr-2021"><span class="yc-year">2021</span><span class="yc-mark" aria-hidden="true"></span></button>
           <button class="ychip" type="button" data-year="2020" aria-expanded="false" aria-controls="yr-2020"><span class="yc-year">2020</span><span class="yc-mark" aria-hidden="true"></span></button>
           <button class="ychip" type="button" data-year="2019" aria-expanded="false" aria-controls="yr-2019"><span class="yc-year">2019</span><span class="yc-mark" aria-hidden="true"></span></button>
-          <button class="ychip" type="button" data-year="2018" aria-expanded="false" aria-controls="yr-2018"><span class="yc-year">2018</span><span class="yc-mark" aria-hidden="true"></span></button>
+          <button class="ychip" type="button" data-year="2018" data-shot="images/reading-2018-debt-cut.png" aria-expanded="false" aria-controls="yr-2018"><span class="yc-year">2018</span><span class="yc-mark" aria-hidden="true"></span></button>
         </div>
       </div>
       <div class="yrail-nav">
@@ -2095,6 +2097,78 @@
       }(pix[i]));
     }
   }());
+  </script>
+
+
+  <!-- ---------------------------------------------------------------
+       A year with a picture of its own shows it under the chip. The
+       year carries data-shot; the file is fetched the first time a
+       pointer arrives, and the little pane is hung on the rail's
+       wrapper rather than on the chip, because the rail clips
+       everything that tries to leave it. It opens downward, like a
+       drawer pulled out of the box, keeps to the width of the year
+       above it, goes when the pointer goes, and is never built at
+       all where there is no pointer to begin with.
+       ---------------------------------------------------------------- -->
+  <script>
+    (function () {
+      var wrap = document.querySelector(".yrail-wrap");
+      var rail = wrap ? wrap.querySelector(".yrail") : null;
+      if (!wrap || !rail) { return; }
+      var years = wrap.querySelectorAll(".ychip[data-shot]");
+      if (!years.length) { return; }
+      if (window.matchMedia && !window.matchMedia("(hover: hover)").matches) { return; }
+
+      var pane = document.createElement("span");
+      pane.className = "yshot";
+      pane.setAttribute("aria-hidden", "true");
+      var pic = document.createElement("img");
+      pic.alt = "";
+      pane.appendChild(pic);
+      wrap.appendChild(pane);
+
+      var on = null;
+
+      /* The pane sits under the year it belongs to, one pixel up so
+        that the two share an edge, and takes the year's width. */
+      function place() {
+        if (!on) { return; }
+        var a = on.getBoundingClientRect(), b = wrap.getBoundingClientRect();
+        pane.style.left = (a.left - b.left) + "px";
+        pane.style.top = (a.bottom - b.top - 1) + "px";
+        pane.style.width = a.width + "px";
+        pane.style.height = Math.round(a.width * 0.9) + "px";
+      }
+
+      function show(chip) {
+        if (chip.getAttribute("aria-expanded") === "true") { return; }
+        var src = chip.getAttribute("data-shot");
+        if (pic.getAttribute("src") !== src) { pic.setAttribute("src", src); }
+        on = chip;
+        place();
+        pane.classList.add("is-on");
+      }
+
+      function hide() {
+        on = null;
+        pane.classList.remove("is-on");
+      }
+
+      for (var i = 0; i < years.length; i++) {
+        (function (chip) {
+          chip.addEventListener("mouseenter", function () { show(chip); });
+          chip.addEventListener("focus", function () { show(chip); });
+          chip.addEventListener("mouseleave", hide);
+          chip.addEventListener("blur", hide);
+          chip.addEventListener("click", hide);
+        }(years[i]));
+      }
+
+      /* The rail can be dragged out from under the pane, and the window
+        can change its mind about how wide it is. */
+      rail.addEventListener("scroll", place, { passive: true });
+      window.addEventListener("resize", place);
+    }());
   </script>
 
 </body>
