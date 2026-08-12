@@ -138,12 +138,18 @@
          an optional gloss in small caps, and one line underneath. The
          reading card is a link, because the books themselves sit further
          down the page - the small arrow comes from the stylesheet.
+         Two of the cards carry a photograph as well, lying behind the
+         type in the same manner as the wall of covers further down. A
+         card whose picture is not in the repository drops the frame
+         without a word and looks as it always did.
     ----------------------------------------------------------------- -->
     <div class="hobbies">
       <p class="focus-label">Away from the desk</p>
       <ul class="hb-grid">
 
         <li class="hb-item">
+          <span class="hb-shot" aria-hidden="true"><img src="images/hb-football.jpg"
+            alt="" loading="lazy" onerror="this.parentNode.remove()"></span>
           <span class="hb-mark" aria-hidden="true">
             <svg viewBox="0 0 40 40"><path d="M20 4 C28.6 4.3 35.7 11.4 36 20 C36.3 28.6 28.6 36.1 20 36 C11.3 35.9 4.2 28.6 4 20 C3.8 11.3 11.4 4.2 20 4 Z"/><path d="M20 13.3 L25.7 17.5 L23.5 24.3 L16.5 24.3 L14.3 17.5 Z"/><path d="M20 13.3 L20 8.1"/><path d="M25.7 17.5 L31.4 15.3"/><path d="M14.3 17.5 L8.6 15.4"/><path d="M23.5 24.3 L26.9 29.7"/><path d="M16.5 24.3 L13.1 29.8"/></svg>
           </span>
@@ -168,6 +174,8 @@
         </li>
 
         <li class="hb-item hb-item-link">
+          <span class="hb-shot" aria-hidden="true"><img src="images/hb-reading.jpg"
+            alt="" loading="lazy" onerror="this.parentNode.remove()"></span>
           <a href="#reading">
             <span class="hb-mark" aria-hidden="true">
               <svg viewBox="0 0 40 40"><path d="M20 12.6 C16.5 10.2 12.3 9.3 7.8 9.8 L7.8 27.8 C12.3 27.3 16.5 28.2 20 30.6 C23.5 28.2 27.7 27.3 32.2 27.8 L32.2 9.8 C27.7 9.3 23.5 10.2 20 12.6 Z"/><path d="M20 12.6 L20 30.6"/><path d="M11.6 15.4 C13.8 15.2 15.8 15.6 17.4 16.6"/><path d="M22.6 16.6 C24.2 15.6 26.2 15.2 28.4 15.4"/></svg>
@@ -1902,9 +1910,9 @@
        and it can be exchanged for them without shutting the sheet.
        An arrow on either side, the left and right arrow keys, a swipe
        across the glass, a left click on the picture for the next one
-       and a right click for the one before. The set runs round, so
-       the last picture is followed by the first, and a count in the
-       bottom corner says where in the row one is standing. Where an
+       and a right click for the one before. The row has a beginning
+       and an end, and a count in the bottom corner says where in the
+       row one is standing. Where an
        entry has only one picture none of this appears. -->
   <script>
   (function () {
@@ -1983,13 +1991,19 @@
       back.hidden = !several;
       on.hidden = !several;
       tally.hidden = !several;
+      back.disabled = i === 0;
+      on.disabled = i === set.length - 1;
       tally.textContent = several ? (i + 1) + " / " + set.length : "";
     }
 
-    /* The row runs round: after the last picture comes the first. */
+    /* The row has two ends. Beyond the last picture, and before the
+       first, there is nothing to go to, and the arrow that points
+       that way has already gone quiet. */
     function step(d) {
       if (set.length < 2) { return; }
-      show((at + d + set.length) % set.length);
+      var to = at + d;
+      if (to < 0 || to > set.length - 1) { return; }
+      show(to);
     }
 
     function open(frame) {
