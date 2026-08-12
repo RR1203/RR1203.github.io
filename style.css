@@ -45,20 +45,15 @@ a:hover {
 /* Navigation ---------------------------------------------- */
 
 .topnav {
-  background: var(--charcoal);
   position: sticky;
   top: 0;
   z-index: 20;
 }
 
 .nav-inner {
-  max-width: 1150px;
   margin: 0 auto;
-  padding: 16px 24px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px 40px;
 }
 
 .nav-inner a {
@@ -76,18 +71,10 @@ a:hover {
 
 /* Hero ---------------------------------------------------- */
 
-.hero {
-  padding: 60px 24px 80px;
-}
 
 .hero-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
   justify-content: center;
-  gap: 55px;
 }
 
 .hero-photo {
@@ -97,15 +84,11 @@ a:hover {
 }
 
 .hero-photo img {
-  width: 100%;
-  display: block;
   filter: grayscale(100%);
 }
 
 .hero-text {
   flex: 1 1 420px;
-  max-width: 620px;
-  text-align: center;
 }
 
 h1 {
@@ -116,27 +99,8 @@ h1 {
   letter-spacing: 1px;
   margin: 0 0 30px;
 }
-
-.rule {
-  border: 0;
-  border-top: 1px solid var(--rule);
-  width: 290px;
-  max-width: 80%;
-  margin: 0 auto 28px;
-}
-
-.line {
-  font-style: italic;
-  margin: 0 0 22px;
-}
-
 /* Sections ------------------------------------------------ */
 
-main {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 0 24px 30px;
-}
 
 section {
   padding: 46px 0;
@@ -157,12 +121,6 @@ h2 {
   margin: 0 0 14px;
 }
 
-.h2-rule {
-  width: 90px;
-  height: 4px;
-  background: var(--rule);
-  margin: 0 auto 32px;
-}
 
 p {
   margin: 0 0 18px;
@@ -183,21 +141,11 @@ p {
 /* Contact and message form -------------------------------- */
 
 .contact {
-  background: var(--charcoal-light);
   padding: 60px 0 70px;
 }
 
-.contact-inner {
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
-}
 
 .message-form {
-  max-width: 620px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
   gap: 12px;
   text-align: left;
 }
@@ -210,14 +158,11 @@ p {
   color: #1c1c1c;
   border: 0;
   border-bottom: 3px solid #d3d3d3;
-  padding: 16px 20px;
   font-family: inherit;
-  font-size: 19px;
   line-height: 1.4;
 }
 
 .message-form textarea {
-  min-height: 150px;
   resize: vertical;
 }
 
@@ -301,90 +246,23 @@ p {
 
 footer {
   background: var(--navy);
-  text-align: center;
-  padding: 28px 24px 36px;
   font-size: 16px;
   letter-spacing: 1px;
   color: rgba(255, 255, 255, 0.6);
 }
 
-footer p {
-  margin: 0;
-}
 
 /* ---------------------------------------------------------
    Top navigation: menu left, social buttons right
    --------------------------------------------------------- */
 
-.nav-inner {
-  justify-content: space-between;
-  gap: 14px 24px;
-}
 
 .nav-links {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 14px 40px;
 }
-
-.nav-social {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nav-social a.social {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  margin: 0;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 3px;
-  color: rgba(255, 255, 255, 0.72);
-  text-decoration: none;
-  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-}
-
-.nav-social a.social:hover {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.nav-social svg {
-  width: 17px;
-  height: 17px;
-  display: block;
-  fill: currentColor;
-}
-
-.nav-social svg[stroke] {
-  fill: none;
-}
-
-.social-text {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 14px;
-  line-height: 1;
-  letter-spacing: 0.5px;
-}
-
 /* Curriculum vitae timeline -------------------------------- */
-
-.cv-intro {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 22px;
-  margin: 0 0 36px;
-}
-
-.cv-intro em {
-  font-style: italic;
-}
-
 .cv-timeline {
   display: flex;
   flex-direction: column;
@@ -394,36 +272,19 @@ footer p {
 
 .cv-entry {
   display: grid;
-  grid-template-columns: 190px 1fr;
-  gap: 10px 30px;
-  padding: 30px 34px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 4px;
 }
 
 .cv-period {
-  font-size: 16px;
-  letter-spacing: 1.4px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  padding-top: 6px;
 }
 
 .cv-body h3 {
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 400;
-  font-size: 27px;
-  margin: 0 0 12px;
   color: #ffffff;
 }
 
-.cv-body p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 20px;
-  line-height: 1.65;
-}
 
 @media (max-width: 700px) {
   .cv-entry {
@@ -433,18 +294,6 @@ footer p {
 }
 
 /* Spam protection checkbox --------------------------------- */
-
-.captcha-wrap {
-  margin: 26px 0 6px;
-  display: flex;
-  justify-content: center;
-}
-
-#recaptcha {
-  display: flex;
-  justify-content: center;
-}
-
 .human-check {
   display: inline-flex;
   align-items: center;
@@ -600,126 +449,11 @@ footer p {
   }
 }
 
-/* ---------------------------------------------------------
-   Social buttons in the original brand colours
-   --------------------------------------------------------- */
-
-.nav-social a.social {
-  width: 32px;
-  height: 32px;
-  border: 0;
-  border-radius: 5px;
-  background: #ffffff;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
-}
-
-.nav-social a.social:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
-  filter: brightness(1.06);
-}
-
-.nav-social svg {
-  width: 19px;
-  height: 19px;
-}
-
-.nav-social a.s-scholar,
-.nav-social a.s-scholar:hover {
-  background: #4285f4;
-}
-
-.nav-social a.s-scholar svg {
-  width: 18px;
-  height: 18px;
-  fill: #ffffff;
-}
-
-.nav-social a.s-orcid,
-.nav-social a.s-orcid:hover {
-  background: #ffffff;
-  border-radius: 50%;
-}
-
-.nav-social a.s-orcid svg {
-  width: 32px;
-  height: 32px;
-  fill: #a6ce39;
-}
-
-.nav-social a.s-rg,
-.nav-social a.s-rg:hover {
-  background: #00ccbb;
-}
-
-.nav-social a.s-rg .social-text {
-  color: #ffffff;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-}
-
-.nav-social a.s-linkedin,
-.nav-social a.s-linkedin:hover {
-  background: #ffffff;
-}
-
-.nav-social a.s-linkedin svg {
-  width: 32px;
-  height: 32px;
-  fill: #0a66c2;
-}
-
-.nav-social a.s-mail,
-.nav-social a.s-mail:hover {
-  background: #6b7684;
-}
-
-.nav-social a.s-mail svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: #ffffff;
-}
 
 /* ---------------------------------------------------------
    Profile buttons in the hero (icon + name)
    --------------------------------------------------------- */
 
-.nav-inner {
-  justify-content: center;
-}
-
-.hero-social {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 42px;
-}
-
-.hero-social .pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 11px;
-  padding: 7px 20px 7px 7px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 999px;
-  color: var(--muted);
-  text-decoration: none;
-  transition: border-color 0.2s ease, background-color 0.2s ease,
-              transform 0.2s ease, color 0.2s ease;
-}
-
-.hero-social .pill:hover {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.45);
-  background: rgba(255, 255, 255, 0.06);
-  transform: translateY(-2px);
-}
 
 .pill-icon {
   flex: 0 0 28px;
@@ -762,15 +496,6 @@ footer p {
 .pill.s-rg .pill-icon {
   background: #00ccbb;
 }
-
-.pill.s-rg .pill-icon .social-text {
-  color: #ffffff;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-}
-
 .pill.s-linkedin .pill-icon {
   background: #ffffff;
 }
@@ -793,9 +518,7 @@ footer p {
 }
 
 @media (max-width: 620px) {
-  .hero-social {
-    gap: 9px;
-  }
+
 
   .pill-label {
     font-size: 16px;
@@ -819,88 +542,29 @@ footer p {
   background: none !important;
   border: 0 !important;
   border-radius: 0 !important;
-  width: 30px;
-  height: 30px;
   padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-  flex: 0 0 auto;
 }
 .hero-social .pill-icon svg {
   width: 30px;
   height: 30px;
-  display: block;
   fill: initial;
   stroke: initial;
 }
-.hero-social .pill {
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 7px 22px 7px 9px;
-  gap: 12px;
-  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-}
-.hero-social .pill:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.34);
-  transform: translateY(-2px);
-}
-.hero-social .pill-label {
-  color: #d8dde4;
-}
 
-/* ---- invisible reCAPTCHA ---- */
-.grecaptcha-badge {
-  visibility: hidden;
-}
-#recaptcha {
-  min-height: 0;
-  height: 0;
-  margin: 0;
-}
-.captcha-wrap {
-  display: block;
-  text-align: center;
-  margin: 26px 0 4px;
-}
-.captcha-note {
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.42);
-  margin: 0;
-}
-.captcha-note a {
-  color: rgba(255, 255, 255, 0.62);
-  text-decoration: underline;
-}
-.captcha-note a:hover {
-  color: #ffffff;
-}
 
 /* ============================================================
    Hero profile icons v3 - uniform circular buttons
    ============================================================ */
 .hero-social {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
   margin-top: 32px;
 }
 
 .hero-social .pill {
   width: 50px;
   height: 50px;
-  padding: 0;
-  gap: 0;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #dfe5ec;
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
   transition: background 0.25s ease, border-color 0.25s ease,
               color 0.25s ease, transform 0.25s ease;
@@ -909,7 +573,6 @@ footer p {
 .hero-social .pill:hover {
   background: rgba(255, 255, 255, 0.16);
   border-color: rgba(255, 255, 255, 0.32);
-  color: #ffffff;
   transform: translateY(-3px);
 }
 
@@ -927,7 +590,6 @@ footer p {
 .hero-social .pill-icon svg {
   width: 23px !important;
   height: 23px !important;
-  display: block;
   fill: currentColor !important;
   stroke: none !important;
 }
@@ -946,21 +608,11 @@ footer p {
 
 /* labels are kept in the markup for screen readers only */
 .hero-social .pill-label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
   border: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  clip-path: inset(50%);
 }
 
 @media (max-width: 620px) {
-  .hero-social {
-    gap: 12px;
-  }
+
 
   .hero-social .pill {
     width: 46px;
@@ -978,15 +630,12 @@ footer p {
    Hero profile icons v3.1 - captioned circles
    ============================================================ */
 .hero-social {
-  gap: 26px;
   align-items: flex-start;
 }
 
 .hero-social .pill {
   width: auto !important;
   height: auto !important;
-  flex-direction: column;
-  gap: 10px;
   background: none !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -1001,10 +650,6 @@ footer p {
   background: rgba(255, 255, 255, 0.07) !important;
   border: 1px solid rgba(255, 255, 255, 0.14) !important;
   display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.25s ease, border-color 0.25s ease,
-              transform 0.25s ease;
 }
 
 .hero-social .pill:hover {
@@ -1014,44 +659,23 @@ footer p {
 .hero-social .pill:hover .pill-icon {
   background: rgba(255, 255, 255, 0.16) !important;
   border-color: rgba(255, 255, 255, 0.32) !important;
-  transform: translateY(-3px);
 }
 
 .hero-social .pill-label {
-  position: static;
-  width: auto;
-  height: auto;
   margin: 0;
   padding: 0;
-  overflow: visible;
-  clip-path: none;
-  white-space: nowrap;
-  font-size: 13px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: inherit;
-  opacity: 0.85;
-  transition: opacity 0.25s ease;
 }
 
-.hero-social .pill:hover .pill-label {
-  opacity: 1;
-}
 
 @media (max-width: 620px) {
-  .hero-social {
-    gap: 14px 18px;
-  }
+
 
   .hero-social .pill-icon {
     width: 46px !important;
     height: 46px !important;
   }
 
-  .hero-social .pill-label {
-    font-size: 11px;
-    letter-spacing: 0.08em;
-  }
+
 }
 
 @media (max-width: 420px) {
@@ -1079,13 +703,13 @@ footer p {
 section[id],header[id]{scroll-margin-top:96px}
 
 /* Navigation ---------------------------------------------- */
-.nav-links a{text-decoration:none;opacity:.72;padding-bottom:5px;border-bottom:1px solid transparent;transition:opacity .2s ease,border-color .2s ease}
+.nav-links a{text-decoration:none;border-bottom:1px solid transparent;transition:opacity .2s ease,border-color .2s ease}
 .nav-links a:hover{opacity:1}
-.nav-links a.active{opacity:1;border-bottom-color:var(--accent)}
+.nav-links a.active{border-bottom-color:var(--accent)}
 
 /* Buttons ------------------------------------------------- */
 .btn{display:inline-block;text-decoration:none;font-size:15px;letter-spacing:.06em;padding:13px 26px;border-radius:999px;border:1px solid var(--card-border);transition:transform .22s ease,border-color .22s ease,background .22s ease,color .22s ease}
-.btn:hover{opacity:1;transform:translateY(-2px)}
+.btn:hover{opacity:1;}
 .btn-primary{background:var(--accent);color:#0b182a;border-color:var(--accent);font-weight:600}
 .btn-primary:hover{background:var(--accent-strong);border-color:var(--accent-strong)}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
@@ -1098,19 +722,19 @@ section[id],header[id]{scroll-margin-top:96px}
 .hero-photo img{width:288px;height:288px;object-fit:cover;border-radius:50%;border:1px solid var(--card-border);display:block}
 .hero-text{order:1;text-align:left;max-width:none}
 .hero-eyebrow{margin:0 0 20px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
-.hero-text h1{font-size:clamp(46px,6.2vw,84px);line-height:1.03;margin:0 0 24px;letter-spacing:-.005em}
-.hero-lede{font-size:clamp(21px,2.1vw,27px);line-height:1.5;color:var(--text);margin:0 0 16px;max-width:30ch}
-.hero-affil{margin:0 0 34px;color:var(--muted);font-size:19px}
+.hero-text h1{font-size:clamp(46px,6.2vw,84px);margin:0 0 24px;}
+.hero-lede{color:var(--text);}
+.hero-affil{color:var(--muted);font-size:19px}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 46px}
 
 /* Profile icons: uniform circles in brand colour ----------- */
-.hero-social{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:26px;margin:0}
-.hero-social .pill{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:11px;text-decoration:none;width:auto}
-.hero-social .pill-icon{width:54px!important;height:54px!important;border-radius:50%!important;border:0!important;background:var(--brand)!important;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.35);transition:transform .22s ease,box-shadow .22s ease}
-.hero-social .pill:hover .pill-icon{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,.45)}
+.hero-social{display:flex;flex-wrap:wrap;justify-content:flex-start;margin:0}
+.hero-social .pill{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;text-decoration:none;width:auto}
+.hero-social .pill-icon{width:54px!important;height:54px!important;border-radius:50%!important;border:0!important;background:var(--brand)!important;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.35);}
+.hero-social .pill:hover .pill-icon{box-shadow:0 12px 24px rgba(0,0,0,.45)}
 .hero-social .pill-icon svg{width:27px!important;height:27px!important;fill:#fff!important;display:block}
-.hero-social .pill-label{position:static;width:auto;height:auto;clip:auto;clip-path:none;overflow:visible;white-space:nowrap;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);opacity:.85;transition:opacity .2s ease,color .2s ease}
-.hero-social .pill:hover .pill-label{opacity:1;color:var(--text)}
+.hero-social .pill-label{position:static;width:auto;height:auto;clip:auto;clip-path:none;overflow:visible;white-space:nowrap;text-transform:uppercase;opacity:.85;transition:opacity .2s ease,color .2s ease}
+
 .pill.s-scholar{--brand:#4285f4}
 .pill.s-orcid{--brand:#a6ce39}
 .pill.s-rg{--brand:#00d0af}
@@ -1127,14 +751,14 @@ main > section > p{max-width:68ch;font-size:19px;line-height:1.75;color:var(--mu
 /* Research theme cards ------------------------------------ */
 .theme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:22px;margin-top:38px}
 .theme-card{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:28px 26px;transition:transform .25s ease,border-color .25s ease,background .25s ease}
-.theme-card:hover{transform:translateY(-4px);border-color:rgba(127,208,196,.55);background:rgba(255,255,255,.07)}
+.theme-card:hover{border-color:rgba(127,208,196,.55);background:rgba(255,255,255,.07)}
 .theme-num{display:block;font-size:12px;letter-spacing:.2em;color:var(--accent);margin-bottom:14px}
 .theme-card h3{margin:0 0 10px;font-size:23px;line-height:1.25}
 .theme-card p{margin:0;font-size:17px;line-height:1.62;color:var(--muted)}
 
 /* Publications -------------------------------------------- */
 .pubs{list-style:none;margin:38px 0 0;padding:0;max-width:860px}
-.pubs li{display:grid;grid-template-columns:92px 1fr;gap:22px;padding:24px 0;border-top:1px solid rgba(255,255,255,.1);margin:0}
+.pubs li{display:grid;gap:22px;padding:24px 0;border-top:1px solid rgba(255,255,255,.1);margin:0}
 .pubs li:last-child{border-bottom:1px solid rgba(255,255,255,.1)}
 .pub-year{color:var(--accent);font-size:15px;letter-spacing:.12em;padding-top:5px}
 .pub-title{margin:0 0 6px;font-size:20px;line-height:1.35}
@@ -1144,12 +768,10 @@ main > section > p{max-width:68ch;font-size:19px;line-height:1.75;color:var(--mu
 .pubs-more{margin-top:30px!important;font-size:16px!important}
 .pubs-more a{color:var(--accent);text-underline-offset:4px}
 
-/* CV timeline --------------------------------------------- */
-.cv-intro{color:var(--muted);text-align:left!important;max-width:68ch}
-.cv-timeline{position:relative;margin-top:40px}
-.cv-timeline::before{content:"";position:absolute;left:151px;top:8px;bottom:8px;width:1px;background:rgba(255,255,255,.15)}
+/* CV timeline --------------------------------------------- */.cv-timeline{position:relative;margin-top:40px}
+.cv-timeline::before{content:"";position:absolute;left:151px;top:8px;bottom:8px;width:1px;}
 .cv-entry{display:grid!important;grid-template-columns:150px 1fr;gap:40px;padding:0 0 44px;position:relative;text-align:left;border:0;background:none!important;box-shadow:none!important;border-radius:0;margin:0}
-.cv-entry::before{content:"";position:absolute;left:147px;top:11px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--navy)}
+.cv-entry::before{content:"";position:absolute;left:147px;top:11px;width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 4px var(--navy)}
 .cv-period{color:var(--accent);font-size:15px;letter-spacing:.1em;padding-top:2px;text-align:left}
 .cv-body h3{margin:0 0 8px;font-size:23px;line-height:1.3}
 .cv-body p{margin:0;color:var(--muted);font-size:17px;line-height:1.65;max-width:62ch}
@@ -1160,7 +782,7 @@ main > section > p{max-width:68ch;font-size:19px;line-height:1.75;color:var(--mu
        ... up to three images ...
      </div>
    Files live in the images/ folder of this repository.                     */
-.cv-pix{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:430px;margin:20px 0 4px}
+.cv-pix{grid-template-columns:repeat(3,1fr);max-width:430px;}
 .cv-pix img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:3px;
   border:1px solid rgba(255,255,255,.10);background:#16283d;
   transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .35s ease;
@@ -1173,20 +795,17 @@ main > section > p{max-width:68ch;font-size:19px;line-height:1.75;color:var(--mu
 
 #cv .centered{text-align:left!important;margin-top:6px}
 #cv .centered a{display:inline-block;text-decoration:none;font-size:15px;letter-spacing:.06em;padding:13px 26px;border-radius:999px;background:var(--accent);color:#0b182a;border:1px solid var(--accent);font-weight:600;transition:transform .22s ease,background .22s ease}
-#cv .centered a:hover{background:var(--accent-strong);opacity:1;transform:translateY(-2px)}
+#cv .centered a:hover{background:var(--accent-strong);opacity:1;}
 
 /* Contact ------------------------------------------------- */
-.contact{border-top:1px solid rgba(255,255,255,.09)}
+
 .contact-inner{max-width:1150px;margin:0 auto;padding:104px 32px;text-align:left}
 .contact-lede{max-width:56ch;color:var(--muted);font-size:19px;margin:0 0 30px}
 .message-form{max-width:640px;margin:0;display:flex;flex-direction:column;align-items:flex-start}
 .message-form input,.message-form textarea,.message-form .captcha-wrap{width:100%}
 .message-form input,.message-form textarea{border-radius:10px;border:1px solid rgba(255,255,255,.18);padding:14px 16px;font-size:17px;margin-bottom:14px;background:#fff;color:#20222a}
-.message-form input:focus,.message-form textarea:focus{outline:2px solid var(--accent);outline-offset:2px}
-.captcha-note{text-align:left!important;font-size:14px;opacity:.7}
-.captcha-wrap{margin-bottom:18px}
-.message-form button[type=submit]{background:var(--accent);color:#0b182a;border:1px solid var(--accent);border-radius:999px;padding:13px 30px;font-weight:600;letter-spacing:.06em;cursor:pointer;display:inline-block;width:auto;min-width:180px;margin:6px 0 0 0;align-self:flex-start;transition:background .22s ease,transform .22s ease}
-.message-form button[type=submit]:hover{background:var(--accent-strong);transform:translateY(-2px)}
+.message-form input:focus,.message-form textarea:focus{outline:2px solid var(--accent);outline-offset:2px}.message-form button[type=submit]{background:var(--accent);color:#0b182a;border:1px solid var(--accent);border-radius:999px;padding:13px 30px;font-weight:600;letter-spacing:.06em;cursor:pointer;display:inline-block;width:auto;min-width:180px;margin:6px 0 0 0;align-self:flex-start;transition:background .22s ease,transform .22s ease}
+.message-form button[type=submit]:hover{background:var(--accent-strong);}
 
 /* Links --------------------------------------------------- */
 main a:not(.btn):hover{color:var(--accent)}
@@ -1234,8 +853,8 @@ main a:not(.btn):hover{color:var(--accent)}
 .img-frame img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* About: text beside a portrait --------------------------- */
-.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:56px;align-items:start}
-.about-grid > p{margin:0;max-width:58ch;font-size:19px;line-height:1.75;color:var(--muted)}
+.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);}
+
 .about-photo{aspect-ratio:4/5;width:100%}
 
 /* Research cards: optional image at the top --------------- */
@@ -1244,11 +863,6 @@ main a:not(.btn):hover{color:var(--accent)}
 
 /* Publications: optional square thumbnail ----------------- */
 .pubs li{grid-template-columns:92px 1fr auto}
-.pub-thumb{width:120px;aspect-ratio:1/1;border-radius:12px;align-self:start}
-
-/* CV: optional institution mark --------------------------- */
-.cv-mark{width:36px;height:36px;margin:0 0 12px;border:0;background:none;line-height:0}
-.cv-mark img{width:100%;height:100%;object-fit:contain;filter:grayscale(1) brightness(1.7);opacity:.85}
 
 /* Wide image band above the contact section --------------- */
 .image-band{position:relative;height:clamp(200px,30vw,360px);overflow:hidden}
@@ -1256,7 +870,7 @@ main a:not(.btn):hover{color:var(--accent)}
 .image-band::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,var(--navy),rgba(11,24,42,.3) 45%,var(--charcoal))}
 
 /* Texture: soft accent glow behind the hero --------------- */
-.hero{position:relative;isolation:isolate}
+
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(680px 420px at 22% 34%,rgba(127,208,196,.10),transparent 70%)}
 
 /* Texture: very fine grain over the whole page ------------ */
@@ -1265,14 +879,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 @media (max-width:900px){
   .about-grid{grid-template-columns:minmax(0,1fr);gap:34px}
   .about-photo{max-width:320px}
-  .pubs li{grid-template-columns:92px 1fr}
-  .pub-thumb{display:none}
-}
-
-/* Optional helper: add class="slot-preview" to <body> to see
-   dashed outlines of every empty image slot while editing. */
-.slot-preview .img-frame,.slot-preview .card-media,.slot-preview .cv-mark,.slot-preview .image-band,.slot-preview .hero-photo{display:block!important;position:relative;border:1px dashed rgba(127,208,196,.75)!important;background:rgba(127,208,196,.07)!important}
-.slot-preview .image-band::after{opacity:.25}
+  .pubs li{grid-template-columns:92px 1fr}}
 
 
 /* =========================================================
@@ -1323,8 +930,8 @@ html{scrollbar-color:rgba(255,255,255,.22) #0a1626}
 .hero-text > *{animation:heroUp .95s cubic-bezier(.22,.61,.36,1) both}
 .hero-text .hero-eyebrow{animation-delay:.05s}
 .hero-text h1{animation-delay:.15s}
-.hero-text .hero-lede{animation-delay:.26s}
-.hero-text .hero-affil{animation-delay:.34s}
+
+
 .hero-text .hero-actions{animation-delay:.42s}
 .hero-text .hero-social{animation-delay:.52s}
 @keyframes heroUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
@@ -1342,7 +949,7 @@ html{scrollbar-color:rgba(255,255,255,.22) #0a1626}
 main{counter-reset:sec}
 main > section{counter-increment:sec;position:relative}
 main > section > h2::before{content:"0" counter(sec);display:block;font-size:12px;letter-spacing:.28em;color:var(--accent);opacity:.9;margin-bottom:13px}
-.contact h2::before{content:"05";display:block;font-size:12px;letter-spacing:.28em;color:var(--accent);opacity:.9;margin-bottom:13px}
+.contact h2::before{display:block;font-size:12px;letter-spacing:.28em;color:var(--accent);opacity:.9;margin-bottom:13px}
 main section + section{border-top:0!important}
 main > section + section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.17) 15%,rgba(255,255,255,.17) 85%,transparent)}
 
@@ -1363,10 +970,6 @@ main > section + section::before{content:"";position:absolute;top:0;left:0;right
 .about-grid > p{flex:1 1 430px;margin:0;max-width:60ch;font-size:20px;line-height:1.8;color:var(--muted)}
 .about-grid > p::first-letter{font-family:"Playfair Display",Georgia,serif;font-size:68px;line-height:.78;float:left;padding:8px 15px 0 0;color:var(--accent)}
 .about-photo{flex:0 0 320px;max-width:320px}
-.tags{list-style:none;display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:34px 0 0}
-.tags li{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);border:1px solid var(--card-border);border-radius:999px;padding:9px 17px;background:rgba(255,255,255,.03);transition:border-color .28s ease,color .28s ease,background .28s ease,transform .28s ease}
-.tags li:hover{border-color:var(--accent);color:var(--accent);background:rgba(127,208,196,.08);transform:translateY(-2px)}
-
 /* Research cards: light follows the cursor ----------------- */
 .theme-card{position:relative;overflow:hidden}
 .theme-card::before{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .4s ease;background:radial-gradient(280px 220px at var(--mx,50%) var(--my,0%),rgba(127,208,196,.17),transparent 70%)}
@@ -1447,7 +1050,7 @@ body.simple{min-height:100vh;display:flex;flex-direction:column}
 body.simple .topnav{position:sticky;top:0}
 body.simple footer{margin-top:auto}
 
-.simple-main{flex:1 0 auto;width:100%;max-width:860px;margin:0 auto;padding:92px 32px 110px}
+.simple-main{flex:1 0 auto;width:100%;margin:0 auto;padding:92px 32px 110px}
 .simple-eyebrow{margin:0 0 18px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)}
 .simple-main h1{font-family:"Playfair Display",Georgia,serif;font-weight:500;font-size:clamp(36px,5vw,58px);line-height:1.08;letter-spacing:-.005em;margin:0 0 18px;color:#fff}
 .simple-main .h2-rule{margin:0 0 34px}
@@ -1488,25 +1091,11 @@ body.simple footer{margin-top:auto}
 .about-copy p:last-child{margin-bottom:0}
 .about-copy p:first-child::first-letter{font-family:"Playfair Display",Georgia,serif;font-size:68px;line-height:.78;float:left;padding:8px 15px 0 0;color:var(--accent)}
 
-/* Publications: grouped by kind ---------------------------- */
-.pub-group{font-family:"Playfair Display",Georgia,serif;font-weight:500;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:52px 0 0;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.09);max-width:860px}
-.pub-group:first-of-type{margin-top:30px}
-.pub-group + .pubs{margin-top:0}
-.pubs li:first-child::after{opacity:0}
+/* Publications: grouped by kind ---------------------------- */.pubs li:first-child::after{opacity:0}
 .pub-authors{margin:0 0 8px;font-size:16px;line-height:1.65;color:rgba(216,213,208,.6)}
 .pubs .me{color:#eef1f5;font-weight:600}
 .pub-note{font-style:italic;color:rgba(216,213,208,.5)}
-.pub-links .pub-note{font-size:15px}
-
-/* Clinical electives -------------------------------------- */
-.cv-sub-head{font-family:"Playfair Display",Georgia,serif;font-weight:500;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:62px 0 6px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.09);max-width:900px}
-.electives{list-style:none;margin:0;padding:0;max-width:900px}
-.electives li{display:flex;gap:30px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.06)}
-.electives li:last-child{border-bottom:none}
-.electives .el-when{flex:0 0 160px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(216,213,208,.55);padding-top:5px}
-.electives .el-what b{display:block;font-weight:500;font-size:19px;color:#eef1f5}
-.electives .el-what i{display:block;font-style:normal;font-size:16px;color:rgba(216,213,208,.6);margin-top:3px}
-@media (max-width:680px){.electives li{flex-direction:column;gap:5px}.electives .el-when{flex:none;padding-top:0}}
+/* Clinical electives -------------------------------------- */@media (max-width:680px){}
 
 /* CV structure: sub-points and country flags --------------- */
 .flag{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:.8em;line-height:1;margin-left:.4em;vertical-align:.05em;opacity:.92}
@@ -1528,7 +1117,7 @@ body.simple footer{margin-top:auto}
    ========================================================= */
 
 /* Profile marks: quiet ring, brand glyph, fills on hover --- */
-.hero-social{gap:24px}
+
 .hero-social .pill{gap:13px}
 .hero-social .pill-icon{width:52px!important;height:52px!important;border-radius:50%!important;background:var(--brand-soft)!important;border:1px solid var(--brand-line)!important;box-shadow:none!important;color:var(--brand);transition:background .3s ease,border-color .3s ease,color .3s ease,transform .3s ease,box-shadow .3s ease}
 .hero-social .pill:hover .pill-icon{background:var(--brand)!important;border-color:var(--brand)!important;color:#0b182a;transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.38)!important}
@@ -1545,23 +1134,12 @@ body.simple footer{margin-top:auto}
 .pill.s-mail{--brand:#7fd0c4;--brand-soft:rgba(127,208,196,.10);--brand-line:rgba(127,208,196,.45)}
 
 /* About: research focus as one keyline row ----------------- */
-.focus-label{margin:54px 0 0!important;max-width:none!important;font-size:12px!important;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)!important;opacity:.9}
-.tags{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin:18px 0 0;padding:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
-.tags li{display:block;padding:20px;border:0!important;border-radius:0!important;background:none!important;font-size:11.5px;letter-spacing:.17em;line-height:1.65;color:var(--muted);transition:color .3s ease,background .3s ease}
-.tags li+li{box-shadow:inset 1px 0 0 var(--hair)}
-.tags li:first-child{padding-left:0}
-.tags li:last-child{padding-right:0}
-.tags li:hover{transform:none!important;color:var(--accent);background:rgba(127,208,196,.05)}
-@media (max-width:900px){
-.tags{grid-template-columns:1fr}
-.tags li{padding:15px 0!important;box-shadow:none!important}
-.tags li+li{box-shadow:inset 0 1px 0 var(--hair)!important}
-}
+.focus-label{margin:54px 0 0!important;max-width:none!important;font-size:12px!important;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)!important;opacity:.9}@media (max-width:900px){}
 
 /* Writing & media: clickable blocks ------------------------ */
 .media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;margin-top:38px}
 .media-card{position:relative;display:flex;flex-direction:column;overflow:hidden;background:var(--card);border:1px solid var(--card-border);border-radius:16px;text-decoration:none!important;color:inherit;transition:transform .28s ease,border-color .28s ease,background .28s ease,box-shadow .28s ease}
-.media-card:hover{transform:translateY(-5px);border-color:rgba(127,208,196,.5);background:rgba(255,255,255,.07);box-shadow:0 18px 40px rgba(0,0,0,.32);opacity:1}
+.media-card:hover{border-color:rgba(127,208,196,.5);background:rgba(255,255,255,.07);box-shadow:0 18px 40px rgba(0,0,0,.32);opacity:1}
 .media-thumb{position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;line-height:0;background:linear-gradient(135deg,rgba(127,208,196,.15),rgba(143,182,255,.09))}
 .media-thumb::before{content:attr(data-mark);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",Georgia,serif;font-size:30px;letter-spacing:.22em;color:rgba(127,208,196,.32)}
 .media-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,24,42,.6),transparent 58%);pointer-events:none}
@@ -1576,8 +1154,6 @@ body.simple footer{margin-top:auto}
 .media-cue{margin-top:auto;display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
 .media-cue i{font-style:normal;transition:transform .3s ease}
 .media-card:hover .media-cue i{transform:translateX(5px)}
-.media-note{margin-top:34px!important;font-size:15px!important;color:rgba(216,213,208,.5)!important}
-
 /* the contact section is now the fifth one ----------------- */
 .contact h2::before{content:"05"}
 
@@ -1630,8 +1206,7 @@ body.simple footer{margin-top:auto}
 .hero-name{position:relative;display:inline-block}
 .hero-name .hn-text{position:relative;z-index:2;white-space:nowrap}
 .hero-name svg{position:absolute;z-index:1;display:block;pointer-events:none;overflow:visible}
-.hero-name .hn-arc{left:50%;transform:translateX(-50%);bottom:.14em;width:2.2281em;height:.9em}
-.hero-name .hn-pulse{left:-.9em;bottom:-.27em;width:8.1381em;height:.7em}
+
 
 /* Very narrow phones: shrink the name so one line still fits */
 @media (max-width:335px){
@@ -1665,26 +1240,10 @@ body.simple footer{margin-top:auto}
 @media (prefers-reduced-motion:reduce){.pf-chev{transition:none}}
 
 /* Reading notes, one post per year ------------------------- */
-.reading{margin-top:64px}
-.reading-head{font-family:'Playfair Display',Georgia,serif;font-size:23px;margin:0 0 6px;color:var(--text)}
-.reading-lede{color:var(--muted);font-size:17px;margin:0 0 22px;max-width:56ch}
-.reading-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.reading-card{display:flex;flex-direction:column;gap:8px;text-decoration:none;border:1px solid rgba(255,255,255,.11);border-radius:8px;padding:18px 16px 16px;background:rgba(255,255,255,.022);transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s ease,background .3s ease}
-.reading-card:hover{transform:translateY(-3px);border-color:rgba(127,208,196,.45);background:rgba(255,255,255,.05)}
-.reading-card .ry{font-family:'Playfair Display',Georgia,serif;font-size:27px;line-height:1;color:var(--accent)}
-.reading-card .rt{font-size:14px;line-height:1.35;color:var(--text)}
-.reading-card .rc{font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(216,213,208,.5);margin-top:auto}
-@media (max-width:900px){.reading-grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:420px){.reading-grid{grid-template-columns:1fr}}
 
-/* Book list on the reading-notes pages --------------------- */
-.book-list{list-style:none;padding:0;margin:34px 0 0;counter-reset:bk}
-.book-list .book{position:relative;padding:0 0 26px 46px;margin:0 0 26px;border-bottom:1px solid rgba(255,255,255,.09)}
-.book-list .book:last-child{border-bottom:0;margin-bottom:0}
-.book-list .book::before{counter-increment:bk;content:counter(bk,decimal-leading-zero);position:absolute;left:0;top:5px;font:500 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;color:var(--accent)}
-.book-title{font-family:'Playfair Display',Georgia,serif;font-size:21px;margin:0 0 4px;color:var(--text)}
-.book-author{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:rgba(216,213,208,.6);margin:0 0 10px}
-.book-take{margin:0;color:var(--muted)}
+@media (max-width:900px){}
+@media (max-width:420px){}
+
 
 /* ---------------------------------------------------------------
    Writing & Media: horizontal rail
@@ -1782,9 +1341,8 @@ body.simple footer{margin-top:auto}
 .cd-list>.cd-item{grid-area:1/1}
 
 .cd-item{display:grid;grid-template-columns:158px minmax(0,1fr);gap:0 38px;align-items:start}
-.cd.is-js .cd-item{opacity:0;visibility:hidden;transform:translateY(16px);
-  transition:opacity .45s ease,transform .6s cubic-bezier(.22,.61,.36,1)}
-.cd.is-js .cd-item.is-current{opacity:1;visibility:visible;transform:none}
+.cd.is-js .cd-item{opacity:0;visibility:hidden;}
+.cd.is-js .cd-item.is-current{opacity:1;visibility:visible;}
 .cd.is-js .cd-item + .cd-item{margin-top:0}
 
 .cd-rank{margin:0;user-select:none}
@@ -1811,7 +1369,7 @@ body.simple footer{margin-top:auto}
   cursor:pointer;display:grid;place-items:center}
 .cd-ticks button::before{content:"";display:block;width:14px;height:2px;border-radius:2px;
   background:rgba(216,213,208,.26);transition:background .3s ease,width .3s ease}
-.cd-ticks button.is-past::before{background:rgba(127,208,196,.42)}
+
 .cd-ticks button.is-on::before{background:var(--accent);width:22px}
 .cd-ticks button:hover::before{background:var(--accent-strong)}
 .cd-ticks button:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
@@ -1819,8 +1377,7 @@ body.simple footer{margin-top:auto}
 .cd-nav{display:flex;gap:10px;flex:0 0 auto}
 .cd-nav button{width:38px;height:38px;border-radius:50%;background:transparent;
   border:1px solid var(--hair);color:var(--muted);cursor:pointer;display:grid;
-  place-items:center;font:inherit;
-  transition:border-color .3s,color .3s,transform .3s,opacity .3s}
+  place-items:center;font:inherit;}
 .cd-nav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent);
   transform:translateY(-1px)}
 .cd-nav button:disabled{opacity:.26;cursor:default}
@@ -1855,13 +1412,10 @@ body.simple footer{margin-top:auto}
    descenders with its spike sitting in the gap between the
    two words. Both are stretched to the width of the name, so
    they stay in step at every size. */
-.hero-text h1 .hn-text{
-  background:linear-gradient(96deg,#ffffff 0%,#f6fdfb 26%,#bfeade 54%,#93d3f0 78%,#a9bdf7 100%);
-  -webkit-background-clip:text;background-clip:text;
-  color:transparent;-webkit-text-fill-color:transparent}
+
 .hero-name .hn-arc{top:-.34em;bottom:auto;left:0;transform:none;width:100%;height:.40em}
 .hero-name .hn-pulse{left:0;bottom:-.34em;width:100%;height:.60em}
-@media print{.hero-text h1 .hn-text{background:none;color:#111;-webkit-text-fill-color:#111}}
+@media print{}
 
 /* Hero: the role first, the research line underneath ------- */
 .hero-affil{margin:0 0 16px}
@@ -1875,44 +1429,8 @@ body.simple footer{margin-top:auto}
    back, a gradient rule draws itself in from the left, a
    soft light follows the pointer and the one-line gloss
    fades up. The gloss keeps its space in the layout, so
-   nothing moves while the cursor travels along the row. */
-.tags li{position:relative;overflow:hidden;padding:22px 20px 20px;
-  transition:opacity .35s ease,background .35s ease}
-.tags li::before{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2));
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .55s cubic-bezier(.22,.61,.36,1)}
-.tags li::after{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;
-  transition:opacity .45s ease;
-  background:radial-gradient(150px 120px at var(--tx,50%) var(--ty,50%),
-    rgba(127,208,196,.17),transparent 70%)}
-.tags:hover li{opacity:.45}
-.tags li:hover{opacity:1;background:rgba(127,208,196,.05)}
-.tags li:hover::before{transform:scaleX(1)}
-.tags li:hover::after{opacity:1}
-.tags .t-no{display:block;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-  letter-spacing:.14em;color:var(--accent);opacity:.4;margin-bottom:11px;
-  transition:opacity .35s ease}
-.tags li:hover .t-no{opacity:1}
-.tags .t-name{display:block;font-size:11.5px;letter-spacing:.17em;line-height:1.55;
-  color:var(--muted);transition:transform .45s cubic-bezier(.22,.61,.36,1),color .35s ease}
-.tags li:hover .t-name{transform:translateY(-2px);color:#fff}
-.tags .t-note{display:block;margin-top:9px;font-size:12.5px;letter-spacing:.01em;
-  text-transform:none;line-height:1.5;color:var(--muted);opacity:0;transform:translateY(7px);
-  transition:opacity .5s ease,transform .5s cubic-bezier(.22,.61,.36,1)}
-.tags li:hover .t-note{opacity:.7;transform:none}
-.tags li:first-child{padding-left:0}
-.tags li:last-child{padding-right:0}
-@media (max-width:900px){
-.tags li,.tags:hover li{opacity:1}
-.tags li{padding:16px 0!important}
-.tags .t-note{opacity:.7;transform:none}
-}
-@media (hover:none){
-.tags:hover li{opacity:1}
-.tags .t-note{opacity:.7;transform:none}
-.tags li::before{transform:scaleX(1)}
-}
+   nothing moves while the cursor travels along the row. */@media (max-width:900px){}
+@media (hover:none){}
 
 /* Intellectual heroes: nation and what they are known for -- */
 .ih-for{font-size:.8rem;line-height:1.5;color:var(--muted);opacity:.6}
@@ -1947,11 +1465,11 @@ body.simple footer{margin-top:auto}
   background:linear-gradient(90deg,var(--accent),var(--accent-2));
   transform:scaleX(0);transform-origin:left;
   transition:transform .45s cubic-bezier(.2,.7,.2,1)}
-.ychip:hover{transform:translateY(-3px);border-color:rgba(127,208,196,.45);
+.ychip:hover{border-color:rgba(127,208,196,.45);
   background:rgba(255,255,255,.05);box-shadow:0 12px 26px rgba(0,0,0,.28)}
 .ychip:hover .yc-mark{transform:scaleX(1)}
 .ychip:hover .yc-year{color:var(--accent-strong)}
-.yrail:hover .ychip:not(:hover):not([aria-expanded="true"]){opacity:.55}
+
 .ychip[aria-expanded="true"]{opacity:1;transform:translateY(-3px);
   border-color:rgba(127,208,196,.7);background:rgba(127,208,196,.10)}
 .ychip[aria-expanded="true"] .yc-mark{transform:scaleX(1)}
@@ -2018,7 +1536,7 @@ body.simple footer{margin-top:auto}
    data-cols is how many sit in the row. Until a file is
    added the frame shows a quiet cross, so the row is visible
    while the pictures are still missing. */
-.cv-pix{display:grid;gap:10px;margin:22px 0 2px}
+.cv-pix{display:grid;margin:22px 0 2px}
 .cv-pix[data-cols="1"]{grid-template-columns:repeat(1,1fr);max-width:150px}
 .cv-pix[data-cols="2"]{grid-template-columns:repeat(2,1fr);max-width:300px}
 .cv-pix[data-cols="3"]{grid-template-columns:repeat(3,1fr);max-width:440px}
@@ -2036,8 +1554,8 @@ body.simple footer{margin-top:auto}
 .cv-pix .pix::after{width:1px;height:15px;transform:translate(-50%,-50%)}
 .cv-pix .pix img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;
   display:block;transform:none;filter:saturate(.78);transition:filter .45s ease}
-.cv-pix:hover .pix{opacity:.5}
-.cv-pix .pix:hover{opacity:1;z-index:5;transform:scale(1.45) translateY(-4px);
+
+.cv-pix .pix:hover{opacity:1;z-index:5;
   box-shadow:0 24px 46px rgba(0,0,0,.5);border-color:rgba(127,208,196,.55)}
 .cv-pix .pix:hover img{filter:saturate(1)}
 .cv-pix .pix:hover::before{transform:translate(-50%,-50%) rotate(90deg)}
@@ -2045,7 +1563,7 @@ body.simple footer{margin-top:auto}
 @media (max-width:900px){
 .cv-pix[data-cols="5"]{grid-template-columns:repeat(3,1fr);max-width:none}
 .cv-pix[data-cols="4"]{grid-template-columns:repeat(2,1fr);max-width:none}
-.cv-pix .pix:hover{transform:scale(1.18)}
+
 }
 @media (hover:none){
 .cv-pix:hover .pix{opacity:1}
@@ -2112,7 +1630,7 @@ body.simple footer{margin-top:auto}
 .heroes .ih-role,.heroes .ih-for{transition:opacity .35s ease,color .35s ease}
 .heroes>li:hover .ih-role{opacity:1;color:var(--accent-strong)}
 .heroes>li:hover .ih-for{opacity:.95}
-.heroes:hover>li:not(:hover){opacity:.62}
+
 
 @media(hover:none){
   .heroes>li::before{display:none}
@@ -2153,10 +1671,10 @@ body.simple footer{margin-top:auto}
 /* One step of the countdown is slow enough to be read. While it runs the
    arrows and the book itself stop taking presses, so the ten cannot be
    clicked away in a second. */
-.cd.is-js .cd-item{transition:opacity .55s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
+
 .cd-nav button{transition:opacity .3s ease,background .3s ease,border-color .3s ease,color .3s ease}
 .cd.is-busy .cd-nav button,.cd.is-busy .cd-stage{pointer-events:none}
-.cd.is-busy .cd-nav button:not(:disabled){opacity:.5}
+
 .cd.is-busy .cd-stage{cursor:default}
 
 /* Nothing that opens or closes on a click should become selected text. */
@@ -2178,9 +1696,7 @@ body.simple footer{margin-top:auto}
 #cv .centered a:hover{transform:scale(1.035)}
 .message-form button[type=submit]:hover{transform:scale(1.03)}
 .theme-card:hover{transform:scale(1.012)}
-.media-card:hover{transform:scale(1.014)}
-.reading-card:hover{transform:scale(1.012)}
-.ychip:hover{transform:scale(1.045)}
+.media-card:hover{transform:scale(1.014)}.ychip:hover{transform:scale(1.045)}
 @media (prefers-reduced-motion:reduce){
 .btn:hover,#cv .centered a:hover,.message-form button[type=submit]:hover,
 .theme-card:hover,.media-card:hover,.reading-card:hover,.ychip:hover{transform:none}
@@ -2191,8 +1707,8 @@ body.simple footer{margin-top:auto}
    of the word underneath, and each word stays centred under its circle.
    The ring is a little tighter around the glyph. */
 @media (min-width:901px){
-  .hero-social{gap:0;flex-wrap:nowrap;max-width:600px;justify-content:space-between}
-  .hero-social .pill{flex:1 1 0;min-width:0}
+
+
 }
 .hero-social .pill-icon{width:47px!important;height:47px!important}
 
@@ -2202,15 +1718,13 @@ body.simple footer{margin-top:auto}
    quick, more a glance over the shoulder than a walk. The delay on
    visibility keeps the departing book on screen long enough to be seen
    leaving. */
-.cd.is-js .cd-item{transform:translateX(-56px);pointer-events:none;
-  transition:opacity .5s ease,transform .8s cubic-bezier(.16,.72,.24,1),visibility 0s linear .8s}
-.cd.is-js .cd-item.is-done{transform:translateX(56px)}
-.cd.is-js .cd-item.is-current{transform:none;pointer-events:auto;
-  transition:opacity .5s ease,transform .8s cubic-bezier(.16,.72,.24,1),visibility 0s linear 0s}
-.cd.is-js.is-back .cd-item{transition:opacity .26s ease,transform .34s cubic-bezier(.3,.75,.3,1),visibility 0s linear .34s}
-.cd.is-js.is-back .cd-item.is-current{transition:opacity .26s ease,transform .34s cubic-bezier(.3,.75,.3,1),visibility 0s linear 0s}
+.cd.is-js .cd-item{pointer-events:none;}
+
+.cd.is-js .cd-item.is-current{pointer-events:auto;}
+
+
 @media (prefers-reduced-motion:reduce){
-.cd.is-js .cd-item,.cd.is-js .cd-item.is-done{transform:none}
+
 }
 
 /* No single word left alone on a line of its own. */
@@ -2231,16 +1745,12 @@ body.simple footer{margin-top:auto}
 @media (min-width:901px){
   .hero-social{
     --hs-pull:calc((var(--hero-w,600px)/5 - 47px)/1.6);
-    width:calc(var(--hero-w,600px) + 2 * var(--hs-pull));
-    max-width:none;
-    margin-left:calc(0px - var(--hs-pull));
-    gap:0;flex-wrap:nowrap;justify-content:space-between;
   }
-  .hero-social .pill{flex:1 1 0;min-width:0}
+  .hero-social .pill{min-width:0}
   /* Each word has a narrower column to stand in than before, so it is set
      a size smaller and is allowed to fall onto a second line. */
-  .hero-social .pill-label{white-space:normal;text-align:center;
-    font-size:9px;letter-spacing:.11em;line-height:1.45}
+  .hero-social .pill-label{white-space:normal;
+    font-size:9px;line-height:1.45}
 }
 
 /* ---- a jacket for every book --------------------------------------------
@@ -2297,21 +1807,13 @@ body.simple footer{margin-top:auto}
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-color: #081321;
-  transition: background-color 900ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.chapter-wash[data-chapter="home"] { background-color: #081321; }
-.chapter-wash[data-chapter="about"] { background-color: #0b1b2d; }
-.chapter-wash[data-chapter="writing"] { background-color: #0f2339; }
-.chapter-wash[data-chapter="research"] { background-color: #132b45; }
-.chapter-wash[data-chapter="cv"] { background-color: #173352; }
-.chapter-wash[data-chapter="contact"] { background-color: #173352; }
 
 /* A reader who has asked for less movement still gets the change of
    chapter, only faster and with less of a drift. */
 @media (prefers-reduced-motion: reduce) {
-  .chapter-wash { transition-duration: 300ms; }
+
 }
 
 /* ---------------------------------------------------------------
@@ -2426,16 +1928,7 @@ body.simple footer{margin-top:auto}
    beside every book and the author set small underneath. The
    heading is kept out of the numbered-section styling, so it takes
    no counter and stays quieter than the title of the piece.
-   ---------------------------------------------------------------- */
-.cd-hm{margin:56px 0 0;border-top:1px solid var(--hair);padding-top:30px;counter-increment:none}
-.piece .cd-hm>.cd-hm-title{margin:0;font-family:"Playfair Display",Georgia,serif;font-size:24px;font-weight:400;line-height:1.25;letter-spacing:0;text-transform:none;color:var(--text)}
-.piece .cd-hm>.cd-hm-title::before{content:none}
-.cd-hm-list{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 38px}
-.cd-hm-list li{margin:0;padding-left:16px;position:relative}
-.cd-hm-list li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--accent);opacity:.55}
-.cd-hm-book{display:block;font-family:"Playfair Display",Georgia,serif;font-size:17px;line-height:1.45;color:var(--text)}
-.cd-hm-by{display:block;margin-top:5px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-@media (max-width:720px){.cd-hm-list{grid-template-columns:minmax(0,1fr);gap:18px 0}}
+   ---------------------------------------------------------------- */@media (max-width:720px){}
 
 /* ----------------------------------------------------------------
    v21 - the fine print under the footer
@@ -2445,7 +1938,7 @@ body.simple footer{margin-top:auto}
    on a narrow screen.
    ---------------------------------------------------------------- */
 .foot-fine{max-width:1150px;margin:20px auto 0;padding:0 32px}
-.foot-fine p{margin:0;max-width:78ch;font-size:12px;line-height:1.6;letter-spacing:.04em;color:rgba(255,255,255,.36)}
+.foot-fine p{margin:0;font-size:12px;line-height:1.6;letter-spacing:.04em;color:rgba(255,255,255,.36)}
 @media (max-width:620px){.foot-fine{padding:0 22px}}
 
 /* ----------------------------------------------------------------
@@ -2470,24 +1963,21 @@ body.simple footer{margin-top:auto}
   .ypanel .cd-extra{grid-template-columns:126px minmax(0,1fr)}
 }
 .cd-extra .cd-body{padding-top:4px}
-.cd-extra-list{list-style:none;margin:0;padding:0;display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 34px}
-.cd-extra-list li{margin:0;padding-left:16px;position:relative}
-.cd-extra-list li::before{content:"";position:absolute;left:0;top:.7em;width:8px;
-  height:1px;background:var(--accent);opacity:.55}
-.cd-extra-book{display:block;font-family:"Playfair Display",Georgia,serif;
-  font-size:16px;line-height:1.42;color:#fff}
-.cd-extra-by{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.18em;
+.cd-extra-list{list-style:none;}
+.cd-extra-list li{padding-left:16px;}
+.cd-extra-list li::before{left:0;top:.7em;background:var(--accent);}
+.cd-extra-book{display:block;font-family:"Playfair Display",Georgia,serif;color:#fff}
+.cd-extra-by{display:block;
   text-transform:uppercase;color:var(--muted);opacity:.72}
 .cd-plus{margin:14px 0 0;font-family:"Playfair Display",Georgia,serif;font-size:16px;
   color:var(--accent);opacity:.6}
 .cd-plus + .cd-title{margin-top:8px}
-.ypanel .cd-extra-list{gap:16px 26px}
-.ypanel .cd-extra-book{font-size:15px}
+
+
 .ypanel .cd-num-band{font-size:46px}
 .ypanel .cd-num-word{font-size:21px}
 @media (max-width:720px){
-  .cd-extra-list{grid-template-columns:minmax(0,1fr);gap:16px 0}
+  .cd-extra-list{grid-template-columns:minmax(0,1fr);}
 }
 @media (max-width:640px){
   .cd-num-band{font-size:46px}
@@ -2500,10 +1990,8 @@ body.simple footer{margin-top:auto}
    ============================================================ */
 /* Forward was unhurried; now both directions are brisk. The visibility
    delay still keeps the departing card on screen while it fades. */
-.cd.is-js .cd-item{transition:opacity .2s ease,transform .32s cubic-bezier(.16,.72,.24,1),visibility 0s linear .32s}
-.cd.is-js .cd-item.is-current{transition:opacity .2s ease,transform .32s cubic-bezier(.16,.72,.24,1),visibility 0s linear 0s}
-.cd.is-js.is-back .cd-item{transition:opacity .16s ease,transform .24s cubic-bezier(.3,.75,.3,1),visibility 0s linear .24s}
-.cd.is-js.is-back .cd-item.is-current{transition:opacity .16s ease,transform .24s cubic-bezier(.3,.75,.3,1),visibility 0s linear 0s}
+
+
 @media (prefers-reduced-motion:reduce){
 .cd.is-js .cd-item,.cd.is-js .cd-item.is-current,
 .cd.is-js.is-back .cd-item,.cd.is-js.is-back .cd-item.is-current{transition:opacity .12s linear}
@@ -2513,8 +2001,8 @@ body.simple footer{margin-top:auto}
 /* On a wide screen the marks kept stretching to fill the column; let them
    sit at their own width, close together, well inside the CV button. */
 @media (min-width:901px){
-.hero-social{gap:18px;flex-wrap:wrap;max-width:none;justify-content:flex-start}
-.hero-social .pill{flex:0 0 auto}
+
+
 }
 
 
@@ -2529,14 +2017,11 @@ body.simple footer{margin-top:auto}
    further than its card and grows as it lands, which makes every step feel
    like an arrival, and the row of marks below fills up from the left as
    number one comes nearer. */
-.cd.is-js .cd-list{overflow:hidden}
-.cd.is-js .cd-item{transform:translateX(-13%);
-  transition:opacity .26s ease,transform .48s cubic-bezier(.22,.61,.36,1),visibility 0s linear .48s}
+
+.cd.is-js .cd-item{transform:translateX(-13%);}
 .cd.is-js .cd-item.is-current ~ .cd-item{transform:translateX(13%)}
-.cd.is-js .cd-item.is-current{transform:none;
-  transition:opacity .34s ease .1s,transform .48s cubic-bezier(.22,.61,.36,1),visibility 0s linear 0s}
-.cd.is-js .cd-item .cd-rank{transform:translateX(-46px) scale(.9);
-  transition:transform .58s cubic-bezier(.22,.61,.36,1)}
+.cd.is-js .cd-item.is-current{transform:none;}
+.cd.is-js .cd-item .cd-rank{transform:translateX(-46px) scale(.9);}
 .cd.is-js .cd-item.is-current ~ .cd-item .cd-rank{transform:translateX(46px) scale(.9)}
 .cd.is-js .cd-item.is-current .cd-rank{transform:none}
 /* The marks already passed read as ground covered. */
