@@ -2706,3 +2706,76 @@ background:linear-gradient(158deg,rgba(11,24,42,.56),rgba(11,24,42,.8) 62%,rgba(
 .hb-shot img{transition:none}
 .hb-item:hover .hb-shot img{transform:scale(1.03)}
 }
+
+
+/* ==============================================================
+   v40 - The wall loses its frame, and a year opens a drawer
+   --------------------------------------------------------------
+   1. At six tenths the wall of covers had begun to read as a box
+      dropped on the page: four hard edges and a rounded corner.
+      The corners are gone and the edges are gone with them - the
+      navy of the page now washes in over left, right and top, so
+      the covers rise out of the paper instead of sitting in a
+      frame. The top wash does the work the dark plate behind the
+      heading used to do, and does it more quietly, so the plate
+      is dismissed and the heading only keeps its shadow.
+
+   2. The photographs behind the cards under About are paintings
+      and deserve to be seen: a little more of them shows, and
+      more again under the pointer.
+
+   3. A year that has a picture of its own opens it downward, a
+      drawer the width of the year and in the same glass, cut so
+      that the picture sits in the middle of it. The script that
+      places it is in index.html; nothing here appears until the
+      pointer arrives.
+   ============================================================== */
+
+/* 1 - no frame, only a wash --------------------------------- */
+.reading::before{border-radius:0}
+.reading::after{content:"";position:absolute;pointer-events:none;z-index:-1;
+top:0;left:calc(-1*var(--rbleed));right:calc(-1*var(--rbleed));
+height:clamp(230px,32vw,344px);
+background:
+linear-gradient(90deg,var(--navy),rgba(11,24,42,0) 104px),
+linear-gradient(270deg,var(--navy),rgba(11,24,42,0) 104px),
+linear-gradient(180deg,var(--navy) 0,rgba(11,24,42,.86) 40px,
+rgba(11,24,42,.34) 84px,rgba(11,24,42,0) 124px)}
+.reading:has(.ypanel:not([hidden]))::after{height:clamp(200px,24vw,252px)}
+.reading-head{display:inline-block}
+.reading-head::before{display:none}
+@media (max-width:640px){
+.reading::before{border-radius:0}
+.reading::after{height:clamp(200px,52vw,280px);
+background:
+linear-gradient(90deg,var(--navy),rgba(11,24,42,0) 54px),
+linear-gradient(270deg,var(--navy),rgba(11,24,42,0) 54px),
+linear-gradient(180deg,var(--navy) 0,rgba(11,24,42,.86) 30px,
+rgba(11,24,42,.34) 64px,rgba(11,24,42,0) 96px)}
+.reading:has(.ypanel:not([hidden]))::after{height:clamp(180px,44vw,240px)}
+}
+
+/* 2 - the paintings come forward ---------------------------- */
+.hb-shot img{opacity:.62}
+.hb-shot::after{background:linear-gradient(158deg,rgba(11,24,42,.4),
+rgba(11,24,42,.72) 58%,rgba(11,24,42,.86))}
+.hb-item:hover .hb-shot img{opacity:.76}
+
+/* 3 - the drawer under a year ------------------------------- */
+.yshot{position:absolute;z-index:6;overflow:hidden;pointer-events:none;
+border:1px solid rgba(255,255,255,.26);border-top:0;border-radius:0 0 10px 10px;
+background:linear-gradient(180deg,rgba(14,30,52,.72),rgba(9,20,36,.66));
+-webkit-backdrop-filter:blur(18px) saturate(150%) brightness(.9);
+backdrop-filter:blur(18px) saturate(150%) brightness(.9);
+box-shadow:0 18px 34px rgba(3,10,20,.5);
+opacity:0;transform:translateY(-10px) scaleY(.6);transform-origin:top center;
+transition:opacity .3s ease,transform .38s cubic-bezier(.2,.7,.2,1)}
+.yshot.is-on{opacity:1;transform:none}
+.yshot img{display:block;width:100%;height:100%;object-fit:cover;
+object-position:center;opacity:.92}
+@supports not ((-webkit-backdrop-filter:blur(2px)) or (backdrop-filter:blur(2px))){
+.yshot{background:linear-gradient(180deg,rgba(16,32,54,.94),rgba(11,24,42,.9))}
+}
+@media (prefers-reduced-motion:reduce){
+.yshot{transition:opacity .2s ease;transform:none}
+}
