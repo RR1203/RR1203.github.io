@@ -653,10 +653,6 @@
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Sam Vaknin</span><span class="ih-for">author of <em>Malignant Self-Love: Narcissism Revisited</em></span></div>
-            <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
-          </li>
-          <li>
             <div class="ih-line"><span class="ih-name">Hartmut Rosa</span><span class="ih-role">Sociologist</span><span class="ih-for">author of <em>Resonance</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
@@ -1082,7 +1078,7 @@
 
       <p class="contact-lede">Questions and collaborations are welcome.</p>
 
-      <form id="message-form" class="message-form" action="https://formsubmit.co/ajax/hannes.meilicke@gmail.com" method="POST">
+      <form id="message-form" class="message-form" method="POST" data-a="lt2YpxWal1mLzVmbuFGa" data-b="t92YuwWah12Z">
         <input type="email" name="email" placeholder="Email" aria-label="Your email address" autocomplete="email" required>
         <input type="text" name="subject" placeholder="Subject" aria-label="Subject">
         <textarea name="message" placeholder="Message" aria-label="Your message" rows="6" required></textarea>
@@ -1171,6 +1167,20 @@
       var humanCheck = document.getElementById('human-check');
       var loadedAt = Date.now();
 
+      /* The address itself is written nowhere in this page. Machines that
+         comb the web for anything shaped like an address find nothing here
+         to take: the two halves are kept turned back to front, and they are
+         only put together, here, in the moment a message is actually sent. */
+      function endpoint() {
+        function half(code) {
+          return atob(String(code).split('').reverse().join(''));
+        }
+        return 'https://formsubmit.co/ajax/'
+          + half(form.getAttribute('data-a'))
+          + String.fromCharCode(64)
+          + half(form.getAttribute('data-b'));
+      }
+
       function show(message, ok) {
         statusLine.textContent = message;
         statusLine.className = 'form-status is-visible ' + (ok ? 'success' : 'error');
@@ -1184,7 +1194,7 @@
       function send() {
         var data = new FormData(form);
         data.delete('g-recaptcha-response');
-        fetch(form.action, {
+        fetch(endpoint(), {
           method: 'POST',
           body: data,
           headers: { 'Accept': 'application/json' }
@@ -1883,6 +1893,11 @@
     function open(pic, from) {
       shown.src = pic.getAttribute("src");
       shown.alt = pic.getAttribute("alt") || "";
+      /* The sheet is told the shape of the picture, so that the picture can
+         grow into the height it is offered without being pulled out of
+         shape. */
+      var wide = pic.naturalWidth, high = pic.naturalHeight;
+      box.style.setProperty("--pixar", String((wide && high) ? (wide / high) : 1.5));
       opener = from;
       box.classList.add("is-open");
       document.addEventListener("keydown", key);
