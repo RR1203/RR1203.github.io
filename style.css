@@ -2498,8 +2498,15 @@ body.simple footer{margin-top:auto}
 /* ============================================================
    v23 - a quicker turn of the card, a tighter row of icons
    ============================================================ */
-.cd.is-js .cd-item{transition:opacity .18s ease,transform .26s cubic-bezier(.22,.61,.36,1)}
-@media(prefers-reduced-motion:reduce){
-.cd.is-js .cd-item{transition:opacity .12s linear;transform:none}
+/* Forward was unhurried; now both directions are brisk. The visibility
+   delay still keeps the departing card on screen while it fades. */
+.cd.is-js .cd-item{transition:opacity .2s ease,transform .32s cubic-bezier(.16,.72,.24,1),visibility 0s linear .32s}
+.cd.is-js .cd-item.is-current{transition:opacity .2s ease,transform .32s cubic-bezier(.16,.72,.24,1),visibility 0s linear 0s}
+.cd.is-js.is-back .cd-item{transition:opacity .16s ease,transform .24s cubic-bezier(.3,.75,.3,1),visibility 0s linear .24s}
+.cd.is-js.is-back .cd-item.is-current{transition:opacity .16s ease,transform .24s cubic-bezier(.3,.75,.3,1),visibility 0s linear 0s}
+@media (prefers-reduced-motion:reduce){
+.cd.is-js .cd-item,.cd.is-js .cd-item.is-current,
+.cd.is-js.is-back .cd-item,.cd.is-js.is-back .cd-item.is-current{transition:opacity .12s linear}
+.cd.is-js .cd-item,.cd.is-js .cd-item.is-done{transform:none}
 }
 .hero-social{gap:12px}
