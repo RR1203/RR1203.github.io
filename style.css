@@ -2779,3 +2779,135 @@ object-position:center;opacity:.92}
 @media (prefers-reduced-motion:reduce){
 .yshot{transition:opacity .2s ease;transform:none}
 }
+
+/* ==============================================================
+   v41 - The wall in its own resolution, the paintings whole, the
+         heroes given faces, and every top ten in jackets
+   --------------------------------------------------------------
+   1. The wall of covers had been travelling as a 1500-pixel JPEG
+      folded inside an SVG and stretched across twice that many
+      device pixels, which is why it would not come sharp. It is
+      replaced by images/reading-cover-wall.jpg, cut at full
+      resolution from the top rows of the library picture. And the
+      box is gone for good: the navy sheet that v40 laid over the
+      covers is dismissed, and the picture now carries its own
+      edge - one mask that dissolves all four sides at once - so
+      it can stand near full strength with no border, no corner
+      and no shadow anywhere. What ends it is the page itself.
+
+   2. The paintings under Away from the desk are square, and so
+      are their cards now: the whole picture shows, feet included.
+      What keeps the words legible is no longer a veil over the
+      entire painting but a weight that gathers at the foot of the
+      card, where the writing sits.
+
+   3. Every intellectual hero with a portrait in
+      images/portraits/ shows it when the pointer rests on the
+      name: a small photograph hung to the left of the line, black
+      and white like the rest of the page, one hairline around it
+      and its own shadow. The file is only fetched on the first
+      visit (the script at the foot of index.html), so the page
+      does not carry two dozen photographs it may never show.
+      Under a finger, where there is nothing to hover, the face
+      stands small and steady beside the name instead.
+
+   4. The drawer a year pulls open under its chip is a vitrine: a
+      square of dark plate, the object set inside it whole and at
+      full strength with room to breathe, a low light behind it
+      and its own shadow beneath. It had been cropped to a
+      letterbox and dimmed over a wall of covers, which is why it
+      read as a smudge.
+   ============================================================== */
+
+/* 1 - the wall, sharp and unframed ---------------------------- */
+.reading{
+  --rbleed:clamp(16px,4vw,72px);
+  --rwash:
+    linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.26) 9%,rgba(0,0,0,.72) 26%,
+      #000 44%,#000 60%,rgba(0,0,0,.6) 79%,rgba(0,0,0,.2) 92%,rgba(0,0,0,0) 100%),
+    linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.5) 6%,#000 16%,#000 84%,
+      rgba(0,0,0,.5) 94%,rgba(0,0,0,0) 100%);
+}
+.reading::before{
+  height:clamp(240px,32vw,352px);
+  border-radius:0;
+  background-image:url("images/reading-cover-wall.jpg");
+  opacity:.8;
+  filter:saturate(1.02) contrast(1.01);
+  box-shadow:none;
+  -webkit-mask-image:var(--rwash);
+  -webkit-mask-composite:source-in;
+  -webkit-mask-repeat:no-repeat;
+  -webkit-mask-size:100% 100%;
+  mask-image:var(--rwash);
+  mask-composite:intersect;
+  mask-repeat:no-repeat;
+  mask-size:100% 100%;
+}
+/* the sheet of navy that v40 laid over the covers has nothing
+   left to do, and neither has the plate behind the heading */
+.reading::after,
+.reading:has(.ypanel:not([hidden]))::after{display:none}
+.reading:has(.ypanel:not([hidden]))::before{
+  height:clamp(210px,24vw,268px);
+  -webkit-mask-image:var(--rwash);
+  mask-image:var(--rwash);
+}
+@media (max-width:640px){
+  .reading::before{height:clamp(200px,52vw,290px);border-radius:0}
+  .reading:has(.ypanel:not([hidden]))::before{height:clamp(180px,44vw,240px)}
+}
+@media (prefers-contrast:more){.reading::before{opacity:.3}}
+
+/* 2 - the paintings, whole ------------------------------------ */
+.hb-grid .hb-item{aspect-ratio:1/1;display:flex;flex-direction:column;
+  justify-content:flex-end;min-height:0}
+.hb-grid .hb-mark{margin-bottom:auto}
+.hb-shot img{opacity:.95;filter:saturate(1.04) contrast(1.02)}
+.hb-item:hover .hb-shot img{opacity:1;filter:saturate(1.08) contrast(1.03)}
+.hb-shot::after{background:
+  linear-gradient(180deg,rgba(11,24,42,0) 0,rgba(11,24,42,.1) 46%,
+    rgba(11,24,42,.58) 76%,rgba(11,24,42,.86) 100%),
+  linear-gradient(105deg,rgba(11,24,42,.38),rgba(11,24,42,.1) 50%,rgba(11,24,42,0) 100%)}
+.hb-item .hb-name,.hb-item .hb-note,.hb-item .hb-gloss{
+  text-shadow:0 1px 12px rgba(5,12,22,.9),0 1px 3px rgba(5,12,22,.75)}
+.hb-item .hb-note{color:#e7e4df}
+.hb-item .hb-mark svg{filter:drop-shadow(0 1px 7px rgba(5,12,22,.85))}
+@media (max-width:520px){.hb-grid .hb-item{aspect-ratio:5/4}}
+
+/* 3 - a face for every hero ----------------------------------- */
+.heroes>li{position:relative}
+.ih-line{position:relative}
+.ih-face{position:absolute;right:calc(100% + 18px);top:50%;
+  width:92px;aspect-ratio:4/5;border-radius:6px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.3);background:#0d1c30;
+  box-shadow:0 16px 34px rgba(2,8,18,.55),inset 0 1px 0 rgba(255,255,255,.12);
+  opacity:0;pointer-events:none;z-index:6;
+  transform:translateY(-50%) translateX(8px);
+  transition:opacity .26s ease,transform .34s cubic-bezier(.2,.7,.2,1)}
+.ih-face img{display:block;width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) contrast(1.03)}
+.heroes>li:hover .ih-face,
+.heroes>li:focus-within .ih-face{opacity:1;transform:translateY(-50%)}
+/* where there is no pointer, or no ground to the left of the
+   text, the face stands small and steady in the line instead */
+@media (hover:none),(pointer:coarse),(max-width:1120px){
+  .ih-face{position:static;opacity:1;pointer-events:auto;
+    transform:none;width:40px;border-radius:5px;flex:0 0 auto;
+    box-shadow:0 4px 10px rgba(2,8,18,.4);align-self:center}
+  .heroes>li:hover .ih-face,
+  .heroes>li:focus-within .ih-face{transform:none}
+}
+@media (prefers-reduced-motion:reduce){.ih-face{transition:opacity .2s ease}}
+
+/* 4 - the vitrine under a year -------------------------------- */
+.yshot{height:auto!important;aspect-ratio:1/1;padding:18px;
+  border:1px solid rgba(255,255,255,.18);border-top:0;border-radius:0 0 14px 14px;
+  background:linear-gradient(180deg,rgba(10,22,38,.95),rgba(6,14,26,.94));
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  box-shadow:0 24px 44px rgba(2,8,18,.6),inset 0 -1px 0 rgba(255,255,255,.05)}
+.yshot::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(58% 52% at 50% 46%,rgba(127,208,196,.17),rgba(127,208,196,0) 72%)}
+.yshot img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;
+  object-position:center;opacity:1;
+  filter:drop-shadow(0 12px 20px rgba(0,0,0,.6)) drop-shadow(0 2px 4px rgba(0,0,0,.4))}
