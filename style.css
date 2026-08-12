@@ -2352,3 +2352,18 @@ html{scroll-padding-top:84px}
 @media (hover:none){
   .pill:hover,.media-card:hover,.theme-card:hover,.ychip:hover{transform:none}
 }
+
+
+/* ____________________________________________________________
+   v33 - the narrowest screen
+   ____________________________________________________________ */
+/* At three hundred and twenty pixels, which is what an iPhone reports
+   when its owner has asked for the larger, zoomed display, the portrait
+   beside the About text refused to give any ground: it was told to be
+   three hundred and twenty pixels wide and not to shrink, so it pushed
+   the whole page twenty-two pixels wider than the screen and every
+   other measurement was taken from the wrong edge. It may shrink now.
+   Nothing above three hundred and ninety pixels changes. */
+@media (max-width:960px){
+  .about-photo{flex-shrink:1;min-width:0}
+}
