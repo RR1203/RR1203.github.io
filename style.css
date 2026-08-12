@@ -2531,3 +2531,84 @@ html{scroll-padding-top:84px}
   text-shadow:0 1px 12px rgba(6,14,26,.9),0 0 3px rgba(6,14,26,.6)}
 @media (max-width:640px){.reading::before{height:min(100%,300px);border-radius:12px}}
 @media (prefers-contrast:more){.reading::before{opacity:.08}}
+
+/* ==============================================================
+   v38 - the sideways rows, the wall behind the reading, and the
+   picture that knows its neighbours
+--------------------------------------------------------------
+   Three things.
+
+   1. Every row that scrolls sideways had been told to scroll
+   smoothly. That instruction is meant for the jump to a heading
+   and is quite wrong under a hand: each notch of the wheel began
+   its own small animation and cancelled the one before it, so the
+   row crawled, stopped well short of where it had been pushed,
+   and a proximity snap then pulled it part of the way back. The
+   rows now follow the hand one to one and keep the weight and the
+   slowing-down the browser gives them. The two round buttons
+   still glide, because they ask for that themselves, in the
+   script. Under a finger the snap is worth having, so it stays
+   where there is no pointer.
+
+   2. The wall of covers behind the reading was too faint and
+   dissolved far too early: one row and a sliver of a second. It
+   now stands at more than twice the strength and holds its ground
+   almost to the bottom edge, which leaves three rows to look at.
+   The block is given room underneath so that the third row falls
+   on empty ground and not on the intellectual heroes. When a year
+   stands open the wall draws back to two rows, because the notes
+   need clean paper under them.
+
+   3. The sheet that shows a picture at full size carries an arrow
+   on either side now, and a count. The script beside it (see
+   index.html) gives it the arrow keys and the swipe as well.
+============================================================== */
+
+/* 1 - the rows follow the hand ------------------------------- */
+.media-grid.mrail,.yrail,.cd-extra-list,.nav-links{
+  scroll-behavior:auto;scroll-snap-type:none;overscroll-behavior-y:auto}
+@media (hover:none),(pointer:coarse){
+  .media-grid.mrail,.yrail,.cd-extra-list{scroll-snap-type:x proximity}
+}
+
+/* 2 - three rows of covers, and firmer ground ---------------- */
+.reading{padding-bottom:132px}
+.reading::before{height:clamp(230px,32vw,344px);opacity:.4;
+  filter:saturate(.9) contrast(.95);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 62%,rgba(0,0,0,.7) 80%,rgba(0,0,0,.24) 93%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0,#000 62%,rgba(0,0,0,.7) 80%,rgba(0,0,0,.24) 93%,transparent 100%)}
+.reading:has(.ypanel:not([hidden])){padding-bottom:0}
+.reading:has(.ypanel:not([hidden]))::before{height:clamp(200px,24vw,252px);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 64%,rgba(0,0,0,.5) 86%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0,#000 64%,rgba(0,0,0,.5) 86%,transparent 100%)}
+@media (max-width:640px){
+  .reading{padding-bottom:96px}
+  .reading::before{height:clamp(200px,52vw,280px);border-radius:12px}
+  .reading:has(.ypanel:not([hidden])){padding-bottom:0}
+  .reading:has(.ypanel:not([hidden]))::before{height:clamp(180px,44vw,240px)}
+}
+@media (prefers-contrast:more){.reading::before{opacity:.16}}
+
+/* 3 - an arrow on either side of the open picture ------------ */
+.pixbox-arrow{position:absolute;top:50%;transform:translateY(-50%);
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(7,16,29,.72);border:1px solid rgba(255,255,255,.28);
+  color:var(--muted);font:inherit;cursor:pointer;display:grid;place-items:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.35);z-index:2;
+  transition:border-color .3s ease,color .3s ease,transform .3s ease}
+.pixbox-arrow svg{width:15px;height:15px;fill:none;stroke:currentColor;
+  stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pixbox-arrow:hover{border-color:var(--accent);color:var(--accent)}
+.pixbox-prev{left:14px}
+.pixbox-next{right:14px}
+.pixbox-arrow[hidden]{display:none}
+.pixbox-count{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);
+  font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.18em;color:rgba(216,213,208,.55);pointer-events:none}
+.pixbox-count[hidden]{display:none}
+@media (max-width:700px){
+  .pixbox-arrow{width:44px;height:44px}
+  .pixbox-prev{left:6px}
+  .pixbox-next{right:6px}
+}
+@media (prefers-reduced-motion:reduce){.pixbox-arrow{transition:none}}
