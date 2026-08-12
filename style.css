@@ -2547,3 +2547,21 @@ body.simple footer{margin-top:auto}
   .cd.is-js .cd-item .cd-rank,
   .cd.is-js .cd-item.is-current ~ .cd-item .cd-rank{transform:none}
 }
+
+
+/* ============================================================
+   v25 - the five marks on the same left rule as everything above
+   ============================================================ */
+/* The row used to be pulled left of the column so that the first circle
+   would sit under the H of Hannes; the pull made the whole row hang out
+   past the eyebrow, the name, the line of text and the three buttons. It
+   is dropped here. Each mark now stands in a hundred-pixel column of its
+   own with its word set flush beneath it, so the first circle begins on
+   the same rule as Get in touch, the gaps between them are equal, and the
+   last one stops just inside the Download CV button. */
+@media (min-width:901px){
+  .hero-social{width:auto;max-width:none;margin-left:0;
+    gap:0;flex-wrap:nowrap;justify-content:flex-start}
+  .hero-social .pill{flex:0 0 100px;align-items:flex-start}
+  .hero-social .pill-label{text-align:left;letter-spacing:.085em}
+}
