@@ -2624,3 +2624,20 @@ body.simple footer{margin-top:auto}
   .cd-extra-list li:hover,
   .cd-extra-list li:focus-within{transform:none}
 }
+
+
+/* ----------------------------------------------------------------
+   v27 - air above the shelf, and the card just read leaves left
+   Two corrections to the block above. The list of cards was clipped
+   to its own four edges, which cut the top off any honorable mention
+   that rose under the cursor; it is now clipped left and right only,
+   with a hand&rsquo;s breadth of air above and below. And in the year
+   panels on the home page the card just read still drifted to the
+   right as it left, against the sense of the sliding door; it now
+   goes out to the left, the way it already did on the year pages.
+   ---------------------------------------------------------------- */
+.cd.is-js .cd-list{overflow:visible;clip-path:inset(-44px 0 -8px 0)}
+.cd.is-js .cd-item.is-done{transform:translateX(-13%)}
+@media (prefers-reduced-motion:reduce){
+  .cd.is-js .cd-item.is-done{transform:none}
+}
