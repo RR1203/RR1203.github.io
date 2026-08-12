@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b182a">
   <title>Hannes Meilicke | Physician &amp; Psychiatric Researcher</title>
   <meta name="description" content="Hannes Meilicke - physician and research fellow in the Department of Psychiatry and Psychology at the XXX, working on childhood adversity, stress responsivity, depression and translational neuroscience.">
   <meta property="og:title" content="Hannes Meilicke | Physician &amp; Psychiatric Researcher">
@@ -24,12 +25,17 @@
 </head>
 <body>
 
+  <!-- The first thing a keyboard finds: a way straight past the
+       navigation and into the words. It stays out of sight until
+       it is tabbed to. -->
+  <a class="skip-to" href="#main">Skip to the content</a>
+
   <!-- The chapter wash. One backdrop, pinned to the window, that fades to
        a new shade whenever a new chapter of the page reaches the middle of
        the screen. The shades live in style.css under .chapter-wash. -->
   <div class="chapter-wash" aria-hidden="true"></div>
 
-  <nav class="topnav">
+  <nav class="topnav" aria-label="Main">
 
     <!-- Reading progress: fills as the visitor moves down the page -->
     <div class="scroll-progress"><i></i></div>
@@ -110,7 +116,7 @@
 
 </header>
 
-  <main>
+  <main id="main">
 
     <section id="about" class="reveal reveal-soft">
       <h2>About</h2>
@@ -1076,9 +1082,9 @@
       <p class="contact-lede">Questions and collaborations are welcome.</p>
 
       <form id="message-form" class="message-form" action="https://formsubmit.co/ajax/hannes.meilicke@gmail.com" method="POST">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="subject" placeholder="Subject">
-        <textarea name="message" placeholder="Message" rows="6" required></textarea>
+        <input type="email" name="email" placeholder="Email" aria-label="Your email address" autocomplete="email" required>
+        <input type="text" name="subject" placeholder="Subject" aria-label="Subject">
+        <textarea name="message" placeholder="Message" aria-label="Your message" rows="6" required></textarea>
         <input type="hidden" name="_subject" value="New message from hannes-meilicke.com">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
@@ -1800,6 +1806,31 @@
   window.addEventListener("resize", queue);
 }());
 </script>
+
+  <!-- Sideways rows and the downward wheel.
+       A row that scrolls sideways is, as far as the browser is
+       concerned, a box with scrollbars of its own, and it will
+       swallow a downward turn of the wheel rather than pass it on.
+       The page then seems to seize up wherever the pointer happens
+       to be resting. So catch the wheel: if the turn was mostly
+       vertical and the row has no vertical travel of its own to
+       give, hand it back to the page. -->
+  <script>
+  (function () {
+    var rails = document.querySelectorAll(".media-grid.mrail, .yrail, .cd-extra-list");
+    if (!rails.length) { return; }
+    function pass(e) {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) { return; }
+      if (this.scrollHeight - this.clientHeight > 2) { return; }
+      var unit = e.deltaMode === 1 ? 16 : (e.deltaMode === 2 ? window.innerHeight : 1);
+      e.preventDefault();
+      window.scrollBy(0, e.deltaY * unit);
+    }
+    for (var i = 0; i < rails.length; i++) {
+      rails[i].addEventListener("wheel", pass, { passive: false });
+    }
+  }());
+  </script>
 
 </body>
 </html>
