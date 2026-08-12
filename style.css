@@ -2565,3 +2565,61 @@ body.simple footer{margin-top:auto}
   .hero-social .pill{flex:0 0 100px;align-items:flex-start}
   .hero-social .pill-label{text-align:left;letter-spacing:.085em}
 }
+
+
+/* ----------------------------------------------------------------
+   v26 - a shelf for the honorable mentions
+   The books that did not make the ten still deserve a spine to look
+   at. On the first card of every year they now stand in a row that
+   runs from left to right, each one behind a blank jacket of its own.
+   Rest the cursor on one and it lifts and grows a little, the way a
+   book does when you pull it half out of the shelf to read the title.
+   When the row runs past the edge of the card it simply keeps going:
+   scroll it sideways, drag it, or swipe, and the rest comes into view.
+   ---------------------------------------------------------------- */
+.cd-extra-list{display:flex;flex-wrap:nowrap;grid-template-columns:none;
+  gap:0 20px;margin:-18px -6px 0;padding:24px 6px 14px;
+  overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x proximity;scroll-padding-left:6px;
+  -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+  scrollbar-width:thin;scrollbar-color:rgba(127,208,196,.34) rgba(255,255,255,.06)}
+.ypanel .cd-extra-list{gap:0 18px}
+.cd-extra-list::-webkit-scrollbar{height:6px}
+.cd-extra-list::-webkit-scrollbar-track{background:rgba(255,255,255,.06);border-radius:99px}
+.cd-extra-list::-webkit-scrollbar-thumb{background:rgba(127,208,196,.32);border-radius:99px}
+.cd-extra-list:hover::-webkit-scrollbar-thumb{background:rgba(127,208,196,.55)}
+.cd-extra-list li{flex:0 0 94px;width:94px;margin:0;padding:0;position:relative;
+  scroll-snap-align:start;transform-origin:50% 100%;
+  transition:transform .34s cubic-bezier(.22,.61,.36,1)}
+.cd-extra-list li::before{content:"";position:static;display:block;
+  width:100%;height:auto;aspect-ratio:2/3;margin:0 0 10px;opacity:1;
+  border-radius:4px;border:1px solid rgba(255,255,255,.10);
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2044%2034%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-opacity%3D%22.3%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M22%207.6%20C21.6%2015%2021.6%2022%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C17%205%2011%204.2%205%205.2%20C5%2012%205%2019%205%2025.8%20C11%2025.2%2017%2026.2%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C27%205%2033%204.2%2039%205.2%20C39%2012%2039%2019%2039%2025.8%20C33%2025.2%2027%2026.2%2022%2029%22%2F%3E%3C%2Fsvg%3E"),
+    linear-gradient(90deg,transparent 5px,rgba(255,255,255,.10) 5px,rgba(255,255,255,.10) 6px,transparent 6px),
+    linear-gradient(140deg,rgba(127,208,196,.13),rgba(143,182,255,.07));
+  background-repeat:no-repeat,no-repeat,no-repeat;
+  background-position:center,left top,center;
+  background-size:34px 26px,100% 100%,100% 100%;
+  box-shadow:0 8px 18px rgba(0,0,0,.26);
+  transition:border-color .34s ease,box-shadow .34s ease}
+.cd-extra-list li:hover,
+.cd-extra-list li:focus-within{transform:scale(1.09) translateY(-5px);z-index:3}
+.cd-extra-list li:hover::before,
+.cd-extra-list li:focus-within::before{border-color:rgba(127,208,196,.44);
+  box-shadow:0 16px 34px rgba(0,0,0,.44)}
+.cd-extra-list li:hover .cd-extra-book{color:#fff}
+.cd-extra-list li:hover .cd-extra-by{opacity:.95}
+.cd-extra-book{font-size:12.5px;line-height:1.32}
+.cd-extra-by{margin-top:4px;font-size:8.5px;letter-spacing:.13em}
+.ypanel .cd-extra-book{font-size:11.5px}
+.ypanel .cd-extra-list li{flex:0 0 86px;width:86px}
+@media (max-width:720px){
+  .cd-extra-list{gap:0 16px}
+  .cd-extra-list li{flex:0 0 84px;width:84px}
+}
+@media (prefers-reduced-motion:reduce){
+  .cd-extra-list li,
+  .cd-extra-list li::before{transition:none}
+  .cd-extra-list li:hover,
+  .cd-extra-list li:focus-within{transform:none}
+}
