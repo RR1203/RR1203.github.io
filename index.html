@@ -1826,26 +1826,50 @@
 }());
 </script>
 
-  <!-- Sideways rows and the downward wheel.
+  <!-- Sideways rows and the wheel that means to go down.
        A row that scrolls sideways is, as far as the browser is
        concerned, a box with scrollbars of its own, and it will
-       swallow a downward turn of the wheel rather than pass it on.
-       The page then seems to seize up wherever the pointer happens
-       to be resting. So catch the wheel: if the turn was mostly
-       vertical and the row has no vertical travel of its own to
-       give, hand it back to the page. The page itself is set to
-       scroll smoothly, which is the right manner for a link to a
-       heading and quite wrong here: handed back a notch at a time,
-       every notch would begin its own small animation and the page
-       would appear to crawl or to stick. So the smooth setting is
-       lifted for the length of one notch and put back after. -->
+       swallow a downward turn of the wheel rather than pass it on:
+       the page then seems to seize up wherever the pointer happens
+       to be resting. And a trackpad almost never gives a pure
+       direction, so a gesture meant to go down arrives with a
+       little sideways in it; a rule that judges one notch at a
+       time sends half of such a gesture to the row and half to the
+       page, and neither of them gets anywhere.
+       So the gesture is judged as a whole. The first clear notch
+       settles the direction and everything that follows within a
+       fifth of a second goes the same way - unless the sideways
+       part has died out altogether, which is exactly what happens
+       when a hand pushes a row along and then means to read on.
+       Sideways is left to the browser, which carries the row with a
+       weight and a slowing-down of its own; downward is handed to
+       the page.
+       The page is set to scroll smoothly, which is the right manner
+       for a link to a heading and quite wrong here: handed back a
+       notch at a time, every notch would begin its own small
+       animation and the page would appear to crawl or to stick. So
+       the smooth setting is lifted for the length of one notch and
+       put back after. -->
   <script>
   (function () {
     var rails = document.querySelectorAll(".media-grid.mrail, .yrail, .cd-extra-list, .nav-links");
     if (!rails.length) { return; }
+
+    var axis = null, last = 0;
+
     function pass(e) {
-      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) { return; }
+      var now = performance.now();
+      if (now - last > 200) { axis = null; }
+      last = now;
+
+      var ax = Math.abs(e.deltaX), ay = Math.abs(e.deltaY);
+      if (!axis && (ax > 1 || ay > 1)) { axis = ax > ay ? "x" : "y"; }
+      /* The sideways part of the gesture has died out: what is left
+         of it is meant for the page. */
+      if (axis === "x" && ax < 1 && ay > 2) { axis = "y"; }
+      if (axis === "x" || !ay) { return; }
       if (this.scrollHeight - this.clientHeight > 2) { return; }
+
       var unit = e.deltaMode === 1 ? 16 : (e.deltaMode === 2 ? window.innerHeight : 1);
       var root = document.documentElement;
       var was = root.style.scrollBehavior;
@@ -1854,13 +1878,15 @@
       window.scrollBy(0, e.deltaY * unit);
       root.style.scrollBehavior = was;
     }
+
     for (var i = 0; i < rails.length; i++) {
       rails[i].addEventListener("wheel", pass, { passive: false });
     }
   }());
   </script>
 
-  <!-- A picture in the CV, and the finger that has no hover.
+  <!-- A picture in the CV, the finger that has no hover, and the
+       neighbours on either side.
        On a desktop a picture in the CV grows under the pointer. A
        telephone has no pointer to grow under, so the first tap left a
        picture standing open at half its growth until something else
@@ -1869,7 +1895,17 @@
        zoom-in cursor always promised: the picture opens at full size
        over the page. A mouse may click for the same thing. The cross,
        Escape, or a click beside the picture puts it away again, and a
-       frame still waiting for its file opens nothing at all. -->
+       frame still waiting for its file opens nothing at all.
+
+       A picture opened this way is no longer alone: it knows the other
+       pictures of its own entry in the CV, the ones that carry a file,
+       and it can be exchanged for them without shutting the sheet.
+       An arrow on either side, the left and right arrow keys, a swipe
+       across the glass, a left click on the picture for the next one
+       and a right click for the one before. The set runs round, so
+       the last picture is followed by the first, and a count in the
+       bottom corner says where in the row one is standing. Where an
+       entry has only one picture none of this appears. -->
   <script>
   (function () {
     var pix = document.querySelectorAll(".cv-pix .pix");
@@ -1887,19 +1923,74 @@
     cross.className = "pixbox-x";
     cross.setAttribute("aria-label", "Close the picture");
     cross.textContent = "\u2715";
-    box.appendChild(shown);
-    box.appendChild(cross);
-    var opener = null;
 
-    function open(pic, from) {
+    function arrow(side, label, line) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "pixbox-arrow pixbox-" + side;
+      b.setAttribute("aria-label", label);
+      b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + line + '"/><\/svg>';
+      b.hidden = true;
+      return b;
+    }
+    var back = arrow("prev", "The picture before", "M15 4 L7 12 L15 20");
+    var on = arrow("next", "The next picture", "M9 4 L17 12 L9 20");
+    var tally = document.createElement("p");
+    tally.className = "pixbox-count";
+    tally.hidden = true;
+
+    box.appendChild(shown);
+    box.appendChild(back);
+    box.appendChild(on);
+    box.appendChild(tally);
+    box.appendChild(cross);
+
+    var opener = null, set = [], at = -1, swiped = 0;
+
+    /* The pictures of one entry in the CV are a set: those standing in
+       the same row that really have a file behind them. */
+    function setOf(frame) {
+      var row = frame.closest ? frame.closest(".cv-pix") : frame.parentNode;
+      var all = row ? row.querySelectorAll(".pix") : [frame];
+      var out = [];
+      for (var i = 0; i < all.length; i++) {
+        var img = all[i].querySelector("img");
+        if (img && img.naturalWidth) { out.push(all[i]); }
+      }
+      return out.length ? out : [frame];
+    }
+
+    function show(i) {
+      var frame = set[i];
+      if (!frame) { return; }
+      var pic = frame.querySelector("img");
+      if (!pic) { return; }
+      at = i;
+      opener = frame;
       shown.src = pic.getAttribute("src");
       shown.alt = pic.getAttribute("alt") || "";
-      /* The sheet is told the shape of the picture, so that the picture can
-         grow into the height it is offered without being pulled out of
-         shape. */
+      /* The sheet is told the shape of the picture, so that the picture
+         can grow into the height it is offered without being pulled out
+         of shape. */
       var wide = pic.naturalWidth, high = pic.naturalHeight;
       box.style.setProperty("--pixar", String((wide && high) ? (wide / high) : 1.5));
-      opener = from;
+      var several = set.length > 1;
+      back.hidden = !several;
+      on.hidden = !several;
+      tally.hidden = !several;
+      tally.textContent = several ? (i + 1) + " / " + set.length : "";
+    }
+
+    /* The row runs round: after the last picture comes the first. */
+    function step(d) {
+      if (set.length < 2) { return; }
+      show((at + d + set.length) % set.length);
+    }
+
+    function open(frame) {
+      set = setOf(frame);
+      var i = set.indexOf(frame);
+      show(i < 0 ? 0 : i);
       box.classList.add("is-open");
       document.addEventListener("keydown", key);
       cross.focus();
@@ -1910,17 +2001,52 @@
       box.classList.remove("is-open");
       document.removeEventListener("keydown", key);
       if (opener && opener.focus) { opener.focus(); }
-      opener = null;
+      opener = null; set = []; at = -1;
     }
 
     function key(e) {
-      if (e.key === "Escape" || e.keyCode === 27) { close(); }
+      if (e.key === "Escape" || e.keyCode === 27) { close(); return; }
+      if (e.key === "ArrowRight" || e.keyCode === 39) { e.preventDefault(); step(1); return; }
+      if (e.key === "ArrowLeft" || e.keyCode === 37) { e.preventDefault(); step(-1); }
     }
 
     /* A click beside the picture closes it; a click on the picture
-       itself does not, or nobody could look at it twice. */
+       itself hands over to the next one, and the right button to the
+       one before. */
     box.addEventListener("click", close);
-    shown.addEventListener("click", function (e) { e.stopPropagation(); });
+    back.addEventListener("click", function (e) { e.stopPropagation(); step(-1); });
+    on.addEventListener("click", function (e) { e.stopPropagation(); step(1); });
+    shown.addEventListener("click", function (e) {
+      e.stopPropagation();
+      /* A swipe ends in a click as well; the swipe has already been
+         answered, so this one is let go. */
+      if (Date.now() - swiped < 500) { return; }
+      step(1);
+    });
+    box.addEventListener("contextmenu", function (e) {
+      if (set.length < 2) { return; }
+      e.preventDefault();
+      step(-1);
+    });
+
+    /* And across the glass with one finger. */
+    var fx = 0, fy = 0, ft = 0, following = false;
+    box.addEventListener("touchstart", function (e) {
+      following = e.touches.length === 1;
+      if (!following) { return; }
+      fx = e.touches[0].clientX; fy = e.touches[0].clientY; ft = Date.now();
+    }, { passive: true });
+    box.addEventListener("touchend", function (e) {
+      if (!following) { return; }
+      following = false;
+      var t = e.changedTouches[0];
+      if (!t || Date.now() - ft > 700) { return; }
+      var dx = t.clientX - fx, dy = t.clientY - fy;
+      if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy) * 1.4) { return; }
+      swiped = Date.now();
+      step(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
     document.body.appendChild(box);
 
     for (var i = 0; i < pix.length; i++) {
@@ -1939,12 +2065,12 @@
         else { pic.addEventListener("load", ready); }
         p.addEventListener("click", function () {
           if (!pic.naturalWidth) { return; }
-          open(pic, p);
+          open(p);
         });
         p.addEventListener("keydown", function (e) {
           if (e.key === "Enter" || e.key === " " || e.keyCode === 13 || e.keyCode === 32) {
             e.preventDefault();
-            if (pic.naturalWidth) { open(pic, p); }
+            if (pic.naturalWidth) { open(p); }
           }
         });
       }(pix[i]));
