@@ -289,6 +289,11 @@ def main() -> int:
     fig4(yrage)
     tables(yr, summary)
     suppression_table()
+    (TAB.parent / "README.md").write_text(
+        "# outputs/ — figures and tables\n\n"
+        "Produced by `scripts/05_outputs.py` from `data/*.csv` and\n"
+        "`analysis/results_summary.json`. Every figure/table has a `.caption.txt`\n"
+        "naming the producing script and its input files.\n")
     return 0
 
 

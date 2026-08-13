@@ -180,6 +180,14 @@ def main() -> int:
     with (OUT / "results_summary.json").open("w") as fh:
         json.dump(summary, fh, indent=1, sort_keys=True, default=str)
     log.info("wrote analysis/results_summary.json with %d entries", len(summary))
+    (OUT / "README.md").write_text(
+        "# analysis/ — saved model outputs\n\n"
+        "One complete model-output text file per pre-registered analysis (H1-H3, S1-S4,\n"
+        "descriptives) plus `results_summary.json`, all produced by\n"
+        "`scripts/04_analysis.py` from `data/*.csv` (which derive solely from `raw/`).\n"
+        "Rule enforced by `scripts/07_check_claims.py`: no number may appear in the\n"
+        "manuscript that is not present in a saved output file here. Exploratory work\n"
+        "(none pre-registered) would live under `exploratory/`.\n")
     return 0
 
 

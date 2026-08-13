@@ -147,6 +147,13 @@ def main() -> int:
             failures += 1
     write_shasums()
     log.info("fetch pass complete: %d/%d queries ok", len(plan) - failures, len(plan))
+    if failures == 0:
+        (RAW / "README.md").write_text(
+            "# raw/ — append-only archive of CDC WONDER requests and responses\n\n"
+            "Complete: every query in the pre-registered plan has a successful response.\n"
+            "`queries/qNN.xml` = exact request; `responses/qNN.xml` = untouched response;\n"
+            "`manifest.csv` = index; `SHA256SUMS` = checksums. Append-only: successful\n"
+            "queries are never re-posted or overwritten.\n")
     return 0 if failures == 0 else 1
 
 
