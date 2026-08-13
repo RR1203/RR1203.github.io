@@ -4,9 +4,9 @@ Overall state: **RUNNING**
 
 | Step | Description | State | Timestamp (UTC) |
 |------|-------------|-------|-----------------|
-| 00a  | Environment setup | running | 2026-08-13T05:47Z |
-| 00   | Protocol (pre-registration) | pending | |
-| 01   | Fetch (CDC WONDER API) | pending | |
+| 00a  | Environment setup | done | 2026-08-13T05:52Z |
+| 00   | Protocol (pre-registration) | done | 2026-08-13T05:58Z |
+| 01   | Fetch (CDC WONDER API) | running | 2026-08-13T05:58Z |
 | 02   | Clean | pending | |
 | 03   | QC | pending | |
 | 04   | Analysis | pending | |
