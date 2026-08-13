@@ -1715,8 +1715,10 @@
     cd.classList.add("is-js");
 
     /* One step takes its time. While a book is still moving in, the
-       next press is ignored, so the ten cannot be flicked through in
-       a second and nothing slips past unread. */
+       next press is ignored, so nothing slips past unread. The bar is
+       set low enough that a reader who presses Next four times in a
+       row gets four books and not two: it is there to keep the run
+       honest, not to hold anyone up. */
     var busy = false;
     var step = function (n) {
       if (busy || n === at || n < 0 || n > items.length - 1) { return; }
@@ -1730,7 +1732,7 @@
       window.setTimeout(function () {
         busy = false;
         cd.classList.remove("is-busy");
-      }, back ? 170 : 190);
+      }, back ? 110 : 120);
     };
 
     if (prev) { prev.addEventListener("click", function () { step(at - 1); }); }
@@ -1744,21 +1746,45 @@
       t.addEventListener("click", function (e) { e.stopPropagation(); step(k); });
     });
 
-    /* The book itself is the step forward. */
+    /* A row that scrolls sideways belongs to itself. The honorable
+       mentions are a shelf: a finger pushed along it is reading the
+       shelf, not asking for the next card, and it must never be
+       taken for a press. */
+    var onShelf = function (t) {
+      return !!(t && t.closest && t.closest(".cd-extra-list"));
+    };
+
+    /* The book itself is the step forward - but only if the finger
+       stayed where it was put. Anything that travelled was a scroll
+       or a swipe, and a scroll is not a press. */
     var stage = cd.querySelector(".cd-stage");
     if (stage) {
+      var px = 0, py = 0, drift = 0;
+      stage.addEventListener("pointerdown", function (e) {
+        px = e.clientX; py = e.clientY; drift = 0;
+      }, { passive: true });
+      stage.addEventListener("pointermove", function (e) {
+        var d = Math.abs(e.clientX - px) + Math.abs(e.clientY - py);
+        if (d > drift) { drift = d; }
+      }, { passive: true });
       stage.addEventListener("click", function (e) {
         /* The second half of a double click must not count twice. */
         if (e.detail > 1) { return; }
+        if (drift > 10) { drift = 0; return; }
+        if (onShelf(e.target)) { return; }
         step(at + 1);
       });
     }
-    var x0 = null, y0 = null;
-    cd.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    var x0 = null, y0 = null, shelved = false;
+    cd.addEventListener("touchstart", function (e) {
+      x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+      shelved = onShelf(e.target);
+    }, { passive: true });
     cd.addEventListener("touchend", function (e) {
       if (x0 === null) { return; }
       var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
       x0 = null;
+      if (shelved) { shelved = false; return; }
       if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy)) { step(dx < 0 ? at + 1 : at - 1); }
     });
     draw(0);
@@ -1823,6 +1849,61 @@
 }());
 
 </script>
+<script>
+/* ---------------------------------------------------------
+   Two arrows at the edges of a book card.
+   The pair of round buttons under the card is a long way from
+   the book on a phone, and nothing on the card said that it
+   could be swiped. So a chevron is set into either margin of
+   the stage, level with the numeral and the jacket. They are
+   not a second mechanism: each one presses the round button it
+   belongs to, and goes pale exactly when that button does. The
+   stylesheet only shows them on a narrow screen; on the wide
+   page the round buttons are where they always were.
+   --------------------------------------------------------- */
+(function () {
+  var boxes = document.querySelectorAll("[data-cd]");
+  if (!boxes.length) { return; }
+  Array.prototype.forEach.call(boxes, function (cd) {
+    var stage = cd.querySelector(".cd-stage");
+    var prev = cd.querySelector("[data-cd-step='-1']");
+    var next = cd.querySelector("[data-cd-step='1']");
+    if (!stage || !prev || !next || cd.querySelector(".cd-edge")) { return; }
+
+    var add = function (real, side, label, points) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "cd-edge cd-edge-" + side;
+      b.setAttribute("aria-label", label);
+      b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="'
+        + points + '"/></svg>';
+      /* The press stops here: the card underneath must not read it
+         as a tap on the book itself and step twice. */
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (!real.disabled) { real.click(); }
+      });
+      stage.appendChild(b);
+      return b;
+    };
+
+    var left = add(prev, "prev", "Previous book", "15,5 8,12 15,19");
+    var right = add(next, "next", "Next book", "9,5 16,12 9,19");
+
+    var sync = function () {
+      left.disabled = prev.disabled;
+      right.disabled = next.disabled;
+    };
+    sync();
+    if (window.MutationObserver) {
+      var watch = new MutationObserver(sync);
+      watch.observe(prev, { attributes: true, attributeFilter: ["disabled"] });
+      watch.observe(next, { attributes: true, attributeFilter: ["disabled"] });
+    }
+  });
+}());
+</script>
+
 
 <script>
 /* A fold answers every click at once, however fast the clicks come:

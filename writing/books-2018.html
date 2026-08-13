@@ -307,12 +307,19 @@
       if(e.key==="ArrowRight"){show(i+1,true);}
       else if(e.key==="ArrowLeft"){show(i-1,true);}
     });
-    var x0=null,y0=null;
-    cd.addEventListener("touchstart",function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
+    /* The honorable mentions are a shelf that runs sideways. A finger
+       pushed along it is reading the shelf, not asking for the next
+       card, so a swipe that begins there is left to the shelf. */
+    var x0=null,y0=null,shelved=false;
+    cd.addEventListener("touchstart",function(e){
+      x0=e.touches[0].clientX;y0=e.touches[0].clientY;
+      shelved=!!(e.target&&e.target.closest&&e.target.closest(".cd-extra-list"));
+    },{passive:true});
     cd.addEventListener("touchend",function(e){
       if(x0===null){return;}
       var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
       x0=null;
+      if(shelved){shelved=false;return;}
       if(Math.abs(dx)>46&&Math.abs(dx)>Math.abs(dy)){show(dx<0?i+1:i-1,true);}
     });
     var m=/^#no-([0-9]+)$/.exec(location.hash||"");
@@ -322,6 +329,61 @@
   });
 })();
 </script>
+<script>
+/* ---------------------------------------------------------
+   Two arrows at the edges of a book card.
+   The pair of round buttons under the card is a long way from
+   the book on a phone, and nothing on the card said that it
+   could be swiped. So a chevron is set into either margin of
+   the stage, level with the numeral and the jacket. They are
+   not a second mechanism: each one presses the round button it
+   belongs to, and goes pale exactly when that button does. The
+   stylesheet only shows them on a narrow screen; on the wide
+   page the round buttons are where they always were.
+   --------------------------------------------------------- */
+(function () {
+  var boxes = document.querySelectorAll("[data-cd]");
+  if (!boxes.length) { return; }
+  Array.prototype.forEach.call(boxes, function (cd) {
+    var stage = cd.querySelector(".cd-stage");
+    var prev = cd.querySelector("[data-cd-step='-1']");
+    var next = cd.querySelector("[data-cd-step='1']");
+    if (!stage || !prev || !next || cd.querySelector(".cd-edge")) { return; }
+
+    var add = function (real, side, label, points) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "cd-edge cd-edge-" + side;
+      b.setAttribute("aria-label", label);
+      b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="'
+        + points + '"/></svg>';
+      /* The press stops here: the card underneath must not read it
+         as a tap on the book itself and step twice. */
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (!real.disabled) { real.click(); }
+      });
+      stage.appendChild(b);
+      return b;
+    };
+
+    var left = add(prev, "prev", "Previous book", "15,5 8,12 15,19");
+    var right = add(next, "next", "Next book", "9,5 16,12 9,19");
+
+    var sync = function () {
+      left.disabled = prev.disabled;
+      right.disabled = next.disabled;
+    };
+    sync();
+    if (window.MutationObserver) {
+      var watch = new MutationObserver(sync);
+      watch.observe(prev, { attributes: true, attributeFilter: ["disabled"] });
+      watch.observe(next, { attributes: true, attributeFilter: ["disabled"] });
+    }
+  });
+}());
+</script>
+
 <!-- Sideways rows and the downward wheel. A row that scrolls
      sideways is, as far as the browser is concerned, a box with
      scrollbars of its own, and it swallows a downward turn of the

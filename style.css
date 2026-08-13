@@ -3555,3 +3555,398 @@ html[data-theme="light"] .flag{opacity:1}
 html[data-theme="light"] .simple-main h1,
 html[data-theme="light"] .piece h1,
 html[data-theme="light"] .legal h1{color:var(--text)}
+
+
+/* ______________________________________________________________
+   Note to self, v42 - the page in the hand, and daylight with a
+   pulse in it
+
+   Everything below answers one of two complaints, and nothing
+   below touches the wide page except where it is said to.
+
+   The phone first. A quick second press on Next was read as a
+   double tap and the whole page jumped to twice its size. A push
+   sideways through the honorable mentions was read as a press, so
+   the shelf was gone before it had been looked at. A step from one
+   book to the next travelled sideways and dragged the page with
+   it, when all that was wanted was for the next book to be there.
+   The heroes fell into ragged lines, a name here, a discipline
+   half a line below it, a face adrift. The card itself was long,
+   the numeral fought the jacket, and the two round buttons sat far
+   below the book they turned. And the page had a hand's breadth of
+   slack to the left and the right with nothing in it to find.
+
+   Then daylight. The light page was made by turning the dark one
+   over, and a turned-over page carries its old shadows with it:
+   the year numerals still wore the black halo that had been drawn
+   to lift them off navy, and a good deal of the small type was set
+   at an opacity that reads on black and vanishes on cream. The
+   ground is brought up, the teal is given some blood, every
+   chapter gets a colour one can actually name, and the faint type
+   is made to stand.
+   __________________________________________________________ */
+
+
+/* ---- 1. guardrails: the page holds its own width ---------------
+   There is nothing to be seen outside the left and right edges, so
+   nothing outside them may be reached. overflow-x:clip rather than
+   hidden: clip is not a scroll box, so the header still sticks and
+   the page still scrolls the way it always did. Every row that
+   does run sideways keeps its swipe to itself, so a finger that
+   runs out of a row does not go on to move the page under it. */
+html,body{overflow-x:clip}
+@supports not (overflow:clip){html,body{overflow-x:hidden}}
+html,body{overscroll-behavior-x:none}
+.media-grid.mrail,.yrail,.cd-extra-list,.nav-links{overscroll-behavior-x:contain}
+
+
+/* ---- 2. a second press is a second press ----------------------
+   Waiting to see whether a tap is the first half of a double tap
+   is what put the zoom on the end of a quick Next, and it is what
+   made every press feel a beat late. Anything one presses says so
+   here. The page as a whole keeps its pinch, so nothing is taken
+   away from a reader who needs to enlarge it. */
+a,button,summary,label,
+.cd-stage,.ychip,.hb-item,.media-card,.cv-pix .pix,
+.cd-ticks button,.theme-toggle{touch-action:manipulation}
+
+
+/* ---- 3. the countdown on a phone ------------------------------
+   Below seven hundred pixels the book no longer travels: it simply
+   arrives. Nothing moves sideways, so nothing can push the page
+   sideways with it, and the eye stays on the one place where the
+   new book appears. */
+@media (max-width:700px){
+  .cd.is-js .cd-item,
+  .cd.is-js .cd-item.is-done,
+  .cd.is-js .cd-item.is-ahead,
+  .cd.is-js.is-back .cd-item,
+  .cd.is-js .cd-item .cd-rank{transform:none!important}
+  .cd.is-js .cd-item{
+    transition:opacity .16s ease-out,visibility 0s linear .16s}
+  .cd.is-js .cd-item.is-current{
+    transition:opacity .2s ease-in,visibility 0s linear 0s}
+  .cd.is-js .cd-list{clip-path:none;position:relative}
+  /* Every card used to stand in the same grid cell, so the box kept
+     the height of the tallest of the twelve and a short book sat at
+     the top of a hand's length of nothing. On a phone only the card
+     being read holds the box open; the other eleven are lifted out
+     of the flow and lie over it while they fade. The box is then as
+     tall as the book in it and no taller. */
+  .cd.is-js .cd-item{position:absolute;top:0;left:0;right:0}
+  .cd.is-js .cd-item.is-current{position:relative}
+
+  /* The card, gathered up. The numeral and the jacket share the top
+     line - the figure standing on the same rule as the foot of the
+     book beside it - and the words run the full width underneath, so
+     that number, cover, title, author and text are all in the hand
+     at once. A margin is kept clear down either side; the two arrows
+     live in it. */
+  .cd{position:relative}
+  .cd-stage{padding:20px 40px 0;border-top-width:1px}
+  .cd-item{
+    grid-template-columns:minmax(0,1fr) 82px;
+    grid-template-areas:"rank cover" "body body";
+    gap:0 14px;align-items:start;align-content:start}
+  .cd-rank{grid-area:rank;align-self:end;padding-bottom:2px}
+  .cd-cover{grid-area:cover;width:82px;max-width:82px;justify-self:end}
+  .ypanel .cd-cover{max-width:82px}
+  .cd-body{grid-area:body;padding-top:15px}
+  .cd-item.cd-extra{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"rank" "body"}
+  .cd-extra .cd-body{padding-top:10px}
+  /* The shelf keeps inside the margin the arrows were given, and its
+     spines come down to a size at which two of them and the edge of a
+     third are in view: one push of the thumb then buys a pair of
+     books rather than one and a half. */
+  .cd-extra-list,.ypanel .cd-extra-list{margin-left:0;margin-right:0;
+    padding-left:0;padding-right:0;scroll-padding-left:0;gap:0 14px}
+  .cd-extra-list li,.ypanel .cd-extra-list li{flex:0 0 102px;width:102px}
+
+  .cd-no{margin-bottom:2px;font-size:10px;letter-spacing:.26em}
+  .cd-num,.ypanel .cd-num{font-size:60px;line-height:.9}
+  .cd-num-band,.ypanel .cd-num-band{font-size:38px}
+  .cd-num-word,.ypanel .cd-num-word{font-size:19px}
+  .cd-title,.ypanel .cd-title{font-size:21px;line-height:1.26}
+  .cd-author{margin-top:7px;font-size:11px;letter-spacing:.16em}
+  .cd-take{margin-top:13px;font-size:15.5px;line-height:1.68}
+
+  /* A crown drawn for a hundred-and-eight-pixel jacket does not fit
+     an eighty-two-pixel one, and the flourish under the first and the
+     third came down on the title. The marks are brought in to the
+     smaller frame, and those two books are given the room the mark
+     needs underneath them. */
+  .cd-item[data-rank="1"] .cd-cover::before{width:44px;height:20px;top:-21px}
+  .cd-item[data-rank="1"] .cd-cover::after,
+  .cd-item[data-rank="3"] .cd-cover::after{height:19px;margin-top:4px}
+  .cd-item[data-rank="1"] .cd-body,
+  .cd-item[data-rank="3"] .cd-body{padding-top:34px}
+  .cd-item[data-rank="2"] .cd-cover::after{left:-9px;right:-9px}
+
+  /* The foot loses its pair of buttons - they have gone to the
+     sides of the card, where the thumb already is - and keeps only
+     the read-out of how far through the year one has come. */
+  .cd-foot{margin-top:24px;padding-top:14px;align-items:center;gap:0}
+  .cd-foot .cd-nav{display:none}
+  .cd-ticks{justify-content:center;width:100%}
+}
+/* On the narrowest screens the margin for the arrows is taking room
+   the title needs, so both give a little. */
+@media (max-width:380px){
+  .cd-stage{padding-left:31px;padding-right:31px}
+  .cd-item{grid-template-columns:minmax(0,1fr) 74px;gap:0 12px}
+  .cd-cover,.ypanel .cd-cover{width:74px;max-width:74px}
+  .cd-num,.ypanel .cd-num{font-size:54px}
+  .cd-title,.ypanel .cd-title{font-size:20px}
+  .cd-edge{width:29px}
+  .cd-edge svg{width:17px;height:17px}
+}
+
+/* The two arrows at the edges of the card. index.html and the year
+   pages put them there once the countdown is running, so a page
+   without script never shows an arrow that would do nothing. They
+   sit in the margin the card was given for them, high enough to be
+   beside the numeral and the jacket rather than halfway down a long
+   shelf, and they say without a word that this box answers a swipe
+   as well as a press. */
+.cd-edge{position:absolute;top:min(50%,124px);z-index:4;
+  width:34px;height:56px;padding:0;margin:0;
+  transform:translateY(-50%);
+  display:none;place-items:center;
+  border:0;border-radius:9px;background:transparent;
+  color:var(--accent);cursor:pointer;font:inherit;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  transition:opacity .25s ease,color .25s ease}
+.cd-edge svg{width:19px;height:19px;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 1px 3px rgba(var(--bgc),.92))}
+.cd-edge-prev{left:1px}
+.cd-edge-next{right:1px}
+.cd-edge:disabled{opacity:.16;cursor:default}
+.cd-edge:not(:disabled):active{color:var(--accent-strong)}
+.cd-edge:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+@media (max-width:700px){
+  .cd.is-js .cd-stage{position:relative}
+  .cd.is-js .cd-edge{display:grid}
+}
+
+
+/* ---- 4. the heroes on a phone ---------------------------------
+   On the wide page a hero is one line: face, name, discipline, and
+   what they are known for, reading straight across. On a phone that
+   line had nowhere to go and broke wherever it ran out, so the
+   gloss started back at the left margin under the face and the
+   whole column went ragged. Here the four parts are given a shape
+   of their own: the face holds the left, and everything else -
+   name, discipline, gloss, and the note underneath - hangs from one
+   rule beside it. Nothing about the wide page changes.
+
+   One thing had been wrong wherever the face stood in the line
+   rather than out to the left of it: the frame was set to static, so
+   the two initials drawn inside a frame with no photograph in it
+   were measured against the whole row instead of against the frame,
+   and landed in the middle of the discipline. The frame keeps its
+   place in the flow and takes its position back. */
+@media (hover:none),(pointer:coarse),(max-width:1120px){
+  .ih-face{position:relative;top:auto;right:auto;bottom:auto;left:auto}
+}
+@media (max-width:760px){
+  .heroes>li{padding:15px 0;gap:0}
+  .ih-line{display:grid;
+    grid-template-columns:46px minmax(0,1fr);
+    grid-template-areas:"face name" "face role" "face for";
+    align-items:start;column-gap:14px;row-gap:3px}
+  .ih-face{grid-area:face;align-self:start;width:46px;margin-top:3px}
+  .ih-name{grid-area:name;font-size:1.04rem;line-height:1.24}
+  .ih-role{grid-area:role;font-size:.63rem;letter-spacing:.13em;
+    line-height:1.35;opacity:.95}
+  .ih-for{grid-area:for;font-size:.78rem;line-height:1.45;opacity:.72}
+  .ih-note{margin-top:8px;padding-left:60px;font-size:.88rem}
+  #heroes-block .heroes-fold>summary{padding:15px 2px;gap:10px}
+}
+
+
+/* ---- 5. the media rail, lighter under the thumb ---------------
+   Three things were slowing it. The cards were nearly the width of
+   the screen, so a whole flick bought one card. The row fought the
+   page at both ends. And every card carried a hover - a lift, a
+   shadow, a change of colour - which on a touch screen is only a
+   repaint in the middle of a scroll. */
+@media (max-width:700px){
+  .media-grid.mrail{gap:16px;padding-bottom:14px;scroll-padding-left:2px}
+  .media-grid.mrail>.media-card{flex:0 0 72vw}
+}
+@media (max-width:380px){
+  .media-grid.mrail>.media-card{flex:0 0 78vw}
+}
+@media (hover:none){
+  .media-card,.media-card:hover{transition:none;transform:none}
+  .media-card:hover{box-shadow:none}
+  .cd-extra-list li:hover{transform:none}
+  .cd-extra-list li:hover::before{box-shadow:0 8px 18px rgba(0,0,0,.26)}
+}
+
+
+/* ---- 6. two marks that were out of step ------------------------
+   Both tones, both widths.
+
+   The count beside a category of heroes is a pill, and a pill drawn
+   round one digit is narrower than a pill drawn round two: six sat
+   in a smaller badge than twelve and ten, and the row of three read
+   as though one of them had been made by a different hand. Every
+   badge now takes the same room whatever the number in it.
+
+   And the four marks over the hobbies: the book over Reading sits
+   just above the word, because that card is a link and the mark
+   travels inside it, while the other three were pushed to the top
+   of their card by a margin set to auto. All four now stand where
+   the book stands. */
+.heroes-fold .hf-count{display:inline-flex;align-items:center;
+  justify-content:center;min-width:34px;padding:2px 8px;
+  line-height:1.45;font-variant-numeric:tabular-nums}
+.hb-grid .hb-mark{margin-bottom:0}
+
+
+/* ---- 7. daylight with a pulse in it ---------------------------
+   The ground comes up half a step towards white and loses a little
+   of its grey; the teal gains some blood; every chapter is given a
+   wash one can actually name, so that moving down the page feels
+   like moving through rooms rather than along one long corridor.
+   None of this touches the dark page. */
+html[data-theme="light"]{
+  --bgc:250,248,244;
+  --deepc:238,235,228;
+  --mutedc:65,77,97;
+  --accentc:15,125,109;
+  --navy:#faf8f4;
+  --panel:#ffffff;
+  --text:#151e2c;
+  --muted:#414d61;
+  --rule:rgba(21,30,44,.46);
+  --accent:#0f7d6d;
+  --accent-strong:#0a6357;
+  --accent-2:#4a76cf;
+  --card:rgba(21,30,44,.032);
+  --card-border:rgba(21,30,44,.17);
+  --hair:rgba(21,30,44,.19);
+  --green:#1a7548;
+  --red:#a8342d;
+}
+html[data-theme="light"] .chapter-wash,
+html[data-theme="light"] .chapter-wash[data-chapter="home"],
+html[data-theme="light"] .chapter-wash[data-chapter="contact"]{background-color:#faf8f4}
+html[data-theme="light"] .chapter-wash[data-chapter="about"]{background-color:#e8f3ef}
+html[data-theme="light"] .chapter-wash[data-chapter="writing"]{background-color:#eeecf9}
+html[data-theme="light"] .chapter-wash[data-chapter="research"]{background-color:#e4f1f2}
+html[data-theme="light"] .chapter-wash[data-chapter="cv"]{background-color:#f4efe4}
+html[data-theme="light"] .contact{
+  background:linear-gradient(180deg,#e9f1f1 0%,#faf8f4 100%)}
+
+/* ---- 8. the halo the year numerals brought with them ----------
+   On navy the heading, the years and the note under a year were
+   each given a black glow, so that they would lift off the wall of
+   covers behind them. On cream the same glow is a smudge round
+   every figure, and it is what makes the row of years look wrong.
+   Daylight gets the opposite: a little of the page itself laid
+   round the letter, which does the same work the other way up. */
+html[data-theme="light"] .reading-head,
+html[data-theme="light"] .reading .yrail-head,
+html[data-theme="light"] .reading .yc-year,
+html[data-theme="light"] .reading .yp-eyebrow,
+html[data-theme="light"] .reading .yp-note{
+  text-shadow:0 1px 2px rgba(255,255,255,.95),0 0 10px rgba(250,248,244,.8)}
+html[data-theme="light"] .ypanel .yc-year,
+html[data-theme="light"] .ypanel .yp-note{text-shadow:none}
+/* the chips stand on paper, not on the wall behind them */
+html[data-theme="light"] .ychip{
+  background:linear-gradient(168deg,rgba(255,255,255,.97),rgba(246,243,238,.95));
+  border-color:rgba(21,30,44,.18);
+  box-shadow:0 8px 20px rgba(21,30,44,.09)}
+html[data-theme="light"] .ychip:hover{
+  background:linear-gradient(168deg,#ffffff,rgba(233,244,241,.97));
+  border-color:rgba(15,125,109,.5);
+  box-shadow:0 12px 26px rgba(21,30,44,.13)}
+html[data-theme="light"] .ychip[aria-expanded="true"]{
+  background:linear-gradient(168deg,rgba(221,241,235,.98),rgba(238,248,245,.97));
+  border-color:rgba(15,125,109,.62)}
+html[data-theme="light"] .yc-year{color:var(--accent-strong)}
+html[data-theme="light"] .ychip .yc-state{color:rgba(var(--mutedc),.8)}
+/* and the wall behind them keeps out of the way of the type */
+html[data-theme="light"] .reading::before{
+  opacity:.26;filter:saturate(1.02) contrast(.98)}
+
+/* ---- 9. the big numeral, drawn once ---------------------------
+   In daylight it was carrying two instructions at the same time: a
+   grey fill from the light sheet and a teal outline from the dark
+   one, which together read as a printing fault. It is one thing
+   now - a quiet wash of the accent, and its own metal for the
+   first three. */
+html[data-theme="light"] .cd-num{
+  -webkit-text-stroke:0;color:rgba(15,125,109,.3)}
+html[data-theme="light"] .cd-item[data-rank="1"] .cd-num{
+  -webkit-text-stroke:0;color:rgba(160,120,38,.82)}
+html[data-theme="light"] .cd-item[data-rank="2"] .cd-num{
+  -webkit-text-stroke:0;color:rgba(21,30,44,.4)}
+html[data-theme="light"] .cd-item[data-rank="3"] .cd-num{
+  -webkit-text-stroke:0;color:rgba(138,92,48,.72)}
+html[data-theme="light"] .cd-edge{color:var(--accent)}
+/* The two cards that carry words in the numeral's place - the
+   honorable mentions and the band from fifteen to eleven - are
+   reading matter, not decoration, and must not be handed the wash
+   the figures get. */
+html[data-theme="light"] .cd-num-word{color:var(--accent-strong);opacity:.92}
+html[data-theme="light"] .cd-num-band{color:rgba(15,125,109,.52)}
+
+/* ---- 10. the type that was set to fade on black ---------------
+   A line at half opacity is quiet on navy and gone on cream. Each
+   of these is given back enough weight to be read, without any of
+   them becoming loud. */
+html[data-theme="light"] .affil-prev{color:rgba(var(--mutedc),.88)}
+html[data-theme="light"] .pub-note,
+html[data-theme="light"] .piece-figure figcaption,
+html[data-theme="light"] .piece-meta,
+html[data-theme="light"] .media-date{color:rgba(var(--mutedc),.9)}
+html[data-theme="light"] .cd-author,
+html[data-theme="light"] .cd-extra-by,
+html[data-theme="light"] .ih-for,
+html[data-theme="light"] .hero-social .pill-label,
+html[data-theme="light"] .theme-card p,
+html[data-theme="light"] .credo-list span,
+html[data-theme="light"] .hb-note{opacity:1;color:var(--muted)}
+html[data-theme="light"] .cd-no,
+html[data-theme="light"] .ih-role,
+html[data-theme="light"] .focus-label,
+html[data-theme="light"] .hero-eyebrow,
+html[data-theme="light"] .reading-head,
+html[data-theme="light"] .credo-list b,
+html[data-theme="light"] .yp-more a{opacity:1;color:var(--accent)}
+html[data-theme="light"] #heroes-block .ih-disclaimer{opacity:.9}
+html[data-theme="light"] .is-placeholder{opacity:.62}
+html[data-theme="light"] .cd-take.is-placeholder,
+html[data-theme="light"] .yp-note.is-placeholder,
+html[data-theme="light"] .ih-note.is-placeholder{color:var(--muted)}
+html[data-theme="light"] .heroes-fold .hf-count{
+  color:var(--accent);border-color:rgba(15,125,109,.34);
+  background:rgba(15,125,109,.06)}
+html[data-theme="light"] .cd-ticks button::before{
+  background:rgba(21,30,44,.22)}
+html[data-theme="light"] .cd-ticks button.is-on::before{background:var(--accent)}
+html[data-theme="light"] .media-grid.mrail{
+  scrollbar-color:rgba(21,30,44,.3) transparent}
+html[data-theme="light"] .media-grid.mrail::-webkit-scrollbar-thumb,
+html[data-theme="light"] .yrail::-webkit-scrollbar-thumb{
+  background:rgba(21,30,44,.26)}
+html[data-theme="light"] .cd-extra-list::-webkit-scrollbar-thumb{
+  background:rgba(15,125,109,.42)}
+/* the empty frames were drawn in white ink for a black page */
+html[data-theme="light"] .cd-extra-list li::before{
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2044%2034%22%20fill%3D%22none%22%20stroke%3D%22%23152340%22%20stroke-opacity%3D%22.34%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M22%207.6%20C21.6%2015%2021.6%2022%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C17%205%2011%204.2%205%205.2%20C5%2012%205%2019%205%2025.8%20C11%2025.2%2017%2026.2%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C27%205%2033%204.2%2039%205.2%20C39%2012%2039%2019%2039%2025.8%20C33%2025.2%2027%2026.2%2022%2029%22%2F%3E%3C%2Fsvg%3E"),
+    linear-gradient(90deg,transparent 5px,rgba(21,30,44,.12) 5px,rgba(21,30,44,.12) 6px,transparent 6px),
+    linear-gradient(140deg,rgba(15,125,109,.1),rgba(74,118,207,.06));
+  box-shadow:0 6px 14px rgba(21,30,44,.12)}
+html[data-theme="light"] .cd-jacket{
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2044%2034%22%20fill%3D%22none%22%20stroke%3D%22%23152340%22%20stroke-opacity%3D%22.34%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M22%207.6%20C21.6%2015%2021.6%2022%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C17%205%2011%204.2%205%205.2%20C5%2012%205%2019%205%2025.8%20C11%2025.2%2017%2026.2%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C27%205%2033%204.2%2039%205.2%20C39%2012%2039%2019%2039%2025.8%20C33%2025.2%2027%2026.2%2022%2029%22%2F%3E%3C%2Fsvg%3E"),
+    linear-gradient(90deg,transparent 6px,rgba(21,30,44,.12) 6px,rgba(21,30,44,.12) 7px,transparent 7px),
+    linear-gradient(140deg,rgba(15,125,109,.1),rgba(74,118,207,.06))}
+html[data-theme="light"] .cd-jacket:has(img){background-image:none}
