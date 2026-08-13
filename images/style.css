@@ -1,0 +1,3047 @@
+/* ---------------------------------------------------------
+   Personal academic site - dark editorial style
+   --------------------------------------------------------- */
+
+:root {
+  --navy: #0b182a;
+  --charcoal: #2f2e2e;
+  --charcoal-light: #3f4045;
+  --text: #ffffff;
+  --muted: #d8d5d0;
+  --rule: rgba(255, 255, 255, 0.55);
+  --green: #5fc98a;
+  --red: #ea9a94;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--navy);
+  color: var(--text);
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.65;
+}
+
+/* Navigation ---------------------------------------------- */
+
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav-inner {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav-inner a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 22px;
+  letter-spacing: 0.6px;
+}
+
+.nav-inner a:hover,
+.nav-inner a.active {
+  color: #ffffff;
+  opacity: 1;
+}
+
+/* Hero ---------------------------------------------------- */
+
+
+.hero-inner {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-photo {
+  flex: 0 1 340px;
+  max-width: 340px;
+  margin-top: 120px;
+}
+
+.hero-photo img {
+  filter: grayscale(100%);
+}
+
+.hero-text {
+  flex: 1 1 420px;
+}
+
+h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(42px, 6vw, 68px);
+  line-height: 1.05;
+  letter-spacing: 1px;
+  margin: 0 0 30px;
+}
+/* Sections ------------------------------------------------ */
+
+
+section {
+  padding: 46px 0;
+}
+
+main section + section {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  font-size: 34px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #e9e6e1;
+  margin: 0 0 14px;
+}
+
+
+p {
+  margin: 0 0 18px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.pubs {
+  padding-left: 22px;
+}
+
+.pubs li {
+  margin-bottom: 16px;
+}
+
+/* Contact and message form -------------------------------- */
+
+.contact {
+  padding: 60px 0 70px;
+}
+
+
+.message-form {
+  gap: 12px;
+  text-align: left;
+}
+
+.message-form input[type="email"],
+.message-form input[type="text"],
+.message-form textarea {
+  width: 100%;
+  background: #ffffff;
+  color: #1c1c1c;
+  border: 0;
+  border-bottom: 3px solid #d3d3d3;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.message-form textarea {
+  resize: vertical;
+}
+
+.message-form input::placeholder,
+.message-form textarea::placeholder {
+  color: #6d6d6d;
+}
+
+.message-form input:focus,
+.message-form textarea:focus {
+  outline: 0;
+  border-bottom-color: #8f98a8;
+}
+
+.message-form .honey {
+  display: none;
+}
+
+.message-form button {
+  margin: 26px auto 0;
+  background: none;
+  border: 0;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 26px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+.message-form button:hover {
+  opacity: 0.7;
+}
+
+.message-form button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+/* Status message shown after sending ---------------------- */
+
+.form-status {
+  display: none;
+  margin: 16px auto 0;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.form-status.is-visible {
+  display: block;
+}
+
+.form-status.success {
+  color: var(--green);
+}
+
+.form-status.error {
+  color: var(--red);
+}
+
+.form-status.success::before {
+  content: "✓";
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 26px;
+  line-height: 1;
+  vertical-align: -2px;
+  color: var(--green);
+}
+
+.contact .links {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+}
+
+/* Footer -------------------------------------------------- */
+
+footer {
+  background: var(--navy);
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* ---------------------------------------------------------
+   Top navigation: menu left, social buttons right
+   --------------------------------------------------------- */
+
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+/* Curriculum vitae timeline -------------------------------- */
+.cv-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 44px;
+}
+
+.cv-entry {
+  display: grid;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.cv-period {
+  text-transform: uppercase;
+}
+
+.cv-body h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+
+@media (max-width: 700px) {
+  .cv-entry {
+    grid-template-columns: 1fr;
+    padding: 24px 22px;
+  }
+}
+
+/* Spam protection checkbox --------------------------------- */
+.human-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: background .25s ease, border-color .25s ease;
+}
+
+.human-check:hover {
+  background: rgba(255, 255, 255, 0.065);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.human-check:focus-within {
+  border-color: var(--accent);
+}
+
+.human-check:has(input:checked) {
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.human-check input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.human-box {
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  transition: border-color .3s ease, background .3s ease;
+}
+
+/* the tick itself, drawn on with stroke-dashoffset (path length ~19.5) */
+.human-box svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  opacity: 0;
+}
+
+/* click -> spinner runs ~0.78s -> box lights up and dips -> tick draws in */
+.human-check input:checked + .human-box::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-top-color: var(--accent);
+  opacity: 0;
+  animation: hc-spin .55s linear infinite, hc-spin-life .78s ease forwards;
+}
+
+.human-check input:checked + .human-box {
+  animation: hc-box .45s ease .66s forwards, hc-pop .42s ease .66s;
+}
+
+.human-check input:checked + .human-box svg {
+  animation: hc-draw .46s cubic-bezier(.2, .75, .3, 1) .74s forwards;
+}
+
+@keyframes hc-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hc-spin-life {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes hc-box {
+  to { border-color: var(--accent); background: rgba(255, 255, 255, 0.07); }
+}
+
+@keyframes hc-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(.88); }
+  100% { transform: scale(1); }
+}
+
+@keyframes hc-draw {
+  0% { opacity: 1; stroke-dashoffset: 20; }
+  100% { opacity: 1; stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .human-check input:checked + .human-box::after { display: none; }
+  .human-check input:checked + .human-box { animation: none; border-color: var(--accent); }
+  .human-check input:checked + .human-box svg { animation: none; opacity: 1; stroke-dashoffset: 0; }
+}
+
+.human-label {
+  font-size: 15px;
+  letter-spacing: .02em;
+  color: var(--muted);
+  transition: color .3s ease;
+}
+
+.human-check:has(input:checked) .human-label {
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------
+   Scroll reveal (CV entries fade in and out while scrolling)
+   --------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(44px);
+  transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Profile buttons in the hero (icon + name)
+   --------------------------------------------------------- */
+
+
+.pill-icon {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill-label {
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.pill.s-scholar .pill-icon {
+  background: #4285f4;
+}
+
+.pill.s-scholar .pill-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: #ffffff;
+}
+
+.pill.s-orcid .pill-icon {
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.pill.s-orcid .pill-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: #a6ce39;
+}
+
+.pill.s-rg .pill-icon {
+  background: #00ccbb;
+}
+.pill.s-linkedin .pill-icon {
+  background: #ffffff;
+}
+
+.pill.s-linkedin .pill-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: #0a66c2;
+}
+
+.pill.s-mail .pill-icon {
+  background: #6b7684;
+}
+
+.pill.s-mail .pill-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #ffffff;
+}
+
+@media (max-width: 620px) {
+
+
+  .pill-label {
+    font-size: 16px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Gentle reveal for whole sections: starts early, leaves late
+   --------------------------------------------------------- */
+
+.reveal-soft {
+  transform: translateY(26px);
+  transition: opacity 1.15s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 1.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================================
+   Brand logos: each icon carries its own colours (v2)
+   ============================================================ */
+.hero-social .pill-icon {
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0;
+}
+.hero-social .pill-icon svg {
+  width: 30px;
+  height: 30px;
+  fill: initial;
+  stroke: initial;
+}
+
+
+/* ============================================================
+   Hero profile icons v3 - uniform circular buttons
+   ============================================================ */
+.hero-social {
+  margin-top: 32px;
+}
+
+.hero-social .pill {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  justify-content: center;
+  transition: background 0.25s ease, border-color 0.25s ease,
+              color 0.25s ease, transform 0.25s ease;
+}
+
+.hero-social .pill:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.32);
+  transform: translateY(-3px);
+}
+
+.hero-social .pill-icon {
+  width: 23px;
+  height: 23px;
+  flex: 0 0 auto;
+  display: block;
+  overflow: visible;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.hero-social .pill-icon svg {
+  width: 23px !important;
+  height: 23px !important;
+  fill: currentColor !important;
+  stroke: none !important;
+}
+
+/* optical balance: the solid disc marks read heavier, so slightly smaller */
+.hero-social .s-orcid .pill-icon svg,
+.hero-social .s-rg .pill-icon svg {
+  width: 21px !important;
+  height: 21px !important;
+}
+
+.hero-social .s-linkedin .pill-icon svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* labels are kept in the markup for screen readers only */
+.hero-social .pill-label {
+  border: 0;
+}
+
+@media (max-width: 620px) {
+
+
+  .hero-social .pill {
+    width: 46px;
+    height: 46px;
+  }
+
+  .hero-social .pill-icon,
+  .hero-social .pill-icon svg {
+    width: 21px !important;
+    height: 21px !important;
+  }
+}
+
+/* ============================================================
+   Hero profile icons v3.1 - captioned circles
+   ============================================================ */
+.hero-social {
+  align-items: flex-start;
+}
+
+.hero-social .pill {
+  width: auto !important;
+  height: auto !important;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  transform: none !important;
+  color: #c3cedb;
+}
+
+.hero-social .pill-icon {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  display: inline-flex !important;
+}
+
+.hero-social .pill:hover {
+  color: #ffffff;
+}
+
+.hero-social .pill:hover .pill-icon {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: rgba(255, 255, 255, 0.32) !important;
+}
+
+.hero-social .pill-label {
+  margin: 0;
+  padding: 0;
+}
+
+
+@media (max-width: 620px) {
+
+
+  .hero-social .pill-icon {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+
+}
+
+@media (max-width: 420px) {
+  .hero-social {
+    gap: 14px;
+  }
+
+  .hero-social .pill-label {
+    font-size: 10px;
+  }
+}
+
+
+/* =========================================================
+   v4 - Editorial redesign: hero, sections, cards, timeline
+   ========================================================= */
+
+:root{
+  --accent:#7fd0c4;
+  --accent-strong:#a3e2d9;
+  --card:rgba(255,255,255,.045);
+  --card-border:rgba(255,255,255,.13);
+}
+
+section[id],header[id]{scroll-margin-top:96px}
+
+/* Navigation ---------------------------------------------- */
+.nav-links a{text-decoration:none;border-bottom:1px solid transparent;transition:opacity .2s ease,border-color .2s ease}
+.nav-links a:hover{opacity:1}
+.nav-links a.active{border-bottom-color:var(--accent)}
+
+/* Buttons ------------------------------------------------- */
+.btn{display:inline-block;text-decoration:none;font-size:15px;letter-spacing:.06em;padding:13px 26px;border-radius:999px;border:1px solid var(--card-border);transition:transform .22s ease,border-color .22s ease,background .22s ease,color .22s ease}
+.btn:hover{opacity:1;}
+.btn-primary{background:var(--accent);color:#0b182a;border-color:var(--accent);font-weight:600}
+.btn-primary:hover{background:var(--accent-strong);border-color:var(--accent-strong)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Hero ---------------------------------------------------- */
+.hero{padding:112px 0 56px}
+.hero-inner{max-width:1150px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:minmax(0,1fr);gap:60px;align-items:center;text-align:left}
+.hero-inner.has-photo{grid-template-columns:minmax(0,1fr) auto}
+.hero-photo{order:2;margin:0}
+.hero-photo img{width:288px;height:288px;object-fit:cover;border-radius:50%;border:1px solid var(--card-border);display:block}
+.hero-text{order:1;text-align:left;max-width:none}
+.hero-eyebrow{margin:0 0 20px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.hero-text h1{font-size:clamp(46px,6.2vw,84px);margin:0 0 24px;}
+.hero-lede{color:var(--text);}
+.hero-affil{color:var(--muted);font-size:19px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 46px}
+
+/* Profile icons: uniform circles in brand colour ----------- */
+.hero-social{display:flex;flex-wrap:wrap;justify-content:flex-start;margin:0}
+.hero-social .pill{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;text-decoration:none;width:auto}
+.hero-social .pill-icon{width:54px!important;height:54px!important;border-radius:50%!important;border:0!important;background:var(--brand)!important;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.35);}
+.hero-social .pill:hover .pill-icon{box-shadow:0 12px 24px rgba(0,0,0,.45)}
+.hero-social .pill-icon svg{width:27px!important;height:27px!important;fill:#fff!important;display:block}
+.hero-social .pill-label{position:static;width:auto;height:auto;clip:auto;clip-path:none;overflow:visible;white-space:nowrap;text-transform:uppercase;opacity:.85;transition:opacity .2s ease,color .2s ease}
+
+.pill.s-scholar{--brand:#4285f4}
+.pill.s-orcid{--brand:#a6ce39}
+.pill.s-rg{--brand:#00d0af}
+.pill.s-linkedin{--brand:#0a66c2}
+.pill.s-mail{--brand:#0b84ff}
+
+/* Sections ------------------------------------------------ */
+main{max-width:1150px;margin:0 auto;padding:0 32px}
+main > section{padding:96px 0;max-width:none;text-align:left}
+main > section h2,.contact h2{font-size:clamp(30px,3.3vw,42px);margin:0 0 16px;text-align:left;letter-spacing:0}
+.h2-rule{width:64px;height:2px;background:var(--accent);margin:0 0 34px;border:0;opacity:1}
+main > section > p{max-width:68ch;font-size:19px;line-height:1.75;color:var(--muted);text-align:left}
+
+/* Research theme cards ------------------------------------ */
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:22px;margin-top:38px}
+.theme-card{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:28px 26px;transition:transform .25s ease,border-color .25s ease,background .25s ease}
+.theme-card:hover{border-color:rgba(127,208,196,.55);background:rgba(255,255,255,.07)}
+.theme-num{display:block;font-size:12px;letter-spacing:.2em;color:var(--accent);margin-bottom:14px}
+.theme-card h3{margin:0 0 10px;font-size:23px;line-height:1.25}
+.theme-card p{margin:0;font-size:17px;line-height:1.62;color:var(--muted)}
+
+/* Publications -------------------------------------------- */
+.pubs{list-style:none;margin:38px 0 0;padding:0;max-width:860px}
+.pubs li{display:grid;gap:22px;padding:24px 0;border-top:1px solid rgba(255,255,255,.1);margin:0}
+.pubs li:last-child{border-bottom:1px solid rgba(255,255,255,.1)}
+.pub-year{color:var(--accent);font-size:15px;letter-spacing:.12em;padding-top:5px}
+.pub-title{margin:0 0 6px;font-size:20px;line-height:1.35}
+.pub-meta{margin:0 0 12px;color:var(--muted);font-size:17px}
+.pub-links a{display:inline-block;margin:0 8px 8px 0;padding:5px 13px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid var(--card-border);border-radius:999px;transition:border-color .2s ease,color .2s ease}
+.pub-links a:hover{border-color:var(--accent);color:var(--accent);opacity:1}
+.pubs-more{margin-top:30px!important;font-size:16px!important}
+.pubs-more a{color:var(--accent);text-underline-offset:4px}
+
+/* CV timeline --------------------------------------------- */.cv-timeline{position:relative;margin-top:40px}
+.cv-timeline::before{content:"";position:absolute;left:151px;top:8px;bottom:8px;width:1px;}
+.cv-entry{display:grid!important;grid-template-columns:150px 1fr;gap:40px;padding:0 0 44px;position:relative;text-align:left;border:0;background:none!important;box-shadow:none!important;border-radius:0;margin:0}
+.cv-entry::before{content:"";position:absolute;left:147px;top:11px;width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 4px var(--navy)}
+.cv-period{color:var(--accent);font-size:15px;letter-spacing:.1em;padding-top:2px;text-align:left}
+.cv-body h3{margin:0 0 8px;font-size:23px;line-height:1.3}
+.cv-body p{margin:0;color:var(--muted);font-size:17px;line-height:1.65;max-width:62ch}
+/* --- picture row inside a CV entry ---------------------------------------
+   Markup: put this inside .cv-body, after the <p>:
+     <div class="cv-pix">
+       <img src="images/growing-up-pokemon-ruby.jpg" alt="Pokemon Ruby cartridge">
+       ... up to three images ...
+     </div>
+   Files live in the images/ folder of this repository.                     */
+.cv-pix{grid-template-columns:repeat(3,1fr);max-width:430px;}
+.cv-pix img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:3px;
+  border:1px solid rgba(255,255,255,.10);background:#16283d;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .35s ease;
+  will-change:transform}
+.cv-pix img:hover{transform:scale(1.09);z-index:2;
+  box-shadow:0 14px 30px rgba(0,0,0,.45);border-color:rgba(127,208,196,.45)}
+@media (hover:none){.cv-pix img:hover{transform:none;box-shadow:none;border-color:rgba(255,255,255,.10)}}
+@media (prefers-reduced-motion:reduce){.cv-pix img{transition:none}.cv-pix img:hover{transform:none}}
+@media (max-width:900px){.cv-pix{max-width:none;gap:8px;margin-top:16px}}
+
+#cv .centered{text-align:left!important;margin-top:6px}
+#cv .centered a{display:inline-block;text-decoration:none;font-size:15px;letter-spacing:.06em;padding:13px 26px;border-radius:999px;background:var(--accent);color:#0b182a;border:1px solid var(--accent);font-weight:600;transition:transform .22s ease,background .22s ease}
+#cv .centered a:hover{background:var(--accent-strong);opacity:1;}
+
+/* Contact ------------------------------------------------- */
+
+.contact-inner{max-width:1150px;margin:0 auto;padding:104px 32px;text-align:left}
+.contact-lede{max-width:56ch;color:var(--muted);font-size:19px;margin:0 0 30px}
+.message-form{max-width:640px;margin:0;display:flex;flex-direction:column;align-items:flex-start}
+.message-form input,.message-form textarea,.message-form .captcha-wrap{width:100%}
+.message-form input,.message-form textarea{border-radius:10px;border:1px solid rgba(255,255,255,.18);padding:14px 16px;font-size:17px;margin-bottom:14px;background:#fff;color:#20222a}
+.message-form input:focus,.message-form textarea:focus{outline:2px solid var(--accent);outline-offset:2px}.message-form button[type=submit]{background:var(--accent);color:#0b182a;border:1px solid var(--accent);border-radius:999px;padding:13px 30px;font-weight:600;letter-spacing:.06em;cursor:pointer;display:inline-block;width:auto;min-width:180px;margin:6px 0 0 0;align-self:flex-start;transition:background .22s ease,transform .22s ease}
+.message-form button[type=submit]:hover{background:var(--accent-strong);}
+
+/* Links --------------------------------------------------- */
+main a:not(.btn):hover{color:var(--accent)}
+
+/* Responsive ---------------------------------------------- */
+@media (max-width:900px){
+  .hero-inner.has-photo{grid-template-columns:minmax(0,1fr)}
+  .hero-photo{order:0;justify-self:start}
+  .hero-photo img{width:200px;height:200px}
+  .cv-timeline::before{left:5px}
+  .cv-entry{grid-template-columns:1fr;gap:8px;padding-left:34px}
+  .cv-entry::before{left:1px;top:9px}
+}
+@media (max-width:620px){
+  .hero{padding:78px 0 64px}
+  .hero-inner,main,.contact-inner{padding-left:22px;padding-right:22px}
+  main > section{padding:72px 0}
+  .hero-social{gap:18px}
+  .hero-social .pill-icon{width:48px!important;height:48px!important}
+  .hero-social .pill-icon svg{width:24px!important;height:24px!important}
+  .hero-social .pill-label{font-size:10px;letter-spacing:.1em}
+  .pubs li{grid-template-columns:1fr;gap:6px}
+  .btn{padding:12px 22px;font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+
+
+/* =========================================================
+   v5 - Image slots + texture
+   Every image block hides itself when the file is missing,
+   so the page looks unchanged until a picture is added.
+   Files expected (all optional):
+     photo.jpg              square portrait, hero
+     images/about.jpg       4:5 portrait, About section
+     images/research-1..3.jpg  16:9, research cards
+     images/pub-2026.jpg etc.  1:1, publication thumbnails
+     images/cv-1..4.png     institution marks, CV timeline
+     images/band.jpg        wide 21:9 band above Contact
+   ========================================================= */
+
+.img-frame{margin:0;overflow:hidden;border-radius:16px;border:1px solid var(--card-border);background:rgba(255,255,255,.03);line-height:0}
+.img-frame img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* About: text beside a portrait --------------------------- */
+.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);}
+
+.about-photo{aspect-ratio:4/5;width:100%}
+
+/* Research cards: optional image at the top --------------- */
+.card-media{margin:-28px -26px 22px;border:0;border-radius:16px 16px 0 0;aspect-ratio:16/9;overflow:hidden;line-height:0}
+.card-media img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.72)}
+
+/* Publications: optional square thumbnail ----------------- */
+.pubs li{grid-template-columns:92px 1fr auto}
+
+/* Wide image band above the contact section --------------- */
+.image-band{position:relative;height:clamp(200px,30vw,360px);overflow:hidden}
+.image-band img{width:100%;height:100%;object-fit:cover;display:block;opacity:.5}
+.image-band::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,var(--navy),rgba(11,24,42,.3) 45%,var(--charcoal))}
+
+/* Texture: soft accent glow behind the hero --------------- */
+
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(680px 420px at 22% 34%,rgba(127,208,196,.10),transparent 70%)}
+
+/* Texture: very fine grain over the whole page ------------ */
+body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+@media (max-width:900px){
+  .about-grid{grid-template-columns:minmax(0,1fr);gap:34px}
+  .about-photo{max-width:320px}
+  .pubs li{grid-template-columns:92px 1fr}}
+
+
+/* =========================================================
+   v6 - Atmosphere, structure and motion
+   Adds: reading progress, glass navigation with monogram,
+   a drifting connectome behind the hero, numbered sections,
+   a section rail, a CV timeline that fills while reading,
+   cursor light on the research cards and a wider footer.
+   ========================================================= */
+
+:root{ --accent-2:#8fb6ff; --hair:rgba(255,255,255,.10); }
+
+::selection{background:rgba(127,208,196,.30);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+html{scrollbar-color:rgba(255,255,255,.22) #0a1626}
+::-webkit-scrollbar{width:11px}
+::-webkit-scrollbar-track{background:#0a1626}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:9px;border:3px solid #0a1626}
+::-webkit-scrollbar-thumb:hover{background:rgba(127,208,196,.55)}
+
+/* Reading progress bar on the top edge --------------------- */
+.scroll-progress{position:absolute;inset:0 0 auto 0;height:2px;pointer-events:none;overflow:hidden}
+.scroll-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 10px rgba(127,208,196,.6)}
+
+/* Navigation: glass bar with a monogram -------------------- */
+.topnav{background:rgba(11,24,42,.55);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);border-bottom:1px solid transparent;transition:background .35s ease,border-color .35s ease}
+.topnav.is-stuck{background:rgba(11,24,42,.88);border-bottom-color:var(--hair)}
+.nav-inner{max-width:1150px;padding:13px 32px;justify-content:space-between;align-items:center;gap:12px 28px}
+.nav-brand{display:inline-flex;align-items:center;gap:13px;text-decoration:none;color:#fff;flex:0 0 auto}
+.nav-brand .mono{width:38px;height:38px;border-radius:50%;border:1px solid rgba(127,208,196,.5);display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",Georgia,serif;font-size:14px;letter-spacing:.08em;color:var(--accent);transition:background .3s ease,transform .3s ease,border-color .3s ease}
+.nav-brand:hover{opacity:1}
+.nav-brand:hover .mono{background:rgba(127,208,196,.15);border-color:var(--accent);transform:translateY(-1px)}
+.nav-brand .brand-name{font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.nav-links{gap:12px 28px}
+.nav-links a{font-size:14px;letter-spacing:.14em;text-transform:uppercase;position:relative;border-bottom:0!important;padding-bottom:5px;opacity:.66}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--accent);transition:right .3s cubic-bezier(.22,.61,.36,1)}
+.nav-links a:hover::after,.nav-links a.active::after{right:0}
+.nav-links a.active{opacity:1;color:#fff}
+@media (max-width:760px){.nav-brand .brand-name{display:none}.nav-links a{font-size:12px;letter-spacing:.1em}}
+
+/* Hero: the drifting connectome ---------------------------- */
+.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero-canvas{position:absolute;inset:0;z-index:-1;width:100%;height:100%;display:block;pointer-events:none;
+  -webkit-mask-image:radial-gradient(78% 92% at 80% 44%,#000 8%,rgba(0,0,0,.35) 55%,transparent 78%);
+  mask-image:radial-gradient(78% 92% at 80% 44%,#000 8%,rgba(0,0,0,.35) 55%,transparent 78%)}
+
+/* Hero: staggered entrance --------------------------------- */
+.hero-text > *{animation:heroUp .95s cubic-bezier(.22,.61,.36,1) both}
+.hero-text .hero-eyebrow{animation-delay:.05s}
+.hero-text h1{animation-delay:.15s}
+
+
+.hero-text .hero-actions{animation-delay:.42s}
+.hero-text .hero-social{animation-delay:.52s}
+@keyframes heroUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* Hero: quiet scroll cue ----------------------------------- */
+.scroll-cue{position:absolute;right:36px;bottom:34px;display:flex;flex-direction:column;align-items:center;gap:14px;text-decoration:none;color:rgba(255,255,255,.42);font-size:10px;letter-spacing:.3em;text-transform:uppercase;transition:color .3s ease;z-index:1}
+.scroll-cue span{writing-mode:vertical-rl}
+.scroll-cue i{width:1px;height:58px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;left:0;width:1px;height:34%;background:var(--accent);animation:cueRun 2.6s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes cueRun{0%{top:-38%}100%{top:104%}}
+.scroll-cue:hover{color:#fff;opacity:1}
+@media (max-width:960px){.scroll-cue{display:none}}
+
+/* Sections: numbered eyebrows and softer dividers ---------- */
+main{counter-reset:sec}
+main > section{counter-increment:sec;position:relative}
+main > section > h2::before{content:"0" counter(sec);display:block;font-size:12px;letter-spacing:.28em;color:var(--accent);opacity:.9;margin-bottom:13px}
+.contact h2::before{display:block;font-size:12px;letter-spacing:.28em;color:var(--accent);opacity:.9;margin-bottom:13px}
+main section + section{border-top:0!important}
+main > section + section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.17) 15%,rgba(255,255,255,.17) 85%,transparent)}
+
+/* Section rail --------------------------------------------- */
+.rail{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;gap:19px;align-items:flex-end}
+.rail a{display:flex;align-items:center;gap:11px;text-decoration:none;color:rgba(255,255,255,.45);font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.rail a:hover{opacity:1;color:#fff}
+.rail .lbl{opacity:0;transform:translateX(8px);transition:opacity .3s ease,transform .3s ease;white-space:nowrap}
+.rail a:hover .lbl,.rail a.active .lbl{opacity:1;transform:none}
+.rail .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);transition:background .3s ease,transform .3s ease,box-shadow .3s ease}
+.rail a:hover .dot{background:var(--accent)}
+.rail a.active{color:#fff}
+.rail a.active .dot{background:var(--accent);transform:scale(1.5);box-shadow:0 0 0 4px rgba(127,208,196,.15)}
+@media (max-width:1240px){.rail{display:none}}
+
+/* About: flexible layout, drop cap, focus tags ------------- */
+.about-grid{display:flex!important;flex-wrap:wrap;gap:56px;align-items:flex-start}
+.about-grid > p{flex:1 1 430px;margin:0;max-width:60ch;font-size:20px;line-height:1.8;color:var(--muted)}
+.about-grid > p::first-letter{font-family:"Playfair Display",Georgia,serif;font-size:68px;line-height:.78;float:left;padding:8px 15px 0 0;color:var(--accent)}
+.about-photo{flex:0 0 320px;max-width:320px}
+/* Research cards: light follows the cursor ----------------- */
+.theme-card{position:relative;overflow:hidden}
+.theme-card::before{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .4s ease;background:radial-gradient(280px 220px at var(--mx,50%) var(--my,0%),rgba(127,208,196,.17),transparent 70%)}
+.theme-card:hover::before{opacity:1}
+.theme-card h3{transition:color .3s ease}
+.theme-card:hover h3{color:var(--accent-strong)}
+.theme-num{position:relative;z-index:1}
+
+/* Publications: calm hover with inset hairlines ------------ */
+.pubs li{position:relative;padding-left:16px;padding-right:16px;margin-left:-16px;margin-right:-16px;border-radius:12px;transition:background .3s ease;border-top-color:transparent!important;border-bottom-color:transparent!important}
+.pubs li:hover{background:rgba(255,255,255,.04)}
+.pubs li::after{content:"";position:absolute;top:0;left:16px;right:16px;height:1px;background:rgba(255,255,255,.11)}
+.pubs li:last-child::before{content:"";position:absolute;bottom:0;left:16px;right:16px;height:1px;background:rgba(255,255,255,.11)}
+.pub-title{transition:color .3s ease}
+.pubs li:hover .pub-title{color:var(--accent-strong)}
+
+/* CV timeline: the line fills as you read ------------------ */
+.cv-timeline::before{background:rgba(255,255,255,.13)}
+.cv-timeline::after{content:"";position:absolute;left:151px;top:8px;width:1px;height:var(--cvp,0px);background:linear-gradient(to bottom,rgba(127,208,196,.25),var(--accent));box-shadow:0 0 12px rgba(127,208,196,.45)}
+.cv-entry::before{background:rgba(255,255,255,.26);transition:background .45s ease,box-shadow .45s ease,transform .45s ease}
+.cv-entry.lit::before{background:var(--accent);box-shadow:0 0 0 4px var(--navy),0 0 16px rgba(127,208,196,.65);transform:scale(1.15)}
+@media (max-width:900px){.cv-timeline::after{left:5px}}
+
+/* Primary buttons: a single quiet sheen -------------------- */
+.btn-primary,#cv .centered a{position:relative;overflow:hidden}
+.btn-primary::after,#cv .centered a::after{content:"";position:absolute;top:0;left:-45%;width:38%;height:100%;transform:skewX(-18deg);opacity:0;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent)}
+.btn-primary:hover::after,#cv .centered a:hover::after{opacity:1;animation:sheen .85s ease}
+@keyframes sheen{from{left:-45%}to{left:125%}}
+
+/* Contact: stays in the navy family ------------------------ */
+.contact{background:linear-gradient(180deg,#102135 0%,#0c1a2c 100%);border-top:1px solid var(--hair);position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(620px 380px at 82% 18%,rgba(127,208,196,.09),transparent 70%)}
+.contact-inner{position:relative}
+.message-form input[type="email"],
+.message-form input[type="text"],
+.message-form textarea{background:rgba(255,255,255,.05)!important;color:#f2f5f8!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:12px;padding:15px 18px;font-size:18px;transition:border-color .25s ease,background .25s ease,box-shadow .25s ease}
+.message-form input::placeholder,.message-form textarea::placeholder{color:rgba(255,255,255,.45)!important}
+.message-form input:focus,.message-form textarea:focus{outline:none!important;border-color:var(--accent)!important;background:rgba(255,255,255,.08)!important;box-shadow:0 0 0 4px rgba(127,208,196,.14)}
+.message-form textarea{min-height:170px}
+@media (min-width:1020px){
+  .contact-inner{display:grid;grid-template-columns:minmax(280px,400px) minmax(0,1fr);gap:0 90px;align-items:start}
+  .contact-inner > h2{grid-column:1;grid-row:1}
+  .contact-inner > .h2-rule{grid-column:1;grid-row:2}
+  .contact-inner > .contact-lede{grid-column:1;grid-row:3;margin:0}
+  .contact-inner > .message-form{grid-column:2;grid-row:1 / span 4;max-width:620px;width:100%}
+}
+
+/* Footer ---------------------------------------------------- */
+footer{border-top:1px solid var(--hair);padding:42px 0 46px;text-align:left}
+.foot-inner{max-width:1150px;margin:0 auto;padding:0 32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 30px}
+.foot-links{display:flex;flex-wrap:wrap;gap:12px 24px}
+.foot-links a{color:rgba(255,255,255,.58);text-decoration:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase;transition:color .25s ease}
+.foot-links a:hover{color:var(--accent);opacity:1}
+footer p{margin:0;font-size:13px;letter-spacing:.12em;color:rgba(255,255,255,.5)}
+
+@media (max-width:620px){
+  .about-grid{gap:32px}
+  .about-grid > p::first-letter{font-size:54px}
+  .foot-inner{padding:0 22px;justify-content:flex-start}
+}
+
+/* Print ----------------------------------------------------- */
+@media print{
+  .topnav,.rail,.scroll-cue,.hero-canvas,.image-band,.contact,.scroll-progress{display:none!important}
+  body{background:#fff;color:#111}
+  body::after{display:none}
+  h1,h2,h3,.hero-text h1{color:#111}
+  p,.cv-body p,main > section > p{color:#333}
+  .reveal,.reveal.is-in{opacity:1;transform:none}
+}
+
+
+/* =========================================================
+   v7 - Simple pages (404, Impressum, Datenschutz)
+   ========================================================= */
+
+body.simple{min-height:100vh;display:flex;flex-direction:column}
+body.simple .topnav{position:sticky;top:0}
+body.simple footer{margin-top:auto}
+
+.simple-main{flex:1 0 auto;width:100%;margin:0 auto;padding:92px 32px 110px}
+.simple-eyebrow{margin:0 0 18px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)}
+.simple-main h1{font-family:"Playfair Display",Georgia,serif;font-weight:500;font-size:clamp(36px,5vw,58px);line-height:1.08;letter-spacing:-.005em;margin:0 0 18px;color:#fff}
+.simple-main .h2-rule{margin:0 0 34px}
+.simple-lede{font-size:21px;line-height:1.6;color:var(--muted);max-width:52ch;margin:0}
+.simple-actions{display:flex;flex-wrap:wrap;gap:14px;margin:38px 0 0}
+.simple-main h2{font-family:"Playfair Display",Georgia,serif;font-size:23px;font-weight:400;line-height:1.3;letter-spacing:0;text-transform:none;text-align:left;color:#fff;margin:46px 0 12px}
+.simple-main p{color:var(--muted);font-size:18px;line-height:1.75;max-width:70ch}
+.simple-main a{color:var(--accent);text-underline-offset:4px}
+.simple-main a:hover{color:var(--accent-strong);opacity:1}
+
+.legal-note{border:1px solid rgba(127,208,196,.35);background:rgba(127,208,196,.07);border-radius:12px;padding:16px 20px;font-size:16px!important;line-height:1.6!important;color:#dbeeea!important;max-width:70ch}
+.fill{display:inline-block;padding:1px 9px;border-radius:6px;border:1px dashed rgba(127,208,196,.6);background:rgba(127,208,196,.09);color:var(--accent-strong);font-size:.94em}
+.legal-updated{margin-top:52px!important;font-size:15px!important;opacity:.65}
+
+@media (max-width:620px){
+  .simple-main{padding:64px 22px 84px}
+  .simple-main h2{margin-top:38px}
+}
+
+
+/* --- v7.1 corrections --- */
+.simple-main{max-width:1150px}
+.simple-main a.btn,.simple-main a.btn-primary{color:#0b182a}
+.simple-main a.btn-ghost{color:var(--text)}
+.simple-main a.btn-ghost:hover{color:var(--accent)}
+
+/* ===========================================================
+   v8 - real content
+   affiliation line, multi-paragraph About, publication groups,
+   education timeline and clinical electives
+   =========================================================== */
+
+.affil-prev{display:block;margin-top:8px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,213,208,.48)}
+
+/* About: several paragraphs, one drop cap ------------------ */
+.about-grid > .about-copy{flex:1 1 430px;max-width:62ch}
+.about-copy p{margin:0 0 22px;font-size:20px;line-height:1.8;color:var(--muted)}
+.about-copy p:last-child{margin-bottom:0}
+.about-copy p:first-child::first-letter{font-family:"Playfair Display",Georgia,serif;font-size:68px;line-height:.78;float:left;padding:8px 15px 0 0;color:var(--accent)}
+
+/* Publications: grouped by kind ---------------------------- */.pubs li:first-child::after{opacity:0}
+.pub-authors{margin:0 0 8px;font-size:16px;line-height:1.65;color:rgba(216,213,208,.6)}
+.pubs .me{color:#eef1f5;font-weight:600}
+.pub-note{font-style:italic;color:rgba(216,213,208,.5)}
+/* Clinical electives -------------------------------------- */@media (max-width:680px){}
+
+/* CV structure: sub-points and country flags --------------- */
+.flag{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:.8em;line-height:1;margin-left:.4em;vertical-align:.05em;opacity:.92}
+.cv-body h3 .flag{font-size:.68em;margin-left:.45em;vertical-align:.12em}
+.cv-points{list-style:none;margin:12px 0 0;padding:0;max-width:64ch}
+.cv-points>li{display:flex;gap:20px;padding:9px 0;border-top:1px solid rgba(255,255,255,.07)}
+.cv-points>li:first-child{border-top:0;padding-top:2px}
+.cv-points .pt-when{flex:0 0 156px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);opacity:.7;padding-top:4px}
+.cv-points .pt-what b{display:block;font-weight:500;font-size:18px;color:#eef1f5}
+.cv-points .pt-what i{display:block;font-style:normal;font-size:15.5px;line-height:1.55;color:rgba(216,213,208,.62);margin-top:3px}
+.rot{list-style:none;margin:8px 0 0;padding:0 0 0 14px;border-left:1px solid rgba(255,255,255,.16)}
+.rot li{font-size:15.5px;line-height:1.55;color:rgba(216,213,208,.62);margin-top:3px}
+.rot li:first-child{margin-top:0}
+@media (max-width:680px){.cv-points>li{flex-direction:column;gap:4px}.cv-points .pt-when{flex:none;padding-top:0}}
+
+
+/* =========================================================
+   v9 - profile marks, research focus keyline, writing & media
+   ========================================================= */
+
+/* Profile marks: quiet ring, brand glyph, fills on hover --- */
+
+.hero-social .pill{gap:13px}
+.hero-social .pill-icon{width:52px!important;height:52px!important;border-radius:50%!important;background:var(--brand-soft)!important;border:1px solid var(--brand-line)!important;box-shadow:none!important;color:var(--brand);transition:background .3s ease,border-color .3s ease,color .3s ease,transform .3s ease,box-shadow .3s ease}
+.hero-social .pill:hover .pill-icon{background:var(--brand)!important;border-color:var(--brand)!important;color:#0b182a;transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.38)!important}
+.hero-social .pill-icon svg{width:23px!important;height:23px!important;fill:currentColor!important;stroke:none!important}
+.hero-social .s-orcid .pill-icon svg{width:20px!important;height:20px!important}
+.hero-social .s-rg .pill-icon svg{width:24px!important;height:24px!important}
+.hero-social .s-mail .pill-icon svg{width:24px!important;height:24px!important;fill:none!important;stroke:currentColor!important}
+.hero-social .pill-label{font-size:11px;letter-spacing:.18em;color:rgba(216,213,208,.6)}
+.hero-social .pill:hover .pill-label{color:#fff;opacity:1}
+.pill.s-scholar{--brand:#5b9bf8;--brand-soft:rgba(91,155,248,.10);--brand-line:rgba(91,155,248,.45)}
+.pill.s-orcid{--brand:#a6ce39;--brand-soft:rgba(166,206,57,.10);--brand-line:rgba(166,206,57,.45)}
+.pill.s-rg{--brand:#00d0af;--brand-soft:rgba(0,208,175,.10);--brand-line:rgba(0,208,175,.45)}
+.pill.s-linkedin{--brand:#4a9fe0;--brand-soft:rgba(74,159,224,.10);--brand-line:rgba(74,159,224,.45)}
+.pill.s-mail{--brand:#7fd0c4;--brand-soft:rgba(127,208,196,.10);--brand-line:rgba(127,208,196,.45)}
+
+/* About: research focus as one keyline row ----------------- */
+.focus-label{margin:54px 0 0!important;max-width:none!important;font-size:12px!important;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)!important;opacity:.9}@media (max-width:900px){}
+
+/* Writing & media: clickable blocks ------------------------ */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;margin-top:38px}
+.media-card{position:relative;display:flex;flex-direction:column;overflow:hidden;background:var(--card);border:1px solid var(--card-border);border-radius:16px;text-decoration:none!important;color:inherit;transition:transform .28s ease,border-color .28s ease,background .28s ease,box-shadow .28s ease}
+.media-card:hover{border-color:rgba(127,208,196,.5);background:rgba(255,255,255,.07);box-shadow:0 18px 40px rgba(0,0,0,.32);opacity:1}
+.media-thumb{position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;line-height:0;background:linear-gradient(135deg,rgba(127,208,196,.15),rgba(143,182,255,.09))}
+.media-thumb::before{content:attr(data-mark);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",Georgia,serif;font-size:30px;letter-spacing:.22em;color:rgba(127,208,196,.32)}
+.media-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,24,42,.6),transparent 58%);pointer-events:none}
+.media-thumb img{position:relative;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.78);transition:transform .5s cubic-bezier(.22,.61,.36,1),filter .4s ease}
+.media-card:hover .media-thumb img{transform:scale(1.045);filter:saturate(1)}
+.media-kind{position:absolute;left:15px;top:15px;z-index:2;padding:6px 13px;border-radius:999px;background:rgba(11,24,42,.7);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.media-body{display:flex;flex-direction:column;flex:1 1 auto;padding:24px 26px 26px}
+.media-date{margin:0 0 10px!important;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(216,213,208,.5)}
+.media-card h3{margin:0 0 10px;font-size:22px;line-height:1.3;color:#fff;transition:color .3s ease}
+.media-card:hover h3{color:var(--accent-strong)}
+.media-excerpt{margin:0 0 20px!important;font-size:16.5px;line-height:1.62;color:var(--muted)}
+.media-cue{margin-top:auto;display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.media-cue i{font-style:normal;transition:transform .3s ease}
+.media-card:hover .media-cue i{transform:translateX(5px)}
+/* the contact section is now the fifth one ----------------- */
+.contact h2::before{content:"05"}
+
+
+/* =========================================================
+   v10 - single piece pages (writing/*.html)
+   ========================================================= */
+
+.piece .h2-rule{margin:0 0 28px}
+.piece-back{display:inline-flex;align-items:center;gap:10px;margin:0 0 30px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)!important;text-decoration:none}
+.piece-back:hover{color:var(--accent-strong)!important;opacity:1}
+.piece-meta{display:flex!important;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:0 0 20px!important;font-size:11px!important;letter-spacing:.2em;text-transform:uppercase;color:rgba(216,213,208,.55)!important}
+.piece-meta .kind{padding:5px 13px;border:1px solid var(--card-border);border-radius:999px;color:var(--accent)}
+.piece-lede{margin:0 0 8px!important;font-size:22px!important;line-height:1.6!important;color:#eef1f5!important;max-width:46ch}
+.piece-figure{margin:40px 0 44px;max-width:900px;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.03)}
+.piece-figure img{width:100%;display:block;line-height:0}
+.piece-figure figcaption{padding:13px 18px;font-size:14px;line-height:1.55;letter-spacing:.02em;color:rgba(216,213,208,.5)}
+.piece-body{max-width:68ch}
+.piece-body p{margin:0 0 24px!important;font-size:19.5px!important;line-height:1.8!important;color:var(--muted)!important}
+.piece-body h2{margin:46px 0 14px}
+.piece-quote{margin:40px 0;padding:4px 0 4px 26px;border-left:2px solid var(--accent);font-family:"Playfair Display",Georgia,serif;font-size:24px;line-height:1.5;font-style:italic;color:#eef1f5;max-width:52ch}
+.embed{position:relative;margin:38px 0;max-width:900px;aspect-ratio:16/9;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;background:linear-gradient(135deg,rgba(127,208,196,.14),rgba(143,182,255,.08))}
+.embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.embed-hint{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(216,213,208,.6)}
+.embed-hint b{font-family:"Playfair Display",Georgia,serif;font-size:27px;font-weight:500;letter-spacing:.06em;text-transform:none;color:rgba(127,208,196,.8)}
+.piece-foot{display:flex;flex-wrap:wrap;gap:14px;margin-top:54px;padding-top:30px;border-top:1px solid var(--hair)}
+@media (max-width:620px){
+.piece-lede{font-size:20px!important}
+.piece-body p{font-size:18px!important}
+.piece-quote{font-size:21px;padding-left:20px}
+}
+
+/* ---------------------------------------------------------
+   Hero name typeface
+   The name in the header is set in Fraunces (self-hosted
+   subset in fonts.css). Nothing else on the site uses it.
+   --------------------------------------------------------- */
+.hero-text h1{font-family:'Fraunces Hero','Playfair Display',Georgia,serif;font-weight:600;letter-spacing:-.03em;line-height:1.02}
+
+
+/* =========================================================
+   v11 - Hero name mark
+   Two quiet marks sit with the name in the header: an arc
+   rising out of the gap between the two words, and a pulse
+   line woven along the baseline, both fading out at their
+   ends. Everything is inline SVG drawn in em units, so it
+   scales with the clamped h1 size and the page still makes
+   no third-party requests.
+   ========================================================= */
+.hero-name{position:relative;display:inline-block}
+.hero-name .hn-text{position:relative;z-index:2;white-space:nowrap}
+.hero-name svg{position:absolute;z-index:1;display:block;pointer-events:none;overflow:visible}
+
+
+/* Very narrow phones: shrink the name so one line still fits */
+@media (max-width:335px){
+  .hero-text h1{font-size:calc((100vw - 90px) / 6.34)}
+}
+
+@media print{
+  .hero-name svg{display:none}
+}
+
+
+/* Download CV button aligned to the timeline rail --------- */
+#cv .centered{margin-left:151px}
+@media (max-width:900px){#cv .centered{margin-left:5px}}
+
+
+/* Collapsible publication groups --------------------------- */
+.pub-fold{border-top:1px solid rgba(255,255,255,.10)}
+.pub-fold:last-of-type{border-bottom:1px solid rgba(255,255,255,.10)}
+.pub-fold > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:22px 2px}
+.pub-fold > summary::-webkit-details-marker{display:none}
+.pub-fold > summary::marker{content:""}
+.pf-title{font-family:'Playfair Display',Georgia,serif;font-size:23px;letter-spacing:.01em;color:var(--text);transition:color .25s ease}
+.pf-count{font:500 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;color:rgba(216,213,208,.7);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:5px 9px}
+.pf-chev{margin-left:auto;width:15px;height:15px;flex:none;stroke:var(--accent);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .32s cubic-bezier(.2,.7,.2,1)}
+.pub-fold[open] .pf-chev{transform:rotate(180deg)}
+.pub-fold > summary:hover .pf-title{color:var(--accent-strong)}
+.pub-fold > summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+.pub-fold .pubs{margin:0;padding:2px 0 26px 22px}
+.pubs-more{margin-top:26px}
+@media (prefers-reduced-motion:reduce){.pf-chev{transition:none}}
+
+/* Reading notes, one post per year ------------------------- */
+
+@media (max-width:900px){}
+@media (max-width:420px){}
+
+
+/* ---------------------------------------------------------------
+   Writing & Media: horizontal rail
+   The cards sit side by side and scroll horizontally. Drag with the
+   mouse, swipe on a trackpad, or use the two round buttons.
+   --------------------------------------------------------------- */
+.mrail-wrap{position:relative;margin-top:8px}
+.media-grid.mrail{display:flex;flex-direction:row;align-items:stretch;flex-wrap:nowrap;gap:26px;
+  overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;padding:2px 2px 20px;
+  scrollbar-width:thin;scrollbar-color:rgba(216,213,208,.28) transparent;cursor:grab}
+.media-grid.mrail.dragging{cursor:grabbing;scroll-behavior:auto;scroll-snap-type:none}
+.media-grid.mrail.dragging *{pointer-events:none}
+.media-grid.mrail::-webkit-scrollbar{height:3px}
+.media-grid.mrail::-webkit-scrollbar-track{background:rgba(255,255,255,.06);border-radius:2px}
+.media-grid.mrail::-webkit-scrollbar-thumb{background:rgba(216,213,208,.3);border-radius:2px}
+.media-grid.mrail::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+.media-grid.mrail>.media-card{flex:0 0 340px;scroll-snap-align:start}
+@media(max-width:700px){.media-grid.mrail>.media-card{flex:0 0 78vw}}
+.mrail-wrap::before,.mrail-wrap::after{content:"";position:absolute;top:0;bottom:20px;width:60px;
+  pointer-events:none;opacity:0;transition:opacity .35s ease;z-index:3}
+.mrail-wrap::before{left:0;background:linear-gradient(to right,var(--navy),rgba(11,24,42,0))}
+.mrail-wrap::after{right:0;background:linear-gradient(to left,var(--navy),rgba(11,24,42,0))}
+.mrail-wrap.can-l::before{opacity:1}
+.mrail-wrap.can-r::after{opacity:1}
+.mrail-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:-8px}
+.mrail-nav button{width:38px;height:38px;border-radius:50%;background:transparent;border:1px solid var(--hair);
+  color:var(--muted);cursor:pointer;display:grid;place-items:center;font:inherit;
+  transition:border-color .3s,color .3s,transform .3s,opacity .3s}
+.mrail-nav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.mrail-nav button:disabled{opacity:.28;cursor:default}
+.mrail-nav svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6}
+@media(prefers-reduced-motion:reduce){.media-grid.mrail{scroll-behavior:auto}}
+
+/* ---------------------------------------------------------------
+   Intellectual heroes (About)
+   --------------------------------------------------------------- */
+#heroes-block{margin-top:54px}
+#heroes-block .focus-label{margin-bottom:0}
+.heroes-fold{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);margin-top:14px}
+.heroes-fold>summary{list-style:none;cursor:pointer;padding:16px 2px;display:flex;align-items:center;gap:12px;
+  font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.heroes-fold>summary::-webkit-details-marker{display:none}
+.heroes-fold>summary:hover{color:var(--accent)}
+.heroes-fold .hf-count{font-size:.68rem;letter-spacing:.1em;padding:2px 9px;border:1px solid var(--hair);
+  border-radius:999px;color:var(--muted)}
+.heroes-fold .hf-chev{margin-left:auto;width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:1.6;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.heroes-fold[open] .hf-chev{transform:rotate(180deg)}
+.heroes{list-style:none;margin:0 0 4px;padding:0;max-width:760px}
+/* one fold per category: stack them without doubling the hairlines */
+#heroes-block .heroes-fold{margin-top:0}
+#heroes-block .heroes-fold + .heroes-fold{border-top:none}
+#heroes-block .heroes-fold:first-of-type{margin-top:14px}
+#heroes-block .heroes-fold[open]>summary{color:var(--accent)}
+.heroes>li{padding:16px 0;border-top:1px solid var(--hair);display:grid;gap:6px}
+.heroes>li:first-child{border-top:none}
+.ih-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.ih-name{font-size:1.02rem;color:var(--text);margin:0;font-weight:500}
+.ih-role{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);opacity:.85}
+.ih-note{margin:0;font-size:.92rem;color:var(--muted);line-height:1.6}
+.ih-note.is-placeholder{opacity:.45;font-style:italic}
+
+/* Publications now live inside the Research section */
+#research .focus-label{margin-top:58px}
+.pub-block{margin-top:2px}
+
+/* ---------------------------------------------------------------
+   Media rail: head-room for the hover lift
+   The rail clips vertically (overflow-y:hidden) so a hovered card
+   used to lose its top edge and drop shadow. Pad the scroller and
+   pull it back up by the same amount so the page does not move.
+   --------------------------------------------------------------- */
+.media-grid.mrail{padding-top:26px;margin-top:14px}
+
+/* Intellectual heroes: framing note under the label */
+#heroes-block .ih-disclaimer{max-width:64ch;margin:14px 0 0;font-size:14.5px;
+  line-height:1.7;color:var(--muted);opacity:.7}
+@media(max-width:700px){#heroes-block .ih-disclaimer{font-size:13.5px}}
+
+/* ---------------------------------------------------------------
+   Reading notes: the ten-to-one countdown
+   One <li class="cd-item"> per book, data-rank 10 down to 1.
+   Every item sits in the same grid cell, so the box keeps the
+   height of the tallest entry and nothing jumps while clicking
+   through. Without JavaScript all ten stay visible as a list.
+   --------------------------------------------------------------- */
+.cd{margin-top:34px}
+.cd-hint{display:none;margin:0 0 24px;font-size:13px;letter-spacing:.03em;
+  color:var(--muted);opacity:.6}
+.cd.is-js .cd-hint{display:block}
+
+.cd-stage{border-top:1px solid var(--hair);padding-top:32px}
+.cd-list{list-style:none;margin:0;padding:0;display:grid}
+.cd-list>.cd-item{grid-area:1/1}
+
+.cd-item{display:grid;grid-template-columns:158px minmax(0,1fr);gap:0 38px;align-items:start}
+.cd.is-js .cd-item{opacity:0;visibility:hidden;}
+.cd.is-js .cd-item.is-current{opacity:1;visibility:visible;}
+.cd.is-js .cd-item + .cd-item{margin-top:0}
+
+.cd-rank{margin:0;user-select:none}
+.cd-no{display:block;font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--accent);opacity:.85;margin-bottom:6px}
+.cd-num{display:block;font-family:"Playfair Display",Georgia,serif;font-size:112px;
+  line-height:.82;letter-spacing:-.03em;color:rgba(255,255,255,.18)}
+@supports (-webkit-text-stroke:1px #fff){
+  .cd-num{color:transparent;-webkit-text-stroke:1px rgba(127,208,196,.52)}
+}
+
+.cd-body{padding-top:8px}
+.cd-title{margin:0;font-family:"Playfair Display",Georgia,serif;font-size:27px;
+  line-height:1.3;color:#fff}
+.cd-author{margin:10px 0 0;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);opacity:.72}
+.cd-take{margin:20px 0 0;max-width:60ch;font-size:17px;line-height:1.78;color:var(--muted)}
+.cd-take.is-placeholder{opacity:.45;font-style:italic}
+
+.cd-foot{display:flex;align-items:center;justify-content:space-between;gap:24px;
+  margin-top:38px;padding-top:20px;border-top:1px solid var(--hair)}
+.cd-ticks{display:flex;align-items:center;gap:8px}
+.cd-ticks button{width:24px;height:22px;padding:0;border:0;background:transparent;
+  cursor:pointer;display:grid;place-items:center}
+.cd-ticks button::before{content:"";display:block;width:14px;height:2px;border-radius:2px;
+  background:rgba(216,213,208,.26);transition:background .3s ease,width .3s ease}
+
+.cd-ticks button.is-on::before{background:var(--accent);width:22px}
+.cd-ticks button:hover::before{background:var(--accent-strong)}
+.cd-ticks button:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+
+.cd-nav{display:flex;gap:10px;flex:0 0 auto}
+.cd-nav button{width:38px;height:38px;border-radius:50%;background:transparent;
+  border:1px solid var(--hair);color:var(--muted);cursor:pointer;display:grid;
+  place-items:center;font:inherit;}
+.cd-nav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent);
+  transform:translateY(-1px)}
+.cd-nav button:disabled{opacity:.26;cursor:default}
+.cd-nav svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+
+.cd-live{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+@media(max-width:640px){
+  .cd-item{grid-template-columns:minmax(0,1fr);gap:12px 0}
+  .cd-num{font-size:78px}
+  .cd-title{font-size:23px}
+  .cd-take{font-size:16px}
+  .cd-foot{flex-direction:column;align-items:flex-start;gap:18px}
+  .cd-ticks{gap:6px}
+}
+@media(prefers-reduced-motion:reduce){
+  .cd.is-js .cd-item{transition:opacity .2s linear;transform:none}
+}
+
+
+/* =========================================================
+   v12 - Hero name in colour, research focus that answers the
+         cursor, the reading-notes year rail and its panels,
+         and rows of pictures in the CV.
+   ========================================================= */
+
+/* Hero: the name in colour, the two marks framing it -------
+   The arc no longer cuts across the letters. It is a wide,
+   flat dome above them, while the pulse runs below the
+   descenders with its spike sitting in the gap between the
+   two words. Both are stretched to the width of the name, so
+   they stay in step at every size. */
+
+.hero-name .hn-arc{top:-.34em;bottom:auto;left:0;transform:none;width:100%;height:.40em}
+.hero-name .hn-pulse{left:0;bottom:-.34em;width:100%;height:.60em}
+@media print{}
+
+/* Hero: the role first, the research line underneath ------- */
+.hero-affil{margin:0 0 16px}
+.hero-lede{max-width:46ch;font-size:clamp(20px,1.9vw,25px);line-height:1.45;
+  text-wrap:balance;margin:0 0 36px}
+.hero-text .hero-affil{animation-delay:.26s}
+.hero-text .hero-lede{animation-delay:.34s}
+
+/* Research focus: every topic answers the cursor -----------
+   The row keeps its keylines. On hover the other topics step
+   back, a gradient rule draws itself in from the left, a
+   soft light follows the pointer and the one-line gloss
+   fades up. The gloss keeps its space in the layout, so
+   nothing moves while the cursor travels along the row. */@media (max-width:900px){}
+@media (hover:none){}
+
+/* Intellectual heroes: nation and what they are known for -- */
+.ih-for{font-size:.8rem;line-height:1.5;color:var(--muted);opacity:.6}
+.ih-for em{font-style:italic}
+
+/* Reading notes: the row of years -------------------------- */
+.reading{margin-top:64px}
+.reading-head{font-family:'Playfair Display',Georgia,serif;font-size:14px;font-weight:500;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.yrail-wrap{position:relative}
+.yrail{display:flex;flex-wrap:nowrap;gap:12px;overflow-x:auto;overflow-y:hidden;
+  padding:16px 2px 18px;scroll-snap-type:x proximity;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;cursor:grab;
+  scrollbar-width:thin;scrollbar-color:rgba(216,213,208,.28) transparent}
+.yrail.dragging{cursor:grabbing;scroll-behavior:auto;scroll-snap-type:none}
+.yrail.dragging *{pointer-events:none}
+.yrail::-webkit-scrollbar{height:3px}
+.yrail::-webkit-scrollbar-track{background:rgba(255,255,255,.06);border-radius:2px}
+.yrail::-webkit-scrollbar-thumb{background:rgba(216,213,208,.3);border-radius:2px}
+.yrail::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+.ychip{position:relative;flex:0 0 128px;scroll-snap-align:start;overflow:hidden;
+  display:flex;flex-direction:column;align-items:flex-start;gap:7px;
+  padding:16px 16px 15px;border:1px solid rgba(255,255,255,.11);border-radius:10px;
+  background:rgba(255,255,255,.022);color:inherit;font:inherit;text-align:left;cursor:pointer;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s ease,
+    background .3s ease,box-shadow .3s ease,opacity .3s ease}
+.ychip .yc-year{font-family:'Playfair Display',Georgia,serif;font-size:28px;line-height:1;
+  color:var(--accent);transition:color .3s ease}
+.ychip .yc-state{font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(216,213,208,.5)}
+.ychip .yc-mark{position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.ychip:hover{border-color:rgba(127,208,196,.45);
+  background:rgba(255,255,255,.05);box-shadow:0 12px 26px rgba(0,0,0,.28)}
+.ychip:hover .yc-mark{transform:scaleX(1)}
+.ychip:hover .yc-year{color:var(--accent-strong)}
+
+.ychip[aria-expanded="true"]{opacity:1;transform:translateY(-3px);
+  border-color:rgba(127,208,196,.7);background:rgba(127,208,196,.10)}
+.ychip[aria-expanded="true"] .yc-mark{transform:scaleX(1)}
+.ychip[aria-expanded="true"] .yc-year{color:var(--accent-strong)}
+.yrail-wrap::before,.yrail-wrap::after{content:"";position:absolute;top:0;bottom:18px;
+  width:52px;pointer-events:none;opacity:0;transition:opacity .35s ease;z-index:3}
+.yrail-wrap::before{left:0;background:linear-gradient(to right,var(--navy),rgba(11,24,42,0))}
+.yrail-wrap::after{right:0;background:linear-gradient(to left,var(--navy),rgba(11,24,42,0))}
+.yrail-wrap.can-l::before{opacity:1}
+.yrail-wrap.can-r::after{opacity:1}
+.yrail-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:-8px}
+.yrail-nav button{width:34px;height:34px;border-radius:50%;background:transparent;
+  border:1px solid var(--hair);color:var(--muted);cursor:pointer;display:grid;place-items:center;
+  font:inherit;transition:border-color .3s,color .3s,transform .3s,opacity .3s}
+.yrail-nav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent);
+  transform:translateY(-1px)}
+.yrail-nav button:disabled{opacity:.28;cursor:default}
+.yrail-nav svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.6}
+
+/* Reading notes: the panel a year opens ------------------- */
+.ypanel{position:relative;margin-top:16px;padding:26px 30px 30px;
+  border:1px solid rgba(127,208,196,.26);border-radius:14px;
+  background:linear-gradient(180deg,rgba(127,208,196,.055),rgba(255,255,255,.018));
+  box-shadow:0 22px 46px rgba(0,0,0,.28)}
+.ypanel[hidden]{display:none}
+.ypanel.is-open{animation:ypIn .5s cubic-bezier(.22,.61,.36,1) both}
+@keyframes ypIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+.yp-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.yp-eyebrow{margin:0!important;font-family:'Playfair Display',Georgia,serif;font-size:34px;
+  line-height:1;color:var(--accent-strong)}
+.yp-close{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:transparent;
+  border:1px solid var(--hair);color:var(--muted);cursor:pointer;display:grid;place-items:center;
+  transition:border-color .3s,color .3s,transform .35s}
+.yp-close:hover{border-color:var(--accent);color:var(--accent);transform:rotate(90deg)}
+.yp-close svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round}
+.yp-note{margin:16px 0 0!important;max-width:64ch;font-size:17px!important;
+  line-height:1.75!important;color:var(--muted)!important}
+.yp-note.is-placeholder{opacity:.45;font-style:italic}
+.yp-more{margin:16px 0 0!important}
+.yp-more a{display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);text-decoration:none}
+.yp-more a i{font-style:normal;transition:transform .3s ease}
+.yp-more a:hover i{transform:translateX(5px)}
+.ypanel .cd{margin-top:24px}
+.ypanel .cd-item{grid-template-columns:126px minmax(0,1fr);gap:0 30px}
+.ypanel .cd-num{font-size:88px}
+.ypanel .cd-title{font-size:24px}
+.ypanel .cd-foot{margin-top:30px}
+@media (max-width:700px){
+.ypanel{padding:22px 20px 26px}
+.ypanel .cd-item{grid-template-columns:minmax(0,1fr)}
+.ypanel .cd-num{font-size:64px}
+.yp-eyebrow{font-size:28px}
+}
+
+/* CV: rows of pictures that grow under the cursor ----------
+   Markup, inside .cv-body:
+     <div class="cv-pix" data-cols="3">
+       <span class="pix"><img src="images/cv-....jpg" alt=""
+         loading="lazy" onerror="this.style.display='none'"></span>
+       ... one span per picture ...
+     </div>
+   data-cols is how many sit in the row. Until a file is
+   added the frame shows a quiet cross, so the row is visible
+   while the pictures are still missing. */
+.cv-pix{display:grid;margin:22px 0 2px}
+.cv-pix[data-cols="1"]{grid-template-columns:repeat(1,1fr);max-width:150px}
+.cv-pix[data-cols="2"]{grid-template-columns:repeat(2,1fr);max-width:300px}
+.cv-pix[data-cols="3"]{grid-template-columns:repeat(3,1fr);max-width:440px}
+.cv-pix[data-cols="4"]{grid-template-columns:repeat(4,1fr);max-width:560px}
+.cv-pix[data-cols="5"]{grid-template-columns:repeat(5,1fr);max-width:600px}
+.cv-pix .pix{position:relative;display:block;aspect-ratio:1/1;border-radius:7px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(140deg,rgba(127,208,196,.13),rgba(143,182,255,.07));
+  transition:transform .5s cubic-bezier(.28,1.35,.5,1),box-shadow .5s ease,
+    border-color .5s ease,opacity .35s ease;
+  will-change:transform;cursor:zoom-in}
+.cv-pix .pix::before,.cv-pix .pix::after{content:"";position:absolute;left:50%;top:50%;
+  background:rgba(127,208,196,.45);transition:transform .55s cubic-bezier(.22,.61,.36,1)}
+.cv-pix .pix::before{width:15px;height:1px;transform:translate(-50%,-50%)}
+.cv-pix .pix::after{width:1px;height:15px;transform:translate(-50%,-50%)}
+.cv-pix .pix img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;
+  display:block;transform:none;filter:saturate(.78);transition:filter .45s ease}
+
+.cv-pix .pix:hover{opacity:1;z-index:5;
+  box-shadow:0 24px 46px rgba(0,0,0,.5);border-color:rgba(127,208,196,.55)}
+.cv-pix .pix:hover img{filter:saturate(1)}
+.cv-pix .pix:hover::before{transform:translate(-50%,-50%) rotate(90deg)}
+.cv-pix .pix:hover::after{transform:translate(-50%,-50%) rotate(90deg)}
+@media (max-width:900px){
+.cv-pix[data-cols="5"]{grid-template-columns:repeat(3,1fr);max-width:none}
+.cv-pix[data-cols="4"]{grid-template-columns:repeat(2,1fr);max-width:none}
+
+}
+@media (hover:none){
+.cv-pix:hover .pix{opacity:1}
+.cv-pix .pix:hover{transform:none;box-shadow:none;border-color:rgba(255,255,255,.10)}
+}
+@media (prefers-reduced-motion:reduce){
+.cv-pix .pix,.cv-pix .pix::before,.cv-pix .pix::after{transition:none}
+.cv-pix .pix:hover{transform:none}
+.ypanel.is-open{animation:none}
+}
+
+
+/* ==========================================================
+   v13
+   1. the last letter of the name is painted in full again
+   2. the ten books move strictly one step at a time
+   ========================================================== */
+
+/* The name is set with negative letter spacing and painted
+   through background-clip:text, so the gradient box ended a
+   fraction before the outline of the final e. A little padding
+   on the right gives the letter room to finish. */
+.hero-text h1 .hn-text{padding-right:.1em}
+
+/* The book itself is the step forward. */
+.cd.is-js .cd-stage{cursor:pointer;transition:border-color .35s ease}
+.cd.is-js:not(.is-last) .cd-stage:hover{border-top-color:rgba(127,208,196,.5)}
+.cd.is-js.is-last .cd-stage{cursor:default}
+
+/* The ticks are a read-out of where the year has got to, not a
+   way of jumping: nothing can be skipped between ten and one. */
+.cd.is-js .cd-ticks{pointer-events:none}
+.cd.is-js .cd-ticks button{cursor:default}
+.cd.is-js .cd-ticks button:disabled{opacity:1}
+
+/* Of the two round buttons the next one carries the weight. */
+.cd-nav button:not(:disabled){border-color:rgba(127,208,196,.4);color:#d6efe9}
+.cd-nav button[data-cd-step="1"]:not(:disabled){background:rgba(127,208,196,.13);
+  border-color:rgba(127,208,196,.62);color:#eafcf8}
+.cd-nav button[data-cd-step="1"]:not(:disabled):hover{background:rgba(127,208,196,.2);
+  border-color:var(--accent)}
+
+
+/* ==========================================================
+   v14
+   Every intellectual hero answers to the cursor: the name
+   lifts a little, the row warms, the rest of the list steps
+   back. Nothing moves out of place, so the column stays calm.
+   ========================================================== */
+
+.heroes>li{position:relative;transition:opacity .4s ease}
+.heroes>li::before{content:"";position:absolute;inset:5px -16px;border-radius:12px;
+  background:linear-gradient(90deg,rgba(127,208,196,.1),rgba(127,208,196,.02) 62%,
+    rgba(127,208,196,0) 100%);
+  opacity:0;transition:opacity .4s ease;pointer-events:none}
+.heroes>li:hover::before{opacity:1}
+.heroes>li>*{position:relative}
+
+.heroes .ih-name{display:inline-block;transform-origin:left center;
+  transition:transform .45s cubic-bezier(.22,.61,.36,1),color .35s ease,
+    text-shadow .45s ease}
+.heroes>li:hover .ih-name{transform:scale(1.055);color:#fff;
+  text-shadow:0 0 26px rgba(127,208,196,.3)}
+.heroes .ih-role,.heroes .ih-for{transition:opacity .35s ease,color .35s ease}
+.heroes>li:hover .ih-role{opacity:1;color:var(--accent-strong)}
+.heroes>li:hover .ih-for{opacity:.95}
+
+
+@media(hover:none){
+  .heroes>li::before{display:none}
+  .heroes:hover>li:not(:hover){opacity:1}
+  .heroes>li:hover .ih-name{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .heroes>li:hover .ih-name{transform:none}
+}
+
+/* ---- v15 -----------------------------------------------------------------
+   Three things. The rows no longer blink when the pointer crosses the gap
+   between two items. A tile no longer grows far enough to reach over its
+   neighbour and take the hover away from it. And anything that opens or
+   closes on a click stops turning into selected text when it is clicked
+   twice.                                                                 */
+
+/* The old rules dimmed everything as soon as the pointer was anywhere
+   inside the list, so the empty space between two items counted as well
+   and the whole row flickered on the way across. :has() asks the honest
+   question instead: dim the others only while one of them really is
+   under the pointer. */
+.yrail:hover .ychip:not(:hover):not([aria-expanded="true"]){opacity:1}
+.yrail:has(.ychip:hover) .ychip:not(:hover):not([aria-expanded="true"]){opacity:.55}
+.cv-pix:hover .pix{opacity:1}
+.cv-pix:has(.pix:hover) .pix{opacity:.5}
+.cv-pix:has(.pix:hover) .pix:hover{opacity:1}
+.heroes:hover>li:not(:hover){opacity:1}
+.heroes:has(>li:hover)>li:not(:hover){opacity:.62}
+
+/* A little more air between the pictures, and a growth that stays inside
+   that air. The enlarged tile can no longer cover the one next to it, so
+   the pointer is never handed back and forth at the seam. */
+.cv-pix{gap:18px}
+.cv-pix .pix:hover{transform:scale(1.26) translateY(-3px)}
+@media (max-width:900px){.cv-pix .pix:hover{transform:scale(1.13)}}
+
+/* One step of the countdown is slow enough to be read. While it runs the
+   arrows and the book itself stop taking presses, so the ten cannot be
+   clicked away in a second. */
+
+.cd-nav button{transition:opacity .3s ease,background .3s ease,border-color .3s ease,color .3s ease}
+.cd.is-busy .cd-nav button,.cd.is-busy .cd-stage{pointer-events:none}
+
+.cd.is-busy .cd-stage{cursor:default}
+
+/* Nothing that opens or closes on a click should become selected text. */
+.heroes-fold>summary,.pub-fold>summary,.ychip,.ychip *,.yp-close,
+.cd-stage,.cd-nav button,.cd-ticks button{-webkit-user-select:none;user-select:none}
+
+/* ---- v16 -----------------------------------------------------------------
+   The real cause of the flickering cursor, the profile row on an even
+   pitch, and a countdown that travels across its box.                   */
+
+/* Why the cursor used to stutter along the lower edge of a card: the card
+   lifted itself out from under the pointer. A pixel or two above its bottom
+   edge the hover began, the card rose, the pointer fell outside it, the
+   hover ended, the card dropped back under the pointer, and round it went
+   several times a second. Growing cannot do that, because every edge moves
+   outwards and the pointer can only ever stay inside. The lift is now a
+   very slight swell and the shadow does the rest of the work. */
+.btn:hover{transform:scale(1.035)}
+#cv .centered a:hover{transform:scale(1.035)}
+.message-form button[type=submit]:hover{transform:scale(1.03)}
+.theme-card:hover{transform:scale(1.012)}
+.media-card:hover{transform:scale(1.014)}.ychip:hover{transform:scale(1.045)}
+@media (prefers-reduced-motion:reduce){
+.btn:hover,#cv .centered a:hover,.message-form button[type=submit]:hover,
+.theme-card:hover,.media-card:hover,.reading-card:hover,.ychip:hover{transform:none}
+}
+
+/* The five profile marks sit on one even pitch. Each is given the same
+   share of the row, so the circles are equally spaced whatever the length
+   of the word underneath, and each word stays centred under its circle.
+   The ring is a little tighter around the glyph. */
+@media (min-width:901px){
+
+
+}
+.hero-social .pill-icon{width:47px!important;height:47px!important}
+
+/* Ten to one reads as a journey across the box: a book still to come waits
+   off to the left, a book already read has moved off to the right, so every
+   step carries the eye rightwards. Forward is unhurried; turning back is
+   quick, more a glance over the shoulder than a walk. The delay on
+   visibility keeps the departing book on screen long enough to be seen
+   leaving. */
+.cd.is-js .cd-item{pointer-events:none;}
+
+.cd.is-js .cd-item.is-current{pointer-events:auto;}
+
+
+@media (prefers-reduced-motion:reduce){
+
+}
+
+/* No single word left alone on a line of its own. */
+#writing>p{max-width:76ch}
+#about>p,#writing>p,#research>p{text-wrap:pretty}
+
+/* ---- v17 -----------------------------------------------------------------
+   The five profile marks keep to the width of the name above them, and
+   every book in a top ten is given a jacket: an empty frame while there is
+   no picture yet, with a drawn crown over the first, silver around the
+   second and bronze beneath the third.                                   */
+
+/* index.html measures the name and hands its width over as --hero-w. Each
+   mark owns a fifth of the row and sits in the middle of its share, so the
+   row is widened by half a share on either side and pulled back by the same
+   amount: that is what brings the first circle under the H of Hannes and
+   the last one under the e of Meilicke, with four equal gaps between. */
+@media (min-width:901px){
+  .hero-social{
+    --hs-pull:calc((var(--hero-w,600px)/5 - 47px)/1.6);
+  }
+  .hero-social .pill{min-width:0}
+  /* Each word has a narrower column to stand in than before, so it is set
+     a size smaller and is allowed to fall onto a second line. */
+  .hero-social .pill-label{white-space:normal;
+    font-size:9px;line-height:1.45}
+}
+
+/* ---- a jacket for every book --------------------------------------------
+   The frame is drawn while the shelf is still empty. A picture goes inside
+   the span and needs nothing else:
+   <span class="cd-jacket"><img src="/images/books/2025-01.jpg" alt=""></span>
+   The columns are only turned on where there is room for them; on a narrow
+   screen the rank, the jacket and the words still sit one above the other. */
+@media (min-width:641px){
+  .cd-item{grid-template-columns:158px 108px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-item{grid-template-columns:126px 104px minmax(0,1fr)}
+}
+.cd-cover{position:relative;width:100%;max-width:108px}
+.ypanel .cd-cover{max-width:104px}
+.cd-jacket{display:block;width:100%;aspect-ratio:2/3;border-radius:4px;
+  overflow:hidden;border:1px solid rgba(255,255,255,.10);
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2044%2034%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-opacity%3D%22.3%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M22%207.6%20C21.6%2015%2021.6%2022%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C17%205%2011%204.2%205%205.2%20C5%2012%205%2019%205%2025.8%20C11%2025.2%2017%2026.2%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C27%205%2033%204.2%2039%205.2%20C39%2012%2039%2019%2039%2025.8%20C33%2025.2%2027%2026.2%2022%2029%22%2F%3E%3C%2Fsvg%3E"),
+    linear-gradient(90deg,transparent 6px,rgba(255,255,255,.10) 6px,rgba(255,255,255,.10) 7px,transparent 7px),
+    linear-gradient(140deg,rgba(127,208,196,.13),rgba(143,182,255,.07));
+  background-repeat:no-repeat,no-repeat,no-repeat;
+  background-position:center,left top,center;
+  background-size:40px 31px,100% 100%,100% 100%;
+  box-shadow:0 10px 22px rgba(0,0,0,.28)}
+.cd-jacket img{display:block;width:100%;height:100%;object-fit:cover}
+.cd-jacket:has(img){background-image:none}
+
+/* First, second and third are marked by hand around the jacket: a crown
+   above number one, silver drawn around number two, bronze under three. */
+.cd-item[data-rank="1"] .cd-cover::before{content:"";position:absolute;
+  left:50%;top:-26px;width:54px;height:24px;transform:translateX(-50%);
+  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2060%2030%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.5%22%20stroke-width%3D%221%22%20transform%3D%22translate(1.2%201.7)%22%3E%3Cpath%20d%3D%22M8%2025%20C7%2019%206.4%2013%206%207.6%20C10.6%2012.4%2014.2%2016%2017.8%2019.6%20C21.6%2014%2025.6%208.4%2029.6%202.8%20C33.6%208.4%2037.6%2014%2041.4%2019.6%20C45%2016%2048.6%2012.4%2053.2%207.6%20C52.8%2013%2052.2%2019%2051.2%2025%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%2025%20C7%2019%206.4%2013%206%207.6%20C10.6%2012.4%2014.2%2016%2017.8%2019.6%20C21.6%2014%2025.6%208.4%2029.6%202.8%20C33.6%208.4%2037.6%2014%2041.4%2019.6%20C45%2016%2048.6%2012.4%2053.2%207.6%20C52.8%2013%2052.2%2019%2051.2%2025%22%2F%3E%3Cpath%20d%3D%22M8%2025%20C20%2027.6%2040%2027.6%2051.2%2024.3%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%227.2%22%20r%3D%221.8%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2229.6%22%20cy%3D%222.4%22%20r%3D%222%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2253.2%22%20cy%3D%227.2%22%20r%3D%221.8%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;pointer-events:none}
+.cd-item[data-rank="2"] .cd-cover::after{content:"";position:absolute;
+  left:-13px;right:-13px;top:-7px;bottom:-7px;
+  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20130%20170%22%20fill%3D%22none%22%20stroke%3D%22%23c6ced9%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.5%201.3)%22%3E%3Cpath%20d%3D%22M12%2028%20C4.5%2062%204.5%20108%2012%20142%22%2F%3E%3Cpath%20d%3D%22M118%2028%20C125.5%2062%20125.5%20108%20118%20142%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M12%2028%20C4.5%2062%204.5%20108%2012%20142%22%2F%3E%3Cpath%20d%3D%22M118%2028%20C125.5%2062%20125.5%20108%20118%20142%22%2F%3E%3Cpath%20d%3D%22M12%2028%20C13.5%2024%2015.5%2021%2018%2018.5%22%2F%3E%3Cpath%20d%3D%22M12%20142%20C13.5%20146%2015.5%20149%2018%20151.5%22%2F%3E%3Cpath%20d%3D%22M118%2028%20C116.5%2024%20114.5%2021%20112%2018.5%22%2F%3E%3Cpath%20d%3D%22M118%20142%20C116.5%20146%20114.5%20149%20112%20151.5%22%2F%3E%3Cpath%20d%3D%22M6.5%2072%20C8.5%2073%2010.5%2073.6%2012.5%2073.8%22%2F%3E%3Cpath%20d%3D%22M6.5%20100%20C8.5%2099%2010.5%2098.4%2012.5%2098.2%22%2F%3E%3Cpath%20d%3D%22M123.5%2072%20C121.5%2073%20119.5%2073.6%20117.5%2073.8%22%2F%3E%3Cpath%20d%3D%22M123.5%20100%20C121.5%2099%20119.5%2098.4%20117.5%2098.2%22%2F%3E%3C%2Fsvg%3E") center/100% 100% no-repeat;pointer-events:none}
+.cd-item[data-rank="3"] .cd-cover::after{content:"";position:absolute;
+  left:-6px;right:-6px;top:100%;height:26px;margin-top:6px;
+  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23bd7f42%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E") center/100% 100% no-repeat;pointer-events:none}
+
+/* ---------------------------------------------------------------
+   v18 - a wash of colour for every chapter
+   Each chapter of the page owns a shade. The wash below is pinned to
+   the window and sits behind everything on it, and it fades from one
+   shade to the next as the reader travels down. It is one colour the
+   whole way, lifted a step at every chapter: the page opens at its
+   darkest and grows steadily lighter towards the end, so the descent
+   is felt rather than announced. The script at the foot of index.html
+   names whichever chapter holds the middle of the screen; the fade
+   itself is the transition below.
+   --------------------------------------------------------------- */
+.chapter-wash {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+/* A reader who has asked for less movement still gets the change of
+   chapter, only faster and with less of a drift. */
+@media (prefers-reduced-motion: reduce) {
+
+}
+
+/* ---------------------------------------------------------------
+   v19 - away from the desk
+   Four small cards under About for the life outside the work. Each
+   card carries a hand-drawn mark, a name with an optional gloss and
+   one line of its own. The reading card is a link down to the books,
+   and shows a small arrow to say so.
+   Nothing here changes size when the pointer arrives - the surface
+   only warms and the mark rises a couple of pixels - so the pointer
+   never comes to rest on a moving edge.
+   --------------------------------------------------------------- */
+.hobbies { margin-top: 8px; }
+
+.hb-grid {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.hb-item {
+  position: relative;
+  padding: 20px 18px 22px;
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  background-image: linear-gradient(155deg, rgba(127, 208, 196, .055), rgba(143, 182, 255, .028));
+  transition: border-color 340ms ease, box-shadow 340ms ease;
+}
+
+.hb-item:hover {
+  border-color: rgba(127, 208, 196, .34);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .26);
+}
+
+.hb-item > a { display: block; color: inherit; text-decoration: none; }
+
+.hb-mark {
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: 0 0 14px;
+  color: var(--accent);
+  opacity: .82;
+  transition: transform 340ms cubic-bezier(.34, .9, .3, 1), opacity 340ms ease;
+}
+
+.hb-item:hover .hb-mark { transform: translateY(-3px); opacity: 1; }
+
+.hb-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hb-name { margin: 0; font-size: 1.02rem; color: var(--text); font-weight: 500; }
+
+.hb-gloss {
+  margin-left: 5px;
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: .85;
+}
+
+.hb-note { margin: 6px 0 0; font-size: .92rem; line-height: 1.6; color: var(--muted); }
+
+.hb-item-link .hb-note::after { content: " \2193"; color: var(--accent); opacity: .8; }
+
+@media (max-width: 900px) { .hb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .hb-grid { grid-template-columns: 1fr; } }
+
+/* v13 - hero: kicker clears the arc, and the name carries one colour
+   The eyebrow now sits a step higher, so the dome above the name never
+   grazes it at any size, and the gradient that used to fade in from
+   white starts on the Meilicke colours, so both words are tinted. */
+.hero-eyebrow{margin-bottom:0}
+.hero-text h1{margin-top:.57em}
+.hero-text h1 .hn-text{background:linear-gradient(96deg,#cbeee4 0%,#bfeade 6%,#93d3f0 46%,#a9bdf7 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+@media print{.hero-text h1 .hn-text{background:none;color:#111;-webkit-text-fill-color:#111}}
+
+/* ---------------------------------------------------------------
+   v19 - every chapter takes its own shade back, and takes it sooner
+   v18 above settled on one colour lifted a step at a time. The
+   older shades read better, so they return here: each chapter a
+   little cooler, a little warmer, a little deeper than the last,
+   all still in the dark family of the page. The fade between them
+   is cut to under half its length, so a new chapter lands instead
+   of drifting in. These rules sit after v18 and supersede it.
+   --------------------------------------------------------------- */
+.chapter-wash{background-color:#0b182a;transition:background-color 420ms cubic-bezier(.2,.8,.2,1)}
+.chapter-wash[data-chapter="home"]{background-color:#0b182a}
+.chapter-wash[data-chapter="about"]{background-color:#0a2434}
+.chapter-wash[data-chapter="writing"]{background-color:#141634}
+.chapter-wash[data-chapter="research"]{background-color:#082a30}
+.chapter-wash[data-chapter="cv"]{background-color:#1c2230}
+.chapter-wash[data-chapter="contact"]{background-color:#0b182a}
+@media (prefers-reduced-motion:reduce){.chapter-wash{transition-duration:180ms}}
+
+/* ----------------------------------------------------------------
+   v20 - the six that almost made the ten
+   Under the countdown sits one block for the honorable mentions:
+   two columns on a wide screen, one on a narrow one, a short rule
+   beside every book and the author set small underneath. The
+   heading is kept out of the numbered-section styling, so it takes
+   no counter and stays quieter than the title of the piece.
+   ---------------------------------------------------------------- */@media (max-width:720px){}
+
+/* ----------------------------------------------------------------
+   v21 - the fine print under the footer
+   A single quiet line below the footer row, for credits that belong
+   on the page but should not compete with anything on it. It sits
+   on the same measure as .foot-inner and drops to the same padding
+   on a narrow screen.
+   ---------------------------------------------------------------- */
+.foot-fine{max-width:1150px;margin:20px auto 0;padding:0 32px}
+.foot-fine p{margin:0;font-size:12px;line-height:1.6;letter-spacing:.04em;color:rgba(255,255,255,.36)}
+@media (max-width:620px){.foot-fine{padding:0 22px}}
+
+/* ----------------------------------------------------------------
+   v22 - the cards that come before number ten
+   A countdown can open with cards that carry no single rank: the
+   honorable mentions, and the band from fifteen to eleven. They keep
+   the shape of a book card, but the numeral column takes a word or a
+   span of figures, no jacket stands beside it, and the body holds a
+   short list instead of one title. Where two books share one place,
+   a small mark sits between them.
+   ---------------------------------------------------------------- */
+.cd-num-band{font-size:56px;letter-spacing:-.02em}
+.cd-num-word{font-size:25px;line-height:1.16;letter-spacing:0;
+  color:rgba(127,208,196,.62)}
+@supports (-webkit-text-stroke:1px #fff){
+  .cd-num-word{-webkit-text-stroke:0;color:rgba(127,208,196,.62)}
+}
+@media (min-width:641px){
+  .cd-extra{grid-template-columns:158px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-extra{grid-template-columns:126px minmax(0,1fr)}
+}
+.cd-extra .cd-body{padding-top:4px}
+.cd-extra-list{list-style:none;}
+.cd-extra-list li{padding-left:16px;}
+.cd-extra-list li::before{left:0;top:.7em;background:var(--accent);}
+.cd-extra-book{display:block;font-family:"Playfair Display",Georgia,serif;color:#fff}
+.cd-extra-by{display:block;
+  text-transform:uppercase;color:var(--muted);opacity:.72}
+.cd-plus{margin:14px 0 0;font-family:"Playfair Display",Georgia,serif;font-size:16px;
+  color:var(--accent);opacity:.6}
+.cd-plus + .cd-title{margin-top:8px}
+
+
+.ypanel .cd-num-band{font-size:46px}
+.ypanel .cd-num-word{font-size:21px}
+@media (max-width:720px){
+  .cd-extra-list{grid-template-columns:minmax(0,1fr);}
+}
+@media (max-width:640px){
+  .cd-num-band{font-size:46px}
+  .cd-num-word{font-size:23px}
+}
+
+
+/* ============================================================
+   v23 - a quicker turn of the card, a tighter row of icons
+   ============================================================ */
+/* Forward was unhurried; now both directions are brisk. The visibility
+   delay still keeps the departing card on screen while it fades. */
+
+
+@media (prefers-reduced-motion:reduce){
+.cd.is-js .cd-item,.cd.is-js .cd-item.is-current,
+.cd.is-js.is-back .cd-item,.cd.is-js.is-back .cd-item.is-current{transition:opacity .12s linear}
+.cd.is-js .cd-item,.cd.is-js .cd-item.is-done{transform:none}
+}
+.hero-social{gap:12px}
+/* On a wide screen the marks kept stretching to fill the column; let them
+   sit at their own width, close together, well inside the CV button. */
+@media (min-width:901px){
+
+
+}
+
+
+/* ============================================================
+   v24 - the countdown as a sliding door
+   ============================================================ */
+/* A book already shown waits off to the left, a book still to come waits
+   off to the right. Step forward and the card just read slides out to the
+   left while the next one arrives from the right; step back and the same
+   door runs the other way. The list is clipped at the column edge so the
+   cards have something to slide behind. The numeral travels a little
+   further than its card and grows as it lands, which makes every step feel
+   like an arrival, and the row of marks below fills up from the left as
+   number one comes nearer. */
+
+.cd.is-js .cd-item{transform:translateX(-13%);}
+.cd.is-js .cd-item.is-current ~ .cd-item{transform:translateX(13%)}
+.cd.is-js .cd-item.is-current{transform:none;}
+.cd.is-js .cd-item .cd-rank{transform:translateX(-46px) scale(.9);}
+.cd.is-js .cd-item.is-current ~ .cd-item .cd-rank{transform:translateX(46px) scale(.9)}
+.cd.is-js .cd-item.is-current .cd-rank{transform:none}
+/* The marks already passed read as ground covered. */
+.cd-ticks button.is-past::before{background:rgba(127,208,196,.62)}
+@media (prefers-reduced-motion:reduce){
+  .cd.is-js .cd-item,
+  .cd.is-js .cd-item.is-current ~ .cd-item,
+  .cd.is-js .cd-item .cd-rank,
+  .cd.is-js .cd-item.is-current ~ .cd-item .cd-rank{transform:none}
+}
+
+
+/* ============================================================
+   v25 - the five marks on the same left rule as everything above
+   ============================================================ */
+/* The row used to be pulled left of the column so that the first circle
+   would sit under the H of Hannes; the pull made the whole row hang out
+   past the eyebrow, the name, the line of text and the three buttons. It
+   is dropped here. Each mark now stands in a hundred-pixel column of its
+   own with its word set flush beneath it, so the first circle begins on
+   the same rule as Get in touch, the gaps between them are equal, and the
+   last one stops just inside the Download CV button. */
+@media (min-width:901px){
+  .hero-social{width:auto;max-width:none;margin-left:0;
+    gap:0;flex-wrap:nowrap;justify-content:flex-start}
+  .hero-social .pill{flex:0 0 100px;align-items:flex-start}
+  .hero-social .pill-label{text-align:left;letter-spacing:.085em}
+}
+
+
+/* ----------------------------------------------------------------
+   v26 - a shelf for the honorable mentions
+   The books that did not make the ten still deserve a spine to look
+   at. On the first card of every year they now stand in a row that
+   runs from left to right, each one behind a blank jacket of its own.
+   Rest the cursor on one and it lifts and grows a little, the way a
+   book does when you pull it half out of the shelf to read the title.
+   When the row runs past the edge of the card it simply keeps going:
+   scroll it sideways, drag it, or swipe, and the rest comes into view.
+   ---------------------------------------------------------------- */
+.cd-extra-list{display:flex;flex-wrap:nowrap;grid-template-columns:none;
+  gap:0 20px;margin:-38px -6px 0;padding:44px 6px 14px;
+  overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x proximity;scroll-padding-left:6px;
+  -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+  scrollbar-width:thin;scrollbar-color:rgba(127,208,196,.34) rgba(255,255,255,.06)}
+.ypanel .cd-extra-list{gap:0 18px}
+.cd-extra-list::-webkit-scrollbar{height:6px}
+.cd-extra-list::-webkit-scrollbar-track{background:rgba(255,255,255,.06);border-radius:99px}
+.cd-extra-list::-webkit-scrollbar-thumb{background:rgba(127,208,196,.32);border-radius:99px}
+.cd-extra-list:hover::-webkit-scrollbar-thumb{background:rgba(127,208,196,.55)}
+.cd-extra-list li{flex:0 0 94px;width:94px;margin:0;padding:0;position:relative;
+  scroll-snap-align:start;transform-origin:50% 100%;
+  transition:transform .34s cubic-bezier(.22,.61,.36,1)}
+.cd-extra-list li::before{content:"";position:static;display:block;
+  width:100%;height:auto;aspect-ratio:2/3;margin:0 0 10px;opacity:1;
+  border-radius:4px;border:1px solid rgba(255,255,255,.10);
+  background-color:transparent;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2044%2034%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-opacity%3D%22.3%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M22%207.6%20C21.6%2015%2021.6%2022%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C17%205%2011%204.2%205%205.2%20C5%2012%205%2019%205%2025.8%20C11%2025.2%2017%2026.2%2022%2029%22%2F%3E%3Cpath%20d%3D%22M22%207.6%20C27%205%2033%204.2%2039%205.2%20C39%2012%2039%2019%2039%2025.8%20C33%2025.2%2027%2026.2%2022%2029%22%2F%3E%3C%2Fsvg%3E"),
+    linear-gradient(90deg,transparent 5px,rgba(255,255,255,.10) 5px,rgba(255,255,255,.10) 6px,transparent 6px),
+    linear-gradient(140deg,rgba(127,208,196,.13),rgba(143,182,255,.07));
+  background-repeat:no-repeat,no-repeat,no-repeat;
+  background-position:center,left top,center;
+  background-size:34px 26px,100% 100%,100% 100%;
+  box-shadow:0 8px 18px rgba(0,0,0,.26);
+  transition:border-color .34s ease,box-shadow .34s ease}
+.cd-extra-list li:hover,
+.cd-extra-list li:focus-within{transform:scale(1.09) translateY(-5px);z-index:3}
+.cd-extra-list li:hover::before,
+.cd-extra-list li:focus-within::before{border-color:rgba(127,208,196,.44);
+  box-shadow:0 16px 34px rgba(0,0,0,.44)}
+.cd-extra-list li:hover .cd-extra-book{color:#fff}
+.cd-extra-list li:hover .cd-extra-by{opacity:.95}
+.cd-extra-book{font-size:12.5px;line-height:1.32}
+.cd-extra-by{margin-top:4px;font-size:8.5px;letter-spacing:.13em}
+.ypanel .cd-extra-book{font-size:11.5px}
+.ypanel .cd-extra-list li{flex:0 0 86px;width:86px}
+@media (max-width:720px){
+  .cd-extra-list{gap:0 16px}
+  .cd-extra-list li{flex:0 0 84px;width:84px}
+}
+@media (prefers-reduced-motion:reduce){
+  .cd-extra-list li,
+  .cd-extra-list li::before{transition:none}
+  .cd-extra-list li:hover,
+  .cd-extra-list li:focus-within{transform:none}
+}
+
+
+/* ----------------------------------------------------------------
+   v27 - air above the shelf, and the card just read leaves left
+   Two corrections to the block above. The list of cards was clipped
+   to its own four edges, which cut the top off any honorable mention
+   that rose under the cursor; it is now clipped left and right only,
+   with a hand&rsquo;s breadth of air above and below. And in the year
+   panels on the home page the card just read still drifted to the
+   right as it left, against the sense of the sliding door; it now
+   goes out to the left, the way it already did on the year pages.
+   ---------------------------------------------------------------- */
+.cd.is-js .cd-list{overflow:visible;clip-path:inset(-44px 0 -8px 0)}
+.cd.is-js .cd-item.is-done{transform:translateX(-13%)}
+@media (prefers-reduced-motion:reduce){
+  .cd.is-js .cd-item.is-done{transform:none}
+}
+
+
+/* ================================================================
+   v28 - one continuous door
+   ================================================================ */
+/* The step from one book to the next was two motions with a pause in
+   between: a slow slide, a fade that waited, and a different, quicker
+   rule for going back. Now it is one motion in both directions. The
+   card leaves and the next arrives on the same curve and in the same
+   time, the fades overlap so the box is never empty, and the numeral
+   travels with its card instead of trailing behind it. Everything is
+   short enough that holding the arrow reads as a run, not a queue. */
+.cd.is-js .cd-item{
+  will-change:transform,opacity;
+  transition:opacity .19s ease-out,transform .36s cubic-bezier(.28,.78,.22,1),visibility 0s linear .36s}
+.cd.is-js .cd-item.is-current{
+  transition:opacity .24s ease-in,transform .36s cubic-bezier(.28,.78,.22,1),visibility 0s linear 0s}
+.cd.is-js.is-back .cd-item{
+  transition:opacity .19s ease-out,transform .36s cubic-bezier(.28,.78,.22,1),visibility 0s linear .36s}
+.cd.is-js.is-back .cd-item.is-current{
+  transition:opacity .24s ease-in,transform .36s cubic-bezier(.28,.78,.22,1),visibility 0s linear 0s}
+.cd.is-js .cd-item .cd-rank{
+  transition:transform .38s cubic-bezier(.28,.78,.22,1)}
+/* The arrows stop dimming between steps, so a quick run does not flicker. */
+.cd.is-busy .cd-nav button:not(:disabled){opacity:1}
+@media (prefers-reduced-motion:reduce){
+  .cd.is-js .cd-item,
+  .cd.is-js .cd-item.is-done,
+  .cd.is-js .cd-item.is-current ~ .cd-item,
+  .cd.is-js .cd-item .cd-rank,
+  .cd.is-js .cd-item.is-current ~ .cd-item .cd-rank{transform:none;transition:opacity .12s linear}
+}
+
+/* One line is enough for the fine print. */
+.foot-fine p{max-width:none}
+
+
+/* ---------------------------------------------------------------
+   v29 - the small courtesies
+
+   None of this changes what the page looks like when everything
+   goes right. It changes how the page behaves when someone
+   arrives with a keyboard instead of a mouse, with a reader
+   instead of eyes, or on a phone that insists on drawing its
+   own furniture.
+   --------------------------------------------------------------- */
+
+/* Say out loud that this is a dark document. The browser then
+   draws its own parts - scrollbars, the caret, the fields it
+   offers to fill in for you - in the same key, instead of
+   punching a white hole through the page. */
+:root{color-scheme:dark}
+
+/* Stop a phone enlarging the type of its own accord when it is
+   turned on its side, and stop a tap leaving a grey rectangle
+   behind it: give it the accent instead, faintly. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;
+  -webkit-tap-highlight-color:rgba(127,208,196,.18)}
+
+/* Present to a reader, absent to the eye. */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);
+  white-space:nowrap;border:0}
+
+/* The skip link. It waits just above the top of the window and
+   only steps down when it is tabbed to, so that someone moving
+   through the page by keyboard is not walked past the whole
+   navigation before reaching the first sentence. */
+.skip-to{position:fixed;left:22px;top:-72px;z-index:1200;
+  display:inline-block;padding:11px 22px;border-radius:999px;
+  background:var(--accent);color:#0d1622;
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;white-space:nowrap;
+  box-shadow:0 12px 34px rgba(0,0,0,.5);
+  transition:top .2s cubic-bezier(.22,.61,.36,1)}
+.skip-to:focus{top:14px}
+.skip-to:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.skip-to{transition:none}}
+
+/* The message fields used to answer a keyboard visitor with
+   nothing at all: the outline had been taken away and only a
+   border tint left behind, which this background swallows.
+   Give the ring back - but only when the focus arrived by key,
+   so that a click still lands quietly. */
+.message-form input:focus-visible,
+.message-form textarea:focus-visible{outline:2px solid var(--accent)!important;
+  outline-offset:2px!important}
+
+/* ---------------------------------------------------------------
+   v30 - one year to the next
+
+   At the foot of a reading-notes page there was nowhere to go but
+   back to the front. The lists are a sequence, so let them read
+   like one: the year before on the left, the year after on the
+   right, and no rule of their own - the buttons below already
+   bring a hairline, and two lines so close together made a box
+   of what should be a quiet aside.
+   --------------------------------------------------------------- */
+.year-hop{display:flex;align-items:center;gap:18px;
+  margin:58px 0 0;padding:0}
+.year-hop a{display:inline-flex;align-items:baseline;gap:10px;
+  color:rgba(255,255,255,.58);text-decoration:none;
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  transition:color .2s ease,transform .24s cubic-bezier(.22,.61,.36,1)}
+.year-hop a:hover{color:var(--accent)}
+.year-hop .yh-next{margin-left:auto}
+.year-hop .yh-prev:hover{transform:translateX(-4px)}
+.year-hop .yh-next:hover{transform:translateX(4px)}
+.year-hop span{opacity:.7}
+@media (prefers-reduced-motion:reduce){
+  .year-hop a{transition:color .2s ease}
+  .year-hop .yh-prev:hover,.year-hop .yh-next:hover{transform:none}
+}
+@media (max-width:520px){.year-hop{gap:12px;margin-top:48px}.year-hop a{letter-spacing:.14em}}
+
+
+/* ____________________________________________________________
+   v31 - the five marks, one measure apart
+   ____________________________________________________________ */
+/* On a wide screen the circles were already a hundred pixels apart,
+   but the words underneath were set flush left, so Google Scholar ran
+   on almost as far as the next mark while ORCID sat alone in a field
+   of its own. The row read as ragged even though the buttons were not.
+   Below nine hundred pixels the columns were given up altogether and
+   each mark took whatever width its caption happened to need, which is
+   why the row looked scattered on a phone. Now every mark stands in a
+   column of the same measure at every width, and the word is centred
+   beneath the circle it belongs to rather than under the column. The
+   caption for Google Scholar is shortened to Scholar so that no word
+   has to be broken; the full name stays in the link title and in the
+   label read aloud to anyone listening. On a phone the five columns
+   simply divide the width of the text between them, so the marks stay
+   evenly spaced instead of collapsing into a heap. */
+.hero-social{--mark:47px;--mark-col:100px;
+  display:grid;grid-template-columns:repeat(5,var(--mark-col));
+  justify-items:start;align-items:start;row-gap:28px;column-gap:0;
+  width:auto;max-width:none;margin-left:0}
+.hero-social .pill{position:relative;display:block;width:var(--mark);height:auto;
+  min-height:0;padding:0 0 24px;margin:0;overflow:visible;
+  background:none!important;border:0!important;border-radius:0!important}
+.hero-social .pill-icon{width:var(--mark);height:var(--mark);flex:0 0 auto}
+.hero-social .pill-label{position:absolute;left:50%;top:calc(var(--mark) + 11px);
+  transform:translateX(-50%);width:calc(var(--mark-col) - 6px);
+  text-align:center;white-space:normal;font-size:10px;letter-spacing:.1em;
+  line-height:1.3;margin:0}
+@media (max-width:900px){.hero-social{--mark-col:92px}}
+@media (max-width:760px){.hero-social{--mark:44px;--mark-col:86px}}
+@media (max-width:560px){
+  .hero-social{grid-template-columns:repeat(5,1fr);justify-items:stretch;row-gap:0}
+  .hero-social .pill{display:flex;flex-direction:column;align-items:center;
+    gap:11px;width:auto;padding:0}
+  .hero-social .pill-label{position:static;left:auto;top:auto;transform:none;
+    width:100%;font-size:clamp(7.5px,2.1vw,9px);letter-spacing:.02em}
+}
+
+
+/* ____________________________________________________________
+   v32 - the same site in the hand
+   ____________________________________________________________ */
+/* Opened on a phone the page had three faults worth naming. The bar
+   at the top broke onto a second and sometimes a third line and then
+   stood there, a hundred and forty pixels of it, over whatever one was
+   trying to read; it is a single line now, fifty-five pixels tall, its
+   type shrinking with the screen, and all six words still present.
+   Opening a year made the whole page scroll sideways: the cards of the
+   countdown are slid in from the right, and a card waiting off stage
+   counts as somewhere the page can be scrolled to, so the stage is now
+   a frame that clips whatever has not arrived yet. The twelve marks
+   below the cards, twenty-four pixels apiece, did not fit across a
+   narrow card either; they are smaller below six hundred and twenty
+   pixels and are allowed to fall onto a second line rather than push
+   the page wide. The rest is small work. The honorable mentions no
+   longer float in the middle of a tall card. Links in the footer are
+   given a finger of height. The hidden trap for spam robots in the
+   contact form is taken out of the flow, where it had been reaching a
+   whole screen width past the edge. Where a screen cannot hover, the
+   little lifts on tap are switched off so nothing stays raised after a
+   finger leaves it. And the plain pages measure themselves against the
+   small viewport, so the footer no longer hides behind the browser own
+   furniture. */
+html{scroll-padding-top:84px}
+@supports (min-height:100svh){body.simple{min-height:100svh}}
+@media (max-width:900px){
+  html{scroll-padding-top:66px}
+  .nav-inner{flex-wrap:nowrap;align-items:center;gap:0 16px;
+    padding-top:8px;padding-bottom:8px;
+    padding-left:max(18px,env(safe-area-inset-left));
+    padding-right:max(18px,env(safe-area-inset-right))}
+  .nav-brand{flex:0 0 auto}
+  .nav-links{flex:1 1 auto;min-width:0;flex-wrap:nowrap;justify-content:flex-end;
+    gap:0 16px;padding:0;margin:0}
+  .nav-links a{white-space:nowrap;font-size:clamp(9.5px,2.5vw,12px);
+    letter-spacing:.06em;padding-top:12px;padding-bottom:10px}
+  .foot-links a{padding-top:9px;padding-bottom:9px}
+  .pubs-more a{display:inline-block;padding-top:9px;padding-bottom:9px}
+}
+@media (max-width:430px){
+  .nav-inner{gap:0 10px;
+    padding-left:max(14px,env(safe-area-inset-left));
+    padding-right:max(14px,env(safe-area-inset-right))}
+  .nav-links{gap:0 11px;overflow-x:auto;overflow-y:hidden;
+    overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .nav-links::-webkit-scrollbar{display:none}
+}
+.cd-stage{overflow-x:clip;overflow-y:visible}
+.cd-ticks{flex-wrap:wrap;row-gap:6px}
+@media (max-width:760px){.cd-item{align-content:start}}
+@media (max-width:620px){
+  .cd-ticks{gap:4px 4px}
+  .cd-ticks button{width:20px;height:20px}
+  .cd-ticks button::before{width:12px}
+  .cd-ticks button.is-on::before{width:16px}
+}
+@media (max-width:400px){
+  .cd-ticks{gap:3px 3px}
+  .cd-ticks button{width:18px}
+  .cd-ticks button::before{width:11px}
+  .cd-ticks button.is-on::before{width:14px}
+}
+.message-form .honey{position:absolute!important;width:1px;max-width:1px;
+  height:0;padding:0;border:0;opacity:0;pointer-events:none;left:0;top:0}
+.media-grid.mrail,.yrail,.cd-extra-list{-webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain}
+@media (hover:none){
+  .pill:hover,.media-card:hover,.theme-card:hover,.ychip:hover{transform:none}
+}
+
+
+/* ____________________________________________________________
+   v33 - the narrowest screen
+   ____________________________________________________________ */
+/* At three hundred and twenty pixels, which is what an iPhone reports
+   when its owner has asked for the larger, zoomed display, the portrait
+   beside the About text refused to give any ground: it was told to be
+   three hundred and twenty pixels wide and not to shrink, so it pushed
+   the whole page twenty-two pixels wider than the screen and every
+   other measurement was taken from the wrong edge. It may shrink now.
+   Nothing above three hundred and ninety pixels changes. */
+@media (max-width:960px){
+  .about-photo{flex-shrink:1;min-width:0}
+}
+
+
+/* ============================================================
+   v34 - a telephone has no pointer
+   ============================================================ */
+/* Two things on this site were written for a mouse and behaved badly
+   under a finger.
+
+   The rows that scroll sideways were being scrolled twice over: once
+   by the browser, which does it properly, with weight and with a
+   slowing down at the end, and once again by a hand-written drag that
+   could not tell a finger from a mouse. Both pulled at the same row at
+   the same moment, so it ran at double speed, stuttered, and then
+   argued with itself about where to come to rest. The drag now belongs
+   to the mouse alone and on a touch screen the browser is left to it.
+   That correction sits in index.html, where the drag lives.
+
+   The pictures in the CV grew under the pointer. A finger cannot rest
+   on anything, so the first tap left a picture standing open at half
+   its growth, its neighbours dimmed, and there it stayed until
+   something else was touched: not an effect but a fault. So where
+   there is no hover the growing is put away altogether, and the tap is
+   given the meaning the zoom-in cursor always promised. The picture
+   opens at full size over the page; the cross, Escape, or a tap beside
+   it puts the picture away again. */
+@media (hover:none),(pointer:coarse){
+  .cv-pix .pix:hover{transform:none;box-shadow:none;border-color:var(--hair)}
+  .cv-pix .pix:hover img{filter:saturate(.78)}
+  .cv-pix:has(.pix:hover) .pix,.cv-pix:hover .pix{opacity:1}
+  .cv-pix .pix:hover::before{transform:translate(-50%,-50%)}
+  .cv-pix .pix:hover::after{transform:translate(-50%,-50%)}
+  .cv-pix .pix{cursor:pointer}
+  .cv-pix .pix:active{transform:scale(.97);transition-duration:.12s}
+}
+
+/* The row of links in the header is a sideways row too: a swipe that
+   runs out of it should not become the gesture that leaves the page. */
+.nav-links{overscroll-behavior-x:contain}
+
+/* The picture, opened over the page. The sheet is put in place once,
+   empty and out of sight, so that the first picture to be opened fades
+   in exactly like every one after it. */
+.pixbox{position:fixed;inset:0;z-index:1300;display:grid;place-items:center;padding:20px;
+  background:rgba(7,16,29,.94);opacity:0;visibility:hidden;pointer-events:none;
+  overscroll-behavior:contain;touch-action:pinch-zoom;
+  transition:opacity .3s ease,visibility 0s linear .3s}
+.pixbox.is-open{opacity:1;visibility:visible;pointer-events:auto;
+  transition:opacity .3s ease,visibility 0s}
+.pixbox img{display:block;width:auto;height:auto;
+  max-width:min(100%,1180px);max-height:calc(100vh - 40px);
+  border-radius:6px;border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 30px 70px rgba(0,0,0,.55);cursor:default;
+  transform:scale(.97);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.pixbox.is-open img{transform:scale(1)}
+.pixbox-x{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;
+  background:rgba(7,16,29,.72);border:1px solid rgba(255,255,255,.28);
+  color:var(--muted);font-family:inherit;font-size:20px;line-height:1;
+  cursor:pointer;display:grid;place-items:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.35);
+  transition:border-color .3s ease,color .3s ease}
+.pixbox-x:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:700px){
+  .pixbox{padding:14px}
+  .pixbox img{max-height:calc(100vh - 28px)}
+  .pixbox-x{top:8px;right:8px;width:40px;height:40px}
+}
+/* Where the browser can measure the screen that is really left over
+   once its own bars are counted, it should use that measure instead. */
+@supports (height:100dvh){
+  .pixbox img{max-height:calc(100dvh - 40px)}
+  @media (max-width:700px){.pixbox img{max-height:calc(100dvh - 28px)}}
+}
+@media (prefers-reduced-motion:reduce){
+  .pixbox,.pixbox.is-open{transition:opacity .01s linear,visibility 0s}
+  .pixbox img{transition:none;transform:none}
+}
+
+
+/* ============================================================
+   v35 - one long German word
+   ============================================================ */
+/* A publication title in German carries the word
+   Kindheitstraumatisierung: twenty-four letters that will not break.
+   The second column of that list is asked to be at least as wide as
+   its longest unbreakable word, so on a three-hundred-and-twenty pixel
+   screen this one title pushed itself past the right edge and lost its
+   ending there. The column may now be narrower than the word, and the
+   word may break. Nothing at three hundred and ninety pixels or above
+   moves at all; only this one title, and only on the narrowest
+   screens. */
+.pubs>li>div{min-width:0}
+.pub-title,.pub-authors,.pub-meta{overflow-wrap:break-word}
+
+/* ______________________________________________________________
+   Note to self, v36
+   The two pictures under the Abitur were shown too politely.
+
+   A picture opened over the page was allowed to be no larger than the
+   file itself, so on a wide screen a photograph of a hundred people sat
+   small in the middle of the glass and asked to be squinted at. It now
+   takes the whole height it is offered and grows into it, with a ceiling
+   so that it is never stretched so far that the grain of the file begins
+   to show. The proportion of the picture is handed to the sheet by the
+   script that opens it, so nothing is ever pulled out of shape.
+
+   And a frame in the row grows further under the pointer than it did:
+   half again as large, which is enough to see who is standing there.
+   __________________________________________________________ */
+
+/* A narrow margin is enough; the rest of the glass belongs to the
+   picture. */
+.pixbox{padding:16px}
+.pixbox img{width:min(100%,calc((100vh - 32px) * var(--pixar,1.5)),1400px);
+  height:auto;max-width:min(100%,1400px);max-height:calc(100vh - 32px)}
+@media (max-width:700px){
+  .pixbox{padding:10px}
+  .pixbox img{width:min(100%,calc((100vh - 20px) * var(--pixar,1.5)),1400px);
+    max-height:calc(100vh - 20px)}
+  .pixbox-x{top:6px;right:6px}
+}
+/* Where the browser can measure the screen that is really left over
+   once its own bars are counted, it should use that measure instead. */
+@supports (height:100dvh){
+  .pixbox img{width:min(100%,calc((100dvh - 32px) * var(--pixar,1.5)),1400px);
+    max-height:calc(100dvh - 32px)}
+  @media (max-width:700px){
+    .pixbox img{width:min(100%,calc((100dvh - 20px) * var(--pixar,1.5)),1400px);
+      max-height:calc(100dvh - 20px)}
+  }
+}
+
+/* Under the pointer a frame in the CV grows half again as large. */
+.cv-pix .pix:hover{transform:scale(1.55) translateY(-4px)}
+@media (max-width:900px){.cv-pix .pix:hover{transform:scale(1.3) translateY(-3px)}}
+/* Where there is no pointer there is still nothing to grow: a finger
+   opens the picture instead. */
+@media (hover:none),(pointer:coarse){.cv-pix .pix:hover{transform:none}}
+
+/* ==============================================================
+   v37 - The wall of covers behind the reading
+   --------------------------------------------------------------
+   The books now stand in front of a picture of themselves: the
+   upper rows of the wall of covers, held well back behind the
+   type, dimmed and a little desaturated, and dissolving downward
+   so that the years and the notes keep clean ground under them.
+   One file carries it, images/reading-cover-wall.svg - a JPEG
+   wrapped in an SVG so that it could travel as text.
+   The left and right edges reach a touch past the text column;
+   nothing reaches past the window, at any width. The small
+   shadow under the headings lifts them off the covers.
+   ============================================================== */
+.reading{position:relative;isolation:isolate;margin-top:48px;padding-top:16px;
+  --rbleed:clamp(10px,2vw,26px)}
+.reading::before{content:"";position:absolute;pointer-events:none;z-index:-1;
+  top:0;left:calc(-1*var(--rbleed));right:calc(-1*var(--rbleed));
+  height:min(100%,400px);border-radius:16px;
+  background:url("images/reading-cover-wall.svg") center top/cover no-repeat;
+  opacity:.18;filter:saturate(.8) contrast(.9);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 42%,rgba(0,0,0,.5) 72%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0,#000 42%,rgba(0,0,0,.5) 72%,transparent 100%)}
+.reading-head,.reading .yc-year,.reading .yp-year,.reading .yp-note{
+  text-shadow:0 1px 12px rgba(6,14,26,.9),0 0 3px rgba(6,14,26,.6)}
+@media (max-width:640px){.reading::before{height:min(100%,300px);border-radius:12px}}
+@media (prefers-contrast:more){.reading::before{opacity:.08}}
+
+/* ==============================================================
+   v38 - the sideways rows, the wall behind the reading, and the
+   picture that knows its neighbours
+--------------------------------------------------------------
+   Three things.
+
+   1. Every row that scrolls sideways had been told to scroll
+   smoothly. That instruction is meant for the jump to a heading
+   and is quite wrong under a hand: each notch of the wheel began
+   its own small animation and cancelled the one before it, so the
+   row crawled, stopped well short of where it had been pushed,
+   and a proximity snap then pulled it part of the way back. The
+   rows now follow the hand one to one and keep the weight and the
+   slowing-down the browser gives them. The two round buttons
+   still glide, because they ask for that themselves, in the
+   script. Under a finger the snap is worth having, so it stays
+   where there is no pointer.
+
+   2. The wall of covers behind the reading was too faint and
+   dissolved far too early: one row and a sliver of a second. It
+   now stands at more than twice the strength and holds its ground
+   almost to the bottom edge, which leaves three rows to look at.
+   The block is given room underneath so that the third row falls
+   on empty ground and not on the intellectual heroes. When a year
+   stands open the wall draws back to two rows, because the notes
+   need clean paper under them.
+
+   3. The sheet that shows a picture at full size carries an arrow
+   on either side now, and a count. The script beside it (see
+   index.html) gives it the arrow keys and the swipe as well.
+============================================================== */
+
+/* 1 - the rows follow the hand ------------------------------- */
+.media-grid.mrail,.yrail,.cd-extra-list,.nav-links{
+  scroll-behavior:auto;scroll-snap-type:none;overscroll-behavior-y:auto}
+@media (hover:none),(pointer:coarse){
+  .media-grid.mrail,.yrail,.cd-extra-list{scroll-snap-type:x proximity}
+}
+
+/* 2 - three rows of covers, and firmer ground ---------------- */
+.reading{padding-bottom:132px}
+.reading::before{height:clamp(230px,32vw,344px);opacity:.4;
+  filter:saturate(.9) contrast(.95);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 62%,rgba(0,0,0,.7) 80%,rgba(0,0,0,.24) 93%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0,#000 62%,rgba(0,0,0,.7) 80%,rgba(0,0,0,.24) 93%,transparent 100%)}
+.reading:has(.ypanel:not([hidden])){padding-bottom:0}
+.reading:has(.ypanel:not([hidden]))::before{height:clamp(200px,24vw,252px);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 64%,rgba(0,0,0,.5) 86%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0,#000 64%,rgba(0,0,0,.5) 86%,transparent 100%)}
+@media (max-width:640px){
+  .reading{padding-bottom:96px}
+  .reading::before{height:clamp(200px,52vw,280px);border-radius:12px}
+  .reading:has(.ypanel:not([hidden])){padding-bottom:0}
+  .reading:has(.ypanel:not([hidden]))::before{height:clamp(180px,44vw,240px)}
+}
+@media (prefers-contrast:more){.reading::before{opacity:.16}}
+
+/* 3 - an arrow on either side of the open picture ------------ */
+.pixbox-arrow{position:absolute;top:50%;transform:translateY(-50%);
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(7,16,29,.72);border:1px solid rgba(255,255,255,.28);
+  color:var(--muted);font:inherit;cursor:pointer;display:grid;place-items:center;
+  box-shadow:0 4px 14px rgba(0,0,0,.35);z-index:2;
+  transition:border-color .3s ease,color .3s ease,transform .3s ease}
+.pixbox-arrow svg{width:15px;height:15px;fill:none;stroke:currentColor;
+  stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pixbox-arrow:hover{border-color:var(--accent);color:var(--accent)}
+.pixbox-prev{left:14px}
+.pixbox-next{right:14px}
+.pixbox-arrow[hidden]{display:none}
+.pixbox-count{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);
+  margin:0;padding:5px 11px 4px;border-radius:99px;
+  background:rgba(7,16,29,.72);border:1px solid rgba(255,255,255,.16);
+  font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.18em;color:rgba(216,213,208,.72);pointer-events:none}
+.pixbox-count[hidden]{display:none}
+@media (max-width:700px){
+  .pixbox-arrow{width:44px;height:44px}
+  .pixbox-prev{left:6px}
+  .pixbox-next{right:6px}
+}
+@media (prefers-reduced-motion:reduce){.pixbox-arrow{transition:none}}
+
+
+/* ==============================================================
+   v39 - Glass under the years, a firmer wall behind them, and a
+         row of pictures that knows where it ends
+   --------------------------------------------------------------
+   1. The wall of covers goes up once more, from four tenths to
+      not quite six, and is given its own colours back. It is a
+      picture of books, and it may look like one. The heading
+      then had nothing to stand on, so a soft dark ground is
+      laid under it - no edge, no box, only the covers going
+      quiet where the words run.
+
+   2. Which still left the years hard to read off the wall. Every
+      chip is a piece of glass now: it blurs whatever stands
+      behind it, keeps a bright hairline along the top edge where
+      the light would catch, and carries its own shadow. The
+      glass is dark rather than light, because everything written
+      on it is pale. The panel a year opens does the same, only
+      heavier, since whole paragraphs are read there. Where a
+      browser cannot blur, the glass becomes plain dark plate, so
+      that nothing is ever left floating over the covers.
+
+   3. A row of pictures at full size no longer runs round. It has
+      a first and a last, and the arrow with nowhere left to go
+      turns quiet.
+
+   4. A card under About can carry a photograph of the thing
+      itself, held well back behind the type in the same manner
+      as the wall of covers. A card whose picture is not in the
+      repository yet drops the frame and looks as it always did.
+   ============================================================== */
+
+/* 1 - the wall, stronger and in its own colours --------------- */
+.reading::before{opacity:.58;filter:saturate(1) contrast(1)}
+@media (prefers-contrast:more){.reading::before{opacity:.2}}
+.reading-head{position:relative}
+.reading-head::before{content:"";position:absolute;z-index:-1;
+left:-16px;right:-16px;top:-12px;bottom:-10px;border-radius:12px;
+background:radial-gradient(115% 150% at 24% 50%,rgba(6,14,26,.92),
+rgba(6,14,26,.62) 58%,rgba(6,14,26,0) 100%)}
+.reading-head,.reading .yrail-head,.reading .yc-year,.reading .yp-eyebrow,
+.reading .yp-note{text-shadow:0 1px 14px rgba(6,14,26,.92),0 0 4px rgba(6,14,26,.7)}
+
+/* 2 - the years and their notes on dark glass ----------------- */
+.ychip{border:1px solid rgba(255,255,255,.26);
+background:linear-gradient(168deg,rgba(14,30,52,.64),rgba(9,20,36,.5) 52%,rgba(14,30,52,.6));
+-webkit-backdrop-filter:blur(18px) saturate(150%) brightness(.9);
+backdrop-filter:blur(18px) saturate(150%) brightness(.9);
+box-shadow:0 14px 30px rgba(3,10,20,.45),
+inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 0 rgba(255,255,255,.06)}
+.ychip .yc-state{color:rgba(216,213,208,.82)}
+.ychip:hover{border-color:rgba(127,208,196,.6);
+background:linear-gradient(168deg,rgba(20,42,66,.7),rgba(12,26,46,.56) 52%,rgba(20,42,66,.66));
+box-shadow:0 18px 36px rgba(3,10,20,.52),inset 0 1px 0 rgba(255,255,255,.4)}
+.ychip[aria-expanded="true"]{border-color:rgba(127,208,196,.85);
+background:linear-gradient(168deg,rgba(29,72,78,.72),rgba(14,34,50,.58) 55%,rgba(24,58,68,.68));
+box-shadow:0 18px 36px rgba(3,10,20,.52),inset 0 1px 0 rgba(255,255,255,.4)}
+.ypanel{border:1px solid rgba(255,255,255,.22);
+background:linear-gradient(180deg,rgba(24,42,68,.74),rgba(11,24,42,.66));
+-webkit-backdrop-filter:blur(26px) saturate(150%);
+backdrop-filter:blur(26px) saturate(150%);
+box-shadow:0 28px 64px rgba(2,8,18,.5),inset 0 1px 0 rgba(255,255,255,.16)}
+@supports not ((-webkit-backdrop-filter:blur(2px)) or (backdrop-filter:blur(2px))){
+.ychip{background:linear-gradient(168deg,rgba(16,32,54,.92),rgba(11,24,42,.88))}
+.ychip:hover{background:linear-gradient(168deg,rgba(22,44,68,.94),rgba(14,30,50,.9))}
+.ychip[aria-expanded="true"]{background:linear-gradient(168deg,rgba(30,72,78,.94),rgba(16,36,54,.9))}
+.ypanel{background:linear-gradient(180deg,rgba(20,38,62,.96),rgba(11,24,42,.94))}
+}
+
+/* 3 - an arrow with nowhere to go ----------------------------- */
+.pixbox-arrow:disabled,.pixbox-arrow:disabled:hover{opacity:.2;cursor:default;
+border-color:rgba(255,255,255,.14);color:rgba(216,213,208,.6);
+transform:translateY(-50%)}
+
+/* 4 - a photograph behind the card ---------------------------- */
+.hb-item{overflow:hidden}
+.hb-item>a,.hb-item>.hb-mark,.hb-item>.hb-name,.hb-item>.hb-note{
+position:relative;z-index:1}
+.hb-shot{position:absolute;inset:0;z-index:0;border-radius:inherit;overflow:hidden;
+pointer-events:none}
+.hb-shot img{display:block;width:100%;height:100%;object-fit:cover;
+opacity:.5;filter:saturate(.9) contrast(.95);transform:scale(1.03);
+transition:transform 700ms cubic-bezier(.2,.7,.2,1),opacity 400ms ease,
+filter 400ms ease}
+.hb-shot::after{content:"";position:absolute;inset:0;
+background:linear-gradient(158deg,rgba(11,24,42,.56),rgba(11,24,42,.8) 62%,rgba(11,24,42,.9))}
+.hb-item:hover .hb-shot img{transform:scale(1.08);opacity:.62;filter:none}
+@media (prefers-reduced-motion:reduce){
+.hb-shot img{transition:none}
+.hb-item:hover .hb-shot img{transform:scale(1.03)}
+}
+
+
+/* ==============================================================
+   v40 - The wall loses its frame, and a year opens a drawer
+   --------------------------------------------------------------
+   1. At six tenths the wall of covers had begun to read as a box
+      dropped on the page: four hard edges and a rounded corner.
+      The corners are gone and the edges are gone with them - the
+      navy of the page now washes in over left, right and top, so
+      the covers rise out of the paper instead of sitting in a
+      frame. The top wash does the work the dark plate behind the
+      heading used to do, and does it more quietly, so the plate
+      is dismissed and the heading only keeps its shadow.
+
+   2. The photographs behind the cards under About are paintings
+      and deserve to be seen: a little more of them shows, and
+      more again under the pointer.
+
+   3. A year that has a picture of its own opens it downward, a
+      drawer the width of the year and in the same glass, cut so
+      that the picture sits in the middle of it. The script that
+      places it is in index.html; nothing here appears until the
+      pointer arrives.
+   ============================================================== */
+
+/* 1 - no frame, only a wash --------------------------------- */
+.reading::before{border-radius:0}
+.reading::after{content:"";position:absolute;pointer-events:none;z-index:-1;
+top:0;left:calc(-1*var(--rbleed));right:calc(-1*var(--rbleed));
+height:clamp(230px,32vw,344px);
+background:
+linear-gradient(90deg,var(--navy),rgba(11,24,42,0) 104px),
+linear-gradient(270deg,var(--navy),rgba(11,24,42,0) 104px),
+linear-gradient(180deg,var(--navy) 0,rgba(11,24,42,.86) 40px,
+rgba(11,24,42,.34) 84px,rgba(11,24,42,0) 124px)}
+.reading:has(.ypanel:not([hidden]))::after{height:clamp(200px,24vw,252px)}
+.reading-head{display:inline-block}
+.reading-head::before{display:none}
+@media (max-width:640px){
+.reading::before{border-radius:0}
+.reading::after{height:clamp(200px,52vw,280px);
+background:
+linear-gradient(90deg,var(--navy),rgba(11,24,42,0) 54px),
+linear-gradient(270deg,var(--navy),rgba(11,24,42,0) 54px),
+linear-gradient(180deg,var(--navy) 0,rgba(11,24,42,.86) 30px,
+rgba(11,24,42,.34) 64px,rgba(11,24,42,0) 96px)}
+.reading:has(.ypanel:not([hidden]))::after{height:clamp(180px,44vw,240px)}
+}
+
+/* 2 - the paintings come forward ---------------------------- */
+.hb-shot img{opacity:.62}
+.hb-shot::after{background:linear-gradient(158deg,rgba(11,24,42,.4),
+rgba(11,24,42,.72) 58%,rgba(11,24,42,.86))}
+.hb-item:hover .hb-shot img{opacity:.76}
+
+/* 3 - the drawer under a year ------------------------------- */
+.yshot{position:absolute;z-index:6;overflow:hidden;pointer-events:none;
+border:1px solid rgba(255,255,255,.26);border-top:0;border-radius:0 0 10px 10px;
+background:linear-gradient(180deg,rgba(14,30,52,.72),rgba(9,20,36,.66));
+-webkit-backdrop-filter:blur(18px) saturate(150%) brightness(.9);
+backdrop-filter:blur(18px) saturate(150%) brightness(.9);
+box-shadow:0 18px 34px rgba(3,10,20,.5);
+opacity:0;transform:translateY(-10px) scaleY(.6);transform-origin:top center;
+transition:opacity .3s ease,transform .38s cubic-bezier(.2,.7,.2,1)}
+.yshot.is-on{opacity:1;transform:none}
+.yshot img{display:block;width:100%;height:100%;object-fit:cover;
+object-position:center;opacity:.92}
+@supports not ((-webkit-backdrop-filter:blur(2px)) or (backdrop-filter:blur(2px))){
+.yshot{background:linear-gradient(180deg,rgba(16,32,54,.94),rgba(11,24,42,.9))}
+}
+@media (prefers-reduced-motion:reduce){
+.yshot{transition:opacity .2s ease;transform:none}
+}
+
+/* ==============================================================
+   v41 - The wall in its own resolution, the paintings whole, the
+         heroes given faces, and every top ten in jackets
+   --------------------------------------------------------------
+   1. The wall of covers had been travelling as a 1500-pixel JPEG
+      folded inside an SVG and stretched across twice that many
+      device pixels, which is why it would not come sharp. It is
+      replaced by images/reading-cover-wall.jpg, cut at full
+      resolution from the top rows of the library picture. And the
+      box is gone for good: the navy sheet that v40 laid over the
+      covers is dismissed, and the picture now carries its own
+      edge - one mask that dissolves all four sides at once - so
+      it can stand near full strength with no border, no corner
+      and no shadow anywhere. What ends it is the page itself.
+
+   2. The paintings under Away from the desk are square, and so
+      are their cards now: the whole picture shows, feet included.
+      What keeps the words legible is no longer a veil over the
+      entire painting but a weight that gathers at the foot of the
+      card, where the writing sits.
+
+   3. Every intellectual hero with a portrait in
+      images/portraits/ shows it when the pointer rests on the
+      name: a small photograph hung to the left of the line, black
+      and white like the rest of the page, one hairline around it
+      and its own shadow. The file is only fetched on the first
+      visit (the script at the foot of index.html), so the page
+      does not carry two dozen photographs it may never show.
+      Under a finger, where there is nothing to hover, the face
+      stands small and steady beside the name instead.
+
+   4. The drawer a year pulls open under its chip is a vitrine: a
+      square of dark plate, the object set inside it whole and at
+      full strength with room to breathe, a low light behind it
+      and its own shadow beneath. It had been cropped to a
+      letterbox and dimmed over a wall of covers, which is why it
+      read as a smudge.
+   ============================================================== */
+
+/* 1 - the wall, sharp and unframed ---------------------------- */
+.reading{
+  --rbleed:clamp(16px,4vw,72px);
+  --rwash:
+    linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.26) 9%,rgba(0,0,0,.72) 26%,
+      #000 44%,#000 60%,rgba(0,0,0,.6) 79%,rgba(0,0,0,.2) 92%,rgba(0,0,0,0) 100%),
+    linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.5) 6%,#000 16%,#000 84%,
+      rgba(0,0,0,.5) 94%,rgba(0,0,0,0) 100%);
+}
+.reading::before{
+  height:clamp(240px,32vw,352px);
+  border-radius:0;
+  background-image:url("images/reading-cover-wall.jpg");
+  opacity:.8;
+  filter:saturate(1.02) contrast(1.01);
+  box-shadow:none;
+  -webkit-mask-image:var(--rwash);
+  -webkit-mask-composite:source-in;
+  -webkit-mask-repeat:no-repeat;
+  -webkit-mask-size:100% 100%;
+  mask-image:var(--rwash);
+  mask-composite:intersect;
+  mask-repeat:no-repeat;
+  mask-size:100% 100%;
+}
+/* the sheet of navy that v40 laid over the covers has nothing
+   left to do, and neither has the plate behind the heading */
+.reading::after,
+.reading:has(.ypanel:not([hidden]))::after{display:none}
+.reading:has(.ypanel:not([hidden]))::before{
+  height:clamp(210px,24vw,268px);
+  -webkit-mask-image:var(--rwash);
+  mask-image:var(--rwash);
+}
+@media (max-width:640px){
+  .reading::before{height:clamp(200px,52vw,290px);border-radius:0}
+  .reading:has(.ypanel:not([hidden]))::before{height:clamp(180px,44vw,240px)}
+}
+@media (prefers-contrast:more){.reading::before{opacity:.3}}
+
+/* 2 - the paintings, whole ------------------------------------ */
+.hb-grid .hb-item{aspect-ratio:1/1;display:flex;flex-direction:column;
+  justify-content:flex-end;min-height:0}
+.hb-grid .hb-mark{margin-bottom:auto}
+.hb-shot img{opacity:.95;filter:saturate(1.04) contrast(1.02)}
+.hb-item:hover .hb-shot img{opacity:1;filter:saturate(1.08) contrast(1.03)}
+.hb-shot::after{background:
+  linear-gradient(180deg,rgba(11,24,42,0) 0,rgba(11,24,42,.1) 46%,
+    rgba(11,24,42,.58) 76%,rgba(11,24,42,.86) 100%),
+  linear-gradient(105deg,rgba(11,24,42,.38),rgba(11,24,42,.1) 50%,rgba(11,24,42,0) 100%)}
+.hb-item .hb-name,.hb-item .hb-note,.hb-item .hb-gloss{
+  text-shadow:0 1px 12px rgba(5,12,22,.9),0 1px 3px rgba(5,12,22,.75)}
+.hb-item .hb-note{color:#e7e4df}
+.hb-item .hb-mark svg{filter:drop-shadow(0 1px 7px rgba(5,12,22,.85))}
+@media (max-width:520px){.hb-grid .hb-item{aspect-ratio:5/4}}
+
+/* 3 - a face for every hero ----------------------------------- */
+.heroes>li{position:relative}
+.ih-line{position:relative}
+.ih-face{position:absolute;right:calc(100% + 18px);top:50%;
+  width:92px;aspect-ratio:4/5;border-radius:6px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.3);background:#0d1c30;
+  box-shadow:0 16px 34px rgba(2,8,18,.55),inset 0 1px 0 rgba(255,255,255,.12);
+  opacity:0;pointer-events:none;z-index:6;
+  transform:translateY(-50%) translateX(8px);
+  transition:opacity .26s ease,transform .34s cubic-bezier(.2,.7,.2,1)}
+.ih-face img{display:block;width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) contrast(1.03)}
+.heroes>li:hover .ih-face,
+.heroes>li:focus-within .ih-face{opacity:1;transform:translateY(-50%)}
+/* where there is no pointer, or no ground to the left of the
+   text, the face stands small and steady in the line instead */
+@media (hover:none),(pointer:coarse),(max-width:1120px){
+  .ih-face{position:static;opacity:1;pointer-events:auto;
+    transform:none;width:40px;border-radius:5px;flex:0 0 auto;
+    box-shadow:0 4px 10px rgba(2,8,18,.4);align-self:center}
+  .heroes>li:hover .ih-face,
+  .heroes>li:focus-within .ih-face{transform:none}
+}
+@media (prefers-reduced-motion:reduce){.ih-face{transition:opacity .2s ease}}
+
+/* 4 - the vitrine under a year -------------------------------- */
+.yshot{height:auto!important;aspect-ratio:1/1;padding:18px;
+  border:1px solid rgba(255,255,255,.18);border-top:0;border-radius:0 0 14px 14px;
+  background:linear-gradient(180deg,rgba(10,22,38,.95),rgba(6,14,26,.94));
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  box-shadow:0 24px 44px rgba(2,8,18,.6),inset 0 -1px 0 rgba(255,255,255,.05)}
+.yshot::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(58% 52% at 50% 46%,rgba(127,208,196,.17),rgba(127,208,196,0) 72%)}
+.yshot img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;
+  object-position:center;opacity:1;
+  filter:drop-shadow(0 12px 20px rgba(0,0,0,.6)) drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+
+/* ==============================================================
+   v41 - the covers get room, the medals agree on a shape, and
+   the wall behind the reading stops dissolving so early.
+   --------------------------------------------------------------
+   1. Every jacket is larger and sits properly inside its frame:
+      the box follows the shape a hardback actually has, the
+      picture is let in whole rather than cropped to fit, and a
+      little light falls down the spine.
+   2. Bronze was right. Silver and gold now carry the same
+      curve beneath the jacket, in their own metal; gold keeps
+      its crown above.
+   3. The wall of covers holds its edge further down the page
+      before it goes.
+   ============================================================== */
+
+/* ---- 1. bigger jackets, better seated ---- */
+@media (min-width:641px){
+  .cd-item{grid-template-columns:158px 150px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-item{grid-template-columns:126px 140px minmax(0,1fr)}
+}
+.cd-cover{max-width:150px}
+.ypanel .cd-cover{max-width:140px}
+.cd-jacket{aspect-ratio:1/1.52;border-radius:3px 5px 5px 3px;
+  border-color:rgba(255,255,255,.14);
+  box-shadow:0 14px 30px rgba(0,0,0,.42),0 2px 6px rgba(0,0,0,.34)}
+/* the picture is shown whole; the mat behind it takes its colour from
+   the page, so a cover of any shape sits calmly in the same frame */
+.cd-jacket:has(img){background:#0e1c2e}
+.cd-jacket img{width:100%;height:100%;object-fit:contain;object-position:center}
+/* light down the spine and a soft edge on the fore-edge */
+.cd-jacket::after{content:"";position:absolute;inset:0;pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(90deg,rgba(255,255,255,.20) 0,rgba(255,255,255,.05) 3px,
+    rgba(255,255,255,0) 9px,rgba(0,0,0,0) 88%,rgba(0,0,0,.16) 100%)}
+.cd-jacket{position:relative}
+.cd-item .cd-cover{transition:transform .38s cubic-bezier(.22,.61,.36,1)}
+.cd-item:hover .cd-cover{transform:translateY(-3px)}
+
+/* ---- 2. one shape for all three metals ---- */
+.cd-item[data-rank="1"] .cd-cover::after,
+.cd-item[data-rank="2"] .cd-cover::after,
+.cd-item[data-rank="3"] .cd-cover::after{
+  content:"";position:absolute;left:-6px;right:-6px;bottom:auto;
+  top:100%;height:26px;margin-top:6px;
+  background-repeat:no-repeat;background-position:center;background-size:100% 100%;
+  pointer-events:none}
+.cd-item[data-rank="2"] .cd-cover::after{
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23c6ced9%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+.cd-item[data-rank="1"] .cd-cover::after{
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+
+/* ---- 3. the wall keeps its edge ---- */
+.reading::before{
+  height:min(100%,430px);opacity:.22;filter:saturate(.88) contrast(.98);
+  border-radius:10px;
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 74%,rgba(0,0,0,.72) 88%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0,#000 74%,rgba(0,0,0,.72) 88%,transparent 100%)}
+@media (max-width:640px){.reading::before{height:min(100%,320px);border-radius:8px}}
+
+/* ---- the honorable mentions and the 15-11 band get their jackets ---- */
+.cd-extra-cover{display:block;width:100%;aspect-ratio:1/1.52;margin:0 0 10px;
+  border-radius:3px 4px 4px 3px;overflow:hidden;position:relative;
+  border:1px solid rgba(255,255,255,.12);background:#0e1c2e;
+  box-shadow:0 8px 18px rgba(0,0,0,.34);
+  transition:border-color .34s ease,box-shadow .34s ease}
+.cd-extra-cover img{display:block;width:100%;height:100%;
+  object-fit:contain;object-position:center}
+.cd-extra-cover::after{content:"";position:absolute;inset:0;pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(90deg,rgba(255,255,255,.18) 0,rgba(255,255,255,.04) 3px,
+    rgba(255,255,255,0) 8px,rgba(0,0,0,0) 88%,rgba(0,0,0,.14) 100%)}
+/* where a jacket is present the drawn empty frame steps aside */
+.cd-extra-list li:has(.cd-extra-cover)::before{display:none}
+.cd-extra-list li:hover .cd-extra-cover,
+.cd-extra-list li:focus-within .cd-extra-cover{border-color:rgba(127,208,196,.44);
+  box-shadow:0 16px 34px rgba(0,0,0,.44)}
+
+/* The extras rows are .cd-item too, but they have no jacket column of
+   their own - their books stand in the row below. Give them their two
+   columns back, and let every card in the row be the same width. */
+@media (min-width:641px){
+  .cd-extra{grid-template-columns:158px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-extra{grid-template-columns:126px minmax(0,1fr)}
+}
+.cd-extra-list li{flex:0 0 112px;width:112px}
+.ypanel .cd-extra-list li{flex:0 0 104px;width:104px}
+@media (max-width:640px){
+  .cd-extra-list li{flex:0 0 96px;width:96px}
+  .ypanel .cd-extra-list li{flex:0 0 96px;width:96px}
+}
+
+/* ==============================================================
+   v42 - the jackets are meant to be read
+   A cover that has to be squinted at might as well not be there.
+   The ranked books now stand at a size where the title and the
+   author can be read from the chair, and the rows of honorable
+   mentions grow with them.
+   ============================================================== */
+@media (min-width:641px){
+  .cd-item{grid-template-columns:130px 230px minmax(0,1fr)}
+  .cd-extra{grid-template-columns:130px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-item{grid-template-columns:112px 210px minmax(0,1fr)}
+  .ypanel .cd-extra{grid-template-columns:112px minmax(0,1fr)}
+}
+.cd-cover{max-width:230px}
+.ypanel .cd-cover{max-width:210px}
+.cd-jacket{border-radius:3px 6px 6px 3px;
+  box-shadow:0 20px 42px rgba(0,0,0,.46),0 3px 8px rgba(0,0,0,.36)}
+/* the medals keep their proportion against a larger jacket */
+.cd-item[data-rank="1"] .cd-cover::after,
+.cd-item[data-rank="2"] .cd-cover::after,
+.cd-item[data-rank="3"] .cd-cover::after{left:-8px;right:-8px;height:34px;margin-top:9px}
+.cd-item[data-rank="1"] .cd-cover::before{top:-34px;width:74px;height:32px}
+
+/* the sideways rows follow suit */
+.cd-extra-list li{flex:0 0 150px;width:150px}
+.ypanel .cd-extra-list li{flex:0 0 140px;width:140px}
+.cd-extra-book{font-size:14px;line-height:1.34}
+.ypanel .cd-extra-book{font-size:13px}
+.cd-extra-by{font-size:9.5px}
+@media (max-width:900px){
+  .cd-extra-list li,.ypanel .cd-extra-list li{flex:0 0 124px;width:124px}
+}
+@media (max-width:640px){
+  .cd-cover,.ypanel .cd-cover{max-width:190px}
+  .cd-extra-list li,.ypanel .cd-extra-list li{flex:0 0 112px;width:112px}
+}
