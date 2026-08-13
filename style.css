@@ -24,6 +24,11 @@
   --rule: rgba(var(--ink),0.55);
   --green: #5fc98a;
   --red: #ea9a94;
+  /* the warm second accent. On navy it wants to be brighter and paler
+     than the gold the light page uses; both are the same idea. */
+  --goldc: 217, 164, 65;
+  --gold: #d9a441;
+  --gold-strong: #f0bd60;
 }
 
 * {
@@ -1124,6 +1129,52 @@ body.simple footer{margin-top:auto}
 .rot li:first-child{margin-top:0}
 @media (max-width:680px){.cv-points>li{flex-direction:column;gap:4px}.cv-points .pt-when{flex:none;padding-top:0}}
 
+/* ---------------------------------------------------------------
+   The timeline, carried down to a phone
+
+   On the desk the date sits in a rail of its own and the title starts
+   on the same line, so an entry costs two sizes of type and one band
+   of air beneath it. On a phone the rail collapses and the date has to
+   climb on top of the title, and until now everything else stayed at
+   its desk size: a 23px heading inside a 297px column, 44px of air
+   under every entry, and eight pixels between a date and the title it
+   belongs to. Read on the phone it came out cramped where it should
+   breathe and loose where it should hold together.
+
+   What follows keeps the desk proportions rather than the desk
+   numbers. Type steps down with the column. The date is pulled close
+   to its title so the two read as one label. The air between entries
+   comes down in the same measure the type did, so the rhythm on a
+   phone is the rhythm on a laptop, only smaller.
+   --------------------------------------------------------------- */
+@media (max-width:900px){
+  .cv-timeline{margin-top:30px}
+  /* date and title are one unit now: nearly touching, with the air
+     moved to where the entries actually part */
+  .cv-entry{gap:3px;padding-bottom:32px;padding-left:30px}
+  .cv-period{font-size:13px;letter-spacing:.13em;padding-top:0;line-height:1.5}
+  .cv-entry::before{top:7px}
+  .cv-body h3{font-size:clamp(18.5px,4.7vw,21px);line-height:1.3;margin:0 0 6px}
+  .cv-body p{font-size:15.5px;line-height:1.62;max-width:none}
+
+  /* the sub-points keep the same relation to their entry as on the desk */
+  .cv-points{margin-top:10px;max-width:none}
+  .cv-points>li{padding:8px 0}
+  .cv-points>li:first-child{padding-top:2px}
+  .cv-points .pt-what b{font-size:16.5px}
+  .cv-points .pt-what i{font-size:14.5px;line-height:1.5}
+  .rot{margin-top:7px;padding-left:12px}
+  .rot li{font-size:14.5px;line-height:1.5}
+
+  .cv-pix{margin:16px 0 2px}
+}
+@media (max-width:520px){
+  .cv-entry{padding-bottom:28px;padding-left:26px}
+  .cv-period{font-size:12.5px}
+  .cv-body p{font-size:15px}
+  .cv-points .pt-when{font-size:11.5px;letter-spacing:.12em}
+}
+
 
 /* =========================================================
    v9 - profile marks, research focus keyline, writing & media
@@ -1904,8 +1955,10 @@ body.simple footer{margin-top:auto}
 
 .hb-item-link .hb-note::after { content: " \2193"; color: var(--accent); opacity: .8; }
 
+/* Four across on the desk, two by two everywhere below it. The pair of
+   squares survives all the way down to the narrowest phone: a single
+   stacked column turned four small pictures into a long march. */
 @media (max-width: 900px) { .hb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 520px) { .hb-grid { grid-template-columns: 1fr; } }
 
 /* v13 - hero: kicker clears the arc, and the name carries one colour
    The eyebrow now sits a step higher, so the dome above the name never
@@ -2330,7 +2383,10 @@ html{scroll-padding-top:84px}
   .nav-brand{flex:0 0 auto}
   .nav-links{flex:1 1 auto;min-width:0;flex-wrap:nowrap;justify-content:flex-end;
     gap:0 16px;padding:0;margin:0}
-  .nav-links a{white-space:nowrap;font-size:clamp(9.5px,2.5vw,12px);
+  /* Small enough to fit, never small enough to squint at. Below 430px the
+     row becomes a quiet horizontal scroller, so legibility wins over
+     cramming all six words into the width of a phone. */
+  .nav-links a{white-space:nowrap;font-size:clamp(11px,3vw,13px);
     letter-spacing:.06em;padding-top:12px;padding-bottom:10px}
   .foot-links a{padding-top:9px;padding-bottom:9px}
   .pubs-more a{display:inline-block;padding-top:9px;padding-bottom:9px}
@@ -2886,7 +2942,24 @@ object-position:center;opacity:.92}
   text-shadow:0 1px 12px rgba(5,12,22,.9),0 1px 3px rgba(5,12,22,.75)}
 .hb-item .hb-note{color:#e7e4df}
 .hb-item .hb-mark svg{filter:drop-shadow(0 1px 7px rgba(5,12,22,.85))}
-@media (max-width:520px){.hb-grid .hb-item{aspect-ratio:5/4}}
+/* Two to a row on a phone means each tile is about half a screen wide, so
+   the square becomes a slightly upright rectangle and everything inside it
+   steps down a size: the mark, the padding, the name and the note. The
+   gloss beside "Football" goes to its own line rather than squeezing the
+   word it belongs to. */
+@media (max-width:520px){
+  .hb-grid{gap:12px}
+  .hb-grid .hb-item{aspect-ratio:5/6;padding:14px 13px 15px}
+  .hb-grid .hb-mark{width:27px;height:27px;margin-bottom:auto}
+  .hb-item .hb-name{font-size:.95rem;line-height:1.3}
+  .hb-item .hb-gloss{display:block;margin-left:0;margin-top:2px;font-size:.62rem}
+  .hb-item .hb-note{font-size:.8rem;line-height:1.45;margin-top:4px}
+}
+@media (max-width:360px){
+  .hb-grid .hb-item{aspect-ratio:4/5;padding:12px 11px 13px}
+  .hb-item .hb-name{font-size:.9rem}
+  .hb-item .hb-note{font-size:.76rem}
+}
 
 /* 3 - a face for every hero ----------------------------------- */
 .heroes>li{position:relative}
@@ -3200,76 +3273,108 @@ object-position:center;opacity:.92}
    is asked instead.
    __________________________________________________________ */
 
+/* The light page is not the dark page turned inside out.
+
+   That was the first mistake, and it is the reason the first attempt
+   looked ill: inverting a navy sheet gives you a cold sheet. Every grey
+   came out of the same blue, so paper, type, rules and cards all leaned
+   the same slate direction, and slate on slate reads as a form to be
+   filled in rather than a page to be read.
+
+   So the ground here is not white but warm ivory, the ink is not navy
+   but a dark warm brown, and the quiet type is taupe rather than steel.
+   The teal stays — it is the one thing both pages share — but deepened,
+   because a teal bright enough to carry on navy disappears on paper. And
+   a second colour joins it that the dark page never needed: a warm gold,
+   which is where nearly all of the cheerfulness in this theme comes from.
+   Teal and gold on cream is an old, friendly combination; navy-grey and
+   pale mint is a waiting room. */
+
 html[data-theme="light"]{
   color-scheme:light;
-  --ink:23,35,52;                 /* what stands on the page   */
-  --bgc:247,245,241;              /* the page itself           */
-  --mutedc:76,87,105;             /* the quiet type            */
-  --accentc:28,127,114;           /* the teal, deepened        */
-  --deepc:236,233,227;            /* the ground under a panel  */
-  --navy:#f7f5f1;
-  --panel:#ffffff;
-  --text:#16202f;
-  --muted:#4c5769;
-  --rule:rgba(23,35,52,.42);
-  --accent:#1c7f72;
-  --accent-strong:#12655a;
-  --card:rgba(23,35,52,.035);
-  --card-border:rgba(23,35,52,.14);
-  --hair:rgba(23,35,52,.16);
-  --green:#1f7a4d;
-  --red:#b23b34;
+  --ink:43,36,28;                 /* warm brown-black, on the page  */
+  --bgc:251,247,239;              /* the paper itself               */
+  /* The quiet type: taupe, not steel - and darker than a straight
+     inversion would make it. White prose on navy runs at about 14:1;
+     the first light theme answered with 6:1, which is legible but
+     tentative, and reads on screen as a page that has faded. This sits
+     near 9:1, so paragraphs carry the same confidence in either tone
+     while still stepping back from the near-black of the headings. */
+  --mutedc:79,67,53;
+  --accentc:14,124,107;           /* the teal, deepened for daylight */
+  --goldc:184,121,46;             /* the warm second voice          */
+  --deepc:243,236,223;            /* sand, the ground under a panel */
+  --navy:#fbf7ef;
+  --panel:#fffcf6;
+  --text:#2b241c;
+  --muted:#4f4335;
+  --rule:rgba(43,36,28,.4);
+  --accent:#0e7c6b;
+  --accent-strong:#0a6053;
+  --gold:#b8792e;
+  --gold-strong:#96601f;
+  /* cards get a warm tint and real paper under them, not a grey film */
+  --card:rgba(184,121,46,.055);
+  --card-border:rgba(43,36,28,.12);
+  --hair:rgba(43,36,28,.13);
+  --green:#2f7a46;
+  --red:#b0463a;
 }
 html[data-theme="light"] body{background:var(--navy);color:var(--text)}
 
 /* A straight inversion leaves these behind. */
-html[data-theme="light"] .ih-face{background:#e8e4dc}
+html[data-theme="light"] .ih-face{background:#efe7d9}
 html[data-theme="light"] .cd-jacket:has(img),
-html[data-theme="light"] .cd-extra-cover{background:#ece8e1}
+html[data-theme="light"] .cd-extra-cover{background:#f0e8da}
 html[data-theme="light"] .yshot,
 html[data-theme="light"] .ypanel{
-  background:linear-gradient(180deg,#ffffff,#f4f1ec)}
+  background:linear-gradient(180deg,#fffcf6,#f6f1e6)}
 html[data-theme="light"] .ychip{
   background:linear-gradient(168deg,rgba(255,255,255,.96),rgba(244,241,236,.94))}
 html[data-theme="light"] .ychip:hover{
-  background:linear-gradient(168deg,#ffffff,rgba(238,244,242,.96))}
+  background:linear-gradient(168deg,#fffcf6,rgba(238,244,242,.96))}
 html[data-theme="light"] .ychip[aria-expanded="true"]{
   background:linear-gradient(168deg,rgba(226,242,238,.98),rgba(240,247,245,.96))}
 /* the wash at the head of the reading, and the wall it sits on */
 html[data-theme="light"] .reading::after,
 html[data-theme="light"] .reading:has(.ypanel:not([hidden]))::after{
-  background:linear-gradient(180deg,rgba(247,245,241,.96) 0,rgba(247,245,241,.9) 30%,
-    rgba(247,245,241,.6) 66%,rgba(247,245,241,0) 100%)}
+  background:linear-gradient(180deg,rgba(251,247,239,.96) 0,rgba(251,247,239,.9) 30%,
+    rgba(251,247,239,.6) 66%,rgba(251,247,239,0) 100%)}
 html[data-theme="light"] .reading::before{opacity:.34;filter:saturate(.94) contrast(.97)}
 html[data-theme="light"] .reading-head{
-  text-shadow:0 1px 2px rgba(247,245,241,.95),0 2px 12px rgba(247,245,241,.85)}
+  text-shadow:0 1px 2px rgba(251,247,239,.95),0 2px 12px rgba(251,247,239,.85)}
 /* the emblems were cut out to stand on navy; on paper they want a
    little weight under them instead of a glow */
 html[data-theme="light"] .yp-symbol img{
-  filter:drop-shadow(0 3px 7px rgba(23,35,52,.28))}
+  filter:drop-shadow(0 3px 7px rgba(43,36,28,.28))}
 /* a photograph keeps its own shadow in either tone */
 html[data-theme="light"] .hb-shot::after{
-  background:linear-gradient(158deg,rgba(10,18,30,.28),rgba(10,18,30,.62))}
-html[data-theme="light"] .pixbox{background:rgba(247,245,241,.95)}
+  background:linear-gradient(158deg,rgba(58,40,20,.28),rgba(58,40,20,.62))}
+html[data-theme="light"] .pixbox{background:rgba(251,247,239,.95)}
 html[data-theme="light"] .pixbox-x{background:rgba(255,255,255,.86);color:var(--muted)}
-html[data-theme="light"] .topnav{background:rgba(247,245,241,.86)}
+html[data-theme="light"] .topnav{background:rgba(251,247,239,.86)}
 html[data-theme="light"] .message-form input,
-html[data-theme="light"] .message-form textarea{background:#ffffff}
-html[data-theme="light"] .message-form button{color:#f7f5f1}
-html[data-theme="light"] .btn-primary{color:#f7f5f1}
+html[data-theme="light"] .message-form textarea{background:#fffcf6}
+html[data-theme="light"] .message-form button{color:#fbf7ef}
+html[data-theme="light"] .btn-primary{color:#fbf7ef}
 html[data-theme="light"] .hn-arc,
-html[data-theme="light"] .hn-pulse{stroke:rgba(23,35,52,.45)}
+html[data-theme="light"] .hn-pulse{stroke:rgba(43,36,28,.45)}
 
 /* ---- what a straight inversion cannot know ---- */
 /* the wash that carries a colour per chapter: the same six moods,
    raised into daylight rather than sunk into night */
 html[data-theme="light"] .chapter-wash,
 html[data-theme="light"] .chapter-wash[data-chapter="home"],
-html[data-theme="light"] .chapter-wash[data-chapter="contact"]{background-color:#f7f5f1}
-html[data-theme="light"] .chapter-wash[data-chapter="about"]{background-color:#eef4f4}
-html[data-theme="light"] .chapter-wash[data-chapter="writing"]{background-color:#f1f1f7}
-html[data-theme="light"] .chapter-wash[data-chapter="research"]{background-color:#ecf4f2}
-html[data-theme="light"] .chapter-wash[data-chapter="cv"]{background-color:#f2f3f6}
+html[data-theme="light"] .chapter-wash[data-chapter="contact"]{background-color:#fbf7ef}
+/* Six moods in daylight. The dark page moves through blues and greens
+   because that is what night does; the light page moves through sand,
+   apricot, olive and clay, because that is what warm paper does. Each
+   is only a few steps from the ivory ground - enough that a chapter
+   feels like it has its own weather, never enough to notice a seam. */
+html[data-theme="light"] .chapter-wash[data-chapter="about"]{background-color:#f6f1e0}
+html[data-theme="light"] .chapter-wash[data-chapter="writing"]{background-color:#fbeee1}
+html[data-theme="light"] .chapter-wash[data-chapter="research"]{background-color:#eff3e4}
+html[data-theme="light"] .chapter-wash[data-chapter="cv"]{background-color:#f8efe4}
 
 /* type that was written pale because the ground was dark */
 html[data-theme="light"] h2,
@@ -3285,33 +3390,37 @@ html[data-theme="light"] .cd-nav button[data-cd-step="1"]:not(:disabled){color:v
 html[data-theme="light"] .message-form input[type="email"],
 html[data-theme="light"] .message-form input[type="text"],
 html[data-theme="light"] .message-form textarea{
-  background:#ffffff!important;color:var(--text)!important}
+  background:#fffcf6!important;color:var(--text)!important}
 html[data-theme="light"] .message-form input::placeholder,
-html[data-theme="light"] .message-form textarea::placeholder{color:#7b8595}
-html[data-theme="light"] .cv-pix img{background:#e9e5de}
-html[data-theme="light"] .contact{background:linear-gradient(180deg,#eef1f2 0%,#f7f5f1 100%)}
+html[data-theme="light"] .message-form textarea::placeholder{color:#8a7a66}
+html[data-theme="light"] .cv-pix img{background:#efe7d9}
+html[data-theme="light"] .contact{background:linear-gradient(180deg,#f6efe2 0%,#fbf7ef 100%)}
 html[data-theme="light"] .nav-brand{color:var(--text)}
 html[data-theme="light"] .nav-inner a:hover,
 html[data-theme="light"] .nav-inner a.active{color:var(--text)}
-html[data-theme="light"]{scrollbar-color:rgba(23,35,52,.3) #e9e5de}
-html[data-theme="light"] ::-webkit-scrollbar-track{background:#e9e5de}
+html[data-theme="light"]{scrollbar-color:rgba(43,36,28,.3) #efe7d9}
+html[data-theme="light"] ::-webkit-scrollbar-track{background:#efe7d9}
 html[data-theme="light"] ::-webkit-scrollbar-thumb{
-  background:rgba(23,35,52,.22);border:3px solid #e9e5de}
+  background:rgba(43,36,28,.22);border:3px solid #efe7d9}
 /* anything set in the accent wants the page's colour back on top of it */
 html[data-theme="light"] .btn-primary,
 html[data-theme="light"] .skip-to,
 html[data-theme="light"] .message-form button,
-html[data-theme="light"] .message-form button[type=submit]{color:#f7f5f1}
-/* the name over the hero was drawn in four pale tints */
+html[data-theme="light"] .message-form button[type=submit]{color:#fbf7ef}
+/* The name over the hero. The dark page runs it through four pale tints
+   of the night sky; the first light version simply darkened them, and
+   "Meilicke" ended in a cold slate-violet that belonged to neither the
+   teal nor the paper. It runs teal into gold instead - the two colours
+   this page is actually built from - so the name warms as it is read. */
 html[data-theme="light"] .hero-text h1 .hn-text{
-  background-image:linear-gradient(96deg,#123f52 0%,#14544e 6%,#1c7f72 46%,#3f4d76 100%)}
+  background-image:linear-gradient(96deg,#0b544a 0%,#0c6659 8%,#0e7c6b 44%,#a97530 100%)}
 
 html[data-theme="light"] .cd-extra-book,
 html[data-theme="light"] .cd-extra-list li:hover .cd-extra-book{color:var(--text)}
 html[data-theme="light"] .rail a.active{color:var(--text)}
 html[data-theme="light"] .rail .lbl{color:var(--muted)}
 html[data-theme="light"] .scroll-cue span{color:var(--muted)}
-html[data-theme="light"] .cd-nav button:disabled{color:rgba(23,35,52,.3)}
+html[data-theme="light"] .cd-nav button:disabled{color:rgba(43,36,28,.3)}
 html[data-theme="light"] .heroes-fold>summary,
 html[data-theme="light"] .pub-fold>summary{color:var(--text)}
 /* the submit sits under the middle of the box it belongs to */
@@ -3413,12 +3522,15 @@ html[data-theme="light"] .pill.s-scholar .pill-icon svg{fill:#2a63c4}
 html[data-theme="light"] .pill.s-orcid   .pill-icon svg{fill:#6f8a1f}
 html[data-theme="light"] .pill.s-rg      .pill-icon svg{fill:#0b7f70}
 html[data-theme="light"] .pill.s-linkedin .pill-icon svg{fill:#0a66c2}
-html[data-theme="light"] .pill.s-mail    .pill-icon svg{fill:#2a6070}
+/* Scholar, ORCID, ResearchGate and LinkedIn wear their own colours and
+   should. The message pill has no brand to answer to, so it wears the
+   page's teal instead of the cold slate it borrowed from the dark theme. */
+html[data-theme="light"] .pill.s-mail    .pill-icon svg{fill:var(--accent)}
 html[data-theme="light"] .pill.s-scholar{--brand:#2a63c4;--brand-line:rgba(42,99,196,.4)}
 html[data-theme="light"] .pill.s-orcid{--brand:#6f8a1f;--brand-line:rgba(111,138,31,.4)}
 html[data-theme="light"] .pill.s-rg{--brand:#0b7f70;--brand-line:rgba(11,127,112,.4)}
 html[data-theme="light"] .pill.s-linkedin{--brand:#0a66c2;--brand-line:rgba(10,102,194,.4)}
-html[data-theme="light"] .pill.s-mail{--brand:#2a6070;--brand-line:rgba(42,96,112,.4)}
+html[data-theme="light"] .pill.s-mail{--brand:var(--accent);--brand-line:rgba(var(--accentc),.45)}
 html[data-theme="light"] .hero-social .pill:hover .pill-label{color:var(--text)}
 html[data-theme="light"] .hero-social .pill-label{color:var(--muted);opacity:.9}
 html[data-theme="light"] .pill-icon svg{fill:currentColor}
@@ -3426,37 +3538,47 @@ html[data-theme="light"] .pill-icon svg{fill:currentColor}
 /* ---- 2. hairlines, rules and empty frames ---- */
 /* Every one of these was set to read against black. */
 html[data-theme="light"]{
-  --card-border:rgba(23,35,52,.16);
-  --hair:rgba(23,35,52,.18);
-  --card:rgba(23,35,52,.03)}
+  --card-border:rgba(43,36,28,.16);
+  --hair:rgba(43,36,28,.18);
+  --card:rgba(43,36,28,.03)}
 html[data-theme="light"] .h2-rule{background:var(--accent);opacity:.9}
-html[data-theme="light"] .cv-pix .pix{border-color:rgba(23,35,52,.16)}
+html[data-theme="light"] .cv-pix .pix{border-color:rgba(43,36,28,.16)}
 html[data-theme="light"] .cv-pix .pix::before,
-html[data-theme="light"] .cv-pix .pix::after{background:rgba(23,35,52,.4)}
+html[data-theme="light"] .cv-pix .pix::after{background:rgba(43,36,28,.4)}
+/* On navy a card is made by lifting it a shade out of the dark. On paper
+   that trick inverts into a grey film laid over cream, which is exactly
+   how the first light theme lost its cards: a 2.5% wash of ink is not a
+   card, it is a smudge. Here a card is paper laid on paper - lighter and
+   warmer than the ground, with a soft shadow doing the separating. */
 html[data-theme="light"] .img-frame,
 html[data-theme="light"] .media-card,
 html[data-theme="light"] .theme-card,
 html[data-theme="light"] .reading-card{
-  border-color:rgba(23,35,52,.14);background:rgba(23,35,52,.025)}
+  border-color:rgba(43,36,28,.1);
+  background:linear-gradient(168deg,#fffdf8,#fdf8ee);
+  box-shadow:0 1px 2px rgba(96,68,32,.05),0 10px 26px rgba(96,68,32,.07)}
+html[data-theme="light"] .media-card:hover,
+html[data-theme="light"] .theme-card:hover{
+  box-shadow:0 2px 4px rgba(96,68,32,.07),0 18px 40px rgba(96,68,32,.12)}
 html[data-theme="light"] .cd-jacket,
 html[data-theme="light"] .cd-extra-cover{
-  border-color:rgba(23,35,52,.14);
-  box-shadow:0 10px 24px rgba(23,35,52,.14),0 2px 5px rgba(23,35,52,.1)}
+  border-color:rgba(43,36,28,.14);
+  box-shadow:0 10px 24px rgba(43,36,28,.14),0 2px 5px rgba(43,36,28,.1)}
 html[data-theme="light"] .ih-face{
-  border-color:rgba(23,35,52,.2);
-  box-shadow:0 10px 24px rgba(23,35,52,.16)}
+  border-color:rgba(43,36,28,.2);
+  box-shadow:0 10px 24px rgba(43,36,28,.16)}
 html[data-theme="light"] .ypanel{
-  border-color:rgba(23,35,52,.14);
-  box-shadow:0 20px 44px rgba(23,35,52,.1)}
-html[data-theme="light"] .yshot{border-color:rgba(23,35,52,.14)}
-html[data-theme="light"] .ychip{border-color:rgba(23,35,52,.16)}
+  border-color:rgba(43,36,28,.14);
+  box-shadow:0 20px 44px rgba(43,36,28,.1)}
+html[data-theme="light"] .yshot{border-color:rgba(43,36,28,.14)}
+html[data-theme="light"] .ychip{border-color:rgba(43,36,28,.16)}
 html[data-theme="light"] .yp-close,
 html[data-theme="light"] .cd-nav button,
 html[data-theme="light"] .yrail-nav button,
-html[data-theme="light"] .pixbox-x{border-color:rgba(23,35,52,.22)}
+html[data-theme="light"] .pixbox-x{border-color:rgba(43,36,28,.22)}
 html[data-theme="light"] .scroll-progress i{background:var(--accent)}
 html[data-theme="light"] hr,
-html[data-theme="light"] .rule{background:rgba(23,35,52,.16)}
+html[data-theme="light"] .rule{background:rgba(43,36,28,.16)}
 
 /* ---- 3. the type that was written for a dark ground ---- */
 html[data-theme="light"] .focus-label,
@@ -3464,9 +3586,9 @@ html[data-theme="light"] .reading-head,
 html[data-theme="light"] .hero-eyebrow,
 html[data-theme="light"] .cd-no,
 html[data-theme="light"] .yc-year{color:var(--accent)}
-html[data-theme="light"] .cd-num{color:rgba(23,35,52,.3)}
+html[data-theme="light"] .cd-num{color:rgba(43,36,28,.3)}
 html[data-theme="light"] .cd-item[data-rank="1"] .cd-num{color:rgba(163,124,42,.85)}
-html[data-theme="light"] .cd-item[data-rank="2"] .cd-num{color:rgba(23,35,52,.42)}
+html[data-theme="light"] .cd-item[data-rank="2"] .cd-num{color:rgba(43,36,28,.42)}
 html[data-theme="light"] .cd-item[data-rank="3"] .cd-num{color:rgba(140,96,52,.7)}
 html[data-theme="light"] .ih-role{color:var(--accent)}
 html[data-theme="light"] .ih-for,
@@ -3483,11 +3605,11 @@ html[data-theme="light"] .nav-inner a{color:var(--muted)}
 html[data-theme="light"] .sec-num,
 html[data-theme="light"] .scroll-cue span,
 html[data-theme="light"] .rail .lbl{color:var(--muted);opacity:.85}
-html[data-theme="light"] .rail a .dot{background:rgba(23,35,52,.25)}
+html[data-theme="light"] .rail a .dot{background:rgba(43,36,28,.25)}
 html[data-theme="light"] .rail a.active .dot,
 html[data-theme="light"] .rail a:hover .dot{background:var(--accent)}
-html[data-theme="light"] ::selection{background:rgba(28,127,114,.22);color:var(--text)}
-html[data-theme="light"] ::placeholder{color:#7b8595}
+html[data-theme="light"] ::selection{background:rgba(14,124,107,.22);color:var(--text)}
+html[data-theme="light"] ::placeholder{color:#8a7a66}
 
 /* ---- 4. a photograph keeps its own light ---- */
 /* The pictures are the one thing that should not turn over: they are
@@ -3501,7 +3623,7 @@ html[data-theme="light"] .hb-item .hb-name,
 html[data-theme="light"] .hb-item .hb-gloss{color:#fff!important;
   text-shadow:0 1px 3px rgba(0,0,0,.6),0 2px 14px rgba(0,0,0,.45)}
 html[data-theme="light"] .hb-mark{color:#eafcf8;opacity:.95}
-html[data-theme="light"] .hb-item{border-color:rgba(23,35,52,.14)}
+html[data-theme="light"] .hb-item{border-color:rgba(43,36,28,.14)}
 html[data-theme="light"] .ih-face img{filter:grayscale(1) contrast(1.05) brightness(1.02)}
 /* a jacket sits on paper, not on navy */
 html[data-theme="light"] .cd-jacket:has(img),
@@ -3511,11 +3633,11 @@ html[data-theme="light"] .cv-pix .pix:hover img{filter:saturate(1)}
 
 /* ---- 5. the emblems, cut for navy, standing on paper ---- */
 html[data-theme="light"] .yp-symbol img{
-  filter:drop-shadow(0 2px 5px rgba(23,35,52,.35))
-         drop-shadow(0 8px 18px rgba(23,35,52,.18))}
+  filter:drop-shadow(0 2px 5px rgba(43,36,28,.35))
+         drop-shadow(0 8px 18px rgba(43,36,28,.18))}
 
 /* ---- 6. the switch reads either way ---- */
-html[data-theme="light"] .theme-toggle{color:var(--muted);border-color:rgba(23,35,52,.2)}
+html[data-theme="light"] .theme-toggle{color:var(--muted);border-color:rgba(43,36,28,.2)}
 html[data-theme="light"] .theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
 
 /* ---- 7. the writing cards ---- */
@@ -3523,35 +3645,176 @@ html[data-theme="light"] .theme-toggle:hover{color:var(--accent);border-color:va
    of the night. Both are turned. */
 html[data-theme="light"] .media-card h3{color:var(--text)}
 html[data-theme="light"] .media-card:hover h3{color:var(--accent)}
+/* A card that is hovered should come up off the page, not get dirtier.
+   The wash stays paper; the shadow does the lifting. */
 html[data-theme="light"] .media-card:hover{
-  background:rgba(23,35,52,.04);box-shadow:0 18px 40px rgba(23,35,52,.14)}
+  background:linear-gradient(168deg,#fffefb,#fefaf2)}
 html[data-theme="light"] .media-thumb{
-  background:linear-gradient(135deg,rgba(28,127,114,.1),rgba(90,120,180,.08))}
-html[data-theme="light"] .media-thumb::before{color:rgba(28,127,114,.34)}
+  background:linear-gradient(135deg,rgba(14,124,107,.12),rgba(184,121,46,.1))}
+html[data-theme="light"] .media-thumb::before{color:rgba(14,124,107,.36)}
 html[data-theme="light"] .media-thumb::after{
-  background:linear-gradient(to top,rgba(247,245,241,.75),transparent 58%)}
+  background:linear-gradient(to top,rgba(251,247,239,.75),transparent 58%)}
 html[data-theme="light"] .media-card .kicker,
 html[data-theme="light"] .media-card p{color:var(--muted)}
 html[data-theme="light"] .theme-card:hover{
-  background:rgba(23,35,52,.04);box-shadow:0 18px 40px rgba(23,35,52,.12)}
-html[data-theme="light"] .reading-card:hover{background:rgba(23,35,52,.04)}
+  background:linear-gradient(168deg,#fffefb,#fefaf2)}
+html[data-theme="light"] .reading-card:hover{
+  background:linear-gradient(168deg,#fffefb,#fdf8ee)}
 /* the small caps over a card */
 html[data-theme="light"] [class*="-tag"],
 html[data-theme="light"] [class*="-kicker"]{color:var(--muted)}
 
-html[data-theme="light"] .media-date{color:rgba(23,35,52,.55)}
+html[data-theme="light"] .media-date{color:rgba(43,36,28,.55)}
 html[data-theme="light"] .media-kind{
-  background:rgba(255,255,255,.82);border-color:rgba(23,35,52,.18);color:var(--accent)}
+  background:rgba(255,255,255,.82);border-color:rgba(43,36,28,.18);color:var(--accent)}
 
 /* ---- 8. the last of the white type ---- */
 html[data-theme="light"] .cd-title,
 html[data-theme="light"] .cv-body h3,
 html[data-theme="light"] .simple-main h2,
 html[data-theme="light"] .simple-main h3{color:var(--text)}
-html[data-theme="light"] .cd-plus{color:rgba(23,35,52,.35)}
+html[data-theme="light"] .cd-plus{color:rgba(43,36,28,.35)}
 /* an emoji flag has no colour of its own to turn */
 html[data-theme="light"] .flag{opacity:1}
 
 html[data-theme="light"] .simple-main h1,
 html[data-theme="light"] .piece h1,
 html[data-theme="light"] .legal h1{color:var(--text)}
+
+/* __________________________________________________________________
+   Light theme, part two: what the dark page could afford and paper
+   cannot
+
+   White type on navy starts with an enormous contrast surplus, so the
+   dark sheet spends it freely: a caption at 62% of an already-quiet
+   grey still reads perfectly well against #0b182a. Turn the ground to
+   ivory and that surplus is gone. The same 62% now lands somewhere
+   around 3:1, and a whole layer of the page - dates, roles, authors,
+   sub-points, the little count beside a heading - goes faint at once.
+   That faintness is a large part of why the first light theme felt
+   washed out rather than light.
+
+   So on paper the dilutions come off. Where the dark sheet writes
+   rgba(muted, .5) this writes the colour outright, and the greys that
+   carry the most words go a step deeper still. Nothing here changes a
+   size or a weight; it only stops asking ink to be half-present.
+
+   Everything below clears 4.5:1 against the ivory it sits on, and the
+   accent-coloured labels clear it too.
+   __________________________________________________________________ */
+
+html[data-theme="light"]{
+  /* one step deeper than --muted, for type the dark sheet diluted */
+  --muted-deep:#3b3126;
+  --accent-label:#0a6053;
+}
+
+/* the line under the name in the hero */
+html[data-theme="light"] .affil-prev{color:var(--muted)}
+
+/* navigation: .66 was fine over navy, not over cream */
+html[data-theme="light"] .nav-links a{opacity:1;color:var(--muted)}
+html[data-theme="light"] .nav-links a:hover,
+html[data-theme="light"] .nav-links a.active{color:var(--text)}
+
+/* the reading countdown */
+html[data-theme="light"] .cd-num-word{color:var(--accent-label)}
+html[data-theme="light"] .cd-extra-by{color:var(--muted);opacity:1}
+html[data-theme="light"] .cd-extra-list li:hover .cd-extra-by{opacity:1;color:var(--muted-deep)}
+
+/* the heroes list */
+html[data-theme="light"] #heroes-block .ih-disclaimer{color:var(--muted)}
+html[data-theme="light"] .ih-role{color:var(--accent-label);opacity:1}
+html[data-theme="light"] .ih-for{color:var(--muted);opacity:1}
+html[data-theme="light"] .heroes>li:hover .ih-for{color:var(--muted-deep)}
+
+/* publications */
+html[data-theme="light"] .pf-count{color:var(--muted);border-color:rgba(43,36,28,.24)}
+html[data-theme="light"] .pub-note{color:var(--muted)}
+
+/* the CV: dates, sub-points, rotations */
+html[data-theme="light"] .cv-period{color:var(--accent-label)}
+html[data-theme="light"] .cv-points .pt-when{color:var(--accent-label);opacity:1}
+html[data-theme="light"] .cv-points .pt-what i{color:var(--muted)}
+html[data-theme="light"] .cv-sub .cs-where{opacity:1;color:var(--muted)}
+html[data-theme="light"] .rot li{color:var(--muted)}
+
+/* the small labels that ride along the edges */
+html[data-theme="light"] .focus-label{opacity:1;color:var(--accent-label)!important}
+html[data-theme="light"] .rail .lbl,
+html[data-theme="light"] .scroll-cue span{color:var(--muted-deep);opacity:1}
+
+/* Draft text should read as draft, not as damage. On navy .45 opacity
+   was a soft italic aside; on paper it is barely there. It keeps the
+   italic and stays clearly quieter than finished prose, but a visitor
+   can now actually read what is waiting to be written. */
+html[data-theme="light"] .is-placeholder{opacity:1;color:rgba(43,36,28,.62)}
+html[data-theme="light"] .ih-note.is-placeholder,
+html[data-theme="light"] .cd-take.is-placeholder,
+html[data-theme="light"] .yp-note.is-placeholder{opacity:1}
+
+/* 8.5px is below what anyone should be asked to read, in either tone */
+.cd-extra-by{font-size:9.5px}
+
+/* the last five, found by measuring rather than by eye */
+html[data-theme="light"] #heroes-block .ih-disclaimer{opacity:1;color:var(--muted)}
+html[data-theme="light"] .is-placeholder{color:rgba(43,36,28,.68)}
+html[data-theme="light"]{--accent-label:#08564a}
+html[data-theme="light"] footer p{color:var(--muted)}
+html[data-theme="light"] .foot-links a{color:var(--muted)}
+/* the CV download is a filled button, so its label takes the paper colour */
+html[data-theme="light"] #cv .centered a{color:#fbf7ef}
+
+/* __________________________________________________________________
+   Both tones: the last few greys that were a shade under
+
+   Measuring the light page turned up the same handful of selectors on
+   the dark one, all just under 4.5:1 - between 3.3 and 4.05, close
+   enough to look fine and not close enough to be. They are all the
+   secondary layer: the line under the name, the date over a card, the
+   note beside a publication, the credit in the footer, the draft text
+   waiting to be written. Each is nudged up by a few percent of alpha.
+   Nothing moves, nothing changes size, and the hierarchy is unchanged
+   - these stay clearly quieter than the type they sit beneath.
+   __________________________________________________________________ */
+
+.affil-prev{color:rgba(var(--mutedc),.62)}
+.pub-note{color:rgba(var(--mutedc),.66)}
+.media-date{color:rgba(var(--mutedc),.66)}
+.foot-fine p{color:rgba(var(--ink),.5)}
+.scroll-cue{color:rgba(var(--ink),.52)}
+.hero-social .pill-label{color:rgba(var(--mutedc),.72)}
+.ih-note.is-placeholder,
+.cd-take.is-placeholder,
+.yp-note.is-placeholder{opacity:.6}
+
+/* the light page sets these itself, just above; keep it winning */
+html[data-theme="light"] .affil-prev{color:var(--muted)}
+html[data-theme="light"] .pub-note{color:var(--muted)}
+html[data-theme="light"] .media-date{color:var(--muted)}
+html[data-theme="light"] .foot-fine p{color:var(--muted)}
+html[data-theme="light"] .scroll-cue{color:var(--muted-deep)}
+html[data-theme="light"] .hero-social .pill-label{color:var(--muted);opacity:1}
+html[data-theme="light"] .ih-note.is-placeholder,
+html[data-theme="light"] .cd-take.is-placeholder,
+html[data-theme="light"] .yp-note.is-placeholder{opacity:1}
+
+/* __________________________________________________________________
+   A frame waits empty rather than flashing empty
+
+   Every optional picture on this page hides its own frame when the file
+   is missing, which worked invisibly while a card was a 2.5% wash of
+   ink. Now that a card in daylight is real paper with a shadow under
+   it, the half-second between "the browser tried" and "the browser
+   failed" shows as a blank white slab that then vanishes.
+
+   So the frame starts hidden and is shown by the picture itself: the
+   img adds .has-pic on load, and only then does the frame take up any
+   room. A missing file now costs nothing at all rather than a flash,
+   and a present one appears exactly as before.
+   __________________________________________________________________ */
+
+.img-frame:not(.has-pic),
+.hero-photo:not(.has-pic),
+.card-media:not(.has-pic),
+.image-band:not(.has-pic){display:none}

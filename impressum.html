@@ -12,6 +12,7 @@
   <meta property="og:url" content="https://hannes-meilicke.com/impressum.html">
   <meta property="og:image" content="https://hannes-meilicke.com/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://hannes-meilicke.com/impressum.html">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="mask-icon" href="/favicon.svg" color="#7fd0c4">
   <link rel="stylesheet" href="/fonts.css">
@@ -57,8 +58,6 @@
     <h1>Impressum</h1>
     <div class="h2-rule"></div>
 
-    <p class="legal-note">Hinweis an dich selbst: Anschrift, E-Mail und Datum sind eingetragen. Offen sind nur noch die drei Felder unter &bdquo;Berufsbezeichnung und berufsrechtliche Regelungen&ldquo;. L&ouml;sche diesen Kasten, sobald sie ausgef&uuml;llt sind, und lass den Text von einer fachkundigen Person pr&uuml;fen.</p>
-
     <h2>Angaben gem&auml;&szlig; &sect; 5 DDG</h2>
     <p>
       Hannes Meilicke<br>
@@ -74,9 +73,9 @@
 
     <h2>Berufsbezeichnung und berufsrechtliche Regelungen</h2>
     <p>
-      Berufsbezeichnung: <span class="fill">[z. B. Arzt]</span>, verliehen in Deutschland<br>
-      Zust&auml;ndige Kammer: <span class="fill">[z. B. &Auml;rztekammer Berlin]</span><br>
-      Es gelten die Berufsordnung der zust&auml;ndigen &Auml;rztekammer sowie das Heilberufe&shy;kammergesetz des jeweiligen Bundeslandes. Beide sind auf der Website der zust&auml;ndigen Kammer einsehbar: <span class="fill">[Link zur Kammer]</span>.
+      Berufsbezeichnung: Arzt, verliehen in Deutschland<br>
+      Zust&auml;ndige Kammer: Bezirks&auml;rztekammer Nordw&uuml;rttemberg, ein Bezirk der Landes&auml;rztekammer Baden-W&uuml;rttemberg<br>
+      Es gelten die Berufsordnung der Landes&auml;rztekammer Baden-W&uuml;rttemberg sowie das Heilberufe-Kammergesetz Baden-W&uuml;rttemberg. Beide sind auf der Website der Kammer einsehbar: <a href="https://www.aerztekammer-bw.de" target="_blank" rel="noopener noreferrer">aerztekammer-bw.de</a>.
     </p>
 
     <h2>Verantwortlich f&uuml;r den Inhalt nach &sect; 18 Abs. 2 MStV</h2>
@@ -86,12 +85,12 @@
     <p>Die Inhalte dieser Seite entstehen mit Sorgfalt, eine Gew&auml;hr f&uuml;r Richtigkeit, Vollst&auml;ndigkeit und Aktualit&auml;t kann ich jedoch nicht &uuml;bernehmen. An einigen Stellen wird auf externe Websites verwiesen. Auf deren Inhalte habe ich keinen Einfluss, daf&uuml;r sind ausschlie&szlig;lich die jeweiligen Betreiber verantwortlich. Zum Zeitpunkt der Verlinkung waren dort keine Rechtsverst&ouml;&szlig;e erkennbar. Sollte ich auf eine Rechtsverletzung aufmerksam werden, entferne ich den betreffenden Link umgehend.</p>
 
     <h2>Urheberrecht</h2>
-    <p>Texte und Gestaltung dieser Seite unterliegen dem deutschen Urheberrecht. Eine Nutzung &uuml;ber die gesetzlich erlaubten F&auml;lle hinaus bedarf meiner vorherigen Zustimmung. Die verwendeten Schriften Cormorant Garamond und Playfair Display stehen unter der SIL Open Font License 1.1.</p>
+    <p>Texte und Gestaltung dieser Seite unterliegen dem deutschen Urheberrecht. Eine Nutzung &uuml;ber die gesetzlich erlaubten F&auml;lle hinaus bedarf meiner vorherigen Zustimmung. Die verwendeten Schriften Cormorant Garamond, Playfair Display und Fraunces stehen unter der SIL Open Font License 1.1.</p>
 
     <h2>Datenschutz</h2>
     <p>Wie diese Seite mit personenbezogenen Daten umgeht, steht in der <a href="/datenschutz.html">Datenschutzerkl&auml;rung</a>.</p>
 
-    <p class="legal-updated">Stand: 10. August 2026</p>
+    <p class="legal-updated">Stand: 13. August 2026</p>
   </main>
 
 <footer>
@@ -114,7 +113,7 @@
     var meta = document.querySelector('meta[name="theme-color"]');
     var paint = function (tone) {
       root.setAttribute("data-theme", tone);
-      if (meta) { meta.setAttribute("content", tone === "light" ? "#f7f5f1" : "#0b182a"); }
+      if (meta) { meta.setAttribute("content", tone === "light" ? "#fbf7ef" : "#0b182a"); }
       btn.setAttribute("aria-pressed", tone === "light" ? "true" : "false");
       btn.title = tone === "light" ? "Switch to the dark page" : "Switch to the light page";
     };
