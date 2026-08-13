@@ -3818,3 +3818,23 @@ html[data-theme="light"] .yp-note.is-placeholder{opacity:1}
 .hero-photo:not(.has-pic),
 .card-media:not(.has-pic),
 .image-band:not(.has-pic){display:none}
+
+/* __________________________________________________________________
+   An empty photo slot in the CV shows nothing, not a plus sign
+
+   The slots in the timeline were the one place on the site where a
+   missing picture left something behind: the img hid itself but the
+   square it sat in stayed, drawn as a pale panel with a cross in the
+   middle. Nine of the seventeen have no file yet, so the Mayo and
+   Medicine entries read as an admin screen waiting to be filled in
+   rather than as a finished page.
+
+   A slot now starts hidden and is revealed by its own picture, the
+   same contract every other frame on the site follows; a slot whose
+   file is missing removes itself outright. When a whole row comes up
+   empty the grid above it goes too, so no stray margin is left where
+   the pictures would have been.
+   __________________________________________________________________ */
+
+.cv-pix .pix:not(.has-pic){display:none}
+.cv-pix:not(:has(.pix.has-pic)){display:none}

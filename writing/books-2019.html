@@ -3,6 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- What this page is allowed to load, and where it may send anything.
+
+       The site fetches nothing from anywhere else: the fonts are inlined in
+       fonts.css, the pictures are in this repository, and there is not one
+       external script or stylesheet. So the policy is simply "self", with
+       three deliberate exceptions:
+
+         connect-src / form-action  formsubmit.co, which the contact form
+                                    posts to. Nothing else may be sent
+                                    anywhere, which is the half of this that
+                                    matters most - injected code cannot phone
+                                    home.
+         frame-src                  YouTube and Vimeo, so the video template
+                                    in writing/ works the day a real embed is
+                                    pasted into it rather than failing with a
+                                    blank box and a console error.
+         data:                      fonts and the two inline SVGs.
+
+       One honest limit: script-src has to allow 'unsafe-inline', because the
+       behaviour on this site lives in inline <script> blocks - fourteen of
+       them on the home page. Hashing each one would be stricter but would
+       break on every edit. So this does not stop injected inline script; it
+       stops that script loading anything external or sending anything out.
+
+       frame-ancestors is absent on purpose: browsers ignore it in a meta tag,
+       and GitHub Pages cannot set real headers. Clickjacking is unaddressed. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; frame-src https://www.youtube.com https://player.vimeo.com; upgrade-insecure-requests">
 <meta name="theme-color" content="#0b182a">
 <title>My ten most influential books of 2019 | Hannes Meilicke</title>
 <meta name="description" content="The ten books from 2019 that influenced me most, with the honorable mentions, counted down to number one.">
@@ -93,10 +120,10 @@
           <p class="cd-rank"><span class="cd-num cd-num-word">Honorable<br>mentions</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2019-plaidoyer-pour-la-vie.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Plaidoyer pour la vie (&ldquo;A Plea for Life&rdquo;)</span><span class="cd-extra-by">Denis Mukwege</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2019-predictably-irrational.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The (Honest) Truth About Dishonesty / Predictably Irrational: The Hidden Forces That Shape Our Decisions / The Upside of Irrationality: The Unexpected Benefits of Defying Logic at Work and at Home</span><span class="cd-extra-by">Dan Ariely</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2019-salome.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Salom&eacute;</span><span class="cd-extra-by">Oscar Wilde</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2019-utopia-for-realists.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Utopia for Realists: How We Can Build the Ideal World</span><span class="cd-extra-by">Rutger Bregman</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="645" src="/images/books/2019-plaidoyer-pour-la-vie.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Plaidoyer pour la vie (&ldquo;A Plea for Life&rdquo;)</span><span class="cd-extra-by">Denis Mukwege</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="609" src="/images/books/2019-predictably-irrational.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The (Honest) Truth About Dishonesty / Predictably Irrational: The Hidden Forces That Shape Our Decisions / The Upside of Irrationality: The Unexpected Benefits of Defying Logic at Work and at Home</span><span class="cd-extra-by">Dan Ariely</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="542" src="/images/books/2019-salome.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Salom&eacute;</span><span class="cd-extra-by">Oscar Wilde</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="596" src="/images/books/2019-utopia-for-realists.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Utopia for Realists: How We Can Build the Ideal World</span><span class="cd-extra-by">Rutger Bregman</span></li>
             </ul>
           </div>
         </li>
@@ -105,18 +132,18 @@
           <p class="cd-rank"><span class="cd-no">Nos.</span><span class="cd-num cd-num-band">15&ndash;11</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2019-originals.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Originals: How Non-Conformists Move the World</span><span class="cd-extra-by">Adam Grant</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2019-the-upside-of-stress.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Upside of Stress: Why Stress Is Good for You, and How to Get Good at It</span><span class="cd-extra-by">Kelly McGonigal</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2019-identity-the-demand-for-dignity.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Identity: The Demand for Dignity and the Politics of Resentment</span><span class="cd-extra-by">Francis Fukuyama</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2019-die-kunst-des-guten-lebens.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Die Kunst des guten Lebens (The Art of the Good Life)</span><span class="cd-extra-by">Rolf Dobelli</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2019-the-brain-the-story-of-you.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Brain: The Story of You</span><span class="cd-extra-by">David Eagleman</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="603" src="/images/books/2019-originals.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Originals: How Non-Conformists Move the World</span><span class="cd-extra-by">Adam Grant</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="602" src="/images/books/2019-the-upside-of-stress.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Upside of Stress: Why Stress Is Good for You, and How to Get Good at It</span><span class="cd-extra-by">Kelly McGonigal</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="614" src="/images/books/2019-identity-the-demand-for-dignity.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Identity: The Demand for Dignity and the Politics of Resentment</span><span class="cd-extra-by">Francis Fukuyama</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="610" src="/images/books/2019-die-kunst-des-guten-lebens.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Die Kunst des guten Lebens (The Art of the Good Life)</span><span class="cd-extra-by">Rolf Dobelli</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="615" src="/images/books/2019-the-brain-the-story-of-you.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Brain: The Story of You</span><span class="cd-extra-by">David Eagleman</span></li>
             </ul>
           </div>
         </li>
 
         <li class="cd-item" data-rank="10">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2019-misbehaving.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="600" src="/images/books/2019-misbehaving.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Misbehaving: The Making of Behavioral Economics</p>
             <p class="cd-author">Richard H. Thaler</p>
@@ -126,7 +153,7 @@
 
         <li class="cd-item" data-rank="9">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2019-seven-brief-lessons-on-physics.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="614" src="/images/books/2019-seven-brief-lessons-on-physics.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Seven Brief Lessons on Physics</p>
             <p class="cd-author">Carlo Rovelli</p>
@@ -136,7 +163,7 @@
 
         <li class="cd-item" data-rank="8">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2019-der-ernahrungskompass.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="634" src="/images/books/2019-der-ernahrungskompass.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Der Ern&auml;hrungskompass (The Diet Compass)</p>
             <p class="cd-author">Bas Kast</p>
@@ -146,7 +173,7 @@
 
         <li class="cd-item" data-rank="7">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2019-why-we-sleep.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="609" src="/images/books/2019-why-we-sleep.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Why We Sleep: Unlocking the Power of Sleep and Dreams</p>
             <p class="cd-author">Matthew Walker</p>
@@ -156,7 +183,7 @@
 
         <li class="cd-item" data-rank="6">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2019-stumbling-on-happiness.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="592" src="/images/books/2019-stumbling-on-happiness.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Stumbling on Happiness</p>
             <p class="cd-author">Daniel Gilbert</p>
@@ -166,7 +193,7 @@
 
         <li class="cd-item" data-rank="5">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2019-the-strange-order-of-things.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="608" src="/images/books/2019-the-strange-order-of-things.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Strange Order of Things: Life, Feeling, and the Making of Cultures</p>
             <p class="cd-author">Antonio Damasio</p>
@@ -176,7 +203,7 @@
 
         <li class="cd-item" data-rank="4">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2019-when-breath-becomes-air.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="590" src="/images/books/2019-when-breath-becomes-air.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">When Breath Becomes Air</p>
             <p class="cd-author">Paul Kalanithi</p>
@@ -186,7 +213,7 @@
 
         <li class="cd-item" data-rank="3">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2019-the-science-of-trust.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="604" src="/images/books/2019-the-science-of-trust.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Science of Trust: Emotional Attunement for Couples</p>
             <p class="cd-author">John M. Gottman</p>
@@ -196,7 +223,7 @@
 
         <li class="cd-item" data-rank="2">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2019-flow-the-psychology-of-optimal-experience.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="640" src="/images/books/2019-flow-the-psychology-of-optimal-experience.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Flow: The Psychology of Optimal Experience</p>
             <p class="cd-author">Mihaly Csikszentmihalyi</p>
@@ -206,7 +233,7 @@
 
         <li class="cd-item" data-rank="1">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2019-the-black-swan.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="617" src="/images/books/2019-the-black-swan.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Black Swan: The Impact of the Highly Improbable</p>
             <p class="cd-author">Nassim Nicholas Taleb</p>

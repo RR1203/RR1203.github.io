@@ -3,6 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- What this page is allowed to load, and where it may send anything.
+
+       The site fetches nothing from anywhere else: the fonts are inlined in
+       fonts.css, the pictures are in this repository, and there is not one
+       external script or stylesheet. So the policy is simply "self", with
+       three deliberate exceptions:
+
+         connect-src / form-action  formsubmit.co, which the contact form
+                                    posts to. Nothing else may be sent
+                                    anywhere, which is the half of this that
+                                    matters most - injected code cannot phone
+                                    home.
+         frame-src                  YouTube and Vimeo, so the video template
+                                    in writing/ works the day a real embed is
+                                    pasted into it rather than failing with a
+                                    blank box and a console error.
+         data:                      fonts and the two inline SVGs.
+
+       One honest limit: script-src has to allow 'unsafe-inline', because the
+       behaviour on this site lives in inline <script> blocks - fourteen of
+       them on the home page. Hashing each one would be stricter but would
+       break on every edit. So this does not stop injected inline script; it
+       stops that script loading anything external or sending anything out.
+
+       frame-ancestors is absent on purpose: browsers ignore it in a meta tag,
+       and GitHub Pages cannot set real headers. Clickjacking is unaddressed. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; frame-src https://www.youtube.com https://player.vimeo.com; upgrade-insecure-requests">
 <meta name="theme-color" content="#0b182a">
 <title>My ten most influential books of 2022 | Hannes Meilicke</title>
 <meta name="description" content="The books from 2022 that influenced me most, counted down from the honorable mentions to number one.">
@@ -93,20 +120,20 @@
           <p class="cd-rank"><span class="cd-num cd-num-word">Honorable<br>mentions</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-23-things-they-don-t-tell-you-about-capitalism.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">23 Things They Don&rsquo;t Tell You About Capitalism</span><span class="cd-extra-by">Ha-Joon Chang</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-how-pleasure-works.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">How Pleasure Works: The New Science of Why We Like What We Like</span><span class="cd-extra-by">Paul Bloom</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-what-i-learned-losing-a-million-dollars.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">What I Learned Losing a Million Dollars</span><span class="cd-extra-by">Jim Paul &amp; Brendan Moynihan</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-the-e-myth-revisited.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The E-Myth Revisited: Why Most Small Businesses Don&rsquo;t Work and What to Do About It</span><span class="cd-extra-by">Michael E. Gerber</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-projections-a-story-of-human-emotions.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Projections: A Story of Human Emotions</span><span class="cd-extra-by">Karl Deisseroth</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-the-effective-executive.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Effective Executive: The Definitive Guide to Getting the Right Things Done</span><span class="cd-extra-by">Peter F. Drucker</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-why-meditate.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Why Meditate?</span><span class="cd-extra-by">Matthieu Ricard</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-the-cancer-code.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Cancer Code: A Revolutionary New Understanding of a Medical Mystery</span><span class="cd-extra-by">Jason Fung</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="591" src="/images/books/2022-23-things-they-don-t-tell-you-about-capitalism.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">23 Things They Don&rsquo;t Tell You About Capitalism</span><span class="cd-extra-by">Ha-Joon Chang</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="607" src="/images/books/2022-how-pleasure-works.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">How Pleasure Works: The New Science of Why We Like What We Like</span><span class="cd-extra-by">Paul Bloom</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="595" src="/images/books/2022-what-i-learned-losing-a-million-dollars.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">What I Learned Losing a Million Dollars</span><span class="cd-extra-by">Jim Paul &amp; Brendan Moynihan</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="601" src="/images/books/2022-the-e-myth-revisited.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The E-Myth Revisited: Why Most Small Businesses Don&rsquo;t Work and What to Do About It</span><span class="cd-extra-by">Michael E. Gerber</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="608" src="/images/books/2022-projections-a-story-of-human-emotions.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Projections: A Story of Human Emotions</span><span class="cd-extra-by">Karl Deisseroth</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="604" src="/images/books/2022-the-effective-executive.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Effective Executive: The Definitive Guide to Getting the Right Things Done</span><span class="cd-extra-by">Peter F. Drucker</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="604" src="/images/books/2022-why-meditate.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Why Meditate?</span><span class="cd-extra-by">Matthieu Ricard</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="611" src="/images/books/2022-the-cancer-code.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Cancer Code: A Revolutionary New Understanding of a Medical Mystery</span><span class="cd-extra-by">Jason Fung</span></li>
               
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-connectome.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Connectome: How the Brain&rsquo;s Wiring Makes Us Who We Are</span><span class="cd-extra-by">Sebastian Seung</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-this-view-of-life.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">This View of Life: Completing the Darwinian Revolution</span><span class="cd-extra-by">David Sloan Wilson</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-the-loss-of-sadness.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Loss of Sadness: How Psychiatry Transformed Normal Sorrow into Depressive Disorder</span><span class="cd-extra-by">Allan V. Horwitz &amp; Jerome C. Wakefield</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-psychology-s-ghosts.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Psychology&rsquo;s Ghosts: The Crisis in the Profession and the Ideology of Cure</span><span class="cd-extra-by">Jerome Kagan</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-why-zebras-don-t-get-ulcers.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Why Zebras Don&rsquo;t Get Ulcers: The Acclaimed Guide to Stress, Stress-Related Diseases, and Coping</span><span class="cd-extra-by">Robert M. Sapolsky</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="600" src="/images/books/2022-connectome.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Connectome: How the Brain&rsquo;s Wiring Makes Us Who We Are</span><span class="cd-extra-by">Sebastian Seung</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="608" src="/images/books/2022-this-view-of-life.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">This View of Life: Completing the Darwinian Revolution</span><span class="cd-extra-by">David Sloan Wilson</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="610" src="/images/books/2022-the-loss-of-sadness.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Loss of Sadness: How Psychiatry Transformed Normal Sorrow into Depressive Disorder</span><span class="cd-extra-by">Allan V. Horwitz &amp; Jerome C. Wakefield</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="533" src="/images/books/2022-psychology-s-ghosts.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Psychology&rsquo;s Ghosts: The Crisis in the Profession and the Ideology of Cure</span><span class="cd-extra-by">Jerome Kagan</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="627" src="/images/books/2022-why-zebras-don-t-get-ulcers.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Why Zebras Don&rsquo;t Get Ulcers: The Acclaimed Guide to Stress, Stress-Related Diseases, and Coping</span><span class="cd-extra-by">Robert M. Sapolsky</span></li>
             </ul>
           </div>
         </li>
@@ -115,10 +142,10 @@
           <p class="cd-rank"><span class="cd-no">Nos.</span><span class="cd-num cd-num-band">15&ndash;11</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-the-ascent-of-money.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Great Degeneration: How Institutions Decay and Economies Die / The Ascent of Money: A Financial History of the World</span><span class="cd-extra-by">Niall Ferguson</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-narrative-economics.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Narrative Economics: How Stories Go Viral and Drive Major Economic Events</span><span class="cd-extra-by">Robert J. Shiller</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-the-fourfold-remedy.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Fourfold Remedy: Epicurus and the Art of Happiness</span><span class="cd-extra-by">John Sellars</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2022-feeling-and-knowing.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Feeling &amp; Knowing: Making Minds Conscious</span><span class="cd-extra-by">Antonio Damasio</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="608" src="/images/books/2022-the-ascent-of-money.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Great Degeneration: How Institutions Decay and Economies Die / The Ascent of Money: A Financial History of the World</span><span class="cd-extra-by">Niall Ferguson</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="604" src="/images/books/2022-narrative-economics.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Narrative Economics: How Stories Go Viral and Drive Major Economic Events</span><span class="cd-extra-by">Robert J. Shiller</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="613" src="/images/books/2022-the-fourfold-remedy.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Fourfold Remedy: Epicurus and the Art of Happiness</span><span class="cd-extra-by">John Sellars</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="585" src="/images/books/2022-feeling-and-knowing.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Feeling &amp; Knowing: Making Minds Conscious</span><span class="cd-extra-by">Antonio Damasio</span></li>
               
             </ul>
           </div>
@@ -126,7 +153,7 @@
 
         <li class="cd-item" data-rank="10">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2022-the-science-of-science.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="607" src="/images/books/2022-the-science-of-science.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Science of Science</p>
             <p class="cd-author">Dashun Wang &amp; Albert-L&aacute;szl&oacute; Barab&aacute;si</p>
@@ -136,7 +163,7 @@
 
         <li class="cd-item" data-rank="9">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2022-the-art-of-war.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="536" src="/images/books/2022-the-art-of-war.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Art of War</p>
             <p class="cd-author">Sun Tzu</p>
@@ -146,7 +173,7 @@
 
         <li class="cd-item" data-rank="8">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2022-in-search-of-memory-kandel.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="602" src="/images/books/2022-in-search-of-memory-kandel.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">In Search of Memory: The Emergence of a New Science of Mind</p>
             <p class="cd-author">Eric R. Kandel</p>
@@ -156,7 +183,7 @@
 
         <li class="cd-item" data-rank="7">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2022-from-bacteria-to-bach-and-back.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="599" src="/images/books/2022-from-bacteria-to-bach-and-back.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">From Bacteria to Bach and Back: The Evolution of Minds</p>
             <p class="cd-author">Daniel C. Dennett</p>
@@ -166,7 +193,7 @@
 
         <li class="cd-item" data-rank="6">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2022-from-third-world-to-first-lee-kuan-yew.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="608" src="/images/books/2022-from-third-world-to-first-lee-kuan-yew.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">From Third World to First: The Singapore Story, 1965&ndash;2000</p>
             <p class="cd-author">Lee Kuan Yew</p>
@@ -176,7 +203,7 @@
 
         <li class="cd-item" data-rank="5">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2022-healing-our-path-from-mental-illness-to-mental-healt.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="608" src="/images/books/2022-healing-our-path-from-mental-illness-to-mental-healt.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Healing: Our Path from Mental Illness to Mental Health</p>
             <p class="cd-author">Thomas Insel</p>
@@ -186,7 +213,7 @@
 
         <li class="cd-item" data-rank="4">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2022-wanting-the-power-of-mimetic-desire.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="613" src="/images/books/2022-wanting-the-power-of-mimetic-desire.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Wanting: The Power of Mimetic Desire in Everyday Life</p>
             <p class="cd-author">Luke Burgis</p>
@@ -196,7 +223,7 @@
 
         <li class="cd-item" data-rank="3">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2022-bullshit-jobs.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="609" src="/images/books/2022-bullshit-jobs.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Bullshit Jobs: A Theory</p>
             <p class="cd-author">David Graeber</p>
@@ -206,7 +233,7 @@
 
         <li class="cd-item" data-rank="2">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2022-shrinks-the-untold-story-of-psychiatry.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="600" src="/images/books/2022-shrinks-the-untold-story-of-psychiatry.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Shrinks: The Untold Story of Psychiatry</p>
             <p class="cd-author">Jeffrey A. Lieberman</p>
@@ -216,7 +243,7 @@
 
         <li class="cd-item" data-rank="1">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2022-safe-haven-investing-for-financial-storms.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="578" src="/images/books/2022-safe-haven-investing-for-financial-storms.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Safe Haven: Investing for Financial Storms</p>
             <p class="cd-author">Mark Spitznagel</p>

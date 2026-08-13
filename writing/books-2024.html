@@ -3,6 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- What this page is allowed to load, and where it may send anything.
+
+       The site fetches nothing from anywhere else: the fonts are inlined in
+       fonts.css, the pictures are in this repository, and there is not one
+       external script or stylesheet. So the policy is simply "self", with
+       three deliberate exceptions:
+
+         connect-src / form-action  formsubmit.co, which the contact form
+                                    posts to. Nothing else may be sent
+                                    anywhere, which is the half of this that
+                                    matters most - injected code cannot phone
+                                    home.
+         frame-src                  YouTube and Vimeo, so the video template
+                                    in writing/ works the day a real embed is
+                                    pasted into it rather than failing with a
+                                    blank box and a console error.
+         data:                      fonts and the two inline SVGs.
+
+       One honest limit: script-src has to allow 'unsafe-inline', because the
+       behaviour on this site lives in inline <script> blocks - fourteen of
+       them on the home page. Hashing each one would be stricter but would
+       break on every edit. So this does not stop injected inline script; it
+       stops that script loading anything external or sending anything out.
+
+       frame-ancestors is absent on purpose: browsers ignore it in a meta tag,
+       and GitHub Pages cannot set real headers. Clickjacking is unaddressed. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; frame-src https://www.youtube.com https://player.vimeo.com; upgrade-insecure-requests">
 <meta name="theme-color" content="#0b182a">
 <title>My ten most influential books of 2024 | Hannes Meilicke</title>
 <meta name="description" content="The books from 2024 that influenced me most, counted down from the honorable mentions to number one.">
@@ -93,15 +120,15 @@
           <p class="cd-rank"><span class="cd-num cd-num-word">Honorable<br>mentions</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-becoming-myself-a-psychiatrist-s-memoir.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Becoming Myself: A Psychiatrist&rsquo;s Memoir</span><span class="cd-extra-by">Irvin D. Yalom</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-the-anxious-generation.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Anxious Generation: How the Great Rewiring of Childhood Is Causing an Epidemic of Mental Illness</span><span class="cd-extra-by">Jonathan Haidt</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-cyber-crisis.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Cyber Crisis: Protecting Your Business from Real Threats in the Virtual World</span><span class="cd-extra-by">Eric Cole</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-the-science-of-evil.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Science of Evil: On Empathy and the Origins of Cruelty</span><span class="cd-extra-by">Simon Baron-Cohen</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-media-control.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Media Control: The Spectacular Achievements of Propaganda</span><span class="cd-extra-by">Noam Chomsky</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-talking-to-my-daughter-about-the-economy.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Talking to My Daughter About the Economy: A Brief History of Capitalism</span><span class="cd-extra-by">Yanis Varoufakis</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-the-end-of-average.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The End of Average: How We Succeed in a World That Values Sameness</span><span class="cd-extra-by">Todd Rose</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-the-elephant-in-the-brain.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Elephant in the Brain: Hidden Motives in Everyday Life</span><span class="cd-extra-by">Kevin Simler &amp; Robin Hanson</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-gladiators-pirates-and-games-of-trust.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Gladiators, Pirates and Games of Trust: How Game Theory, Strategy and Probability Rule Our Lives</span><span class="cd-extra-by">Haim Shapira</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="611" src="/images/books/2024-becoming-myself-a-psychiatrist-s-memoir.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Becoming Myself: A Psychiatrist&rsquo;s Memoir</span><span class="cd-extra-by">Irvin D. Yalom</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="604" src="/images/books/2024-the-anxious-generation.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Anxious Generation: How the Great Rewiring of Childhood Is Causing an Epidemic of Mental Illness</span><span class="cd-extra-by">Jonathan Haidt</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="597" src="/images/books/2024-cyber-crisis.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Cyber Crisis: Protecting Your Business from Real Threats in the Virtual World</span><span class="cd-extra-by">Eric Cole</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="604" src="/images/books/2024-the-science-of-evil.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Science of Evil: On Empathy and the Origins of Cruelty</span><span class="cd-extra-by">Simon Baron-Cohen</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="560" src="/images/books/2024-media-control.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Media Control: The Spectacular Achievements of Propaganda</span><span class="cd-extra-by">Noam Chomsky</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="657" src="/images/books/2024-talking-to-my-daughter-about-the-economy.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Talking to My Daughter About the Economy: A Brief History of Capitalism</span><span class="cd-extra-by">Yanis Varoufakis</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="604" src="/images/books/2024-the-end-of-average.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The End of Average: How We Succeed in a World That Values Sameness</span><span class="cd-extra-by">Todd Rose</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="608" src="/images/books/2024-the-elephant-in-the-brain.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Elephant in the Brain: Hidden Motives in Everyday Life</span><span class="cd-extra-by">Kevin Simler &amp; Robin Hanson</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="591" src="/images/books/2024-gladiators-pirates-and-games-of-trust.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Gladiators, Pirates and Games of Trust: How Game Theory, Strategy and Probability Rule Our Lives</span><span class="cd-extra-by">Haim Shapira</span></li>
             </ul>
           </div>
         </li>
@@ -110,18 +137,18 @@
           <p class="cd-rank"><span class="cd-no">Nos.</span><span class="cd-num cd-num-band">15&ndash;11</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-what-is-chatgpt-doing-and-why-does-it-work.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">What Is ChatGPT Doing&hellip; and Why Does It Work?</span><span class="cd-extra-by">Stephen Wolfram</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-a-brief-history-of-artificial-intelligence.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">A Brief History of Artificial Intelligence: What It Is, Where We Are, and Where We Are Going</span><span class="cd-extra-by">Michael Wooldridge</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-a-dose-of-hope.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">A Dose of Hope: A Story of MDMA-Assisted Psychotherapy</span><span class="cd-extra-by">Dan Engle &amp; Alex Young</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-the-new-silk-roads.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The New Silk Roads: The Present and Future of the World / Has the West Lost It? A Provocation</span><span class="cd-extra-by">Peter Frankopan / Kishore Mahbubani</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2024-the-evolution-of-desire.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Evolution of Desire: Strategies of Human Mating</span><span class="cd-extra-by">David M. Buss</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="600" src="/images/books/2024-what-is-chatgpt-doing-and-why-does-it-work.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">What Is ChatGPT Doing&hellip; and Why Does It Work?</span><span class="cd-extra-by">Stephen Wolfram</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="618" src="/images/books/2024-a-brief-history-of-artificial-intelligence.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">A Brief History of Artificial Intelligence: What It Is, Where We Are, and Where We Are Going</span><span class="cd-extra-by">Michael Wooldridge</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="618" src="/images/books/2024-a-dose-of-hope.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">A Dose of Hope: A Story of MDMA-Assisted Psychotherapy</span><span class="cd-extra-by">Dan Engle &amp; Alex Young</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="587" src="/images/books/2024-the-new-silk-roads.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The New Silk Roads: The Present and Future of the World / Has the West Lost It? A Provocation</span><span class="cd-extra-by">Peter Frankopan / Kishore Mahbubani</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="598" src="/images/books/2024-the-evolution-of-desire.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Evolution of Desire: Strategies of Human Mating</span><span class="cd-extra-by">David M. Buss</span></li>
             </ul>
           </div>
         </li>
 
         <li class="cd-item" data-rank="10">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2024-the-joy-of-x.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="576" src="/images/books/2024-the-joy-of-x.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Joy of X: A Guided Tour of Math, from One to Infinity</p>
             <p class="cd-author">Steven Strogatz</p>
@@ -131,7 +158,7 @@
 
         <li class="cd-item" data-rank="9">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2024-the-new-leviathans-john-gray-penguin.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="614" src="/images/books/2024-the-new-leviathans-john-gray-penguin.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The New Leviathans: Thoughts After Liberalism</p>
             <p class="cd-author">John Gray</p>
@@ -141,7 +168,7 @@
 
         <li class="cd-item" data-rank="8">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2024-end-times-elites-counter-elites.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="604" src="/images/books/2024-end-times-elites-counter-elites.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">End Times: Elites, Counter-Elites, and the Path of Political Disintegration</p>
             <p class="cd-author">Peter Turchin</p>
@@ -151,7 +178,7 @@
 
         <li class="cd-item" data-rank="7">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2024-the-gulag-archipelago.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="603" src="/images/books/2024-the-gulag-archipelago.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Gulag Archipelago, 1918&ndash;1956: An Experiment in Literary Investigation</p>
             <p class="cd-author">Aleksandr Solzhenitsyn</p>
@@ -161,7 +188,7 @@
 
         <li class="cd-item" data-rank="6">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2024-man-s-search-for-himself.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="332" height="500" src="/images/books/2024-man-s-search-for-himself.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Man&rsquo;s Search for Himself</p>
             <p class="cd-author">Rollo May</p>
@@ -171,7 +198,7 @@
 
         <li class="cd-item" data-rank="5">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2024-a-liberated-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="604" src="/images/books/2024-a-liberated-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">A Liberated Mind: How to Pivot Toward What Matters</p>
             <p class="cd-author">Steven C. Hayes</p>
@@ -181,7 +208,7 @@
 
         <li class="cd-item" data-rank="4">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2024-malady-of-the-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="609" src="/images/books/2024-malady-of-the-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Malady of the Mind: Schizophrenia and the Path to Prevention</p>
             <p class="cd-author">Jeffrey A. Lieberman</p>
@@ -191,7 +218,7 @@
 
         <li class="cd-item" data-rank="3">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2024-how-big-things-get-done.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="604" src="/images/books/2024-how-big-things-get-done.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">How Big Things Get Done: The Surprising Factors That Determine the Fate of Every Project, from Home Renovations to Space Exploration</p>
             <p class="cd-author">Bent Flyvbjerg &amp; Dan Gardner</p>
@@ -201,7 +228,7 @@
 
         <li class="cd-item" data-rank="2">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2024-artificial-intelligence-a-guide-for-thinking-humans.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="619" src="/images/books/2024-artificial-intelligence-a-guide-for-thinking-humans.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Artificial Intelligence: A Guide for Thinking Humans</p>
             <p class="cd-author">Melanie Mitchell</p>
@@ -211,7 +238,7 @@
 
         <li class="cd-item" data-rank="1">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2024-antifragile.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="604" src="/images/books/2024-antifragile.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Antifragile: Things That Gain from Disorder</p>
             <p class="cd-author">Nassim Nicholas Taleb</p>

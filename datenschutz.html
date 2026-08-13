@@ -3,6 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- What this page is allowed to load, and where it may send anything.
+
+       The site fetches nothing from anywhere else: the fonts are inlined in
+       fonts.css, the pictures are in this repository, and there is not one
+       external script or stylesheet. So the policy is simply "self", with
+       three deliberate exceptions:
+
+         connect-src / form-action  formsubmit.co, which the contact form
+                                    posts to. Nothing else may be sent
+                                    anywhere, which is the half of this that
+                                    matters most - injected code cannot phone
+                                    home.
+         frame-src                  YouTube and Vimeo, so the video template
+                                    in writing/ works the day a real embed is
+                                    pasted into it rather than failing with a
+                                    blank box and a console error.
+         data:                      fonts and the two inline SVGs.
+
+       One honest limit: script-src has to allow 'unsafe-inline', because the
+       behaviour on this site lives in inline <script> blocks - fourteen of
+       them on the home page. Hashing each one would be stricter but would
+       break on every edit. So this does not stop injected inline script; it
+       stops that script loading anything external or sending anything out.
+
+       frame-ancestors is absent on purpose: browsers ignore it in a meta tag,
+       and GitHub Pages cannot set real headers. Clickjacking is unaddressed. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; frame-src https://www.youtube.com https://player.vimeo.com; upgrade-insecure-requests">
   <meta name="theme-color" content="#0b182a">
   <title>Datenschutzerkl&auml;rung | Hannes Meilicke</title>
   <meta name="description" content="Datenschutzerkl&auml;rung der Website von Hannes Meilicke.">

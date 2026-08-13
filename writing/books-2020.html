@@ -3,6 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- What this page is allowed to load, and where it may send anything.
+
+       The site fetches nothing from anywhere else: the fonts are inlined in
+       fonts.css, the pictures are in this repository, and there is not one
+       external script or stylesheet. So the policy is simply "self", with
+       three deliberate exceptions:
+
+         connect-src / form-action  formsubmit.co, which the contact form
+                                    posts to. Nothing else may be sent
+                                    anywhere, which is the half of this that
+                                    matters most - injected code cannot phone
+                                    home.
+         frame-src                  YouTube and Vimeo, so the video template
+                                    in writing/ works the day a real embed is
+                                    pasted into it rather than failing with a
+                                    blank box and a console error.
+         data:                      fonts and the two inline SVGs.
+
+       One honest limit: script-src has to allow 'unsafe-inline', because the
+       behaviour on this site lives in inline <script> blocks - fourteen of
+       them on the home page. Hashing each one would be stricter but would
+       break on every edit. So this does not stop injected inline script; it
+       stops that script loading anything external or sending anything out.
+
+       frame-ancestors is absent on purpose: browsers ignore it in a meta tag,
+       and GitHub Pages cannot set real headers. Clickjacking is unaddressed. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; frame-src https://www.youtube.com https://player.vimeo.com; upgrade-insecure-requests">
 <meta name="theme-color" content="#0b182a">
 <title>My ten most influential books of 2020 | Hannes Meilicke</title>
 <meta name="description" content="The ten books from 2020 that influenced me most, counted down from the honorable mentions to number one.">
@@ -93,11 +120,11 @@
           <p class="cd-rank"><span class="cd-num cd-num-word">Honorable<br>mentions</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2020-fooled-by-randomness.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Fooled by Randomness: The Hidden Role of Chance in Life and in the Markets</span><span class="cd-extra-by">Nassim Nicholas Taleb</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2020-of-mice-and-men.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Of Mice and Men</span><span class="cd-extra-by">John Steinbeck</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2020-the-knowledge-illusion.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Knowledge Illusion: Why We Never Think Alone</span><span class="cd-extra-by">Steven Sloman &amp; Philip Fernbach</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2020-in-love-with-the-world.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">In Love with the World: A Monk&rsquo;s Journey Through the Bardos of Living and Dying</span><span class="cd-extra-by">Yongey Mingyur Rinpoche &amp; Helen Tworkov</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2020-souveran-investieren-mit-indexfonds-und-etfs.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Souver&auml;n investieren mit Indexfonds und ETFs</span><span class="cd-extra-by">Gerd Kommer</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="609" src="/images/books/2020-fooled-by-randomness.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Fooled by Randomness: The Hidden Role of Chance in Life and in the Markets</span><span class="cd-extra-by">Nassim Nicholas Taleb</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="700" src="/images/books/2020-of-mice-and-men.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Of Mice and Men</span><span class="cd-extra-by">John Steinbeck</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="600" src="/images/books/2020-the-knowledge-illusion.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Knowledge Illusion: Why We Never Think Alone</span><span class="cd-extra-by">Steven Sloman &amp; Philip Fernbach</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="605" src="/images/books/2020-in-love-with-the-world.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">In Love with the World: A Monk&rsquo;s Journey Through the Bardos of Living and Dying</span><span class="cd-extra-by">Yongey Mingyur Rinpoche &amp; Helen Tworkov</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="638" src="/images/books/2020-souveran-investieren-mit-indexfonds-und-etfs.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Souver&auml;n investieren mit Indexfonds und ETFs</span><span class="cd-extra-by">Gerd Kommer</span></li>
             </ul>
           </div>
         </li>
@@ -106,18 +133,18 @@
           <p class="cd-rank"><span class="cd-no">Nos.</span><span class="cd-num cd-num-band">15&ndash;11</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2020-this-america-the-case-for-the-nation.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">This America: The Case for the Nation</span><span class="cd-extra-by">Jill Lepore</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2020-end-this-depression-now.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">End This Depression Now!</span><span class="cd-extra-by">Paul Krugman</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2020-go-wild.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Go Wild: Free Your Body and Mind from the Afflictions of Civilization</span><span class="cd-extra-by">John J. Ratey &amp; Richard Manning</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2020-doing-good-better.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Doing Good Better: How Effective Altruism Can Help You Make a Difference</span><span class="cd-extra-by">William MacAskill</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2020-the-feeling-of-life-itself.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Feeling of Life Itself: Why Consciousness Is Widespread but Can&rsquo;t Be Computed</span><span class="cd-extra-by">Christof Koch</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="644" src="/images/books/2020-this-america-the-case-for-the-nation.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">This America: The Case for the Nation</span><span class="cd-extra-by">Jill Lepore</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="607" src="/images/books/2020-end-this-depression-now.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">End This Depression Now!</span><span class="cd-extra-by">Paul Krugman</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="611" src="/images/books/2020-go-wild.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Go Wild: Free Your Body and Mind from the Afflictions of Civilization</span><span class="cd-extra-by">John J. Ratey &amp; Richard Manning</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="602" src="/images/books/2020-doing-good-better.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Doing Good Better: How Effective Altruism Can Help You Make a Difference</span><span class="cd-extra-by">William MacAskill</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="600" src="/images/books/2020-the-feeling-of-life-itself.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Feeling of Life Itself: Why Consciousness Is Widespread but Can&rsquo;t Be Computed</span><span class="cd-extra-by">Christof Koch</span></li>
             </ul>
           </div>
         </li>
 
         <li class="cd-item" data-rank="10">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2020-evolution-what-everyone-needs-to-know.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="600" src="/images/books/2020-evolution-what-everyone-needs-to-know.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Evolution: What Everyone Needs to Know</p>
             <p class="cd-author">Robin Dunbar</p>
@@ -127,7 +154,7 @@
 
         <li class="cd-item" data-rank="9">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2020-the-culture-map.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="600" src="/images/books/2020-the-culture-map.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Culture Map: Breaking Through the Invisible Boundaries of Global Business</p>
             <p class="cd-author">Erin Meyer</p>
@@ -137,7 +164,7 @@
 
         <li class="cd-item" data-rank="8">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2020-risk-savvy.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="614" src="/images/books/2020-risk-savvy.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Risk Savvy: How to Make Good Decisions</p>
             <p class="cd-author">Gerd Gigerenzer</p>
@@ -147,7 +174,7 @@
 
         <li class="cd-item" data-rank="7">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2020-norwegian-wood.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="618" src="/images/books/2020-norwegian-wood.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Norwegian Wood</p>
             <p class="cd-author">Haruki Murakami</p>
@@ -157,7 +184,7 @@
 
         <li class="cd-item" data-rank="6">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2020-the-myths-of-happiness.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="615" src="/images/books/2020-the-myths-of-happiness.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Myths of Happiness: What Should Make You Happy, but Doesn&rsquo;t, What Shouldn&rsquo;t Make You Happy, but Does</p>
             <p class="cd-author">Sonja Lyubomirsky</p>
@@ -167,7 +194,7 @@
 
         <li class="cd-item" data-rank="5">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2020-steve-jobs.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="613" src="/images/books/2020-steve-jobs.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Steve Jobs</p>
             <p class="cd-author">Walter Isaacson</p>
@@ -177,7 +204,7 @@
 
         <li class="cd-item" data-rank="4">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2020-how-to-change-your-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="613" src="/images/books/2020-how-to-change-your-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">How to Change Your Mind: What the New Science of Psychedelics Teaches Us About Consciousness, Dying, Addiction, Depression, and Transcendence</p>
             <p class="cd-author">Michael Pollan</p>
@@ -187,7 +214,7 @@
 
         <li class="cd-item" data-rank="3">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2020-the-inflamed-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="605" src="/images/books/2020-the-inflamed-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Inflamed Mind: A Radical New Approach to Depression</p>
             <p class="cd-author">Edward Bullmore</p>
@@ -197,7 +224,7 @@
 
         <li class="cd-item" data-rank="2">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2020-the-formula-the-universal-laws-of-success.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="612" src="/images/books/2020-the-formula-the-universal-laws-of-success.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Formula: The Universal Laws of Success</p>
             <p class="cd-author">Albert-L&aacute;szl&oacute; Barab&aacute;si</p>
@@ -207,7 +234,7 @@
 
         <li class="cd-item" data-rank="1">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2020-scale-the-universal-laws-of-growth.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="604" src="/images/books/2020-scale-the-universal-laws-of-growth.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Scale: The Universal Laws of Growth, Innovation, Sustainability, and the Pace of Life in Organisms, Cities, Economies, and Companies</p>
             <p class="cd-author">Geoffrey West</p>

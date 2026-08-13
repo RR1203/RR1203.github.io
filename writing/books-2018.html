@@ -3,6 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- What this page is allowed to load, and where it may send anything.
+
+       The site fetches nothing from anywhere else: the fonts are inlined in
+       fonts.css, the pictures are in this repository, and there is not one
+       external script or stylesheet. So the policy is simply "self", with
+       three deliberate exceptions:
+
+         connect-src / form-action  formsubmit.co, which the contact form
+                                    posts to. Nothing else may be sent
+                                    anywhere, which is the half of this that
+                                    matters most - injected code cannot phone
+                                    home.
+         frame-src                  YouTube and Vimeo, so the video template
+                                    in writing/ works the day a real embed is
+                                    pasted into it rather than failing with a
+                                    blank box and a console error.
+         data:                      fonts and the two inline SVGs.
+
+       One honest limit: script-src has to allow 'unsafe-inline', because the
+       behaviour on this site lives in inline <script> blocks - fourteen of
+       them on the home page. Hashing each one would be stricter but would
+       break on every edit. So this does not stop injected inline script; it
+       stops that script loading anything external or sending anything out.
+
+       frame-ancestors is absent on purpose: browsers ignore it in a meta tag,
+       and GitHub Pages cannot set real headers. Clickjacking is unaddressed. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; frame-src https://www.youtube.com https://player.vimeo.com; upgrade-insecure-requests">
 <meta name="theme-color" content="#0b182a">
 <title>My ten most influential books of 2018 | Hannes Meilicke</title>
 <meta name="description" content="The ten books from 2018 that influenced me most, with the honorable mentions, counted down to number one.">
@@ -93,9 +120,9 @@
           <p class="cd-rank"><span class="cd-num cd-num-word">Honorable<br>mentions</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2018-was-wir-sind-und-was-wir-sein-konnten.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Was wir sind und was wir sein k&ouml;nnten: Ein neurobiologischer Mutmacher</span><span class="cd-extra-by">Gerald H&uuml;ther</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2018-das-seelenleben-der-tiere.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Das Seelenleben der Tiere (The Inner Life of Animals)</span><span class="cd-extra-by">Peter Wohlleben</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2018-be-excellent-at-anything.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Be Excellent at Anything: The Four Keys to Transforming the Way We Work and Live</span><span class="cd-extra-by">Tony Schwartz, Jean Gomes &amp; Catherine McCarthy</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="644" src="/images/books/2018-was-wir-sind-und-was-wir-sein-konnten.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Was wir sind und was wir sein k&ouml;nnten: Ein neurobiologischer Mutmacher</span><span class="cd-extra-by">Gerald H&uuml;ther</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="637" src="/images/books/2018-das-seelenleben-der-tiere.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Das Seelenleben der Tiere (The Inner Life of Animals)</span><span class="cd-extra-by">Peter Wohlleben</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="300" height="457" src="/images/books/2018-be-excellent-at-anything.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Be Excellent at Anything: The Four Keys to Transforming the Way We Work and Live</span><span class="cd-extra-by">Tony Schwartz, Jean Gomes &amp; Catherine McCarthy</span></li>
             </ul>
           </div>
         </li>
@@ -104,18 +131,18 @@
           <p class="cd-rank"><span class="cd-no">Nos.</span><span class="cd-num cd-num-band">15&ndash;11</span></p>
           <div class="cd-body">
             <ul class="cd-extra-list">
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2018-nudge.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Nudge: Improving Decisions About Health, Wealth, and Happiness</span><span class="cd-extra-by">Richard H. Thaler &amp; Cass R. Sunstein</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2018-the-memory-illusion.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Memory Illusion: Remembering, Forgetting, and the Science of False Memory</span><span class="cd-extra-by">Julia Shaw</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2018-the-distracted-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Distracted Mind: Ancient Brains in a High-Tech World</span><span class="cd-extra-by">Adam Gazzaley &amp; Larry D. Rosen</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2018-the-4-hour-workweek.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The 4-Hour Workweek</span><span class="cd-extra-by">Timothy Ferriss</span></li>
-              <li><span class="cd-extra-cover" aria-hidden="true"><img src="/images/books/2018-narziss-und-goldmund.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Narzi&szlig; und Goldmund (Narcissus and Goldmund)</span><span class="cd-extra-by">Hermann Hesse</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="614" src="/images/books/2018-nudge.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Nudge: Improving Decisions About Health, Wealth, and Happiness</span><span class="cd-extra-by">Richard H. Thaler &amp; Cass R. Sunstein</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="640" src="/images/books/2018-the-memory-illusion.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Memory Illusion: Remembering, Forgetting, and the Science of False Memory</span><span class="cd-extra-by">Julia Shaw</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="593" src="/images/books/2018-the-distracted-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The Distracted Mind: Ancient Brains in a High-Tech World</span><span class="cd-extra-by">Adam Gazzaley &amp; Larry D. Rosen</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="601" src="/images/books/2018-the-4-hour-workweek.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">The 4-Hour Workweek</span><span class="cd-extra-by">Timothy Ferriss</span></li>
+              <li><span class="cd-extra-cover" aria-hidden="true"><img width="400" height="657" src="/images/books/2018-narziss-und-goldmund.jpg" alt="" loading="lazy" decoding="async" onerror="this.closest('.cd-extra-cover').remove()"></span><span class="cd-extra-book">Narzi&szlig; und Goldmund (Narcissus and Goldmund)</span><span class="cd-extra-by">Hermann Hesse</span></li>
             </ul>
           </div>
         </li>
 
         <li class="cd-item" data-rank="10">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">10</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2018-die-verwandlung-kafka-anaconda.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="613" src="/images/books/2018-die-verwandlung-kafka-anaconda.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Die Verwandlung (The Metamorphosis)</p>
             <p class="cd-author">Franz Kafka</p>
@@ -125,7 +152,7 @@
 
         <li class="cd-item" data-rank="9">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">9</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2018-animal-farm-orwell.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="589" src="/images/books/2018-animal-farm-orwell.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Animal Farm</p>
             <p class="cd-author">George Orwell</p>
@@ -135,7 +162,7 @@
 
         <li class="cd-item" data-rank="8">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">8</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2018-crito.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="633" src="/images/books/2018-crito.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Crito</p>
             <p class="cd-author">Plato</p>
@@ -145,7 +172,7 @@
 
         <li class="cd-item" data-rank="7">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">7</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2018-requiem-for-the-american-dream.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="498" src="/images/books/2018-requiem-for-the-american-dream.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Requiem for the American Dream: The 10 Principles of Concentration of Wealth &amp; Power</p>
             <p class="cd-author">Noam Chomsky</p>
@@ -155,7 +182,7 @@
 
         <li class="cd-item" data-rank="6">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">6</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2018-factfulness.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="613" src="/images/books/2018-factfulness.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Factfulness: Ten Reasons We&rsquo;re Wrong About the World &mdash; and Why Things Are Better Than You Think</p>
             <p class="cd-author">Hans Rosling, Ola Rosling &amp; Anna Rosling R&ouml;nnlund</p>
@@ -165,7 +192,7 @@
 
         <li class="cd-item" data-rank="5">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">5</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2018-das-glasperlenspiel-hesse-suhrkamp.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="631" src="/images/books/2018-das-glasperlenspiel-hesse-suhrkamp.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Das Glasperlenspiel (The Glass Bead Game)</p>
             <p class="cd-author">Hermann Hesse</p>
@@ -175,7 +202,7 @@
 
         <li class="cd-item" data-rank="4">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">4</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2018-der-steppenwolf-hesse-suhrkamp.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="657" src="/images/books/2018-der-steppenwolf-hesse-suhrkamp.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Der Steppenwolf (Steppenwolf)</p>
             <p class="cd-author">Hermann Hesse</p>
@@ -185,7 +212,7 @@
 
         <li class="cd-item" data-rank="3">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">3</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2018-the-disordered-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="600" src="/images/books/2018-the-disordered-mind.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Disordered Mind: What Unusual Brains Tell Us About Ourselves</p>
             <p class="cd-author">Eric R. Kandel</p>
@@ -195,7 +222,7 @@
 
         <li class="cd-item" data-rank="2">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">2</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2018-the-marshmallow-test.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="623" src="/images/books/2018-the-marshmallow-test.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">The Marshmallow Test: Mastering Self-Control</p>
             <p class="cd-author">Walter Mischel</p>
@@ -205,7 +232,7 @@
 
         <li class="cd-item" data-rank="1">
           <p class="cd-rank"><span class="cd-no">No.</span><span class="cd-num">1</span></p>
-          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img src="/images/books/2018-debt-the-first-5000-years.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
+          <div class="cd-cover" aria-hidden="true"><span class="cd-jacket"><img width="400" height="596" src="/images/books/2018-debt-the-first-5000-years.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span></div>
           <div class="cd-body">
             <p class="cd-title">Debt: The First 5,000 Years</p>
             <p class="cd-author">David Graeber</p>
