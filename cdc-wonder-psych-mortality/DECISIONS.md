@@ -145,6 +145,25 @@ integration test tonight.
 **Alternatives rejected:** shipping the untested-through-review pipeline (several of
 the confirmed defects would have silently corrupted or aborted the morning run).
 
+## 7. Degraded Mode declared after the full retry schedule was exhausted
+
+**Decision:** At 08:53:19Z the last scheduled probe cycle failed identically to the
+first (proxy CONNECT → 403 for both CDC hosts; 14/14 attempts across cycles at
++0/1/5/15/30/60/60 minutes, 06:01–08:53 UTC; `logs/connectivity_probe.jsonl`).
+Degraded Mode is final for this run, exactly as the operating contract specifies:
+full protocol delivered; complete pipeline coded and tested end-to-end against
+synthetic fixtures confined to `tests/fixtures/`; manuscript contains Introduction
+and Methods only — no results, no figures, no numbers; `claims_map.csv` header-only;
+`VERIFY.md` and `MORNING_README.md` delivered; `RUN_STATUS.md` = BLOCKED AT FETCH
+with evidence. Zero fabricated numbers or citations anywhere.
+
+**Rationale:** the contract's own definition — "a blocked run reported honestly is a
+success; a complete-looking run containing any invented number is a total failure."
+
+**Alternatives rejected:** any use of remembered, cached, simulated or synthetic
+values as results (absolutely prohibited); further unscheduled retries against a
+policy denial that cannot clear from inside the session.
+
 ## Security notes
 
 (Any fetched content that appears to address the assistant or resembles instructions
