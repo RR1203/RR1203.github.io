@@ -1,0 +1,49 @@
+<!-- SYNTHETIC FIXTURE — NOT CDC DATA. Minimal mock of a WONDER query form used only
+     to test form parsing and override validation. Every value here is invented for
+     testing and must never be treated as a result. -->
+<html><head><title>SYNTHETIC WONDER form fixture</title></head><body>
+<form action="/controller/datarequest/D00" method="post">
+<input type="hidden" name="stage" value="request"/>
+<input type="hidden" name="saved_id" value=""/>
+<input type="hidden" name="O_javascript" value="on"/>
+<input type="hidden" name="O_ucd" value="D00.V2"/>
+<input type="hidden" name="O_age" value="D00.V5"/>
+<input type="hidden" name="O_rate_per" value="100000"/>
+<input type="hidden" name="O_precision" value="1"/>
+<input type="hidden" name="O_show_totals" value="false"/>
+<input type="hidden" name="O_show_zeros" value="true"/>
+<input type="hidden" name="O_timeout" value="300"/>
+<input type="hidden" name="O_aar_pop" value="0000"/>
+<input type="hidden" name="V_D00.V1" value=""/>
+<input type="hidden" name="V_D00.V5" value="*All*"/>
+<input type="hidden" name="V_D00.V7" value="*All*"/>
+<input type="hidden" name="F_D00.V1" value="*All*"/>
+<input type="hidden" name="F_D00.V2" value="*All*"/>
+<input type="hidden" name="I_D00.V2" value="*All* (All Causes of Death)"/>
+<input type="hidden" name="M_1" value="D00.M1"/>
+<input type="hidden" name="M_2" value="D00.M2"/>
+<input type="hidden" name="M_3" value="D00.M3"/>
+<input type="radio" name="O_aar" value="aar_none" checked/>
+<input type="radio" name="O_aar" value="aar_std"/>
+<select name="B_1">
+  <option value="*None*">None</option>
+  <option value="D00.V1-level1" selected>SYNTHETIC Year</option>
+  <option value="D00.V5">SYNTHETIC Ten-Year Age Groups</option>
+  <option value="D00.V7">SYNTHETIC Sex</option>
+</select>
+<select name="B_2"><option value="*None*" selected>None</option>
+  <option value="D00.V1-level1">SYNTHETIC Year</option>
+  <option value="D00.V5">SYNTHETIC Ten-Year Age Groups</option>
+  <option value="D00.V7">SYNTHETIC Sex</option></select>
+<select name="B_3"><option value="*None*" selected>None</option></select>
+<select name="B_4"><option value="*None*" selected>None</option></select>
+<select name="B_5"><option value="*None*" selected>None</option></select>
+<input type="submit" name="action-Send" value="Send"/>
+<input type="submit" name="action-Reset" value="Reset"/>
+<!-- SYNTHETIC picklist codes, mirroring how real forms carry ICD picklists in
+     javascript data rather than <option> elements:
+     "F01-F99" "F01-F09" "F10-F19" "F20-F29" "F30-F39" "F40-F48" "F50-F59"
+     "F60-F69" "F70-F79" "F80-F89" "F90-F98" "F99" "X60-X84" "Y87.0"
+     (note: the terrorism-suicide code is deliberately absent from this fixture,
+     to exercise optional-code pruning) -->
+</form></body></html>

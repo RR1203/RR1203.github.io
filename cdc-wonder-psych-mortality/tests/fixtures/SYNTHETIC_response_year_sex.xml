@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SYNTHETIC FIXTURE ... NOT CDC DATA. Invented numbers exercising the documented
+     WONDER response shape: label cells (l) with rowspan compression (r), value
+     cells (v), Suppressed / Unreliable / Not Applicable markers, and a Total row.
+     This file must never be copied into raw/, data/ or outputs/. -->
+<page><response><request><parameter><name>SYNTHETIC</name><value>true</value></parameter></request>
+<data-table>
+<r><c l="2001" r="2"/><c l="Female"/><c v="12"/><c v="1,000,000"/><c v="1.2"/><c v="1.1"/></r>
+<r><c l="Male"/><c v="Suppressed"/><c v="1,100,000"/><c v="Suppressed"/><c v="Suppressed"/></r>
+<r><c l="2002" r="2"/><c l="Female"/><c v="15"/><c v="1,010,000"/><c v="Unreliable"/><c v="1.4"/></r>
+<r><c l="Male"/><c v="30"/><c v="1,110,000"/><c v="2.7"/><c v="2.6"/></r>
+<r><c l="2003" r="2"/><c l="Female"/><c v="22"/><c v="1,020,000"/><c v="2.2"/><c v="2.1"/></r>
+<r><c l="Male"/><c v="41"/><c v="Not Applicable"/><c v="Not Applicable"/><c v="Not Applicable"/></r>
+<r><c l="Total"/><c v="120"/><c v="6,240,000"/><c v="1.9"/><c v="1.8"/></r>
+</data-table>
+</response></page>

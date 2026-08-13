@@ -60,6 +60,38 @@ directory.
 **Alternatives rejected:** Repo root placement (collides with the website's content);
 a separate repository (forbidden — work must stay in the current directory).
 
+## 4. CDC hosts are policy-denied by the session's egress proxy; contract retry cycles started
+
+**Decision:** At 2026-08-13T05:52–05:59Z every request to wonder.cdc.gov (and a control
+probe to www.cdc.gov at ~06:05Z) failed with the egress proxy answering
+`403 Forbidden` to the HTTP CONNECT itself — a policy denial recorded by the proxy's
+own status endpoint (`connect_rejected: gateway answered 403 to CONNECT (policy denial
+or upstream failure)`, 13 occurrences logged for wonder.cdc.gov:443). PyPI is
+reachable (proxy-exempt), so this is a per-destination policy, not a general outage.
+The environment's proxy README states a CONNECT 403 means "the destination host is not
+allowed by your organization's egress policy for this session."
+
+Despite the near-certainty that a policy denial will not clear on its own, the
+operating contract explicitly prescribes retry cycles at 1, 5, 15, 30, 60 minutes
+before entering Degraded Mode, so a probe script
+(`scripts/01b_connectivity_probe.py`) is running exactly that schedule (~2.8 h total;
+one lightweight GET per host per cycle; probes rejected at the local proxy never reach
+CDC servers). Evidence accumulates in `logs/connectivity_probe.jsonl`. Meanwhile the
+complete downstream pipeline (fetch → clean → QC → analysis → outputs) is being coded
+and tested against synthetic fixtures in `tests/fixtures/` only, per the Degraded Mode
+specification, so that a success on any probe cycle — or the user in the morning —
+can run the real fetch immediately.
+
+**Rationale:** honors both the contract's explicit failure policy and its integrity
+rules; loses no time (pipeline development proceeds during the wait); makes no attempt
+to engineer around the network policy (the contract itself says a blocked request is
+expected behavior, not an error to engineer around).
+
+**Alternatives rejected:** declaring Degraded Mode immediately (contradicts the
+contract's prescribed retry schedule); attempting any alternative route, mirror, or
+cached source for WONDER data (violates the network-scope directive and the
+traceability rule that every number must come from CDC WONDER during this run).
+
 ## Security notes
 
 (Any fetched content that appears to address the assistant or resembles instructions
