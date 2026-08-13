@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b182a">
   <title>Hannes Meilicke | Physician &amp; Psychiatric Researcher</title>
-  <meta name="description" content="Hannes Meilicke - physician and research fellow in the Department of Psychiatry and Psychology at the XXX, working on childhood adversity, stress responsivity, depression and translational neuroscience.">
+  <meta name="description" content="Hannes Meilicke - physician and research fellow in psychiatry and psychology, working on childhood adversity, stress responsivity, depression and translational neuroscience.">
   <meta property="og:title" content="Hannes Meilicke | Physician &amp; Psychiatric Researcher">
-  <meta property="og:description" content="Research fellow at the XXX. Childhood adversity, stress responsivity, depression and translational neuroscience.">
+  <meta property="og:description" content="Physician and research fellow. Childhood adversity, stress responsivity, depression and translational neuroscience.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hannes-meilicke.com/">
   <meta property="og:image" content="https://hannes-meilicke.com/og.jpg">
@@ -18,6 +18,7 @@
   <meta property="og:locale" content="en_GB">
   <meta name="twitter:image" content="https://hannes-meilicke.com/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://hannes-meilicke.com/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="mask-icon" href="/favicon.svg" color="#7fd0c4">
   <link rel="stylesheet" href="fonts.css">
@@ -84,7 +85,7 @@
       <!-- Add a file named photo.jpg to the repository to show your portrait here.
            If the file is missing, this block simply hides itself. -->
       <div class="hero-photo">
-        <img src="photo.jpg" alt="Hannes Meilicke" onerror="this.parentNode.style.display='none'">
+        <img src="photo.jpg" alt="Hannes Meilicke" onerror="this.parentNode.style.display='none'" onload="this.parentNode.classList.add('has-pic')">
       </div>
 
       <div class="hero-text">
@@ -145,7 +146,7 @@
 </div>
         <!-- Optional photo: add images/about.jpg (4:5 portrait). If the file is missing this block hides itself. -->
         <figure class="img-frame about-photo">
-          <img src="images/about.jpg" alt="Hannes Meilicke at work" loading="lazy" onerror="this.parentNode.style.display='none'">
+          <img src="images/about.jpg" alt="Hannes Meilicke at work" loading="lazy" onerror="this.parentNode.style.display='none'" onload="this.parentNode.classList.add('has-pic')">
         </figure>
       </div>
 
@@ -896,7 +897,7 @@
       <div class="theme-grid">
 <article class="theme-card">
 <figure class="card-media">
-<img src="images/research-1.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+<img src="images/research-1.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" onload="this.parentNode.classList.add('has-pic')">
 </figure>
 <span class="theme-num">01</span>
 <h3>Childhood adversity &amp; the stress response</h3>
@@ -904,7 +905,7 @@
 </article>
 <article class="theme-card">
 <figure class="card-media">
-<img src="images/research-2.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+<img src="images/research-2.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" onload="this.parentNode.classList.add('has-pic')">
 </figure>
 <span class="theme-num">02</span>
 <h3>The course of depression</h3>
@@ -912,7 +913,7 @@
 </article>
 <article class="theme-card">
 <figure class="card-media">
-<img src="images/research-3.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+<img src="images/research-3.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" onload="this.parentNode.classList.add('has-pic')">
 </figure>
 <span class="theme-num">03</span>
 <h3>Imaging, metabolites &amp; computation</h3>
@@ -1133,7 +1134,7 @@
 
   <!-- Optional wide image band: add images/band.jpg (about 21:9). Hides itself if missing. -->
   <div class="image-band">
-    <img src="images/band.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+    <img src="images/band.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" onload="this.parentNode.classList.add('has-pic')">
   </div>
 
   <section id="contact" class="contact">
@@ -1143,7 +1144,13 @@
 
       <p class="contact-lede">Questions and collaborations are welcome.</p>
 
-      <form id="message-form" class="message-form" method="POST" data-a="lt2YpxWal1mLzVmbuFGa" data-b="t92YuwWah12Z">
+      <!-- data-alias is the proper hiding place for the destination: FormSubmit
+           hands out a random string once the address has been confirmed once,
+           and that string reveals nothing. Paste it in and the address below
+           is never consulted again. data-k is the fallback until then. -->
+      <form id="message-form" class="message-form" method="POST"
+            data-alias=""
+            data-k="000c435c554118400b1e04044e59557251400f1e04434e5d5d">
         <input type="email" name="email" placeholder="Email" aria-label="Your email address" autocomplete="email" required>
         <input type="text" name="subject" placeholder="Subject" aria-label="Subject">
         <textarea name="message" placeholder="Message" aria-label="Your message" rows="6" required></textarea>
@@ -1232,18 +1239,31 @@
       var humanCheck = document.getElementById('human-check');
       var loadedAt = Date.now();
 
-      /* The address itself is written nowhere in this page. Machines that
-         comb the web for anything shaped like an address find nothing here
-         to take: the two halves are kept turned back to front, and they are
-         only put together, here, in the moment a message is actually sent. */
+      /* Where the message goes.
+
+         Best case, the form carries a FormSubmit alias: a random string that
+         stands in for the address and gives a scraper nothing at all. If that
+         slot is filled, nothing else on this page touches the address.
+
+         Until then the address is carried as data-k, XOR'd against a key and
+         written as plain hexadecimal. It is deliberately not base64 and not
+         reversed text, so it matches none of the shapes an address harvester
+         looks for, and it is only assembled in the instant a message is sent.
+         It is obfuscation, not secrecy: anything a browser can reconstruct, a
+         determined scraper running a browser can reconstruct too. The alias
+         is the only version of this that is actually hidden. */
       function endpoint() {
-        function half(code) {
-          return atob(String(code).split('').reverse().join(''));
+        var alias = (form.getAttribute('data-alias') || '').trim();
+        if (alias) { return 'https://formsubmit.co/ajax/' + alias; }
+        var hex = form.getAttribute('data-k') || '';
+        var key = 'hm-2026-nw';
+        var out = '';
+        for (var i = 0; i < hex.length; i += 2) {
+          out += String.fromCharCode(
+            parseInt(hex.substr(i, 2), 16) ^ key.charCodeAt((i / 2) % key.length)
+          );
         }
-        return 'https://formsubmit.co/ajax/'
-          + half(form.getAttribute('data-a'))
-          + String.fromCharCode(64)
-          + half(form.getAttribute('data-b'));
+        return 'https://formsubmit.co/ajax/' + out;
       }
 
       function show(message, ok) {
@@ -1484,11 +1504,15 @@
       }
     }
 
-    /* The network is drawn on whichever ground the reader chose. */
+    /* The network is drawn on whichever ground the reader chose. On navy
+       it is a night sky. On paper it was a grid of cold blue dots, which
+       is the one thing a warm page cannot carry: the stars are ink-brown
+       now, the threads teal, and the travelling pulse is the warm gold
+       the light theme takes its cheerfulness from. */
     function tone() { return document.documentElement.getAttribute("data-theme") === "light"; }
-    function LINE() { return tone() ? "28,127,114" : "127,208,196"; }
-    function STAR() { return tone() ? "38,72,96" : "196,228,236"; }
-    function PULSE() { return tone() ? "18,101,90" : "163,226,217"; }
+    function LINE() { return tone() ? "14,124,107" : "127,208,196"; }
+    function STAR() { return tone() ? "108,86,58" : "196,228,236"; }
+    function PULSE() { return tone() ? "184,121,46" : "163,226,217"; }
 
     function start() { if (running) { return; } running = true; last = 0; raf = requestAnimationFrame(frame); }
     function stop() { if (!running) { return; } running = false; cancelAnimationFrame(raf); }
@@ -1502,13 +1526,19 @@
     hero.addEventListener('mouseleave', function () {
       mouse.on = false; mouse.x = -9999; mouse.y = -9999;
     });
-    D.addEventListener('visibilitychange', function () { if (D.hidden) { stop(); } else { start(); } });
+    /* Two reasons to stop, so both have to agree before it runs again:
+       coming back to the tab must not restart a network that has long
+       since scrolled off the top of the screen. */
+    var onScreen = true, tabOpen = !D.hidden;
+    function settle() { if (onScreen && tabOpen) { start(); } else { stop(); } }
+
+    D.addEventListener('visibilitychange', function () { tabOpen = !D.hidden; settle(); });
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) {
-        if (es[0].isIntersecting) { start(); } else { stop(); }
+        onScreen = es[0].isIntersecting; settle();
       }, { threshold: 0 }).observe(c);
     }
-    start();
+    settle();
   }());
 }());
 </script>
@@ -2285,7 +2315,7 @@
     var meta = document.querySelector('meta[name="theme-color"]');
     var paint = function (tone) {
       root.setAttribute("data-theme", tone);
-      if (meta) { meta.setAttribute("content", tone === "light" ? "#f7f5f1" : "#0b182a"); }
+      if (meta) { meta.setAttribute("content", tone === "light" ? "#fbf7ef" : "#0b182a"); }
       btn.setAttribute("aria-pressed", tone === "light" ? "true" : "false");
       btn.title = tone === "light" ? "Switch to the dark page" : "Switch to the light page";
     };
