@@ -1,0 +1,37 @@
+#!/bin/sh
+# Refuse to commit private key material, whatever the file is called.
+#
+# .gitignore can only match names, and the key that actually landed in this
+# repository was called "gh auth login" - no extension, three words, nothing
+# any pattern would catch. So this checks content instead: anything staged
+# that opens with a PEM private-key header stops the commit.
+#
+# Note the -z and the NUL-delimited read. The first version of this hook
+# split the file list on whitespace, so "gh auth login" arrived as three
+# filenames that did not exist and the key went straight through - the same
+# class of mistake as the one that put it here in the first place.
+#
+# Enabled with:  git config core.hooksPath .githooks
+
+hits=$(mktemp)
+trap 'rm -f "$hits"' EXIT
+
+git diff --cached --name-only --diff-filter=ACM -z |
+while IFS= read -r -d '' f; do
+	[ -f "$f" ] || continue
+	if head -c 200 "$f" 2>/dev/null | grep -q -- "-----BEGIN .*PRIVATE KEY-----"; then
+		printf '    %s\n' "$f" >> "$hits"
+	fi
+done
+
+if [ -s "$hits" ]; then
+	printf '\n  BLOCKED: a private key is staged.\n\n'
+	cat "$hits"
+	printf '\n  This repository is published to the public web.\n'
+	printf '  Unstage it with:   git restore --staged "<file>"\n'
+	printf '  and move the key to ~/.ssh/ where it belongs.\n\n'
+	printf '  If you are certain this is not a key: git commit --no-verify\n\n'
+	exit 1
+fi
+
+exit 0

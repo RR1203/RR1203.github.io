@@ -18,12 +18,93 @@
   <meta property="og:locale" content="en_GB">
   <meta name="twitter:image" content="https://hannes-meilicke.com/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
+
+  <!-- ------------------------------------------------------------------
+       Who this is, in the form a machine reads
+
+       Everything above describes the page. This describes the person, and
+       it is the only thing on the site that says the five places called
+       "Hannes Meilicke" - here, ORCID, Scholar, ResearchGate, LinkedIn -
+       are one person rather than five. That claim is what "sameAs" is for,
+       and it is what a search engine needs before it will treat the name
+       as an entity instead of a string.
+
+       Two deliberate omissions. There is no employer, because the current
+       affiliation is still XXX in the copy above and a wrong machine-
+       readable claim is worse than an absent one - add "worksFor" here on
+       the same day the XXX goes. And there is no honorificPrefix, because
+       "Dr. med." is not awarded until the thesis is accepted.
+
+       This is dormant while the site sits behind its holding page: both
+       index.html and this file are noindex, so nothing is crawling it yet.
+       It starts working on the day the site goes back up.
+       ------------------------------------------------------------------ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://hannes-meilicke.com/#hannes-meilicke",
+    "name": "Hannes Meilicke",
+    "givenName": "Hannes",
+    "familyName": "Meilicke",
+    "url": "https://hannes-meilicke.com/",
+    "image": "https://hannes-meilicke.com/og.jpg",
+    "jobTitle": "Physician and Research Fellow",
+    "description": "Physician and psychiatric researcher working on childhood adversity, stress responsivity, depression and translational neuroscience.",
+    "nationality": { "@type": "Country", "name": "Germany" },
+    "knowsLanguage": ["de", "en", "zh", "it", "es"],
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "ORCID",
+      "value": "0009-0002-7678-2857",
+      "url": "https://orcid.org/0009-0002-7678-2857"
+    },
+    "knowsAbout": [
+      "Psychiatry",
+      "Childhood adversity",
+      "Stress responsivity",
+      "Depression",
+      "Translational neuroscience",
+      "Functional magnetic resonance imaging",
+      "Magnetic resonance spectroscopy"
+    ],
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Friedrich Schiller University Jena", "sameAs": "https://www.uni-jena.de/" },
+      { "@type": "CollegeOrUniversity", "name": "Goethe University Frankfurt", "sameAs": "https://www.goethe-university-frankfurt.de/" },
+      { "@type": "CollegeOrUniversity", "name": "Università degli Studi di Padova", "sameAs": "https://www.unipd.it/" },
+      { "@type": "CollegeOrUniversity", "name": "Shanghai International Studies University", "sameAs": "https://en.shisu.edu.cn/" }
+    ],
+    "sameAs": [
+      "https://orcid.org/0009-0002-7678-2857",
+      "https://scholar.google.com/citations?user=iULM0bQAAAAJ&hl=en",
+      "https://www.researchgate.net/profile/Hannes-Meilicke",
+      "https://www.linkedin.com/in/hannes-meilicke-2099ba257/"
+    ]
+  }
+  </script>
+
+  <!-- The site itself, so a search result can show a name for the domain
+       and a search box pointed at it. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://hannes-meilicke.com/#website",
+    "url": "https://hannes-meilicke.com/",
+    "name": "Hannes Meilicke",
+    "inLanguage": "en",
+    "author": { "@id": "https://hannes-meilicke.com/#hannes-meilicke" },
+    "publisher": { "@id": "https://hannes-meilicke.com/#hannes-meilicke" }
+  }
+  </script>
   <!-- The site is behind a holding page. Remove this line, and restore
        the canonical below to "/", on the day it goes back up. -->
   <meta name="robots" content="noindex">
   <link rel="canonical" href="https://hannes-meilicke.com/site.html">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="mask-icon" href="/favicon.svg" color="#7fd0c4">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="style.css">
   <script>
@@ -109,19 +190,19 @@
 
         <!-- Profile buttons: uniform circular icon links, brand colours (v4) -->
         <div class="hero-social">
-          <a class="pill s-scholar" href="https://scholar.google.com/citations?user=iULM0bQAAAAJ&amp;hl=en" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar">
+          <a class="pill s-scholar" href="https://scholar.google.com/citations?user=iULM0bQAAAAJ&amp;hl=en" target="_blank" rel="me noopener" title="Google Scholar" aria-label="Google Scholar">
             <span class="pill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.91V17h2V9z"/><path d="M5 13.18v4L12 21l7-3.82v-4L12 17z"/></svg></span>
             <span class="pill-label">Scholar</span>
           </a>
-          <a class="pill s-orcid" href="https://orcid.org/0009-0002-7678-2857" target="_blank" rel="noopener" title="ORCID" aria-label="ORCID">
+          <a class="pill s-orcid" href="https://orcid.org/0009-0002-7678-2857" target="_blank" rel="me noopener" title="ORCID" aria-label="ORCID">
             <span class="pill-icon"><svg viewBox="68 47 139 140" aria-hidden="true"><path d="M86.3 186.2H70.9V79.1h15.4v107.1z"/><path d="M78.6 66.9c-5.6 0-10.1-4.6-10.1-10.1 0-5.6 4.5-10.1 10.1-10.1s10.1 4.6 10.1 10.1c0 5.5-4.5 10.1-10.1 10.1z"/><path fill-rule="evenodd" d="M108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7 0-21.5-13.7-39.7-43.7-39.7h-23.7v79.4z"/></svg></span>
             <span class="pill-label">ORCID</span>
           </a>
-          <a class="pill s-rg" href="https://www.researchgate.net/profile/Hannes-Meilicke" target="_blank" rel="noopener" title="ResearchGate" aria-label="ResearchGate">
+          <a class="pill s-rg" href="https://www.researchgate.net/profile/Hannes-Meilicke" target="_blank" rel="me noopener" title="ResearchGate" aria-label="ResearchGate">
             <span class="pill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="1.2" y="18.8" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="17.5" font-weight="700" fill="currentColor">R</text><text x="12.4" y="11.6" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" fill="currentColor">G</text></svg></span>
             <span class="pill-label">ResearchGate</span>
           </a>
-          <a class="pill s-linkedin" href="https://www.linkedin.com/in/hannes-meilicke-2099ba257/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <a class="pill s-linkedin" href="https://www.linkedin.com/in/hannes-meilicke-2099ba257/" target="_blank" rel="me noopener" title="LinkedIn" aria-label="LinkedIn">
             <span class="pill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9.5 9h3.8v1.71h.05c.53-.95 1.83-1.95 3.76-1.95 4.02 0 4.76 2.5 4.76 5.76V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.19 1.45-2.19 2.96V21h-4z"/></svg></span>
             <span class="pill-label">LinkedIn</span>
           </a>
@@ -1009,7 +1090,7 @@
 </ol>
       </details>
 
-      <p class="pubs-more"><a href="https://scholar.google.com/citations?user=iULM0bQAAAAJ&amp;hl=en" target="_blank" rel="noopener">See all publications on Google Scholar</a></p>
+      <p class="pubs-more"><a href="https://scholar.google.com/citations?user=iULM0bQAAAAJ&amp;hl=en" target="_blank" rel="me noopener">See all publications on Google Scholar</a></p>
       </div>
 
     </section>
@@ -1188,10 +1269,10 @@
   <div class="foot-inner">
     <p>&copy; 2026 Hannes Meilicke</p>
     <div class="foot-links">
-      <a href="https://scholar.google.com/citations?user=iULM0bQAAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar</a>
-      <a href="https://orcid.org/0009-0002-7678-2857" target="_blank" rel="noopener">ORCID</a>
-      <a href="https://www.researchgate.net/profile/Hannes-Meilicke" target="_blank" rel="noopener">ResearchGate</a>
-      <a href="https://www.linkedin.com/in/hannes-meilicke-2099ba257/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://scholar.google.com/citations?user=iULM0bQAAAAJ&amp;hl=en" target="_blank" rel="me noopener">Scholar</a>
+      <a href="https://orcid.org/0009-0002-7678-2857" target="_blank" rel="me noopener">ORCID</a>
+      <a href="https://www.researchgate.net/profile/Hannes-Meilicke" target="_blank" rel="me noopener">ResearchGate</a>
+      <a href="https://www.linkedin.com/in/hannes-meilicke-2099ba257/" target="_blank" rel="me noopener">LinkedIn</a>
       <a href="#contact">Message</a>
       <a href="#writing">Writing</a>
       <a href="/impressum.html">Impressum</a>

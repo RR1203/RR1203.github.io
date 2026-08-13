@@ -1,0 +1,37 @@
+# This repository is published to the public web. Anything committed here
+# is world-readable the moment it lands on main, so key material must never
+# be stageable by accident - an SSH private key was written into this folder
+# once already, by an ssh-keygen that took a filename from the wrong prompt.
+
+# --- key and credential material -------------------------------------
+id_*
+*.pem
+*.key
+*.p12
+*.pfx
+*.ppk
+*_rsa
+*_dsa
+*_ecdsa
+*_ed25519
+.env
+.env.*
+*.credentials
+# ssh-keygen writing to a stray filename produces a matching .pub beside it;
+# catch the pair rather than only the half that looks dangerous.
+*.pub
+
+# --- macOS and editor litter -----------------------------------------
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# --- local scratch ----------------------------------------------------
+node_modules/
+*.log
