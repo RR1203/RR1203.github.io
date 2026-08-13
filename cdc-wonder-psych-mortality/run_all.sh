@@ -15,16 +15,26 @@ fi
 ./venv/bin/pip install --quiet --disable-pip-version-check -r requirements.txt
 PY=./venv/bin/python
 
+ok_queries() { [ -f raw/manifest.csv ] && awk -F, 'NR>1 && $NF=="ok"' raw/manifest.csv | wc -l || echo 0; }
+
 if [ "$SKIP_FETCH" -eq 0 ]; then
   echo "== step 1a: reference/documentation pages =="
   $PY scripts/01a_fetch_docs.py || echo "WARN: documentation fetch failed"
-  echo "== step 1: WONDER queries =="
-  $PY scripts/01_fetch.py || echo "WARN: fetch pass incomplete (rerun to retry failed queries)"
+  echo "== step 1: WONDER queries (contract backoff: 1/5/15/30/60 min between passes) =="
+  for pause in 0 60 300 900 1800 3600; do
+    [ "$pause" -gt 0 ] && { echo "…retrying failed queries in ${pause}s"; sleep "$pause"; }
+    $PY scripts/01_fetch.py && break
+    if [ "$(ok_queries)" -eq 0 ]; then
+      echo "No query has ever succeeded — systemic block (network policy?), not a"
+      echo "transient failure. Abandoning retry cycles; see logs/01_fetch_*.log."
+      break
+    fi
+  done
 fi
 
-if [ ! -s raw/manifest.csv ]; then
+if [ "$(ok_queries)" -eq 0 ]; then
   echo "=============================================================="
-  echo "BLOCKED AT FETCH: raw/manifest.csv is absent or empty — no CDC"
+  echo "BLOCKED AT FETCH: no successful query in raw/manifest.csv — no CDC"
   echo "data exists in this checkout. Nothing downstream can run on real"
   echo "data. Running the synthetic-fixture test suite instead (fixtures"
   echo "live only in tests/fixtures/ and never enter data/ or outputs/)."

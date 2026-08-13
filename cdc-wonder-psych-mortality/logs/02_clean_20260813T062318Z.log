@@ -1,0 +1,8 @@
+2026-08-13 06:23:18,224 INFO SYNTHETIC_q00: 6 raw rows -> 6 tidy rows (1 totals rows skipped at parse)
+2026-08-13 06:23:18,229 WARNING queries without successful responses (excluded): q01, q03, q04, q05, q06, q07, q08, q09, q10, q11, q12, q13, q14, q15, q16, q17, q18, q19, q20, q21, q22, q23, q24, q25, q26, q27, q28, q29, q30
+2026-08-13 06:23:18,230 INFO q02: 6 raw rows -> 6 tidy rows (1 totals rows skipped at parse)
+2026-08-13 06:23:18,230 INFO wrote rates_year.csv: 0 rows
+2026-08-13 06:23:18,231 INFO wrote rates_year_sex.csv: 6 rows
+2026-08-13 06:23:18,231 INFO wrote rates_year_age.csv: 0 rows
+2026-08-13 06:23:18,251 INFO SYNTHETIC_q00: 6 raw rows -> 6 tidy rows (1 totals rows skipped at parse)
+2026-08-13 06:23:18,274 INFO SYNTHETIC_q00: 6 raw rows -> 6 tidy rows (1 totals rows skipped at parse)
