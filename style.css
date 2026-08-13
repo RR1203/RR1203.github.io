@@ -1529,7 +1529,7 @@ body.simple footer{margin-top:auto}
 /* CV: rows of pictures that grow under the cursor ----------
    Markup, inside .cv-body:
      <div class="cv-pix" data-cols="3">
-       <span class="pix"><img src="images/cv-....jpg" alt=""
+       <span class="pix"><img src="images/cv/....jpg" alt=""
          loading="lazy" onerror="this.style.display='none'"></span>
        ... one span per picture ...
      </div>
@@ -2512,7 +2512,7 @@ html{scroll-padding-top:84px}
    upper rows of the wall of covers, held well back behind the
    type, dimmed and a little desaturated, and dissolving downward
    so that the years and the notes keep clean ground under them.
-   One file carries it, images/reading-cover-wall.svg - a JPEG
+   One file carries it, images/books/reading-cover-wall.svg - a JPEG
    wrapped in an SVG so that it could travel as text.
    The left and right edges reach a touch past the text column;
    nothing reaches past the window, at any width. The small
@@ -2523,7 +2523,7 @@ html{scroll-padding-top:84px}
 .reading::before{content:"";position:absolute;pointer-events:none;z-index:-1;
   top:0;left:calc(-1*var(--rbleed));right:calc(-1*var(--rbleed));
   height:min(100%,400px);border-radius:16px;
-  background:url("images/reading-cover-wall.svg") center top/cover no-repeat;
+  background:url("images/books/reading-cover-wall.svg") center top/cover no-repeat;
   opacity:.18;filter:saturate(.8) contrast(.9);
   -webkit-mask-image:linear-gradient(180deg,#000 0,#000 42%,rgba(0,0,0,.5) 72%,transparent 100%);
   mask-image:linear-gradient(180deg,#000 0,#000 42%,rgba(0,0,0,.5) 72%,transparent 100%)}
@@ -2787,7 +2787,7 @@ object-position:center;opacity:.92}
    1. The wall of covers had been travelling as a 1500-pixel JPEG
       folded inside an SVG and stretched across twice that many
       device pixels, which is why it would not come sharp. It is
-      replaced by images/reading-cover-wall.jpg, cut at full
+      replaced by images/books/reading-cover-wall.jpg, cut at full
       resolution from the top rows of the library picture. And the
       box is gone for good: the navy sheet that v40 laid over the
       covers is dismissed, and the picture now carries its own
@@ -2831,7 +2831,7 @@ object-position:center;opacity:.92}
 .reading::before{
   height:clamp(240px,32vw,352px);
   border-radius:0;
-  background-image:url("images/reading-cover-wall.jpg");
+  background-image:url("images/books/reading-cover-wall.jpg");
   opacity:.8;
   filter:saturate(1.02) contrast(1.01);
   box-shadow:none;
@@ -3006,3 +3006,74 @@ object-position:center;opacity:.92}
   .cd-extra-list li{flex:0 0 96px;width:96px}
   .ypanel .cd-extra-list li{flex:0 0 96px;width:96px}
 }
+
+
+/* ______________________________________________________________
+   Note to self, v38
+   Three things were asked of the page and one was owed to it.
+
+   The jackets in the reading list were shown at the size of a thumbnail
+   when the whole point of them is to be looked at. Every cover, in the
+   ranked column and in the two rows of extras alike, is given about a
+   quarter more room, and the column that holds it grows with it so that
+   nothing is squeezed.
+
+   Each year was drawn an emblem of its own - the tally tablet for the
+   year of Debt, the black swan, the tuning fork for Resonanz, the owl of
+   Athens, the mended bowl, the mandala - and every one of them sat
+   unused in the images folder with the flat navy it was drawn on still
+   behind it. The navy is lifted away and the emblem now stands in the
+   top corner of its year with nothing behind it and nothing around it.
+   A year whose emblem is not in the repository simply has none.
+
+   A picture in the CV, opened, took the whole glass. It is asked to be
+   more modest: large enough to see, small enough that the page is still
+   there around it. Under the pointer a frame grows less far as well.
+   __________________________________________________________ */
+
+/* ---- 1. the jackets are given their room ---- */
+@media (min-width:641px){
+  .cd-item{grid-template-columns:158px 188px minmax(0,1fr)}
+  .cd-extra{grid-template-columns:158px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-item{grid-template-columns:126px 176px minmax(0,1fr)}
+  .ypanel .cd-extra{grid-template-columns:126px minmax(0,1fr)}
+}
+.cd-cover{max-width:188px}
+.ypanel .cd-cover{max-width:176px}
+.cd-extra-list li{flex:0 0 138px;width:138px}
+.ypanel .cd-extra-list li{flex:0 0 130px;width:130px}
+@media (max-width:640px){
+  .cd-extra-list li{flex:0 0 116px;width:116px}
+  .ypanel .cd-extra-list li{flex:0 0 116px;width:116px}
+}
+
+/* ---- 2. the emblem of the year, in the corner, on nothing ---- */
+.yp-symbol{position:absolute;top:16px;right:62px;z-index:1;
+  width:104px;height:104px;display:block;pointer-events:none}
+.yp-symbol img{display:block;width:100%;height:100%;
+  object-fit:contain;object-position:top right;
+  opacity:.94;filter:drop-shadow(0 8px 20px rgba(0,0,0,.42))}
+.yp-top{padding-right:8px}
+.yp-eyebrow{position:relative;z-index:2}
+@media (max-width:900px){.yp-symbol{width:82px;height:82px;right:56px;top:14px}}
+@media (max-width:700px){.yp-symbol{width:64px;height:64px;right:50px;top:12px}}
+@media (max-width:420px){.yp-symbol{width:52px;height:52px;right:44px}}
+
+/* ---- 3. the opened picture is asked to be smaller ---- */
+.pixbox img{width:auto;height:auto;
+  max-width:min(84vw,880px);max-height:min(68vh,660px)}
+@media (max-width:700px){
+  .pixbox img{max-width:92vw;max-height:min(62vh,540px)}
+}
+@supports (height:100dvh){
+  .pixbox img{max-width:min(84vw,880px);max-height:min(68dvh,660px)}
+  @media (max-width:700px){
+    .pixbox img{max-width:92vw;max-height:min(62dvh,540px)}
+  }
+}
+/* and it grows less far under the pointer than it did */
+.cv-pix .pix:hover{transform:scale(1.28) translateY(-3px)}
+@media (max-width:900px){.cv-pix .pix:hover{transform:scale(1.14) translateY(-2px)}}
+@media (hover:none),(pointer:coarse){.cv-pix .pix:hover{transform:none}}
