@@ -2911,3 +2911,98 @@ object-position:center;opacity:.92}
 .yshot img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;
   object-position:center;opacity:1;
   filter:drop-shadow(0 12px 20px rgba(0,0,0,.6)) drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+
+/* ==============================================================
+   v41 - the covers get room, the medals agree on a shape, and
+   the wall behind the reading stops dissolving so early.
+   --------------------------------------------------------------
+   1. Every jacket is larger and sits properly inside its frame:
+      the box follows the shape a hardback actually has, the
+      picture is let in whole rather than cropped to fit, and a
+      little light falls down the spine.
+   2. Bronze was right. Silver and gold now carry the same
+      curve beneath the jacket, in their own metal; gold keeps
+      its crown above.
+   3. The wall of covers holds its edge further down the page
+      before it goes.
+   ============================================================== */
+
+/* ---- 1. bigger jackets, better seated ---- */
+@media (min-width:641px){
+  .cd-item{grid-template-columns:158px 150px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-item{grid-template-columns:126px 140px minmax(0,1fr)}
+}
+.cd-cover{max-width:150px}
+.ypanel .cd-cover{max-width:140px}
+.cd-jacket{aspect-ratio:1/1.52;border-radius:3px 5px 5px 3px;
+  border-color:rgba(255,255,255,.14);
+  box-shadow:0 14px 30px rgba(0,0,0,.42),0 2px 6px rgba(0,0,0,.34)}
+/* the picture is shown whole; the mat behind it takes its colour from
+   the page, so a cover of any shape sits calmly in the same frame */
+.cd-jacket:has(img){background:#0e1c2e}
+.cd-jacket img{width:100%;height:100%;object-fit:contain;object-position:center}
+/* light down the spine and a soft edge on the fore-edge */
+.cd-jacket::after{content:"";position:absolute;inset:0;pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(90deg,rgba(255,255,255,.20) 0,rgba(255,255,255,.05) 3px,
+    rgba(255,255,255,0) 9px,rgba(0,0,0,0) 88%,rgba(0,0,0,.16) 100%)}
+.cd-jacket{position:relative}
+.cd-item .cd-cover{transition:transform .38s cubic-bezier(.22,.61,.36,1)}
+.cd-item:hover .cd-cover{transform:translateY(-3px)}
+
+/* ---- 2. one shape for all three metals ---- */
+.cd-item[data-rank="1"] .cd-cover::after,
+.cd-item[data-rank="2"] .cd-cover::after,
+.cd-item[data-rank="3"] .cd-cover::after{
+  content:"";position:absolute;left:-6px;right:-6px;bottom:auto;
+  top:100%;height:26px;margin-top:6px;
+  background-repeat:no-repeat;background-position:center;background-size:100% 100%;
+  pointer-events:none}
+.cd-item[data-rank="2"] .cd-cover::after{
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23c6ced9%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+.cd-item[data-rank="1"] .cd-cover::after{
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+
+/* ---- 3. the wall keeps its edge ---- */
+.reading::before{
+  height:min(100%,430px);opacity:.22;filter:saturate(.88) contrast(.98);
+  border-radius:10px;
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 74%,rgba(0,0,0,.72) 88%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0,#000 74%,rgba(0,0,0,.72) 88%,transparent 100%)}
+@media (max-width:640px){.reading::before{height:min(100%,320px);border-radius:8px}}
+
+/* ---- the honorable mentions and the 15-11 band get their jackets ---- */
+.cd-extra-cover{display:block;width:100%;aspect-ratio:1/1.52;margin:0 0 10px;
+  border-radius:3px 4px 4px 3px;overflow:hidden;position:relative;
+  border:1px solid rgba(255,255,255,.12);background:#0e1c2e;
+  box-shadow:0 8px 18px rgba(0,0,0,.34);
+  transition:border-color .34s ease,box-shadow .34s ease}
+.cd-extra-cover img{display:block;width:100%;height:100%;
+  object-fit:contain;object-position:center}
+.cd-extra-cover::after{content:"";position:absolute;inset:0;pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(90deg,rgba(255,255,255,.18) 0,rgba(255,255,255,.04) 3px,
+    rgba(255,255,255,0) 8px,rgba(0,0,0,0) 88%,rgba(0,0,0,.14) 100%)}
+/* where a jacket is present the drawn empty frame steps aside */
+.cd-extra-list li:has(.cd-extra-cover)::before{display:none}
+.cd-extra-list li:hover .cd-extra-cover,
+.cd-extra-list li:focus-within .cd-extra-cover{border-color:rgba(127,208,196,.44);
+  box-shadow:0 16px 34px rgba(0,0,0,.44)}
+
+/* The extras rows are .cd-item too, but they have no jacket column of
+   their own - their books stand in the row below. Give them their two
+   columns back, and let every card in the row be the same width. */
+@media (min-width:641px){
+  .cd-extra{grid-template-columns:158px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-extra{grid-template-columns:126px minmax(0,1fr)}
+}
+.cd-extra-list li{flex:0 0 112px;width:112px}
+.ypanel .cd-extra-list li{flex:0 0 104px;width:104px}
+@media (max-width:640px){
+  .cd-extra-list li{flex:0 0 96px;width:96px}
+  .ypanel .cd-extra-list li{flex:0 0 96px;width:96px}
+}
