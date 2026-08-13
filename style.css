@@ -3380,3 +3380,178 @@ html[data-theme="light"] .theme-toggle .t-moon{display:none}
 .credo-list b{display:block;font-family:'Playfair Display',Georgia,serif;
   font-weight:500;font-size:17px;color:var(--accent);margin:0 0 4px}
 .credo-list span{display:block;font-size:16px;line-height:1.6;color:var(--muted)}
+
+
+/* ______________________________________________________________
+   Note to self, v41 - daylight, everywhere and in every mark
+
+   v40 turned the ground over. This turns over what stands on it.
+
+   The switch was only ever on the front page: the eight year pages,
+   the two legal pages and the 404 kept the night whatever the reader
+   had chosen. They carry it now, and the choice travels with them.
+
+   The rest is the small change. A badge whose brand colour was picked
+   to glow on navy goes flat on paper, so on paper it is drawn as an
+   outline in its own colour instead of a disc. The drifting network
+   behind the name was three pale tints; it now takes the darker three.
+   Rules, hairlines and the empty picture frames were all set at an
+   opacity that reads on black and disappears on cream, so each is
+   given a little more weight. And a photograph, which has its own
+   light in it, is left alone.
+   __________________________________________________________ */
+
+/* ---- 1. the brand badges ---- */
+/* On navy each of these is a filled disc in the service's own colour.
+   On paper the same disc is a bright hole, so the colour moves to the
+   mark and the rule around it, and the disc goes quiet. */
+html[data-theme="light"] .pill-icon{
+  background:rgba(var(--ink),.045)!important;
+  border:1px solid var(--brand-line,rgba(var(--ink),.18));
+  box-shadow:none}
+html[data-theme="light"] .pill.s-scholar .pill-icon svg{fill:#2a63c4}
+html[data-theme="light"] .pill.s-orcid   .pill-icon svg{fill:#6f8a1f}
+html[data-theme="light"] .pill.s-rg      .pill-icon svg{fill:#0b7f70}
+html[data-theme="light"] .pill.s-linkedin .pill-icon svg{fill:#0a66c2}
+html[data-theme="light"] .pill.s-mail    .pill-icon svg{fill:#2a6070}
+html[data-theme="light"] .pill.s-scholar{--brand:#2a63c4;--brand-line:rgba(42,99,196,.4)}
+html[data-theme="light"] .pill.s-orcid{--brand:#6f8a1f;--brand-line:rgba(111,138,31,.4)}
+html[data-theme="light"] .pill.s-rg{--brand:#0b7f70;--brand-line:rgba(11,127,112,.4)}
+html[data-theme="light"] .pill.s-linkedin{--brand:#0a66c2;--brand-line:rgba(10,102,194,.4)}
+html[data-theme="light"] .pill.s-mail{--brand:#2a6070;--brand-line:rgba(42,96,112,.4)}
+html[data-theme="light"] .hero-social .pill:hover .pill-label{color:var(--text)}
+html[data-theme="light"] .hero-social .pill-label{color:var(--muted);opacity:.9}
+html[data-theme="light"] .pill-icon svg{fill:currentColor}
+
+/* ---- 2. hairlines, rules and empty frames ---- */
+/* Every one of these was set to read against black. */
+html[data-theme="light"]{
+  --card-border:rgba(23,35,52,.16);
+  --hair:rgba(23,35,52,.18);
+  --card:rgba(23,35,52,.03)}
+html[data-theme="light"] .h2-rule{background:var(--accent);opacity:.9}
+html[data-theme="light"] .cv-pix .pix{border-color:rgba(23,35,52,.16)}
+html[data-theme="light"] .cv-pix .pix::before,
+html[data-theme="light"] .cv-pix .pix::after{background:rgba(23,35,52,.4)}
+html[data-theme="light"] .img-frame,
+html[data-theme="light"] .media-card,
+html[data-theme="light"] .theme-card,
+html[data-theme="light"] .reading-card{
+  border-color:rgba(23,35,52,.14);background:rgba(23,35,52,.025)}
+html[data-theme="light"] .cd-jacket,
+html[data-theme="light"] .cd-extra-cover{
+  border-color:rgba(23,35,52,.14);
+  box-shadow:0 10px 24px rgba(23,35,52,.14),0 2px 5px rgba(23,35,52,.1)}
+html[data-theme="light"] .ih-face{
+  border-color:rgba(23,35,52,.2);
+  box-shadow:0 10px 24px rgba(23,35,52,.16)}
+html[data-theme="light"] .ypanel{
+  border-color:rgba(23,35,52,.14);
+  box-shadow:0 20px 44px rgba(23,35,52,.1)}
+html[data-theme="light"] .yshot{border-color:rgba(23,35,52,.14)}
+html[data-theme="light"] .ychip{border-color:rgba(23,35,52,.16)}
+html[data-theme="light"] .yp-close,
+html[data-theme="light"] .cd-nav button,
+html[data-theme="light"] .yrail-nav button,
+html[data-theme="light"] .pixbox-x{border-color:rgba(23,35,52,.22)}
+html[data-theme="light"] .scroll-progress i{background:var(--accent)}
+html[data-theme="light"] hr,
+html[data-theme="light"] .rule{background:rgba(23,35,52,.16)}
+
+/* ---- 3. the type that was written for a dark ground ---- */
+html[data-theme="light"] .focus-label,
+html[data-theme="light"] .reading-head,
+html[data-theme="light"] .hero-eyebrow,
+html[data-theme="light"] .cd-no,
+html[data-theme="light"] .yc-year{color:var(--accent)}
+html[data-theme="light"] .cd-num{color:rgba(23,35,52,.3)}
+html[data-theme="light"] .cd-item[data-rank="1"] .cd-num{color:rgba(163,124,42,.85)}
+html[data-theme="light"] .cd-item[data-rank="2"] .cd-num{color:rgba(23,35,52,.42)}
+html[data-theme="light"] .cd-item[data-rank="3"] .cd-num{color:rgba(140,96,52,.7)}
+html[data-theme="light"] .ih-role{color:var(--accent)}
+html[data-theme="light"] .ih-for,
+html[data-theme="light"] .cd-author,
+html[data-theme="light"] .cd-extra-by,
+html[data-theme="light"] .pt-when,
+html[data-theme="light"] .cv-period,
+html[data-theme="light"] .pub-meta,
+html[data-theme="light"] .pub-authors{color:var(--muted)}
+html[data-theme="light"] .is-placeholder{opacity:.55}
+html[data-theme="light"] .brand-name,
+html[data-theme="light"] .nav-brand .mono{color:var(--text)}
+html[data-theme="light"] .nav-inner a{color:var(--muted)}
+html[data-theme="light"] .sec-num,
+html[data-theme="light"] .scroll-cue span,
+html[data-theme="light"] .rail .lbl{color:var(--muted);opacity:.85}
+html[data-theme="light"] .rail a .dot{background:rgba(23,35,52,.25)}
+html[data-theme="light"] .rail a.active .dot,
+html[data-theme="light"] .rail a:hover .dot{background:var(--accent)}
+html[data-theme="light"] ::selection{background:rgba(28,127,114,.22);color:var(--text)}
+html[data-theme="light"] ::placeholder{color:#7b8595}
+
+/* ---- 4. a photograph keeps its own light ---- */
+/* The pictures are the one thing that should not turn over: they are
+   lit from inside. Only the veil laid over them is adjusted, so that
+   the type on top still reads on a pale page. */
+html[data-theme="light"] .hb-shot img{opacity:.9}
+html[data-theme="light"] .hb-item:hover .hb-shot img{opacity:1}
+html[data-theme="light"] .hb-shot::after{
+  background:linear-gradient(158deg,rgba(8,16,28,.2) 0,rgba(8,16,28,.34) 42%,rgba(8,16,28,.72) 100%)}
+html[data-theme="light"] .hb-item .hb-name,
+html[data-theme="light"] .hb-item .hb-gloss{color:#fff!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.6),0 2px 14px rgba(0,0,0,.45)}
+html[data-theme="light"] .hb-mark{color:#eafcf8;opacity:.95}
+html[data-theme="light"] .hb-item{border-color:rgba(23,35,52,.14)}
+html[data-theme="light"] .ih-face img{filter:grayscale(1) contrast(1.05) brightness(1.02)}
+/* a jacket sits on paper, not on navy */
+html[data-theme="light"] .cd-jacket:has(img),
+html[data-theme="light"] .cd-extra-cover{background:#efece6}
+html[data-theme="light"] .cv-pix img{filter:saturate(.94)}
+html[data-theme="light"] .cv-pix .pix:hover img{filter:saturate(1)}
+
+/* ---- 5. the emblems, cut for navy, standing on paper ---- */
+html[data-theme="light"] .yp-symbol img{
+  filter:drop-shadow(0 2px 5px rgba(23,35,52,.35))
+         drop-shadow(0 8px 18px rgba(23,35,52,.18))}
+
+/* ---- 6. the switch reads either way ---- */
+html[data-theme="light"] .theme-toggle{color:var(--muted);border-color:rgba(23,35,52,.2)}
+html[data-theme="light"] .theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ---- 7. the writing cards ---- */
+/* Their heading was set white and their thumbnail carries a wash made
+   of the night. Both are turned. */
+html[data-theme="light"] .media-card h3{color:var(--text)}
+html[data-theme="light"] .media-card:hover h3{color:var(--accent)}
+html[data-theme="light"] .media-card:hover{
+  background:rgba(23,35,52,.04);box-shadow:0 18px 40px rgba(23,35,52,.14)}
+html[data-theme="light"] .media-thumb{
+  background:linear-gradient(135deg,rgba(28,127,114,.1),rgba(90,120,180,.08))}
+html[data-theme="light"] .media-thumb::before{color:rgba(28,127,114,.34)}
+html[data-theme="light"] .media-thumb::after{
+  background:linear-gradient(to top,rgba(247,245,241,.75),transparent 58%)}
+html[data-theme="light"] .media-card .kicker,
+html[data-theme="light"] .media-card p{color:var(--muted)}
+html[data-theme="light"] .theme-card:hover{
+  background:rgba(23,35,52,.04);box-shadow:0 18px 40px rgba(23,35,52,.12)}
+html[data-theme="light"] .reading-card:hover{background:rgba(23,35,52,.04)}
+/* the small caps over a card */
+html[data-theme="light"] [class*="-tag"],
+html[data-theme="light"] [class*="-kicker"]{color:var(--muted)}
+
+html[data-theme="light"] .media-date{color:rgba(23,35,52,.55)}
+html[data-theme="light"] .media-kind{
+  background:rgba(255,255,255,.82);border-color:rgba(23,35,52,.18);color:var(--accent)}
+
+/* ---- 8. the last of the white type ---- */
+html[data-theme="light"] .cd-title,
+html[data-theme="light"] .cv-body h3,
+html[data-theme="light"] .simple-main h2,
+html[data-theme="light"] .simple-main h3{color:var(--text)}
+html[data-theme="light"] .cd-plus{color:rgba(23,35,52,.35)}
+/* an emoji flag has no colour of its own to turn */
+html[data-theme="light"] .flag{opacity:1}
+
+html[data-theme="light"] .simple-main h1,
+html[data-theme="light"] .piece h1,
+html[data-theme="light"] .legal h1{color:var(--text)}

@@ -10,6 +10,16 @@
   <link rel="mask-icon" href="/favicon.svg" color="#7fd0c4">
   <link rel="stylesheet" href="/fonts.css">
   <link rel="stylesheet" href="/style.css">
+  <script>
+  /* The tone is settled before anything is painted. */
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      var tone = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      document.documentElement.setAttribute("data-theme", tone);
+    } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }
+  })();
+  </script>
 </head>
 <body class="simple">
 
@@ -28,6 +38,11 @@
         <a href="/#cv">CV</a>
         <a href="/#contact">Contact</a>
       </div>
+      <button class="theme-toggle" type="button" id="theme-toggle"
+              aria-label="Switch between the light and the dark page">
+        <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+        <svg class="t-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.3M12 19.3v2.3M2.4 12h2.3M19.3 12h2.3M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+      </button>
     </div>
   </nav>
   <main class="simple-main" id="main">
@@ -52,5 +67,31 @@
   </div>
 </footer>
 
+
+  <script>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) { return; }
+    var root = document.documentElement;
+    var meta = document.querySelector('meta[name="theme-color"]');
+    var paint = function (tone) {
+      root.setAttribute("data-theme", tone);
+      if (meta) { meta.setAttribute("content", tone === "light" ? "#f7f5f1" : "#0b182a"); }
+      btn.setAttribute("aria-pressed", tone === "light" ? "true" : "false");
+      btn.title = tone === "light" ? "Switch to the dark page" : "Switch to the light page";
+    };
+    paint(root.getAttribute("data-theme") || "dark");
+    btn.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      paint(next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+    try {
+      window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", function (e) {
+        if (!localStorage.getItem("theme")) { paint(e.matches ? "light" : "dark"); }
+      });
+    } catch (e) {}
+  })();
+  </script>
 </body>
 </html>
