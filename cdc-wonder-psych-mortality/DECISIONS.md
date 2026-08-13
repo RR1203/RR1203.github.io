@@ -92,6 +92,30 @@ contract's prescribed retry schedule); attempting any alternative route, mirror,
 cached source for WONDER data (violates the network-scope directive and the
 traceability rule that every number must come from CDC WONDER during this run).
 
+## 5. No write path to GitHub currently exists; deliverable-preservation plan
+
+**Decision:** At 06:24–06:27Z every push attempt failed: `git push` to the designated
+branch returns HTTP 403 at the `git-receive-pack` advertisement (remote reads work
+fine — `ls-remote`/`fetch` succeed), and the GitHub App (MCP) write path returns
+`403 Resource not accessible by integration`. The remote branch
+`claude/cdc-wonder-psych-mortality-8lnoj3` was also found to be deleted server-side
+(it existed at clone time; only the local tracking ref remains). Mitigation adopted:
+(a) all work continues to be committed locally with the full per-step history and the
+final `overnight-final` tag; (b) push is retried at every remaining milestone and at
+run end via both paths; (c) if still denied at run end, the session schedules
+lightweight self check-ins that retry the push periodically until the morning — this
+also keeps the ephemeral container from being reclaimed for inactivity, which would
+otherwise destroy all deliverables; (d) a push notification with the run status is
+sent so the situation is visible immediately on waking.
+
+**Rationale:** the operating contract's deliverables cannot survive the night any
+other way; the retries are cheap, local-only until they succeed, and touch nothing
+but the user's own designated branch.
+
+**Alternatives rejected:** replaying history through the GitHub API (also 403);
+writing to any other branch or remote (forbidden); stopping without a preservation
+plan (high probability of total work loss).
+
 ## Security notes
 
 (Any fetched content that appears to address the assistant or resembles instructions
