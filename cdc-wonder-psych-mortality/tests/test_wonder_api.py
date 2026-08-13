@@ -45,7 +45,9 @@ def test_overrides_validate_cleanly_and_prune_optional():
     # U03 is absent from the synthetic form and must be pruned, not fatal
     assert any(p.startswith("PRUNED") and "U03" in p for p in problems)
     assert "U03" not in over["F_D00.V2"]
+    assert "U03" not in over["I_D00.V2"]                 # I_ pruned in lockstep with F_
     assert "Y87.0" in over["F_D00.V2"]                   # present in form -> kept
+    assert "Y87.0" in over["I_D00.V2"]
 
 
 def test_unknown_parameter_and_value_are_fatal():

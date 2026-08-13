@@ -17,8 +17,11 @@ import statsmodels.formula.api as smf
 
 
 def _strip_volatile(text: str) -> str:
-    return "\n".join(l for l in text.splitlines()
-                     if not re.search(r"\b(Date|Time):", l))
+    """Redact run date/time VALUES from statsmodels summaries without dropping the
+    lines: those lines also carry Prob (F-statistic), Log-Likelihood, Deviance and
+    Pearson chi2, which must stay in the saved 'complete model output'."""
+    text = re.sub(r"\b[A-Z][a-z]{2}, \d{1,2} [A-Z][a-z]{2} \d{4}\b", "DATE-REDACTED", text)
+    return re.sub(r"\b\d{2}:\d{2}:\d{2}\b", "TIME-REDACTED", text)
 
 
 def aapc_loglinear(years: np.ndarray, rates: np.ndarray) -> tuple[dict, str]:
@@ -85,17 +88,22 @@ def h2_count_interaction(df: pd.DataFrame) -> tuple[dict, str]:
             f"({'> 2 -> negative binomial (NB2) is primary' if disp > 2 else '<= 2 -> Poisson is primary'})\n",
             "== Poisson ==", _strip_volatile(str(pois.summary()))]
     if disp > 2:
-        import statsmodels.discrete.count_model  # noqa: F401  (register NB)
         from statsmodels.discrete.discrete_model import NegativeBinomial
+        start = np.append(np.asarray(pois.params), 0.1)   # Poisson betas + alpha seed
         nb = NegativeBinomial(df["deaths"], X, offset=off, loglike_method="nb2").fit(
-            disp=False, maxiter=200)
+            start_params=start, disp=False, maxiter=500)
+        converged = bool(nb.mle_retvals.get("converged", False))
         ci = nb.conf_int()
         res.update({
             "nb2_interaction": float(nb.params["inter"]),
             "nb2_inter_ci": [float(ci.loc["inter"][0]), float(ci.loc["inter"][1])],
             "nb2_alpha": float(nb.params.get("alpha", float("nan"))),
+            "nb2_converged": converged,
         })
         text += ["", "== Negative binomial (NB2, MLE alpha) — PRIMARY ==",
+                 f"optimizer convergence reported: {converged}"
+                 + ("" if converged else "  <-- CAUTION: refit and inspect before "
+                    "citing this model; alpha may sit at its boundary"),
                  _strip_volatile(str(nb.summary()))]
         prim, ci_ = res["nb2_interaction"], res["nb2_inter_ci"]
     else:

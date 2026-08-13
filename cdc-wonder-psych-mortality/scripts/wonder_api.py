@@ -214,6 +214,11 @@ def validate_overrides(over: dict[str, list[str]], defaults: dict[str, list[str]
     problems: list[str] = []
     pruned = {k: list(v) for k, v in over.items()}
     known_names = set(defaults) | set(options) | PROTOCOL_PARAMS
+
+    def code_in_form(code: str) -> bool:
+        # boundary-aware: "F99" must not validate merely because "F01-F99" appears
+        return re.search(rf"(?<![A-Za-z0-9.\-]){re.escape(code)}(?![A-Za-z0-9.\-])",
+                         form_html) is not None
     for name, values in over.items():
         if name.startswith("finder-stage-"):
             # documented finder control: finder-stage-<variable>; valid iff the
@@ -236,8 +241,8 @@ def validate_overrides(over: dict[str, list[str]], defaults: dict[str, list[str]
             elif name.startswith("F_"):
                 # finder codes (e.g. ICD-10 picklist) are carried in the form's
                 # javascript picklist data, not <option> elements: require the
-                # exact code to appear somewhere in the saved form HTML
-                if v in form_html:
+                # exact code to appear (delimited) in the saved form HTML
+                if code_in_form(v):
                     continue
             else:
                 continue  # free-text/hidden non-finder parameter: override accepted
@@ -246,6 +251,14 @@ def validate_overrides(over: dict[str, list[str]], defaults: dict[str, list[str]
                 problems.append(f"PRUNED optional value {v!r} for {name} (absent from saved form)")
             else:
                 problems.append(f"value {v!r} for {name} not found in saved form")
+    # keep the informational I_ parameter in lockstep with its pruned F_ finder,
+    # so a pruned code is never posted anywhere in the request
+    for name in list(pruned):
+        if name.startswith("F_"):
+            ikey = "I_" + name[2:]
+            if ikey in pruned:
+                pruned[ikey] = [v for v in pruned[ikey]
+                                if v in pruned[name] or v not in over.get(name, [])]
     return pruned, problems
 
 
@@ -333,7 +346,7 @@ def parse_response(xml_bytes: bytes, n_label_cols: int, n_value_cols: int) -> Pa
         values = []
         for cell in cells[ci:]:
             values.append(cell.get("v", cell.get("l", (cell.text or ""))))
-        if labels and labels[0].strip().lower() == "total":
+        if any(lab.strip().lower() == "total" for lab in labels):
             skipped_totals += 1
             continue
         if len(labels) == n_label_cols and len(values) == n_value_cols:

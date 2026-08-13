@@ -69,7 +69,9 @@ def save_table(df: pd.DataFrame, name: str, caption: str, inputs: list[str],
                floatfmt: str | None = "%.1f") -> None:
     df = df.copy()
     for col in df.columns:
-        if "deaths" in col and pd.api.types.is_float_dtype(df[col]):
+        # count columns only — never derived stats like deaths_pct_diff
+        if (col == "deaths" or col.endswith("_deaths")) \
+                and pd.api.types.is_float_dtype(df[col]):
             df[col] = df[col].round().astype("Int64")
     df.to_csv(TAB / f"{name}.csv", index=False, float_format=floatfmt)
     md = df.to_markdown(index=False,
@@ -116,7 +118,8 @@ def fig1(yr):
 
 def fig2(yr, summary):
     fig, ax = plt.subplots(figsize=(8, 4.8))
-    g76 = yr[(yr["db"] == "D76") & (yr["series"] == "B")].sort_values("year")
+    g76 = yr[(yr["db"] == "D76") & (yr["series"] == "B")
+             & yr["age_adjusted_rate"].notna()].sort_values("year")
     ax.plot(g76["year"], g76["age_adjusted_rate"], "-", color=SLOT["B"], linewidth=2,
             label="Intentional self-harm (D76)")
     g158 = yr[(yr["db"] == "D158") & (yr["series"] == "B")].sort_values("year")
@@ -215,37 +218,49 @@ def tables(yr, summary):
 
     rows = []
     def aapc_row(name, key):
+        # a failed analysis block leaves its key absent; the gap must be visible
+        if key not in summary:
+            rows.append({"analysis": name, "estimate": "MISSING (analysis block failed)",
+                         "ci95": "-", "years": "-", "decision": "-"})
+            return
         r = summary[key]
         rows.append({"analysis": name,
                      "estimate": f"AAPC {r['aapc_pct']:.2f}%/yr",
                      "ci95": f"{r['aapc_ci_lo']:.2f} to {r['aapc_ci_hi']:.2f}",
                      "years": f"{r['year_min']}-{r['year_max']}",
                      "decision": r.get("hypothesis_decision", "-")})
-    aapc_row("H1: A1 (F10-F19) age-adjusted trend, D76", "h1_aapc_A1_D76")
-    h2 = summary["h2_counts_A1_vs_A2_D76"]
-    rows.append({"analysis": "H2: extra annual growth, A1 vs A2 (count model)",
-                 "estimate": f"ratio of annual rate-ratios {h2['primary_irr_ratio']:.4f}",
-                 "ci95": f"{h2['primary_irr_ratio_ci'][0]:.4f} to {h2['primary_irr_ratio_ci'][1]:.4f}",
-                 "years": "1999-2020",
-                 "decision": h2.get("hypothesis_decision", "-")})
-    h3 = summary["h3_segmented_B_D76_knot2018"]
-    rows.append({"analysis": "H3: self-harm segmented trend (knot 2018)",
-                 "estimate": (f"pre-slope APC {h3['pre_apc_pct']:.2f}%/yr; "
-                              f"slope change b2 {h3['b2_slope_change']:.4f}"),
-                 "ci95": (f"b1 {h3['b1_ci'][0]:.4f} to {h3['b1_ci'][1]:.4f}; "
-                          f"b2 {h3['b2_ci'][0]:.4f} to {h3['b2_ci'][1]:.4f}"),
-                 "years": "1999-2020", "decision": h3.get("hypothesis_decision", "-")})
-    aapc_row("S1: chapter A (F01-F99)", "s1_aapc_A_D76")
-    aapc_row("S1: chapter A' (F10-F99)", "s1_aapc_Aprime_D76")
-    aapc_row("S2: H1 excluding 2020", "s2_h1_excl2020")
-    for knot in (2017, 2019):
-        k = summary[f"s4_segmented_B_D76_knot{knot}"]
-        rows.append({"analysis": f"S4: H3 with knot {knot}",
+    def seg_row(name, key, decision=True):
+        if key not in summary:
+            rows.append({"analysis": name, "estimate": "MISSING (analysis block failed)",
+                         "ci95": "-", "years": "-", "decision": "-"})
+            return
+        k = summary[key]
+        rows.append({"analysis": name,
                      "estimate": (f"pre-slope APC {k['pre_apc_pct']:.2f}%/yr; "
                                   f"slope change b2 {k['b2_slope_change']:.4f}"),
                      "ci95": (f"b1 {k['b1_ci'][0]:.4f} to {k['b1_ci'][1]:.4f}; "
                               f"b2 {k['b2_ci'][0]:.4f} to {k['b2_ci'][1]:.4f}"),
-                     "years": "1999-2020", "decision": "-"})
+                     "years": "1999-2020",
+                     "decision": k.get("hypothesis_decision", "-") if decision else "-"})
+
+    aapc_row("H1: A1 (F10-F19) age-adjusted trend, D76", "h1_aapc_A1_D76")
+    if "h2_counts_A1_vs_A2_D76" in summary:
+        h2 = summary["h2_counts_A1_vs_A2_D76"]
+        rows.append({"analysis": "H2: extra annual growth, A1 vs A2 (count model)",
+                     "estimate": f"ratio of annual rate-ratios {h2['primary_irr_ratio']:.4f}",
+                     "ci95": f"{h2['primary_irr_ratio_ci'][0]:.4f} to {h2['primary_irr_ratio_ci'][1]:.4f}",
+                     "years": "1999-2020",
+                     "decision": h2.get("hypothesis_decision", "-")})
+    else:
+        rows.append({"analysis": "H2: extra annual growth, A1 vs A2 (count model)",
+                     "estimate": "MISSING (analysis block failed)", "ci95": "-",
+                     "years": "-", "decision": "-"})
+    seg_row("H3: self-harm segmented trend (knot 2018)", "h3_segmented_B_D76_knot2018")
+    aapc_row("S1: chapter A (F01-F99)", "s1_aapc_A_D76")
+    aapc_row("S1: chapter A' (F10-F99)", "s1_aapc_Aprime_D76")
+    aapc_row("S2: H1 excluding 2020", "s2_h1_excl2020")
+    for knot in (2017, 2019):
+        seg_row(f"S4: H3 with knot {knot}", f"s4_segmented_B_D76_knot{knot}", decision=False)
     save_table(pd.DataFrame(rows), "table2_model_results",
                "Pre-registered hypothesis tests and sensitivity analyses; full model "
                "outputs in analysis/*.txt.",

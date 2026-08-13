@@ -25,9 +25,10 @@ contains no results — confirm both, and confirm no figure/table exists in `out
 
 Run `./run_all.sh --skip-fetch` twice; each prints a single reproducibility digest
 over `data/`, `analysis/`, `outputs/` at the end — the two digests must be identical.
-**Tonight** (no `raw/manifest.csv`) the same command prints a BLOCKED banner and runs
-the synthetic-fixture test suite instead; confirm all tests pass and that fixtures
-live only in `tests/fixtures/` (every fixture filename carries `SYNTHETIC`).
+**Tonight** (no successful query in `raw/manifest.csv`) the same command prints a
+BLOCKED banner, runs the synthetic-fixture test suite, and **exits 3** — a blocked run
+never reports success even with all tests green. Confirm the tests pass and that
+fixtures live only in `tests/fixtures/` (every fixture filename carries `SYNTHETIC`).
 
 ## 4. Read the decision log (~5 min)
 

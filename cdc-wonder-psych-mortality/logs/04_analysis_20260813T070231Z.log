@@ -1,0 +1,14 @@
+2026-08-13 07:02:31,226 INFO saved analysis/h1_aapc_A1_D76.txt
+2026-08-13 07:02:31,236 INFO saved analysis/h2_counts_A1_vs_A2_D76.txt
+2026-08-13 07:02:31,242 INFO saved analysis/h3_segmented_B_D76_knot2018.txt
+2026-08-13 07:02:31,254 INFO saved analysis/s1_aapc_A_D76.txt
+2026-08-13 07:02:31,263 INFO saved analysis/s1_aapc_Aprime_D76.txt
+2026-08-13 07:02:31,268 INFO saved analysis/s1_segmented_Bprime_D76_knot2018.txt
+2026-08-13 07:02:31,277 INFO saved analysis/s2_h1_excl2020.txt
+2026-08-13 07:02:31,286 INFO saved analysis/s2_h2_excl2020.txt
+2026-08-13 07:02:31,291 INFO saved analysis/s2_h3_excl2020.txt
+2026-08-13 07:02:31,322 INFO saved analysis/s3_overlap_D76_D158.txt
+2026-08-13 07:02:31,327 INFO saved analysis/s4_segmented_B_D76_knot2017.txt
+2026-08-13 07:02:31,332 INFO saved analysis/s4_segmented_B_D76_knot2019.txt
+2026-08-13 07:02:31,469 INFO saved analysis/descriptive_first_last_peak_and_sex_aapc.txt
+2026-08-13 07:02:31,470 INFO wrote analysis/results_summary.json with 13 entries

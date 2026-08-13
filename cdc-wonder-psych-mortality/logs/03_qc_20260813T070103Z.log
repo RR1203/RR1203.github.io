@@ -1,0 +1,7 @@
+2026-08-13 07:01:03,077 INFO 1. Tidy row counts vs raw/manifest.csv: PASS
+2026-08-13 07:01:03,081 INFO 2. External benchmark (saved cdc.gov page): PASS
+2026-08-13 07:01:03,111 INFO 3. Internal consistency: stratum sums vs totals (suppression shortfall): PASS
+2026-08-13 07:01:03,159 INFO 4. D76 vs D158 overlap 2018-2020: PASS
+2026-08-13 07:01:03,167 INFO 5. Suppressed/unreliable audit: PASS
+2026-08-13 07:01:03,173 INFO 6. Denominator sanity: PASS
+2026-08-13 07:01:03,191 INFO 7. Completeness, duplicates, cell invariant: PASS

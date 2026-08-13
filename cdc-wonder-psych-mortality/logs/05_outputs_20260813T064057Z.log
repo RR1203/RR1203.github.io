@@ -1,0 +1,8 @@
+2026-08-13 06:40:58,220 INFO wrote fig1_series_A_trends.png
+2026-08-13 06:40:58,396 INFO wrote fig2_selfharm_segmented.png
+2026-08-13 06:40:58,959 INFO wrote fig3_sex_stratified.png
+2026-08-13 06:40:59,140 INFO wrote fig4_age_heatmap_A1.png
+2026-08-13 06:40:59,156 INFO wrote table1_annual_rates.csv/.md
+2026-08-13 06:40:59,159 INFO wrote table2_model_results.csv/.md
+2026-08-13 06:40:59,163 INFO wrote table3_overlap_D76_D158.csv/.md
+2026-08-13 06:40:59,180 INFO wrote table4_suppression_audit.csv/.md

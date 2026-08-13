@@ -1,0 +1,4 @@
+2026-08-13 06:30:27,381 INFO SYNTHETIC_q00: 6 raw rows -> 6 tidy rows (1 totals rows skipped at parse)
+2026-08-13 06:30:27,382 INFO wrote rates_year_sex.csv: 6 rows
+2026-08-13 06:30:27,382 INFO wrote rates_year.csv: 0 rows
+2026-08-13 06:30:27,382 INFO wrote rates_year_age.csv: 0 rows

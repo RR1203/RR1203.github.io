@@ -27,7 +27,9 @@ def norm(text: str) -> str:
 
 
 def value_in(value: str, text: str) -> bool:
-    return norm(value.strip()) in norm(text)
+    """Digit-boundary-anchored: '2.04' must NOT match inside '12.04' or '2.045'."""
+    return re.search(r"(?<![\d.])" + re.escape(norm(value.strip())) + r"(?![\d.])",
+                     norm(text)) is not None
 
 
 def main() -> int:

@@ -18,7 +18,9 @@ import requests
 
 ALLOWED_HOSTS = {"wonder.cdc.gov", "www.cdc.gov"}
 MIN_INTERVAL_S = 3.0
-TIMEOUT_S = 120
+# (connect, read): read must exceed the O_timeout=300s server-side budget each query
+# authorizes, or heavy queries could never succeed (review finding, DECISIONS.md §6).
+TIMEOUT_S = (30, 360)
 BACKOFF_S = [5, 15, 45, 120]  # in-script retries; the fetch driver adds longer cycles
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -67,11 +69,19 @@ def request(method: str, url: str, logger: logging.Logger, *, data=None, max_tri
     for attempt in range(max_tries):
         _throttle()
         try:
-            resp = _session.request(method, url, data=data, timeout=TIMEOUT_S)
+            # allow_redirects=False: following a redirect could leave ALLOWED_HOSTS
+            # (the host check runs on the initial URL only); a 3xx is a failure here.
+            resp = _session.request(method, url, data=data, timeout=TIMEOUT_S,
+                                    allow_redirects=False)
             logger.info("%s %s -> HTTP %s (%d bytes)", method, url, resp.status_code, len(resp.content))
             if resp.status_code == 200:
                 return resp
-            last_exc = RuntimeError(f"HTTP {resp.status_code} for {url}: {resp.text[:500]!r}")
+            if 300 <= resp.status_code < 400:
+                last_exc = RuntimeError(
+                    f"redirect {resp.status_code} for {url} -> {resp.headers.get('Location')!r}"
+                    " (redirects are refused: they could leave the allowed-host set)")
+            else:
+                last_exc = RuntimeError(f"HTTP {resp.status_code} for {url}: {resp.text[:500]!r}")
         except requests.RequestException as exc:
             logger.warning("%s %s attempt %d failed: %s", method, url, attempt + 1, exc)
             last_exc = exc

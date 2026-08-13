@@ -39,14 +39,18 @@ if [ "$(ok_queries)" -eq 0 ]; then
   echo "data. Running the synthetic-fixture test suite instead (fixtures"
   echo "live only in tests/fixtures/ and never enter data/ or outputs/)."
   echo "=============================================================="
-  exec $PY -m pytest tests/ -q
+  $PY -m pytest tests/ -q
+  echo "Exiting 3: a blocked run is not a success, even with the test suite green."
+  exit 3
 fi
 
 echo "== step 2: clean ==";    $PY scripts/02_clean.py    || exit $?
 echo "== step 3: QC ==";       $PY scripts/03_qc.py;      QC=$?
 [ "$QC" -eq 3 ] && exit 3
 [ "$QC" -ne 0 ] && echo "WARNING: QC has FAIL checks — see qc/qc_report.md before trusting results"
-echo "== step 4: analysis =="; $PY scripts/04_analysis.py || exit $?
+echo "== step 4: analysis =="; $PY scripts/04_analysis.py; AN=$?
+[ "$AN" -eq 3 ] && exit 3
+[ "$AN" -ne 0 ] && echo "WARNING: some analysis blocks failed — see analysis/FAILURES.md; continuing with the rest"
 echo "== step 5: outputs ==";  $PY scripts/05_outputs.py  || exit $?
 if [ -f claims_map.csv ]; then
   echo "== claims check =="

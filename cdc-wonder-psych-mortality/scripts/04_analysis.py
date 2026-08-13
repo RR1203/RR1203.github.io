@@ -6,11 +6,17 @@ numbers additionally land in analysis/results_summary.json (machine-readable, us
 Step 5/6 and claims_map.csv). No number may appear in the manuscript that is not
 present in a saved output file. Exploratory work would live in analysis/exploratory/
 (none is planned).
+
+Each analysis block runs isolated: one failing block (e.g. a series missing because a
+query never succeeded) is recorded in analysis/FAILURES.md and results_summary.json
+under "_failures", and every other block still runs and is saved. Exit codes:
+0 = all blocks succeeded; 1 = some failed (outputs exist for the rest); 3 = no data.
 """
 from __future__ import annotations
 
 import json
 import sys
+import traceback
 from pathlib import Path
 
 import numpy as np
@@ -44,39 +50,36 @@ def series_year(df: pd.DataFrame, db: str, series: str, y0: int | None = None,
     return g
 
 
-def main() -> int:
-    if not (DATA / "rates_year.csv").exists():
-        log.error("BLOCKED: data/rates_year.csv missing — nothing to analyze")
-        return 3
-    OUT.mkdir(exist_ok=True)
-    (OUT / "exploratory").mkdir(exist_ok=True)
-    yr = pd.read_csv(DATA / "rates_year.csv")
-    yrsex = pd.read_csv(DATA / "rates_year_sex.csv")
-
-    # ------------------------------------------------------------------ H1
+def block_h1(yr, yrsex):
     g = series_year(yr, "D76", "A1", 1999, 2020)
     res, text = sl.aapc_loglinear(g["year"].values, g["age_adjusted_rate"].values)
     res["hypothesis_decision"] = sl.decide_h1(res)
     save("h1_aapc_A1_D76", res, "H1 — Series A1 (F10-F19), D76 1999-2020, age-adjusted rate\n"
          f"Decision per protocol rule: {res['hypothesis_decision']}\n\n" + text)
 
-    # ------------------------------------------------------------------ H2
+
+def _h2_frame(yr, y1):
     counts = yr[(yr["db"] == "D76") & (yr["series"].isin(["A1", "A2"]))
                 & yr["deaths"].notna() & yr["population"].notna()]
     h2df = counts.rename(columns={"series": "category"})[
         ["year", "category", "deaths", "population"]]
     # Protocol estimand: A1's extra growth relative to A2. Recode so A1 sorts last
     # (stats_lib treats the last-sorting level as the level of interest).
-    h2df2 = h2df.assign(category=h2df["category"].map({"A2": "0_A2_nonsubstance",
-                                                       "A1": "1_A1_substance"}))
-    res, text = sl.h2_count_interaction(h2df2)
+    h2df = h2df.assign(category=h2df["category"].map({"A2": "0_A2_nonsubstance",
+                                                      "A1": "1_A1_substance"}))
+    return h2df[h2df["year"] <= y1]
+
+
+def block_h2(yr, yrsex):
+    res, text = sl.h2_count_interaction(_h2_frame(yr, 2020))
     res["hypothesis_decision"] = sl.decide_h2(res)
     save("h2_counts_A1_vs_A2_D76", res,
          "H2 — D76 1999-2020, A1 (substance) vs A2 (non-substance), interaction = extra "
          "annual log-rate growth of A1\n"
          f"Decision per protocol rule: {res['hypothesis_decision']}\n\n" + text)
 
-    # ------------------------------------------------------------------ H3
+
+def block_h3(yr, yrsex):
     g = series_year(yr, "D76", "B", 1999, 2020)
     res, text = sl.segmented_loglinear(g["year"].values, g["age_adjusted_rate"].values, 2018)
     res["hypothesis_decision"] = sl.decide_h3(res)
@@ -84,7 +87,8 @@ def main() -> int:
          "H3 — Series B (intentional self-harm), D76 1999-2020, knot 2018 (a priori)\n"
          f"Decision per protocol rule: {res['hypothesis_decision']}\n\n" + text)
 
-    # ------------------------------------------------------------------ S1 alternative definitions
+
+def block_s1(yr, yrsex):
     for series in ("A", "Aprime"):
         g = series_year(yr, "D76", series, 1999, 2020)
         res, text = sl.aapc_loglinear(g["year"].values, g["age_adjusted_rate"].values)
@@ -95,20 +99,21 @@ def main() -> int:
     save("s1_segmented_Bprime_D76_knot2018", res,
          "S1 — Series B' (X60-X84 only), D76 1999-2020, knot 2018\n\n" + text)
 
-    # ------------------------------------------------------------------ S2 exclude 2020
+
+def block_s2(yr, yrsex):
     g = series_year(yr, "D76", "A1", 1999, 2019)
     res, text = sl.aapc_loglinear(g["year"].values, g["age_adjusted_rate"].values)
     save("s2_h1_excl2020", res, "S2 — H1 refit on 1999-2019 (COVID-era certification "
          "sensitivity)\n\n" + text)
-    h2df3 = h2df2[h2df2["year"] <= 2019]
-    res, text = sl.h2_count_interaction(h2df3)
+    res, text = sl.h2_count_interaction(_h2_frame(yr, 2019))
     save("s2_h2_excl2020", res, "S2 — H2 refit on 1999-2019\n\n" + text)
     g = series_year(yr, "D76", "B", 1999, 2019)
     res, text = sl.segmented_loglinear(g["year"].values, g["age_adjusted_rate"].values, 2018)
     save("s2_h3_excl2020", res, "S2 — H3 refit on 1999-2019 (one post-break year; the "
          "slope-change term is estimable only degenerately — protocol caveat applies)\n\n" + text)
 
-    # ------------------------------------------------------------------ S3 cross-database overlap
+
+def block_s3(yr, yrsex):
     rows = []
     for series in ("A", "A1", "A2", "B"):
         for year in (2018, 2019, 2020):
@@ -135,14 +140,16 @@ def main() -> int:
          "S3 — D76 vs D158 overlap 2018-2020 (never spliced; QC cross-check)\n\n"
          + (s3.to_string(index=False) if len(s3) else "NO OVERLAP ROWS AVAILABLE"))
 
-    # ------------------------------------------------------------------ S4 alternative knots
+
+def block_s4(yr, yrsex):
     for knot in (2017, 2019):
         g = series_year(yr, "D76", "B", 1999, 2020)
         res, text = sl.segmented_loglinear(g["year"].values, g["age_adjusted_rate"].values, knot)
         save(f"s4_segmented_B_D76_knot{knot}", res,
              f"S4 — H3 with alternative a-priori candidate knot {knot}\n\n" + text)
 
-    # ------------------------------------------------------------------ pre-specified descriptives
+
+def block_descriptives(yr, yrsex):
     desc: dict = {}
     for db in ("D76", "D158"):
         for series in ("A", "A1", "A2", "B"):
@@ -177,6 +184,42 @@ def main() -> int:
     save("descriptive_first_last_peak_and_sex_aapc",
          {"first_last_peak": desc, "sex_aapc": sexres}, "\n".join(lines))
 
+
+BLOCKS = [
+    ("H1", block_h1), ("H2", block_h2), ("H3", block_h3),
+    ("S1", block_s1), ("S2", block_s2), ("S3", block_s3), ("S4", block_s4),
+    ("descriptives", block_descriptives),
+]
+
+
+def main() -> int:
+    if not (DATA / "rates_year.csv").exists():
+        log.error("BLOCKED: data/rates_year.csv missing — nothing to analyze")
+        return 3
+    OUT.mkdir(exist_ok=True)
+    (OUT / "exploratory").mkdir(exist_ok=True)
+    yr = pd.read_csv(DATA / "rates_year.csv")
+    yrsex = pd.read_csv(DATA / "rates_year_sex.csv")
+
+    failures: dict[str, str] = {}
+    for name, fn in BLOCKS:
+        try:
+            fn(yr, yrsex)
+        except Exception as exc:  # noqa: BLE001 — isolate blocks; record loudly
+            failures[name] = f"{exc!r}\n{traceback.format_exc(limit=3)}"
+            log.error("analysis block %s FAILED: %r", name, exc)
+
+    if failures:
+        summary["_failures"] = {k: v.splitlines()[0] for k, v in failures.items()}
+        (OUT / "FAILURES.md").write_text(
+            "# Analysis blocks that FAILED\n\nEach failure below means the "
+            "corresponding pre-registered outputs are MISSING, not zero.\n\n"
+            + "\n".join(f"## {k}\n```\n{v}\n```\n" for k, v in failures.items()))
+        log.error("%d/%d analysis blocks failed — see analysis/FAILURES.md",
+                  len(failures), len(BLOCKS))
+    elif (OUT / "FAILURES.md").exists():
+        (OUT / "FAILURES.md").unlink()
+
     with (OUT / "results_summary.json").open("w") as fh:
         json.dump(summary, fh, indent=1, sort_keys=True, default=str)
     log.info("wrote analysis/results_summary.json with %d entries", len(summary))
@@ -188,7 +231,7 @@ def main() -> int:
         "Rule enforced by `scripts/07_check_claims.py`: no number may appear in the\n"
         "manuscript that is not present in a saved output file here. Exploratory work\n"
         "(none pre-registered) would live under `exploratory/`.\n")
-    return 0
+    return 1 if failures else 0
 
 
 if __name__ == "__main__":

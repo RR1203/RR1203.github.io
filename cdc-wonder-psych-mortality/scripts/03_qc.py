@@ -43,9 +43,19 @@ def load() -> dict[str, pd.DataFrame]:
 
 
 def check1_rowcounts(dfs) -> tuple[str, str]:
+    import wonder_api as wa
     with (RAW / "manifest.csv").open() as fh:
         manifest = [r for r in csv.DictReader(fh) if r["status"] == "ok"]
     lines, ok = [], True
+    # the whole pre-registered plan must be present: a wholly-failed query must FAIL
+    # QC loudly, not vanish from every downstream check (review finding)
+    ok_qids = {r["qid"] for r in manifest}
+    missing = [f"{s.qid} ({s.db} {s.series} {s.strata})"
+               for s in wa.build_query_plan() if s.qid not in ok_qids]
+    if missing:
+        ok = False
+        lines.append(f"- **missing pre-registered queries (no successful response):** "
+                     + ", ".join(missing))
     tidy_counts = pd.concat([df.groupby("qid").size() for df in dfs.values()])
     for row in manifest:
         expect = int(row["rows_returned"])
@@ -53,8 +63,8 @@ def check1_rowcounts(dfs) -> tuple[str, str]:
         if expect != got:
             ok = False
             lines.append(f"- **{row['qid']}**: manifest says {expect} rows, tidy data has {got}")
-    detail = "All tidy row counts equal `rows_returned` in raw/manifest.csv." if ok \
-        else "\n".join(lines)
+    detail = ("All 30 pre-registered queries fetched; all tidy row counts equal "
+              "`rows_returned` in raw/manifest.csv.") if ok else "\n".join(lines)
     return ("PASS" if ok else "FAIL", detail)
 
 

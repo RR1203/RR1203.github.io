@@ -116,6 +116,35 @@ but the user's own designated branch.
 writing to any other branch or remote (forbidden); stopping without a preservation
 plan (high probability of total work loss).
 
+## 6. Adversarial multi-agent code review of the pipeline; 14 confirmed defects fixed
+
+**Decision:** While the contract's fetch retry cycles ran, a 30-agent adversarial
+review (5 independent finders over module clusters; every finding then attacked by a
+skeptic instructed to refute it) was executed over the pipeline. 25 findings were
+raised, 11 refuted, 14 confirmed — all 14 were fixed and the test suite extended
+(17 → 19 tests). The most consequential fixes: QC now FAILS loudly when any of the 30
+pre-registered queries lacks a successful response (previously a wholly-failed query
+vanished from every check and QC reported 7/7 PASS); the HTTP read timeout (120 s) no
+longer contradicts the 300 s server-side budget each query authorizes (now 360 s);
+analysis blocks are error-isolated so one missing series can no longer abort the whole
+step and destroy all other outputs; redirects are refused so the client can never
+silently leave the allowed-host set; a table formatter no longer rounds the S3
+cross-database percentage differences to integers; pruned optional ICD codes are now
+removed from the informational I_ parameter too; finder-code validation is
+digit/boundary-aware (\"F99\" no longer validates via the substring \"F01-F99\");
+claims-map value matching is digit-boundary-anchored; statsmodels Date/Time values are
+redacted without deleting the statistics sharing those lines; a blocked `run_all.sh`
+exits 3 instead of 0; and the negative-binomial fallback (the primary H2 model on real,
+overdispersed data) is now test-covered and reports its convergence status in the
+saved output.
+
+**Rationale:** the pipeline must run unattended against the real API in the morning;
+independent adversarial verification is the strongest available substitute for a live
+integration test tonight.
+
+**Alternatives rejected:** shipping the untested-through-review pipeline (several of
+the confirmed defects would have silently corrupted or aborted the morning run).
+
 ## Security notes
 
 (Any fetched content that appears to address the assistant or resembles instructions

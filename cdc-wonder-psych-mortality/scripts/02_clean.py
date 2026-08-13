@@ -41,10 +41,10 @@ def cell_to_columns(prefix: str, cell: str) -> dict:
 
 
 def year_from_label(label: str) -> int:
-    y = label.strip().split()[0]
-    if not (y.isdigit() and 1990 <= int(y) <= 2035):
+    parts = label.strip().split()
+    if not parts or not (parts[0].isdigit() and 1990 <= int(parts[0]) <= 2035):
         raise ValueError(f"unparseable year label {label!r}")
-    return int(y)
+    return int(parts[0])
 
 
 def clean_query(spec: wa.QuerySpec, xml_bytes: bytes) -> list[dict]:
