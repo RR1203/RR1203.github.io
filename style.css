@@ -3077,3 +3077,96 @@ object-position:center;opacity:.92}
 .cv-pix .pix:hover{transform:scale(1.28) translateY(-3px)}
 @media (max-width:900px){.cv-pix .pix:hover{transform:scale(1.14) translateY(-2px)}}
 @media (hover:none),(pointer:coarse){.cv-pix .pix:hover{transform:none}}
+
+
+/* ______________________________________________________________
+   Note to self, v39
+   The jackets go up again, and the year is given its room back.
+
+   A year's note was held to sixty-four characters and so always broke
+   onto a second line; it now runs the width of the panel and takes one.
+   That line is what the jackets grow into: a quarter larger again, and
+   the column that carries them with them.
+
+   The emblem stood off in the corner beside the cross, too large and
+   with nothing to hold it. It comes in beside the year instead, small,
+   at the head of the panel, where the two read as one mark.
+
+   The ticks along the foot were drawn but not wired: they reported the
+   place in the year and refused to change it. They are now the way to
+   go straight from ten to six to one, and back.
+
+   The wall of jackets behind the reading was washed out to almost
+   nothing. It is allowed to show. What sits on top of it - the line of
+   the heading and the year chips - is given enough behind it to stay
+   legible.
+   __________________________________________________________ */
+
+/* ---- 1. one line above, larger jackets below ---- */
+.yp-note{max-width:none!important}
+@media (min-width:641px){
+  .cd-item{grid-template-columns:158px 248px minmax(0,1fr)}
+  .cd-extra{grid-template-columns:158px minmax(0,1fr)}
+}
+@media (min-width:701px){
+  .ypanel .cd-item{grid-template-columns:126px 236px minmax(0,1fr)}
+  .ypanel .cd-extra{grid-template-columns:126px minmax(0,1fr)}
+}
+.cd-cover{max-width:248px}
+.ypanel .cd-cover{max-width:236px}
+.cd-extra-list li{flex:0 0 168px;width:168px}
+.ypanel .cd-extra-list li{flex:0 0 158px;width:158px}
+@media (max-width:900px){
+  .cd-extra-list li{flex:0 0 140px;width:140px}
+  .ypanel .cd-extra-list li{flex:0 0 140px;width:140px}
+}
+@media (max-width:640px){
+  .cd-extra-list li{flex:0 0 124px;width:124px}
+  .ypanel .cd-extra-list li{flex:0 0 124px;width:124px}
+}
+
+/* ---- 2. the emblem comes in beside the year ---- */
+.yp-top{justify-content:flex-start;gap:16px;align-items:flex-start}
+.yp-close{margin-left:auto}
+.yp-symbol{position:static;flex:0 0 auto;width:54px;height:54px;
+  margin:0;opacity:.92}
+.yp-symbol img{object-fit:contain;object-position:center;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.4))}
+@media (max-width:700px){
+  .yp-top{gap:12px}
+  .yp-symbol{width:40px;height:40px;margin-top:0}
+}
+
+/* ---- 3. the ticks answer to the hand ---- */
+.cd.is-js .cd-ticks{pointer-events:auto}
+.cd.is-js .cd-ticks button{cursor:pointer}
+.cd-ticks button::before{transition:background .25s ease,width .25s ease}
+.cd-ticks button:hover::before{background:var(--accent-strong);width:22px}
+
+/* ---- 4. the wall is allowed to show ---- */
+.reading::before{opacity:.5;filter:saturate(.95) contrast(1)}
+@media (prefers-contrast:more){.reading::before{opacity:.18}}
+/* A wash across the head of the section only: the line of the heading
+   keeps a dark ground to sit on while the wall below it shines. */
+.reading::after,
+.reading:has(.ypanel:not([hidden]))::after{
+  content:"";display:block;position:absolute;pointer-events:none;z-index:-1;
+  top:0;left:calc(-1*var(--rbleed));right:calc(-1*var(--rbleed));height:104px;
+  border-radius:10px 10px 0 0;
+  background:linear-gradient(180deg,rgba(6,14,26,.95) 0,rgba(6,14,26,.88) 30%,
+    rgba(6,14,26,.55) 66%,rgba(6,14,26,0) 100%)}
+@media (max-width:640px){
+  .reading::after,
+  .reading:has(.ypanel:not([hidden]))::after{height:86px;border-radius:0}
+}
+.reading-head{position:relative;z-index:1;
+  text-shadow:0 1px 2px rgba(5,12,22,.9),0 2px 12px rgba(5,12,22,.7)}
+.ychip{background:linear-gradient(168deg,rgba(13,27,47,.95),rgba(9,20,36,.93));
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.ychip:hover{background:linear-gradient(168deg,rgba(20,42,66,.96),rgba(12,27,46,.94))}
+.ychip[aria-expanded="true"]{
+  background:linear-gradient(168deg,rgba(28,70,76,.96),rgba(14,34,52,.94))}
+
+/* ---- 5. the hobby cards carry a name and nothing else ---- */
+.hb-grid .hb-item .hb-name{margin-bottom:0}
+.hb-item-link .hb-name::after{content:" \2193";color:var(--accent);opacity:.85}
