@@ -22,6 +22,18 @@
   <link rel="mask-icon" href="/favicon.svg" color="#7fd0c4">
   <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="style.css">
+  <script>
+  /* The tone is settled before anything is painted, so the page never
+     opens in one colour and blinks into the other. */
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      var dark = window.matchMedia("(prefers-color-scheme: dark)");
+      var tone = saved || (dark.matches || !window.matchMedia("(prefers-color-scheme: light)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", tone);
+    } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }
+  })();
+  </script>
 </head>
 <body>
 
@@ -53,6 +65,11 @@
         <a href="#cv">CV</a>
         <a href="#contact">Contact</a>
       </div>
+      <button class="theme-toggle" type="button" id="theme-toggle"
+              aria-label="Switch between the light and the dark page">
+        <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+        <svg class="t-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.3M12 19.3v2.3M2.4 12h2.3M19.3 12h2.3M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+      </button>
     </div>
   </nav>
 
@@ -131,6 +148,21 @@
           <img src="images/about.jpg" alt="Hannes Meilicke at work" loading="lazy" onerror="this.parentNode.style.display='none'">
         </figure>
       </div>
+
+
+    <!-- ----------------------------------------------------------------
+         What the clinic is for. Three lines, and one above them.
+         Rewrite the words; the shape holds.
+    ----------------------------------------------------------------- -->
+    <div class="credo reveal reveal-soft">
+      <p class="focus-label">In the clinic</p>
+      <p class="credo-lead">The measurements are worth taking because of what happens in the room. Psychiatry is the one part of medicine where the instrument is the conversation.</p>
+      <ul class="credo-list">
+        <li><b>Clinical psychiatry</b><span>The work of sitting with someone long enough to understand what is actually happening to them, and of being useful while the picture is still unclear.</span></li>
+        <li><b>Psychotherapy</b><span>Where the evidence and the encounter meet. I want to be as careful with the hour as I am with the data.</span></li>
+        <li><b>Time with patients</b><span>The part I would not trade. Everything else &mdash; the imaging, the models, the papers &mdash; is downstream of it.</span></li>
+      </ul>
+    </div>
 
     <!-- ----------------------------------------------------------------
          Away from the desk - four cards for the life outside the work.
@@ -633,47 +665,47 @@
         <summary>Psychiatry and the human condition <span class="hf-count">12</span><svg class="hf-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="5,9 12,16 19,9"/></svg></summary>
         <ul class="heroes">
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/otto-kernberg.jpg" alt="" width="384" height="480"></span><span class="ih-name">Otto Kernberg</span><span class="ih-role">Psychoanalyst</span><span class="ih-for">founder of transference-focused psychotherapy</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="OK"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/otto-kernberg.jpg" alt="" width="384" height="480"></span><span class="ih-name">Otto Kernberg</span><span class="ih-role">Psychoanalyst</span><span class="ih-for">founder of transference-focused psychotherapy</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/c-g-jung.jpg" alt="" width="384" height="480"></span><span class="ih-name">C. G. Jung</span><span class="ih-role">Psychiatrist</span><span class="ih-for">founder of analytical psychology</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="CG"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/c-g-jung.jpg" alt="" width="384" height="480"></span><span class="ih-name">C. G. Jung</span><span class="ih-role">Psychiatrist</span><span class="ih-for">founder of analytical psychology</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/daniel-kahneman.jpg" alt="" width="384" height="480"></span><span class="ih-name">Daniel Kahneman</span><span class="ih-role">Psychologist</span><span class="ih-for">author of <em>Thinking, Fast and Slow</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="DK"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/daniel-kahneman.jpg" alt="" width="384" height="480"></span><span class="ih-name">Daniel Kahneman</span><span class="ih-role">Psychologist</span><span class="ih-for">author of <em>Thinking, Fast and Slow</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/antonio-damasio.jpg" alt="" width="384" height="480"></span><span class="ih-name">Antonio Damasio</span><span class="ih-role">Neuroscientist</span><span class="ih-for">author of <em>Descartes&rsquo; Error</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="AD"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/antonio-damasio.jpg" alt="" width="384" height="480"></span><span class="ih-name">Antonio Damasio</span><span class="ih-role">Neuroscientist</span><span class="ih-for">author of <em>Descartes&rsquo; Error</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Edward Bullmore</span><span class="ih-role">Psychiatrist &amp; neuroscientist</span><span class="ih-for">author of <em>The Inflamed Mind</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="EB"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/edward-bullmore.jpg" alt="" width="384" height="480"></span><span class="ih-name">Edward Bullmore</span><span class="ih-role">Psychiatrist &amp; neuroscientist</span><span class="ih-for">author of <em>The Inflamed Mind</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/randolph-nesse.jpg" alt="" width="384" height="480"></span><span class="ih-name">Randolph Nesse</span><span class="ih-role">Evolutionary psychiatrist</span><span class="ih-for">author of <em>Good Reasons for Bad Feelings</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="RN"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/randolph-nesse.jpg" alt="" width="384" height="480"></span><span class="ih-name">Randolph Nesse</span><span class="ih-role">Evolutionary psychiatrist</span><span class="ih-for">author of <em>Good Reasons for Bad Feelings</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/lisa-feldman-barrett.jpg" alt="" width="384" height="480"></span><span class="ih-name">Lisa Feldman Barrett</span><span class="ih-role">Psychologist &amp; neuroscientist</span><span class="ih-for">the theory of constructed emotion</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="LF"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/lisa-feldman-barrett.jpg" alt="" width="384" height="480"></span><span class="ih-name">Lisa Feldman Barrett</span><span class="ih-role">Psychologist &amp; neuroscientist</span><span class="ih-for">the theory of constructed emotion</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/eric-kandel.jpg" alt="" width="384" height="480"></span><span class="ih-name">Eric Kandel</span><span class="ih-role">Neuroscientist</span><span class="ih-for">Nobel laureate for the biology of memory</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="EK"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/eric-kandel.jpg" alt="" width="384" height="480"></span><span class="ih-name">Eric Kandel</span><span class="ih-role">Neuroscientist</span><span class="ih-for">Nobel laureate for the biology of memory</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/mihaly-csikszentmihalyi.jpg" alt="" width="384" height="480"></span><span class="ih-name">Mihaly Csikszentmihalyi</span><span class="ih-role">Psychologist</span><span class="ih-for">author of <em>Flow</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="MC"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/mihaly-csikszentmihalyi.jpg" alt="" width="384" height="480"></span><span class="ih-name">Mihaly Csikszentmihalyi</span><span class="ih-role">Psychologist</span><span class="ih-for">author of <em>Flow</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/hartmut-rosa.jpg" alt="" width="384" height="480"></span><span class="ih-name">Hartmut Rosa</span><span class="ih-role">Sociologist</span><span class="ih-for">author of <em>Resonance</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="HR"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/hartmut-rosa.jpg" alt="" width="384" height="480"></span><span class="ih-name">Hartmut Rosa</span><span class="ih-role">Sociologist</span><span class="ih-for">author of <em>Resonance</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-name">Bent Flyvbjerg</span><span class="ih-role">Social scientist</span><span class="ih-for">phronesis, and why big projects fail</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="BF"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/bent-flyvbjerg.jpg" alt="" width="384" height="480"></span><span class="ih-name">Bent Flyvbjerg</span><span class="ih-role">Social scientist</span><span class="ih-for">phronesis, and why big projects fail</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
         </ul>
@@ -682,43 +714,43 @@
         <summary>Philosophy, literature and strategy <span class="hf-count">10</span><svg class="hf-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="5,9 12,16 19,9"/></svg></summary>
         <ul class="heroes">
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/sun-tzu.jpg" alt="" width="384" height="480"></span><span class="ih-name">Sun Tzu</span><span class="ih-role">Strategist</span><span class="ih-for">author of <em>The Art of War</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="ST"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/sun-tzu.jpg" alt="" width="384" height="480"></span><span class="ih-name">Sun Tzu</span><span class="ih-role">Strategist</span><span class="ih-for">author of <em>The Art of War</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/confucius.jpg" alt="" width="384" height="480"></span><span class="ih-name">Confucius</span><span class="ih-role">Philosopher</span><span class="ih-for">the <em>Analects</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="C"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/confucius.jpg" alt="" width="384" height="480"></span><span class="ih-name">Confucius</span><span class="ih-role">Philosopher</span><span class="ih-for">the <em>Analects</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/karl-popper.jpg" alt="" width="384" height="480"></span><span class="ih-name">Karl Popper</span><span class="ih-role">Philosopher of science</span><span class="ih-for">falsification</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="KP"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/karl-popper.jpg" alt="" width="384" height="480"></span><span class="ih-name">Karl Popper</span><span class="ih-role">Philosopher of science</span><span class="ih-for">falsification</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/roger-scruton.jpg" alt="" width="384" height="480"></span><span class="ih-name">Roger Scruton</span><span class="ih-role">Philosopher</span><span class="ih-for">aesthetics and conservative thought</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="RS"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/roger-scruton.jpg" alt="" width="384" height="480"></span><span class="ih-name">Roger Scruton</span><span class="ih-role">Philosopher</span><span class="ih-for">aesthetics and conservative thought</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/rene-girard.jpg" alt="" width="384" height="480"></span><span class="ih-name">Ren&eacute; Girard</span><span class="ih-role">Literary theorist</span><span class="ih-for">mimetic desire &mdash; we want by imitation</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="RG"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/rene-girard.jpg" alt="" width="384" height="480"></span><span class="ih-name">Ren&eacute; Girard</span><span class="ih-role">Literary theorist</span><span class="ih-for">mimetic desire &mdash; we want by imitation</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/hannah-arendt.jpg" alt="" width="384" height="480"></span><span class="ih-name">Hannah Arendt</span><span class="ih-role">Political theorist</span><span class="ih-for">author of <em>The Origins of Totalitarianism</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="HA"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/hannah-arendt.jpg" alt="" width="384" height="480"></span><span class="ih-name">Hannah Arendt</span><span class="ih-role">Political theorist</span><span class="ih-for">author of <em>The Origins of Totalitarianism</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/john-gray.jpg" alt="" width="384" height="480"></span><span class="ih-name">John Gray</span><span class="ih-role">Philosopher</span><span class="ih-for">author of <em>Straw Dogs</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="JG"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/john-gray.jpg" alt="" width="384" height="480"></span><span class="ih-name">John Gray</span><span class="ih-role">Philosopher</span><span class="ih-for">author of <em>Straw Dogs</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/nassim-taleb.jpg" alt="" width="384" height="480"></span><span class="ih-name">Nassim Nicholas Taleb</span><span class="ih-role">Essayist, probability theorist &amp; practitioner</span><span class="ih-for">author of <em>The Black Swan</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="NN"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/nassim-taleb.jpg" alt="" width="384" height="480"></span><span class="ih-name">Nassim Nicholas Taleb</span><span class="ih-role">Essayist, probability theorist &amp; practitioner</span><span class="ih-for">author of <em>The Black Swan</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/hermann-hesse.jpg" alt="" width="384" height="480"></span><span class="ih-name">Hermann Hesse</span><span class="ih-role">Novelist</span><span class="ih-for">author of <em>The Glass Bead Game</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="HH"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/hermann-hesse.jpg" alt="" width="384" height="480"></span><span class="ih-name">Hermann Hesse</span><span class="ih-role">Novelist</span><span class="ih-for">author of <em>The Glass Bead Game</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/lev-tolstoy.jpg" alt="" width="384" height="480"></span><span class="ih-name">Lev Tolstoy</span><span class="ih-role">Novelist</span><span class="ih-for">author of <em>War and Peace</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="LT"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/lev-tolstoy.jpg" alt="" width="384" height="480"></span><span class="ih-name">Lev Tolstoy</span><span class="ih-role">Novelist</span><span class="ih-for">author of <em>War and Peace</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
         </ul>
@@ -727,27 +759,27 @@
         <summary>Society, economics and politics <span class="hf-count">6</span><svg class="hf-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="5,9 12,16 19,9"/></svg></summary>
         <ul class="heroes">
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/noam-chomsky.jpg" alt="" width="384" height="480"></span><span class="ih-name">Noam Chomsky</span><span class="ih-role">Linguist &amp; political critic</span><span class="ih-for">author of <em>Manufacturing Consent</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="NC"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/noam-chomsky.jpg" alt="" width="384" height="480"></span><span class="ih-name">Noam Chomsky</span><span class="ih-role">Linguist &amp; political critic</span><span class="ih-for">author of <em>Manufacturing Consent</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/david-graeber.jpg" alt="" width="384" height="480"></span><span class="ih-name">David Graeber</span><span class="ih-role">Anthropologist</span><span class="ih-for">author of <em>Debt: The First 5,000 Years</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="DG"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/david-graeber.jpg" alt="" width="384" height="480"></span><span class="ih-name">David Graeber</span><span class="ih-role">Anthropologist</span><span class="ih-for">author of <em>Debt: The First 5,000 Years</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/friedrich-hayek.jpg" alt="" width="384" height="480"></span><span class="ih-name">Friedrich August von Hayek</span><span class="ih-role">Economist</span><span class="ih-for">author of <em>The Road to Serfdom</em></span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="FA"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/friedrich-hayek.jpg" alt="" width="384" height="480"></span><span class="ih-name">Friedrich August von Hayek</span><span class="ih-role">Economist</span><span class="ih-for">author of <em>The Road to Serfdom</em></span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/branko-milanovic.jpg" alt="" width="384" height="480"></span><span class="ih-name">Branko Milanovi&#263;</span><span class="ih-role">Economist</span><span class="ih-for">global inequality and the elephant curve</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="BM"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/branko-milanovic.jpg" alt="" width="384" height="480"></span><span class="ih-name">Branko Milanovi&#263;</span><span class="ih-role">Economist</span><span class="ih-for">global inequality and the elephant curve</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/yanis-varoufakis.jpg" alt="" width="384" height="480"></span><span class="ih-name">Yanis Varoufakis</span><span class="ih-role">Economist</span><span class="ih-for">former finance minister of Greece</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="YV"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/yanis-varoufakis.jpg" alt="" width="384" height="480"></span><span class="ih-name">Yanis Varoufakis</span><span class="ih-role">Economist</span><span class="ih-for">former finance minister of Greece</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
           <li>
-            <div class="ih-line"><span class="ih-face" aria-hidden="true"><img loading="lazy" onerror="this.closest('.ih-face').remove()" data-src="/images/portraits/lee-kuan-yew.jpg" alt="" width="384" height="480"></span><span class="ih-name">Lee Kuan Yew</span><span class="ih-role">Statesman</span><span class="ih-for">founding prime minister of Singapore</span></div>
+            <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="LK"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/lee-kuan-yew.jpg" alt="" width="384" height="480"></span><span class="ih-name">Lee Kuan Yew</span><span class="ih-role">Statesman</span><span class="ih-for">founding prime minister of Singapore</span></div>
             <p class="ih-note is-placeholder">What I learned &mdash; to be written.</p>
           </li>
         </ul>
@@ -997,11 +1029,14 @@
         </div>
 </div>
 </article>
-<article class="cv-entry reveal">
+<article class="cv-entry cv-entry-minor reveal">
 <div class="cv-period">Month 2026</div>
 <div class="cv-body">
-<h3>Clinical rotation, University of XXX <span class="flag" role="img" aria-label="United States">&#127482;&#127480;</span></h3>
-<p>Psychiatry.</p>
+<h3>US clinical experience <span class="flag" role="img" aria-label="United States">&#127482;&#127480;</span></h3>
+<ul class="cv-sub">
+<li><span class="cs-what">Child psychiatry</span><span class="cs-where">University of XXX</span></li>
+<li><span class="cs-what">Psychiatry</span><span class="cs-where">University of XXX</span></li>
+</ul>
 </div>
 </article>
 <article class="cv-entry reveal">
@@ -2234,5 +2269,33 @@
     }());
   </script>
 
+
+  <!-- The reader chooses the tone, and the choice is kept. -->
+  <script>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) { return; }
+    var root = document.documentElement;
+    var meta = document.querySelector('meta[name="theme-color"]');
+    var paint = function (tone) {
+      root.setAttribute("data-theme", tone);
+      if (meta) { meta.setAttribute("content", tone === "light" ? "#f7f5f1" : "#0b182a"); }
+      btn.setAttribute("aria-pressed", tone === "light" ? "true" : "false");
+      btn.title = tone === "light" ? "Switch to the dark page" : "Switch to the light page";
+    };
+    paint(root.getAttribute("data-theme") || "dark");
+    btn.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      paint(next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+    /* Someone who has never chosen follows their machine. */
+    try {
+      window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", function (e) {
+        if (!localStorage.getItem("theme")) { paint(e.matches ? "light" : "dark"); }
+      });
+    } catch (e) {}
+  })();
+  </script>
 </body>
 </html>
