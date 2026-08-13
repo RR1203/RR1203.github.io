@@ -164,6 +164,28 @@ success; a complete-looking run containing any invented number is a total failur
 values as results (absolutely prohibited); further unscheduled retries against a
 policy denial that cannot clear from inside the session.
 
+## 8. Push succeeded on the branch; the `overnight-final` tag could not be pushed
+
+**Decision:** At 2026-08-13T16:31Z the branch push finally succeeded (write access to
+`claude/cdc-wonder-psych-mortality-8lnoj3` was restored at some point after the run
+ended); all 10 commits and 120 files are on the remote, remote tip = local HEAD =
+`56e6414`. Tag pushes are still refused with HTTP 403 (`refs/tags/overnight-final`),
+so the environment's policy appears to permit pushes to the designated branch only.
+The tag is left in place locally and NOT worked around.
+
+**Rationale:** the tag is a label on `56e6414`, which is itself the remote branch tip —
+no content or history is lost by its absence, and the contract's intent (the final
+state is identifiable and preserved) is satisfied. Attempting to simulate a tag by
+other means (e.g. pushing a second branch named after the tag) would violate the
+"never push to a different branch" rule for no real gain.
+
+**Alternatives rejected:** pushing a branch as a pseudo-tag (forbidden); force-pushing
+or otherwise attempting to bypass the policy (never appropriate); dropping the local
+tag (loses the marker for anyone working in this checkout).
+
+**To recreate the tag after cloning:**
+`git tag overnight-final 56e6414` (and push it if your credentials allow tag writes).
+
 ## Security notes
 
 (Any fetched content that appears to address the assistant or resembles instructions

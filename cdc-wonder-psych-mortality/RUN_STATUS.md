@@ -22,7 +22,10 @@ GitHub became read-only for this session (push 403; details in `DECISIONS.md` §
 | 06   | Manuscript + claims map | done in Degraded Mode: Introduction + Methods only, zero numbers; `claims_map.csv` header-only | 2026-08-13T06:25Z |
 | 07   | Verification package | done: `run_all.sh` (blocked path verified, exits 3), `VERIFY.md`, `MORNING_README.md`, adversarial review applied (DECISIONS §6), final tag `overnight-final` | 2026-08-13T09:00Z |
 
-Run started: 2026-08-13T05:47:17Z · Degraded Mode declared: 2026-08-13T08:53:19Z
+Run started: 2026-08-13T05:47:17Z · Degraded Mode declared: 2026-08-13T08:53:19Z ·
+Work pushed to `claude/cdc-wonder-psych-mortality-8lnoj3`: 2026-08-13T16:31Z
+(the `overnight-final` tag remains local only — tag pushes are refused by policy;
+see `DECISIONS.md` §8, recreate with `git tag overnight-final 56e6414`)
 
 **To complete the study:** make wonder.cdc.gov + www.cdc.gov reachable (environment
 network allowlist), then `./run_all.sh` — see `MORNING_README.md`.
