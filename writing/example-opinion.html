@@ -148,7 +148,7 @@
     var meta = document.querySelector('meta[name="theme-color"]');
     var paint = function (tone) {
       root.setAttribute("data-theme", tone);
-      if (meta) { meta.setAttribute("content", tone === "light" ? "#fbf7ef" : "#0b182a"); }
+      if (meta) { meta.setAttribute("content", tone === "light" ? "#fffdf9" : "#0b182a"); }
       btn.setAttribute("aria-pressed", tone === "light" ? "true" : "false");
       btn.title = tone === "light" ? "Switch to the dark page" : "Switch to the light page";
     };
