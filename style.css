@@ -4128,3 +4128,57 @@ html[data-theme="light"] .cd-item.cd-crowned .cd-num{color:#a37c2a}
 @media (max-width:620px){
   .ychip-childhood .yc-year{font-size:16.5px}
 }
+
+/* __________________________________________________________________
+   The rotations hang off the fellowship, they do not stand beside it
+
+   "US clinical experience" is not another post on the timeline - it is
+   two rotations that belong to the fellowship above it. Drawn with the
+   same filled dot as every other entry, it claimed the same standing,
+   and because each entry reveals on its own observer it also arrived a
+   beat later, as though it were a separate chapter.
+
+   Two changes, one idea. The marker becomes a short rule running out
+   from the spine rather than a node sitting on it - the timeline's way
+   of saying "and also this". And the block no longer carries .reveal:
+   it is shown by the entry above it instead, through a sibling
+   selector, so the two arrive together as one thought.
+   __________________________________________________________________ */
+
+/* the dash: a stroke leaving the spine, not a point on it */
+.cv-entry.cv-entry-minor::before{
+  left:151px;top:15px;
+  width:17px;height:2px;
+  border-radius:1px;
+  background:rgba(var(--ink),.3);
+  box-shadow:none;
+  transform:none}
+.cv-entry.cv-entry-minor.lit::before{
+  background:var(--accent);
+  box-shadow:0 0 10px rgba(var(--accentc),.5);
+  transform:none}
+
+/* revealed by its parent entry, not by its own observer */
+.cv-entry-minor{
+  opacity:0;
+  transform:translateY(44px);
+  transition:opacity .8s cubic-bezier(.22,.61,.36,1) .12s,
+             transform .8s cubic-bezier(.22,.61,.36,1) .12s}
+.cv-entry.is-in + .cv-entry-minor{
+  opacity:1;
+  transform:translateY(0)}
+
+@media (prefers-reduced-motion:reduce){
+  .cv-entry-minor{opacity:1;transform:none;transition:none}
+}
+
+/* the spine sits at a different offset on a phone, so the dash follows */
+@media (max-width:900px){
+  .cv-entry.cv-entry-minor::before{left:5px;top:12px;width:13px}
+}
+@media (max-width:520px){
+  .cv-entry.cv-entry-minor::before{left:5px;width:11px}
+}
+
+/* the thesis title, until there is one */
+.cv-thesis.is-placeholder{font-style:italic;opacity:.72}
