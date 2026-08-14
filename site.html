@@ -139,14 +139,16 @@
   <link rel="stylesheet" href="/fonts.css">
   <link rel="stylesheet" href="style.css">
   <script>
-  /* The tone is settled before anything is painted, so the page never
-     opens in one colour and blinks into the other. */
+  /* The tone is settled before anything is painted.
+
+     Dark is the default now, not the operating system's preference. The
+     site was designed on navy and that is how it should be met; a visitor
+     who wants the light page has a switch, and their choice is remembered
+     from then on. */
   (function () {
     try {
       var saved = localStorage.getItem("theme");
-      var dark = window.matchMedia("(prefers-color-scheme: dark)");
-      var tone = saved || (dark.matches || !window.matchMedia("(prefers-color-scheme: light)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", tone);
+      document.documentElement.setAttribute("data-theme", saved === "light" ? "light" : "dark");
     } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }
   })();
   </script>
@@ -2441,11 +2443,8 @@
       try { localStorage.setItem("theme", next); } catch (e) {}
     });
     /* Someone who has never chosen follows their machine. */
-    try {
-      window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", function (e) {
-        if (!localStorage.getItem("theme")) { paint(e.matches ? "light" : "dark"); }
-      });
-    } catch (e) {}
+    /* No listener on the system preference: dark is the default and
+       stays the default until the reader picks otherwise. */
   })();
   </script>
 </body>
