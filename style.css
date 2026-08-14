@@ -2931,7 +2931,12 @@ object-position:center;opacity:.92}
 /* 2 - the paintings, whole ------------------------------------ */
 .hb-grid .hb-item{aspect-ratio:1/1;display:flex;flex-direction:column;
   justify-content:flex-end;min-height:0}
-.hb-grid .hb-mark{margin-bottom:auto}
+/* The mark belongs directly above the words, the way the book does on the
+   reading card - that one reads right because its mark and its label are
+   wrapped in the same link and fall together at the foot of the tile. The
+   other three were pushed into the top corner by an auto margin and floated
+   free of the thing they label. Removed, so all four agree. */
+.hb-grid .hb-mark{margin-bottom:9px}
 .hb-shot img{opacity:.95;filter:saturate(1.04) contrast(1.02)}
 .hb-item:hover .hb-shot img{opacity:1;filter:saturate(1.08) contrast(1.03)}
 .hb-shot::after{background:
@@ -2950,7 +2955,7 @@ object-position:center;opacity:.92}
 @media (max-width:520px){
   .hb-grid{gap:12px}
   .hb-grid .hb-item{aspect-ratio:5/6;padding:14px 13px 15px}
-  .hb-grid .hb-mark{width:27px;height:27px;margin-bottom:auto}
+  .hb-grid .hb-mark{width:27px;height:27px;margin-bottom:7px}
   .hb-item .hb-name{font-size:.95rem;line-height:1.3}
   .hb-item .hb-gloss{display:block;margin-left:0;margin-top:2px;font-size:.62rem}
   .hb-item .hb-note{font-size:.8rem;line-height:1.45;margin-top:4px}
@@ -4006,4 +4011,120 @@ html[data-theme="light"] .yp-note.is-placeholder{opacity:1}
   .cv-pix{max-width:340px!important}
   .cv-pix .pix{break-inside:avoid}
   img{max-width:100%!important}
+}
+
+/* A heading that is really a divider
+
+   "US clinical experience" is not a post like the fellowship or the
+   doctorate - it is a bracket around two rotations listed underneath it. At
+   full h3 size it claimed the same weight as the entries either side and
+   made the timeline read as though there were more appointments than there
+   are. It steps down to the size of a label with the list doing the talking. */
+.cv-body h3.cv-sub-head{
+  font-size:17px;line-height:1.35;letter-spacing:.02em;
+  font-weight:500;color:var(--muted);margin-bottom:6px}
+.cv-body h3.cv-sub-head .flag{font-size:.8em}
+@media (max-width:900px){
+  .cv-body h3.cv-sub-head{font-size:15.5px}
+}
+
+/* __________________________________________________________________
+   The year, and the mark beside it
+
+   The emblem used to be pinned to the top-right corner of the panel with
+   position:absolute, while the year sat at the far left - two objects at
+   opposite ends of a bar, related only by being in it. And because the
+   images are all different shapes (321x364, 380x248, 358x380 and so on)
+   and were anchored to their top-right corner, each one hung at a
+   different height. Eight years, eight alignments.
+
+   They are one object now. The mark sits immediately beside the numeral,
+   in the flow rather than absolutely placed, and both are centred on the
+   same horizontal line - so whatever the shape of the emblem, its optical
+   middle meets the middle of the number. object-position goes to centre
+   for the same reason: a tall mark and a wide one now balance on the same
+   axis instead of hanging from the same corner.
+   __________________________________________________________________ */
+
+.yp-top{align-items:center!important;gap:14px!important}
+.yp-eyebrow{flex:0 0 auto;display:flex;align-items:center}
+
+.yp-symbol{
+  position:static!important;
+  flex:0 0 auto;
+  width:clamp(42px,4.4vw,58px);height:clamp(42px,4.4vw,58px);
+  display:grid;place-items:center;
+  align-self:center;
+  margin:0;
+}
+.yp-symbol img{
+  width:100%;height:100%;
+  object-fit:contain;
+  object-position:center!important;
+  opacity:.96;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.34))}
+html[data-theme="light"] .yp-symbol img{
+  filter:drop-shadow(0 3px 9px rgba(14,11,7,.26))}
+
+.yp-close{margin-left:auto}
+
+@media (max-width:900px){
+  .yp-symbol{width:44px;height:44px}
+  .yp-top{gap:11px!important}
+}
+@media (max-width:520px){
+  .yp-symbol{width:36px;height:36px}
+  .yp-top{gap:9px!important}
+}
+
+
+/* __________________________________________________________________
+   The childhood page: everything wears the crown
+
+   On a reading year the crown, the silver and the bronze mean first,
+   second and third. On the page before the books they would mean nothing -
+   there is no ranking a Game Boy cartridge against a sitcom, and pretending
+   otherwise would make a joke into a league table. So every one of the
+   seven gets the gold: the crown above the cover and the sweep beneath it,
+   whatever number happens to be printed beside it. The numbers are only
+   there to count you through.
+
+   The silver frame and the bronze rule are cancelled for the same reason,
+   which takes a little unpicking because on a normal page those two draw
+   into the same ::after box with a different geometry.
+   __________________________________________________________________ */
+
+.cd-item.cd-crowned .cd-cover::before{
+  content:"";position:absolute;
+  left:50%;top:-26px;width:54px;height:24px;transform:translateX(-50%);
+  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2060%2030%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.5%22%20stroke-width%3D%221%22%20transform%3D%22translate(1.2%201.7)%22%3E%3Cpath%20d%3D%22M8%2025%20C7%2019%206.4%2013%206%207.6%20C10.6%2012.4%2014.2%2016%2017.8%2019.6%20C21.6%2014%2025.6%208.4%2029.6%202.8%20C33.6%208.4%2037.6%2014%2041.4%2019.6%20C45%2016%2048.6%2012.4%2053.2%207.6%20C52.8%2013%2052.2%2019%2051.2%2025%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%2025%20C7%2019%206.4%2013%206%207.6%20C10.6%2012.4%2014.2%2016%2017.8%2019.6%20C21.6%2014%2025.6%208.4%2029.6%202.8%20C33.6%208.4%2037.6%2014%2041.4%2019.6%20C45%2016%2048.6%2012.4%2053.2%207.6%20C52.8%2013%2052.2%2019%2051.2%2025%22%2F%3E%3Cpath%20d%3D%22M8%2025%20C20%2027.6%2040%2027.6%2051.2%2024.3%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%227.2%22%20r%3D%221.8%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2229.6%22%20cy%3D%222.4%22%20r%3D%222%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2253.2%22%20cy%3D%227.2%22%20r%3D%221.8%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;pointer-events:none}
+
+.cd-item.cd-crowned .cd-cover::after{
+  content:"";position:absolute;
+  left:-6px;right:-6px;top:100%;bottom:auto;height:26px;margin-top:6px;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat:no-repeat;background-position:center;background-size:100% 100%;
+  pointer-events:none}
+
+/* the number beside a crowned card is gold too, in both tones */
+.cd-item.cd-crowned .cd-num{color:#d9b455}
+html[data-theme="light"] .cd-item.cd-crowned .cd-num{color:#a37c2a}
+
+/* "None." where a year would list its honorable mentions */
+.cd-none{margin:0;font-family:'Playfair Display',Georgia,serif;
+  font-size:30px;line-height:1;color:var(--muted);opacity:.75}
+.cd-none-note{margin:10px 0 0;font-size:14.5px;line-height:1.6;
+  color:var(--muted);opacity:.8;max-width:34ch}
+@media (max-width:620px){.cd-none{font-size:25px}}
+
+/* The one chip on the rail that is not a year
+
+   "birth – 2017" will not sit on a line the way 2018 does, so it takes two
+   and drops a few points to keep the chip the same size as its neighbours.
+   Everything else about it - the slab, the mark, the open state - is
+   inherited, because it behaves exactly like a year even though it isn't. */
+.ychip-childhood .yc-year{
+  font-size:19px;line-height:1.12;letter-spacing:.005em}
+@media (max-width:620px){
+  .ychip-childhood .yc-year{font-size:16.5px}
 }
