@@ -4182,3 +4182,130 @@ html[data-theme="light"] .cd-item.cd-crowned .cd-num{color:#a37c2a}
 
 /* the thesis title, until there is one */
 .cv-thesis.is-placeholder{font-style:italic;opacity:.72}
+
+/* __________________________________________________________________
+   The CV, a size up
+
+   The proportions were right and the hierarchy was right - what was
+   missing was simply room. Every level moves up by one to two points,
+   keeping the same steps between them so nothing is flattened: the
+   entry titles lead, the descriptions follow, the dates and the
+   sub-points stay quieter than both. The rotation lists gain the most,
+   because they carry the most words and had the least size.
+   __________________________________________________________________ */
+
+.cv-body h3{font-size:25px}
+.cv-body p{font-size:18.5px;line-height:1.62}
+.cv-period{font-size:16px}
+.cv-points .pt-when{font-size:13.5px}
+.cv-points .pt-what b{font-size:19.5px}
+.cv-points .pt-what i{font-size:17px;line-height:1.55}
+.rot li{font-size:17px;line-height:1.58}
+.cv-sub .cs-what{font-size:18px}
+.cv-sub .cs-where{font-size:16.5px}
+.cv-body h3.cv-sub-head{font-size:18.5px}
+
+@media (max-width:900px){
+  .cv-body h3{font-size:clamp(19.5px,4.9vw,22px)}
+  .cv-body p{font-size:16.5px}
+  .cv-period{font-size:14px}
+  .cv-points .pt-what b{font-size:17.5px}
+  .cv-points .pt-what i{font-size:15.5px}
+  .rot li{font-size:15.5px}
+  .cv-body h3.cv-sub-head{font-size:16.5px}
+}
+@media (max-width:520px){
+  .cv-body p{font-size:16px}
+  .cv-period{font-size:13.5px}
+  .cv-points .pt-when{font-size:12.5px}
+  .rot li{font-size:15px}
+}
+
+/* __________________________________________________________________
+   The emblems, sized up and set true
+
+   Two faults, one visible and one not.
+
+   The visible one: they were too small to see. At 56px against a 34px
+   numeral an emblem is a decoration you notice only if you look for it.
+   They are roughly half again as large now, enough to be read as the
+   picture each one is.
+
+   The hidden one: every img still carried the width and height of its
+   original file, and those were not square - 358x380, 380x248 and so on.
+   An intrinsic ratio beats a percentage height, so the img rendered
+   taller than the box holding it and hung a couple of pixels below the
+   line it was supposed to sit on. Every emblem is a 460 square now and
+   the attributes say so, which is what makes the centring exact rather
+   than approximate.
+
+   The last nudge is optical, not geometric. A row of digits with
+   line-height 1 has no descenders, so its ink sits high in its own line
+   box; centring the emblem on that box therefore leaves it looking a
+   touch low. The translate lifts it onto the middle of the digits
+   themselves, which is where the eye reads the centre to be.
+   __________________________________________________________________ */
+
+.yp-symbol{
+  width:clamp(60px,6.6vw,86px)!important;
+  height:clamp(60px,6.6vw,86px)!important;
+  transform:translateY(-2px)}
+.yp-symbol img{
+  width:100%!important;height:100%!important;
+  object-fit:contain;object-position:center center!important;
+  opacity:1}
+
+@media (max-width:900px){
+  .yp-symbol{width:64px!important;height:64px!important;transform:translateY(-2px)}
+}
+@media (max-width:520px){
+  .yp-symbol{width:52px!important;height:52px!important;transform:translateY(-1px)}
+}
+
+/* The emblem fills its box regardless of the file inside it
+
+   height:100% on a centred grid item is not the guarantee it looks like:
+   the item is not stretched, so an image whose intrinsic ratio disagrees
+   with the box wins and hangs out of it. That is what left two of the
+   nine sitting low. Taking the img out of flow and pinning it to all four
+   edges removes the argument entirely - the box decides, the file inside
+   only decides how it is fitted within it. */
+.yp-symbol{position:relative!important;overflow:visible}
+.yp-symbol img{
+  position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;
+  object-fit:contain!important;object-position:center center!important}
+
+/* __________________________________________________________________
+   The emblem, finally sitting where it should
+
+   The last two pixels of this were not a styling choice, they were a
+   bug. The original rule positioned the emblem absolutely in the corner
+   with top:16px; right:62px. Moving it into the flow changed position to
+   relative but left those offsets in place - and under position:relative
+   a leftover top:16px is not ignored, it shoves the element sixteen
+   pixels down. Every emblem on the site was hanging low for that reason,
+   and no amount of centring the box was going to fix it. Cleared here.
+
+   With the box then genuinely centred, one real optical correction is
+   left. Playfair sets the years in oldstyle figures, so "2023" has
+   descending digits: its ink runs from 18px above the baseline to 5px
+   below it, which puts the visual middle of the numerals about six
+   pixels above the middle of their line box. The emblem is lifted by
+   that much, so it lines up with the digits a reader sees rather than
+   with the invisible box around them. The figure scales with the type,
+   so the smaller headings get a proportionally smaller lift.
+   __________________________________________________________________ */
+
+.yp-symbol{
+  top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
+  width:clamp(66px,7.4vw,96px)!important;
+  height:clamp(66px,7.4vw,96px)!important;
+  transform:translateY(-8.4px)!important}
+
+@media (max-width:900px){
+  .yp-symbol{width:70px!important;height:70px!important;transform:translateY(-7px)!important}
+}
+@media (max-width:520px){
+  .yp-symbol{width:56px!important;height:56px!important;transform:translateY(-5.5px)!important}
+}
