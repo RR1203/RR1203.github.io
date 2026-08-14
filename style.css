@@ -4420,3 +4420,68 @@ html[data-theme="light"] .cd-item.cd-crowned .cd-num{color:#a37c2a}
 @media (max-width:900px){
   .cv-points .pt-when{flex:none;white-space:normal}
 }
+
+/* __________________________________________________________________
+   The monogram as a mosaic - an experiment, switched on by a class
+
+   Set class="mono is-mosaic" on the brand mark to see it. The tesserae
+   are generated as an SVG rather than drawn by hand, and deliberately
+   coarse: a first version used 584 stones and at the 38px this mark
+   actually appears that is about one pixel per tile, which turned the
+   letters into noise. 216 larger stones survive the size.
+
+   It is still a real trade. Two letters built from squares will never be
+   as crisp as two letters set in Playfair, and at 38px this reads as
+   "HM" only because you already know that is what it says. It earns its
+   place if the mosaic is wanted as a motif, not if the monogram needs to
+   be legible to a stranger.
+   __________________________________________________________________ */
+
+.nav-brand .mono.is-mosaic{
+  border:0;
+  background:url("/images/symbols/monogram-mosaic.svg") center/100% 100% no-repeat;
+  color:transparent;
+  font-size:0;
+  overflow:hidden}
+.nav-brand:hover .mono.is-mosaic{
+  background-color:transparent;
+  transform:translateY(-1px) scale(1.04)}
+
+/* __________________________________________________________________
+   The year's note moves up beside its emblem
+
+   The header row held a year, an emblem and a close button, and then a
+   whole line of vertical space went to a sentence sitting underneath it.
+   Beside the emblem there was nothing but air. The note now shares the
+   row: year, emblem, sentence, close. It saves a line of height on every
+   panel and gives the emblem something to sit against instead of a gap.
+
+   The note takes the free space and caps its measure so it does not run
+   at the close button, and it keeps its own line height rather than
+   inheriting the row's - a two-line note simply makes the row taller,
+   with the year and emblem staying centred against it.
+   __________________________________________________________________ */
+
+.yp-top .yp-note{
+  flex:1 1 auto;
+  min-width:0;
+  margin:0 0 0 10px!important;
+  max-width:74ch;
+  font-size:15.5px!important;
+  line-height:1.6!important;
+  align-self:center}
+
+/* below the header the note is gone, so what followed it closes up */
+.ypanel > .yp-more{margin-top:14px!important}
+
+@media (max-width:1024px){
+  .yp-top .yp-note{font-size:14.5px!important;margin-left:6px!important}
+}
+@media (max-width:860px){
+  /* too little width to sit three things on one line: the note drops
+     back under the row it came from */
+  .yp-top{flex-wrap:wrap}
+  .yp-top .yp-note{
+    flex:1 1 100%;order:3;margin:10px 0 0!important;font-size:15px!important}
+  .yp-close{order:2}
+}
