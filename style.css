@@ -4485,3 +4485,41 @@ html[data-theme="light"] .cd-item.cd-crowned .cd-num{color:#a37c2a}
     flex:1 1 100%;order:3;margin:10px 0 0!important;font-size:15px!important}
   .yp-close{order:2}
 }
+
+/* __________________________________________________________________
+   A place that holds two books
+
+   Some years put two titles in one position - not a first and a second,
+   but a pair that belongs together. The card takes a second jacket and
+   a second title, stacked rather than side by side: side by side would
+   halve each cover and the spines stop being readable, while stacking
+   keeps both at nearly full width and lets each title sit under its own
+   book, so it is obvious which words belong to which jacket.
+
+   Add cd-pair to the item and give it two .cd-jacket spans and two
+   .cd-duo-title blocks; everything else - the rank, the crown, the
+   spacing - is inherited unchanged.
+   __________________________________________________________________ */
+
+.cd-item.cd-pair .cd-cover{display:flex;flex-direction:column;gap:10px}
+.cd-item.cd-pair .cd-jacket{width:100%}
+.cd-item.cd-pair .cd-jacket img{width:100%;height:auto;display:block}
+
+/* the two books get their own title blocks, each tied to the jacket above */
+.cd-duo{display:flex;flex-direction:column;gap:14px;margin:0}
+.cd-duo-title{margin:0}
+.cd-duo-title .cd-title{margin:0}
+.cd-duo-title .cd-author{margin:2px 0 0}
+/* a hairline between them, so two books never read as one long title */
+.cd-duo-title + .cd-duo-title{
+  border-top:1px solid rgba(var(--ink),.14);padding-top:12px}
+
+/* the marker that says this slot holds two */
+.cd-pair-note{
+  margin:0 0 8px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);opacity:.85}
+
+@media (max-width:760px){
+  .cd-item.cd-pair .cd-cover{gap:8px}
+  .cd-duo{gap:11px}
+}
