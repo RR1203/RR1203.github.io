@@ -3838,3 +3838,117 @@ html[data-theme="light"] .yp-note.is-placeholder{opacity:1}
 
 .cv-pix .pix:not(.has-pic){display:none}
 .cv-pix:not(:has(.pix.has-pic)){display:none}
+
+/* __________________________________________________________________
+   On paper
+
+   A CV gets printed. This page is a scrolling document with a canvas
+   behind its title, a fixed wash that changes colour per chapter, a
+   rail of jump dots and eight sections of reveal animation, none of
+   which belongs on A4.
+
+   The block further up handled the obvious removals. Three things it
+   did not:
+
+   First, and worst: printing from the dark theme put pale grey type on
+   white paper. The old rules set body colour, but everything quieter
+   than body text - the dates in the timeline, the sub-points, the
+   authors, the notes - takes its colour from a token, and those tokens
+   still held their night values. So the whole secondary layer came out
+   at #d8d5d0 on white, which is to say blank. Print now forces the
+   light token set regardless of which theme is on screen, so what
+   comes out of the printer is the same either way.
+
+   Second, entries broke wherever the page happened to end - a heading
+   at the foot of one sheet and its dates on the next.
+
+   Third, a printed link is a dead end. Every external link in the
+   publications and the CV now prints its address after it, so a DOI
+   on paper is still a DOI you can type in.
+   __________________________________________________________________ */
+
+@media print{
+  /* the light palette, whatever the screen was showing */
+  :root,html[data-theme="dark"],html[data-theme="light"]{
+    --ink:43,36,28;
+    --bgc:255,255,255;
+    --mutedc:70,62,52;
+    --accentc:14,90,80;
+    --goldc:150,96,31;
+    --deepc:245,242,236;
+    --navy:#ffffff;
+    --panel:#ffffff;
+    --text:#16130f;
+    --muted:#463e34;
+    --muted-deep:#2b2620;
+    --rule:rgba(43,36,28,.5);
+    --accent:#0e5a50;
+    --accent-strong:#0a463e;
+    --accent-label:#0a463e;
+    --gold:#96601f;
+    --card:transparent;
+    --card-border:rgba(43,36,28,.28);
+    --hair:rgba(43,36,28,.25);
+  }
+
+  @page{margin:16mm 14mm}
+
+  html,body{background:#fff!important;color:var(--text)!important}
+
+  /* everything that exists only to be moved through */
+  .chapter-wash,.theme-toggle,.skip-to,.pixbox,
+  .scroll-cue,.rail,.topnav,.hero-canvas,.image-band,.scroll-progress,
+  .cd-nav,.cd-ticks,.yrail,.ychip,.heroes-fold>summary,.pub-fold>summary,
+  .reading::before,.reading::after,.hb-shot,.foot-links{
+    display:none!important}
+
+  /* the reveal machinery must not hide half the document */
+  .reveal,.reveal.is-in,.reveal-soft{opacity:1!important;transform:none!important}
+  details,details[open]{display:block!important}
+  details>*{display:block!important}
+  [hidden]{display:revert!important}
+
+  /* keep a thing and its label on the same sheet */
+  .cv-entry,.pub-item,.theme-card,.media-card,.cd-item,
+  .hb-item,.cv-points>li,.heroes>li{
+    break-inside:avoid;page-break-inside:avoid}
+  h1,h2,h3{break-after:avoid;page-break-after:avoid}
+  p,li{orphans:3;widows:3}
+  main>section{break-before:auto;padding:0 0 18px!important}
+
+  /* a printed link should still be usable */
+  main a[href^="http"]::after{
+    content:" (" attr(href) ")";
+    font-size:.78em;color:var(--muted);word-break:break-all}
+  main a[href^="#"]::after,main a[href^="mailto"]::after{content:""}
+
+  /* cards stop being cards; the paper is the card */
+  .theme-card,.media-card,.img-frame,.reading-card{
+    box-shadow:none!important;border:1px solid var(--card-border)!important;
+    background:#fff!important}
+
+  /* the name keeps its shape but loses its gradient */
+  .hero-text h1 .hn-text{
+    background:none!important;color:var(--text)!important;
+    -webkit-text-fill-color:var(--text)!important}
+
+
+  /* The profile row is the most useful thing on a printed CV, so it stays -
+     but as addresses rather than as five circular icons. The icon itself
+     goes, the label stays, and the generic link rule above prints the URL
+     after it. */
+  .hero-social{display:block!important;margin-top:14px!important}
+  .hero-social .pill{
+    display:block!important;margin:0 0 3px!important;
+    color:var(--text)!important;text-decoration:none}
+  .hero-social .pill-icon{display:none!important}
+  .hero-social .pill-label{
+    position:static!important;width:auto!important;height:auto!important;
+    clip:auto!important;clip-path:none!important;overflow:visible!important;
+    font-size:11px!important;letter-spacing:.1em;color:var(--muted)!important}
+
+  /* photographs print, but not at full bleed */
+  .cv-pix{max-width:340px!important}
+  .cv-pix .pix{break-inside:avoid}
+  img{max-width:100%!important}
+}
