@@ -4301,11 +4301,70 @@ html[data-theme="light"] .cd-item.cd-crowned .cd-num{color:#a37c2a}
   top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
   width:clamp(66px,7.4vw,96px)!important;
   height:clamp(66px,7.4vw,96px)!important;
-  transform:translateY(-8.4px)!important}
+  transform:translateY(-7.1px)!important}
 
 @media (max-width:900px){
-  .yp-symbol{width:70px!important;height:70px!important;transform:translateY(-7px)!important}
+  .yp-symbol{width:70px!important;height:70px!important;transform:translateY(-5.9px)!important}
 }
 @media (max-width:520px){
-  .yp-symbol{width:56px!important;height:56px!important;transform:translateY(-5.5px)!important}
+  .yp-symbol{width:56px!important;height:56px!important;transform:translateY(-4.6px)!important}
+}
+
+/* __________________________________________________________________
+   Centring what the eye sees, not what the file measures
+
+   The previous attempt centred each emblem's bounding box, and that is
+   the wrong target. A swan drawn above its own reflection has a bounding
+   box whose middle falls in the water, not on the bird: measured, the
+   visible mass of 2019 sits 33px above the centre of its own box, the
+   kintsugi bowl 22px above, and Pikachu 33px below - the lightning bolt
+   reaches up while the body lies low.
+
+   So each emblem is weighted pixel by pixel, by opacity times brightness
+   - present but faint counts for little, which is exactly how a
+   reflection should count - and the resulting centre of mass is what
+   gets aligned. The nudges are written as a share of the element's own
+   size rather than in pixels, so they hold at every breakpoint.
+
+   Two corrections stack here and they answer different questions. The
+   translateY on the box puts the box on the middle of the numerals. The
+   translate on the img inside puts the visible artwork on the middle of
+   that box. Together the ink lands on the digits.
+   __________________________________________________________________ */
+
+.yp-symbol{
+  width:clamp(84px,9.4vw,124px)!important;
+  height:clamp(84px,9.4vw,124px)!important}
+
+#yr-2018     .yp-symbol img{transform:translate( 0.59%, 2.16%)!important}
+#yr-2019     .yp-symbol img{transform:translate( 3.13%, 6.68%)!important}
+#yr-2020     .yp-symbol img{transform:translate(-0.04%, 0.94%)!important}
+#yr-2021     .yp-symbol img{transform:translate(-2.61%, 0.81%)!important}
+#yr-2022     .yp-symbol img{transform:translate( 0.13%, 0.78%)!important}
+#yr-2023     .yp-symbol img{transform:translate( 0.40%, 3.20%)!important}
+#yr-2024     .yp-symbol img{transform:translate( 2.26%, 4.86%)!important}
+#yr-2025     .yp-symbol img{transform:translate( 0.30%, 2.50%)!important}
+#yr-childhood .yp-symbol img{transform:translate(-0.37%,-7.18%)!important}
+
+@media (max-width:900px){
+  .yp-symbol{width:88px!important;height:88px!important}
+}
+@media (max-width:520px){
+  .yp-symbol{width:68px!important;height:68px!important}
+}
+
+/* A rotation list that says what kind of rotations these were
+
+   The three under the Jena years are electives, chosen rather than
+   assigned, and the list gave no way to know that. A small caps line
+   above them says it once, in the same register as the other labels on
+   the page, without adding a heading level or a second list. */
+.rot-head{
+  list-style:none;
+  font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);opacity:.85;
+  margin:0 0 5px;padding:0}
+.rot.rot-labelled{margin-top:9px}
+@media (max-width:900px){
+  .rot-head{font-size:10.5px;letter-spacing:.17em}
 }
