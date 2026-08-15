@@ -4546,6 +4546,11 @@ html[data-theme="light"] .cd-item.cd-crowned .cd-num{color:#a37c2a}
 
    The covers lose about 18px of width in the trade and the media cards
    about 47px, which is the "a little smaller" this was asked for.
+
+   The 15-11 card is the exception, further down: it holds a closed set
+   of five or six books, not an open list, so there is nothing there to
+   scroll to and a half-cut cover would be a promise of more that does
+   not exist.
    __________________________________________________________________ */
 
 .cd-extra-list{--peek:5.5}
@@ -4645,4 +4650,135 @@ html[data-theme="light"] .nav-brand.is-tiled .brand-name{border-radius:3px}
 @media (max-width:900px){
   .nav-brand.is-tiled .brand-name{display:none}
   .nav-brand.is-tiled .mono{width:56px;height:33px}
+}
+
+/* __________________________________________________________________
+   The 15-11 card shows everything it has
+
+   Honorable mentions are an open list - eleven, fifteen, eighteen books
+   - and cutting the last cover in half is how a reader learns to push
+   it sideways. The band below it is not that. It is exactly the books
+   ranked fifteen to eleven, five of them, six in the two years where a
+   pair was pulled apart. A half-cut cover there promises a sixth or a
+   seventh that is not coming.
+
+   So these covers share the width instead of taking a fixed slice of
+   it: flex:1 1 0 divides the rail evenly however many there are, five
+   or six, and the cap keeps the five-book years from inflating to fill
+   the space. Nothing overflows, so the rail stops being a rail.
+   __________________________________________________________________ */
+
+[data-slug="15-11"] .cd-extra-list{overflow-x:visible;scroll-snap-type:none}
+[data-slug="15-11"] .cd-extra-list li,
+.ypanel [data-slug="15-11"] .cd-extra-list li{
+  flex:1 1 0;
+  min-width:0;
+  max-width:162px}
+@media (max-width:860px){
+  /* Six covers across a tablet are thumbnails - measured at 768px the
+     rail is only 520px wide, which is 86px a cover with five and 71
+     with six. Below this the band goes back to being a rail, with the
+     same half-cut cue as the rest, because a cover you can read and
+     have to push is better than six you cannot. */
+  [data-slug="15-11"] .cd-extra-list{overflow-x:auto}
+  [data-slug="15-11"] .cd-extra-list li,
+  .ypanel [data-slug="15-11"] .cd-extra-list li{
+    flex:0 0 calc(100%/var(--peek) - 20px);
+    max-width:none}
+}
+
+/* __________________________________________________________________
+   Two books on one card, side by side rather than stacked
+
+   The pair card put its second jacket underneath the first, which made
+   number one twice as tall as every other card in the countdown - the
+   panel grew a screen and a half and the two covers stopped reading as
+   one entry.
+
+   They now lean against each other in the width of a single jacket: the
+   first at 62% flush left, the second at 62% pulled back over it by 24%
+   and dropped 22px, so the two together measure exactly 100% and the
+   card is one jacket tall plus the offset. The front one carries a
+   shadow and a hairline so the overlap reads as two objects rather than
+   one torn image.
+
+   The overlap is 39% of a jacket, which is the number this was tuned
+   to: at the first attempt it was 53% and the book underneath lost its
+   title, which defeats the point of showing two covers at all.
+
+   On a phone the covers are already narrow and an overlap would hide
+   half of each, so there they go back to sitting one above the other.
+   __________________________________________________________________ */
+
+.cd-item.cd-pair .cd-cover{
+  display:flex;
+  flex-direction:row;
+  align-items:flex-start;
+  gap:0}
+.cd-item.cd-pair .cd-jacket{flex:0 0 62%;width:62%}
+.cd-item.cd-pair .cd-jacket + .cd-jacket{
+  margin-left:-24%;
+  margin-top:22px;
+  position:relative;
+  z-index:2;
+  box-shadow:-10px 10px 26px rgba(0,0,0,.44);
+  border-radius:3px;
+  outline:1px solid rgba(var(--ink),.16);
+  outline-offset:-1px}
+html[data-theme="light"] .cd-item.cd-pair .cd-jacket + .cd-jacket{
+  box-shadow:-8px 8px 20px rgba(14,11,7,.24);
+  outline-color:rgba(14,11,7,.14)}
+.cd-item.cd-pair .cd-duo{gap:10px}
+
+/* The phone leans them too. Stacking was the first instinct - narrow
+   screen, put one under the other - but measured at 390px that card came
+   to 1289px tall, which is the complaint this whole rule exists to
+   answer, only worse. Leaning gives two 154px jackets and a card a
+   third of the height, and 154px is about what a single cover reads at
+   on a phone anyway. */
+
+/* __________________________________________________________________
+   The HM goes back to what it was
+
+   The tiled name strip stays; the monogram beside it does not. Undoing
+   it is one rule rather than a deletion, because the is-tiled class
+   still has to carry the strip: this hands the mark back to the
+   .mono.is-mosaic rule further up, which is where it was before.
+   __________________________________________________________________ */
+
+.nav-brand.is-tiled .mono{
+  width:38px;height:38px;
+  border:1px solid rgba(var(--accentc),.5);
+  border-radius:50%;
+  background:url("/images/symbols/monogram-mosaic.svg") center/100% 100% no-repeat}
+.nav-brand.is-tiled:hover .mono{
+  background-color:rgba(var(--accentc),.15);
+  border-color:var(--accent);
+  transform:translateY(-1px)}
+@media (max-width:900px){
+  .nav-brand.is-tiled .mono{width:38px;height:38px}
+}
+
+/* __________________________________________________________________
+   The nav row could not be scrolled back to its own beginning
+
+   .nav-links is a flex row that scrolls sideways once the six links
+   stop fitting, and it was aligned to flex-end. When a flex row
+   overflows, an end alignment pushes the surplus off the *left* edge -
+   and scrollLeft cannot go below zero, so that part is not merely
+   hidden, it is unreachable. Measured on a 390px phone the first link
+   sat at x=-27 with scrollLeft already 0: Home could not be scrolled
+   to, tapped, or seen. Widening About to About me made it worse but did
+   not cause it.
+
+   safe flex-end keeps the right alignment while there is room and drops
+   to start alignment the moment it would cost content, which is exactly
+   the rule wanted here. The media query underneath is the fallback for
+   engines that do not know the safe keyword - below this width the row
+   always overflows anyway, so starting it at the left loses nothing.
+   __________________________________________________________________ */
+
+.nav-links{justify-content:safe flex-end}
+@media (max-width:820px){
+  .nav-links{justify-content:flex-start}
 }
