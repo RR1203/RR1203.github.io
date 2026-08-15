@@ -5213,3 +5213,86 @@ html[data-theme="light"] .yv-jacket img{box-shadow:0 10px 24px rgba(14,11,7,.2)}
 .yv-pair .yv-t + .yv-t{
   margin-top:7px;padding-top:7px;
   border-top:1px solid rgba(var(--ink),.14)}
+
+/* __________________________________________________________________
+   Two books joined by an ampersand rather than announced
+
+   "Two books" was a label explaining the card, and a card should not
+   need explaining. The two titles now sit one above the other with an
+   ampersand on its own line between them, which says the same thing in
+   one character and reads as part of the entry rather than as a note
+   about it. The rule that used to divide them goes with the label -
+   with the ampersand there, a line as well is one separator too many.
+   __________________________________________________________________ */
+
+.yv-pair .yv-t + .yv-t,
+.cd-duo .cd-duo-title + .cd-duo-title,
+.xp-pair .cd-extra-book + .cd-extra-book{
+  border-top:0;
+  margin-top:0;
+  padding-top:0}
+
+.yv-pair .yv-t + .yv-t::before,
+.cd-duo .cd-duo-title + .cd-duo-title::before,
+.xp-pair .cd-extra-book + .cd-extra-book::before{
+  content:"&";
+  display:block;
+  margin:7px 0;
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.15em;
+  line-height:1;
+  color:var(--accent);
+  opacity:.75}
+
+/* the countdown card's titles are block elements already, so the mark
+   needs its own left edge rather than inheriting the title's indent */
+.cd-duo .cd-duo-title + .cd-duo-title::before{margin:11px 0 9px}
+.xp-pair .cd-extra-book + .cd-extra-book::before{margin:5px 0;font-size:1em}
+
+/* __________________________________________________________________
+   Room under each mention for a sentence
+
+   The mentions were packed tight enough that a title running to three
+   lines nearly touched the cover below it, and there was nowhere to say
+   anything about the book. Each now carries one sentence under the
+   author, and the row gap opens to make room for it - so the grid is
+   read down as well as across, and the covers stop crowding.
+
+   The same sentence appears on the back of the cover when it is turned
+   over. It is written once, here; the page copies it onto the back at
+   load, so the two cannot drift apart.
+   __________________________________________________________________ */
+
+.yv-grid{gap:52px 26px}
+.yv-say{
+  margin:9px 0 0;
+  font-size:13px;
+  line-height:1.55;
+  color:var(--muted);
+  max-width:34ch}
+.yv-say.is-placeholder{opacity:.42;font-style:italic}
+
+@media (max-width:900px){.yv-grid{gap:44px 20px}}
+@media (max-width:620px){
+  .yv-grid{gap:34px 12px}
+  .yv-say{font-size:11px;line-height:1.45;margin-top:7px}
+}
+
+/* The first tab carries a phrase rather than a numeral, so it needs a
+   little more room and should not be squeezed onto its own line before
+   the years are. */
+.yv-years .yv-first a{white-space:nowrap;letter-spacing:.04em}
+
+/* Raised by one element for the same reason the heading had to be:
+   `.simple-main p` is a class plus an element and beats a lone class, so
+   the sentence was rendering at the body size of 18px instead of 13. */
+.yv-card p.yv-say{
+  margin:9px 0 0;
+  font-size:13px;
+  line-height:1.55;
+  color:var(--muted);
+  max-width:34ch}
+.yv-card p.yv-say.is-placeholder{opacity:.42;font-style:italic}
+@media (max-width:620px){
+  .yv-card p.yv-say{font-size:11px;line-height:1.45;margin-top:7px}
+}
