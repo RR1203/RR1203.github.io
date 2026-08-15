@@ -5385,28 +5385,51 @@ html[data-theme="light"] .yv-float{
 .heroes.is-foldable > li.can-open:focus-visible{
   outline:2px solid var(--accent);outline-offset:6px;border-radius:8px}
 
-/* the chevron sits at the end of the note and turns over when it opens */
-.heroes.is-foldable > li.can-open .ih-note::after{
+/* -- the cue -------------------------------------------------------
+   A bare chevron asks the reader to work out that the line is live. A
+   chevron with the words beside it does not. It is set like the small
+   caps role above it, so it belongs to the entry rather than sitting on
+   it, and it is coloured with the accent, which on this site means "you
+   can do something here".
+
+   Both the label and the arrow are drawn from the stylesheet, so they
+   cannot be selected with the text and will not come along if the note
+   is copied. */
+.ih-cue{
+  display:inline-flex;align-items:center;gap:7px;
+  margin-left:12px;
+  font-size:.62em;letter-spacing:.15em;text-transform:uppercase;
+  font-style:normal;
+  color:var(--accent);
+  white-space:nowrap;
+  vertical-align:baseline;
+  opacity:.85;
+  transition:opacity .22s ease}
+.ih-cue::before{content:"Read more"}
+.heroes.is-foldable > li.is-open .ih-cue::before{content:"Show less"}
+.ih-cue::after{
   content:"";
-  display:inline-block;
-  width:6px;height:6px;
-  margin-left:11px;
-  vertical-align:middle;
-  border-right:1.5px solid var(--accent);
-  border-bottom:1.5px solid var(--accent);
+  width:5px;height:5px;
+  border-right:1.5px solid currentColor;
+  border-bottom:1.5px solid currentColor;
   transform:translateY(-2px) rotate(45deg);
-  transition:transform .28s cubic-bezier(.2,.7,.2,1),opacity .2s ease;
-  opacity:.8}
-.heroes.is-foldable > li.can-open:hover .ih-note::after{opacity:1}
-.heroes.is-foldable > li.is-open .ih-note::after{
+  transition:transform .28s cubic-bezier(.2,.7,.2,1)}
+.heroes.is-foldable > li.is-open .ih-cue::after{
   transform:translateY(1px) rotate(-135deg)}
+
+/* the whole entry answers the pointer, so the whole entry lights up:
+   the cue brightens and the name warms, which is what tells the reader
+   the whole block is the target and not just the words at the end */
+.heroes.is-foldable > li.can-open:hover .ih-cue,
+.heroes.is-foldable > li.can-open:focus-visible .ih-cue{opacity:1}
+.heroes.is-foldable > li.can-open:hover .ih-note{color:var(--text)}
 
 /* an opened note is the one being read, so it keeps its full colour
    while the placeholders around it stay faint */
 .heroes.is-foldable > li.is-open .ih-note{color:var(--text)}
 
 @media (prefers-reduced-motion:reduce){
-  .heroes.is-foldable > li.can-open .ih-note::after{transition:none}
+  .ih-cue::after{transition:none}
 }
 
 /* __________________________________________________________________
@@ -5429,3 +5452,35 @@ html[data-theme="light"] .yv-float{
   content:"\00b7";
   margin-right:9px;
   opacity:.5}
+
+/* __________________________________________________________________
+   Clicking to open must not smear the text blue
+
+   A closed entry is a control, and clicking a control should not select
+   its label - but a double click, or a click with a pixel of drag in
+   it, was marking the words. So while the entry is closed the text is
+   not selectable and the click does nothing but open it.
+
+   The moment it opens the text becomes selectable again, because now it
+   is something to read, and a reader who wants to quote a sentence must
+   be able to take it. Closing it is a single click, which never selects
+   anything on its own, so the two states do not fight.
+
+   The portrait is never selectable in either state: dragging a picture
+   out of a list of names is not a thing anybody means to do.
+   __________________________________________________________________ */
+
+.heroes.is-foldable > li.can-open:not(.is-open){
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  user-select:none}
+.heroes.is-foldable > li.can-open.is-open{
+  -webkit-user-select:text;
+  -moz-user-select:text;
+  user-select:text}
+.heroes .ih-face,
+.heroes .ih-cue{
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  user-select:none;
+  -webkit-user-drag:none}

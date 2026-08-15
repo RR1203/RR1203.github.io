@@ -2581,6 +2581,17 @@
           withMore[w].setAttribute("role", "button");
           withMore[w].setAttribute("tabindex", "0");
           withMore[w].setAttribute("aria-expanded", "false");
+          /* The words that say the entry opens are put here rather than
+             written into each note, so that adding a rest to a note is
+             the only thing anyone has to remember. The label itself
+             lives in the stylesheet and swaps with the state; this is
+             just the peg to hang it on. It is hidden from screen
+             readers because aria-expanded on the row already says the
+             same thing, and saying it twice is worse than once. */
+          var cue = document.createElement("span");
+          cue.className = "ih-cue";
+          cue.setAttribute("aria-hidden", "true");
+          withMore[w].querySelector(".ih-note").appendChild(cue);
         }
         var flip = function (row) {
           var open = row.classList.toggle("is-open");
@@ -2589,7 +2600,14 @@
         heroList.addEventListener("click", function (ev) {
           if (ev.target.closest("a")) { return; }
           var row = ev.target.closest("li.can-open");
-          if (row) { flip(row); }
+          if (!row) { return; }
+          /* An opened note is selectable, so a reader dragging across a
+             sentence to copy it finishes on a click - and that click
+             would otherwise shut the note under their hand. If anything
+             is selected, the gesture was a selection, not a press. */
+          var sel = window.getSelection && window.getSelection();
+          if (sel && !sel.isCollapsed && sel.toString().trim().length > 1) { return; }
+          flip(row);
         });
         heroList.addEventListener("keydown", function (ev) {
           if (ev.key !== "Enter" && ev.key !== " " && ev.key !== "Spacebar") { return; }
