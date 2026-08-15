@@ -5353,3 +5353,67 @@ html[data-theme="light"] .yv-float{
 @media (max-width:620px){
   .yv-float{bottom:16px;padding:10px 16px;font-size:11.5px}
 }
+
+/* __________________________________________________________________
+   A hero note that opens
+
+   Some of these notes want two sentences and some want ten, and a wall
+   of ten-sentence paragraphs would bury the names that are the point of
+   the list. So a note may carry a lead and a rest: the lead always
+   shows, the rest opens on a click, the same bargain the covers on the
+   year pages make.
+
+   The button is only written into the notes that have more to give, so
+   a two-sentence note shows nothing to press and reads as finished
+   rather than as truncated. And the rest is in the markup, not fetched
+   or generated - it is in the page for a reader with no JavaScript, for
+   a search engine, and for anyone who prints it.
+   __________________________________________________________________ */
+
+.ih-rest{display:none}
+.heroes>li.is-open .ih-rest{display:inline}
+
+.ih-more{
+  display:inline-flex;align-items:baseline;gap:6px;
+  margin-left:9px;padding:0;
+  border:0;background:none;cursor:pointer;
+  font-family:inherit;font-size:.86em;font-style:normal;
+  letter-spacing:.02em;
+  color:var(--accent);
+  white-space:nowrap;
+  transition:opacity .2s ease}
+.ih-more:hover{opacity:.72}
+.ih-more:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+.ih-more i{font-style:normal;transition:transform .25s ease;display:inline-block}
+.ih-more:hover i{transform:translateX(3px)}
+.heroes>li.is-open .ih-more i{transform:rotate(90deg)}
+.heroes>li.is-open .ih-more:hover i{transform:rotate(90deg) translateX(3px)}
+
+/* the note that has been opened is the one being read, so it keeps its
+   full colour while the placeholder notes around it stay faint */
+.heroes>li.is-open .ih-note{color:var(--text)}
+
+@media (prefers-reduced-motion:reduce){
+  .ih-more i,.ih-more{transition:none}
+}
+
+/* __________________________________________________________________
+   The role and the gloss need air at every width
+
+   When role and gloss were wrapped in .ih-sub so the phone could stack
+   them, the spacing that used to come from .ih-line's own flex gap went
+   with them - .ih-sub became one flex item with nothing inside it, and
+   on the wide page the two ran together: "PSYCHOANALYSTfounder of
+   transference-focused psychotherapy". The gap and the separating dot
+   belong to the pair itself, not to one layout, so they live here where
+   both widths can see them. The phone block further up still decides
+   where the pair sits; this only decides how it holds together.
+   __________________________________________________________________ */
+
+.ih-sub{
+  display:inline-flex;flex-wrap:wrap;align-items:baseline;
+  column-gap:9px;row-gap:2px}
+.ih-sub .ih-for::before{
+  content:"\00b7";
+  margin-right:9px;
+  opacity:.5}
