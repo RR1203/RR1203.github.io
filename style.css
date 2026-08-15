@@ -4046,7 +4046,12 @@ html[data-theme="light"] .yp-note.is-placeholder{opacity:1}
    axis instead of hanging from the same corner.
    __________________________________________________________________ */
 
-.yp-top{align-items:center!important;gap:14px!important}
+/* Six rather than fourteen: at fourteen the numerals and the emblem read
+   as two things standing near each other, at six as one mark. The note
+   takes the twelve pixels back as its own left margin further down, so
+   only this one distance changes and the rest of the row keeps its
+   spacing. */
+.yp-top{align-items:center!important;gap:6px!important}
 .yp-eyebrow{flex:0 0 auto;display:flex;align-items:center}
 
 .yp-symbol{
@@ -4070,11 +4075,11 @@ html[data-theme="light"] .yp-symbol img{
 
 @media (max-width:900px){
   .yp-symbol{width:44px;height:44px}
-  .yp-top{gap:11px!important}
+  .yp-top{gap:5px!important}
 }
 @media (max-width:520px){
   .yp-symbol{width:36px;height:36px}
-  .yp-top{gap:9px!important}
+  .yp-top{gap:4px!important}
 }
 
 
@@ -4522,4 +4527,122 @@ html[data-theme="light"] .cd-item.cd-crowned .cd-num{color:#a37c2a}
 @media (max-width:760px){
   .cd-item.cd-pair .cd-cover{gap:8px}
   .cd-duo{gap:11px}
+}
+
+/* __________________________________________________________________
+   A rail should show that it is a rail
+
+   Both horizontal rows had been cut, by coincidence, almost exactly at
+   a card edge: the honorable mentions fitted 5.00 covers in their 880px
+   and the media row 2.97 cards in its 1086px. A row that ends flush
+   looks like a row that has ended. Nothing invites the scroll.
+
+   So the card width is now a fraction of the rail rather than a fixed
+   number of pixels: five and a half covers, three and two fifths media
+   cards. The last one visible is always cut down the middle, at every
+   width, which is the one signal a reader reads without being told.
+   The count steps down on narrower screens so the cut stays a half card
+   and does not become a sliver.
+
+   The covers lose about 18px of width in the trade and the media cards
+   about 47px, which is the "a little smaller" this was asked for.
+   __________________________________________________________________ */
+
+.cd-extra-list{--peek:5.5}
+@media (max-width:1000px){.cd-extra-list{--peek:4.5}}
+@media (max-width:760px){ .cd-extra-list{--peek:3.5}}
+@media (max-width:560px){ .cd-extra-list{--peek:2.5}}
+
+.cd-extra-list li,
+.ypanel .cd-extra-list li{
+  flex:0 0 calc(100%/var(--peek) - 20px);
+  width:auto}
+.ypanel .cd-extra-list li{flex-basis:calc(100%/var(--peek) - 18px)}
+
+.media-grid.mrail{--peek:3.4}
+@media (max-width:1000px){.media-grid.mrail{--peek:2.4}}
+@media (max-width:700px){ .media-grid.mrail{--peek:1.25}}
+.media-grid.mrail>.media-card{
+  flex:0 0 calc(100%/var(--peek) - 26px)}
+
+/* __________________________________________________________________
+   The year and its emblem move closer together
+
+   The panel header is a flex row - year, emblem, note, close - and one
+   gap value spaced all four, so tightening the year to its emblem also
+   tightened everything else. The gap itself is changed where it is
+   declared, further up; this is only the note buying its distance back,
+   so the row past the emblem keeps the rhythm it had.
+
+   The per-year vertical nudges that centre each emblem against its
+   digits are untouched: those are translateY, this is horizontal, and
+   the two do not meet.
+   __________________________________________________________________ */
+
+.yp-top .yp-note{margin-left:18px!important}
+@media (max-width:900px){
+  .yp-top .yp-note{margin-left:13px!important}
+}
+
+/* __________________________________________________________________
+   The brand mark cut from the mosaic - a test, switched on by a class
+
+   Remove is-tiled from the nav brand and everything below stops
+   applying; the Playfair monogram and the letterspaced name come back
+   untouched. Nothing else in the stylesheet depends on it.
+
+   The name is a crop of the banner itself, tight to the letters with
+   one row of stones left above and below so it reads as a piece of the
+   wall rather than lettering on black. The HM beside it is generated in
+   the same language - dark stones, thin rings, cream letters - with its
+   colours sampled from that same image, so the two match by derivation
+   rather than by eye.
+
+   Both are photographs of tile, so the real text stays in the markup
+   and is only moved out of sight: a screen reader, a search engine and
+   a visitor with images off all still get the name.
+
+   The honest limit is size. The mark is 38px tall and the HM is eleven
+   stones across, which is roughly five pixels a stone - the letters
+   read because the cream is solid and the field is nearly black, not
+   because the shapes are clear. Smaller than this and it is texture.
+   __________________________________________________________________ */
+
+.nav-brand.is-tiled .mono{
+  width:65px;height:38px;
+  border:0;border-radius:5px;
+  background:#101014 url("/images/brand/hm-mosaic.png") center/100% 100% no-repeat;
+  background-image:image-set(url("/images/brand/hm-mosaic.png") 1x,
+                             url("/images/brand/hm-mosaic@2x.png") 2x,
+                             url("/images/brand/hm-mosaic@3x.png") 3x);
+  color:transparent;font-size:0;overflow:hidden}
+.nav-brand.is-tiled:hover .mono{
+  background-color:#101014;transform:translateY(-1px) scale(1.03)}
+
+/* 28px tall puts the strip at 180px wide, against the 165px the
+   letterspaced name used to take. The nav keeps roughly the rhythm it
+   had rather than the brand growing into the links. */
+.nav-brand.is-tiled .brand-name{
+  width:181px;height:28px;
+  background:url("/images/brand/name-mosaic.jpg") center/100% 100% no-repeat;
+  background-image:image-set(url("/images/brand/name-mosaic.jpg") 1x,
+                             url("/images/brand/name-mosaic@2x.jpg") 2x,
+                             url("/images/brand/name-mosaic@3x.jpg") 3x);
+  color:transparent;font-size:0;text-indent:-9999px;overflow:hidden}
+
+/* The wall is nearly black, and on the light page a black slab in the
+   corner is a hole rather than a mark. It keeps its stones but sits on
+   a warm ground and is lifted slightly, so it reads as an inlay. */
+html[data-theme="light"] .nav-brand.is-tiled .mono,
+html[data-theme="light"] .nav-brand.is-tiled .brand-name{
+  filter:brightness(1.12) contrast(1.04);
+  box-shadow:0 0 0 1px rgba(14,11,7,.10)}
+html[data-theme="light"] .nav-brand.is-tiled .brand-name{border-radius:3px}
+
+/* The strip goes before it can crowd the links. The tiled mark is wider
+   than the circle it replaces, so this happens earlier than the 760px
+   the text name could hold out to. */
+@media (max-width:900px){
+  .nav-brand.is-tiled .brand-name{display:none}
+  .nav-brand.is-tiled .mono{width:56px;height:33px}
 }
