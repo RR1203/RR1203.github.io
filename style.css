@@ -4784,28 +4784,113 @@ html[data-theme="light"] .cd-item.cd-pair .cd-jacket + .cd-jacket{
 }
 
 /* __________________________________________________________________
-   The date and the entry beside it sit on one line
+   The phone layout, and only the phone layout
 
-   Measured across all five entries under Medical studies, the date's
-   baseline sat exactly 4px above the title's - the same 4px on every
-   row, so it read as a systematic tilt rather than as noise. The
-   padding that was meant to settle it was 4px short. Eight lands it.
+   Everything in this block was asked for under the heading "mobile
+   version" and was, at the first attempt, written without a breakpoint
+   - so it changed the desktop page too. It is all gathered here now
+   behind one 760px query. Above that width the page is exactly what it
+   was: two columns in the clinic, five photographs in a row, the
+   heroes' name and role and gloss on one baseline, the portrait a
+   hover reward, and the browser wrapping text as it always did.
+
+   760 rather than 900 so a tablet in portrait still gets the wide
+   layout; the phone is what this is for.
    __________________________________________________________________ */
 
-.cv-points .pt-when{padding-top:8px}
-@media (max-width:680px){
-  /* stacked on a phone, so there is no second baseline to meet */
-  .cv-points .pt-when{padding-top:0}
+@media (max-width:760px){
+
+  /* -- the date beside each CV entry sits on the title's line ------
+     Measured across the entries under Medical studies the date's
+     baseline sat 4px above the title's, the same 4px every row, which
+     read as a tilt rather than as noise. Where the two stack (below
+     680px) there is no second baseline to meet, so the nudge is only
+     wanted in the band where they are still side by side. */
+  .cv-points .pt-when{padding-top:8px}
+
+  /* -- five photographs, three over two, the two between the three --
+     A row of five made every picture small. Three and two reads
+     better, but two left-aligned under three leaves a gap at the right
+     that looks like a missing photograph. Six columns wide with every
+     picture spanning two lets the fourth and fifth start at columns
+     two and four, centred under the gaps above them. Six pictures are
+     simply two rows of three and need no such trick. */
+  .cv-pix[data-cols="5"]{grid-template-columns:repeat(6,1fr)}
+  .cv-pix[data-cols="5"] .pix{grid-column:span 2}
+  .cv-pix[data-cols="5"] .pix:nth-child(4){grid-column:2/span 2}
+  .cv-pix[data-cols="5"] .pix:nth-child(5){grid-column:4/span 2}
+  .cv-pix[data-cols="6"]{grid-template-columns:repeat(3,1fr)}
+
+  /* -- the three things about the clinic, one under the other ------
+     On a phone there is only room for one column, and the three read
+     as three when they are evenly spaced rather than crowded. */
+  .credo-list{grid-template-columns:minmax(0,1fr);gap:22px}
+
+  /* -- lines break where a reader would break them -----------------
+     Rather than hand-placing a <br> in each sentence that happened to
+     split badly, which only moves the problem to the next width, the
+     browser is asked: pretty keeps a single word off the last line,
+     balance evens out short headings. Engines that do not know the
+     keywords ignore them. */
+  p,li,figcaption,dd,blockquote,
+  .cd-title,.cd-author,.cd-extra-book,.cd-extra-by,
+  .ih-for,.ih-note,.credo-list span,.hb-note{text-wrap:pretty}
+  h1,h2,h3,h4,.hero-lede,.credo-lead,.section-lead,
+  .cd-take,.yp-note,.focus-label,.ih-name,.credo-list b{text-wrap:balance}
+
+  /* -- a hero ranked rather than queued ----------------------------
+     Name, small-caps role and gloss used to sit on one baseline, so a
+     long gloss pushed the line wide and the eye had to sort out which
+     of the three it was reading - worst on a phone, where the line
+     wraps three times. The name takes its own line, the role and gloss
+     share the next as one subordinate line, and what I learned sits
+     below both, clear of the portrait rather than starting under it.
+     The dot only appears when there is a gloss to separate. */
+  .ih-line{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr);
+    column-gap:13px;
+    row-gap:3px;
+    align-items:center}
+  .ih-line .ih-face{grid-column:1;grid-row:1/span 2;align-self:center}
+  .ih-name{grid-column:2;grid-row:1;font-size:1.06rem;line-height:1.25}
+  .ih-sub{
+    grid-column:2;grid-row:2;
+    display:flex;flex-wrap:wrap;align-items:baseline;
+    column-gap:9px;row-gap:2px}
+  .ih-sub .ih-for::before{content:"\00b7";margin-right:9px;opacity:.5}
+  .heroes>li{gap:9px}
+  .ih-note{padding-left:53px;max-width:64ch}
+
+  /* -- one portrait at a time, chosen by where the page is scrolled -
+     A line is held across the middle of the window and whichever hero
+     it falls on is the one whose face is showing; scroll on and that
+     one fades as the next takes its place. The picture keeps its slot
+     in the line whether it is showing or not, so nothing shifts as
+     they hand over.
+
+     The class comes from the script, so with no JavaScript every face
+     simply stays visible as it did before rather than all of them
+     going dark. */
+  .heroes.is-scrollfaces>li .ih-face{
+    opacity:0;
+    transition:opacity .32s ease}
+  .heroes.is-scrollfaces>li.is-lit .ih-face,
+  .heroes.is-scrollfaces>li:focus-within .ih-face{opacity:1}
+}
+
+@media (max-width:420px){
+  .ih-line{column-gap:11px}
+  .ih-note{padding-left:51px}
 }
 
 /* __________________________________________________________________
-   Three buttons, one row, on a phone too
+   Three buttons, one row, on a phone
 
-   flex-wrap let the third button drop to a line of its own, which put
-   Download CV under Get in touch and left a hole beside it. They stay
-   in one row now and give up horizontal padding instead - measured at
-   390px the three come to 338px of the 346px available, which fits
-   without shrinking the type.
+   flex-wrap let the third drop to a line of its own, which put Download
+   CV under Get in touch and left a hole beside it. They stay in one row
+   and give up horizontal padding instead - measured at 390px the three
+   come to 333px of the 346px available, so the type does not shrink.
    __________________________________________________________________ */
 
 @media (max-width:620px){
@@ -4822,151 +4907,59 @@ html[data-theme="light"] .cd-item.cd-pair .cd-jacket + .cd-jacket{
 }
 
 /* __________________________________________________________________
-   Five photographs sit three over two, and the two sit between
+   Two books in one slot of a mentions row
 
-   A row of five put every picture on one line and made each of them
-   small. Three and two reads better, but two left-aligned under three
-   leaves a gap at the right that looks like a missing photograph. The
-   grid is therefore six columns wide with every picture spanning two,
-   so the fourth and fifth can start at columns two and four - centred
-   under the gaps between the three above them.
+   The same idea as the pair card in the countdown, at a tenth of the
+   size: two jackets leaning inside the width of one, so an entry that
+   covers two books still occupies one place in the row and the row
+   still counts to five.
 
-   Six is simply two rows of three, which needs no such trick.
+   The covers are stacked with position rather than with a flex overlap,
+   because these tiles are only about 130px wide and the negative
+   margin trick that works at 250px leaves nothing of the book behind.
+   The one in front is inset from the top-left; the one behind shows its
+   spine edge above and to the left of it.
+
+   Both titles are listed and the author is named once - they are the
+   same author, which is the reason the two are together at all.
    __________________________________________________________________ */
 
-.cv-pix[data-cols="5"]{
-  grid-template-columns:repeat(6,1fr);
-  max-width:440px}
-.cv-pix[data-cols="5"] .pix{grid-column:span 2}
-.cv-pix[data-cols="5"] .pix:nth-child(4){grid-column:2/span 2}
-.cv-pix[data-cols="5"] .pix:nth-child(5){grid-column:4/span 2}
+.cd-extra-list li.xp-pair{position:relative}
+.cd-extra-cover.xp-two{
+  position:relative;
+  display:block;
+  aspect-ratio:1/1.42;
+  border:0;
+  background:none;
+  box-shadow:none;
+  overflow:visible}
+.cd-extra-cover.xp-two img{
+  position:absolute;
+  width:82%;
+  height:auto;
+  border-radius:3px;
+  border:1px solid rgba(var(--ink),.14);
+  object-fit:cover}
+.cd-extra-cover.xp-two img:first-child{
+  top:0;left:0;
+  z-index:1;
+  filter:brightness(.82)}
+.cd-extra-cover.xp-two img:last-child{
+  bottom:0;right:0;
+  z-index:2;
+  box-shadow:-7px 7px 16px rgba(0,0,0,.5)}
+html[data-theme="light"] .cd-extra-cover.xp-two img:last-child{
+  box-shadow:-5px 5px 12px rgba(14,11,7,.26)}
 
-.cv-pix[data-cols="6"]{
-  grid-template-columns:repeat(3,1fr);
-  max-width:440px}
-
-/* __________________________________________________________________
-   Three things about the clinic, in three columns
-
-   Two columns and three items gives two on top and one below with a
-   hole beside it, which reads as an unfinished list rather than as a
-   set of three. Three columns says three.
-   __________________________________________________________________ */
-
-.credo-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 34px}
-@media (max-width:900px){
-  .credo-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 30px}
-  /* the odd one out spans both columns rather than sitting in half of
-     one with air beside it */
-  .credo-list li:last-child:nth-child(odd){grid-column:1/-1}
-}
-@media (max-width:620px){
-  .credo-list{grid-template-columns:minmax(0,1fr);gap:20px}
-  .credo-list li:last-child:nth-child(odd){grid-column:auto}
-}
-
-/* __________________________________________________________________
-   Lines break where a reader would break them
-
-   Rather than hand-placing a <br> in each sentence that happened to
-   split badly at one particular width - which only moves the problem to
-   the next width - the browser is asked to do it. text-wrap:pretty
-   tells it to look at the whole paragraph and avoid leaving one word
-   stranded on the last line; balance evens out short headings and leads
-   so they do not go long-long-short.
-
-   Engines that do not know these keywords ignore them and wrap as they
-   did before, so there is nothing to fall back to.
-   __________________________________________________________________ */
-
-p,li,figcaption,dd,blockquote,
-.cd-title,.cd-author,.cd-extra-book,.cd-extra-by,
-.ih-for,.ih-note,.credo-list span,.hb-note{
-  text-wrap:pretty}
-
-h1,h2,h3,h4,.hero-lede,.credo-lead,.section-lead,
-.cd-take,.yp-note,.focus-label,.ih-name,.credo-list b{
-  text-wrap:balance}
-
-/* __________________________________________________________________
-   The heroes: a name, then what they were, then what I took from them
-
-   The three pieces used to sit on one baseline - name, then the small
-   caps role, then the gloss - so a long gloss pushed the whole line
-   wide and the eye had to sort out which of the three it was reading.
-   They are ranked now instead of queued: the name alone on its line,
-   the role and the gloss together underneath it as one quiet
-   subordinate line, and what I learned below both, indented to the same
-   left edge as the name rather than to the portrait.
-
-   The dot between role and gloss only appears when there is a gloss to
-   separate, so the entries that carry only a role do not end in a
-   floating punctuation mark.
-   __________________________________________________________________ */
-
-.ih-line{
-  display:grid;
-  grid-template-columns:auto minmax(0,1fr);
-  column-gap:14px;
-  row-gap:3px;
-  align-items:center}
-.ih-line .ih-face{grid-column:1;grid-row:1/span 2;align-self:center}
-.ih-name{grid-column:2;grid-row:1;font-size:1.12rem;line-height:1.25}
-.ih-sub{
-  grid-column:2;grid-row:2;
-  display:flex;flex-wrap:wrap;align-items:baseline;
-  column-gap:9px;row-gap:2px}
-.ih-sub .ih-for::before{
-  content:"\00b7";
-  margin-right:9px;
-  opacity:.5}
-.heroes>li{gap:9px}
-.ih-note{max-width:64ch}
-
-/* On the narrow layouts the portrait stands in the line itself, so the
-   sentence underneath is pushed clear of it and lines up with the name
-   instead of starting under the picture. */
-@media (hover:none),(pointer:coarse),(max-width:1120px){
-  .ih-note{padding-left:54px}
-}
-@media (max-width:420px){
-  .ih-line{column-gap:11px}
-  .ih-note{padding-left:51px}
-  .ih-name{font-size:1.04rem}
-}
-
-/* __________________________________________________________________
-   One portrait at a time, chosen by where the page is scrolled
-
-   The face used to be a hover reward, which meant it never appeared for
-   anyone reading rather than pointing. A line is now drawn across the
-   middle of the window and whichever hero it falls on is the one whose
-   portrait hangs in the margin; scroll on and that one fades as the
-   next takes its place. The band is 1% of the viewport tall against
-   rows of about ninety pixels, so it is inside exactly one entry
-   except for the moment it crosses a border, where the two cross-fade.
-
-   Only on the wide layout. Below 1120px the portrait already stands in
-   the line at all times and there is nothing to reveal.
-   __________________________________________________________________ */
-
-@media (min-width:1121px) and (hover:hover) and (pointer:fine){
-  .heroes{padding-left:114px}
-  .heroes>li{min-height:104px;display:grid;align-content:center}
-  /* The portrait is out of flow here, so its grid column would be an
-     empty 0-wide track with the gap still after it - which set the name
-     14px right of the sentence below it. One column, no gap, and the
-     three lines share a left edge. */
-  .ih-line{grid-template-columns:minmax(0,1fr);column-gap:0}
-  .ih-name,.ih-sub{grid-column:1}
-  .ih-face{
-    right:auto;left:-114px;
-    top:50%;
-    width:96px;
-    transform:translateY(-50%) translateX(-10px)}
-  .heroes>li.is-lit .ih-face,
-  .heroes>li:hover .ih-face,
-  .heroes>li:focus-within .ih-face{
-    opacity:1;
-    transform:translateY(-50%)}
-}
+.xp-label{
+  display:block;
+  margin-top:9px;
+  font-size:9.5px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent);
+  opacity:.85}
+.cd-extra-list li.xp-pair .cd-extra-book + .cd-extra-book{
+  margin-top:5px;
+  padding-top:5px;
+  border-top:1px solid rgba(var(--ink),.13)}
