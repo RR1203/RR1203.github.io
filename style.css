@@ -4963,3 +4963,253 @@ html[data-theme="light"] .cd-extra-cover.xp-two img:last-child{
   margin-top:5px;
   padding-top:5px;
   border-top:1px solid rgba(var(--ink),.13)}
+
+/* __________________________________________________________________
+   The year pages read downwards, and the books grow as they climb
+
+   The countdown put one card on screen and asked for fifteen presses of
+   an arrow to see a year. The same books now run down the page in three
+   registers, and the size is the ranking: the mentions small and three
+   to a row, the 15-11 band one to a row and half again as large, the
+   ten larger still with the note beside the jacket rather than under
+   it. Nothing has to be clicked to be read.
+
+   A row of years sits at the top so one list leads to the next without
+   going back through the front page, and the back arrow returns to
+   whatever was being read before - see the script on those pages.
+   __________________________________________________________________ */
+
+.yv-bar{
+  display:flex;align-items:center;flex-wrap:wrap;gap:12px 18px;
+  margin:0 0 34px;padding-bottom:14px;
+  border-bottom:1px solid var(--hair)}
+.yv-back{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  padding:7px 13px;border:1px solid var(--card-border);border-radius:99px;
+  transition:color .25s ease,border-color .25s ease}
+.yv-back:hover{color:var(--accent);border-color:rgba(var(--accentc),.5)}
+.yv-back span{transition:transform .25s ease}
+.yv-back:hover span{transform:translateX(-3px)}
+
+.yv-years{
+  list-style:none;margin:0;padding:0;margin-left:auto;
+  display:flex;flex-wrap:wrap;gap:6px}
+.yv-years a{
+  display:block;padding:6px 11px;border-radius:99px;
+  font-size:13px;letter-spacing:.06em;
+  color:var(--muted);text-decoration:none;
+  border:1px solid transparent;
+  transition:color .22s ease,background .22s ease,border-color .22s ease}
+.yv-years a:hover{color:var(--accent);background:rgba(var(--ink),.06)}
+.yv-years a[aria-current="page"]{
+  color:var(--accent);
+  border-color:rgba(var(--accentc),.45);
+  background:rgba(var(--accentc),.1)}
+
+.yv-block{margin:0 0 62px}
+.yv-h{
+  margin:0 0 6px;
+  font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);font-weight:400;font-family:inherit}
+.yv-note{margin:0 0 22px;font-size:13.5px;color:var(--muted);opacity:.75}
+.yv-block .yv-h + .yv-grid,
+.yv-block .yv-h + .yv-rows,
+.yv-block .yv-h + .yv-ten{margin-top:22px}
+
+.yv-t{margin:0;font-size:16px;line-height:1.35;color:var(--text)}
+.yv-a{margin:5px 0 0;font-size:11.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted);opacity:.8}
+.yv-two{margin:0 0 7px;font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);opacity:.9}
+.yv-take{margin:14px 0 0;font-size:15.5px;line-height:1.65;color:var(--muted);
+  max-width:56ch}
+.yv-take.is-placeholder{opacity:.45;font-style:italic}
+
+/* -- honorable mentions: three to a row, and they turn over --------- */
+.yv-grid{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:30px 26px}
+.yv-card{margin:0}
+.yv-card .yv-t{font-size:14.5px;margin-top:12px}
+.yv-card .yv-a{font-size:10.5px}
+
+.yv-flip{
+  display:block;width:100%;padding:0;border:0;background:none;
+  cursor:pointer;font:inherit;color:inherit;
+  perspective:1200px;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.yv-flip:hover,.yv-flip:focus-visible{transform:scale(1.055)}
+.yv-flip:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+
+.yv-inner{
+  position:relative;display:block;
+  aspect-ratio:1/1.48;
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.yv-front,.yv-back{
+  position:absolute;inset:0;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:5px;overflow:hidden}
+.yv-front{
+  background:#0d1c30;
+  box-shadow:0 14px 30px rgba(2,8,18,.5)}
+.yv-front img{width:100%;height:100%;object-fit:cover;display:block}
+.yv-back{
+  transform:rotateY(180deg);
+  display:flex;flex-direction:column;gap:10px;
+  padding:16px 15px;text-align:left;
+  background:linear-gradient(160deg,rgba(var(--accentc),.13),rgba(var(--ink),.05));
+  border:1px solid rgba(var(--accentc),.3);
+  box-shadow:0 14px 30px rgba(2,8,18,.5)}
+.yv-back-t{
+  font-size:12px;line-height:1.35;color:var(--accent);
+  letter-spacing:.02em}
+.yv-desc{font-size:12.5px;line-height:1.55;color:var(--text);overflow:hidden}
+.yv-desc.is-placeholder{opacity:.5;font-style:italic}
+
+/* Turned by a click. Once one has been turned the deck is "open", and
+   from then on moving onto another cover turns that one too - so the
+   reader who wants the descriptions can simply run along the row
+   instead of clicking each. */
+.yv-card.is-flipped .yv-inner{transform:rotateY(180deg)}
+.yv-grid.is-open .yv-card:hover .yv-inner,
+.yv-grid.is-open .yv-card:focus-within .yv-inner{transform:rotateY(180deg)}
+.yv-grid.is-open .yv-card.is-flipped:hover .yv-inner{transform:rotateY(360deg)}
+
+@media (prefers-reduced-motion:reduce){
+  .yv-inner,.yv-flip{transition:none}
+}
+
+/* -- the 15-11 band: one to a row, larger ---------------------------- */
+.yv-rows,.yv-ten{list-style:none;margin:0;padding:0}
+.yv-row{
+  display:grid;grid-template-columns:132px minmax(0,1fr);
+  gap:26px;align-items:center;
+  padding:20px 0;border-top:1px solid var(--hair)}
+.yv-row:first-child{border-top:0;padding-top:4px}
+.yv-row .yv-t{font-size:18px}
+
+/* -- the ten: larger again, the note beside the jacket --------------- */
+.yv-big{
+  display:grid;
+  grid-template-columns:74px 188px minmax(0,1fr);
+  gap:30px;align-items:start;
+  padding:34px 0;border-top:1px solid var(--hair)}
+.yv-big:first-child{border-top:0}
+.yv-big .yv-t{font-size:23px;line-height:1.3;font-family:'Playfair Display',Georgia,serif}
+.yv-num{margin:0;text-align:right;padding-top:4px}
+.yv-no{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);opacity:.6}
+.yv-num b{
+  display:block;margin-top:2px;
+  font-family:'Playfair Display',Georgia,serif;font-weight:400;
+  font-size:52px;line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(var(--accentc),.55)}
+.yv-big[data-rank="1"] .yv-num b{-webkit-text-stroke-color:rgba(212,175,55,.85)}
+.yv-big[data-rank="2"] .yv-num b{-webkit-text-stroke-color:rgba(196,202,212,.8)}
+.yv-big[data-rank="3"] .yv-num b{-webkit-text-stroke-color:rgba(176,132,90,.85)}
+
+.yv-jacket{display:block;position:relative}
+.yv-jacket img{
+  display:block;width:100%;height:auto;border-radius:4px;
+  border:1px solid rgba(var(--ink),.14);
+  box-shadow:0 14px 32px rgba(2,8,18,.45)}
+html[data-theme="light"] .yv-jacket img{box-shadow:0 10px 24px rgba(14,11,7,.2)}
+
+/* two books in one place lean, exactly as they do on the front page */
+.yv-pair .yv-jacket,
+.yv-pair .yv-front{display:flex;flex-direction:row;align-items:flex-start}
+.yv-pair .yv-jacket img{width:62%}
+.yv-pair .yv-jacket img + img{
+  margin-left:-24%;margin-top:16px;position:relative;z-index:2;
+  box-shadow:-9px 9px 22px rgba(0,0,0,.5)}
+.yv-pair .yv-front img{width:62%;height:auto;align-self:flex-start}
+.yv-pair .yv-front img + img{margin-left:-24%;margin-top:14px;z-index:2}
+
+@media (max-width:900px){
+  .yv-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 18px}
+  .yv-big{grid-template-columns:56px 148px minmax(0,1fr);gap:20px}
+  .yv-big .yv-t{font-size:20px}
+  .yv-num b{font-size:40px}
+  .yv-row{grid-template-columns:108px minmax(0,1fr);gap:20px}
+}
+@media (max-width:620px){
+  /* three to a row is what was asked for and it survives here: the
+     covers get small but they are a contact sheet at this point, and
+     the title under each still reads. The ten drop the number into the
+     text column so the jacket keeps its width. */
+  .yv-grid{gap:20px 12px}
+  .yv-card .yv-t{font-size:12.5px}
+  .yv-card .yv-a{font-size:9.5px;letter-spacing:.1em}
+  .yv-back{padding:11px 10px;gap:6px}
+  .yv-back-t{font-size:10px}
+  .yv-desc{font-size:10.5px;line-height:1.45}
+  .yv-row{grid-template-columns:92px minmax(0,1fr);gap:16px;padding:16px 0}
+  .yv-row .yv-t{font-size:16px}
+  .yv-big{grid-template-columns:112px minmax(0,1fr);gap:18px;padding:26px 0}
+  .yv-big .yv-num{grid-column:1/-1;text-align:left;display:flex;align-items:baseline;gap:9px;padding:0}
+  .yv-num b{font-size:30px;margin-top:0}
+  .yv-no{font-size:9.5px}
+  .yv-big .yv-t{font-size:18px}
+  .yv-take{font-size:14.5px;margin-top:11px}
+  .yv-years{margin-left:0}
+  .yv-bar{gap:10px}
+}
+
+/* __________________________________________________________________
+   Corrections to the year page, found by looking at it
+
+   Two things the first pass got wrong.
+
+   The heading lost. `.simple-main h2` and `main > section > h2` both
+   beat a single class, so the small accent label rendered as a 23px
+   Playfair heading and picked up the numbered-section counter with it -
+   "01 Honorable mentions". Raising the selector by one element settles
+   both, and the counter is switched off by name rather than by hoping
+   the section never matches.
+
+   And the sizes ran backwards. Three mentions across the full measure
+   made those covers 345px wide, against 188px for the top ten - so the
+   least important books were the largest thing on the page, which is
+   the opposite of what the order is for. The mentions are now held to a
+   narrow measure so three of them come to about 155px, the band sits at
+   190 and the ten at 250. Small, bigger, biggest, as one reads down.
+   __________________________________________________________________ */
+
+.yv-block h2.yv-h{
+  font-family:inherit;
+  font-size:12.5px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:400;
+  margin:0 0 6px}
+.yv-block h2.yv-h::before{content:none}
+.yv-block h2.yv-h + .h2-rule{display:none}
+
+.yv-grid{max-width:530px}
+.yv-row{grid-template-columns:190px minmax(0,1fr)}
+.yv-big{grid-template-columns:74px 250px minmax(0,1fr)}
+
+@media (max-width:900px){
+  .yv-grid{max-width:460px}
+  .yv-row{grid-template-columns:150px minmax(0,1fr)}
+  .yv-big{grid-template-columns:56px 190px minmax(0,1fr)}
+}
+@media (max-width:620px){
+  /* the measure is the screen by now, so the cap comes off and the
+     three-across grid simply fills it */
+  .yv-grid{max-width:none}
+  .yv-row{grid-template-columns:104px minmax(0,1fr)}
+  .yv-big{grid-template-columns:132px minmax(0,1fr)}
+}
+
+/* Two titles on one card run together otherwise - they are the same
+   size, the same colour and one line apart, so the eye reads them as a
+   single long title rather than as two books. */
+.yv-pair .yv-t + .yv-t{
+  margin-top:7px;padding-top:7px;
+  border-top:1px solid rgba(var(--ink),.14)}
