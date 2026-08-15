@@ -5355,46 +5355,58 @@ html[data-theme="light"] .yv-float{
 }
 
 /* __________________________________________________________________
-   A hero note that opens
+   A hero note that opens when you click the person
 
-   Some of these notes want two sentences and some want ten, and a wall
-   of ten-sentence paragraphs would bury the names that are the point of
-   the list. So a note may carry a lead and a rest: the lead always
-   shows, the rest opens on a click, the same bargain the covers on the
-   year pages make.
+   Some of these notes will want two sentences and some will want ten,
+   and a wall of ten-sentence paragraphs would bury the names that are
+   the point of the list. So a note may carry a lead and a rest: the
+   lead always shows, and clicking anywhere on the entry opens the rest.
+   Clicking it again closes it.
 
-   The button is only written into the notes that have more to give, so
-   a two-sentence note shows nothing to press and reads as finished
-   rather than as truncated. And the rest is in the markup, not fetched
-   or generated - it is in the page for a reader with no JavaScript, for
-   a search engine, and for anyone who prints it.
+   The whole entry is the target rather than a small button at the end
+   of the line - that is a much larger thing to hit, which matters most
+   on a phone, and it means the gesture is the same one the reader
+   already makes to look at somebody: point at the person, not at a
+   control beside them.
+
+   Three things keep that honest. Only an entry that has more to say
+   becomes clickable, so nothing invites a press that does nothing. The
+   chevron says which way the next click goes, rather than leaving the
+   reader to discover the entry is live. And the fold itself is switched
+   on by a class the script adds, so with no JavaScript every note simply
+   shows in full - unreadable-because-hidden is the one failure this must
+   not have.
    __________________________________________________________________ */
 
-.ih-rest{display:none}
-.heroes>li.is-open .ih-rest{display:inline}
+.heroes.is-foldable .ih-rest{display:none}
+.heroes.is-foldable > li.is-open .ih-rest{display:inline}
 
-.ih-more{
-  display:inline-flex;align-items:baseline;gap:6px;
-  margin-left:9px;padding:0;
-  border:0;background:none;cursor:pointer;
-  font-family:inherit;font-size:.86em;font-style:normal;
-  letter-spacing:.02em;
-  color:var(--accent);
-  white-space:nowrap;
-  transition:opacity .2s ease}
-.ih-more:hover{opacity:.72}
-.ih-more:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
-.ih-more i{font-style:normal;transition:transform .25s ease;display:inline-block}
-.ih-more:hover i{transform:translateX(3px)}
-.heroes>li.is-open .ih-more i{transform:rotate(90deg)}
-.heroes>li.is-open .ih-more:hover i{transform:rotate(90deg) translateX(3px)}
+.heroes.is-foldable > li.can-open{cursor:pointer}
+.heroes.is-foldable > li.can-open:focus-visible{
+  outline:2px solid var(--accent);outline-offset:6px;border-radius:8px}
 
-/* the note that has been opened is the one being read, so it keeps its
-   full colour while the placeholder notes around it stay faint */
-.heroes>li.is-open .ih-note{color:var(--text)}
+/* the chevron sits at the end of the note and turns over when it opens */
+.heroes.is-foldable > li.can-open .ih-note::after{
+  content:"";
+  display:inline-block;
+  width:6px;height:6px;
+  margin-left:11px;
+  vertical-align:middle;
+  border-right:1.5px solid var(--accent);
+  border-bottom:1.5px solid var(--accent);
+  transform:translateY(-2px) rotate(45deg);
+  transition:transform .28s cubic-bezier(.2,.7,.2,1),opacity .2s ease;
+  opacity:.8}
+.heroes.is-foldable > li.can-open:hover .ih-note::after{opacity:1}
+.heroes.is-foldable > li.is-open .ih-note::after{
+  transform:translateY(1px) rotate(-135deg)}
+
+/* an opened note is the one being read, so it keeps its full colour
+   while the placeholders around it stay faint */
+.heroes.is-foldable > li.is-open .ih-note{color:var(--text)}
 
 @media (prefers-reduced-motion:reduce){
-  .ih-more i,.ih-more{transition:none}
+  .heroes.is-foldable > li.can-open .ih-note::after{transition:none}
 }
 
 /* __________________________________________________________________
