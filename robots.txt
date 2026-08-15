@@ -1,3 +1,12 @@
+# hannes-meilicke.com
+#
+# Crawling is allowed on purpose while the site is still being written.
+# Every page carries a noindex tag, and a crawler has to be able to fetch
+# a page to see that tag - disallowing it here would hide the instruction
+# and the pages could end up indexed from links alone. Allow the visit,
+# refuse the listing. On launch day the noindex tags come off and this
+# file does not have to change.
+
 User-agent: *
 Allow: /
 

@@ -113,6 +113,8 @@
     <a class="btn btn-primary" href="/site.html#contact">Get in touch</a>
   </div>
 
+
+  <a class="yv-float" href="/site.html#reading" data-yv-back aria-label="Back to the wall of years"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6"/></svg>Back to the books</a>
 </main>
 
 <footer>
@@ -121,6 +123,7 @@
     <div class="foot-links">
       <a href="/site.html">Home</a>
       <a href="/site.html#writing">Writing</a>
+      <a href="/credits.html">Credits</a>
       <a href="/impressum.html">Impressum</a>
       <a href="/datenschutz.html">Datenschutz</a>
     </div>
@@ -237,6 +240,31 @@
           history.back();
         });
       }
+    }
+  }());
+  </script>
+
+  <!-- The button appears once the reader is past the first screen and
+       goes where the arrow at the top goes: back through history if
+       they came from this site, so the year panel they opened is still
+       open, and to the reading wall if they arrived cold. -->
+  <script>
+  (function () {
+    var f = document.querySelector(".yv-float");
+    if (!f) { return; }
+    var queued = false;
+    function tick() {
+      queued = false;
+      f.classList.toggle("is-up", window.scrollY > window.innerHeight * 0.6);
+    }
+    window.addEventListener("scroll", function () {
+      if (queued) { return; }
+      queued = true;
+      window.requestAnimationFrame(tick);
+    }, { passive: true });
+    tick();
+    if (document.referrer && document.referrer.indexOf(location.origin) === 0 && history.length > 1) {
+      f.addEventListener("click", function (ev) { ev.preventDefault(); history.back(); });
     }
   }());
   </script>

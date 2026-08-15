@@ -978,6 +978,19 @@
       <div class="mrail-wrap">
       <div class="media-grid mrail">
 
+      <a class="media-card" href="writing/books-2025.html">
+        <figure class="media-thumb has-pic" data-mark="HM">
+          <img src="images/writing-reading-lists.jpg" alt="" loading="lazy" onerror="this.style.display='none'" onload="this.closest('.media-thumb').classList.add('has-pic')">
+        </figure>
+        <span class="media-kind">Reading notes</span>
+        <div class="media-body">
+          <p class="media-date">2018 &ndash; 2025, kept up</p>
+          <h3>The books that mattered most, year by year</h3>
+          <p class="media-excerpt">Eight years of reading, counted down from the honorable mentions to number one, with what each one changed. Starts at 2025 and runs back to a childhood in Heilbronn.</p>
+          <span class="media-cue">Read<i aria-hidden="true">&rarr;</i></span>
+        </div>
+      </a>
+
       <a class="media-card" href="writing/example-essay.html">
         <figure class="media-thumb" data-mark="HM">
           <img src="images/writing-1.jpg" alt="" loading="lazy" onerror="this.style.display='none'" onload="this.closest('.media-thumb').classList.add('has-pic')">
@@ -1363,6 +1376,7 @@
       <a href="https://www.linkedin.com/in/hannes-meilicke-2099ba257/" target="_blank" rel="me noopener">LinkedIn</a>
       <a href="#contact">Message</a>
       <a href="#writing">Writing</a>
+      <a href="/credits.html">Credits</a>
       <a href="/impressum.html">Impressum</a>
       <a href="/datenschutz.html">Datenschutz</a>
       <a href="#home">Back to top</a>
@@ -1946,15 +1960,11 @@
       t.addEventListener("click", function (e) { e.stopPropagation(); step(k); });
     });
 
-    /* The book itself is the step forward. */
-    var stage = cd.querySelector(".cd-stage");
-    if (stage) {
-      stage.addEventListener("click", function (e) {
-        /* The second half of a double click must not count twice. */
-        if (e.detail > 1) { return; }
-        step(at + 1);
-      });
-    }
+    /* Clicking a book does nothing. It used to step the countdown on,
+       which meant that reaching for a cover to look at it took it away.
+       The arrows, the ticks, the arrow keys and a swipe all still move
+       between cards; the card itself is now something to read, not a
+       button in disguise. */
     var x0 = null, y0 = null;
     cd.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
     cd.addEventListener("touchend", function (e) {

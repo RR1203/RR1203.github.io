@@ -5296,3 +5296,60 @@ html[data-theme="light"] .yv-jacket img{box-shadow:0 10px 24px rgba(14,11,7,.2)}
 @media (max-width:620px){
   .yv-card p.yv-say{font-size:11px;line-height:1.45;margin-top:7px}
 }
+
+
+/* __________________________________________________________________
+   The crown, and a way back, on the pages that read downwards
+
+   The childhood page keeps its joke - every entry is number one, so
+   every entry is crowned. The mark is the same drawing the countdown
+   used, hung over the jacket rather than over a card.
+
+   And a small button follows the reader down. These pages are long now
+   that they scroll instead of stepping, and the way back to the wall of
+   years was at the very top; it is always within reach instead. It
+   goes where the reader came from when that was this site, and to the
+   reading wall otherwise - the same rule as the arrow at the top.
+   __________________________________________________________________ */
+
+.yv-big.yv-crowned .yv-jacket{position:relative}
+.yv-big.yv-crowned .yv-jacket::before{
+  content:"";position:absolute;
+  left:50%;top:-28px;width:56px;height:25px;transform:translateX(-50%);
+  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2060%2030%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.5%22%20stroke-width%3D%221%22%20transform%3D%22translate(1.2%201.7)%22%3E%3Cpath%20d%3D%22M8%2025%20C7%2019%206.4%2013%206%207.6%20C10.6%2012.4%2014.2%2016%2017.8%2019.6%20C21.6%2014%2025.6%208.4%2029.6%202.8%20C33.6%208.4%2037.6%2014%2041.4%2019.6%20C45%2016%2048.6%2012.4%2053.2%207.6%20C52.8%2013%2052.2%2019%2051.2%2025%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%2025%20C7%2019%206.4%2013%206%207.6%20C10.6%2012.4%2014.2%2016%2017.8%2019.6%20C21.6%2014%2025.6%208.4%2029.6%202.8%20C33.6%208.4%2037.6%2014%2041.4%2019.6%20C45%2016%2048.6%2012.4%2053.2%207.6%20C52.8%2013%2052.2%2019%2051.2%2025%22%2F%3E%3Cpath%20d%3D%22M8%2025%20C20%2027.6%2040%2027.6%2051.2%2024.3%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%227.2%22%20r%3D%221.8%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2229.6%22%20cy%3D%222.4%22%20r%3D%222%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2253.2%22%20cy%3D%227.2%22%20r%3D%221.8%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;
+  pointer-events:none}
+.yv-big.yv-crowned .yv-num b{-webkit-text-stroke-color:rgba(217,180,85,.9)}
+
+.yv-float{
+  position:fixed;left:50%;bottom:22px;transform:translate(-50%,14px);
+  z-index:60;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:11px 20px;border-radius:99px;
+  font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  text-decoration:none;
+  color:var(--text);
+  background:rgba(var(--ink),.10);
+  border:1px solid rgba(var(--ink),.18);
+  backdrop-filter:saturate(140%) blur(12px);
+  -webkit-backdrop-filter:saturate(140%) blur(12px);
+  box-shadow:0 12px 30px rgba(2,8,18,.45);
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease,transform .3s cubic-bezier(.2,.7,.2,1),
+             border-color .25s ease,color .25s ease}
+.yv-float.is-up{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.yv-float:hover{color:var(--accent);border-color:rgba(var(--accentc),.55)}
+.yv-float svg{width:13px;height:13px;fill:none;stroke:currentColor;
+  stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .25s ease}
+.yv-float:hover svg{transform:translateX(-3px)}
+html[data-theme="light"] .yv-float{
+  background:rgba(255,253,249,.86);
+  border-color:rgba(14,11,7,.16);
+  box-shadow:0 10px 26px rgba(14,11,7,.18)}
+@media (prefers-reduced-motion:reduce){
+  .yv-float{transition:opacity .2s ease}
+  .yv-float.is-up{transform:translate(-50%,0)}
+}
+@media (max-width:620px){
+  .yv-float{bottom:16px;padding:10px 16px;font-size:11.5px}
+}
