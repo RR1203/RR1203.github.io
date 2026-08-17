@@ -5534,3 +5534,25 @@ html[data-theme="light"] .yv-float{
 .yv-big.yv-plate .yv-jacket{display:flex;align-items:flex-start}
 @media (max-width:900px){.yv-big.yv-plate .yv-jacket img{max-height:190px}}
 @media (max-width:620px){.yv-big.yv-plate .yv-jacket img{max-height:150px}}
+
+/* __________________________________________________________________
+   A jump lands on the section, not short of it
+
+   Two rules were fighting over where an anchor should land, and the
+   larger won: sections carried scroll-margin-top:96px while the page
+   asked for scroll-padding-top:66px. The bar itself is 57px. So every
+   jump stopped 39px above the heading - close enough to look like the
+   page had simply not finished moving.
+
+   One rule decides now, and it is measured rather than guessed: the
+   script writes the bar's real height into --navh and updates it when
+   the window changes, so the landing is exact at any width and stays
+   exact if the bar ever grows a line. The 10px is deliberate breathing
+   room, not slack.
+   __________________________________________________________________ */
+
+html{scroll-padding-top:calc(var(--navh, 57px) + 10px)}
+section[id],header[id]{scroll-margin-top:0}
+@media (max-width:760px){
+  html{scroll-padding-top:calc(var(--navh, 57px) + 6px)}
+}
