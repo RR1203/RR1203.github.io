@@ -2621,10 +2621,44 @@
           cue.className = "ih-cue";
           cue.setAttribute("aria-hidden", "true");
           withMore[w].querySelector(".ih-note").appendChild(cue);
+
+          /* The portrait beside the opened text. The one hanging in the
+             margin is a glance while scanning the list; once the note is
+             open the reader is reading, and the face belongs next to
+             what it is about rather than out in the gutter. So a second
+             copy is built here, inside the fold, and the stylesheet
+             hands over between the two.
+
+             A copy rather than a move: moving the one element would
+             mean putting it back on close, and any interruption
+             mid-animation would leave the face in the wrong place. Two
+             elements, each with one job, and the src is only filled in
+             when the fold first opens so nothing extra is fetched for a
+             note nobody opens. */
+          var src = withMore[w].querySelector(".ih-face img");
+          var into = withMore[w].querySelector(".ih-fold-in");
+          if (src && into) {
+            var plate = document.createElement("figure");
+            plate.className = "ih-plate";
+            plate.setAttribute("aria-hidden", "true");
+            var pic = document.createElement("img");
+            pic.alt = "";
+            pic.loading = "lazy";
+            pic.decoding = "async";
+            pic.setAttribute("data-src", src.getAttribute("data-src") || src.getAttribute("src") || "");
+            plate.appendChild(pic);
+            into.appendChild(plate);
+          }
         }
         var flip = function (row) {
           var open = row.classList.toggle("is-open");
           row.setAttribute("aria-expanded", open ? "true" : "false");
+          if (open) {
+            var pic = row.querySelector(".ih-plate img[data-src]");
+            if (pic && !pic.getAttribute("src")) {
+              pic.setAttribute("src", pic.getAttribute("data-src"));
+            }
+          }
         };
         /* Which device opened it. A click leaves focus on the entry,
            and this engine then treats that focus as keyboard focus - so

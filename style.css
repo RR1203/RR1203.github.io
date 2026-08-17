@@ -5612,18 +5612,19 @@ section[id],header[id]{scroll-margin-top:0}
 .yv-big[data-rank="3"] .yv-jacket::after,
 .yv-big.yv-crowned .yv-jacket::after{
   content:"";position:absolute;
-  left:-6px;right:-6px;top:100%;height:26px;margin-top:8px;
-  background-repeat:no-repeat;background-position:center;background-size:100% 100%;
+  left:6%;right:6%;top:100%;height:34px;margin-top:10px;
+  background-repeat:no-repeat;background-position:center;
+  background-size:100% 100%;
   pointer-events:none}
-.yv-big[data-rank="1"] .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
-.yv-big[data-rank="2"] .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23c6ced9%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
-.yv-big[data-rank="3"] .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23bd7f42%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+.yv-big[data-rank="1"] .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.6%22%20stroke-width%3D%221.5%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+.yv-big[data-rank="2"] .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23c6ced9%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.6%22%20stroke-width%3D%221.5%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+.yv-big[data-rank="3"] .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23bd7f42%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.6%22%20stroke-width%3D%221.5%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
 /* every childhood entry is number one, so every one is gold */
-.yv-big.yv-crowned .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+.yv-big.yv-crowned .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.6%22%20stroke-width%3D%221.5%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
 
 /* the cover column widens for a plate, since a square of six wants more
    room than a single spine */
-.yv-big.yv-plate{grid-template-columns:74px 420px minmax(0,1fr)}
+.yv-big.yv-plate{grid-template-columns:74px 366px minmax(0,1fr)}
 @media (max-width:900px){.yv-big.yv-plate{grid-template-columns:56px 320px minmax(0,1fr)}}
 @media (max-width:620px){.yv-big.yv-plate{grid-template-columns:minmax(0,1fr)}
   .yv-big.yv-plate .yv-jacket{max-width:100%}}
@@ -5631,7 +5632,7 @@ section[id],header[id]{scroll-margin-top:0}
 /* And the same on the front page. The card is a three-column grid and
    the middle column is fixed at 248px, so widening the jacket inside it
    changed nothing - the column had to give first. */
-.cd-item.cd-plate{grid-template-columns:158px 420px minmax(0,1fr)}
+.cd-item.cd-plate{grid-template-columns:158px 366px minmax(0,1fr)}
 .cd-item.cd-plate .cd-cover{max-width:none;width:100%}
 .cd-item.cd-plate .cd-jacket{width:100%;max-width:none;margin-inline:auto}
 @media (max-width:1100px){
@@ -5639,4 +5640,70 @@ section[id],header[id]{scroll-margin-top:0}
 }
 @media (max-width:760px){
   .cd-item.cd-plate{grid-template-columns:1fr}
+}
+
+/* __________________________________________________________________
+   The portrait moves in beside the text when the note opens
+
+   In the margin it is a glance while scanning a list of names. Once the
+   note is open the reader is reading, and the face belongs next to what
+   it is about. So the two hand over: the floating one fades out as the
+   fold begins, and a second copy sits at the top right of the open
+   text, where the eye lands at the end of the first line.
+
+   The text keeps its own column rather than wrapping around the
+   picture - a ragged edge running down the side of a portrait is
+   restless to read, and a clean column beside it is not.
+
+   Only where there is width for two columns. Below that the fold is
+   already the full measure and a picture beside it would leave neither
+   enough room, so the margin portrait simply stays as it is.
+   __________________________________________________________________ */
+
+.ih-plate{display:none;margin:0}
+
+@media (min-width:1000px){
+  .ih-fold-in{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    column-gap:34px;
+    align-items:start}
+
+  .ih-plate{
+    display:block;
+    width:168px;
+    margin-top:9px;
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid rgba(var(--ink),.28);
+    background:#0d1c30;
+    box-shadow:0 16px 34px rgba(2,8,18,.5);
+    opacity:0;
+    transform:translateY(-6px) scale(.985);
+    transition:opacity .24s ease .1s,
+               transform .34s cubic-bezier(.16,1,.3,1) .1s}
+  .ih-plate img{
+    display:block;width:100%;height:auto;aspect-ratio:4/5;
+    object-fit:cover;
+    filter:grayscale(1) contrast(1.03)}
+  html[data-theme="light"] .ih-plate{
+    background:#f0ebe1;
+    border-color:rgba(14,11,7,.16);
+    box-shadow:0 12px 26px rgba(14,11,7,.2)}
+  html[data-theme="light"] .ih-plate img{
+    filter:grayscale(1) contrast(1.05) brightness(1.02)}
+
+  .heroes.is-foldable > li.is-open .ih-plate{opacity:1;transform:none}
+
+  /* the floating one gets out of the way, and stays out of it even
+     under the pointer - two of the same face at once is a mistake */
+  .heroes.is-foldable > li.is-open .ih-face,
+  .heroes.is-foldable > li.is-open:hover .ih-face{
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .16s ease}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ih-plate{transition:opacity .15s ease}
 }
