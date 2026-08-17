@@ -5383,59 +5383,82 @@ html[data-theme="light"] .yv-float{
    not have.
    __________________________________________________________________ */
 
-.heroes.is-foldable .ih-rest{display:none}
-.heroes.is-foldable > li.is-open .ih-rest{display:inline}
 
 .heroes.is-foldable > li.can-open{cursor:pointer}
 .heroes.is-foldable > li.can-open:focus-visible{
   outline:2px solid var(--accent);outline-offset:6px;border-radius:8px}
 
-/* -- the cue -------------------------------------------------------
-   A bare chevron asks the reader to work out that the line is live. A
-   chevron with the words beside it does not. It is set like the small
-   caps role above it, so it belongs to the entry rather than sitting on
-   it, and it is coloured with the accent, which on this site means "you
-   can do something here".
+/* -- the arrow ------------------------------------------------------
+   A word is not needed. The entry is already the target, the cursor
+   already changes, and one small arrow at the right edge says the rest
+   - it points down when there is more below and up when there is not.
+   Nothing else on the site uses that mark, so it reads as this and
+   only this.
 
-   Both the label and the arrow are drawn from the stylesheet, so they
-   cannot be selected with the text and will not come along if the note
-   is copied. */
+   Drawn from two borders rather than a glyph, so it is exactly as heavy
+   as the hairlines it sits among and does not depend on a font. */
 .ih-cue{
-  /* pushed to the right edge of the note rather than trailing the last
-     word: at the far right it is always in the same place whatever the
-     length of the lead, so the eye learns where to look instead of
-     hunting for the end of a sentence that moves. */
   float:right;
-  display:inline-flex;align-items:center;gap:7px;
-  margin-left:22px;
-  font-size:.62em;letter-spacing:.15em;text-transform:uppercase;
-  font-style:normal;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;
+  margin-left:20px;
   color:var(--accent);
-  white-space:nowrap;
-  vertical-align:baseline;
-  opacity:.85;
-  transition:opacity .22s ease}
+  opacity:.55;
+  transition:opacity .18s ease,transform .26s cubic-bezier(.16,1,.3,1)}
+.ih-cue::after{
+  content:"";
+  width:7px;height:7px;
+  border-right:1.4px solid currentColor;
+  border-bottom:1.4px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);
+  transition:transform .26s cubic-bezier(.16,1,.3,1)}
+.heroes.is-foldable > li.is-open .ih-cue::after{
+  transform:translateY(1px) rotate(-135deg)}
+.heroes.is-foldable > li.can-open:hover .ih-cue{opacity:1;transform:translateY(1px)}
+.heroes.is-foldable > li.is-open:hover .ih-cue{transform:translateY(-1px)}
+
 /* the paragraph has to contain its own float or the entry collapses
    behind the next one */
 .heroes.is-foldable > li.can-open .ih-note::after{content:"";display:block;clear:both}
-.ih-cue::before{content:"Read more"}
-.heroes.is-foldable > li.is-open .ih-cue::before{content:"Show less"}
-.ih-cue::after{
-  content:"";
-  width:5px;height:5px;
-  border-right:1.5px solid currentColor;
-  border-bottom:1.5px solid currentColor;
-  transform:translateY(-2px) rotate(45deg);
-  transition:transform .28s cubic-bezier(.2,.7,.2,1)}
-.heroes.is-foldable > li.is-open .ih-cue::after{
-  transform:translateY(1px) rotate(-135deg)}
 
-/* the whole entry answers the pointer, so the whole entry lights up:
-   the cue brightens and the name warms, which is what tells the reader
-   the whole block is the target and not just the words at the end */
-.heroes.is-foldable > li.can-open:hover .ih-cue,
-.heroes.is-foldable > li.can-open:focus-visible .ih-cue{opacity:1}
-.heroes.is-foldable > li.can-open:hover .ih-note{color:var(--text)}
+/* -- the fold -------------------------------------------------------
+   The rest used to appear and disappear outright, which is why opening
+   felt like a jump rather than a movement. It is a block of its own now
+   and its height is animated with a 0fr-to-1fr grid row - the one way
+   to transition to a height that is not known in advance. 200ms out and
+   170ms back: quick enough that a second click never has to wait for
+   the first, slow enough to read as the text arriving rather than being
+   swapped in.
+
+   The words fade a beat behind the box so the two are not fighting, and
+   nothing moves at all for a reader who has asked for less motion. */
+.ih-fold{display:grid;grid-template-rows:1fr}
+.heroes.is-foldable .ih-fold{
+  grid-template-rows:0fr;
+  transition:grid-template-rows .2s cubic-bezier(.16,1,.3,1)}
+.heroes.is-foldable > li.is-open .ih-fold{
+  grid-template-rows:1fr;
+  transition-duration:.2s}
+.heroes.is-foldable > li:not(.is-open) .ih-fold{transition-duration:.17s}
+.ih-fold-in{overflow:hidden;min-height:0}
+.ih-rest{
+  /* it left the note's paragraph to become a block that can be
+     animated, and took none of the note's type with it */
+  margin:0;
+  padding-top:9px;
+  font-size:.92rem;
+  line-height:1.6;
+  color:var(--muted);
+  max-width:64ch}
+.heroes.is-foldable .ih-rest{
+  opacity:0;
+  transform:translateY(-3px);
+  transition:opacity .16s ease .04s,transform .22s cubic-bezier(.16,1,.3,1) .04s}
+.heroes.is-foldable > li.is-open .ih-rest{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .ih-fold,.ih-rest,.ih-cue,.ih-cue::after{transition:none}
+}
 
 /* an opened note is the one being read, so it keeps its full colour
    while the placeholders around it stay faint */
@@ -5497,3 +5520,17 @@ html[data-theme="light"] .yv-float{
   user-select:none;
   -webkit-touch-callout:none;
   -webkit-user-drag:none}
+
+/* A plate of six posters is nearly square, where every other jacket on
+   these pages is tall. Left alone it would tower over the entries above
+   and below it, so it is held to the height a jacket would have taken
+   and lets its width shrink to suit. */
+.yv-big.yv-plate .yv-jacket img{
+  width:auto;
+  max-width:100%;
+  max-height:250px;
+  margin:0 auto;
+  display:block}
+.yv-big.yv-plate .yv-jacket{display:flex;align-items:flex-start}
+@media (max-width:900px){.yv-big.yv-plate .yv-jacket img{max-height:190px}}
+@media (max-width:620px){.yv-big.yv-plate .yv-jacket img{max-height:150px}}

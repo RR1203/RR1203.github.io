@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- What this page is allowed to load, and where it may send anything.
+
+       The site fetches nothing from anywhere else: the fonts are our own
+       files in /fonts, the pictures are in this repository, and there is not
+       one external script or stylesheet. So the policy is simply "self",
+       with three deliberate exceptions:
+
+         connect-src / form-action  formsubmit.co, which the contact form
+                                    posts to. Nothing else may be sent
+                                    anywhere, which is the half of this that
+                                    matters most - injected code cannot phone
+                                    home.
+         frame-src                  YouTube and Vimeo, so the video template
+                                    in writing/ works the day a real embed is
+                                    pasted into it rather than failing with a
+                                    blank box and a console error.
+         data:                      the two inline SVGs in the stylesheet.
+
+       One honest limit: script-src has to allow 'unsafe-inline', because the
+       behaviour on this site lives in inline <script> blocks - fourteen of
+       them on the home page. Hashing each one would be stricter but would
+       break on every edit. So this does not stop injected inline script; it
+       stops that script loading anything external or sending anything out.
+
+       frame-ancestors is absent on purpose: browsers ignore it in a meta tag,
+       and GitHub Pages cannot set real headers. Clickjacking is unaddressed. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; frame-src https://www.youtube.com https://player.vimeo.com; upgrade-insecure-requests">
+<meta name="theme-color" content="#0b182a">
+<title>Edward Bullmore on The Divided Mind | Hannes Meilicke</title>
+<meta name="description" content="Edward Bullmore on The Divided Mind - psychiatry's split between brain and mind, and what a biological psychiatry could look like.">
+<meta property="og:title" content="Edward Bullmore on The Divided Mind">
+<meta property="og:description" content="Psychiatry's split between brain and mind, and what a biological psychiatry could look like.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://hannes-meilicke.com/writing/video-the-divided-mind.html">
+<meta property="og:image" content="https://hannes-meilicke.com/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://hannes-meilicke.com/writing/video-the-divided-mind.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="mask-icon" href="/favicon.svg" color="#7fd0c4">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="/fonts/fraunces-hero-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="/fonts/cormorant-garamond-latin.woff2">
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/style.css">
+  <script>
+  /* The tone is settled before anything is painted.
+
+     Dark is the default now, not the operating system's preference. The
+     site was designed on navy and that is how it should be met; a visitor
+     who wants the light page has a switch, and their choice is remembered
+     from then on. */
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      document.documentElement.setAttribute("data-theme", saved === "light" ? "light" : "dark");
+    } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }
+  })();
+  </script>
+</head>
+<body class="simple">
+
+<a class="skip-to" href="#main">Skip to the content</a>
+
+<nav class="topnav is-stuck" aria-label="Main">
+  <div class="nav-inner">
+    <a class="nav-brand is-tiled" href="/site.html" aria-label="Hannes Meilicke - home">
+      <span class="mono is-mosaic">HM</span>
+      <span class="brand-name">Hannes Meilicke</span>
+    </a>
+    <div class="nav-links">
+      <a href="/site.html">Home</a>
+      <a href="/site.html#about">About me</a>
+      <a href="/site.html#writing">Writing</a>
+      <a href="/site.html#research">Research</a>
+      <a href="/site.html#cv">CV</a>
+      <a href="/site.html#contact">Contact</a>
+    </div>
+      <button class="theme-toggle" type="button" id="theme-toggle"
+              aria-label="Switch between the light and the dark page">
+        <svg class="t-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+        <svg class="t-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.3M12 19.3v2.3M2.4 12h2.3M19.3 12h2.3M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+      </button>
+  </div>
+</nav>
+
+<main class="simple-main piece" id="main">
+
+  <a class="piece-back" href="/site.html#writing"><span aria-hidden="true">&larr;</span> Writing &amp; Media</a>
+
+  <p class="piece-meta"><span class="kind">Video</span><span>2026</span></p>
+  <h1>Edward Bullmore on <i>The Divided Mind</i></h1>
+  <div class="h2-rule"></div>
+  <p class="piece-lede">The book that first showed me what a biological explanation of psychiatric illness could actually look like &mdash; and the argument that the split between brain and mind has done real harm. Bullmore in his own words.</p>
+
+  <div class="embed">
+    <!-- Replace the block below with the embed code from YouTube or Vimeo, for example:
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Edward Bullmore on The Divided Mind" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    -->
+    <div class="embed-hint"><b>Video</b><span>Paste the YouTube or Vimeo embed here</span></div>
+  </div>
+
+  <div class="piece-body">
+    <p>Why this one is here: it is the book behind what I have written about Bullmore under <a href="/site.html#about">my intellectual heroes</a>. Fractal brain networks, genome-wide atlases and polygenic risk, epigenetics, synaptic pruning and the immune system, held together as one account of how a disorder like schizophrenia might come about &mdash; and a history of why psychiatry stopped expecting that to be possible.</p>
+    <p class="is-placeholder">What I would add to it &mdash; to be written.</p>
+  </div>
+
+  <div class="piece-foot">
+    <a class="btn btn-ghost" href="/site.html#writing">More pieces</a>
+    <a class="btn btn-primary" href="/site.html#contact">Get in touch</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <p>&copy; 2026 Hannes Meilicke</p>
+    <div class="foot-links">
+      <a href="/site.html">Home</a>
+      <a href="/site.html#writing">Writing</a>
+      <a href="/credits.html">Credits</a>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+
+  <script>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) { return; }
+    var root = document.documentElement;
+    var meta = document.querySelector('meta[name="theme-color"]');
+    var paint = function (tone) {
+      root.setAttribute("data-theme", tone);
+      if (meta) { meta.setAttribute("content", tone === "light" ? "#fffdf9" : "#0b182a"); }
+      btn.setAttribute("aria-pressed", tone === "light" ? "true" : "false");
+      btn.title = tone === "light" ? "Switch to the dark page" : "Switch to the light page";
+    };
+    paint(root.getAttribute("data-theme") || "dark");
+    btn.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      paint(next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+    /* No listener on the system preference: dark is the default and
+       stays the default until the reader picks otherwise. */
+  })();
+  </script>
+</body>
+</html>
