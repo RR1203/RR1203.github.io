@@ -5525,15 +5525,20 @@ html[data-theme="light"] .yv-float{
    these pages is tall. Left alone it would tower over the entries above
    and below it, so it is held to the height a jacket would have taken
    and lets its width shrink to suit. */
+/* The plate holds six posters where a jacket holds one, so matching a
+   jacket's height made each poster a third of a book cover - about
+   80px, too small to tell one film from another. It takes the width of
+   the text column beside it instead, which puts each poster at roughly
+   the size of a single jacket and makes the six legible as six. */
 .yv-big.yv-plate .yv-jacket img{
-  width:auto;
-  max-width:100%;
-  max-height:250px;
-  margin:0 auto;
+  width:100%;
+  max-width:none;
+  max-height:none;
+  height:auto;
+  margin:0;
   display:block}
 .yv-big.yv-plate .yv-jacket{display:flex;align-items:flex-start}
-@media (max-width:900px){.yv-big.yv-plate .yv-jacket img{max-height:190px}}
-@media (max-width:620px){.yv-big.yv-plate .yv-jacket img{max-height:150px}}
+
 
 /* __________________________________________________________________
    A jump lands on the section, not short of it
@@ -5581,3 +5586,57 @@ section[id],header[id]{scroll-margin-top:0}
   height:auto;
   object-fit:contain}
 .cd-item.cd-plate .cd-cover{align-items:center}
+
+
+/* __________________________________________________________________
+   The medal lines follow the books onto the year pages
+
+   The flourish under the top three - gold, silver, bronze - was drawn
+   on .cd-cover, which belongs to the countdown. The year pages read
+   downwards now and use .yv-jacket, so the three best books of every
+   year lost their line and kept only the colour of the numeral. The
+   childhood page lost it too, where every entry is crowned.
+
+   Same artwork, read back out of the rules above rather than copied
+   into a second place, hung under the jacket instead of under the card,
+   with room left beneath for it to sit in.
+   __________________________________________________________________ */
+
+.yv-big[data-rank="1"] .yv-jacket,
+.yv-big[data-rank="2"] .yv-jacket,
+.yv-big[data-rank="3"] .yv-jacket,
+.yv-big.yv-crowned .yv-jacket{position:relative;margin-bottom:34px}
+
+.yv-big[data-rank="1"] .yv-jacket::after,
+.yv-big[data-rank="2"] .yv-jacket::after,
+.yv-big[data-rank="3"] .yv-jacket::after,
+.yv-big.yv-crowned .yv-jacket::after{
+  content:"";position:absolute;
+  left:-6px;right:-6px;top:100%;height:26px;margin-top:8px;
+  background-repeat:no-repeat;background-position:center;background-size:100% 100%;
+  pointer-events:none}
+.yv-big[data-rank="1"] .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+.yv-big[data-rank="2"] .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23c6ced9%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+.yv-big[data-rank="3"] .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23bd7f42%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+/* every childhood entry is number one, so every one is gold */
+.yv-big.yv-crowned .yv-jacket::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.45%22%20stroke-width%3D%22.9%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E")}
+
+/* the cover column widens for a plate, since a square of six wants more
+   room than a single spine */
+.yv-big.yv-plate{grid-template-columns:74px 420px minmax(0,1fr)}
+@media (max-width:900px){.yv-big.yv-plate{grid-template-columns:56px 320px minmax(0,1fr)}}
+@media (max-width:620px){.yv-big.yv-plate{grid-template-columns:minmax(0,1fr)}
+  .yv-big.yv-plate .yv-jacket{max-width:100%}}
+
+/* And the same on the front page. The card is a three-column grid and
+   the middle column is fixed at 248px, so widening the jacket inside it
+   changed nothing - the column had to give first. */
+.cd-item.cd-plate{grid-template-columns:158px 420px minmax(0,1fr)}
+.cd-item.cd-plate .cd-cover{max-width:none;width:100%}
+.cd-item.cd-plate .cd-jacket{width:100%;max-width:none;margin-inline:auto}
+@media (max-width:1100px){
+  .cd-item.cd-plate{grid-template-columns:120px 330px minmax(0,1fr)}
+}
+@media (max-width:760px){
+  .cd-item.cd-plate{grid-template-columns:1fr}
+}
