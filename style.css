@@ -2978,8 +2978,13 @@ object-position:center;opacity:.92}
   transition:opacity .26s ease,transform .34s cubic-bezier(.2,.7,.2,1)}
 .ih-face img{display:block;width:100%;height:100%;object-fit:cover;
   filter:grayscale(1) contrast(1.03)}
-.heroes>li:hover .ih-face,
-.heroes>li:focus-within .ih-face{opacity:1;transform:translateY(-50%)}
+.heroes>li:hover .ih-face{opacity:1;transform:translateY(-50%)}
+/* :focus-within used to be here. Clicking an entry focuses it, so the
+   portrait stayed up after the click and sat there while the note was
+   read - the picture is meant to answer the pointer and nothing else.
+   :focus-visible keeps it for the keyboard, which never triggers on a
+   mouse click, so the reward survives for anyone tabbing through. */
+.heroes>li:focus-visible .ih-face{opacity:1;transform:translateY(-50%)}
 /* where there is no pointer, or no ground to the left of the
    text, the face stands small and steady in the line instead */
 @media (hover:none),(pointer:coarse),(max-width:1120px){
@@ -2987,7 +2992,7 @@ object-position:center;opacity:.92}
     transform:none;width:40px;border-radius:5px;flex:0 0 auto;
     box-shadow:0 4px 10px rgba(2,8,18,.4);align-self:center}
   .heroes>li:hover .ih-face,
-  .heroes>li:focus-within .ih-face{transform:none}
+  .heroes>li:focus-visible .ih-face{transform:none}
 }
 @media (prefers-reduced-motion:reduce){.ih-face{transition:opacity .2s ease}}
 
@@ -4876,7 +4881,7 @@ html[data-theme="light"] .cd-item.cd-pair .cd-jacket + .cd-jacket{
     opacity:0;
     transition:opacity .32s ease}
   .heroes.is-scrollfaces>li.is-lit .ih-face,
-  .heroes.is-scrollfaces>li:focus-within .ih-face{opacity:1}
+  .heroes.is-scrollfaces>li:focus-visible .ih-face{opacity:1}
 }
 
 @media (max-width:420px){
@@ -5396,8 +5401,13 @@ html[data-theme="light"] .yv-float{
    cannot be selected with the text and will not come along if the note
    is copied. */
 .ih-cue{
+  /* pushed to the right edge of the note rather than trailing the last
+     word: at the far right it is always in the same place whatever the
+     length of the lead, so the eye learns where to look instead of
+     hunting for the end of a sentence that moves. */
+  float:right;
   display:inline-flex;align-items:center;gap:7px;
-  margin-left:12px;
+  margin-left:22px;
   font-size:.62em;letter-spacing:.15em;text-transform:uppercase;
   font-style:normal;
   color:var(--accent);
@@ -5405,6 +5415,9 @@ html[data-theme="light"] .yv-float{
   vertical-align:baseline;
   opacity:.85;
   transition:opacity .22s ease}
+/* the paragraph has to contain its own float or the entry collapses
+   behind the next one */
+.heroes.is-foldable > li.can-open .ih-note::after{content:"";display:block;clear:both}
 .ih-cue::before{content:"Read more"}
 .heroes.is-foldable > li.is-open .ih-cue::before{content:"Show less"}
 .ih-cue::after{
@@ -5454,33 +5467,33 @@ html[data-theme="light"] .yv-float{
   opacity:.5}
 
 /* __________________________________________________________________
-   Clicking to open must not smear the text blue
+   The entry never selects, in either state
 
-   A closed entry is a control, and clicking a control should not select
-   its label - but a double click, or a click with a pixel of drag in
-   it, was marking the words. So while the entry is closed the text is
-   not selectable and the click does nothing but open it.
+   The first attempt made a closed entry unselectable and an open one
+   selectable again, on the reasoning that an open note is something to
+   read and quote. That was wrong, and wrong in a way that made the
+   problem worse rather than better: the click that opens the entry
+   flips it to selectable in the same instant, so a second click landing
+   a moment later - an ordinary double click, or just an eager one - hits
+   text that has become selectable and takes a word with it. The state
+   change was itself the trap.
 
-   The moment it opens the text becomes selectable again, because now it
-   is something to read, and a reader who wants to quote a sentence must
-   be able to take it. Closing it is a single click, which never selects
-   anything on its own, so the two states do not fight.
+   So the entry does not select at all. It is a control in both states
+   and behaves like one. The cost is that the note cannot be dragged
+   over to copy; if that turns out to matter, the honest answer is a
+   copy control, not a selectable region that is also a button.
 
-   The portrait is never selectable in either state: dragging a picture
-   out of a list of names is not a thing anybody means to do.
+   touch-callout goes too, so a long press on a phone opens the note
+   instead of raising the system's copy menu over it.
    __________________________________________________________________ */
 
-.heroes.is-foldable > li.can-open:not(.is-open){
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  user-select:none}
-.heroes.is-foldable > li.can-open.is-open{
-  -webkit-user-select:text;
-  -moz-user-select:text;
-  user-select:text}
+.heroes.is-foldable > li.can-open,
+.heroes.is-foldable > li.can-open *,
 .heroes .ih-face,
 .heroes .ih-cue{
   -webkit-user-select:none;
   -moz-user-select:none;
+  -ms-user-select:none;
   user-select:none;
+  -webkit-touch-callout:none;
   -webkit-user-drag:none}

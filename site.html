@@ -2597,10 +2597,27 @@
           var open = row.classList.toggle("is-open");
           row.setAttribute("aria-expanded", open ? "true" : "false");
         };
+        /* Which device opened it. A click leaves focus on the entry,
+           and this engine then treats that focus as keyboard focus - so
+           the portrait stayed hanging in the margin after the pointer
+           had gone, and a focus ring came with it. Focus is dropped
+           again when the press came from a pointer, and kept when it
+           came from the keyboard, where it is the only thing telling
+           the reader where they are. */
+        var byPointer = false;
+        heroList.addEventListener("pointerdown", function () { byPointer = true; });
+        heroList.addEventListener("keydown", function () { byPointer = false; }, true);
+
         heroList.addEventListener("click", function (ev) {
           if (ev.target.closest("a")) { return; }
           var row = ev.target.closest("li.can-open");
           if (!row) { return; }
+          /* The second click of a double click must not undo the first.
+             Somebody who double clicks a name means to open it, and
+             toggling twice leaves it shut and looks like nothing
+             happened. */
+          if (ev.detail > 1) { return; }
+          if (byPointer && row.blur) { row.blur(); }
           /* An opened note is selectable, so a reader dragging across a
              sentence to copy it finishes on a click - and that click
              would otherwise shut the note under their hand. If anything
