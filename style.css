@@ -5556,3 +5556,28 @@ section[id],header[id]{scroll-margin-top:0}
 @media (max-width:760px){
   html{scroll-padding-top:calc(var(--navh, 57px) + 6px)}
 }
+
+/* __________________________________________________________________
+   A plate of six posters is not shaped like a jacket
+
+   .cd-jacket is locked to 1/1.52, which is right for a book and wrong
+   for a square. The plate was being letterboxed inside it: the artwork
+   fell to the width of the box and left a third of the height empty
+   above and below, so six posters came out about 75px each and the card
+   read as if nothing were there.
+
+   The plate keeps its own shape instead. It takes the full width of the
+   cover column and as much height as that gives it, which is how a
+   collection is meant to sit - wider and shorter than a single spine,
+   and large enough that the six are legible.
+   __________________________________________________________________ */
+
+.cd-item.cd-plate .cd-jacket{
+  aspect-ratio:auto;
+  height:auto;
+  align-self:center}
+.cd-item.cd-plate .cd-jacket img{
+  width:100%;
+  height:auto;
+  object-fit:contain}
+.cd-item.cd-plate .cd-cover{align-items:center}
