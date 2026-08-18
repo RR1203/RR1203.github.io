@@ -3061,17 +3061,16 @@ object-position:center;opacity:.92}
 .cd-item:hover .cd-cover{transform:translateY(-3px)}
 
 /* ---- 2. one shape for all three metals ---- */
-.cd-item[data-rank="1"] .cd-cover,
-.cd-item[data-rank="2"] .cd-cover,
-.cd-item[data-rank="3"] .cd-cover{margin-top:44px}
 .cd-item[data-rank="1"] .cd-cover::after,
 .cd-item[data-rank="2"] .cd-cover::after,
 .cd-item[data-rank="3"] .cd-cover::after{
-  /* above the cover, not under it: below the jacket it fell into the
-     gap before the next card and read as a stray mark, and on a tall
-     card it was pushed off the bottom altogether */
-  content:"";position:absolute;left:4%;right:4%;top:auto;
-  bottom:100%;height:32px;margin-bottom:10px;
+  /* on the cover rather than under it. In the gap below the jacket it
+     had nothing to sit against - dark ink on a dark ground - and on a
+     tall card it was pushed past the bottom of the column altogether.
+     Laid across the foot of the artwork it always has something to be
+     seen against, and z-index puts it in front rather than behind. */
+  content:"";position:absolute;left:6%;right:6%;top:auto;
+  bottom:16px;height:30px;z-index:5;
   background-repeat:no-repeat;background-position:center;background-size:100% 100%;
   pointer-events:none}
 .cd-item[data-rank="2"] .cd-cover::after{
@@ -5630,9 +5629,6 @@ section[id],header[id]{scroll-margin-top:0}
 .yv-big[data-rank="2"] .yv-jacket,
 .yv-big[data-rank="3"] .yv-jacket,
 .yv-big.yv-crowned .yv-jacket{position:relative}
-.yv-big[data-rank="1"] .yv-jacket,
-.yv-big[data-rank="2"] .yv-jacket,
-.yv-big[data-rank="3"] .yv-jacket{margin-top:44px}
 /* the crowned entries keep theirs underneath: the crown is already
    above the jacket and two marks in one place is one too many */
 .yv-big.yv-crowned .yv-jacket{margin-top:38px;margin-bottom:34px}
@@ -5643,7 +5639,7 @@ section[id],header[id]{scroll-margin-top:0}
 .yv-big[data-rank="3"] .yv-jacket::after,
 .yv-big.yv-crowned .yv-jacket::after{
   content:"";position:absolute;
-  left:6%;right:6%;top:auto;bottom:100%;height:34px;margin-bottom:12px;
+  left:7%;right:7%;top:auto;bottom:16px;height:32px;z-index:5;
   background-repeat:no-repeat;background-position:center;
   background-size:100% 100%;
   pointer-events:none}
@@ -5719,20 +5715,9 @@ section[id],header[id]{scroll-margin-top:0}
   aspect-ratio:16/9;border-radius:5px;overflow:hidden;
   background:#0b182a}
 .ih-watch-shot img{width:100%;height:100%;object-fit:cover;display:block}
-.ih-watch-play{
-  position:absolute;left:50%;top:50%;
-  width:30px;height:30px;margin:-15px 0 0 -15px;
-  border-radius:50%;
-  border:1.5px solid rgba(var(--accentc),.85);
-  background:rgba(11,24,42,.55);
-  backdrop-filter:blur(2px);
-  transition:background .25s ease,transform .25s ease}
-.ih-watch-play::after{
-  content:"";position:absolute;left:11px;top:8px;
-  border-left:9px solid var(--accent);
-  border-top:7px solid transparent;
-  border-bottom:7px solid transparent}
-.ih-watch:hover .ih-watch-play{background:rgba(11,24,42,.3);transform:scale(1.08)}
+/* No play mark drawn here: the still already has one rendered into it,
+   and two circles side by side was the giveaway. */
+
 
 .ih-watch-txt{display:flex;flex-direction:column;gap:5px;min-width:0}
 .ih-watch-kind{
@@ -5752,5 +5737,61 @@ section[id],header[id]{scroll-margin-top:0}
   .ih-watch-title{font-size:13.5px}
 }
 @media (prefers-reduced-motion:reduce){
-  .ih-watch,.ih-watch-play,.ih-watch-cue i{transition:none}
+  .ih-watch,.ih-watch-cue i{transition:none}
+}
+
+/* __________________________________________________________________
+   The face stands beside the film at the foot of the note
+
+   The two belong to the same thought - the man, and the hour of him
+   talking about the book the paragraph is about - so they are one row
+   rather than a picture floating out in the gutter and a strip down
+   here. The portrait takes the height of the strip so the row has a
+   single top and a single bottom, which is what makes it read as one
+   object instead of two things that happen to be adjacent.
+
+   While that row is showing, the margin portrait steps aside. One of a
+   man on a screen is enough.
+   __________________________________________________________________ */
+
+.ih-endrow{
+  display:flex;
+  align-items:stretch;
+  gap:14px;
+  margin-top:22px}
+.ih-endrow .ih-watch{margin-top:0;flex:1 1 auto;min-width:0}
+
+.ih-endface{
+  flex:0 0 auto;
+  margin:0;
+  width:96px;
+  border-radius:9px;
+  overflow:hidden;
+  border:1px solid var(--card-border);
+  background:#0d1c30;
+  opacity:0;
+  transform:translateY(-4px);
+  transition:opacity .24s ease .12s,
+             transform .32s cubic-bezier(.16,1,.3,1) .12s}
+.ih-endface img{
+  display:block;width:100%;height:100%;
+  object-fit:cover;object-position:50% 22%;
+  filter:grayscale(1) contrast(1.03)}
+html[data-theme="light"] .ih-endface{background:#f0ebe1}
+html[data-theme="light"] .ih-endface img{filter:grayscale(1) contrast(1.05) brightness(1.02)}
+
+.heroes.is-foldable > li.is-open .ih-endface{opacity:1;transform:none}
+
+/* the margin portrait gives way to the one in the row */
+.heroes.is-foldable > li.has-endface.is-open .ih-face,
+.heroes.is-foldable > li.has-endface.is-open:hover .ih-face{
+  opacity:0;pointer-events:none;transition:opacity .16s ease}
+
+@media (max-width:620px){
+  .ih-endrow{margin-left:53px;gap:10px}
+  .ih-endrow .ih-watch{margin-left:0}
+  .ih-endface{width:64px;border-radius:7px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ih-endface{transition:opacity .15s ease}
 }

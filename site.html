@@ -847,7 +847,7 @@
           </li>
           <li>
             <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="EB"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/edward-bullmore.jpg" alt="" width="384" height="480"></span><span class="ih-name">Edward Bullmore</span><span class="ih-sub"><span class="ih-role">Psychiatrist &amp; neuroscientist</span><span class="ih-for">author of <em>The Divided Mind</em> and <em>The Inflamed Mind</em></span></span></div>
-            <p class="ih-note">Cartesian dualism never convinced me, but nobody had shown me what the alternative looked like in practice. He did.</p><div class="ih-fold"><div class="ih-fold-in"><p class="ih-rest"><em>The Divided Mind</em> was the first umbrella I had seen wide enough to hold the whole problem: fractal brain networks, genome-wide atlases and polygenic risk scores, gene expression mapped onto the networks themselves, epigenetics, developmental trajectories through synaptic pruning with adolescence as the window where it goes wrong, and the immune system inside the brain down to the microglia. Separately I had read all of it. From him I read it as one account of how a disorder like schizophrenia might actually come about &mdash; and it was the first time biological psychiatry felt coherent to me rather than assembled out of parts. <em>The Inflamed Mind</em> does it again for depression, and so do his lectures. I have not read anyone who joins the fields better.</p><a class="ih-watch" href="/writing/video-the-divided-mind.html"><span class="ih-watch-shot"><img src="/images/writing-divided-mind.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async"><span class="ih-watch-play" aria-hidden="true"></span></span><span class="ih-watch-txt"><span class="ih-watch-kind">Video</span><span class="ih-watch-title">Bullmore on <i>The Divided Mind</i></span><span class="ih-watch-cue">Watch<i aria-hidden="true">&rarr;</i></span></span></a></div></div>
+            <p class="ih-note">Cartesian dualism never convinced me, but nobody had shown me what the alternative looked like in practice. He did.</p><div class="ih-fold"><div class="ih-fold-in"><p class="ih-rest"><em>The Divided Mind</em> was the first umbrella I had seen wide enough to hold the whole problem: fractal brain networks, genome-wide atlases and polygenic risk scores, gene expression mapped onto the networks themselves, epigenetics, developmental trajectories through synaptic pruning with adolescence as the window where it goes wrong, and the immune system inside the brain down to the microglia. Separately I had read all of it. From him I read it as one account of how a disorder like schizophrenia might actually come about &mdash; and it was the first time biological psychiatry felt coherent to me rather than assembled out of parts. <em>The Inflamed Mind</em> does it again for depression, and so do his lectures. I have not read anyone who joins the fields better.</p><a class="ih-watch" href="/writing/video-the-divided-mind.html"><span class="ih-watch-shot"><img src="/images/writing-divided-mind.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async"></span><span class="ih-watch-txt"><span class="ih-watch-kind">Video</span><span class="ih-watch-title">Bullmore on <i>The Divided Mind</i></span><span class="ih-watch-cue">Watch<i aria-hidden="true">&rarr;</i></span></span></a></div></div>
           </li>
           <li>
             <div class="ih-line"><span class="ih-face" aria-hidden="true" data-ini="RN"><img loading="lazy" onerror="this.closest('.ih-face').classList.add('is-blank')" data-src="/images/portraits/randolph-nesse.jpg" alt="" width="384" height="480"></span><span class="ih-name">Randolph Nesse</span><span class="ih-sub"><span class="ih-role">Evolutionary psychiatrist</span><span class="ih-for">author of <em>Good Reasons for Bad Feelings</em></span></span></div>
@@ -2622,10 +2622,43 @@
           cue.setAttribute("aria-hidden", "true");
           withMore[w].querySelector(".ih-note").appendChild(cue);
 
+          /* Where a note ends in a film, the face joins it: the two sit
+             as one row at the foot of the open text, the man beside the
+             thing he made. The margin portrait steps aside while that
+             row is showing, so there is only ever one of him on screen.
+
+             Built only where there is a film to stand next to. A note
+             without one keeps the margin portrait and nothing changes. */
+          var film = withMore[w].querySelector(".ih-watch");
+          var from = withMore[w].querySelector(".ih-face img");
+          if (film && from) {
+            var row = document.createElement("div");
+            row.className = "ih-endrow";
+            var fig = document.createElement("figure");
+            fig.className = "ih-endface";
+            fig.setAttribute("aria-hidden", "true");
+            var pic = document.createElement("img");
+            pic.alt = "";
+            pic.loading = "lazy";
+            pic.decoding = "async";
+            pic.setAttribute("data-src", from.getAttribute("data-src") || from.getAttribute("src") || "");
+            fig.appendChild(pic);
+            film.parentNode.insertBefore(row, film);
+            row.appendChild(fig);
+            row.appendChild(film);
+            withMore[w].classList.add("has-endface");
+          }
+
         }
         var flip = function (row) {
           var open = row.classList.toggle("is-open");
           row.setAttribute("aria-expanded", open ? "true" : "false");
+          if (open) {
+            var pic = row.querySelector(".ih-endface img[data-src]");
+            if (pic && !pic.getAttribute("src")) {
+              pic.setAttribute("src", pic.getAttribute("data-src"));
+            }
+          }
         };
         /* Which device opened it. A click leaves focus on the entry,
            and this engine then treats that focus as keyboard focus - so
