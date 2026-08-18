@@ -2968,28 +2968,35 @@ object-position:center;opacity:.92}
 
 /* 3 - a face for every hero ----------------------------------- */
 .heroes>li{position:relative}
-.ih-line{position:static}
-/* Anchored to the entry, not to the 27px header line. Centring on that
-   line put the picture's middle level with the name and its top 28px
-   above the entry, so every portrait straddled the rule above its own
-   heading - which is what "floating too high" was. It hangs from just
-   under the top of the entry now, beside the name it belongs to. */
-.ih-face{position:absolute;right:calc(100% + 18px);top:2px;
+/* .heroes > li > * is set to relative so the children sit above the
+   hover glow, and that beat a bare .ih-line. The portrait has to
+   measure itself against the entry, not against the 27px header, so
+   this has to outrank it. */
+.heroes > li > .ih-line{position:static}
+/* Centred on the entry, which is the only anchor that is right for a
+   short entry and a long one at once.
+
+   It was centred on the 27px header line, which put its middle level
+   with the name: fine while every note was one line, wrong the moment a
+   note ran to two, because then the picture sat against the top of a
+   taller entry. Hanging it from the top instead fixed that one and
+   dropped all the others. The entry's own middle does both. */
+.ih-face{position:absolute;right:calc(100% + 18px);top:50%;
   width:92px;aspect-ratio:4/5;border-radius:6px;overflow:hidden;
   border:1px solid rgba(var(--ink),.3);background:#0d1c30;
   box-shadow:0 16px 34px rgba(2,8,18,.55),inset 0 1px 0 rgba(var(--ink),.12);
   opacity:0;pointer-events:none;z-index:6;
-  transform:translateX(8px);
+  transform:translateY(-50%) translateX(8px);
   transition:opacity .26s ease,transform .34s cubic-bezier(.2,.7,.2,1)}
 .ih-face img{display:block;width:100%;height:100%;object-fit:cover;
   filter:grayscale(1) contrast(1.03)}
-.heroes>li:hover .ih-face{opacity:1;transform:none}
+.heroes>li:hover .ih-face{opacity:1;transform:translateY(-50%)}
 /* :focus-within used to be here. Clicking an entry focuses it, so the
    portrait stayed up after the click and sat there while the note was
    read - the picture is meant to answer the pointer and nothing else.
    :focus-visible keeps it for the keyboard, which never triggers on a
    mouse click, so the reward survives for anyone tabbing through. */
-.heroes>li:focus-visible .ih-face{opacity:1;transform:none}
+.heroes>li:focus-visible .ih-face{opacity:1;transform:translateY(-50%)}
 /* where there is no pointer, or no ground to the left of the
    text, the face stands small and steady in the line instead */
 @media (hover:none),(pointer:coarse),(max-width:1120px){
@@ -3054,11 +3061,17 @@ object-position:center;opacity:.92}
 .cd-item:hover .cd-cover{transform:translateY(-3px)}
 
 /* ---- 2. one shape for all three metals ---- */
+.cd-item[data-rank="1"] .cd-cover,
+.cd-item[data-rank="2"] .cd-cover,
+.cd-item[data-rank="3"] .cd-cover{margin-top:44px}
 .cd-item[data-rank="1"] .cd-cover::after,
 .cd-item[data-rank="2"] .cd-cover::after,
 .cd-item[data-rank="3"] .cd-cover::after{
-  content:"";position:absolute;left:4%;right:4%;bottom:auto;
-  top:100%;height:32px;margin-top:8px;
+  /* above the cover, not under it: below the jacket it fell into the
+     gap before the next card and read as a stray mark, and on a tall
+     card it was pushed off the bottom altogether */
+  content:"";position:absolute;left:4%;right:4%;top:auto;
+  bottom:100%;height:32px;margin-bottom:10px;
   background-repeat:no-repeat;background-position:center;background-size:100% 100%;
   pointer-events:none}
 .cd-item[data-rank="2"] .cd-cover::after{
@@ -4114,7 +4127,9 @@ html[data-theme="light"] .yp-symbol img{
   left:50%;top:-26px;width:54px;height:24px;transform:translateX(-50%);
   background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2060%2030%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.5%22%20stroke-width%3D%221%22%20transform%3D%22translate(1.2%201.7)%22%3E%3Cpath%20d%3D%22M8%2025%20C7%2019%206.4%2013%206%207.6%20C10.6%2012.4%2014.2%2016%2017.8%2019.6%20C21.6%2014%2025.6%208.4%2029.6%202.8%20C33.6%208.4%2037.6%2014%2041.4%2019.6%20C45%2016%2048.6%2012.4%2053.2%207.6%20C52.8%2013%2052.2%2019%2051.2%2025%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%2025%20C7%2019%206.4%2013%206%207.6%20C10.6%2012.4%2014.2%2016%2017.8%2019.6%20C21.6%2014%2025.6%208.4%2029.6%202.8%20C33.6%208.4%2037.6%2014%2041.4%2019.6%20C45%2016%2048.6%2012.4%2053.2%207.6%20C52.8%2013%2052.2%2019%2051.2%2025%22%2F%3E%3Cpath%20d%3D%22M8%2025%20C20%2027.6%2040%2027.6%2051.2%2024.3%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%227.2%22%20r%3D%221.8%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2229.6%22%20cy%3D%222.4%22%20r%3D%222%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2253.2%22%20cy%3D%227.2%22%20r%3D%221.8%22%20fill%3D%22%23d9b455%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;pointer-events:none}
 
-.cd-item.cd-crowned .cd-cover::after{
+/* crowned cards keep the flourish underneath, clear of the crown */
+.cd-item.cd-crowned .cd-cover{margin-top:38px}
+.cd-item.cd-crowned .cd-cover::after{top:100%;bottom:auto;margin:6px 0 0;
   content:"";position:absolute;
   left:-6px;right:-6px;top:100%;bottom:auto;height:26px;margin-top:6px;
   background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20116%2026%22%20fill%3D%22none%22%20stroke%3D%22%23d9b455%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20opacity%3D%22.6%22%20stroke-width%3D%221.5%22%20transform%3D%22translate(1.1%201.5)%22%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M8%209%20C34%202.4%2080%202.4%20108%209.6%22%2F%3E%3Cpath%20d%3D%22M18%2017.4%20C42%2012.6%2076%2012.6%2096%2018.8%22%2F%3E%3Cpath%20d%3D%22M108%209.6%20C113.4%2011.2%20112.2%2016.4%20106.4%2015.2%22%2F%3E%3C%2Fsvg%3E");
@@ -5614,14 +5629,21 @@ section[id],header[id]{scroll-margin-top:0}
 .yv-big[data-rank="1"] .yv-jacket,
 .yv-big[data-rank="2"] .yv-jacket,
 .yv-big[data-rank="3"] .yv-jacket,
-.yv-big.yv-crowned .yv-jacket{position:relative;margin-bottom:34px}
+.yv-big.yv-crowned .yv-jacket{position:relative}
+.yv-big[data-rank="1"] .yv-jacket,
+.yv-big[data-rank="2"] .yv-jacket,
+.yv-big[data-rank="3"] .yv-jacket{margin-top:44px}
+/* the crowned entries keep theirs underneath: the crown is already
+   above the jacket and two marks in one place is one too many */
+.yv-big.yv-crowned .yv-jacket{margin-top:38px;margin-bottom:34px}
+.yv-big.yv-crowned .yv-jacket::after{top:100%;bottom:auto;margin:10px 0 0}
 
 .yv-big[data-rank="1"] .yv-jacket::after,
 .yv-big[data-rank="2"] .yv-jacket::after,
 .yv-big[data-rank="3"] .yv-jacket::after,
 .yv-big.yv-crowned .yv-jacket::after{
   content:"";position:absolute;
-  left:6%;right:6%;top:100%;height:34px;margin-top:10px;
+  left:6%;right:6%;top:auto;bottom:100%;height:34px;margin-bottom:12px;
   background-repeat:no-repeat;background-position:center;
   background-size:100% 100%;
   pointer-events:none}
