@@ -5942,19 +5942,19 @@ html[data-theme="light"] .ih-endface img{filter:grayscale(1) contrast(1.05) brig
   /* 168% of a 250px cover puts the branches about 43px clear of it on
      each side, which is where a wreath has to sit to look like one
      rather than like a border that has slipped */
-  .yv-big[data-rank="1"] .yv-jacket::after{width:170%;height:150%}
-  .yv-big[data-rank="2"] .yv-jacket::after{width:162%;height:143%}
-  .yv-big[data-rank="3"] .yv-jacket::after{width:156%;height:138%}
+  .yv-big[data-rank="1"] .yv-jacket::after{width:166%;height:106%}
+  .yv-big[data-rank="2"] .yv-jacket::after{width:158%;height:102%}
+  .yv-big[data-rank="3"] .yv-jacket::after{width:152%;height:99%}
 }
 @media (max-width:899px){
   /* narrow enough that a wreath would crowd the type; it steps back to
      flanking the cover closely rather than standing clear of it */
-  .yv-big[data-rank="1"] .yv-jacket::after{width:126%;height:114%}
-  .yv-big[data-rank="2"] .yv-jacket::after{width:122%;height:111%}
-  .yv-big[data-rank="3"] .yv-jacket::after{width:118%;height:109%}
+  .yv-big[data-rank="1"] .yv-jacket::after{width:132%;height:100%}
+  .yv-big[data-rank="2"] .yv-jacket::after{width:126%;height:97%}
+  .yv-big[data-rank="3"] .yv-jacket::after{width:122%;height:95%}
 }
 
 /* the countdown card gets the same room */
-.cd-item[data-rank="1"] .cd-cover::after{width:168%;height:148%}
-.cd-item[data-rank="2"] .cd-cover::after{width:160%;height:141%}
-.cd-item[data-rank="3"] .cd-cover::after{width:154%;height:136%}
+.cd-item[data-rank="1"] .cd-cover::after{width:166%;height:106%}
+.cd-item[data-rank="2"] .cd-cover::after{width:158%;height:102%}
+.cd-item[data-rank="3"] .cd-cover::after{width:152%;height:99%}
