@@ -5338,6 +5338,9 @@ html[data-theme="light"] .yv-jacket img{box-shadow:0 10px 24px rgba(14,11,7,.2)}
    __________________________________________________________________ */
 
 .yv-big.yv-crowned .yv-jacket{position:relative}
+/* number one wears the crown on the year pages too, the way it does in
+   the countdown on the front page */
+.yv-big[data-rank="1"] .yv-jacket::before,
 .yv-big.yv-crowned .yv-jacket::before{
   content:"";position:absolute;
   left:50%;top:-28px;width:56px;height:25px;transform:translateX(-50%);
@@ -5819,89 +5822,136 @@ html[data-theme="light"] .ih-endface img{filter:grayscale(1) contrast(1.05) brig
 }
 
 /* __________________________________________________________________
-   Bronze, silver and gold get the room they are standing in
+   A laurel around the first three, and the crown put back
 
-   A single line under a cover was carrying the whole idea of a medal
-   across a card that is mostly empty. The metal now shows in three
-   places at once, none of them loud on its own:
+   The space beside a cover and under it was empty, and a single line
+   was carrying the whole idea of a medal across it. There is a wreath
+   there now: two branches rising from a knot at the foot and opening up
+   either side, so the drawing occupies exactly the space that was
+   spare. Leaves are turned to the tangent of the curve they sit on,
+   which is the difference between a wreath and a row of ellipses.
 
-     a wash behind the jacket, in the metal's own hue, so the space
-       around the cover belongs to it rather than being unused;
-     a hairline of the metal around the jacket, which is what makes a
-       cover look mounted rather than placed;
-     the line already lying across the foot of the artwork.
+   One file per metal, because the colour is the mark. Gold sits widest
+   and bronze narrowest, so first place reads as more than third without
+   anything being labelled.
 
-   The wash is wide and very faint - it reads as light coming off the
-   book rather than as a shape behind it, which is the difference
-   between a frame and a halo. Gold is warmest and widest, bronze
-   narrowest, so first place feels like more than third without anything
-   being labelled.
+   The crown comes back. My first attempt at the metals put a wash on
+   ::before, which is where the crown for number one had always been
+   drawn - so gilding the space quietly deleted the crown. The wash is a
+   box-shadow now and needs no pseudo-element at all, which leaves
+   ::before to the crown and ::after to the wreath.
    __________________________________________________________________ */
 
 .cd-item[data-rank="1"] .cd-cover,
 .cd-item[data-rank="2"] .cd-cover,
 .cd-item[data-rank="3"] .cd-cover{position:relative}
 
-.cd-item[data-rank="1"] .cd-cover::before,
-.cd-item[data-rank="2"] .cd-cover::before,
-.cd-item[data-rank="3"] .cd-cover::before{
+.cd-item[data-rank="1"] .cd-cover::after,
+.cd-item[data-rank="2"] .cd-cover::after,
+.cd-item[data-rank="3"] .cd-cover::after{
   content:"";position:absolute;z-index:-1;pointer-events:none;
   left:50%;top:50%;transform:translate(-50%,-50%);
-  width:190%;height:150%;
-  border-radius:50%;
-  opacity:.5;
-  transition:opacity .5s ease}
-.cd-item[data-rank="1"] .cd-cover::before{
-  width:210%;height:165%;
-  background:radial-gradient(closest-side,
-    rgba(217,180,85,.30) 0%, rgba(217,180,85,.13) 46%, rgba(217,180,85,0) 78%)}
-.cd-item[data-rank="2"] .cd-cover::before{
-  background:radial-gradient(closest-side,
-    rgba(198,206,217,.22) 0%, rgba(198,206,217,.10) 46%, rgba(198,206,217,0) 78%)}
-.cd-item[data-rank="3"] .cd-cover::before{
-  width:175%;height:140%;
-  background:radial-gradient(closest-side,
-    rgba(189,127,66,.24) 0%, rgba(189,127,66,.10) 46%, rgba(189,127,66,0) 78%)}
-.cd-item[data-rank="1"]:hover .cd-cover::before,
-.cd-item[data-rank="2"]:hover .cd-cover::before,
-.cd-item[data-rank="3"]:hover .cd-cover::before{opacity:.72}
+  width:172%;height:132%;
+  background-repeat:no-repeat;background-position:center;
+  background-size:contain;
+  opacity:.85;
+  transition:opacity .45s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.cd-item[data-rank="1"] .cd-cover::after{
+  width:184%;height:140%;
+  background-image:url("/images/symbols/laurel-gold.svg")}
+.cd-item[data-rank="2"] .cd-cover::after{
+  background-image:url("/images/symbols/laurel-silver.svg")}
+.cd-item[data-rank="3"] .cd-cover::after{
+  width:164%;height:126%;
+  background-image:url("/images/symbols/laurel-bronze.svg")}
+.cd-item[data-rank="1"]:hover .cd-cover::after,
+.cd-item[data-rank="2"]:hover .cd-cover::after,
+.cd-item[data-rank="3"]:hover .cd-cover::after{
+  opacity:1;transform:translate(-50%,-50%) scale(1.03)}
 
-/* the hairline that mounts the cover */
+/* the wash and the hairline, both on the jacket, so no pseudo-element
+   is spent on them and the crown keeps ::before */
 .cd-item[data-rank="1"] .cd-jacket{
-  box-shadow:0 0 0 1px rgba(217,180,85,.42), 0 18px 42px rgba(2,8,18,.5)}
+  box-shadow:0 0 0 1px rgba(217,180,85,.45), 0 0 66px 24px rgba(217,180,85,.10),
+             0 18px 42px rgba(2,8,18,.5)}
 .cd-item[data-rank="2"] .cd-jacket{
-  box-shadow:0 0 0 1px rgba(198,206,217,.34), 0 18px 42px rgba(2,8,18,.5)}
+  box-shadow:0 0 0 1px rgba(198,206,217,.36), 0 0 58px 20px rgba(198,206,217,.08),
+             0 18px 42px rgba(2,8,18,.5)}
 .cd-item[data-rank="3"] .cd-jacket{
-  box-shadow:0 0 0 1px rgba(189,127,66,.38), 0 18px 42px rgba(2,8,18,.5)}
+  box-shadow:0 0 0 1px rgba(189,127,66,.40), 0 0 52px 18px rgba(189,127,66,.09),
+             0 18px 42px rgba(2,8,18,.5)}
 
-html[data-theme="light"] .cd-item[data-rank="1"] .cd-cover::before{opacity:.34}
-html[data-theme="light"] .cd-item[data-rank="2"] .cd-cover::before{opacity:.3}
-html[data-theme="light"] .cd-item[data-rank="3"] .cd-cover::before{opacity:.32}
-html[data-theme="light"] .cd-item[data-rank="1"] .cd-jacket{
-  box-shadow:0 0 0 1px rgba(163,124,42,.4), 0 14px 30px rgba(14,11,7,.2)}
-html[data-theme="light"] .cd-item[data-rank="2"] .cd-jacket{
-  box-shadow:0 0 0 1px rgba(120,128,140,.34), 0 14px 30px rgba(14,11,7,.2)}
-html[data-theme="light"] .cd-item[data-rank="3"] .cd-jacket{
-  box-shadow:0 0 0 1px rgba(140,96,52,.38), 0 14px 30px rgba(14,11,7,.2)}
+/* the crowned cards keep their crown above and take the gold wreath */
+.cd-item.cd-crowned .cd-cover::after{
+  background-image:url("/images/symbols/laurel-gold.svg")!important;
+  top:50%!important;bottom:auto!important;left:50%!important;right:auto!important;
+  width:184%!important;height:140%!important;
+  margin:0!important;
+  transform:translate(-50%,-50%)!important;
+  background-size:contain!important;background-position:center!important;
+  z-index:-1!important;opacity:.85}
 
-/* and the same three signs on the year pages */
-.yv-big[data-rank="1"] .yv-jacket::before,
-.yv-big[data-rank="2"] .yv-jacket::before,
-.yv-big[data-rank="3"] .yv-jacket::before{
+/* and the same on the year pages */
+.yv-big[data-rank="1"] .yv-jacket::after,
+.yv-big[data-rank="2"] .yv-jacket::after,
+.yv-big[data-rank="3"] .yv-jacket::after,
+.yv-big.yv-crowned .yv-jacket::after{
   content:"";position:absolute;z-index:-1;pointer-events:none;
-  left:50%;top:50%;transform:translate(-50%,-50%);
-  width:185%;height:145%;border-radius:50%;opacity:.5}
-.yv-big[data-rank="1"] .yv-jacket::before{
-  width:205%;height:160%;
-  background:radial-gradient(closest-side,
-    rgba(217,180,85,.28) 0%, rgba(217,180,85,.12) 46%, rgba(217,180,85,0) 78%)}
-.yv-big[data-rank="2"] .yv-jacket::before{
-  background:radial-gradient(closest-side,
-    rgba(198,206,217,.2) 0%, rgba(198,206,217,.09) 46%, rgba(198,206,217,0) 78%)}
-.yv-big[data-rank="3"] .yv-jacket::before{
-  width:172%;height:138%;
-  background:radial-gradient(closest-side,
-    rgba(189,127,66,.22) 0%, rgba(189,127,66,.09) 46%, rgba(189,127,66,0) 78%)}
-.yv-big[data-rank="1"] .yv-jacket img{box-shadow:0 0 0 1px rgba(217,180,85,.42),0 14px 32px rgba(2,8,18,.45)}
-.yv-big[data-rank="2"] .yv-jacket img{box-shadow:0 0 0 1px rgba(198,206,217,.34),0 14px 32px rgba(2,8,18,.45)}
-.yv-big[data-rank="3"] .yv-jacket img{box-shadow:0 0 0 1px rgba(189,127,66,.38),0 14px 32px rgba(2,8,18,.45)}
+  left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;
+  transform:translate(-50%,-50%);
+  width:170%;height:130%;
+  background-repeat:no-repeat;background-position:center;background-size:contain;
+  margin:0!important;opacity:.85}
+.yv-big[data-rank="1"] .yv-jacket::after,
+.yv-big.yv-crowned .yv-jacket::after{
+  width:182%;height:138%;
+  background-image:url("/images/symbols/laurel-gold.svg")}
+.yv-big[data-rank="2"] .yv-jacket::after{
+  background-image:url("/images/symbols/laurel-silver.svg")}
+.yv-big[data-rank="3"] .yv-jacket::after{
+  width:162%;height:124%;
+  background-image:url("/images/symbols/laurel-bronze.svg")}
+.yv-big[data-rank="1"] .yv-jacket img{box-shadow:0 0 0 1px rgba(217,180,85,.45),0 0 60px 20px rgba(217,180,85,.09),0 14px 32px rgba(2,8,18,.45)}
+.yv-big[data-rank="2"] .yv-jacket img{box-shadow:0 0 0 1px rgba(198,206,217,.36),0 0 54px 18px rgba(198,206,217,.07),0 14px 32px rgba(2,8,18,.45)}
+.yv-big[data-rank="3"] .yv-jacket img{box-shadow:0 0 0 1px rgba(189,127,66,.40),0 0 48px 16px rgba(189,127,66,.08),0 14px 32px rgba(2,8,18,.45)}
+
+@media (prefers-reduced-motion:reduce){
+  .cd-item .cd-cover::after{transition:none}
+}
+
+
+/* __________________________________________________________________
+   The wreath needs a column of its own
+
+   At 184% of a 250px jacket the laurel reached 105px past the cover on
+   each side, which put it through the rank numeral on one side and the
+   title on the other. The answer is not a smaller wreath - a laurel
+   that barely clears the book does not read as a wreath - but a wider
+   column for it to stand in. The jacket keeps its size and centres; the
+   column grows to hold the drawing around it.
+   __________________________________________________________________ */
+
+@media (min-width:900px){
+  .yv-big[data-rank="1"],
+  .yv-big[data-rank="2"],
+  .yv-big[data-rank="3"]{grid-template-columns:74px 356px minmax(0,1fr)}
+  .yv-big[data-rank="1"] .yv-jacket,
+  .yv-big[data-rank="2"] .yv-jacket,
+  .yv-big[data-rank="3"] .yv-jacket{
+    width:250px;margin-inline:auto}
+  .yv-big[data-rank="1"] .yv-jacket::after{width:142%;height:126%}
+  .yv-big[data-rank="2"] .yv-jacket::after{width:134%;height:120%}
+  .yv-big[data-rank="3"] .yv-jacket::after{width:128%;height:116%}
+}
+@media (max-width:899px){
+  /* narrow enough that a wreath would crowd the type; it steps back to
+     flanking the cover closely rather than standing clear of it */
+  .yv-big[data-rank="1"] .yv-jacket::after{width:126%;height:114%}
+  .yv-big[data-rank="2"] .yv-jacket::after{width:122%;height:111%}
+  .yv-big[data-rank="3"] .yv-jacket::after{width:118%;height:109%}
+}
+
+/* the countdown card gets the same room */
+.cd-item[data-rank="1"] .cd-cover::after{width:142%;height:126%}
+.cd-item[data-rank="2"] .cd-cover::after{width:134%;height:120%}
+.cd-item[data-rank="3"] .cd-cover::after{width:128%;height:116%}
