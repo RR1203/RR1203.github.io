@@ -1342,13 +1342,14 @@
 
       <p class="contact-lede">Questions and collaborations are welcome.</p>
 
-      <!-- data-alias is the proper hiding place for the destination: FormSubmit
-           hands out a random string once the address has been confirmed once,
-           and that string reveals nothing. Paste it in and the address below
-           is never consulted again. data-k is the fallback until then. -->
+      <!-- The destination is a FormSubmit alias: a random string standing in
+           for the address, handed out once the address was confirmed. It
+           reveals nothing, so the address itself is no longer anywhere on
+           this page. The XOR-obfuscated fallback that used to sit here is
+           gone with it - obfuscation only ever slowed a scraper down, and
+           there is nothing left to slow it down over. -->
       <form id="message-form" class="message-form" method="POST"
-            data-alias=""
-            data-k="000c435c554118400b1e04044e59557251400f1e04434e5d5d">
+            data-alias="c3d8462922c3bddae4d66b51a25153e1">
         <input type="email" name="email" placeholder="Email" aria-label="Your email address" autocomplete="email" required>
         <input type="text" name="subject" placeholder="Subject" aria-label="Subject">
         <textarea name="message" placeholder="Message" aria-label="Your message" rows="6" required></textarea>
@@ -1356,12 +1357,6 @@
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
         <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
-
-        <label class="human-check">
-          <input type="checkbox" id="human-check" required>
-          <span class="human-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.5 12.6 10 17.2 18.6 7.4"/></svg></span>
-          <span class="human-label">I am not a robot</span>
-        </label>
 
         <button type="submit">Submit</button>
         <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
@@ -1435,34 +1430,14 @@
       var button = form.querySelector('button[type="submit"]');
       var statusLine = document.getElementById('form-status');
       var honey = form.querySelector('input[name="_honey"]');
-      var humanCheck = document.getElementById('human-check');
       var loadedAt = Date.now();
 
-      /* Where the message goes.
-
-         Best case, the form carries a FormSubmit alias: a random string that
-         stands in for the address and gives a scraper nothing at all. If that
-         slot is filled, nothing else on this page touches the address.
-
-         Until then the address is carried as data-k, XOR'd against a key and
-         written as plain hexadecimal. It is deliberately not base64 and not
-         reversed text, so it matches none of the shapes an address harvester
-         looks for, and it is only assembled in the instant a message is sent.
-         It is obfuscation, not secrecy: anything a browser can reconstruct, a
-         determined scraper running a browser can reconstruct too. The alias
-         is the only version of this that is actually hidden. */
+      /* Where the message goes. The alias is a public string by design -
+         it is in this page and this page is public - but it is a string
+         that is useful to nobody except as a way of posting a message to
+         an inbox it never names. */
       function endpoint() {
-        var alias = (form.getAttribute('data-alias') || '').trim();
-        if (alias) { return 'https://formsubmit.co/ajax/' + alias; }
-        var hex = form.getAttribute('data-k') || '';
-        var key = 'hm-2026-nw';
-        var out = '';
-        for (var i = 0; i < hex.length; i += 2) {
-          out += String.fromCharCode(
-            parseInt(hex.substr(i, 2), 16) ^ key.charCodeAt((i / 2) % key.length)
-          );
-        }
-        return 'https://formsubmit.co/ajax/' + out;
+        return 'https://formsubmit.co/ajax/' + (form.getAttribute('data-alias') || '').trim();
       }
 
       function show(message, ok) {
@@ -1477,7 +1452,6 @@
 
       function send() {
         var data = new FormData(form);
-        data.delete('g-recaptcha-response');
         fetch(endpoint(), {
           method: 'POST',
           body: data,
@@ -1501,10 +1475,6 @@
       form.addEventListener('submit', function (event) {
         event.preventDefault();
         if (honey && honey.value) { return; }
-        if (!humanCheck.checked) {
-          show('Please confirm that you are not a robot.', false);
-          return;
-        }
         if (Date.now() - loadedAt < 2500) {
           show('Please take a moment before sending.', false);
           return;
