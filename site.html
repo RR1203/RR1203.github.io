@@ -1358,6 +1358,12 @@
         <input type="hidden" name="_captcha" value="false">
         <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
 
+        <label class="human-check">
+          <input type="checkbox" id="human-check" required>
+          <span class="human-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.5 12.6 10 17.2 18.6 7.4"/></svg></span>
+          <span class="human-label">I am not a robot</span>
+        </label>
+
         <button type="submit">Submit</button>
         <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
       </form>
@@ -1430,6 +1436,7 @@
       var button = form.querySelector('button[type="submit"]');
       var statusLine = document.getElementById('form-status');
       var honey = form.querySelector('input[name="_honey"]');
+      var humanCheck = document.getElementById('human-check');
       var loadedAt = Date.now();
 
       /* Where the message goes. The alias is a public string by design -
@@ -1475,6 +1482,10 @@
       form.addEventListener('submit', function (event) {
         event.preventDefault();
         if (honey && honey.value) { return; }
+        if (!humanCheck.checked) {
+          show('Please confirm that you are not a robot.', false);
+          return;
+        }
         if (Date.now() - loadedAt < 2500) {
           show('Please take a moment before sending.', false);
           return;
