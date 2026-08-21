@@ -1901,6 +1901,11 @@
   }
 
   /* ---- one countdown per panel ---- */
+  /* Declared here and defined further down: draw() calls it on every
+     change, and at start-up it is still undefined, which is exactly
+     right - the first draw(0) of each panel must not overwrite the
+     state we are about to restore. */
+  var remember;
   var counters = {};
   [].slice.call(block.querySelectorAll(".ypanel")).forEach(function (panel) {
     var cd = panel.querySelector("[data-cd]");
@@ -1937,6 +1942,7 @@
         live.textContent = card ? (card + ", card " + (at + 1) + " of " + items.length) :
           ("Number " + (items[at].getAttribute("data-rank") || (items.length - at)) + " of " + items.length);
       }
+      if (remember) { remember(); }
     };
     cd.classList.add("is-js");
 
@@ -1986,6 +1992,16 @@
     draw(0);
     counters[panel.getAttribute("data-year")] = {
       move: function (d) { step(at + d); },
+      index: function () { return at; },
+      /* Used when coming back to a reloaded page: the card is put in
+         place directly rather than travelling there through every card
+         in between. */
+      jump: function (k) {
+        if (k < 0 || k > items.length - 1) { return; }
+        busy = false;
+        cd.classList.remove("is-busy", "is-back");
+        draw(k);
+      },
       reset: function () {
         busy = false;
         cd.classList.remove("is-busy", "is-back");
@@ -2004,6 +2020,7 @@
     if (panel) { panel.classList.remove("is-open"); panel.hidden = true; }
     chips.forEach(function (c) { c.setAttribute("aria-expanded", "false"); });
     openYear = null;
+    if (remember) { remember(); }
   };
   var openUp = function (year) {
     if (openYear === year) { shut(); return; }
@@ -2015,8 +2032,9 @@
     chips.forEach(function (c) {
       c.setAttribute("aria-expanded", c.getAttribute("data-year") === year ? "true" : "false");
     });
-    if (counters[year]) { counters[year].reset(); }
     openYear = year;
+    if (counters[year]) { counters[year].reset(); }
+    remember();
   };
   chips.forEach(function (c) {
     c.addEventListener("click", function () {
@@ -2042,6 +2060,68 @@
     if (e.key === "ArrowRight") { counters[openYear].move(1); e.preventDefault(); }
     else if (e.key === "ArrowLeft") { counters[openYear].move(-1); e.preventDefault(); }
   });
+
+  /* ---- coming back to the same page ----
+     Opening a year and walking down to a book is several deliberate
+     steps, and a reload used to throw all of them away and drop you at
+     the closed row of years. The open year, the card being read and the
+     place on the page are now written down as they change, and put back
+     on the way in.
+
+     sessionStorage, not the address bar: the page already uses the hash
+     for its own sections (#about, #writing), so a second meaning there
+     would fight the anchors. Per-tab is also the right lifetime - this
+     should survive a reload, not greet you a week later with a year you
+     have forgotten opening. */
+  var MEM = "hm:reading";
+  remember = function () {
+    try {
+      if (!openYear) { window.sessionStorage.removeItem(MEM); return; }
+      var c = counters[openYear];
+      window.sessionStorage.setItem(MEM, JSON.stringify({
+        y: openYear,
+        i: c ? c.index() : 0
+      }));
+    } catch (err) { /* private mode, or storage full: not worth a broken page */ }
+  };
+
+  (function () {
+    var raw = null;
+    try { raw = window.sessionStorage.getItem(MEM); } catch (err) { return; }
+    if (!raw) { return; }
+    var st = null;
+    try { st = JSON.parse(raw); } catch (err) { return; }
+    if (!st || !st.y || !document.getElementById("yr-" + st.y)) { return; }
+
+    openUp(st.y);
+    if (counters[st.y] && st.i) { counters[st.y].jump(st.i); }
+
+    /* Bring the panel back into view rather than replaying a saved pixel
+       offset. The panel is opened by script, so the document is still
+       short while the browser does its own scroll restoration and it
+       lands too high; and a stored offset would be wrong anyway if the
+       window had been resized or zoomed in between. The height of the
+       sticky bar is the one the bar itself publishes. */
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    var panel = document.getElementById("yr-" + st.y);
+    var settle = function () {
+      var navh = parseInt(window.getComputedStyle(document.documentElement)
+        .getPropertyValue("--navh"), 10);
+      if (!navh || isNaN(navh)) { navh = 57; }
+      var top = panel.getBoundingClientRect().top + (window.pageYOffset || 0);
+      var y = Math.max(0, Math.round(top - navh - 14));
+      /* both spellings: some engines ignore one or the other when the
+         document has just changed height under them */
+      window.scrollTo(0, y);
+      var se = document.scrollingElement || document.documentElement;
+      if (se && Math.abs((window.pageYOffset || 0) - y) > 2) { se.scrollTop = y; }
+    };
+    settle();
+    window.requestAnimationFrame(settle);
+    window.setTimeout(settle, 80);
+  }());
 }());
 
 </script>
