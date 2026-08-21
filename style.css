@@ -5822,126 +5822,93 @@ html[data-theme="light"] .ih-endface img{filter:grayscale(1) contrast(1.05) brig
 }
 
 /* __________________________________________________________________
-   A laurel around the first three, and the crown put back
+   A vine frame around the first three
 
-   The space beside a cover and under it was empty, and a single line
-   was carrying the whole idea of a medal across it. There is a wreath
-   there now: two branches rising from a knot at the foot and opening up
-   either side, so the drawing occupies exactly the space that was
-   spare. Leaves are turned to the tangent of the curve they sit on,
-   which is the difference between a wreath and a row of ellipses.
+   The metal is a border now rather than something standing beside the
+   book, which settles the argument the laurel kept losing: a frame cannot
+   reach the headline, because it is fastened to the cover on all four
+   sides and sits eighteen pixels outside it.
 
-   One file per metal, because the colour is the mark. Gold sits widest
-   and bronze narrowest, so first place reads as more than third without
-   anything being labelled.
+   Drawn with border-image, the one mechanism that frames a box of unknown
+   proportions honestly - the four corners are placed undistorted and only
+   the straight runs repeat. Every jacket here is a slightly different
+   shape and a single stretched image would squash the leaves differently
+   on each.
 
-   The crown comes back. My first attempt at the metals put a wash on
-   ::before, which is where the crown for number one had always been
-   drawn - so gilding the space quietly deleted the crown. The wash is a
-   box-shadow now and needs no pseudo-element at all, which leaves
-   ::before to the crown and ::after to the wreath.
+   Two numbers matter and both are deliberate. The slice is 18 and the
+   border is 18px, so the artwork renders at 1.0: a 2.4-unit stroke is
+   2.4px and a 6-unit leaf is 6px. Every earlier version of this ornament
+   was invisible because those two numbers disagreed and the whole drawing
+   came out at a fraction of its size. And the SVG carries width and
+   height, not only a viewBox - border-image-slice counts in the image's
+   own pixels, and an SVG with no intrinsic size gives it nothing to count.
    __________________________________________________________________ */
 
 .cd-item[data-rank="1"] .cd-cover,
 .cd-item[data-rank="2"] .cd-cover,
-.cd-item[data-rank="3"] .cd-cover{position:relative}
+.cd-item[data-rank="3"] .cd-cover,
+.yv-big[data-rank="1"] .yv-jacket,
+.yv-big[data-rank="2"] .yv-jacket,
+.yv-big[data-rank="3"] .yv-jacket,
+.yv-big.yv-crowned .yv-jacket{position:relative}
 
 .cd-item[data-rank="1"] .cd-cover::after,
 .cd-item[data-rank="2"] .cd-cover::after,
-.cd-item[data-rank="3"] .cd-cover::after{
-  content:"";position:absolute;pointer-events:none;z-index:1;
-  left:50%;top:100%;transform:translateX(-50%);
-  margin-top:12px;
-  background-repeat:no-repeat;background-position:center top;
-  background-size:contain;
-  opacity:.9;
-  transition:opacity .45s ease}
-.cd-item[data-rank="1"] .cd-cover::after{
-  background-image:url("/images/symbols/laurel-gold.svg")}
-.cd-item[data-rank="2"] .cd-cover::after{
-  background-image:url("/images/symbols/laurel-silver.svg")}
-.cd-item[data-rank="3"] .cd-cover::after{
-  background-image:url("/images/symbols/laurel-bronze.svg")}
-.cd-item[data-rank="1"]:hover .cd-cover::after,
-.cd-item[data-rank="2"]:hover .cd-cover::after,
-.cd-item[data-rank="3"]:hover .cd-cover::after{opacity:1}
-
-/* the wash and the hairline, both on the jacket, so no pseudo-element
-   is spent on them and the crown keeps ::before */
-.cd-item[data-rank="1"] .cd-jacket{
-  box-shadow:0 0 0 1px rgba(217,180,85,.45), 0 0 66px 24px rgba(217,180,85,.10),
-             0 18px 42px rgba(2,8,18,.5)}
-.cd-item[data-rank="2"] .cd-jacket{
-  box-shadow:0 0 0 1px rgba(198,206,217,.36), 0 0 58px 20px rgba(198,206,217,.08),
-             0 18px 42px rgba(2,8,18,.5)}
-.cd-item[data-rank="3"] .cd-jacket{
-  box-shadow:0 0 0 1px rgba(189,127,66,.40), 0 0 52px 18px rgba(189,127,66,.09),
-             0 18px 42px rgba(2,8,18,.5)}
-
-/* the crowned cards keep their crown above and take the gold wreath */
-.cd-item.cd-crowned .cd-cover::after{
-  background-image:url("/images/symbols/laurel-gold.svg")!important;
-  top:100%!important;bottom:auto!important;left:50%!important;right:auto!important;
-  width:100%!important;height:52px!important;
-  margin:12px 0 0!important;
-  transform:translateX(-50%)!important;
-  background-size:contain!important;background-position:center top!important;
-  z-index:1!important;opacity:.9}
-
-/* and the same on the year pages */
+.cd-item[data-rank="3"] .cd-cover::after,
+.cd-item.cd-crowned .cd-cover::after,
 .yv-big[data-rank="1"] .yv-jacket::after,
 .yv-big[data-rank="2"] .yv-jacket::after,
 .yv-big[data-rank="3"] .yv-jacket::after,
 .yv-big.yv-crowned .yv-jacket::after{
-  content:"";position:absolute;pointer-events:none;
-  left:50%!important;right:auto!important;top:100%!important;bottom:auto!important;
-  transform:translateX(-50%);
-  background-repeat:no-repeat;background-position:center top;background-size:contain;
-  margin:12px 0 0!important;opacity:.9;z-index:1}
+  content:"";
+  position:absolute;
+  inset:-18px;
+  left:-18px;right:-18px;top:-18px;bottom:-18px;
+  width:auto;height:auto;aspect-ratio:auto;margin:0;
+  border:18px solid transparent;
+  border-image-slice:18;
+  border-image-width:18px;
+  border-image-repeat:round;
+  background:none;
+  transform:none;
+  pointer-events:none;
+  z-index:2;
+  opacity:.9;
+  transition:opacity .35s ease}
+
+.cd-item[data-rank="1"] .cd-cover::after,
+.cd-item.cd-crowned .cd-cover::after,
 .yv-big[data-rank="1"] .yv-jacket::after,
 .yv-big.yv-crowned .yv-jacket::after{
-  background-image:url("/images/symbols/laurel-gold.svg")}
+  border-image-source:url("/images/symbols/vine-gold.svg")}
+.cd-item[data-rank="2"] .cd-cover::after,
 .yv-big[data-rank="2"] .yv-jacket::after{
-  background-image:url("/images/symbols/laurel-silver.svg")}
+  border-image-source:url("/images/symbols/vine-silver.svg")}
+.cd-item[data-rank="3"] .cd-cover::after,
 .yv-big[data-rank="3"] .yv-jacket::after{
-  background-image:url("/images/symbols/laurel-bronze.svg")}
-.yv-big[data-rank="1"] .yv-jacket img{box-shadow:0 0 0 1px rgba(217,180,85,.45),0 0 60px 20px rgba(217,180,85,.09),0 14px 32px rgba(2,8,18,.45)}
-.yv-big[data-rank="2"] .yv-jacket img{box-shadow:0 0 0 1px rgba(198,206,217,.36),0 0 54px 18px rgba(198,206,217,.07),0 14px 32px rgba(2,8,18,.45)}
-.yv-big[data-rank="3"] .yv-jacket img{box-shadow:0 0 0 1px rgba(189,127,66,.40),0 0 48px 16px rgba(189,127,66,.08),0 14px 32px rgba(2,8,18,.45)}
+  border-image-source:url("/images/symbols/vine-bronze.svg")}
+
+.cd-item[data-rank="1"]:hover .cd-cover::after,
+.cd-item[data-rank="2"]:hover .cd-cover::after,
+.cd-item[data-rank="3"]:hover .cd-cover::after,
+.yv-big[data-rank="1"]:hover .yv-jacket::after,
+.yv-big[data-rank="2"]:hover .yv-jacket::after,
+.yv-big[data-rank="3"]:hover .yv-jacket::after{opacity:1}
+
+/* the metal hairline on the jacket goes - the frame is the metal now, and
+   two metal edges eighteen pixels apart read as a mistake */
+.cd-item[data-rank="1"] .cd-jacket,
+.cd-item[data-rank="2"] .cd-jacket,
+.cd-item[data-rank="3"] .cd-jacket{box-shadow:0 18px 42px rgba(2,8,18,.5)}
+.yv-big[data-rank="1"] .yv-jacket img,
+.yv-big[data-rank="2"] .yv-jacket img,
+.yv-big[data-rank="3"] .yv-jacket img{box-shadow:0 14px 32px rgba(2,8,18,.45)}
+
+/* room for the frame, so it never sits on the entry above or below */
+.yv-big[data-rank="1"],
+.yv-big[data-rank="2"],
+.yv-big[data-rank="3"]{padding-top:44px;padding-bottom:44px}
 
 @media (prefers-reduced-motion:reduce){
-  .cd-item .cd-cover::after{transition:none}
+  .cd-item .cd-cover::after,.yv-big .yv-jacket::after{transition:none}
 }
-
-
-/* __________________________________________________________________
-   The wreath needs a column of its own
-
-   At 184% of a 250px jacket the laurel reached 105px past the cover on
-   each side, which put it through the rank numeral on one side and the
-   title on the other. The answer is not a smaller wreath - a laurel
-   that barely clears the book does not read as a wreath - but a wider
-   column for it to stand in. The jacket keeps its size and centres; the
-   column grows to hold the drawing around it.
-   __________________________________________________________________ */
-
-@media (min-width:900px){
-  /* 168% of a 250px cover puts the branches about 43px clear of it on
-     each side, which is where a wreath has to sit to look like one
-     rather than like a border that has slipped */
-  .yv-big[data-rank="1"] .yv-jacket::after{width:100%;height:56px}
-  .yv-big[data-rank="2"] .yv-jacket::after{width:92%;height:50px}
-  .yv-big[data-rank="3"] .yv-jacket::after{width:86%;height:46px}
-}
-@media (max-width:899px){
-  /* narrow enough that a wreath would crowd the type; it steps back to
-     flanking the cover closely rather than standing clear of it */
-  .yv-big[data-rank="1"] .yv-jacket::after{width:100%;height:44px}
-  .yv-big[data-rank="2"] .yv-jacket::after{width:92%;height:40px}
-  .yv-big[data-rank="3"] .yv-jacket::after{width:86%;height:37px}
-}
-
-/* the countdown card gets the same room */
-.cd-item[data-rank="1"] .cd-cover::after{width:100%;height:52px}
-.cd-item[data-rank="2"] .cd-cover::after{width:92%;height:47px}
-.cd-item[data-rank="3"] .cd-cover::after{width:86%;height:43px}
