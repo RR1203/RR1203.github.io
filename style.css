@@ -5912,3 +5912,22 @@ html[data-theme="light"] .ih-endface img{filter:grayscale(1) contrast(1.05) brig
 @media (prefers-reduced-motion:reduce){
   .cd-item .cd-cover::after,.yv-big .yv-jacket::after{transition:none}
 }
+
+
+/* __________________________________________________________________
+   Room under the winners for the frame
+
+   The vine frame stands eighteen pixels outside the cover on all four
+   sides, but the countdown box was only ever built around the cover
+   itself. Underneath the bottom row that left four pixels of daylight:
+   enough for the frame to render, not enough to see it, and little
+   enough that a change of text size or browser zoom pushed it into the
+   rule below.
+
+   Two adjustments. The list's clip is opened underneath, so it matches
+   the generous margin it always had above rather than the eight pixels
+   it had below. And the stage carries padding at its foot, so the frame
+   ends in air instead of against the divider and the row of ticks.
+   __________________________________________________________________ */
+.cd.is-js .cd-list{clip-path:inset(-44px 0 -40px 0)}
+.cd-stage{padding-bottom:34px}
