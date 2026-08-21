@@ -5931,3 +5931,33 @@ html[data-theme="light"] .ih-endface img{filter:grayscale(1) contrast(1.05) brig
    __________________________________________________________________ */
 .cd.is-js .cd-list{clip-path:inset(-44px 0 -40px 0)}
 .cd-stage{padding-bottom:34px}
+
+
+/* __________________________________________________________________
+   The vine stops at the crown
+
+   The crown sits on the frame's top strip, so the stem ran straight
+   through the middle of it and out the other side. A gap is punched in
+   the frame exactly where the crown stands: two mask layers, one
+   covering the whole box and one the size of the crown, composited so
+   the overlap is subtracted. The border-image is painted inside the
+   element, so a mask on the element cuts the drawing itself - there is
+   no patch of background colour to keep in step with the theme.
+
+   Only the crowned covers are touched; second and third keep an
+   unbroken frame.
+   __________________________________________________________________ */
+.cd-item[data-rank="1"] .cd-cover::after,
+.cd-item.cd-crowned .cd-cover::after,
+.yv-big[data-rank="1"] .yv-jacket::after,
+.yv-big.yv-crowned .yv-jacket::after{
+  -webkit-mask-image:linear-gradient(#000,#000),linear-gradient(#000,#000);
+  -webkit-mask-size:100% 100%,60px 20px;
+  -webkit-mask-position:0 0,top center;
+  -webkit-mask-repeat:no-repeat,no-repeat;
+  -webkit-mask-composite:xor;
+  mask-image:linear-gradient(#000,#000),linear-gradient(#000,#000);
+  mask-size:100% 100%,60px 20px;
+  mask-position:0 0,top center;
+  mask-repeat:no-repeat,no-repeat;
+  mask-composite:exclude}
