@@ -1,0 +1,93 @@
+{
+ "note": "report-level openFDA counts; PD = any drug indication text matching parkinson/parkinsonism/lewy; drug present in any role",
+ "pd_query": "(patient.drug.drugindication:parkinson OR patient.drug.drugindication:parkinsonism OR patient.drug.drugindication:\"lewy\")",
+ "results": {
+  "pimavanserin": {
+   "n_all": 57693,
+   "n_pd": 53449,
+   "n_nonpd": 4244,
+   "motor_any": {
+    "pd_events": 9244,
+    "pd_pct": 17.3,
+    "nonpd_events": 510,
+    "nonpd_pct": 12.0,
+    "ror_pd_vs_nonpd": 1.53,
+    "ci": [
+     1.39,
+     1.68
+    ],
+    "haldane": false
+   },
+   "eps_core": {
+    "pd_events": 2241,
+    "pd_pct": 4.2,
+    "nonpd_events": 148,
+    "nonpd_pct": 3.5,
+    "ror_pd_vs_nonpd": 1.21,
+    "ci": [
+     1.02,
+     1.43
+    ],
+    "haldane": false
+   }
+  },
+  "quetiapine": {
+   "n_all": 194380,
+   "n_pd": 10158,
+   "n_nonpd": 184222,
+   "motor_any": {
+    "pd_events": 3089,
+    "pd_pct": 30.4,
+    "nonpd_events": 25468,
+    "nonpd_pct": 13.8,
+    "ror_pd_vs_nonpd": 2.72,
+    "ci": [
+     2.61,
+     2.85
+    ],
+    "haldane": false
+   },
+   "eps_core": {
+    "pd_events": 1475,
+    "pd_pct": 14.5,
+    "nonpd_events": 13299,
+    "nonpd_pct": 7.2,
+    "ror_pd_vs_nonpd": 2.18,
+    "ci": [
+     2.06,
+     2.31
+    ],
+    "haldane": false
+   }
+  },
+  "xanomeline-trospium": {
+   "n_all": 2875,
+   "n_pd": 6,
+   "n_nonpd": 2869,
+   "motor_any": {
+    "pd_events": 0,
+    "pd_pct": 0.0,
+    "nonpd_events": 163,
+    "nonpd_pct": 5.7,
+    "ror_pd_vs_nonpd": 1.27,
+    "ci": [
+     0.07,
+     22.7
+    ],
+    "haldane": true
+   },
+   "eps_core": {
+    "pd_events": 0,
+    "pd_pct": 0.0,
+    "nonpd_events": 106,
+    "nonpd_pct": 3.7,
+    "ror_pd_vs_nonpd": 2.0,
+    "ci": [
+     0.11,
+     35.66
+    ],
+    "haldane": true
+   }
+  }
+ }
+}

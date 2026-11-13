@@ -1,0 +1,119 @@
+{
+ "tierA_reports|motor_any": {
+  "n": 6,
+  "events": 0,
+  "n_ref": 2867,
+  "ref_events": 164,
+  "ref_pct": 5.7,
+  "ror": [
+   1.26,
+   0.07,
+   22.54,
+   true
+  ]
+ },
+ "tierA_reports|eps_core": {
+  "n": 6,
+  "events": 0,
+  "n_ref": 2867,
+  "ref_events": 106,
+  "ref_pct": 3.7,
+  "ror": [
+   1.99,
+   0.11,
+   35.64,
+   true
+  ]
+ },
+ "tierA_reports|gait_fall": {
+  "n": 6,
+  "events": 0,
+  "n_ref": 2867,
+  "ref_events": 31,
+  "ref_pct": 1.1,
+  "ror": [
+   6.93,
+   0.38,
+   125.62,
+   true
+  ]
+ },
+ "tierA_dedup_patients|motor_any": {
+  "n": 4,
+  "events": 0,
+  "n_ref": 2867,
+  "ref_events": 164,
+  "ref_pct": 5.7,
+  "ror": [
+   1.83,
+   0.1,
+   34.06,
+   true
+  ]
+ },
+ "tierA_dedup_patients|eps_core": {
+  "n": 4,
+  "events": 0,
+  "n_ref": 2867,
+  "ref_events": 106,
+  "ref_pct": 3.7,
+  "ror": [
+   2.88,
+   0.15,
+   53.86,
+   true
+  ]
+ },
+ "tierA_dedup_patients|gait_fall": {
+  "n": 4,
+  "events": 0,
+  "n_ref": 2867,
+  "ref_events": 31,
+  "ref_pct": 1.1,
+  "ror": [
+   10.01,
+   0.53,
+   189.79,
+   true
+  ]
+ },
+ "tierAB_reports|motor_any": {
+  "n": 7,
+  "events": 1,
+  "n_ref": 2867,
+  "ref_events": 164,
+  "ref_pct": 5.7,
+  "ror": [
+   2.75,
+   0.33,
+   22.95,
+   false
+  ]
+ },
+ "tierAB_reports|eps_core": {
+  "n": 7,
+  "events": 1,
+  "n_ref": 2867,
+  "ref_events": 106,
+  "ref_pct": 3.7,
+  "ror": [
+   4.34,
+   0.52,
+   36.38,
+   false
+  ]
+ },
+ "tierAB_reports|gait_fall": {
+  "n": 7,
+  "events": 0,
+  "n_ref": 2867,
+  "ref_events": 31,
+  "ref_pct": 1.1,
+  "ror": [
+   6.0,
+   0.34,
+   107.39,
+   true
+  ]
+ }
+}

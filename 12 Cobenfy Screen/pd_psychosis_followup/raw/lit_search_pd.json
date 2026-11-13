@@ -1,0 +1,4875 @@
+{
+ "log": [
+  {
+   "source": "PubMed",
+   "query": "(xanomeline[tiab] OR KarXT[tiab] OR Cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab] OR \"xanomeline/trospium\"[tiab]) AND (parkinson*[tiab] OR lewy[tiab] OR parkinsonism[tiab] OR extrapyramidal[tiab] OR dystonia[tiab] OR tremor[tiab] OR motor[tiab]) AND 2024:2026[dp]",
+   "count": 31
+  },
+  {
+   "source": "PubMed",
+   "query": "(xanomeline OR KarXT OR cobenfy) AND (parkinson* OR lewy)",
+   "count": 6
+  },
+  {
+   "source": "Europe PMC",
+   "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\" OR \"xanomeline and trospium\" OR \"xanomeline/trospium\") AND (parkinson* OR \"lewy body\" OR \"lewy bodies\" OR parkinsonism OR \"extrapyramidal\" OR dystonia OR tremor) AND PUB_YEAR:[2024 TO 2026]",
+   "count": 217
+  },
+  {
+   "source": "Europe PMC",
+   "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\" OR \"xanomeline and trospium\" OR \"xanomeline/trospium\") AND (parkinson* OR \"lewy\") AND SRC:PPR",
+   "count": 1
+  },
+  {
+   "source": "Europe PMC",
+   "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\" OR \"xanomeline and trospium\" OR \"xanomeline/trospium\") AND (parkinson* OR \"lewy\")",
+   "count": 357
+  }
+ ],
+ "records": [
+  {
+   "id": "PMID:43011897",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Xanomeline/Trospium (Cobenfy) for Schizophrenia: Is It Revolutionary? A Systematic Review.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Innov Clin Neurosci",
+   "doi": null
+  },
+  {
+   "id": "PMID:42978501",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "[Xanomeline-trospium: A review of clinical studies in patients with schizophrenia].",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Tijdschr Psychiatr",
+   "doi": null
+  },
+  {
+   "id": "PMID:42947585",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "An Update on Xanomeline-trospium (Cobenfy) for Schizophrenia: Emerging Evidence and Clinical Implications.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Clin Psychopharmacol Neurosci",
+   "doi": "10.9758/cpn.26.1406"
+  },
+  {
+   "id": "PMID:42846838",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Beyond dopamine: KarXT and emerging mechanism-based therapies in schizophrenia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2026.1828831"
+  },
+  {
+   "id": "PMID:42741956",
+   "found_in": [
+    "pubmed"
+   ]
+  },
+  {
+   "id": "PMID:42729706",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Treatment-resistant Parkinson's disease psychosis responding to xanomeline-trospium: A case report.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Clin Park Relat Disord",
+   "doi": "10.1016/j.prdoa.2026.100497"
+  },
+  {
+   "id": "PMID:42728876",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Xanomeline and Trospium Chloride: Mechanism of Action, Clinical, and Translational Science.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Clin Transl Sci",
+   "doi": "10.1111/cts.70725"
+  },
+  {
+   "id": "PMID:42621264",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "The mechanism of action and clinical efficacy of xanomeline-trospium in schizophrenia: A comprehensive review.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Ther Adv Psychopharmacol",
+   "doi": "10.1177/20451253261478086"
+  },
+  {
+   "id": "PMID:42450007",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Xanomeline-Trospium Validates Muscarinic Agonism as an Effective Non-Dopaminergic Treatment for Schizophrenia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms27135734"
+  },
+  {
+   "id": "PMID:42345506",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Effects of pimavanserin, xanomeline and highly-purified plant-derived cannabidiol on MK-801-induced behaviours in mice relevant to psychosis.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "J Psychopharmacol",
+   "doi": "10.1177/02698811261456216"
+  },
+  {
+   "id": "PMID:42288069",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Post-marketing safety surveillance of the novel muscarinic antipsychotic Xanomeline-Trospium for schizophrenia: A comparative disproportionality analysis against olanzapine based on FAERS data.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Psychiatry Res",
+   "doi": "10.1016/j.psychres.2026.117270"
+  },
+  {
+   "id": "PMID:42202430",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Safety profile and potential clinical risks of xanomeline and trospium chloride: A real-world pharmacovigilance study using FAERS.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Neurotherapeutics",
+   "doi": "10.1016/j.neurot.2026.e00930"
+  },
+  {
+   "id": "PMID:42124748",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Inpatient Initiation of Cobenfy (Xanomeline-Trospium Chloride) During Acute Psychotic Decompensation in a Patient With Schizoaffective Disorder: A Case Report.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Cureus",
+   "doi": "10.7759/cureus.106836"
+  },
+  {
+   "id": "PMID:42069559",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Transitioning from clozapine to Cobenfy (xanomeline-trospium chloride) in treatment resistant schizophrenia and clozapine induced OCD.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "BMC Psychiatry",
+   "doi": "10.1186/s12888-026-07795-7"
+  },
+  {
+   "id": "PMID:41825117",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Low incidence of extrapyramidal symptoms following treatment with a muscarinic agonist medication for schizophrenia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Schizophr Res",
+   "doi": "10.1016/j.schres.2026.03.004"
+  },
+  {
+   "id": "PMID:41786037",
+   "found_in": [
+    "pubmed"
+   ]
+  },
+  {
+   "id": "PMID:41756233",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "From dopamine to muscarine: xanomeline-trospium (KarXT) as a novel direction in the psychopharmacotherapy of schizophrenia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Front Pharmacol",
+   "doi": "10.3389/fphar.2026.1774437"
+  },
+  {
+   "id": "PMID:41634905",
+   "found_in": [
+    "pubmed"
+   ]
+  },
+  {
+   "id": "PMID:41540764",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Exploring Adjunctive Novel Therapeutic Approach of KarXT (Xanomeline-Trospium Chloride) for Managing Psychotic Symptoms in Patients With Schizophrenia and Alzheimer's Disease.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Brain Behav",
+   "doi": "10.1002/brb3.71182"
+  },
+  {
+   "id": "PMID:41532001",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Emerging Innovations in Third- and Fourth-Generation Antipsychotics: Mechanistic Advances and Clinical Implications.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Psychopharmacol Bull",
+   "doi": "10.64719/pb.15431"
+  },
+  {
+   "id": "PMID:41201439",
+   "found_in": [
+    "pubmed"
+   ]
+  },
+  {
+   "id": "PMID:40863247",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Considerations for Augmenting Aripiprazole Long-Acting Injectables with Other Antipsychotics: A Mini-Review.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Diseases",
+   "doi": "10.3390/diseases13080274"
+  },
+  {
+   "id": "PMID:40165106",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Does KarXT (xanomeline-trospium) represent a novel approach to schizophrenia management? A GRADE-assessed systematic review and meta-analysis of randomized controlled clinical trials.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "BMC Psychiatry",
+   "doi": "10.1186/s12888-025-06696-5"
+  },
+  {
+   "id": "PMID:40056428",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "From theory to therapy: unlocking the potential of muscarinic receptor activation in schizophrenia with the dual M1/M4 muscarinic receptor agonist xanomeline and trospium chloride and insights from clinical trials.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Int J Neuropsychopharmacol",
+   "doi": "10.1093/ijnp/pyaf015"
+  },
+  {
+   "id": "PMID:40047530",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Safety and Tolerability of Xanomeline and Trospium Chloride in Schizophrenia: Pooled Results From the 5-Week, Randomized, Double-Blind, Placebo-Controlled EMERGENT Trials.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "J Clin Psychiatry",
+   "doi": "10.4088/jcp.24m15497"
+  },
+  {
+   "id": "PMID:39618418",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "How antipsychotics work in schizophrenia: a primer on mechanisms.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "CNS Spectr",
+   "doi": "10.1017/s1092852924002244"
+  },
+  {
+   "id": "PMID:39525169",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Cobenfy (Xanomeline-Trospium Chloride): A New Frontier in Schizophrenia Management.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Cureus",
+   "doi": "10.7759/cureus.71131"
+  },
+  {
+   "id": "PMID:43010316",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Pooled Analysis of EPS-Like Symptoms in the EMERGENT Program of KarXT in Schizophrenia.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "CNS Spectr",
+   "doi": "10.1017/s1092852924001792"
+  },
+  {
+   "id": "PMID:38904739",
+   "found_in": [
+    "pubmed"
+   ]
+  },
+  {
+   "id": "PMID:38691387",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Efficacy and Safety of Xanomeline-Trospium Chloride in Schizophrenia: A Randomized Clinical Trial.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "JAMA Psychiatry",
+   "doi": "10.1001/jamapsychiatry.2024.0785"
+  },
+  {
+   "id": "PMID:38104575",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Efficacy and safety of the muscarinic receptor agonist KarXT (xanomeline-trospium) in schizophrenia (EMERGENT-2) in the USA: results from a randomised, double-blind, placebo-controlled, flexible-dose phase 3 trial.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Lancet",
+   "doi": "10.1016/s0140-6736(23)02190-6"
+  },
+  {
+   "id": "PMID:31299348",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "In Vivo Pharmacological Comparison of TAK-071, a Positive Allosteric Modulator of Muscarinic M<sub>1</sub> Receptor, and Xanomeline, an Agonist of Muscarinic M<sub>1</sub>/M<sub>4</sub> Receptor, in Rodents.",
+   "year": "2019",
+   "src": "MED",
+   "journal": "Neuroscience",
+   "doi": "10.1016/j.neuroscience.2019.07.003"
+  },
+  {
+   "id": "PMID:30856192",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "TAK-071, a muscarinic M1 receptor positive allosteric modulator, attenuates scopolamine-induced quantitative electroencephalogram power spectral changes in cynomolgus monkeys.",
+   "year": "2019",
+   "src": "MED",
+   "journal": "PLoS One",
+   "doi": "10.1371/journal.pone.0207969"
+  },
+  {
+   "id": "PMID:28422371",
+   "found_in": [
+    "epmc",
+    "pubmed"
+   ],
+   "title": "Effects of M1 and M4 activation on excitatory synaptic transmission in CA1.",
+   "year": "2017",
+   "src": "MED",
+   "journal": "Hippocampus",
+   "doi": "10.1002/hipo.22732"
+  },
+  {
+   "id": "PMID:42530555",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Systematic review and network meta-analysis of the efficacy, safety and tolerability of xanomeline plus trospium chloride compared with eight oral antipsychotics for the acute treatment of schizophrenia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "J Comp Eff Res",
+   "doi": "10.57264/cer-2026-0045"
+  },
+  {
+   "id": "PMID:42400654",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Effects of xanomeline-trospium on the gut-lung microbiota axis and susceptibility to LPS-induced acute lung injury in male and female mice.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Eur Arch Psychiatry Clin Neurosci",
+   "doi": "10.1007/s00406-026-02318-7"
+  },
+  {
+   "id": "PMID:41742980",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline-Trospium Chloride as a New Paradigm in the Treatment of Schizophrenia Through Muscarinic Modulation: A Renewed Hope in Psychiatric Care.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Cureus",
+   "doi": "10.7759/cureus.102250"
+  },
+  {
+   "id": "PMID:42170669",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A Qualitative Investigation of the Experience of Taking Xanomeline and Trospium Chloride for Schizophrenia, Part 2: Perceived Changes in Subjective Quality of Life and Medication Satisfaction.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Schizophr Bull Open",
+   "doi": "10.1093/schizbullopen/sgag003"
+  },
+  {
+   "id": "PMID:40621959",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Efficacy and safety of the muscarinic receptor agonist KarXT (Xanomeline-Trospium) in schizophrenia: a systematic review, meta-analysis and Bayesian sensitivity analysis.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Int J Neuropsychopharmacol",
+   "doi": "10.1093/ijnp/pyaf045"
+  },
+  {
+   "id": "PMID:41633901",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Targeting muscarinic receptors for treating schizophrenia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Neurotherapeutics",
+   "doi": "10.1016/j.neurot.2026.e00839"
+  },
+  {
+   "id": "PMID:40574777",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Targeting muscarinic receptors in schizophrenia treatment: Novel antipsychotic xanomeline/trospium chloride.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "World J Psychiatry",
+   "doi": "10.5498/wjp.v15.i6.105409"
+  },
+  {
+   "id": "PMID:41618768",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "From schizophrenia to dementia: Is Cobenfy a potential treatment for behavioral and psychological symptoms of dementia?",
+   "year": "2026",
+   "src": "MED",
+   "journal": "J Int Med Res",
+   "doi": "10.1177/03000605261417092"
+  },
+  {
+   "id": "PMID:41868713",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A Qualitative Investigation of the Experience of Taking Xanomeline and Trospium Chloride for Schizophrenia, Part 1: Perceived Impact on Symptoms.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Schizophr Bull Open",
+   "doi": "10.1093/schizbullopen/sgag002"
+  },
+  {
+   "id": "PMID:42648934",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Comment on \"Safety profile and potential clinical risks of xanomeline and trospium chloride\" - Confirmatory findings from an independent FAERS analysis.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Neurotherapeutics",
+   "doi": "10.1016/j.neurot.2026.e01054"
+  },
+  {
+   "id": "PMID:41877882",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Commentary: Real-world effectiveness and safety of xanomeline and trospium for treatment-resistant schizophrenia in a state hospital system.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2026.1807080"
+  },
+  {
+   "id": "PMID:42578048",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Monitoring and addressing anticholinergic-induced ocular adverse effects associated with psychotropic medication.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Ment Health Clin",
+   "doi": "10.9740/mhc.2026.08.192"
+  },
+  {
+   "id": "PMID:41909822",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Adjunctive xanomeline/trospium in clozapine-resistant schizophrenia: two case reports demonstrating limited response.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Ther Adv Psychopharmacol",
+   "doi": "10.1177/20451253261433832"
+  },
+  {
+   "id": "PMID:42161933",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline-trospium reverses phencyclidine-induced cognitive deficits through modulation of the gut microbiota-brain axis in mice.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Transl Psychiatry",
+   "doi": "10.1038/s41398-026-04097-0"
+  },
+  {
+   "id": "PMID:40903813",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline-trospium: defining its place among the current antipsychotic landscape.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Acta Neuropsychiatr",
+   "doi": "10.1017/neu.2025.10032"
+  },
+  {
+   "id": "PMID:39715912",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline/Trospium Chloride: First Approval.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Drugs",
+   "doi": "10.1007/s40265-024-02126-0"
+  },
+  {
+   "id": "PMC:PMC13556829",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "744. Discovery and Preclinical Development of a Novel Muscarinic M4 Ago-PAM for the Treatment of Schizophrenia",
+   "year": "2026",
+   "src": "PMC",
+   "journal": "Int J Neuropsychopharmacol",
+   "doi": null
+  },
+  {
+   "id": "PMID:40671308",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "From betel nuts to Cobenfy: how an ancient recreational drug gave rise to a new class of schizophrenia medications.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "CNS Spectr",
+   "doi": "10.1017/s1092852925100424"
+  },
+  {
+   "id": "PMID:40145363",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline-Trospium: A Novel Therapeutic for the Treatment of Schizophrenia.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Ann Pharmacother",
+   "doi": "10.1177/10600280251324642"
+  },
+  {
+   "id": "PMID:42006053",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Beyond dopamine blockade: mechanistic humility and the rise of muscarinic, TAAR1, and glutamatergic pathways in schizophrenia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2026.1769613"
+  },
+  {
+   "id": "PMID:40486636",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Cobenfy (xanomeline-trospium): a breakthrough FDA-approved therapy redefining schizophrenia treatment.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Ann Med Surg (Lond)",
+   "doi": "10.1097/ms9.0000000000003309"
+  },
+  {
+   "id": "PMID:40212458",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline and Trospium Chloride Versus Placebo for the Treatment of Schizophrenia: A Post Hoc Analysis of Number Needed to Treat, Number Needed to Harm, and Likelihood to Be Helped or Harmed.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Neuropsychiatr Dis Treat",
+   "doi": "10.2147/ndt.s503494"
+  },
+  {
+   "id": "PMID:40621552",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Early outpatient clinical experience with xanomeline and trospium chloride for schizophrenia: a case report.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2025.1630574"
+  },
+  {
+   "id": "PMID:41613741",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline-Trospium for the Treatment of Schizophrenia.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Focus (Am Psychiatr Publ)",
+   "doi": "10.1176/appi.focus.20250022"
+  },
+  {
+   "id": "PMID:41195345",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Managing treatment-resistant schizophrenia following clozapine cessation: a case report of xanomeline-trospium and olanzapine combination therapy.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2025.1679678"
+  },
+  {
+   "id": "PMID:39920126",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Methods to address functional unblinding of raters in CNS trials.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Transl Psychiatry",
+   "doi": "10.1038/s41398-025-03262-1"
+  },
+  {
+   "id": "PMID:42500322",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Emerging non-D&lt;sub&gt;2&lt;/sub&gt; receptor-based therapies for schizophrenia: a focus on muscarinic and glutamatergic pathways.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2026.1898212"
+  },
+  {
+   "id": "PMID:41079522",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline/trospium-induced polyuria: A patient case report.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Ment Health Clin",
+   "doi": "10.9740/mhc.2025.10.255"
+  },
+  {
+   "id": "PMID:42796036",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Beyond Clozapine Failure: Precision Approach and Palliative Psychiatry in Ultra-Treatment-Resistant Schizophrenia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "J Clin Med",
+   "doi": "10.3390/jcm15187264"
+  },
+  {
+   "id": "PMID:39820108",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline-trospium (Cobenfy<sup>TM</sup>) for Schizophrenia: A Review of the Literature.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Clin Psychopharmacol Neurosci",
+   "doi": "10.9758/cpn.24.1253"
+  },
+  {
+   "id": "PMID:41816351",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Selected Abstracts from CNS Summit 2025.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Innov Clin Neurosci",
+   "doi": null
+  },
+  {
+   "id": "PMID:42667248",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Positive and Negative Symptoms Changes in Schizophrenia Patients on Antipsychotic Treatment: a Systematic Review and Dose-Response Meta-analysis.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Schizophr Bull",
+   "doi": "10.1093/schbul/sbag077"
+  },
+  {
+   "id": "PMID:42096531",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Global perspectives on central nervous system drug innovation: achievements, barriers, and priorities for the next decade.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Int J Neuropsychopharmacol",
+   "doi": "10.1093/ijnp/pyag023"
+  },
+  {
+   "id": "PMID:38794180",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The New Horizon of Antipsychotics beyond the Classic Dopaminergic Hypothesis-The Case of the Xanomeline-Trospium Combination: A Systematic Review.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Pharmaceuticals (Basel)",
+   "doi": "10.3390/ph17050610"
+  },
+  {
+   "id": "PMID:41994716",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A Case of Constipation During Cobenfy Therapy and a Constipation Prevention Protocol.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Cureus",
+   "doi": "10.7759/cureus.105113"
+  },
+  {
+   "id": "PMID:41052274",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Antipsychotic drugs at 75: the past, present, and future of psychosis management.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Br Med Bull",
+   "doi": "10.1093/bmb/ldaf016"
+  },
+  {
+   "id": "PMID:41609993",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "New Pharmacological Treatment Approaches for Schizophrenia: Navigating the Post-iclepertin Landscape.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "CNS Drugs",
+   "doi": "10.1007/s40263-025-01259-4"
+  },
+  {
+   "id": "PMID:42418174",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Toward a Pluralistic Model for the Schizophrenia Spectrum-Dopamine and Beyond.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "JAMA Psychiatry",
+   "doi": "10.1001/jamapsychiatry.2026.1684"
+  },
+  {
+   "id": "PMID:38824628",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline-Trospium in schizophrenia: A detailed review and comparison with the Institute for Clinical and Economic Review's analysis.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "J Manag Care Spec Pharm",
+   "doi": "10.18553/jmcp.2024.30.6.629"
+  },
+  {
+   "id": "PMID:39741904",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A Clinically Oriented Review of New Antipsychotics for Schizophrenia.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Neuropsychiatr Dis Treat",
+   "doi": "10.2147/ndt.s501560"
+  },
+  {
+   "id": "PMID:41285920",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Why is schizophrenia a huge graveyard of molecules?",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Schizophrenia (Heidelb)",
+   "doi": "10.1038/s41537-025-00686-y"
+  },
+  {
+   "id": "PMID:42251640",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Mechanism-Based Polypharmacy as a Repurposing Strategy: The Case of D-Cycloserine and Lurasidone.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Clin Transl Sci",
+   "doi": "10.1111/cts.70624"
+  },
+  {
+   "id": "PMID:40175961",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Is muscarinic receptor agonist effective and tolerant for schizophrenia?",
+   "year": "2025",
+   "src": "MED",
+   "journal": "BMC Psychiatry",
+   "doi": "10.1186/s12888-025-06662-1"
+  },
+  {
+   "id": "PMID:39623197",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Emerging Pharmacological Approaches for Psychosis and Agitation in Alzheimer's Disease.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "CNS Drugs",
+   "doi": "10.1007/s40263-024-01133-9"
+  },
+  {
+   "id": "PMID:41953819",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Antipsychotic dose and efficacy for acute schizophrenia spectrum disorders: an updated systematic review and dose-response meta-analysis.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "EClinicalMedicine",
+   "doi": "10.1016/j.eclinm.2026.103847"
+  },
+  {
+   "id": "PMID:41779005",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Budget impact of xanomeline and trospium chloride for the treatment of adults with schizophrenia in the United States.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "J Manag Care Spec Pharm",
+   "doi": "10.18553/jmcp.2026.25256"
+  },
+  {
+   "id": "PMID:39857669",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Overview of Novel Antipsychotic Drugs: State of the Art, New Mechanisms, and Clinical Aspects of Promising Compounds.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Biomedicines",
+   "doi": "10.3390/biomedicines13010085"
+  },
+  {
+   "id": "PMID:41793756",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Schizophrenia and disordered sensorimotor control: challenges, mechanisms and opportunities.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Brain",
+   "doi": "10.1093/brain/awag064"
+  },
+  {
+   "id": "PMID:40774882",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Shared and unique therapeutic targets of KarXT and clozapine for schizophrenia treatment revealed by network pharmacology and molecular docking analyses: Implications for differential clinical responses.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Neurotherapeutics",
+   "doi": "10.1016/j.neurot.2025.e00714"
+  },
+  {
+   "id": "PMID:39945414",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The mechanism of action of clozapine.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "J Psychopharmacol",
+   "doi": "10.1177/02698811251319458"
+  },
+  {
+   "id": "PMID:40835496",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Recommendations for management and future investigation of psychosis in neurodegenerative disease: Findings from the International Psychogeriatric Association (IPA) working group.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Int Psychogeriatr",
+   "doi": "10.1016/j.inpsyc.2025.100133"
+  },
+  {
+   "id": "PMID:38305989",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Muscarinic control of cardiovascular function in humans: a review of current clinical evidence.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Clin Auton Res",
+   "doi": "10.1007/s10286-024-01016-5"
+  },
+  {
+   "id": "PMID:41694131",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Real-world effectiveness and safety of xanomeline and trospium for treatment-resistant schizophrenia in a state hospital system.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2025.1736922"
+  },
+  {
+   "id": "PMID:41898681",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Phosphatase Signaling as a Therapeutic Strategy in Schizophrenia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms27062822"
+  },
+  {
+   "id": "PMID:40161932",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Unlocking the potential of lumateperone and novel anti-psychotics for schizophrenia.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Bioimpacts",
+   "doi": "10.34172/bi.30259"
+  },
+  {
+   "id": "PMID:42320782",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Antipsychotic Drug Action, Novel Treatment Targets, and the Failure of Current Clinical Trial Designs in Evaluating New Target Molecules.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Biol Psychiatry",
+   "doi": "10.1016/j.biopsych.2026.06.010"
+  },
+  {
+   "id": "PMID:40654581",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Schizophrenia management: Systematic review of current medications and Phase-3 agents (2008-2024).",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Neurosci Appl",
+   "doi": "10.1016/j.nsa.2025.105507"
+  },
+  {
+   "id": "PMID:42446851",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Animal Models for Drug Discovery in Schizophrenia: A Critical View from a Clinical Perspective.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Pharmaceut Med",
+   "doi": "10.1007/s40290-026-00617-x"
+  },
+  {
+   "id": "PMID:40430486",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "New Agents in the Treatment of Psychiatric Disorders: What Innovations and in What Areas of Psychopathology?",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Pharmaceuticals (Basel)",
+   "doi": "10.3390/ph18050665"
+  },
+  {
+   "id": "PMID:41902463",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Game Changers in the Treatment of and Engagement With Persons Living With Mental Health and Substance Use Disorders: The Role of the Nurse.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Int J Ment Health Nurs",
+   "doi": "10.1111/inm.70251"
+  },
+  {
+   "id": "PMID:42305118",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Decoding GPCR signaling in living cells to advance early therapeutic discovery for neurological disorders.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Front Mol Neurosci",
+   "doi": "10.3389/fnmol.2026.1789400"
+  },
+  {
+   "id": "PMID:41505203",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Neuropsychiatric symptoms in Alzheimer's disease: Past, present, and future.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Alzheimers Dement",
+   "doi": "10.1002/alz.71077"
+  },
+  {
+   "id": "PMID:40143145",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A New Era of Muscarinic Acetylcholine Receptor Modulators in Neurological Diseases, Cancer and Drug Abuse.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Pharmaceuticals (Basel)",
+   "doi": "10.3390/ph18030369"
+  },
+  {
+   "id": "PMID:39483736",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The potential of muscarinic M<sub>1</sub> and M<sub>4</sub> receptor activators for the treatment of cognitive impairment associated with schizophrenia.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2024.1421554"
+  },
+  {
+   "id": "PMID:39329027",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Overview of Psychiatric Medications in the Pipeline in Phase III Trials as of June 1, 2024: A Systematic Review.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Innov Clin Neurosci",
+   "doi": null
+  },
+  {
+   "id": "PMID:41145341",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The role for artificial intelligence in identifying combination therapies for Alzheimer's disease.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "J Prev Alzheimers Dis",
+   "doi": "10.1016/j.tjpad.2025.100366"
+  },
+  {
+   "id": "PMID:42793115",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Schizophrenia: Converging Neurobiological Mechanisms and Emerging Therapeutic Strategies.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Biomolecules",
+   "doi": "10.3390/biom16091283"
+  },
+  {
+   "id": "PMID:41233335",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Depressive symptomatology in the first-episode schizophrenia spectrum disorders OPTiMiSE trial: prevalence, correlates, symptom progression and outcomes.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Schizophrenia (Heidelb)",
+   "doi": "10.1038/s41537-025-00681-3"
+  },
+  {
+   "id": "PMID:41608158",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Compensatory hallucinogenesis across three neuropsychiatric disorders: a Bayesian account.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Brain Commun",
+   "doi": "10.1093/braincomms/fcag001"
+  },
+  {
+   "id": "PMID:40364647",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Schizophrenia: Genetics, neurological mechanisms, and therapeutic approaches.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Neural Regen Res",
+   "doi": "10.4103/nrr.nrr-d-24-01375"
+  },
+  {
+   "id": "PMID:41981211",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Clinical innovations and future directions of nanoparticles in the treatment of psychiatric and neurological disorders.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Mol Psychiatry",
+   "doi": "10.1038/s41380-026-03603-6"
+  },
+  {
+   "id": "PMID:41147362",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Targeting disrupted networks in schizophrenia: Can muscarinic drugs make a fundamental difference?",
+   "year": "2025",
+   "src": "MED",
+   "journal": "J Psychopharmacol",
+   "doi": "10.1177/02698811251375104"
+  },
+  {
+   "id": "PMID:41912979",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Prevalence and Healthcare Costs of Metabolic Disorders Among Individuals with Schizophrenia Following Initiation of Oral Antipsychotic Therapy.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Pharmacoecon Open",
+   "doi": "10.1007/s41669-026-00647-w"
+  },
+  {
+   "id": "PMID:41358042",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Rational antipsychotic polypharmacy in psychotic and bipolar disorders: A focus on D2 receptor partial agonists.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Ment Health Clin",
+   "doi": "10.9740/mhc.2025.12.275"
+  },
+  {
+   "id": "PMID:41458821",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "New-Onset Gambling Addiction Following Treatment for Psychosis With Cariprazine.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Cureus",
+   "doi": "10.7759/cureus.97709"
+  },
+  {
+   "id": "PMID:42018313",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Antipsychotic Efficacy and Safety of LB-102 in the Treatment of Adults With Acute Schizophrenia: A Randomized Clinical Trial.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "JAMA Psychiatry",
+   "doi": "10.1001/jamapsychiatry.2026.0428"
+  },
+  {
+   "id": "PMID:39199294",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "What Remains to Be Discovered in Schizophrenia Therapeutics: Contributions by Advancing the Molecular Mechanisms of Drugs for Psychosis and Schizophrenia.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Biomolecules",
+   "doi": "10.3390/biom14080906"
+  },
+  {
+   "id": "PMID:42320779",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Distinctive Molecular Mechanisms in Higher Cortical Circuits Confer Vulnerability to Mental Disorders.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Biol Psychiatry",
+   "doi": "10.1016/j.biopsych.2026.06.008"
+  },
+  {
+   "id": "PMID:40517113",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Pre-psychosis in later life as a risk factor for progressive cognitive decline: Findings from the IPA psychosis in neurodegenerative disease working group.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Int Psychogeriatr",
+   "doi": "10.1016/j.inpsyc.2025.100094"
+  },
+  {
+   "id": "PMID:42913320",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Spatial pharmacometabolomic profiling of two antipsychotics reveals region-specific neurochemical alterations in the rat brain.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Neurotherapeutics",
+   "doi": "10.1016/j.neurot.2026.e01101"
+  },
+  {
+   "id": "PMID:41793755",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Clinical Practice Guideline on the Choice of First Antipsychotic Medicine for Females Experiencing a First-Episode of Psychosis.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Schizophr Bull",
+   "doi": "10.1093/schbul/sbag023"
+  },
+  {
+   "id": "PMID:41145337",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Alzheimer Combination Therapies: Overview and Scenarios.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "J Prev Alzheimers Dis",
+   "doi": "10.1016/j.tjpad.2025.100328"
+  },
+  {
+   "id": "PMID:38782077",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The excitatory-inhibitory balance as a target for the development of novel drugs to treat schizophrenia.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Biochem Pharmacol",
+   "doi": "10.1016/j.bcp.2024.116298"
+  },
+  {
+   "id": "PMID:40390796",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Aripiprazole Lauroxil Every 2 Months or Paliperidone Palmitate Monthly for Acute Schizophrenia: A Post Hoc Analysis of PANSS Five-Factor Scores in the ALPINE Trial.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Neuropsychiatr Dis Treat",
+   "doi": "10.2147/ndt.s510471"
+  },
+  {
+   "id": "PMID:41220866",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Executive Summary of 2025 International Conference of the Korean Dementia Association and International Congress of the Asian Society Against Dementia (IC-KDA/ASAD 2025): A Report From the Academic Committee of the Korean Dementia Association.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Dement Neurocogn Disord",
+   "doi": "10.12779/dnd.2025.24.4.209"
+  },
+  {
+   "id": "PMC:PMC12420010",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Atypical antipsychotics as add-ons to antidepressants in the major depressive disorder \u2013 A risks and benefits analysis",
+   "year": "2025",
+   "src": "PMC",
+   "journal": "Eur Psychiatry",
+   "doi": null
+  },
+  {
+   "id": "PMID:42824856",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "AI-enabled passive digital phenotyping of experiential negative symptoms in schizophrenia-spectrum disorders: a narrative review on the path from sensing to clinical endpoints.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2026.1898444"
+  },
+  {
+   "id": "PMID:38824622",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "KarXT for schizophrenia-effectiveness and value: A summary from the Institute for Clinical and Economic Review's New England Comparative Effectiveness Public Advisory Council.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "J Manag Care Spec Pharm",
+   "doi": "10.18553/jmcp.2024.30.6.624"
+  },
+  {
+   "id": "PMID:39967411",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Continuous Dopamine D&lt;sub&gt;2&lt;/sub&gt; Receptor Blockade and Long-Term Outcome in First-Episode Schizophrenia.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Am J Psychiatry",
+   "doi": "10.1176/appi.ajp.20240321"
+  },
+  {
+   "id": "PMID:40562636",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Clinical trials for neuropsychiatric syndromes in major and mild neurocognitive disorders: A CONSORT-based approach.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Int Psychogeriatr",
+   "doi": "10.1016/j.inpsyc.2025.100107"
+  },
+  {
+   "id": "PMID:39844929",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Muscarinic receptor agonists and positive allosteric modulators in animal models of psychosis: protocol for a systematic review and meta-analysis.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "F1000Res",
+   "doi": "10.12688/f1000research.155356.2"
+  },
+  {
+   "id": "PMID:41581069",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Discovery of VU6025733 (AG06827): A Highly Selective, Orally Bioavailable, and Structurally Distinct M&lt;sub&gt;4&lt;/sub&gt; Muscarinic Acetylcholine Receptor Positive Allosteric Modulator (PAM) with Robust &lt;i&gt;In Vivo&lt;/i&gt; Efficacy.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "ACS Chem Neurosci",
+   "doi": "10.1021/acschemneuro.5c00963"
+  },
+  {
+   "id": "PMID:39223138",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Updated rationale for the initial antipsychotic selection for patients with schizophrenia.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Schizophrenia (Heidelb)",
+   "doi": "10.1038/s41537-024-00492-y"
+  },
+  {
+   "id": "PMID:41752042",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Emerging Neurobiological and Therapeutic Insights into Schizophrenia: A Comprehensive Review.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms27041906"
+  },
+  {
+   "id": "PMID:40735218",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Exploration of current situation of psychotropic drugs research and development in China based on drug clinical trials.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2025.1599038"
+  },
+  {
+   "id": "PMID:42108701",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Variability and Magnitude of Choline Levels Across the Psychosis Spectrum: A Meta-analysis.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Schizophr Bull",
+   "doi": "10.1093/schbul/sbag069"
+  },
+  {
+   "id": "PMID:42753161",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Understanding Postmarketing Requirements and Commitments for CYP3A-Mediated Drug-Drug Interactions: An Analysis of FDA-Approved Drugs From 2015 to 2024.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Clin Transl Sci",
+   "doi": "10.1111/cts.70729"
+  },
+  {
+   "id": "PMID:39935667",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Psychopharmacology: The 'Combo Pills'-Did it find its way into Practice?",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Psychopharmacol Bull",
+   "doi": "10.64719/pb.4523"
+  },
+  {
+   "id": "PMID:41453063",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Role of Natural Product Chemistry in Drug Discovery: Two Decades of Progress and Perspectives.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "J Nat Prod",
+   "doi": "10.1021/acs.jnatprod.5c01368"
+  },
+  {
+   "id": "PMID:40512218",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A comprehensive review on schizophrenia: epidemiology, pathogenesis, diagnosis, conventional treatments, and proposed natural compounds used for management.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Naunyn Schmiedebergs Arch Pharmacol",
+   "doi": "10.1007/s00210-025-04351-0"
+  },
+  {
+   "id": "PMID:40163152",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A year in pharmacology: new drugs approved by the US Food and Drug Administration in 2024.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Naunyn Schmiedebergs Arch Pharmacol",
+   "doi": "10.1007/s00210-025-04020-2"
+  },
+  {
+   "id": "PMID:37582978",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Finding new and better treatments for psychiatric disorders.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/s41386-023-01690-5"
+  },
+  {
+   "id": "PMID:42389265",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Advances in the treatment of Alzheimer's disease.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Front Pharmacol",
+   "doi": "10.3389/fphar.2026.1819165"
+  },
+  {
+   "id": "PMID:41206258",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Neuropsychiatric Disturbances of Delirium: A Review of Syndromes and Their Treatment.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Am J Geriatr Psychiatry",
+   "doi": "10.1016/j.jagp.2025.10.003"
+  },
+  {
+   "id": "PMID:40690135",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Repeated Clozapine Administration Causes Extensive Changes to the Expression of Coding and Non-coding RNAs, Including miR-124, in the Mouse Frontal Cortex.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Mol Neurobiol",
+   "doi": "10.1007/s12035-025-05199-4"
+  },
+  {
+   "id": "PMID:42425941",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The use of artificial intelligence (AI) in neuropsychiatric drug discovery: current challenges and future directions.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Transl Psychiatry",
+   "doi": "10.1038/s41398-026-04153-9"
+  },
+  {
+   "id": "PMID:42931251",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Two Coordinates for Dopamine in the Basal Ganglia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "NeuroSci",
+   "doi": "10.3390/neurosci7050104"
+  },
+  {
+   "id": "PMID:39856031",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Corticolimbic circuitry as a druggable target in schizophrenia spectrum disorders: a narrative review.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Transl Psychiatry",
+   "doi": "10.1038/s41398-024-03221-2"
+  },
+  {
+   "id": "PMID:39518892",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Future Therapeutic Strategies for Alzheimer's Disease: Focus on Behavioral and Psychological Symptoms.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms252111338"
+  },
+  {
+   "id": "PMID:41613748",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Risk Factors and Management Strategies for Antipsychotic-Induced Weight Gain: A Prescriptive Review for Clinicians.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Focus (Am Psychiatr Publ)",
+   "doi": "10.1176/appi.focus.20250020"
+  },
+  {
+   "id": "PMID:40300598",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Developing algorithmic psychiatry via multi-level spanning computational models.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Cell Rep Med",
+   "doi": "10.1016/j.xcrm.2025.102094"
+  },
+  {
+   "id": "PMID:42308865",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Therapeutic potential of metabotropic glutamate receptor 7 modulation in correcting cognitive deficits of schizophrenia.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Schizophr Res",
+   "doi": "10.1016/j.schres.2026.06.012"
+  },
+  {
+   "id": "PMID:42095064",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Alzheimer's disease drug development pipeline: 2026.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Alzheimers Dement (N Y)",
+   "doi": "10.1002/trc2.70251"
+  },
+  {
+   "id": "PMID:40392301",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Roluperidone monotherapy, a treatment for negative symptoms in schizophrenia.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Int J Neuropsychopharmacol",
+   "doi": "10.1093/ijnp/pyaf032"
+  },
+  {
+   "id": "PMC:PMC12420098",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Exploring cholinergic dysfunctions in schizophrenia as targets for a new generation of antipsychotics- The current level of evidence",
+   "year": "2025",
+   "src": "PMC",
+   "journal": "Eur Psychiatry",
+   "doi": null
+  },
+  {
+   "id": "PMID:40836692",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Do we need drugs for psychiatric symptoms specifically for Parkinson's disease?",
+   "year": "2026",
+   "src": "MED",
+   "journal": "J Parkinsons Dis",
+   "doi": "10.1177/1877718x251370970"
+  },
+  {
+   "id": "PMID:40012975",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Anticholinergic burden and behavioral and psychological symptoms in older patients with cognitive impairment.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Front Med (Lausanne)",
+   "doi": "10.3389/fmed.2025.1505007"
+  },
+  {
+   "id": "PMID:41694052",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Clinical practice guidelines for management of schizophrenia in India: A comprehensive overview.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Indian J Psychiatry",
+   "doi": "10.4103/indianjpsychiatry_1341_25"
+  },
+  {
+   "id": "PMID:42136416",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Real-world comprehensive care of people living with schizophrenia: recommendations across different settings and clinical stages.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "World Psychiatry",
+   "doi": "10.1002/wps.70066"
+  },
+  {
+   "id": "PMC:PMC12420175",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Vitamin E and Clonazepam in the treatment of tardive dyskinesia secondary to atypical antipsychotic treatment: a case report",
+   "year": "2025",
+   "src": "PMC",
+   "journal": "Eur Psychiatry",
+   "doi": null
+  },
+  {
+   "id": "PMID:40463637",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Alzheimer's disease drug development pipeline: 2025.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Alzheimers Dement (N Y)",
+   "doi": "10.1002/trc2.70098"
+  },
+  {
+   "id": "PMID:40562225",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Why Is Clozapine Uniquely Effective in Treatment-Resistant Schizophrenia? A Review and Proposal.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Biol Psychiatry",
+   "doi": "10.1016/j.biopsych.2025.06.011"
+  },
+  {
+   "id": "PMID:41647067",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Neurocognitive Disorders: Systematic Review of Approved (2008-2024) and Pipeline Phase III Medications.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Innov Clin Neurosci",
+   "doi": null
+  },
+  {
+   "id": "PMID:39660766",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Discovery of VU0467319: an M&lt;sub&gt;1&lt;/sub&gt; Positive Allosteric Modulator Candidate That Advanced into Clinical Trials.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "ACS Chem Neurosci",
+   "doi": "10.1021/acschemneuro.4c00769"
+  },
+  {
+   "id": "PMID:40530049",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Role of the cholinergic system in the psychopathology and treatment of schizophrenia: a protocol for a scoping review.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2025.1593211"
+  },
+  {
+   "id": "PMID:40384150",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Downstream Signaling of Muscarinic M&lt;sub&gt;4&lt;/sub&gt; Receptors Is Regulated by Receptor Density and Cellular Environment.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Pharmacol Res Perspect",
+   "doi": "10.1002/prp2.70123"
+  },
+  {
+   "id": "PMID:39260466",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A Computational Account of the Development and Evolution of Psychotic Symptoms.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Biol Psychiatry",
+   "doi": "10.1016/j.biopsych.2024.08.026"
+  },
+  {
+   "id": "PMID:40362567",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Glutamate-Based Therapeutic Strategies for Schizophrenia: Emerging Approaches Beyond Dopamine.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms26094331"
+  },
+  {
+   "id": "PMID:39156608",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Global research in schizophrenia and serotonin: a bibliometric analysis.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2024.1436906"
+  },
+  {
+   "id": "PMID:40650013",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Inflammatory Nexus: Unraveling Shared Pathways and Promising Treatments in Alzheimer's Disease and Schizophrenia.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms26136237"
+  },
+  {
+   "id": "PMID:38558015",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Progress in Pharmacologic Management of Neuropsychiatric Syndromes in Neurodegenerative Disorders: A Review.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "JAMA Neurol",
+   "doi": "10.1001/jamaneurol.2024.0586"
+  },
+  {
+   "id": "PMID:40735384",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Does Dysregulation Of The Indirect Pathway Contribute To The Pathophysiology Of Catatonia Through Neurotransmitter Imbalance?",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Clin Neuropsychiatry",
+   "doi": "10.36131/cnfioritieditore20250306"
+  },
+  {
+   "id": "PMID:40830450",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Ethical considerations of deep brain stimulation for treatment refractory schizophrenia: surveying stakeholders.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "BMC Psychiatry",
+   "doi": "10.1186/s12888-025-07128-0"
+  },
+  {
+   "id": "PMID:40468931",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Can Sodium Oxybate Mitigate the Symptoms of Schizophrenia?",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Curr Neuropharmacol",
+   "doi": "10.2174/011570159x377481250526110256"
+  },
+  {
+   "id": "PMID:39046524",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Diagnostics and treatment of impulse control disorders, psychosis and delirium: systemic review-based recommendations\u00a0- guideline \"Parkinson's disease\" of the German Society of Neurology.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "J Neurol",
+   "doi": "10.1007/s00415-024-12576-x"
+  },
+  {
+   "id": "PMID:39140069",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Discovery of VU6008677: A Structurally Distinct Tricyclic M<sub>4</sub> Positive Allosteric Modulator with Improved CYP450 Profile.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "ACS Med Chem Lett",
+   "doi": "10.1021/acsmedchemlett.4c00249"
+  },
+  {
+   "id": "PMC:PMC11706615",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "CNS Summit 2024: Abstracts of Poster Presentations",
+   "year": "2024",
+   "src": "PMC",
+   "journal": "Innov Clin Neurosci",
+   "doi": null
+  },
+  {
+   "id": "PMID:42506310",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Muscarinic Receptor PET in Neurodegeneration: Promise, Pitfalls, and Translational Priorities.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Med Sci (Basel)",
+   "doi": "10.3390/medsci14030341"
+  },
+  {
+   "id": "PMID:41096935",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Central Cholinergic Synapse: A Primer.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms26199670"
+  },
+  {
+   "id": "PMID:42338505",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A new framework for nicotinic receptor-targeted therapeutic strategies in psychiatric and neurodegenerative disorders.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Front Cell Neurosci",
+   "doi": "10.3389/fncel.2026.1768143"
+  },
+  {
+   "id": "PMID:40598606",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Safety, tolerability, pharmacokinetic and pharmacodynamic effects of the muscarinic M&lt;sub&gt;1&lt;/sub&gt; positive allosteric modulator VU0467319 for Alzheimer's disease: a single ascending-dose study in healthy participants.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Alzheimers Res Ther",
+   "doi": "10.1186/s13195-025-01798-4"
+  },
+  {
+   "id": "PMID:40253240",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Challenges and opportunities for novel combination therapies in Alzheimer's disease: a report from the EU/US CTAD Task Force.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "J Prev Alzheimers Dis",
+   "doi": "10.1016/j.tjpad.2025.100163"
+  },
+  {
+   "id": "PMID:41142961",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Tourette syndrome research highlights from 2024.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "F1000Res",
+   "doi": "10.12688/f1000research.164800.3"
+  },
+  {
+   "id": "PMID:39316465",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Discovery of VU6016235: A Highly Selective, Orally Bioavailable, and Structurally Distinct Tricyclic M<sub>4</sub> Muscarinic Acetylcholine Receptor Positive Allosteric Modulator (PAM).",
+   "year": "2024",
+   "src": "MED",
+   "journal": "ACS Chem Neurosci",
+   "doi": "10.1021/acschemneuro.4c00465"
+  },
+  {
+   "id": "PMID:40415588",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Discovery of Pre-Clinical Candidate &lt;b&gt;VU6008055&lt;/b&gt;/&lt;b&gt;AF98943&lt;/b&gt;: A Highly Selective, Orally Bioavailable, and Structurally Distinct Tricyclic M&lt;sub&gt;4&lt;/sub&gt; Muscarinic Acetylcholine Receptor Positive Allosteric Modulator (PAM) with Robust In Vivo Efficacy.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "ACS Chem Neurosci",
+   "doi": "10.1021/acschemneuro.5c00277"
+  },
+  {
+   "id": "PMID:38654553",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The trace amine-associated receptor 1 agonists - non-dopaminergic antipsychotics or covert modulators of D2 receptors?",
+   "year": "2024",
+   "src": "MED",
+   "journal": "J Psychopharmacol",
+   "doi": "10.1177/02698811241249415"
+  },
+  {
+   "id": "PMID:38993656",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Black Book of Psychotropic Dosing and Monitoring.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Psychopharmacol Bull",
+   "doi": "10.64719/pb.4493"
+  },
+  {
+   "id": "PMID:39252645",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Visual hallucinations in Parkinson's disease: spotlight on central cholinergic dysfunction.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Brain",
+   "doi": "10.1093/brain/awae289"
+  },
+  {
+   "id": "PMID:41187083",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Extracellular nanobody screening using conformationally stable GPCR variants.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Proc Natl Acad Sci U S A",
+   "doi": "10.1073/pnas.2508879122"
+  },
+  {
+   "id": "PMID:39982834",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Towards Enhancing Drug Development Methodology to Treat Cognitive Impairment Associated With Schizophrenia and Other Neuropsychiatric Conditions: Insights From 2 Decades of Clinical Trials.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Schizophr Bull",
+   "doi": "10.1093/schbul/sbae151"
+  },
+  {
+   "id": "PMC:PMC11485753",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Poster Abstracts - Academy of Managed Care Pharmacy 2024",
+   "year": "2024",
+   "src": "PMC",
+   "journal": "J Manag Care Spec Pharm",
+   "doi": null
+  },
+  {
+   "id": "PMID:40155941",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Exploratory analysis of the relationship between striatal connectivity and apathy during phosphodiesterase 10 inhibition in schizophrenia: findings from a randomized crossover trial.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "BMC Med",
+   "doi": "10.1186/s12916-025-04004-2"
+  },
+  {
+   "id": "PMID:38689378",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Activation of M&lt;sub&gt;4&lt;/sub&gt; muscarinic receptors in the striatum reduces tic-like behaviours in two distinct murine models of Tourette syndrome.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Br J Pharmacol",
+   "doi": "10.1111/bph.16392"
+  },
+  {
+   "id": "PMID:38525480",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "New Therapeutic Targets and Drugs for Schizophrenia Beyond Dopamine D2 Receptor Antagonists.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Neuropsychiatr Dis Treat",
+   "doi": "10.2147/ndt.s455279"
+  },
+  {
+   "id": "PMID:41511095",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Novel Functions of M4 Muscarinic Receptors.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Physiol Res",
+   "doi": null
+  },
+  {
+   "id": "PMID:37526188",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Future Directions for Developing Non-dopaminergic Strategies for the Treatment of Parkinson's Disease.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Curr Neuropharmacol",
+   "doi": "10.2174/1570159x21666230731110709"
+  },
+  {
+   "id": "PMID:41007810",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Magnesium and Zinc in Schizophrenia.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Biomedicines",
+   "doi": "10.3390/biomedicines13092249"
+  },
+  {
+   "id": "PMID:41258376",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Molecular and topographic mapping of antipsychotic effects: a meta-analysis of postsynaptic density proteins in animal models with translational implications.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Mol Psychiatry",
+   "doi": "10.1038/s41380-025-03351-z"
+  },
+  {
+   "id": "PMC:PMC11993141",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "AAPP 2025 Annual Meeting Poster Abstracts",
+   "year": "2025",
+   "src": "PMC",
+   "journal": "Ment Health Clin",
+   "doi": null
+  },
+  {
+   "id": "PMID:38659717",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Alzheimer's disease drug development pipeline: 2024.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Alzheimers Dement (N Y)",
+   "doi": "10.1002/trc2.12465"
+  },
+  {
+   "id": "PMID:39502833",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Transcriptomic analysis of rat prefrontal cortex following chronic stress induced by social isolation - Relevance to psychiatric and neurodevelopmental illness, and implications for treatment.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Neurobiol Stress",
+   "doi": "10.1016/j.ynstr.2024.100679"
+  },
+  {
+   "id": "PMID:39869338",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Characteristics of Trials Preceding FDA Approval of Novel Psychiatric Drugs.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "JAMA Netw Open",
+   "doi": "10.1001/jamanetworkopen.2024.56588"
+  },
+  {
+   "id": "PMID:39371908",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Definition, assessment and treatment of cognitive impairment associated with schizophrenia: expert opinion and practical recommendations.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2024.1451832"
+  },
+  {
+   "id": "PMID:40149518",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Pharmacological Interventions for Negative Symptoms in Schizophrenia: A Systematic Review of Randomised Control Trials.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Biomedicines",
+   "doi": "10.3390/biomedicines13030540"
+  },
+  {
+   "id": "PMID:40427508",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Role of Astrocytes in the Molecular Pathophysiology of Schizophrenia: Between Neurodevelopment and Neurodegeneration.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Biomolecules",
+   "doi": "10.3390/biom15050615"
+  },
+  {
+   "id": "PMID:40566484",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Following the Action of Atypical Antipsychotic Clozapine and Possible Prediction of Treatment Response in Schizophrenia.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Life (Basel)",
+   "doi": "10.3390/life15060830"
+  },
+  {
+   "id": "PMC:PMC11627190",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 63rd Annual Meeting: Poster Abstracts P609-P914",
+   "year": "2024",
+   "src": "PMC",
+   "journal": "Neuropsychopharmacology",
+   "doi": null
+  },
+  {
+   "id": "PMID:42393022",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Next-generation chemogenetic inhibition using a brain-permeant non-prescription agent.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Signal Transduct Target Ther",
+   "doi": "10.1038/s41392-026-02865-4"
+  },
+  {
+   "id": "PMID:42679819",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Cross-species single-cell atlas of the striatum defines cell-type and subregion disease vulnerabilities.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Cell",
+   "doi": "10.1016/j.cell.2026.08.006"
+  },
+  {
+   "id": "PMC:PMC11058319",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "AAPP 2024 Annual Meeting Poster Abstracts",
+   "year": "2024",
+   "src": "PMC",
+   "journal": "Ment Health Clin",
+   "doi": null
+  },
+  {
+   "id": "PMID:41639063",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Identifying drug targets for schizophrenia through gene prioritization.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Transl Psychiatry",
+   "doi": "10.1038/s41398-026-03813-0"
+  },
+  {
+   "id": "PMC:PMC12038215",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The International BNA 2025 Festival of Neuroscience",
+   "year": "2025",
+   "src": "PMC",
+   "journal": "Brain and neuroscience advances",
+   "doi": null
+  },
+  {
+   "id": "PMID:37552895",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Targeting the Actions of Muscarinic Receptors on Dopamine Systems: New Strategies for Treating Neuropsychiatric Disorders.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Annu Rev Pharmacol Toxicol",
+   "doi": "10.1146/annurev-pharmtox-051921-023858"
+  },
+  {
+   "id": "PMC:PMC11627189",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 63rd Annual Meeting: Keyword Index",
+   "year": "2024",
+   "src": "PMC",
+   "journal": "Neuropsychopharmacology",
+   "doi": null
+  },
+  {
+   "id": "PMID:39057049",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Muscarinic Receptors and Alzheimer's Disease: New Perspectives and Mechanisms.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Curr Issues Mol Biol",
+   "doi": "10.3390/cimb46070407"
+  },
+  {
+   "id": "PMC:PMC11912877",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Poster Abstracts - Academy of Managed Care Pharmacy 2025",
+   "year": "2025",
+   "src": "PMC",
+   "journal": "J Manag Care Spec Pharm",
+   "doi": null
+  },
+  {
+   "id": "PMID:39735263",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Connecting dots of long COVID-19 pathogenesis: a vagus nerve- hypothalamic-pituitary- adrenal-mitochondrial axis dysfunction.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Front Cell Infect Microbiol",
+   "doi": "10.3389/fcimb.2024.1501949"
+  },
+  {
+   "id": "PMID:39942672",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Antimicrobial Neuropeptides and Their Receptors: Immunoregulator and Therapeutic Targets for Immune Disorders.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Molecules",
+   "doi": "10.3390/molecules30030568"
+  },
+  {
+   "id": "PMID:39130374",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Deepening insights into cholinergic agents for intraocular pressure reduction: systems genetics, molecular modeling, and <i>in vivo</i> perspectives.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Front Mol Biosci",
+   "doi": "10.3389/fmolb.2024.1423351"
+  },
+  {
+   "id": "PMID:39881398",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "AiGPro: a multi-tasks model for profiling of GPCRs for agonist and antagonist.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "J Cheminform",
+   "doi": "10.1186/s13321-024-00945-7"
+  },
+  {
+   "id": "PMID:41017816",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Emerging Role of the DDAH Proteins in Psychiatric Disorders.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Biol Psychiatry Glob Open Sci",
+   "doi": "10.1016/j.bpsgos.2025.100574"
+  },
+  {
+   "id": "PMID:41899485",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Neurotransmitter Systems in Alzheimer's Disease.",
+   "year": "2026",
+   "src": "MED",
+   "journal": "Curr Issues Mol Biol",
+   "doi": "10.3390/cimb48030334"
+  },
+  {
+   "id": "PMID:39576337",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "EANM perspective on clinical PET and SPECT imaging in schizophrenia-spectrum disorders: a systematic review of longitudinal studies.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Eur J Nucl Med Mol Imaging",
+   "doi": "10.1007/s00259-024-06987-1"
+  },
+  {
+   "id": "PMID:40429850",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Alleviation of Neurological Disorders by Targeting Neurodegenerative-Associated Enzymes: Natural and Synthetic Molecules.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms26104707"
+  },
+  {
+   "id": "PMID:39228432",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Pharmacological Treatments for Methamphetamine Use Disorder: Current Status and Future Targets.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Subst Abuse Rehabil",
+   "doi": "10.2147/sar.s431273"
+  },
+  {
+   "id": "PMC:PMC13041524",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Poster Abstracts - Academy of Managed Care Pharmacy 2026",
+   "year": "2026",
+   "src": "PMC",
+   "journal": "J Manag Care Spec Pharm",
+   "doi": null
+  },
+  {
+   "id": "PMID:41461581",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Concise Guide to PHARMACOLOGY 2025/26: G protein-coupled receptors.",
+   "year": "2025",
+   "src": "MED",
+   "journal": "Br J Pharmacol",
+   "doi": "10.1111/bph.70230"
+  },
+  {
+   "id": "PMID:38821630",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "&lt;i&gt;N&lt;/i&gt;-(4-Bromo-2,5-Dimethoxyphenethyl)-6-(4-Phenylbutoxy)Hexan-1-Amine (XOB): A Novel Phenylalkylamine Antagonist of Serotonin 2A Receptors and Voltage-Gated Sodium Channels.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Mol Pharmacol",
+   "doi": "10.1124/molpharm.123.000837"
+  },
+  {
+   "id": "PMID:39334894",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Dysfunction of the NMDA Receptor in the Pathophysiology of Schizophrenia and/or the Pathomechanisms of Treatment-Resistant Schizophrenia.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Biomolecules",
+   "doi": "10.3390/biom14091128"
+  },
+  {
+   "id": "PMID:39612588",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Combination of Haloperidol With UNC9994, \u03b2-arrestin-Biased Analog of Aripiprazole, Ameliorates Schizophrenia-Related Phenotypes Induced by NMDAR Deficit in Mice.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "Int J Neuropsychopharmacol",
+   "doi": "10.1093/ijnp/pyae060"
+  },
+  {
+   "id": "PMID:38495977",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Analysing the effect caused by increasing the molecular volume in M1-AChR receptor agonists and antagonists: a structural and computational study.",
+   "year": "2024",
+   "src": "MED",
+   "journal": "RSC Adv",
+   "doi": "10.1039/d3ra07380g"
+  },
+  {
+   "id": "PPR:PPR61639",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "TAK-071, a muscarinic M  <sub>1</sub>  receptor positive allosteric modulator, attenuates scopolamine-induced quantitative electroencephalogram power spectral changes in cynomolgus monkeys",
+   "year": "2018",
+   "src": "PPR",
+   "journal": null,
+   "doi": "10.1101/468686"
+  },
+  {
+   "id": "PMC:PMC13643683",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Beyond dopamine: KarXT and emerging mechanism-based therapies in schizophrenia",
+   "year": null,
+   "src": "PMC",
+   "journal": "Front Psychiatry",
+   "doi": null
+  },
+  {
+   "id": "PMC:PMC13444963",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Case Series: Obstacles in the Treatment of Patients with Schizophrenia Lacking Family Support",
+   "year": null,
+   "src": "PMC",
+   "journal": "Eur Psychiatry",
+   "doi": null
+  },
+  {
+   "id": "PMID:37036495",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Evidence of trospium's ability to mitigate cholinergic adverse events related to xanomeline: phase 1 study results.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Psychopharmacology (Berl)",
+   "doi": "10.1007/s00213-023-06362-2"
+  },
+  {
+   "id": "PMID:36463237",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Safety and tolerability of KarXT (xanomeline-trospium) in a phase 2, randomized, double-blind, placebo-controlled study in patients with schizophrenia.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Schizophrenia (Heidelb)",
+   "doi": "10.1038/s41537-022-00320-1"
+  },
+  {
+   "id": "PMID:37193547",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline-Trospium and Muscarinic Involvement in Schizophrenia.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Neuropsychiatr Dis Treat",
+   "doi": "10.2147/ndt.s406371"
+  },
+  {
+   "id": "PMID:36591549",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline and Trospium: A Potential Fixed Drug Combination (FDC) for Schizophrenia-A Brief Review of Current Data.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Innov Clin Neurosci",
+   "doi": null
+  },
+  {
+   "id": "PMID:37626549",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Novel Compounds in the Treatment of Schizophrenia-A Selective Review.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Brain Sci",
+   "doi": "10.3390/brainsci13081193"
+  },
+  {
+   "id": "PMID:37470979",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Increased Metabolic Potential, Efficacy, and Safety of Emerging Treatments in Schizophrenia.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "CNS Drugs",
+   "doi": "10.1007/s40263-023-01022-7"
+  },
+  {
+   "id": "PMID:33626254",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Muscarinic Cholinergic Receptor Agonist and Peripheral Antagonist for Schizophrenia.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "N Engl J Med",
+   "doi": "10.1056/nejmoa2017015"
+  },
+  {
+   "id": "PMID:36932673",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "New Developments in the Treatment of Schizophrenia: An Expert Roundtable.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Int J Neuropsychopharmacol",
+   "doi": "10.1093/ijnp/pyad011"
+  },
+  {
+   "id": "PMC:PMC10712291",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "CNS Summit 2023: Abstracts of Poster Presentations",
+   "year": "2023",
+   "src": "PMC",
+   "journal": "Innov Clin Neurosci",
+   "doi": null
+  },
+  {
+   "id": "PMID:34838528",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "New and emerging treatments for schizophrenia: a narrative review of their pharmacology, efficacy and side effect profile relative to established antipsychotics.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Neurosci Biobehav Rev",
+   "doi": "10.1016/j.neubiorev.2021.11.032"
+  },
+  {
+   "id": "PMID:36269510",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Clinical Effectiveness of Muscarinic Receptor-Targeted Interventions in Neuropsychiatric Disorders: A Systematic Review.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "CNS Drugs",
+   "doi": "10.1007/s40263-022-00964-8"
+  },
+  {
+   "id": "PMID:35571495",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Targeting the M1 muscarinic acetylcholine receptor in Alzheimer's disease.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Neuronal Signal",
+   "doi": "10.1042/ns20210004"
+  },
+  {
+   "id": "PMID:36878603",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The past and present of therapeutic strategy for Alzheimer's diseases: potential for stem cell therapy.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Exp Anim",
+   "doi": "10.1538/expanim.22-0164"
+  },
+  {
+   "id": "PMID:35461339",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Existing and emerging pharmacological approaches to the treatment of mania: A critical overview.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Transl Psychiatry",
+   "doi": "10.1038/s41398-022-01928-8"
+  },
+  {
+   "id": "PMID:36640403",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The future of psychopharmacology:\u00a0a critical appraisal of\u00a0ongoing phase 2/3 trials, and of some current trends aiming to de-risk trial programmes of novel agents.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "World Psychiatry",
+   "doi": "10.1002/wps.21056"
+  },
+  {
+   "id": "PMID:35873225",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Basal Forebrain Cholinergic Nuclei and Their Relevance to Schizophrenia and Other Psychotic Disorders.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2022.909961"
+  },
+  {
+   "id": "PMID:35831706",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Progress and Pitfalls in Developing Agents to Treat Neurocognitive Deficits Associated with Schizophrenia.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "CNS Drugs",
+   "doi": "10.1007/s40263-022-00935-z"
+  },
+  {
+   "id": "PMID:33922888",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Beyond Dopamine Receptor Antagonism: New Targets for Schizophrenia Treatment and Prevention.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms22094467"
+  },
+  {
+   "id": "PMID:33344888",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Translation-Focused Approaches to GPCR Drug Discovery for Cognitive Impairments Associated with Schizophrenia.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "ACS Pharmacol Transl Sci",
+   "doi": "10.1021/acsptsci.0c00117"
+  },
+  {
+   "id": "PMID:36909280",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A growing understanding of the role of muscarinic receptors in the molecular pathology and treatment of schizophrenia.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Front Cell Neurosci",
+   "doi": "10.3389/fncel.2023.1124333"
+  },
+  {
+   "id": "PMID:37251912",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Alzheimer's disease drug development pipeline: 2023.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Alzheimers Dement (N Y)",
+   "doi": "10.1002/trc2.12385"
+  },
+  {
+   "id": "PMID:35203607",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Drug Design Targeting the Muscarinic Receptors and the Implications in Central Nervous System Disorders.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Biomedicines",
+   "doi": "10.3390/biomedicines10020398"
+  },
+  {
+   "id": "PMID:36983018",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Canonical and Non-Canonical Antipsychotics' Dopamine-Related Mechanisms of Present and Next Generation Molecules: A Systematic Review on Translational Highlights for Treatment Response and Treatment-Resistant Schizophrenia.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms24065945"
+  },
+  {
+   "id": "PMID:31711626",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Targeting Muscarinic Acetylcholine Receptors for the Treatment of Psychiatric and Neurological Disorders.",
+   "year": "2019",
+   "src": "MED",
+   "journal": "Trends Pharmacol Sci",
+   "doi": "10.1016/j.tips.2019.10.007"
+  },
+  {
+   "id": "PMID:34671731",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Progress in mechanistically novel treatments for schizophrenia.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "RSC Med Chem",
+   "doi": "10.1039/d1md00096a"
+  },
+  {
+   "id": "PMID:36983593",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Recent Advances in Psychopharmacology: From Bench to Bedside Novel Trends in Schizophrenia.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "J Pers Med",
+   "doi": "10.3390/jpm13030411"
+  },
+  {
+   "id": "PMID:34710625",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Discovery of structurally distinct tricyclic M<sub>4</sub> positive allosteric modulator (PAM) chemotypes - Part 2.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Bioorg Med Chem Lett",
+   "doi": "10.1016/j.bmcl.2021.128416"
+  },
+  {
+   "id": "PMID:34703232",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Tardive Dyskinesia in Older Persons Taking Antipsychotics.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Neuropsychiatr Dis Treat",
+   "doi": "10.2147/ndt.s328301"
+  },
+  {
+   "id": "PMID:36690793",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Cognitive impairment in schizophrenia: aetiology, pathophysiology, and treatment.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Mol Psychiatry",
+   "doi": "10.1038/s41380-023-01949-9"
+  },
+  {
+   "id": "PMID:33584282",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Fine Tuning Muscarinic Acetylcholine Receptor Signaling Through Allostery and Bias.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "Front Pharmacol",
+   "doi": "10.3389/fphar.2020.606656"
+  },
+  {
+   "id": "PMID:33790746",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Neuromodulation of Persistent Activity and Working Memory Circuitry in Primate Prefrontal Cortex by Muscarinic Receptors.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Front Neural Circuits",
+   "doi": "10.3389/fncir.2021.648624"
+  },
+  {
+   "id": "PMID:37108085",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Cholinergic Antagonists and Behavioral Disturbances in Neurodegenerative Diseases.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms24086921"
+  },
+  {
+   "id": "PMID:37443282",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Antipsychotic drug efficacy correlates with the modulation of D1 rather than D2 receptor-expressing striatal projection neurons.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Nat Neurosci",
+   "doi": "10.1038/s41593-023-01390-9"
+  },
+  {
+   "id": "PMID:37107350",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Schizophrenia Synaptic Pathology and Antipsychotic Treatment in the Framework of Oxidative and Mitochondrial Dysfunction: Translational Highlights for the Clinics and Treatment.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Antioxidants (Basel)",
+   "doi": "10.3390/antiox12040975"
+  },
+  {
+   "id": "PMID:36361865",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Allosteric Modulation of Muscarinic Receptors by Cholesterol, Neurosteroids and Neuroactive Steroids.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms232113075"
+  },
+  {
+   "id": "PMID:36613951",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Modulation of Muscarinic Signalling in the Central Nervous System by Steroid Hormones and Neurosteroids.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms24010507"
+  },
+  {
+   "id": "PMID:31545131",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Redirecting the revolution: new developments in drug development for psychiatry.",
+   "year": "2019",
+   "src": "MED",
+   "journal": "Expert Opin Drug Discov",
+   "doi": "10.1080/17460441.2019.1666102"
+  },
+  {
+   "id": "PMID:33351971",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "First-in-man study to investigate safety, pharmacokinetics and exploratory pharmacodynamics of HTL0018318, a novel M<sub>1</sub> -receptor partial agonist for the treatment of dementias.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Br J Clin Pharmacol",
+   "doi": "10.1111/bcp.14710"
+  },
+  {
+   "id": "PMC:PMC9009819",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "CPNP 2022 Annual Meeting Poster Abstracts",
+   "year": "2022",
+   "src": "PMC",
+   "journal": "Ment Health Clin",
+   "doi": null
+  },
+  {
+   "id": "PMID:34576254",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Fusion with Promiscuous G\u03b1<sub>16</sub> Subunit Reveals Signaling Bias at Muscarinic Receptors.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms221810089"
+  },
+  {
+   "id": "PMID:37583063",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Imaging Cholinergic Receptors in the Brain by Positron Emission Tomography.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "J Med Chem",
+   "doi": "10.1021/acs.jmedchem.3c00573"
+  },
+  {
+   "id": "PMC:PMC10729593",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 62nd Annual Meeting: Keyword Index",
+   "year": "2023",
+   "src": "PMC",
+   "journal": "Neuropsychopharmacology",
+   "doi": null
+  },
+  {
+   "id": "PMID:29344344",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Acetylcholinesterase inhibitors in treatment-resistant psychotic depression.",
+   "year": "2018",
+   "src": "MED",
+   "journal": "Ther Adv Psychopharmacol",
+   "doi": "10.1177/2045125317718810"
+  },
+  {
+   "id": "PMID:33048274",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Psychosis in Alzheimer's Disease.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "Curr Neurol Neurosci Rep",
+   "doi": "10.1007/s11910-020-01074-y"
+  },
+  {
+   "id": "PMID:35782443",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Antipsychotic Drug Development: From Historical Evidence to Fresh Perspectives.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2022.903156"
+  },
+  {
+   "id": "PMID:34199622",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Update on PET Tracer Development for Muscarinic Acetylcholine Receptors.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Pharmaceuticals (Basel)",
+   "doi": "10.3390/ph14060530"
+  },
+  {
+   "id": "PMID:36148314",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Multitargeting nature of muscarinic orthosteric agonists and antagonists.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Front Physiol",
+   "doi": "10.3389/fphys.2022.974160"
+  },
+  {
+   "id": "PMID:36986626",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Current Status of Oligonucleotide-Based Protein Degraders.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Pharmaceutics",
+   "doi": "10.3390/pharmaceutics15030765"
+  },
+  {
+   "id": "PMID:36111312",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Treatment-resistant schizophrenia: How far have we traveled?",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2022.994425"
+  },
+  {
+   "id": "PMID:35791387",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Intrinsically disordered proteins and proteins with intrinsically disordered regions in neurodegenerative diseases.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Biophys Rev",
+   "doi": "10.1007/s12551-022-00968-0"
+  },
+  {
+   "id": "PMC:PMC10729596",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 62nd Annual Meeting: Poster Abstracts P251 \u2013 P500",
+   "year": "2023",
+   "src": "PMC",
+   "journal": "Neuropsychopharmacology",
+   "doi": null
+  },
+  {
+   "id": "PMID:34962108",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "M<sub>1</sub> muscarinic receptor activation decreases alcohol consumption via a reduction in consummatory behavior.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Pharmacol Res Perspect",
+   "doi": "10.1002/prp2.907"
+  },
+  {
+   "id": "PMID:37626588",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Impact of Muscarinic Antagonism on Psychosis-Relevant Behaviors and Striatal [<sup>11</sup>C] Raclopride Binding in Tau Mouse Models of Alzheimer's Disease.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Biomedicines",
+   "doi": "10.3390/biomedicines11082091"
+  },
+  {
+   "id": "PMC:PMC10586513",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Poster Abstracts - Academy of Managed Care Pharmacy 2023",
+   "year": "2023",
+   "src": "PMC",
+   "journal": "J Manag Care Spec Pharm",
+   "doi": null
+  },
+  {
+   "id": "PMID:35410602",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Strategies for Treatment of Disease-Associated Dementia Beyond Alzheimer's Disease: An Update.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Curr Neuropharmacol",
+   "doi": "10.2174/1570159x20666220411083922"
+  },
+  {
+   "id": "PMID:34327122",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Novel approaches in schizophrenia-from risk factors and hypotheses to novel drug targets.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "World J Psychiatry",
+   "doi": "10.5498/wjp.v11.i7.277"
+  },
+  {
+   "id": "PMID:33883008",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Safety, pharmacokinetics and exploratory pro-cognitive effects of HTL0018318, a selective M<sub>1</sub> receptor agonist, in healthy younger adult and elderly subjects: a multiple ascending dose study.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Alzheimers Res Ther",
+   "doi": "10.1186/s13195-021-00816-5"
+  },
+  {
+   "id": "PMID:37367077",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "<i>Cymbopogon citratus</i> Essential Oil: Extraction, GC-MS, Phytochemical Analysis, Antioxidant Activity, and In Silico Molecular Docking for Protein Targets Related to CNS.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Curr Issues Mol Biol",
+   "doi": "10.3390/cimb45060328"
+  },
+  {
+   "id": "PMID:29498041",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Novel long-acting antagonists of muscarinic ACh receptors.",
+   "year": "2018",
+   "src": "MED",
+   "journal": "Br J Pharmacol",
+   "doi": "10.1111/bph.14187"
+  },
+  {
+   "id": "PMID:37743365",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Orthosteric ligand selectivity and allosteric probe dependence at Hydroxycarboxylic acid receptor HCAR2.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Signal Transduct Target Ther",
+   "doi": "10.1038/s41392-023-01625-y"
+  },
+  {
+   "id": "PMID:31223452",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Discovery of Selective M4 Muscarinic Acetylcholine Receptor Agonists with Novel Carbamate Isosteres.",
+   "year": "2019",
+   "src": "MED",
+   "journal": "ACS Med Chem Lett",
+   "doi": "10.1021/acsmedchemlett.9b00106"
+  },
+  {
+   "id": "PMID:31990455",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "T-495, a novel low cooperative M<sub>1</sub> receptor positive allosteric modulator, improves memory deficits associated with cholinergic dysfunction and is characterized by low gastrointestinal side effect risk.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "Pharmacol Res Perspect",
+   "doi": "10.1002/prp2.560"
+  },
+  {
+   "id": "PMID:32102186",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "G-Protein-Coupled Receptors in CNS: A Potential Therapeutic Target for Intervention in Neurodegenerative Disorders and Associated Cognitive Deficits.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "Cells",
+   "doi": "10.3390/cells9020506"
+  },
+  {
+   "id": "PMID:33279934",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 59<sup>th</sup> Annual Meeting: Poster Session I.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/s41386-020-00890-7"
+  },
+  {
+   "id": "PMC:PMC9734609",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "15th Conference Clinical Trials Alzheimer\u2019s Disease, November 29\u2013December 2, 2022, San Francisco, CA, USA: Posters (Clinical Trial Alzheimer\u2019s Disease)",
+   "year": "2022",
+   "src": "PMC",
+   "journal": "The Journal of Prevention of Alzheimer's Disease",
+   "doi": null
+  },
+  {
+   "id": "PMID:36378750",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "M&lt;sub&gt;1&lt;/sub&gt; muscarinic receptor activation reduces the molecular pathology and slows the progression of prion-mediated neurodegenerative disease.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Sci Signal",
+   "doi": "10.1126/scisignal.abm3720"
+  },
+  {
+   "id": "PMID:33219523",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Treating disorders across the lifespan by modulating cholinergic signaling with galantamine.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "J Neurochem",
+   "doi": "10.1111/jnc.15243"
+  },
+  {
+   "id": "PMID:34791301",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Effects of the Partial M1 Muscarinic Cholinergic Receptor Agonist CDD-0102A on Stereotyped Motor Behaviors and Reversal Learning in the BTBR Mouse Model of Autism.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Int J Neuropsychopharmacol",
+   "doi": "10.1093/ijnp/pyab079"
+  },
+  {
+   "id": "PMID:33891333",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Safety, pharmacokinetics and pharmacodynamics of HTL0009936, a selective muscarinic M<sub>1</sub> -acetylcholine receptor agonist: A randomized cross-over trial.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Br J Clin Pharmacol",
+   "doi": "10.1111/bcp.14872"
+  },
+  {
+   "id": "PMID:35435461",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Changes in corticostriatal connectivity and striatal tissue iron associated with efficacy of clozapine for treatment\u2011resistant\u00a0schizophrenia.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Psychopharmacology (Berl)",
+   "doi": "10.1007/s00213-022-06138-0"
+  },
+  {
+   "id": "PMID:24558448",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Long-term activation upon brief exposure to xanomleline is unique to M1 and M4 subtypes of muscarinic acetylcholine receptors.",
+   "year": "2014",
+   "src": "MED",
+   "journal": "PLoS One",
+   "doi": "10.1371/journal.pone.0088910"
+  },
+  {
+   "id": "PMID:29560312",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Relationship between muscarinic M&lt;sub&gt;1&lt;/sub&gt; receptor binding and cognition in medication-free subjects with psychosis.",
+   "year": "2018",
+   "src": "MED",
+   "journal": "Neuroimage Clin",
+   "doi": "10.1016/j.nicl.2018.02.030"
+  },
+  {
+   "id": "PMID:34188186",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Lower cholinergic basal forebrain volumes link with cognitive difficulties in schizophrenia.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/s41386-021-01070-x"
+  },
+  {
+   "id": "PMID:29230398",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Insulin Signaling Deficiency Produces Immobility in <i>Caenorhabditis elegans</i> That Models Diminished Motivation States in Man and Responds to Antidepressants.",
+   "year": "2017",
+   "src": "MED",
+   "journal": "Mol Neuropsychiatry",
+   "doi": "10.1159/000478049"
+  },
+  {
+   "id": "PMID:36672549",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Emerging Roles of Cholinergic Receptors in Schwann Cell Development and Plasticity.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Biomedicines",
+   "doi": "10.3390/biomedicines11010041"
+  },
+  {
+   "id": "PMID:24511233",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Activation of M1 and M4 muscarinic receptors as potential treatments for Alzheimer's disease and schizophrenia.",
+   "year": "2014",
+   "src": "MED",
+   "journal": "Neuropsychiatr Dis Treat",
+   "doi": "10.2147/ndt.s55104"
+  },
+  {
+   "id": "PMID:24590577",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "M1 muscarinic acetylcholine receptor in Alzheimer's disease.",
+   "year": "2014",
+   "src": "MED",
+   "journal": "Neurosci Bull",
+   "doi": "10.1007/s12264-013-1406-z"
+  },
+  {
+   "id": "PMID:23493042",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Blockade of Tau hyperphosphorylation and A\u03b2\u2081\u208b\u2084\u2082 generation by the aminotetrahydrofuran derivative ANAVEX2-73, a mixed muscarinic and \u03c3\u2081 receptor agonist, in a nontransgenic mouse model of Alzheimer's disease.",
+   "year": "2013",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/npp.2013.70"
+  },
+  {
+   "id": "PMID:36946488",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Functional Nutrition as Integrated Intervention for In- and Outpatient with Schizophrenia.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Curr Neuropharmacol",
+   "doi": "10.2174/1570159x21666230322160259"
+  },
+  {
+   "id": "PMID:34951390",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Potential Roles of \u03b1-amylase in Alzheimer's Disease: Biomarker and Drug Target.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Curr Neuropharmacol",
+   "doi": "10.2174/1570159x20666211223124715"
+  },
+  {
+   "id": "PMID:24442096",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Antipsychotic drug-like effects of the selective M4 muscarinic acetylcholine receptor positive allosteric modulator VU0152100.",
+   "year": "2014",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/npp.2014.2"
+  },
+  {
+   "id": "PMID:23272693",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Emerging approaches for treatment of schizophrenia: modulation of cholinergic signaling.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "Discov Med",
+   "doi": null
+  },
+  {
+   "id": "PMID:23514539",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "[11C]AF150(S), an agonist PET ligand for M1 muscarinic acetylcholine receptors.",
+   "year": "2013",
+   "src": "MED",
+   "journal": "EJNMMI Res",
+   "doi": "10.1186/2191-219x-3-19"
+  },
+  {
+   "id": "PMID:33233865",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Regulation of Glutamatergic Activity via Bidirectional Activation of Two Select Receptors as a Novel Approach in Antipsychotic Drug Discovery.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms21228811"
+  },
+  {
+   "id": "PMID:22389751",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Muscarinic Acetylcholine Receptor Subtypes as Potential Drug Targets for the Treatment of Schizophrenia, Drug Abuse and Parkinson's Disease.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "ACS Chem Neurosci",
+   "doi": "10.1021/cn200110q"
+  },
+  {
+   "id": "PMID:33802091",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Therapeutic Advances in Diabetes, Autoimmune, and Neurological Diseases.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms22062805"
+  },
+  {
+   "id": "PMID:26512000",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Neural circuitry and immunity.",
+   "year": "2015",
+   "src": "MED",
+   "journal": "Immunol Res",
+   "doi": "10.1007/s12026-015-8718-1"
+  },
+  {
+   "id": "PMID:32329686",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Dangerous Liaisons: Tau Interaction with Muscarinic Receptors.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "Curr Alzheimer Res",
+   "doi": "10.2174/1567205017666200424134311"
+  },
+  {
+   "id": "PMID:32532978",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The role of nicotinic cholinergic neurotransmission in delusional thinking.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "NPJ Schizophr",
+   "doi": "10.1038/s41537-020-0105-9"
+  },
+  {
+   "id": "PMID:34884958",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Differential Actions of Muscarinic Receptor Subtypes in Gastric, Pancreatic, and Colon Cancer.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms222313153"
+  },
+  {
+   "id": "PMID:32859711",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "First-in-Human Assessment of <sup>11</sup>C-LSN3172176, an M1 Muscarinic Acetylcholine Receptor PET Radiotracer.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "J Nucl Med",
+   "doi": "10.2967/jnumed.120.246967"
+  },
+  {
+   "id": "PMID:28472649",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Allosteric Modulation of GPCRs: New Insights and Potential Utility for Treatment of Schizophrenia and Other CNS Disorders.",
+   "year": "2017",
+   "src": "MED",
+   "journal": "Neuron",
+   "doi": "10.1016/j.neuron.2017.03.016"
+  },
+  {
+   "id": "PMID:36551939",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Antipsychotics-Induced Changes in Synaptic Architecture and Functional Connectivity: Translational Implications for Treatment Response and Resistance.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Biomedicines",
+   "doi": "10.3390/biomedicines10123183"
+  },
+  {
+   "id": "PMID:22540185",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Distinct muscarinic acetylcholine receptor subtypes mediate pre- and postsynaptic effects in rat neocortex.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "BMC Neurosci",
+   "doi": "10.1186/1471-2202-13-42"
+  },
+  {
+   "id": "PMC:PMC10094993",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "AAPP 2023 Annual Meeting Poster Abstracts",
+   "year": "2023",
+   "src": "PMC",
+   "journal": "Ment Health Clin",
+   "doi": null
+  },
+  {
+   "id": "PMID:35836971",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Risk of Drug-induced Movement Disorders with Newer Antipsychotic Agents.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Tremor Other Hyperkinet Mov (N Y)",
+   "doi": "10.5334/tohm.695"
+  },
+  {
+   "id": "PMID:28911965",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Physiological roles of CNS muscarinic receptors gained from knockout mice.",
+   "year": "2018",
+   "src": "MED",
+   "journal": "Neuropharmacology",
+   "doi": "10.1016/j.neuropharm.2017.09.011"
+  },
+  {
+   "id": "PMID:19201489",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Subtype-selective allosteric modulators of muscarinic receptors for the treatment of CNS disorders.",
+   "year": "2009",
+   "src": "MED",
+   "journal": "Trends Pharmacol Sci",
+   "doi": "10.1016/j.tips.2008.12.002"
+  },
+  {
+   "id": "PMID:33279935",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 59<sup>th</sup> Annual Meeting: Poster Session II.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/s41386-020-00891-6"
+  },
+  {
+   "id": "PMID:24076101",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Development of allosteric modulators of GPCRs for treatment of CNS disorders.",
+   "year": "2014",
+   "src": "MED",
+   "journal": "Neurobiol Dis",
+   "doi": "10.1016/j.nbd.2013.09.013"
+  },
+  {
+   "id": "PMID:30089885",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "TAK-071, a novel M<sub>1</sub> positive allosteric modulator with low cooperativity, improves cognitive function in rodents with few cholinergic side effects.",
+   "year": "2019",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/s41386-018-0168-8"
+  },
+  {
+   "id": "PMID:36448509",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Putative neurochemical and cell type contributions to hemodynamic activity in the rodent caudate putamen.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "J Cereb Blood Flow Metab",
+   "doi": "10.1177/0271678x221142533"
+  },
+  {
+   "id": "PMID:38123151",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The Concise Guide to PHARMACOLOGY 2023/24: G protein-coupled receptors.",
+   "year": "2023",
+   "src": "MED",
+   "journal": "Br J Pharmacol",
+   "doi": "10.1111/bph.16177"
+  },
+  {
+   "id": "PMID:27746762",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Why an M1 Antagonist Could Be a More Selective Model for Memory Impairment than Scopolamine.",
+   "year": "2016",
+   "src": "MED",
+   "journal": "Front Neurol",
+   "doi": "10.3389/fneur.2016.00167"
+  },
+  {
+   "id": "PMID:23696705",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Magnetic resonance spectroscopy in Alzheimer's disease.",
+   "year": "2013",
+   "src": "MED",
+   "journal": "Neuropsychiatr Dis Treat",
+   "doi": "10.2147/ndt.s35440"
+  },
+  {
+   "id": "PMID:23659787",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Development of M1 mAChR allosteric and bitopic ligands: prospective therapeutics for the treatment of cognitive deficits.",
+   "year": "2013",
+   "src": "MED",
+   "journal": "ACS Chem Neurosci",
+   "doi": "10.1021/cn400086m"
+  },
+  {
+   "id": "PMID:22070219",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Muscarinic receptors: their roles in disorders of the central nervous system and potential as therapeutic targets.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "CNS Neurosci Ther",
+   "doi": "10.1111/j.1755-5949.2011.00249.x"
+  },
+  {
+   "id": "PMID:34803723",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Potential Role for Combined Subtype-Selective Targeting of M<sub>1</sub> and M<sub>3</sub> Muscarinic Receptors in Gastrointestinal and Liver Diseases.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Front Pharmacol",
+   "doi": "10.3389/fphar.2021.786105"
+  },
+  {
+   "id": "PMID:33669406",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Allosteric Modulation of GPCRs of Class A by Cholesterol.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms22041953"
+  },
+  {
+   "id": "PMID:26511338",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Changes in BQCA Allosteric Modulation of [(3)H]NMS Binding to Human Cortex within Schizophrenia and by Divalent Cations.",
+   "year": "2016",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/npp.2015.330"
+  },
+  {
+   "id": "PMID:36035218",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Tacrine Derivatives in Neurological Disorders: Focus on Molecular Mechanisms and Neurotherapeutic Potential.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Oxid Med Cell Longev",
+   "doi": "10.1155/2022/7252882"
+  },
+  {
+   "id": "PMID:30791698",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Treatment Recommendations for Tardive Dyskinesia.",
+   "year": "2019",
+   "src": "MED",
+   "journal": "Can J Psychiatry",
+   "doi": "10.1177/0706743719828968"
+  },
+  {
+   "id": "PMID:36456694",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 61<sup>st</sup> Annual Meeting: Poster Abstracts P271-P540.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/s41386-022-01485-0"
+  },
+  {
+   "id": "PMC:PMC9714386",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 61st Annual Meeting: Keyword Index",
+   "year": "2022",
+   "src": "PMC",
+   "journal": "Neuropsychopharmacology",
+   "doi": null
+  },
+  {
+   "id": "PMID:23805071",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Biomarker investigations related to pathophysiological pathways in schizophrenia and psychosis.",
+   "year": "2013",
+   "src": "MED",
+   "journal": "Front Cell Neurosci",
+   "doi": "10.3389/fncel.2013.00095"
+  },
+  {
+   "id": "PMID:34857905",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 60<sup>th</sup> Annual Meeting: Poster Abstracts P276 - P550.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/s41386-021-01237-6"
+  },
+  {
+   "id": "PMID:23597304",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "New pharmacological approaches to the cholinergic system: an overview on muscarinic receptor ligands and cholinesterase inhibitors.",
+   "year": "2013",
+   "src": "MED",
+   "journal": "Recent Pat CNS Drug Discov",
+   "doi": "10.2174/1574889811308020003"
+  },
+  {
+   "id": "PMID:12847557",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Xanomeline and the antipsychotic potential of muscarinic receptor subtype selective agonists.",
+   "year": "2003",
+   "src": "MED",
+   "journal": "CNS Drug Rev",
+   "doi": "10.1111/j.1527-3458.2003.tb00247.x"
+  },
+  {
+   "id": "PMC:PMC8019541",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "CPNP 2021 Annual Meeting Poster Abstracts",
+   "year": "2021",
+   "src": "PMC",
+   "journal": "Ment Health Clin",
+   "doi": null
+  },
+  {
+   "id": "PMID:26712075",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Drug-induced retroperitoneal fibrosis: short aetiopathogenetic note, from the past times of ergot-derivatives large use to currently applied bio-pharmacology.",
+   "year": "2015",
+   "src": "MED",
+   "journal": "G Chir",
+   "doi": "10.11138/gchir/2015.36.4.187"
+  },
+  {
+   "id": "PMID:27603392",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Increased GABA concentrations in type 2 diabetes mellitus are related to lower cognitive functioning.",
+   "year": "2016",
+   "src": "MED",
+   "journal": "Medicine (Baltimore)",
+   "doi": "10.1097/md.0000000000004803"
+  },
+  {
+   "id": "PMID:22723693",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Novel allosteric agonists of M1 muscarinic acetylcholine receptors induce brain region-specific responses that correspond with behavioral effects in animal models.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "J Neurosci",
+   "doi": "10.1523/jneurosci.0337-12.2012"
+  },
+  {
+   "id": "PMC:PMC10615330",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Poster Abstracts - Academy of Managed Care Pharmacy 2023",
+   "year": "2023",
+   "src": "PMC",
+   "journal": "J Manag Care Spec Pharm",
+   "doi": null
+  },
+  {
+   "id": "PMID:18772318",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Centrally active allosteric potentiators of the M4 muscarinic acetylcholine receptor reverse amphetamine-induced hyperlocomotor activity in rats.",
+   "year": "2008",
+   "src": "MED",
+   "journal": "J Pharmacol Exp Ther",
+   "doi": "10.1124/jpet.108.140350"
+  },
+  {
+   "id": "PMID:33551724",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "PDE10A Inhibitors-Clinical Failure or Window Into Antipsychotic Drug Action?",
+   "year": "2020",
+   "src": "MED",
+   "journal": "Front Neurosci",
+   "doi": "10.3389/fnins.2020.600178"
+  },
+  {
+   "id": "PMID:24983212",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Neuromodulation by acetylcholine: examples from schizophrenia and depression.",
+   "year": "2014",
+   "src": "MED",
+   "journal": "Curr Opin Neurobiol",
+   "doi": "10.1016/j.conb.2014.06.004"
+  },
+  {
+   "id": "PMID:26874213",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Effects of dopamine D1-like and D2-like antagonists on cocaine discrimination in muscarinic receptor knockout mice.",
+   "year": "2016",
+   "src": "MED",
+   "journal": "Eur J Pharmacol",
+   "doi": "10.1016/j.ejphar.2016.02.034"
+  },
+  {
+   "id": "PMID:10610396",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The cholinergic hypothesis of Alzheimer's disease: a review of progress.",
+   "year": "1999",
+   "src": "MED",
+   "journal": "J Neurol Neurosurg Psychiatry",
+   "doi": "10.1136/jnnp.67.4.558"
+  },
+  {
+   "id": "PMID:24742809",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Various MRS application tools for Alzheimer disease and mild cognitive impairment.",
+   "year": "2014",
+   "src": "MED",
+   "journal": "AJNR Am J Neuroradiol",
+   "doi": "10.3174/ajnr.a3944"
+  },
+  {
+   "id": "PMC:PMC10729591",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 62nd Annual Meeting: Panels, Mini-Panels and Study Groups",
+   "year": "2023",
+   "src": "PMC",
+   "journal": "Neuropsychopharmacology",
+   "doi": null
+  },
+  {
+   "id": "PMID:34884789",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Role of Receptors in Relation to Plaques and Tangles in Alzheimer's Disease Pathology.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms222312987"
+  },
+  {
+   "id": "PMID:25933960",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Pharmacokinetics of cotinine in rats: a potential therapeutic agent for disorders of cognitive function.",
+   "year": "2015",
+   "src": "MED",
+   "journal": "Pharmacol Rep",
+   "doi": "10.1016/j.pharep.2014.12.004"
+  },
+  {
+   "id": "PMID:19506725",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Role of the central cholinergic system in the therapeutics of schizophrenia.",
+   "year": "2008",
+   "src": "MED",
+   "journal": "Curr Neuropharmacol",
+   "doi": "10.2174/157015908785777247"
+  },
+  {
+   "id": "PMID:32604402",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Signature-based approaches for informed drug repurposing: targeting CNS disorders.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/s41386-020-0752-6"
+  },
+  {
+   "id": "PMID:29553158",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Cholinergic medication for antipsychotic-induced tardive dyskinesia.",
+   "year": "2018",
+   "src": "MED",
+   "journal": "Cochrane Database Syst Rev",
+   "doi": "10.1002/14651858.cd000207.pub2"
+  },
+  {
+   "id": "PMC:PMC5149584",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 55th Annual Meeting: Poster Session I December 5, 2016",
+   "year": "2016",
+   "src": "PMC",
+   "journal": "Neuropsychopharmacology",
+   "doi": null
+  },
+  {
+   "id": "PMID:15014599",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Treating Psychotic Symptoms in Elderly Patients.",
+   "year": "2001",
+   "src": "MED",
+   "journal": "Prim Care Companion J Clin Psychiatry",
+   "doi": "10.4088/pcc.v03n0402"
+  },
+  {
+   "id": "PMID:30309037",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Multi-Target Approach for Drug Discovery against Schizophrenia.",
+   "year": "2018",
+   "src": "MED",
+   "journal": "Int J Mol Sci",
+   "doi": "10.3390/ijms19103105"
+  },
+  {
+   "id": "PMID:28653280",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Clozapine as a Model for Antipsychotic Development.",
+   "year": "2017",
+   "src": "MED",
+   "journal": "Neurotherapeutics",
+   "doi": "10.1007/s13311-017-0552-9"
+  },
+  {
+   "id": "PMID:17617664",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Molecular targets for treating cognitive dysfunction in schizophrenia.",
+   "year": "2007",
+   "src": "MED",
+   "journal": "Schizophr Bull",
+   "doi": "10.1093/schbul/sbm074"
+  },
+  {
+   "id": "PMID:20202841",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Synthesis and SAR of N-(4-(4-alklylpiperazin-1-yl)phenyl)benzamides as muscarinic acetylcholine receptor subtype 1 (M1) anatgonists.",
+   "year": "2010",
+   "src": "MED",
+   "journal": "Bioorg Med Chem Lett",
+   "doi": "10.1016/j.bmcl.2010.02.041"
+  },
+  {
+   "id": "PMID:25671228",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Dopamine receptors - IUPHAR Review 13.",
+   "year": "2015",
+   "src": "MED",
+   "journal": "Br J Pharmacol",
+   "doi": "10.1111/bph.12906"
+  },
+  {
+   "id": "PMID:20147565",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A subpopulation of neuronal M4 muscarinic acetylcholine receptors plays a critical role in modulating dopamine-dependent behaviors.",
+   "year": "2010",
+   "src": "MED",
+   "journal": "J Neurosci",
+   "doi": "10.1523/jneurosci.3843-09.2010"
+  },
+  {
+   "id": "PMID:18332476",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Alzheimer's and non-alzheimer's dementia: a critical review of pharmacological and nonpharmacological strategies.",
+   "year": "2008",
+   "src": "MED",
+   "journal": "Am J Alzheimers Dis Other Demen",
+   "doi": "10.1177/1533317507312957"
+  },
+  {
+   "id": "PMID:22197142",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Development of a more highly selective M(1) antagonist from the continued optimization of the MLPCN Probe ML012.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "Bioorg Med Chem Lett",
+   "doi": "10.1016/j.bmcl.2011.11.110"
+  },
+  {
+   "id": "PMID:23711993",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Use of allosteric targets in the discovery of safer drugs.",
+   "year": "2013",
+   "src": "MED",
+   "journal": "Med Princ Pract",
+   "doi": "10.1159/000350417"
+  },
+  {
+   "id": "PMID:23173069",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Targeting selective activation of M(1) for the treatment of Alzheimer's disease: further chemical optimization and pharmacological characterization of the M(1) positive allosteric modulator ML169.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "ACS Chem Neurosci",
+   "doi": "10.1021/cn300068s"
+  },
+  {
+   "id": "PMID:25026896",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "International Union of Basic and Clinical Pharmacology. XC. multisite pharmacology: recommendations for the nomenclature of receptor allosterism and allosteric ligands.",
+   "year": "2014",
+   "src": "MED",
+   "journal": "Pharmacol Rev",
+   "doi": "10.1124/pr.114.008862"
+  },
+  {
+   "id": "PMID:17046031",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Galantamine and donepezil attenuate pharmacologically induced deficits in prepulse inhibition in rats.",
+   "year": "2007",
+   "src": "MED",
+   "journal": "Neuropharmacology",
+   "doi": "10.1016/j.neuropharm.2006.08.025"
+  },
+  {
+   "id": "PMID:24047509",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Classics in chemical neuroscience: clozapine.",
+   "year": "2013",
+   "src": "MED",
+   "journal": "ACS Chem Neurosci",
+   "doi": "10.1021/cn400121z"
+  },
+  {
+   "id": "PMID:26813123",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Alzheimer's disease: Targeting the Cholinergic System.",
+   "year": "2016",
+   "src": "MED",
+   "journal": "Curr Neuropharmacol",
+   "doi": "10.2174/1570159x13666150716165726"
+  },
+  {
+   "id": "PMID:32717806",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Perspectives for New and More Efficient Multifunctional Ligands for Alzheimer's Disease Therapy.",
+   "year": "2020",
+   "src": "MED",
+   "journal": "Molecules",
+   "doi": "10.3390/molecules25153337"
+  },
+  {
+   "id": "PMID:22749871",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Development of novel M1 antagonist scaffolds through the continued optimization of the MLPCN probe ML012.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "Bioorg Med Chem Lett",
+   "doi": "10.1016/j.bmcl.2012.06.018"
+  },
+  {
+   "id": "PMID:16633462",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Pharmacotherapy in the treatment of Alzheimer's disease: an update.",
+   "year": "2004",
+   "src": "MED",
+   "journal": "World Psychiatry",
+   "doi": null
+  },
+  {
+   "id": "PMID:30420692",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Structural insights into the subtype-selective antagonist binding to the M<sub>2</sub> muscarinic receptor.",
+   "year": "2018",
+   "src": "MED",
+   "journal": "Nat Chem Biol",
+   "doi": "10.1038/s41589-018-0152-y"
+  },
+  {
+   "id": "PMID:21115035",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The treatment of cognitive impairment in schizophrenia.",
+   "year": "2011",
+   "src": "MED",
+   "journal": "Pharmacol Biochem Behav",
+   "doi": "10.1016/j.pbb.2010.11.009"
+  },
+  {
+   "id": "PMID:22463818",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "M4 muscarinic receptor knockout mice display abnormal social behavior and decreased prepulse inhibition.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "Mol Brain",
+   "doi": "10.1186/1756-6606-5-10"
+  },
+  {
+   "id": "PMC:PMC7735197",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 59th Annual Meeting: Keyword Index",
+   "year": "2020",
+   "src": "PMC",
+   "journal": "Neuropsychopharmacology",
+   "doi": null
+  },
+  {
+   "id": "PMID:25869805",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Targeting the schizophrenia genome: a fast track strategy from GWAS to clinic.",
+   "year": "2015",
+   "src": "MED",
+   "journal": "Mol Psychiatry",
+   "doi": "10.1038/mp.2015.28"
+  },
+  {
+   "id": "PMID:30127324",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Current Concepts and Treatments of Schizophrenia.",
+   "year": "2018",
+   "src": "MED",
+   "journal": "Molecules",
+   "doi": "10.3390/molecules23082087"
+  },
+  {
+   "id": "PMID:11563438",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Magnetic resonance imaging and magnetic resonance spectroscopy in dementias.",
+   "year": "2001",
+   "src": "MED",
+   "journal": "J Geriatr Psychiatry Neurol",
+   "doi": "10.1177/089198870101400308"
+  },
+  {
+   "id": "PMID:30186116",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Importance of GPCR-Mediated Microglial Activation in Alzheimer's Disease.",
+   "year": "2018",
+   "src": "MED",
+   "journal": "Front Cell Neurosci",
+   "doi": "10.3389/fncel.2018.00258"
+  },
+  {
+   "id": "PMID:23490231",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "M2 receptor activation inhibits cell cycle progression and survival in human glioblastoma cells.",
+   "year": "2013",
+   "src": "MED",
+   "journal": "J Cell Mol Med",
+   "doi": "10.1111/jcmm.12038"
+  },
+  {
+   "id": "PMID:26240429",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The impact of neuroscience on society: cognitive enhancement in neuropsychiatric disorders and in healthy people.",
+   "year": "2015",
+   "src": "MED",
+   "journal": "Philos Trans R Soc Lond B Biol Sci",
+   "doi": "10.1098/rstb.2014.0214"
+  },
+  {
+   "id": "PMID:10212558",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Apolipoprotein E4, cholinergic integrity and the pharmacogenetics of Alzheimer's disease.",
+   "year": "1999",
+   "src": "MED",
+   "journal": "J Psychiatry Neurosci",
+   "doi": null
+  },
+  {
+   "id": "PMID:18178088",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Synthesis and SAR of selective muscarinic acetylcholine receptor subtype 1 (M1 mAChR) antagonists.",
+   "year": "2008",
+   "src": "MED",
+   "journal": "Bioorg Med Chem Lett",
+   "doi": "10.1016/j.bmcl.2007.12.051"
+  },
+  {
+   "id": "PMID:10610395",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Necrotising vasculitis with conduction block in mononeuropathy multiplex with cold agglutinins.",
+   "year": "1999",
+   "src": "MED",
+   "journal": "J Neurol Neurosurg Psychiatry",
+   "doi": "10.1136/jnnp.67.4.556a"
+  },
+  {
+   "id": "PMID:32783388",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "A multitude of signaling pathways associated with Alzheimer's disease and their roles in AD pathogenesis and therapy.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Med Res Rev",
+   "doi": "10.1002/med.21719"
+  },
+  {
+   "id": "PMID:19845415",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Cholinergic functioning in stimulant addiction: implications for medications development.",
+   "year": "2009",
+   "src": "MED",
+   "journal": "CNS Drugs",
+   "doi": "10.2165/11310920-000000000-00000"
+  },
+  {
+   "id": "PMID:19807667",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Discovery and development of a potent and highly selective small molecule muscarinic acetylcholine receptor subtype I (mAChR 1 or M1) antagonist in vitro and in vivo probe.",
+   "year": "2009",
+   "src": "MED",
+   "journal": "Curr Top Med Chem",
+   "doi": "10.2174/156802609789753635"
+  },
+  {
+   "id": "PMID:27065872",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Drug Development in Alzheimer's Disease: The Contribution of PET and SPECT.",
+   "year": "2016",
+   "src": "MED",
+   "journal": "Front Pharmacol",
+   "doi": "10.3389/fphar.2016.00088"
+  },
+  {
+   "id": "PMID:17349862",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Cholinergic circuits and signaling in the pathophysiology of schizophrenia.",
+   "year": "2007",
+   "src": "MED",
+   "journal": "Int Rev Neurobiol",
+   "doi": "10.1016/s0074-7742(06)78007-2"
+  },
+  {
+   "id": "PMID:19565524",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Approaches to measuring the effects of wake-promoting drugs: a focus on cognitive function.",
+   "year": "2009",
+   "src": "MED",
+   "journal": "Hum Psychopharmacol",
+   "doi": "10.1002/hup.1034"
+  },
+  {
+   "id": "PMID:24363646",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Pharmacological Interventions for the MATRICS Cognitive Domains in Schizophrenia: What's the Evidence?",
+   "year": "2013",
+   "src": "MED",
+   "journal": "Front Psychiatry",
+   "doi": "10.3389/fpsyt.2013.00157"
+  },
+  {
+   "id": "PMID:19667132",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Allosteric modulators of g protein-coupled receptors: future therapeutics for complex physiological disorders.",
+   "year": "2009",
+   "src": "MED",
+   "journal": "J Pharmacol Exp Ther",
+   "doi": "10.1124/jpet.109.156380"
+  },
+  {
+   "id": "PMID:9347775",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Alzheimer's disease: current knowledge, management and research.",
+   "year": "1997",
+   "src": "MED",
+   "journal": "CMAJ",
+   "doi": null
+  },
+  {
+   "id": "PMID:35648190",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Roles of selected non-P450 human oxidoreductase enzymes in protective and toxic effects of chemicals: review and compilation of reactions.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Arch Toxicol",
+   "doi": "10.1007/s00204-022-03304-3"
+  },
+  {
+   "id": "PMID:22148748",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Allosteric modulation of seven transmembrane spanning receptors: theory, practice, and opportunities for central nervous system drug discovery.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "J Med Chem",
+   "doi": "10.1021/jm201139r"
+  },
+  {
+   "id": "PMID:20582339",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Allosteric activators of muscarinic receptors as novel approaches for treatment of CNS disorders.",
+   "year": "2010",
+   "src": "MED",
+   "journal": "Mol Biosyst",
+   "doi": "10.1039/c002938f"
+  },
+  {
+   "id": "PMID:23105779",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The biochemical womb of schizophrenia: A review.",
+   "year": "2008",
+   "src": "MED",
+   "journal": "Indian J Clin Biochem",
+   "doi": "10.1007/s12291-008-0071-x"
+  },
+  {
+   "id": "PMC:PMC6494158",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "CNS FORUM Advancements in Clinical Trials and Drug Development Philadelphia, PA, USA, July 29\u201330, 2003",
+   "year": "2003",
+   "src": "PMC",
+   "journal": "CNS Drug Rev",
+   "doi": null
+  },
+  {
+   "id": "PMID:21106907",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The prototypical ranitidine analog JWS-USC-75-IX improves information processing and cognitive function in animal models.",
+   "year": "2011",
+   "src": "MED",
+   "journal": "J Pharmacol Exp Ther",
+   "doi": "10.1124/jpet.110.175422"
+  },
+  {
+   "id": "PMID:36456695",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 61<sup>st</sup> Annual Meeting: Poster Abstracts P541 - P809.",
+   "year": "2022",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/s41386-022-01486-z"
+  },
+  {
+   "id": "PMID:24605808",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Clinical trials and late-stage drug development for Alzheimer's disease: an appraisal from 1984 to 2014.",
+   "year": "2014",
+   "src": "MED",
+   "journal": "J Intern Med",
+   "doi": "10.1111/joim.12191"
+  },
+  {
+   "id": "PMID:20880390",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Long-lasting target binding and rebinding as mechanisms to prolong in vivo drug action.",
+   "year": "2010",
+   "src": "MED",
+   "journal": "Br J Pharmacol",
+   "doi": "10.1111/j.1476-5381.2010.00936.x"
+  },
+  {
+   "id": "PMID:9641560",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The profile of sabcomeline (SB-202026), a functionally selective M1 receptor partial agonist, in the marmoset.",
+   "year": "1998",
+   "src": "MED",
+   "journal": "Br J Pharmacol",
+   "doi": "10.1038/sj.bjp.0701844"
+  },
+  {
+   "id": "PMID:25876458",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Cholinergic interneurons in the dorsal and ventral striatum: anatomical and functional considerations in normal and diseased conditions.",
+   "year": "2015",
+   "src": "MED",
+   "journal": "Ann N Y Acad Sci",
+   "doi": "10.1111/nyas.12762"
+  },
+  {
+   "id": "PMID:27519538",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "New drug developments in psychosis: Challenges, opportunities and strategies.",
+   "year": "2017",
+   "src": "MED",
+   "journal": "Prog Neurobiol",
+   "doi": "10.1016/j.pneurobio.2016.07.004"
+  },
+  {
+   "id": "PMID:20730384",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Dysfunction of G protein-coupled receptor kinases in Alzheimer's disease.",
+   "year": "2010",
+   "src": "MED",
+   "journal": "ScientificWorldJournal",
+   "doi": "10.1100/tsw.2010.154"
+  },
+  {
+   "id": "PMID:18923405",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Target identification for CNS diseases by transcriptional profiling.",
+   "year": "2009",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/npp.2008.172"
+  },
+  {
+   "id": "PMC:PMC7128221",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Free Communications (Poster Sessions)",
+   "year": "2015",
+   "src": "PMC",
+   "journal": "J Pharmacol Sci",
+   "doi": null
+  },
+  {
+   "id": "PMID:15922018",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Mammalian flavin-containing monooxygenases: structure/function, genetic polymorphisms and role in drug metabolism.",
+   "year": "2005",
+   "src": "MED",
+   "journal": "Pharmacol Ther",
+   "doi": "10.1016/j.pharmthera.2005.01.001"
+  },
+  {
+   "id": "PMID:33370241",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "International Union of Basic and Clinical Pharmacology. CX. Classification of Receptors for 5-hydroxytryptamine; Pharmacology and Function.",
+   "year": "2021",
+   "src": "MED",
+   "journal": "Pharmacol Rev",
+   "doi": "10.1124/pr.118.015552"
+  },
+  {
+   "id": "PMID:10583015",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Acetylcholinesterase inhibitors in Alzheimer's disease.",
+   "year": "1999",
+   "src": "MED",
+   "journal": "Br J Clin Pharmacol",
+   "doi": "10.1046/j.1365-2125.1999.00026.x"
+  },
+  {
+   "id": "PMID:10071091",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "The cholinergic hypothesis of Alzheimer's disease: a review of progress.",
+   "year": "1999",
+   "src": "MED",
+   "journal": "J Neurol Neurosurg Psychiatry",
+   "doi": "10.1136/jnnp.66.2.137"
+  },
+  {
+   "id": "PMID:18568339",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Realistic expectations of prepulse inhibition in translational models for schizophrenia research.",
+   "year": "2008",
+   "src": "MED",
+   "journal": "Psychopharmacology (Berl)",
+   "doi": "10.1007/s00213-008-1072-4"
+  },
+  {
+   "id": "PMC:PMC6741712",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Thirty\u2010fifth Annual Meeting of Society for Neuroscience Washington, D.C., USA November 12\u201316, 2005.",
+   "year": "2005",
+   "src": "PMC",
+   "journal": "CNS Drug Rev",
+   "doi": null
+  },
+  {
+   "id": "PMID:10486413",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Clinical Management of Diabetic Neuropathy.",
+   "year": "1999",
+   "src": "MED",
+   "journal": "J Neurol Neurosurg Psychiatry",
+   "doi": "10.1136/jnnp.67.4.558a"
+  },
+  {
+   "id": "PMID:10486416",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "States of Mind.",
+   "year": "1999",
+   "src": "MED",
+   "journal": "J Neurol Neurosurg Psychiatry",
+   "doi": "10.1136/jnnp.67.4.558d"
+  },
+  {
+   "id": "PMID:10486415",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Key Topics in Neurology.",
+   "year": "1999",
+   "src": "MED",
+   "journal": "J Neurol Neurosurg Psychiatry",
+   "doi": "10.1136/jnnp.67.4.558c"
+  },
+  {
+   "id": "PMID:10486414",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Advanced Neurosurgical Navigation.",
+   "year": "1999",
+   "src": "MED",
+   "journal": "J Neurol Neurosurg Psychiatry",
+   "doi": "10.1136/jnnp.67.4.558b"
+  },
+  {
+   "id": "PMID:31801976",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "ACNP 58<sup>th</sup> Annual Meeting: Poster Session I.",
+   "year": "2019",
+   "src": "MED",
+   "journal": "Neuropsychopharmacology",
+   "doi": "10.1038/s41386-019-0545-y"
+  },
+  {
+   "id": "PMID:16075378",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Nicotinic agonists, antagonists, and modulators from natural sources.",
+   "year": "2005",
+   "src": "MED",
+   "journal": "Cell Mol Neurobiol",
+   "doi": "10.1007/s10571-005-3968-4"
+  },
+  {
+   "id": "PMID:22367921",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Genetic models of sensorimotor gating: relevance to neuropsychiatric disorders.",
+   "year": "2012",
+   "src": "MED",
+   "journal": "Curr Top Behav Neurosci",
+   "doi": "10.1007/7854_2011_195"
+  },
+  {
+   "id": "PMID:16389292",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Cotinine, a neuroactive metabolite of nicotine: potential for treating disorders of impaired cognition.",
+   "year": "2005",
+   "src": "MED",
+   "journal": "CNS Drug Rev",
+   "doi": "10.1111/j.1527-3458.2005.tb00045.x"
+  },
+  {
+   "id": "PMC:PMC5905517",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Abstracts for the Sixth Biennial SIRS Conference",
+   "year": "2018",
+   "src": "PMC",
+   "journal": "Schizophr Bull",
+   "doi": null
+  },
+  {
+   "id": "PMC:PMC6863359",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Poster Session II",
+   "year": "2010",
+   "src": "PMC",
+   "journal": "Neuropsychopharmacology",
+   "doi": null
+  },
+  {
+   "id": "PMC:PMC4261149",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Poster Session III Wednesday, December 10, 2014",
+   "year": "2014",
+   "src": "PMC",
+   "journal": "Neuropsychopharmacology",
+   "doi": null
+  },
+  {
+   "id": "PMC:PMC3315628",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "G Protein-Coupled Receptors",
+   "year": "2011",
+   "src": "PMC",
+   "journal": "Br J Pharmacol",
+   "doi": null
+  },
+  {
+   "id": "PMC:PMC2275470",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "7TM Receptors",
+   "year": "2008",
+   "src": "PMC",
+   "journal": "Br J Pharmacol",
+   "doi": null
+  },
+  {
+   "id": "PMID:21355132",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Abstracts of the 13th International Congress on Schizophrenia Research (ICOSR). April 2-6, 2011. Colorado Springs, Colorado, USA.",
+   "year": "2011",
+   "src": "MED",
+   "journal": "Schizophr Bull",
+   "doi": "10.1093/schbul/sbq173"
+  },
+  {
+   "id": "PMC:PMC2632307",
+   "found_in": [
+    "epmc"
+   ],
+   "title": "Abstracts of the XX International Congress on Schizophrenia Research",
+   "year": "2007",
+   "src": "PMC",
+   "journal": "Schizophr Bull",
+   "doi": null
+  }
+ ]
+}

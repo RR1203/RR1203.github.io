@@ -1,0 +1,74 @@
+{
+ "all_reports|motor_any": {
+  "n_pd": 14,
+  "pd_events": 3,
+  "n_other": 2867,
+  "other_events": 164,
+  "ror": 4.5,
+  "ci": [
+   1.24,
+   16.27
+  ],
+  "haldane": false
+ },
+ "all_reports|eps_core": {
+  "n_pd": 14,
+  "pd_events": 3,
+  "n_other": 2867,
+  "other_events": 106,
+  "ror": 7.1,
+  "ci": [
+   1.95,
+   25.84
+  ],
+  "haldane": false
+ },
+ "all_reports|gait_fall": {
+  "n_pd": 14,
+  "pd_events": 0,
+  "n_other": 2867,
+  "other_events": 31,
+  "ror": 3.11,
+  "ci": [
+   0.18,
+   53.2
+  ],
+  "haldane": true
+ },
+ "cobenfy_suspect_only|motor_any": {
+  "n_pd": 9,
+  "pd_events": 2,
+  "n_other": 2825,
+  "other_events": 154,
+  "ror": 4.96,
+  "ci": [
+   1.02,
+   24.06
+  ],
+  "haldane": false
+ },
+ "cobenfy_suspect_only|eps_core": {
+  "n_pd": 9,
+  "pd_events": 2,
+  "n_other": 2825,
+  "other_events": 97,
+  "ror": 8.04,
+  "ci": [
+   1.65,
+   39.19
+  ],
+  "haldane": false
+ },
+ "cobenfy_suspect_only|gait_fall": {
+  "n_pd": 9,
+  "pd_events": 0,
+  "n_other": 2825,
+  "other_events": 28,
+  "ror": 5.17,
+  "ci": [
+   0.29,
+   90.91
+  ],
+  "haldane": true
+ }
+}

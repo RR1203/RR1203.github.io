@@ -1,0 +1,506 @@
+[
+ {
+  "query": "query.intr=xanomeline & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarXT & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarXT & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarXT & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarXT & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarXT & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarXT & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=Cobenfy & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=Cobenfy & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=Cobenfy & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=Cobenfy & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=Cobenfy & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=Cobenfy & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline trospium & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline trospium & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline trospium & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline trospium & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline trospium & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=xanomeline trospium & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=emraclidine & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=emraclidine & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=emraclidine & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=emraclidine & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=emraclidine & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=emraclidine & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=CVL-231 & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=CVL-231 & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=CVL-231 & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=CVL-231 & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=CVL-231 & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=CVL-231 & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117568 & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117568 & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117568 & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117568 & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117568 & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117568 & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117567 & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117567 & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117567 & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117567 & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117567 & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=NBI-1117567 & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=muscarinic agonist & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=muscarinic agonist & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=muscarinic agonist & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=muscarinic agonist & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=muscarinic agonist & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=muscarinic agonist & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=muscarinic & query.cond=Parkinson Disease",
+  "hits": 1
+ },
+ {
+  "query": "query.intr=muscarinic & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=muscarinic & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=muscarinic & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=muscarinic & query.cond=Parkinsonism",
+  "hits": 1
+ },
+ {
+  "query": "query.intr=muscarinic & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M4 positive allosteric modulator & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M4 positive allosteric modulator & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M4 positive allosteric modulator & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M4 positive allosteric modulator & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M4 positive allosteric modulator & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M4 positive allosteric modulator & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M1 positive allosteric modulator & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M1 positive allosteric modulator & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M1 positive allosteric modulator & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M1 positive allosteric modulator & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M1 positive allosteric modulator & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=M1 positive allosteric modulator & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=TAK-071 & query.cond=Parkinson Disease",
+  "hits": 1
+ },
+ {
+  "query": "query.intr=TAK-071 & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=TAK-071 & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=TAK-071 & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=TAK-071 & query.cond=Parkinsonism",
+  "hits": 1
+ },
+ {
+  "query": "query.intr=TAK-071 & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=MK-7622 & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=MK-7622 & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=MK-7622 & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=MK-7622 & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=MK-7622 & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=MK-7622 & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=HTL0016878 & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=HTL0016878 & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=HTL0016878 & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=HTL0016878 & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=HTL0016878 & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=HTL0016878 & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=VU319 & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=VU319 & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=VU319 & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=VU319 & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=VU319 & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=VU319 & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ML-007 & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ML-007 & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ML-007 & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ML-007 & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ML-007 & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ML-007 & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarX-EC & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarX-EC & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarX-EC & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarX-EC & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarX-EC & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=KarX-EC & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ANAVEX3-71 & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ANAVEX3-71 & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ANAVEX3-71 & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ANAVEX3-71 & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ANAVEX3-71 & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=ANAVEX3-71 & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=cevimeline & query.cond=Parkinson Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=cevimeline & query.cond=Parkinson Disease Psychosis",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=cevimeline & query.cond=Lewy Body Disease",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=cevimeline & query.cond=Dementia with Lewy Bodies",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=cevimeline & query.cond=Parkinsonism",
+  "hits": 0
+ },
+ {
+  "query": "query.intr=cevimeline & query.cond=Parkinson Disease Dementia",
+  "hits": 0
+ },
+ {
+  "query": "query.term=xanomeline AND parkinson",
+  "hits": 0
+ },
+ {
+  "query": "query.term=KarXT AND parkinson",
+  "hits": 0
+ },
+ {
+  "query": "query.term=cobenfy AND parkinson",
+  "hits": 0
+ },
+ {
+  "query": "query.term=xanomeline AND lewy",
+  "hits": 0
+ },
+ {
+  "query": "query.term=cobenfy AND lewy",
+  "hits": 0
+ },
+ {
+  "query": "query.term=muscarinic AND parkinson psychosis",
+  "hits": 0
+ }
+]
