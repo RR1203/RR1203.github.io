@@ -43,8 +43,9 @@ See `novelty_check.md` for the queries.
 - **Literature, 2024–now:**
   - PubMed: 6 hits for xanomeline/KarXT/Cobenfy + Parkinson/Lewy, all-time.
   - Europe PMC: title/abstract search, including preprints.
-  - bioRxiv/medRxiv: full API scan.
+  - bioRxiv/medRxiv: full API scan of 49,265 preprints from 2024 to now in 5 categories.
   - The only PD clinical report is PMID 42729706. There is one non-PD mouse study (42345506) and reviews.
+  - The only PD-related preprint is preclinical: an M4 PAM in the pedunculopontine nucleus *augmented* L-DOPA's motor effect in 6-OHDA rats (doi 10.1101/2024.04.16.589785).
 - **Web/news:** 1 search found no BMS program in PD or Lewy body disease. The nearest program is ADEPT (Alzheimer's psychosis), with readout delayed to end-2026/2027 per news reports.
 
 ---
@@ -110,6 +111,7 @@ See `novelty_check.md` for the queries.
 | M1 and M4 antagonists relieve akinesia in 6-OHDA mice | M4 agonism may **worsen akinesia** | PMID 27581457 |
 | **Counterpoint:** M4 PAM reduced levodopa-induced dyskinesia in mouse and primate | **Benefit** for dyskinesia | PMID 26590347 |
 | **Counterpoint:** M4 signalling is reduced after dopamine loss; restoring it partly alleviated parkinsonian deficits | Possible **benefit** | PMID 39565858 |
+| **Counterpoint:** M4 PAM infused in the pedunculopontine nucleus slightly augmented L-DOPA motor benefit; dyskinesia unchanged (preprint, not peer-reviewed) | Possible **benefit** | doi 10.1101/2024.04.16.589785 |
 | Xanomeline 4 mg/kg caused dystonia in 2/3 EPS-sensitised monkeys (none at 0.5–3 mg/kg) | Dystonia at high dose | PMID 12700711 |
 | ChEIs in PD dementia: new or worse tremor 10.2% vs 3.9% (n=541), with UPDRS-III unchanged | **Tremor** is the realistic clinical effect | PMID 18095748; meta-analysis PMID 25224676 |
 | Donepezil in DLB: EPS AEs 6.5% vs 3.8% (ns), UPDRS-III unchanged over 52 weeks | Reassuring | PMID 26226884 |

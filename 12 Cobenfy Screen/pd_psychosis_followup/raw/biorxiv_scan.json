@@ -1,0 +1,99 @@
+{
+ "log": [
+  {
+   "server": "medrxiv",
+   "category": "neurology",
+   "scanned": 4574,
+   "total": 4574
+  },
+  {
+   "server": "medrxiv",
+   "category": "psychiatry and clinical psychology",
+   "scanned": 3306,
+   "total": 3306
+  },
+  {
+   "server": "medrxiv",
+   "category": "pharmacology and therapeutics",
+   "scanned": 405,
+   "total": 405
+  },
+  {
+   "server": "biorxiv",
+   "category": "neuroscience",
+   "scanned": 38750,
+   "total": 38750
+  },
+  {
+   "server": "biorxiv",
+   "category": "pharmacology and toxicology",
+   "scanned": 2230,
+   "total": 2230
+  }
+ ],
+ "hits": [
+  {
+   "server": "biorxiv",
+   "category": "neuroscience",
+   "doi": "10.1101/2024.04.16.589785",
+   "date": "2024-04-20",
+   "title": "Rostral Pedunculopontine Nucleus Infusion of M4 Positive Allosteric Modulator VU0467154 Augments L-DOPA Effects in Hemiparkinsonian Rats",
+   "pd_related": true,
+   "abstract": "Standard treatment for Parkinsons disease (PD) is dopamine replacement therapy with L-DOPA. However, chronic treatment often results in abnormal involuntary movements called L-DOPA-induced dyskinesia (LID). Prior evidence indicates that heightened striatal cholinergic tone may contribute to LID. Restoring cholinergic inhibition by targeting the inhibitory M4 muscarinic acetylcholine (ACh) receptor (M4) reduces LID in preclinical models. Although intrinsic striatal sources of ACh have been considered for their role in LID, extrinsic sources of ACh such as the pedunculopontine nucleus (PPN) have not been well investigated for their role in LID. Therefore, the current study employed hemiparkinsonian Long-Evans rats with a PPN-targeted cannula ipsilateral to 6-OHDA lesion. Following chronic treatment with L-DOPA, we examined the effect of local unilateral PPN infusion of M4 PAM VU0467154 on LID, motor performance, and c-fos expression within the PPN. It was expected that PPN infusion of VU0467154 would reduce LID, reduce L-DOPAs motor benefit, and globally reduce c-fos expression in the PPN. Contrary to our expectations, PPN infusion of M4 PAM did not significantly affect LID severity. Furthermore, the group receiving M4 PAM showed slightly elevated motor improvement compared to L-DOPA, and decreased c-fos expression specifically in PPN cholinergic neurons. These results suggest that local PPN ACh dynamics differ from those of the striatum. Specifically, our results suggest that "
+  },
+  {
+   "server": "biorxiv",
+   "category": "neuroscience",
+   "doi": "10.1101/2024.04.16.589785",
+   "date": "2024-04-21",
+   "title": "Rostral Pedunculopontine Nucleus Infusion of M4 Positive Allosteric Modulator VU0467154 Augments L-DOPA Effects in Hemiparkinsonian Rats",
+   "pd_related": true,
+   "abstract": "Standard treatment for Parkinsons disease (PD) is dopamine replacement therapy with L-DOPA. However, chronic treatment often results in abnormal involuntary movements called L-DOPA-induced dyskinesia (LID). Prior evidence indicates that heightened striatal cholinergic tone may contribute to LID. Restoring cholinergic inhibition by targeting the inhibitory M4 muscarinic acetylcholine (ACh) receptor (M4) reduces LID in preclinical models. Although intrinsic striatal sources of ACh have been considered for their role in LID, extrinsic sources of ACh such as the pedunculopontine nucleus (PPN) have not been well investigated for their role in LID. Therefore, the current study employed hemiparkinsonian Long-Evans rats with a PPN-targeted cannula ipsilateral to 6-OHDA lesion. Following chronic treatment with L-DOPA, we examined the effect of local unilateral PPN infusion of M4 PAM VU0467154 on LID, motor performance, and c-fos expression within the PPN. It was expected that PPN infusion of VU0467154 would reduce LID, reduce L-DOPAs motor benefit, and globally reduce c-fos expression in the PPN. Contrary to our expectations, PPN infusion of M4 PAM did not significantly affect LID severity. Furthermore, the group receiving M4 PAM showed slightly elevated motor improvement compared to L-DOPA, and decreased c-fos expression specifically in PPN cholinergic neurons. These results suggest that local PPN ACh dynamics differ from those of the striatum. Specifically, our results suggest that "
+  },
+  {
+   "server": "biorxiv",
+   "category": "neuroscience",
+   "doi": "10.1101/2025.11.20.689572",
+   "date": "2025-11-21",
+   "title": "The polypharmacological profiles of xanomeline and N-desmethylxanomeline",
+   "pd_related": false,
+   "abstract": "The muscarinic agonist xanomeline in combination with the peripherally restricted muscarinic antagonist trospium has recently been approved for treatment of schizophrenia. Xanomeline represents the first approved antipsychotic drug without apparent activity at D2-dopamine receptors. In humans, xanomeline is reported to be metabolized to N-desmethylxanomeline, which has a similar pharmacokinetic profile to xanomeline, although its pharmacology has not been reported. We discovered that xanomeline and N-desmethylxanomeline have potent agonist and antagonist actions at many biogenic amine G protein coupled receptors. These results suggest that at least some of the actions of xanomeline and N-desmethylxanomeline could be mediated by off-target actions at serotonergic, dopaminergic, histaminergic, adrenergic and other receptors. We discuss the potential implications of these findings."
+  },
+  {
+   "server": "biorxiv",
+   "category": "neuroscience",
+   "doi": "10.64898/2026.11.05.764685",
+   "date": "2026-11-06",
+   "title": "Broad Cognitive and Motivational Enhancement through M4-Selective Muscarinic Modulation",
+   "pd_related": false,
+   "abstract": "The muscarinic M4 subtype of acetylcholine receptors is part of agonist compounds considered treatment options for Schizophrenia and Alzheimers disease, but how M4-subtype selective modulation affects cognition and motivation is largely unknown due to dose-limiting side effects, a scarcity of receptor-selective compounds, and missing multi-domain assessments of cognition. Here, we surmount these constraints by utilizing a M4-selective positive allosteric modulator (PAM) to assess in nonhuman primates a broad array of endpoints spanning motivational effort control and multiple executive function domains. We found broad dose-dependent performance improvements of set shifting indexing cognitive flexibility, visual search indexing selective attention, antisaccade performance indexing inhibitory control, visuospatial maze learning, and temporal order serial object learning, while working memory span was non-systematically modulated. In addition, the M4 PAM reduced effort avoidance in an effort-based choice task documenting a pro-motivational effect. Task-composite performance scores showed pro-cognitive effects across multiple doses and an effective dose range for individual subjects in the absence of adverse dose-limiting cholinergic side effects. Together, the broad pro-cognitive and pro-motivational multi-task profile of M4 PAM modulation suggests that the M4 receptor is a master regulator of executive cognitive functioning, possibly acting on domain-general neural processes ac"
+  },
+  {
+   "server": "biorxiv",
+   "category": "pharmacology and toxicology",
+   "doi": "10.1101/2025.03.03.641295",
+   "date": "2025-03-11",
+   "title": "Effects of the muscarinic M1 agonist VU0364572 and the M1/M4-prefering agonist xanomeline on cocaine choice in male and female rats",
+   "pd_related": false,
+   "abstract": "Cocaine use disorder (CUD) is a continuing threat to public health that lacks a Food and Drug Administration approved pharmacotherapy. However, there is evidence to suggest that muscarinic receptor activation may lead to reductions in cocaine taking, acquisition, and choice. Therefore, we use a cocaine-vs-food choice procedure in male and female Sprague-Dawley rats to evaluate the effectiveness of the bitopic M1/M4 preferring muscarinic agonist xanomeline and the M1 muscarinic agonist/positive allosteric modulator VU0364572 (VU72). We found that repeated xanomeline did significantly attenuate cocaine choice while VU72 failed to meaningfully alter cocaine choice across subjects. These results suggest that the mechanism by which muscarinic receptors modulate cocaine reinforcement may be mediated either by M4 muscarinic receptors specifically or a combination of both M1 and M4 muscarinic receptors acting in concert. Furthermore, there is evidence that xanomeline may prove a viable pharmacotherapy for treating CUD."
+  },
+  {
+   "server": "biorxiv",
+   "category": "pharmacology and toxicology",
+   "doi": "10.64898/2025.12.22.696048",
+   "date": "2025-12-24",
+   "title": "Effects of nonpharmacological manipulations and repeated xanomeline treatment on methamphetamine-vs-food choice in Sprague Dawley and Long Evans rats",
+   "pd_related": false,
+   "abstract": "The absence of Food and Drug Administration (FDA)-approved pharmacotherapies for methamphetamine use disorder (MUD) highlights the need for preclinical research to understand both the basic biological mechanisms of methamphetamine reinforcement and evaluate novel MUD pharmacotherapies. Recent studies demonstrated that repeated treatment with the muscarinic M1/M4 receptor agonist xanomeline attenuated cocaine self-administration. Whether these xanomeline treatment effects extend to methamphetamine self-administration remains unknown. The first aim established the economic substitutability between methamphetamine and liquid food (i.e., Ensure(R)) using a methamphetamine-vs-food choice procedure in male and female Sprague Dawley (SD) and Long Evans (LE) rats. A within-session methamphetamine choice dose-effect function (0.032-0.32 mg/kg/infusion) was determined daily, and food reinforcer magnitude was manipulated weekly by changing the concentration (0, 10, 32, and 100%) of vanilla-flavored Ensure. Additionally, methamphetamine response requirement (i.e., fixed ratio (FR) 1, 5, 25, 125) was manipulated each week while holding the food FR constant. The second aim determined the effectiveness of repeated 5-day xanomeline (3.2-10 mg/kg, SC) to attenuate methamphetamine choice. Both increasing Ensure concentrations and methamphetamine FR values resulted in rightward shifts in the methamphetamine choice dose-effect function in both SD and LE rats. Repeated 5-day xanomeline treatment "
+  },
+  {
+   "server": "biorxiv",
+   "category": "pharmacology and toxicology",
+   "doi": "10.64898/2026.10.26.761976",
+   "date": "2026-10-27",
+   "title": "Striatal M4 Receptors Mediate M4 PAM Antipsychotic-like Efficacy Independently of Normalizing Striatal Dopamine Release",
+   "pd_related": false,
+   "abstract": "Muscarinic acetylcholine receptor (mAChR) drugs have emerged as a promising new class of antipsychotics, highlighted by the FDA approval of Cobenfy, the first treatment for schizophrenia that does not directly target dopamine receptors. The M4 receptor subtype is thought to be a key mediator of antipsychotic-like efficacy. However, the in vivo circuit mechanisms underlying the antipsychotic-like efficacy observed with M4-selective positive allosteric modulators (PAMs) remain incompletely understood. Here, we used fiber photometry in awake, behaving mice to assess how the M4 PAM VU0467154 (VU'154) affects striatal dopamine (DA) transmission under basal and amphetamine-stimulated conditions. We also generated and validated dorsal striatum-specific M4 knockout mice (DS-M4-KO) to test the role of striatal M4 receptors in regulating DA release and antipsychotic-like effects. VU'154 dose-dependently reduced the amplitude of striatal DA release events under basal conditions without altering event frequency. However, VU'154 had no significant effects on tonic DA levels under basal conditions, as assessed using the D1 PAM DETQ. Despite robustly attenuating AHL, VU'154 produced little to no effect on amphetamine-induced DA levels, indicating that antipsychotic-like efficacy was dissociated from changes in striatal DA levels. Notably, VU'154 efficacy in AHL was absent in DS-M4-KO mice, demonstrating that M4 receptors in the dorsal striatum are required for antipsychotic-like effects. Co"
+  }
+ ]
+}
