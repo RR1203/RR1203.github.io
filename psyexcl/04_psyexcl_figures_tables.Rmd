@@ -1,0 +1,157 @@
+---
+title: "psyexcl — Figures and Tables"
+output:
+  html_document: default
+---
+
+# 00. SETUP
+```{r}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+library(writexl)
+
+# Options
+options(scipen = 999)
+theme_set(theme_classic(base_size = 14))
+set.seed(1234)
+
+# Clean data
+df_clean <- read_excel("04_psyexcl_clean.xlsx") %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4")),
+    sponsor_class = factor(sponsor_class, levels = c("Industry", "Government", "Other"))
+  )
+```
+
+# TABLE 1. SAMPLE CHARACTERISTICS
+```{r}
+################################################################################
+# TABLE 1. SAMPLE CHARACTERISTICS
+################################################################################
+
+# Counts and % with any psychiatric exclusion per characteristic
+t1_table_area <- df_clean %>%
+  group_by(level = area) %>%
+  summarise(n = n(), pct_any_psych = round(100 * mean(any_psych), 1)) %>%
+  mutate(characteristic = "Therapeutic area", level = as.character(level))
+
+t1_table_phase <- df_clean %>%
+  group_by(level = phase) %>%
+  summarise(n = n(), pct_any_psych = round(100 * mean(any_psych), 1)) %>%
+  mutate(characteristic = "Phase", level = as.character(level))
+
+t1_table_sponsor <- df_clean %>%
+  group_by(level = sponsor_class) %>%
+  summarise(n = n(), pct_any_psych = round(100 * mean(any_psych), 1)) %>%
+  mutate(characteristic = "Lead sponsor", level = as.character(level))
+
+t1_table_us <- df_clean %>%
+  group_by(level = if_else(us_site == 1, "Any US site", "No US site")) %>%
+  summarise(n = n(), pct_any_psych = round(100 * mean(any_psych), 1)) %>%
+  mutate(characteristic = "Location")
+
+t1_table_characteristics <- bind_rows(t1_table_area, t1_table_phase, t1_table_sponsor, t1_table_us) %>%
+  mutate(pct_of_sample = round(100 * n / nrow(df_clean), 1)) %>%
+  select(characteristic, level, n, pct_of_sample, pct_any_psych)
+
+print(t1_table_characteristics, n = 30)
+```
+
+# H1. TIME TREND
+```{r}
+################################################################################
+# H1. TIME TREND
+################################################################################
+
+# Proportion per year, overall and by area
+h1_df_year <- bind_rows(
+  df_clean %>% group_by(start_year) %>% summarise(n = n(), prop = mean(any_psych)) %>% mutate(area = "All trials"),
+  df_clean %>% group_by(start_year, area) %>% summarise(n = n(), prop = mean(any_psych), .groups = "drop") %>% mutate(area = as.character(area))
+) %>%
+  mutate(area = factor(area, levels = c("All trials", "Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")))
+
+# Figure 1
+h1_figure_trend <- ggplot(h1_df_year, aes(start_year, 100 * prop, colour = area, linewidth = area == "All trials")) +
+  geom_line() +
+  geom_point(size = 1.5) +
+  scale_linewidth_manual(values = c(0.6, 1.6), guide = "none") +
+  scale_colour_manual(values = c("black", "#2a78b5", "#c9443b", "#e09a2c", "#3f9b5b", "#8a5fb0", "grey60")) +
+  scale_y_continuous(limits = c(0, 50)) +
+  labs(x = "Trial start year", y = "Trials with psychiatric exclusion (%)", colour = NULL)
+
+print(h1_figure_trend)
+
+# Table 2: adjusted odds ratios (treatment coding)
+h1_model_treatment <- glm(
+  any_psych ~ start_year + area + phase + sponsor_class,
+  family = binomial,
+  data = df_clean
+)
+
+h1_table_or <- tibble(
+  term = names(coef(h1_model_treatment)),
+  or = exp(coef(h1_model_treatment)),
+  ci_low = exp(confint.default(h1_model_treatment))[, 1],
+  ci_high = exp(confint.default(h1_model_treatment))[, 2],
+  p = summary(h1_model_treatment)$coefficients[, "Pr(>|z|)"]
+) %>%
+  filter(term != "(Intercept)") %>%
+  mutate(across(c(or, ci_low, ci_high), ~ round(.x, 2)), p = signif(p, 2))
+
+print(h1_table_or)
+```
+
+# E1. CATEGORY PREVALENCE (EXPLORATORY)
+```{r}
+################################################################################
+# E1. CATEGORY PREVALENCE (EXPLORATORY)
+################################################################################
+
+# Long format: area x category
+e1_df_long <- df_clean %>%
+  select(area, excl_general, excl_substance, excl_depression, excl_psychosis, excl_suicidality, excl_other) %>%
+  pivot_longer(-area, names_to = "category", values_to = "excluded") %>%
+  group_by(area, category) %>%
+  summarise(pct = 100 * mean(excluded), .groups = "drop") %>%
+  mutate(category = factor(
+    category,
+    levels = c("excl_general", "excl_substance", "excl_depression", "excl_psychosis", "excl_suicidality", "excl_other"),
+    labels = c("General psychiatric", "Substance use", "Depression", "Psychosis/bipolar", "Suicidality", "Other")
+  ))
+
+# Figure 2
+e1_figure_categories <- ggplot(e1_df_long, aes(pct, fct_rev(category), fill = category)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ area, ncol = 3) +
+  labs(x = "Trials with exclusion (%)", y = NULL)
+
+print(e1_figure_categories)
+```
+
+# SAVE ALL FIGURES AND TABLES
+```{r}
+################################################################################
+# SAVE ALL FIGURES AND TABLES
+################################################################################
+
+dir.create("figures_tables", showWarnings = FALSE)
+
+# Figures
+ggsave("figures_tables/h1_figure_trend.png", h1_figure_trend, width = 9, height = 5.5, dpi = 300)
+ggsave("figures_tables/e1_figure_categories.png", e1_figure_categories, width = 10, height = 6, dpi = 300)
+
+# Data frame tables
+write_xlsx(t1_table_characteristics, "figures_tables/t1_table_characteristics.xlsx")
+write_xlsx(h1_table_or, "figures_tables/h1_table_or.xlsx")
+```
+
+# SESSION INFO
+```{r}
+print(sessionInfo())
+```

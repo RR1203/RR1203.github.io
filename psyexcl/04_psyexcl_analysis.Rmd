@@ -1,0 +1,569 @@
+---
+title: "Psychiatric exclusion criteria in non-psychiatric clinical trials, 2010-2025"
+output:
+  html_document: default
+---
+
+# 00. SETUP
+```{r}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+
+# Export
+library(writexl)
+
+# Options
+options(contrasts = c("contr.sum", "contr.poly"), scipen = 999)
+theme_set(theme_classic(base_size = 14))
+set.seed(1234)
+```
+
+# 01. DATA CLEANING
+```{r}
+################################################################################
+# 01. DATA CLEANING
+################################################################################
+
+# Raw data
+df_raw <- read_excel("03_psyexcl_raw.xlsx", guess_max = 200000)
+print(nrow(df_raw))
+
+# Phrases that contain psychiatric words but are not psychiatric conditions
+pattern_false_positive <- paste0(
+  "bone marrow depression|marrow depression|respiratory depression|ventilatory depression|",
+  "st[- ]segment depression|st depression|depression of (the )?st|myelodepression|",
+  "cns depress\\w*|central nervous system depress\\w*|immunodepress\\w*|",
+  "cardiac depression|myocardial depression|neuromuscular depression|",
+  "anti-?depress\\w*|depressants?\\b|anti-?psychotic\\w*"
+)
+
+# Psychiatric exclusion categories
+pattern_general <- paste0(
+  "psychiatr|mental (illness|disorder|disease|health (condition|disorder|problem|illness))|",
+  "mentally ill|psychological (disorder|illness|condition)|emotional disorder|neuropsychiatr"
+)
+pattern_depression <- "depress(ion|ive|ed)"
+pattern_suicidality <- "suicid"
+pattern_psychosis <- "psychos[ie]s|psychotic|schizophreni|bipolar|manic|\\bmania\\b"
+pattern_substance <- paste0(
+  "(alcohol|drug|substance|opioid|opiate|narcotic|cocaine|cannabis|marijuana|amphetamine|benzodiazepine)s?",
+  "\\s+(abuse|dependen\\w*|addict\\w*|use disorder|misuse)|",
+  "alcoholism|addiction|substance use|illicit drug|chemical dependen"
+)
+pattern_other <- paste0(
+  "anxiety disorder|eating disorder|anorexia nervosa|bulimi|\\bptsd\\b|",
+  "post-?traumatic stress|personality disorder|obsessive|panic disorder"
+)
+pattern_any <- paste(
+  pattern_general, pattern_depression, pattern_suicidality,
+  pattern_psychosis, pattern_substance, pattern_other,
+  sep = "|"
+)
+
+# Rename, recode, derive
+df_clean <- df_raw %>%
+  mutate(
+    start_year = as.numeric(str_sub(start_date, 1, 4)),
+    phase = case_when(
+      phases == "PHASE1|PHASE2" ~ "Phase 1/2",
+      phases == "PHASE2" ~ "Phase 2",
+      phases == "PHASE2|PHASE3" ~ "Phase 2/3",
+      phases == "PHASE3" ~ "Phase 3",
+      phases == "PHASE4" ~ "Phase 4",
+      TRUE ~ NA_character_
+    ),
+    sponsor_class = case_when(
+      lead_sponsor_class == "INDUSTRY" ~ "Industry",
+      lead_sponsor_class %in% c("NIH", "FED", "OTHER_GOV") ~ "Government",
+      !is.na(lead_sponsor_class) ~ "Other",
+      TRUE ~ NA_character_
+    ),
+    sponsor_industry = as.numeric(sponsor_class == "Industry"),
+    mesh_all = paste(replace_na(mesh_terms, ""), replace_na(mesh_ancestors, ""), sep = "|"),
+    psychiatric_or_neuro_trial = str_detect(mesh_all, "Mental Disorders|Nervous System Diseases"),
+    has_mesh = !is.na(mesh_terms) & mesh_terms != "",
+    area = case_when(
+      str_detect(mesh_all, "Neoplasms") ~ "Oncology",
+      str_detect(mesh_all, "Cardiovascular Diseases") ~ "Cardiovascular",
+      str_detect(mesh_all, "Nutritional and Metabolic Diseases|Endocrine System Diseases") ~ "Metabolic/endocrine",
+      str_detect(mesh_all, "Infections") ~ "Infectious",
+      str_detect(mesh_all, "Respiratory Tract Diseases") ~ "Respiratory",
+      TRUE ~ "Other"
+    ),
+    us_site = as.numeric(str_detect(replace_na(countries, ""), "United States")),
+    completed = as.numeric(overall_status == "COMPLETED"),
+    healthy_volunteers = as.numeric(healthy_volunteers == "TRUE" | healthy_volunteers == TRUE),
+    exclusion_text = str_match(
+      str_to_lower(eligibility_criteria),
+      "exclusion(?:\\s+criteria)?\\s*[:\\-]?([\\s\\S]*)$"
+    )[, 2],
+    exclusion_text_clean = str_replace_all(exclusion_text, pattern_false_positive, " "),
+    excl_general = as.numeric(str_detect(exclusion_text_clean, pattern_general)),
+    excl_depression = as.numeric(str_detect(exclusion_text_clean, pattern_depression)),
+    excl_suicidality = as.numeric(str_detect(exclusion_text_clean, pattern_suicidality)),
+    excl_psychosis = as.numeric(str_detect(exclusion_text_clean, pattern_psychosis)),
+    excl_substance = as.numeric(str_detect(exclusion_text_clean, pattern_substance)),
+    excl_other = as.numeric(str_detect(exclusion_text_clean, pattern_other)),
+    any_psych = as.numeric(str_detect(exclusion_text_clean, pattern_any))
+  )
+
+print(nrow(df_clean))
+
+# Study-wide exclusion 1: psychiatric or neurological trials
+df_clean <- df_clean %>%
+  filter(!psychiatric_or_neuro_trial)
+print(nrow(df_clean))
+
+# Study-wide exclusion 2: no MeSH condition terms
+df_clean <- df_clean %>%
+  filter(has_mesh)
+print(nrow(df_clean))
+
+# Study-wide exclusion 3: no separable exclusion section
+df_clean <- df_clean %>%
+  filter(!is.na(exclusion_text), str_length(exclusion_text) >= 20)
+print(nrow(df_clean))
+
+# Study-wide exclusion 4: missing model covariates
+df_clean <- df_clean %>%
+  filter(!is.na(start_year), !is.na(phase), !is.na(sponsor_class))
+print(nrow(df_clean))
+
+# Keep analysis columns
+df_clean <- df_clean %>%
+  select(
+    nct_id, brief_title, start_year, phase, sponsor_class, sponsor_industry,
+    area, us_site, completed, healthy_volunteers, enrollment, overall_status,
+    excl_general, excl_depression, excl_suicidality, excl_psychosis,
+    excl_substance, excl_other, any_psych, exclusion_text
+  )
+
+# Write analysis-ready data
+write_xlsx(df_clean, "04_psyexcl_clean.xlsx")
+```
+
+# 02. CLASSIFIER VALIDATION
+
+## 02.1 Validation sample
+```{r}
+################################################################################
+# 02.1 Validation sample
+################################################################################
+
+# Random sample of 200 trials, exclusion text only (no regex labels)
+set.seed(1234)
+val_sample <- read_excel("04_psyexcl_clean.xlsx") %>%
+  slice_sample(n = 200) %>%
+  select(nct_id, exclusion_text)
+
+if (!file.exists("04_psyexcl_validation_sample.xlsx")) {
+  write_xlsx(val_sample, "04_psyexcl_validation_sample.xlsx")
+}
+
+print(nrow(val_sample))
+```
+
+## 02.2 Agreement with blind LLM labels
+```{r}
+################################################################################
+# 02.2 Agreement with blind LLM labels
+################################################################################
+
+# Blind labels joined to regex labels
+val_df <- read_excel("04_psyexcl_validation_labels.xlsx") %>%
+  inner_join(read_excel("04_psyexcl_clean.xlsx"), by = "nct_id")
+
+print(nrow(val_df))
+
+# Confusion table, any psychiatric exclusion (rows = regex, columns = LLM)
+val_table <- table(regex = val_df$any_psych, llm = val_df$llm_any_psych)
+print(val_table)
+
+# Sensitivity, specificity, PPV, NPV
+val_metrics <- tibble(
+  sensitivity = val_table["1", "1"] / sum(val_table[, "1"]),
+  specificity = val_table["0", "0"] / sum(val_table[, "0"]),
+  ppv = val_table["1", "1"] / sum(val_table["1", ]),
+  npv = val_table["0", "0"] / sum(val_table["0", ]),
+  accuracy = (val_table["1", "1"] + val_table["0", "0"]) / sum(val_table)
+)
+print(val_metrics)
+
+# Cohen's kappa
+val_p_observed <- (val_table["1", "1"] + val_table["0", "0"]) / sum(val_table)
+val_p_expected <- (sum(val_table["1", ]) * sum(val_table[, "1"]) + sum(val_table["0", ]) * sum(val_table[, "0"])) / sum(val_table)^2
+print((val_p_observed - val_p_expected) / (1 - val_p_expected))
+
+# Agreement per category
+val_category_agreement <- tibble(
+  category = c("general", "depression", "suicidality", "psychosis", "substance", "other"),
+  agreement = c(
+    mean(val_df$excl_general == val_df$llm_general),
+    mean(val_df$excl_depression == val_df$llm_depression),
+    mean(val_df$excl_suicidality == val_df$llm_suicidality),
+    mean(val_df$excl_psychosis == val_df$llm_psychosis),
+    mean(val_df$excl_substance == val_df$llm_substance),
+    mean(val_df$excl_other == val_df$llm_other)
+  ),
+  prevalence_regex = c(
+    mean(val_df$excl_general), mean(val_df$excl_depression), mean(val_df$excl_suicidality),
+    mean(val_df$excl_psychosis), mean(val_df$excl_substance), mean(val_df$excl_other)
+  ),
+  prevalence_llm = c(
+    mean(val_df$llm_general), mean(val_df$llm_depression), mean(val_df$llm_suicidality),
+    mean(val_df$llm_psychosis), mean(val_df$llm_substance), mean(val_df$llm_other)
+  )
+)
+print(val_category_agreement)
+
+# Disagreements
+print(val_df %>% filter(any_psych != llm_any_psych) %>% select(nct_id, any_psych, llm_any_psych, llm_note))
+```
+
+# H1. TIME TREND
+
+## H1.1 Data preparation
+```{r}
+################################################################################
+# H1.1 Data preparation
+################################################################################
+
+# Analysis sample
+h1_df <- read_excel("04_psyexcl_clean.xlsx") %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4")),
+    sponsor_class = factor(sponsor_class, levels = c("Industry", "Government", "Other"))
+  )
+
+# Sample
+print(nrow(h1_df))
+print(table(h1_df$start_year))
+print(mean(h1_df$any_psych))
+
+# Proportion with any psychiatric exclusion per start year
+print(h1_df %>% group_by(start_year) %>% summarise(n = n(), prop = mean(any_psych)), n = 20)
+```
+
+## H1.2 Analysis
+```{r}
+################################################################################
+# H1.2 Analysis
+################################################################################
+
+# Primary model
+h1_model_primary <- glm(
+  any_psych ~ start_year + area + phase + sponsor_class,
+  family = binomial,
+  data = h1_df
+)
+
+print(summary(h1_model_primary))
+print(summary(h1_model_primary)$coefficients["start_year", ])
+print(exp(coef(h1_model_primary)["start_year"]))
+print(exp(confint.default(h1_model_primary)["start_year", ]))
+```
+
+## H1.3 Robustness
+```{r}
+################################################################################
+# H1.3 Robustness
+################################################################################
+
+# Completed trials only
+h1_model_completed <- glm(
+  any_psych ~ start_year + area + phase + sponsor_class,
+  family = binomial,
+  data = h1_df %>% filter(completed == 1)
+)
+
+print(summary(h1_model_completed)$coefficients["start_year", ])
+print(exp(coef(h1_model_completed)["start_year"]))
+print(exp(confint.default(h1_model_completed)["start_year", ]))
+
+# Without healthy-volunteer trials
+h1_model_no_hv <- glm(
+  any_psych ~ start_year + area + phase + sponsor_class,
+  family = binomial,
+  data = h1_df %>% filter(healthy_volunteers == 0)
+)
+
+print(summary(h1_model_no_hv)$coefficients["start_year", ])
+print(exp(coef(h1_model_no_hv)["start_year"]))
+print(exp(confint.default(h1_model_no_hv)["start_year", ]))
+
+# Adjusted for log enrollment
+h1_model_enrollment <- glm(
+  any_psych ~ start_year + area + phase + sponsor_class + log1p(enrollment),
+  family = binomial,
+  data = h1_df %>% filter(!is.na(enrollment))
+)
+
+print(summary(h1_model_enrollment)$coefficients["start_year", ])
+print(exp(coef(h1_model_enrollment)["start_year"]))
+print(exp(confint.default(h1_model_enrollment)["start_year", ]))
+
+# Adjusted for US site
+h1_model_us <- glm(
+  any_psych ~ start_year + area + phase + sponsor_class + us_site,
+  family = binomial,
+  data = h1_df
+)
+
+print(summary(h1_model_us)$coefficients["start_year", ])
+print(exp(coef(h1_model_us)["start_year"]))
+print(exp(confint.default(h1_model_us)["start_year", ]))
+```
+
+# H2. INDUSTRY SPONSORSHIP
+
+## H2.1 Data preparation
+```{r}
+################################################################################
+# H2.1 Data preparation
+################################################################################
+
+# Analysis sample
+h2_df <- read_excel("04_psyexcl_clean.xlsx") %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4"))
+  )
+
+# Sample
+print(nrow(h2_df))
+print(table(h2_df$sponsor_industry))
+print(h2_df %>% group_by(sponsor_industry) %>% summarise(n = n(), prop = mean(any_psych)))
+```
+
+## H2.2 Analysis
+```{r}
+################################################################################
+# H2.2 Analysis
+################################################################################
+
+# Primary model
+h2_model_primary <- glm(
+  any_psych ~ sponsor_industry + start_year + area + phase,
+  family = binomial,
+  data = h2_df
+)
+
+print(summary(h2_model_primary))
+print(summary(h2_model_primary)$coefficients["sponsor_industry", ])
+print(exp(coef(h2_model_primary)["sponsor_industry"]))
+print(exp(confint.default(h2_model_primary)["sponsor_industry", ]))
+```
+
+## H2.3 Robustness
+```{r}
+################################################################################
+# H2.3 Robustness
+################################################################################
+
+# Completed trials only
+h2_model_completed <- glm(
+  any_psych ~ sponsor_industry + start_year + area + phase,
+  family = binomial,
+  data = h2_df %>% filter(completed == 1)
+)
+
+print(summary(h2_model_completed)$coefficients["sponsor_industry", ])
+print(exp(coef(h2_model_completed)["sponsor_industry"]))
+print(exp(confint.default(h2_model_completed)["sponsor_industry", ]))
+
+# Adjusted for US site
+h2_model_us <- glm(
+  any_psych ~ sponsor_industry + start_year + area + phase + us_site,
+  family = binomial,
+  data = h2_df
+)
+
+print(summary(h2_model_us)$coefficients["sponsor_industry", ])
+print(exp(coef(h2_model_us)["sponsor_industry"]))
+print(exp(confint.default(h2_model_us)["sponsor_industry", ]))
+```
+
+# H3. THERAPEUTIC AREA
+
+## H3.1 Data preparation
+```{r}
+################################################################################
+# H3.1 Data preparation
+################################################################################
+
+# Analysis sample
+h3_df <- read_excel("04_psyexcl_clean.xlsx") %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4")),
+    sponsor_class = factor(sponsor_class, levels = c("Industry", "Government", "Other"))
+  )
+
+# Sample
+print(nrow(h3_df))
+print(h3_df %>% group_by(area) %>% summarise(n = n(), prop = mean(any_psych)))
+```
+
+## H3.2 Analysis
+```{r}
+################################################################################
+# H3.2 Analysis
+################################################################################
+
+# Full model
+h3_model_full <- glm(
+  any_psych ~ area + start_year + phase + sponsor_class,
+  family = binomial,
+  data = h3_df
+)
+
+# Model without area
+h3_model_reduced <- glm(
+  any_psych ~ start_year + phase + sponsor_class,
+  family = binomial,
+  data = h3_df
+)
+
+print(summary(h3_model_full))
+
+# Likelihood-ratio test of area
+h3_lrt <- anova(h3_model_reduced, h3_model_full, test = "LRT")
+print(h3_lrt)
+
+# Adjusted odds ratios vs Oncology (treatment coding)
+h3_model_treatment <- glm(
+  any_psych ~ area + start_year + phase + sponsor_class,
+  family = binomial,
+  data = h3_df,
+  contrasts = list(area = "contr.treatment", phase = "contr.treatment", sponsor_class = "contr.treatment")
+)
+
+print(exp(cbind(OR = coef(h3_model_treatment), confint.default(h3_model_treatment))))
+```
+
+# E1. CATEGORY PREVALENCE (EXPLORATORY)
+```{r}
+################################################################################
+# E1. CATEGORY PREVALENCE (EXPLORATORY)
+################################################################################
+
+# Analysis sample
+e1_df <- read_excel("04_psyexcl_clean.xlsx")
+
+# Overall
+print(e1_df %>% summarise(
+  n = n(),
+  any_psych = mean(any_psych),
+  general = mean(excl_general),
+  depression = mean(excl_depression),
+  suicidality = mean(excl_suicidality),
+  psychosis = mean(excl_psychosis),
+  substance = mean(excl_substance),
+  other = mean(excl_other)
+))
+
+# By area
+print(e1_df %>% group_by(area) %>% summarise(
+  n = n(),
+  any_psych = mean(any_psych),
+  general = mean(excl_general),
+  depression = mean(excl_depression),
+  suicidality = mean(excl_suicidality),
+  psychosis = mean(excl_psychosis),
+  substance = mean(excl_substance),
+  other = mean(excl_other)
+))
+
+# Oncology boilerplate phrase
+print(mean(str_detect(str_to_lower(e1_df$exclusion_text), "psychiatric illness/social situation")))
+print(mean(str_detect(str_to_lower(e1_df$exclusion_text[e1_df$area == "Oncology"]), "psychiatric illness/social situation")))
+```
+
+# E2. BLANKET VS QUALIFIED EXCLUSIONS (EXPLORATORY)
+```{r}
+################################################################################
+# E2. BLANKET VS QUALIFIED EXCLUSIONS (EXPLORATORY)
+################################################################################
+
+# One row per exclusion bullet in trials with a psychiatric exclusion
+e2_bullets <- read_excel("04_psyexcl_clean.xlsx") %>%
+  filter(any_psych == 1) %>%
+  select(nct_id, exclusion_text) %>%
+  mutate(exclusion_text = str_replace_all(str_to_lower(exclusion_text), pattern_false_positive, " ")) %>%
+  separate_rows(exclusion_text, sep = "\n") %>%
+  filter(str_detect(exclusion_text, pattern_any)) %>%
+  mutate(
+    qualified = str_detect(
+      exclusion_text,
+      "complian|comply|adheren|consent|interfere|cooperat|study requirements|study procedures|investigator|judg|opinion|unstable|uncontrolled|severe|active|current|within (the )?(last|past|previous)"
+    )
+  )
+
+print(nrow(e2_bullets))
+print(mean(e2_bullets$qualified))
+
+# Trial level: every psychiatric bullet qualified vs at least one blanket bullet
+e2_trials <- e2_bullets %>%
+  group_by(nct_id) %>%
+  summarise(all_qualified = all(qualified))
+
+print(nrow(e2_trials))
+print(mean(e2_trials$all_qualified))
+```
+
+# E3. US SITES (EXPLORATORY)
+```{r}
+################################################################################
+# E3. US SITES (EXPLORATORY)
+################################################################################
+
+# Analysis sample
+e3_df <- read_excel("04_psyexcl_clean.xlsx") %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4")),
+    sponsor_class = factor(sponsor_class, levels = c("Industry", "Government", "Other"))
+  )
+
+print(e3_df %>% group_by(us_site) %>% summarise(n = n(), prop = mean(any_psych)))
+
+# Model
+e3_model <- glm(
+  any_psych ~ us_site + start_year + area + phase + sponsor_class,
+  family = binomial,
+  data = e3_df
+)
+
+print(summary(e3_model)$coefficients["us_site", ])
+print(exp(coef(e3_model)["us_site"]))
+print(exp(confint.default(e3_model)["us_site", ]))
+```
+
+# HOLM CORRECTION (SECONDARY HYPOTHESES)
+```{r}
+################################################################################
+# HOLM CORRECTION (SECONDARY HYPOTHESES)
+################################################################################
+
+holm_df <- tibble(
+  hypothesis = c("H2 sponsor_industry", "H3 area (LRT)"),
+  p = c(
+    summary(h2_model_primary)$coefficients["sponsor_industry", "Pr(>|z|)"],
+    h3_lrt$`Pr(>Chi)`[2]
+  )
+) %>%
+  mutate(p_holm = p.adjust(p, method = "holm"))
+
+print(holm_df)
+```
+
+# SESSION INFO
+```{r}
+print(sessionInfo())
+```
