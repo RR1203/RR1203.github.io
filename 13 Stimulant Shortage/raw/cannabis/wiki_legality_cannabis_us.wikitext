@@ -1,0 +1,876 @@
+{{Short description|none}}
+{{Use American English|date=July 2026}}
+{{Use mdy dates|date=November 2023}}
+{{Legality of cannabis by US state}}
+[[File:Timeline of Gallup polls in US on legalizing marijuana.png|thumb|350px|Timeline of [[Gallup, Inc|Gallup polls]] in US on legalizing marijuana.<ref name=galluppolls>{{cite news |last1=Saad |first1=Lydia |title=Grassroots Support for Legalizing Marijuana Hits Record 70% |url=https://news.gallup.com/poll/514007/grassroots-support-legalizing-marijuana-hits-record.aspx |work=Gallup.com |publisher=[[Gallup, Inc.]] |date=8 November 2023 |language=en}} Data link is at bottom of graph.</ref>]]
+[[Cannabis in the United States|In the United States]], [[Cannabis (drug)|cannabis]] is legal in 42 of [[U.S. state|50 states]] for medical use and 24 states for recreational use. At the federal level, cannabis is generally classified as a [[List of Schedule I controlled substances (U.S.)|Schedule&nbsp;I drug]] under the [[Controlled Substances Act]], determined to have a high potential for abuse.<ref name="mpp report">{{citation|title=State-By-State Medical Marijuana Laws|url=https://www.mpp.org/assets/pdf/issues/medical-marijuana/State-by-State-Laws-Report-2015.pdf|publisher=[[Marijuana Policy Project]]|date=December 2016}}</ref> However, licensed medical cannabis is classified as [[List of Schedule III controlled substances (U.S.)|Schedule III]],<ref>{{Cite web |date=2026-04-23 |title=Office of Public Affairs {{!}} Justice Department Places FDA-Approved Marijuana Products and Products Containing Marijuana Subject to a Qualifying State-issued License in Schedule III, Strengthening Medical Research While Maintaining Strict Federal Controls {{!}} United States Department of Justice |url=https://www.justice.gov/opa/pr/justice-department-places-fda-approved-marijuana-products-and-products-containing-marijuana |access-date=2026-04-23 |website=www.justice.gov |language=en}}</ref> reflecting its medical use and lower abuse potential, while unlicensed cannabis products remain Schedule I substances. Despite these prohibitions, federal law is generally [[Unenforced law|not enforced]] against the possession, cultivation, or intrastate distribution of cannabis in states where such activity is legal under state law.<ref name=CRS>{{citation|title=The Federal Status of Marijuana and the Expanding Policy Gap with States|publisher=Congressional Research Service|date=March 6, 2023|url=https://crsreports.congress.gov/product/pdf/IF/IF12270|id=IF12270|quote=Although state laws do not affect the status of marijuana under federal law ... the federal response to states' legalizing or decriminalizing marijuana largely has been to allow states to implement their own laws...Federal law enforcement has generally focused its efforts on criminal networks involved in the illicit marijuana trade. }}</ref><ref name="NLR-AG-Garland">{{cite journal |last1=Haviland |first1=Jane |title=Attorney General Merrick Garland on DOJ's New Marijuana Policy |website=www.natlawreview.com |date=March 16, 2023 |volume=XIV |issue=1 |url=https://www.natlawreview.com/article/ag-garland-signals-department-justice-s-cannabis-policy-will-be-very-close-to-cole |access-date=2 January 2024 |language=en}}</ref> During the [[117th United States Congress]], a [[Marijuana Opportunity Reinvestment and Expungement Act|bill]] to decriminalize marijuana in federal law passed the [[United States House of Representatives|House of Representatives]] but failed in the [[United States Senate|Senate]]. In April 2024, during the Biden administration, the Department of Justice initiated a process to [[Removal of cannabis from Schedule I of the Controlled Substances Act|reschedule cannabis to the less-restrictive Schedule&nbsp;III]].<ref name="To be rescheduled">{{cite news |last1=Miller |first1=Zeke |last2=Goodman |first2=Joshua |last3=Mustian |first3=Jim |last4=Whitehurst |first4=Lindsay |title=US poised to ease restrictions on marijuana in historic shift, but it'll remain controlled substance |url=https://apnews.com/article/marijuana-biden-dea-criminal-justice-pot-f833a8dae6ceb31a8658a5d65832a3b8 |access-date=1 May 2024 |work=[[Associated Press News]] |date=May 1, 2024}}</ref> [[Executive Order 14370]], issued December 18, 2025, during the second Trump administration, expedited the process of rescheduling.<ref>{{cite news |author1=Maher |first=Kit |author2=Contorno |first2=Steve |author3=Owermohle |first3=Sarah |date=December 18, 2025 |title=Trump signs executive order expediting marijuana reclassification after lobbying from cannabis industry |url=https://www.cnn.com/2025/12/18/politics/trump-marijuana-reclassification-executive-order |publisher=CNN}}</ref><ref>{{Cite web |date=2025-12-18 |title=Increasing Medical Marijuana and Cannabidiol Research |url=https://www.whitehouse.gov/presidential-actions/2025/12/increasing-medical-marijuana-and-cannabidiol-research/ |website=The White House |language=en-US}}</ref>
+
+The [[Medical cannabis in the United States|medical use of cannabis]] is legal with a medical recommendation in 42 states, four out of five permanently inhabited [[Territories of the United States|U.S. territories]],{{efn|Guam, Northern Mariana Islands, Puerto Rico, U.S. Virgin Islands}} and the federal [[Cannabis in Washington, D.C.|District of Columbia]] (D.C.).<ref name="NCSL MMJ">{{cite web|date=June 22, 2023|title=State Medical Cannabis Laws|url=https://www.ncsl.org/research/health/state-medical-marijuana-laws.aspx|access-date=April 26, 2024|publisher=[[National Conference of State Legislatures]]|archive-date=February 6, 2021|archive-url=https://web.archive.org/web/20210206034555/https://www.ncsl.org/research/health/state-medical-marijuana-laws.aspx|url-status=dead}}</ref> Eight other states have laws that limit the [[psychoactive]] compound [[tetrahydrocannabinol]] (THC) concentration, for the purpose of allowing access to products rich in [[cannabidiol]] (CBD), a non-intoxicating component of cannabis.<ref name="NCSL-LT2">{{cite web |title=State Medical Cannabis Laws |url=https://www.ncsl.org/health/state-medical-cannabis-laws#table2 |website=www.ncsl.org |access-date=28 June 2026}}</ref><ref name="NCSL MMJ"/><ref name=MPP-CBD>{{cite web |title=Overview of States' Flawed High-CBD Laws |url=https://www.mpp.org/issues/medical-marijuana/overview-of-states-flawed-high-cbd-laws |website=[[Marijuana Policy Project]] |access-date=April 26, 2024}}</ref> The [[Rohrabacher–Farr amendment]], first passed in 2014, prohibits federal prosecution of individuals complying with state medical cannabis laws.<ref>{{cite news|last1=Ingraham|first1=Christopher|date=June 13, 2017|title=Jeff Sessions personally asked Congress to let him prosecute medical-marijuana providers|newspaper=[[The Washington Post]]|url=https://www.washingtonpost.com/news/wonk/wp/2017/06/13/jeff-sessions-personally-asked-congress-to-let-him-prosecute-medical-marijuana-providers/|url-access=limited|access-date=December 31, 2017}}</ref>
+
+The [[Legalization of non-medical cannabis in the United States|recreational use of cannabis]] has been legalized in 24 states, three U.S. territories, and D.C.{{efn|States that have legalized the use of recreational marijuana, including laws which have not yet gone into effect: Alaska, Arizona, California, Colorado, Connecticut, Delaware, Illinois, Maine, Maryland, Massachusetts, Michigan, Minnesota, Missouri, Montana, Nevada, New Jersey, New Mexico, New York, Ohio, Oregon, Rhode Island, Vermont, Virginia, and Washington<br /><br />Territories that have legalized recreational marijuana include: Guam, Northern Mariana Islands, U.S. Virgin Islands}} Another seven states have decriminalized its use.{{efn|Hawaii, Louisiana, Mississippi, Nebraska, New Hampshire, North Carolina, North Dakota}}<ref name="NCSL decrim">{{cite web|date=October 17, 2019|title=Marijuana Overview|url=https://www.ncsl.org/research/civil-and-criminal-justice/marijuana-overview.aspx|access-date=December 31, 2017|publisher=[[National Conference of State Legislatures]]|archive-date=April 17, 2019|archive-url=https://web.archive.org/web/20190417182433/http://www.ncsl.org/research/civil-and-criminal-justice/marijuana-overview.aspx|url-status=dead}}</ref> Commercial distribution has been legalized in all jurisdictions where possession has been legalized, except D.C. Personal cultivation for recreational use is allowed in all of these jurisdictions except for [[Cannabis in Delaware|Delaware]], [[Cannabis in Illinois|Illinois]], [[Cannabis in New Jersey|New Jersey]], and [[Cannabis in Washington (state)|Washington state]].
+
+[[Cannabinoid]] drugs which have received approval from the [[Food and Drug Administration]] (FDA) for prescription use are [[Dronabinol|Marinol and Syndros]] (synthetic THC is the active ingredient in both), Cesamet ([[nabilone]]), and Epidiolex (CBD). For non-prescription use, products with less than 0.3% delta-9 THC containing CBD, [[Delta-8-Tetrahydrocannabinol|delta-8 THC]], and other naturally occurring cannabinoids derived from [[hemp]] (cannabis containing less than 0.3% delta-9 THC) are legal and unregulated<ref name=McPhillips.CNN>{{Cite news |last=McPhillips |first=Deidre |date=January 26, 2023 |title=FDA indicates need to better regulate CBD products and plans to work with Congress on new rules |url=https://www.cnn.com/2023/01/26/health/cbd-new-regulation-fda/index.html |access-date=June 26, 2023 |publisher=[[CNN]] |language=en}}</ref> at the federal level, but legality and enforcement varies by state.<ref>{{cite web |last1=Hudak |first1=John |date=December 14, 2018 |title=The Farm Bill, hemp legalization and the status of CBD: An explainer |url=https://www.brookings.edu/blog/fixgov/2018/12/14/the-farm-bill-hemp-and-cbd-explainer/ |url-status=live |archive-url=https://web.archive.org/web/20200225163555/https://www.brookings.edu/blog/fixgov/2018/12/14/the-farm-bill-hemp-and-cbd-explainer/ |archive-date=February 25, 2020 |access-date=June 3, 2019 |publisher=[[The Brookings Institution]]}}</ref><ref>{{cite news |last1=Williams |first1=Timothy |date=May 6, 2019 |title=CBD Is Wildly Popular. Disputes Over Its Legality Are a Growing Source of Tension. |work=[[The New York Times]] |url=https://www.nytimes.com/2019/05/06/us/cbd-cannabis-marijuana-hemp.html |url-status=live |url-access=limited |access-date=June 3, 2019 |archive-url=https://web.archive.org/web/20190530091654/https://www.nytimes.com/2019/05/06/us/cbd-cannabis-marijuana-hemp.html |archive-date=May 30, 2019}}</ref><ref>{{cite news |last=Mentzer |first=Rob |date=January 4, 2022 |title=A loophole in federal marijuana law has led to the creation of new THC product |publisher=[[NPR]] |url=https://www.npr.org/2022/01/04/1070338052/a-loophole-in-federal-marijuana-law-has-led-to-the-creation-of-new-thc-product}}</ref>
+
+Statewide legalization of recreational cannabis appeared on the ballot for the [[2024 United States elections|2024 elections]] as [[2024 Florida Amendment 3]], and in North and South Dakota. It failed to pass in all 3 states.<ref>{{cite web|url=https://norml.org/blog/2024/08/12/north-dakota-marijuana-legalization-measure-will-appear-on-november-ballot/|title=North Dakota: Marijuana Legalization Measure Will Appear on November Ballot|publisher=[[NORML]]|date=August 12, 2024|access-date=August 22, 2024}}</ref> Nebraskans decided on a ballot measure related to medical cannabis the same day, which passed.<ref>{{cite web|url=https://norml.org/blog/2024/09/03/nebraska-voters-to-decide-on-medical-cannabis-access-measures//|title=Nebraska Voters To Decide on Medical Cannabis Access Measures|publisher=[[NORML]]|date=September 3, 2024|access-date=September 8, 2024}}</ref>
+{{horizontal TOC|nonum=yes}}
+{{clear}}
+
+==By state==
+
+{| class=wikitable
+|+ Contents
+|
+{{flatlist|
+*[[#Alabama|Alabama]]
+*[[#Alaska|Alaska]]
+*[[#Arizona|Arizona]]
+*[[#Arkansas|Arkansas]]
+*[[#California|California]]
+*[[#Colorado|Colorado]]
+*[[#Connecticut|Connecticut]]
+*[[#Delaware|Delaware]]
+*[[#Florida|Florida]]
+*[[#Georgia|Georgia]]
+*[[#Hawaii|Hawaii]]
+*[[#Idaho|Idaho]]
+*[[#Illinois|Illinois]]
+*[[#Indiana|Indiana]]
+*[[#Iowa|Iowa]]
+*[[#Kansas|Kansas]]
+*[[#Kentucky|Kentucky]]
+*[[#Louisiana|Louisiana]]
+*[[#Maine|Maine]]
+*[[#Maryland|Maryland]]
+*[[#Massachusetts|Massachusetts]]
+*[[#Michigan|Michigan]]
+*[[#Minnesota|Minnesota]]
+*[[#Mississippi|Mississippi]]
+*[[#Missouri|Missouri]]
+*[[#Montana|Montana]]
+*[[#Nebraska|Nebraska]]
+*[[#Nevada|Nevada]]
+*[[#New Hampshire|New Hampshire]]
+*[[#New Jersey|New Jersey]]
+*[[#New Mexico|New Mexico]]
+*[[#New York|New York]]
+*[[#North Carolina|North Carolina]]
+*[[#North Dakota|North Dakota]]
+*[[#Ohio|Ohio]]
+*[[#Oklahoma|Oklahoma]]
+*[[#Oregon|Oregon]]
+*[[#Pennsylvania|Pennsylvania]]
+*[[#Rhode Island|Rhode Island]]
+*[[#South Carolina|South Carolina]]
+*[[#South Dakota|South Dakota]]
+*[[#Tennessee|Tennessee]]
+*[[#Texas|Texas]]
+*[[#Utah|Utah]]
+*[[#Vermont|Vermont]]
+*[[#Virginia|Virginia]]
+*[[#Washington|Washington]]
+*[[#West Virginia|West Virginia]]
+*[[#Wisconsin|Wisconsin]]
+*[[#Wyoming|Wyoming]]}}
+|}
+
+{|class="wikitable"
+|+Legend:
+|{{legend|#196E92|Legal for recreational use}}
+|{{legend|#80CE69|Legal for medical use}}
+|{{legend|#C4C9CD|No comprehensive medical program}}
+|{{legend|white |Decriminalized |outline=black |textcolor=black |text= <span style="font-size:15px;">&#9679;</span>
+}}
+|}
+{{sticky header}}
+{| class="wikitable sortable sticky-header" 
+|-
+!State
+!
+! Recreational
+! Medical
+! Cultivation
+! class="unsortable"| Notes
+|- id=Alabama
+| {{flag|Alabama}}
+| style="background:#80CE69;" | {{Hs|3}}
+| Illegal; Misdemeanor for first offense, any subsequent offense is a felony
+| Legal to possess up to "70 daily dosages" at one time.
+| Illegal<ref name="alabama norml">{{cite web |title=Alabama Medical Marijuana Law |url=https://norml.org/laws/alabama-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref><ref>{{cite news |last1=Lyman |first1=Brian |title=Alabama has just authorized medical marijuana. Here's what to know. |url=https://www.montgomeryadvertiser.com/story/news/politics/2021/05/17/alabama-medical-marijuana-legalization-weed-what-to-know/5020360001/ |access-date=May 17, 2021 |work=Montgomery Advertiser |date=May 17, 2021}}</ref>
+| {{main|Cannabis in Alabama}}
+* First-time may be punished as a misdemeanor, but further possession, or intent to sell, can result in felony charges.
+* Medical use legalized in May 2021 through bill signed by Governor [[Kay Ivey]].<ref>{{cite news |last1=Cason |first1=Mike |title=Gov. Kay Ivey signs Alabama's medical marijuana bill |url=https://www.al.com/news/2021/05/gov-kay-ivey-signs-alabamas-medical-marijuana-bill.html |access-date=May 17, 2021 |work=al.com |date=May 17, 2021}}</ref>
+* Registered patients are permitted to possess a maximum of "70 daily dosages" of medical cannabis at one time. Doses of authorized cannabis products are capped at a maximum of 50 milligrams for the first 90 days. First Medical Marijuana Dispensary Opened June 4, 2026. Montgomery, Al. Callie's Apothecary.<ref name="alabama norml" />
+|- id=Alaska
+| {{flag|Alaska}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|1|oz|g|abbr=on}}
+| Legal to possess up to 1 oz (28 g)<ref>{{Cite web |title=Alaska Medical Marijuana Law |url=https://norml.org/laws/medical-laws/alaska-medical-marijuana-law/ |access-date=May 22, 2023 |publisher=[[NORML]] |language=en-US}}</ref>
+| Legal for medical & recreational use up to an amount of no more than 6 plants per person, or twelve plants in a household with two or more adults.<ref>{{cite news|last=Andrews|first=Laurel|date=July 29, 2016|title=Here's how many cannabis plants Alaskans can now legally possess at home|work=[[Alaska Dispatch News]]|url=https://www.adn.com/alaska-news/2016/07/29/heres-how-many-cannabis-plants-alaskans-can-now-legally-possess-at-home/|url-status=live|access-date=March 11, 2017|archive-url=https://web.archive.org/web/20200922090648/https://www.adn.com/alaska-news/2016/07/29/heres-how-many-cannabis-plants-alaskans-can-now-legally-possess-at-home/|archive-date=September 22, 2020}}</ref> 
+| {{main|Cannabis in Alaska}}
+Legalized by [[Alaska Measure 2 (2014)|Measure 2]] on November 4, 2014.<ref>{{cite news|last=Ferner|first=Matt|date=November 5, 2014|title=Alaska Becomes Fourth State To Legalize Recreational Marijuana|work=[[The Huffington Post]]|url=https://www.huffpost.com/entry/alaska-marijuana-legalization_n_5947516|url-status=live|access-date=March 2, 2015|archive-url=https://web.archive.org/web/20160612164939/http://www.huffingtonpost.com/2014/11/05/alaska-marijuana-legalization_n_5947516.html|archive-date=June 12, 2016}}</ref>
+|- id=Arizona
+| {{flag|Arizona}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|1|oz|g|abbr=on}}<ref>{{cite news|url=https://www.12news.com/article/news/politics/elections/what-is-prop-207-arizona-proposition-2020-november-election-voting-ballot-recreational-use-marijuana-posession-growing-plants/75-a462489c-ad28-43cf-9508-bbf6c9aa3b88|last=Bassler|first=Hunter|publisher=[[KPNX]]|title=Everything to know about Proposition 207 and legal marijuana in Arizona before you vote|date=September 21, 2020|access-date=November 3, 2020}}</ref>
+| Legal to possess up to 2.5 oz (71 g) per 14 days.
+| Legal for medical (See notes) & recreational use up to an amount of no more than 6 plants per person, or twelve plants in a household with two or more adults.<ref>{{cite web|title=Smart and Safe Arizona Act|url=https://apps.arizona.vote/info/assets/18/0/BallotMeasures/I-23-2020.pdf|page=4|access-date=November 15, 2020|archive-date=December 8, 2020|archive-url=https://web.archive.org/web/20201208040806/https://apps.arizona.vote/info/assets/18/0/BallotMeasures/I-23-2020.pdf|url-status=dead}}</ref>
+| {{main|Cannabis in Arizona}}
+* Medical use legalized through [[2010 Arizona Proposition 203|Proposition 203]] in 2010.<ref>{{cite news|date=November 14, 2010|title=Arizona voters approve medical marijuana measure|publisher=CNN|url=https://edition.cnn.com/2010/POLITICS/11/14/arizona.medical.marijuana/|url-status=live|access-date=February 4, 2014|archive-url=https://web.archive.org/web/20160128002112/https://edition.cnn.com/2010/POLITICS/11/14/arizona.medical.marijuana/|archive-date=January 28, 2016}}</ref><ref>{{cite news|last=Christie|first=Bob|date=November 13, 2010|title=Ariz. voters approve medical marijuana|work=[[Today (American TV program)|Today]]|agency=[[Associated Press]]|url=https://www.today.com/id/wbna40170982|url-status=live|access-date=February 4, 2014|archive-url=https://web.archive.org/web/20140106034254/http://www.today.com/id/40170982/ns/politics-decision_2010/|archive-date=January 6, 2014}}</ref><ref>{{cite web|url=https://norml.org/news/2010/11/18/arizona-becomes-fifteenth-state-to-legalize-limited-medical-use-of-marijuana |title=Arizona Becomes Fifteenth State To Legalize Limited Medical Use Of Marijuana |publisher=[[NORML]] |date=November 18, 2010 |access-date=February 4, 2014}}</ref>
+* Recreational use legalized through [[2020 Arizona Proposition 207|Proposition 207]] on November 3, 2020.<ref>{{Cite news|last=Randazzo|first=Ryan|title=Arizona voters approve Proposition 207, making recreational marijuana legal in state|url=https://www.azcentral.com/story/news/politics/elections/2020/11/03/arizona-marijuana-proposition-207-election-results/5997553002/|access-date=November 4, 2020|work=[[The Arizona Republic]]}}</ref>
+* Medical patients may only cultivate if they're located further than 25&nbsp;mi (40&nbsp;km) from the nearest dispensary.
+|- id=Arkansas
+| {{flag|Arkansas}}
+| style="background:#80CE69;" | {{Hs|3}}
+| Illegal; Misdemeanor
+| Legal to possess up to 2.5 oz (71 g) per 14 days.<ref>{{Cite web |title=Arkansas Medical Marijuana Law |url=https://norml.org/laws/medical-laws/arkansas-medical-marijuana-law/ |access-date=2023-12-06 |website=NORML |language=en-US}}</ref>
+| Illegal<ref>{{cite web |title=Arkansas Medical Marijuana Law |url=https://norml.org/laws/medical-laws/arkansas-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Arkansas}}
+* Possession under {{convert|3|oz|g|abbr=on}} a misdemeanor; cities of [[Fayetteville, Arkansas|Fayetteville]] and [[Eureka Springs, Arkansas|Eureka Springs]] labeled cannabis their lowest law enforcement priority. 
+* November 8, 2016: medical marijuana legalized when Issue 6 was approved by 53% of voters.<ref>{{cite news|date=August 1, 2017|title=Arkansas Issue 6 — Medical Marijuana Amendment — Results: Approved|work=[[The New York Times]]|url=https://www.nytimes.com/elections/2016/results/arkansas-ballot-measure-6-medical-marijuana-con-amend|url-status=live|url-access=limited|access-date=November 12, 2016|archive-url=https://web.archive.org/web/20190216123331/https://www.nytimes.com/elections/2016/results/arkansas-ballot-measure-6-medical-marijuana-con-amend|archive-date=February 16, 2019}}</ref>
+|- id=California
+| {{flag|California}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|1|oz|g|abbr=on}}
+| Legal to possess up to 8 oz (230 g)
+| Legal for recreational use up to an amount of six plants per household or acre of land.
+| {{main|Cannabis in California}}
+* July 1975: Senate Bill 95 reduced the penalty for possession of {{convert|1|oz|g|abbr=on}} or less of cannabis to a citable misdemeanor.<ref>{{cite web|last=Budman|first=K. B.|date=January 1977|title=A First Report of the Impact of California's New Marijuana Law (SB 95)|url=https://www.ncjrs.gov/App/Publications/abstract.aspx?ID=45532|url-status=live|archive-url=https://web.archive.org/web/20181128164532/https://www.ncjrs.gov/App/Publications/abstract.aspx?ID=45532|archive-date=November 28, 2018|access-date=February 4, 2014|publisher=[[National Technical Information Service]]|via=the [[National Criminal Justice Reference Service]]|id=PB-268 180}}</ref>
+* November 1996: first state to legalize medical marijuana when [[California Proposition 215 (1996)|Proposition 215]] was approved by 56% of voters.<ref>{{Cite news|last=Kaye|first=Jeffrey|date=November 7, 1996|title=Decriminalized Marijuana|work=[[PBS NewsHour]]|url=http://www.pbs.org/newshour/bb/law/november96/marijuana_11-7.html|url-status=dead|archive-url=https://web.archive.org/web/20131024033036/http://www.pbs.org/newshour/bb/law/november96/marijuana_11-7.html|archive-date=October 24, 2013}}</ref>
+* November 2016: [[Adult Use of Marijuana Act|Proposition 64]] passed by 57% to 43%, legalizing sale and distribution, effective January 1, 2018.<ref>{{Cite news|last=McGreevy|first=Patrick|date=November 8, 2016|title=Californians vote to legalize recreational use of marijuana in the state|work=[[Los Angeles Times]]|url=https://www.latimes.com/politics/la-na-election-day-marijuana-20161109-story.html|url-status=live|url-access=limited|access-date=November 9, 2020|archive-url=https://web.archive.org/web/20180102192930/http://www.latimes.com/nation/politics/trailguide/la-na-election-day-2016-proposition-64-marijuana-1478281845-htmlstory.html#getslug|archive-date=January 2, 2018}}</ref>
+|- id=Colorado
+| {{flag|Colorado}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|2|oz|g|abbr=on}}<ref>{{cite news|title=Governor Polis signs bill to increase marijuana possession limit for adults in Colorado|url=https://www.kktv.com/2021/05/20/governor-polis-signs-bill-to-increase-marijuana-possession-limit-for-adults-in-colorado/|access-date=May 26, 2021|publisher=KKTV}}</ref>
+| Legal to possess up to 2 oz (57 g)
+| Legal for medical & recreational use up to an amount of six plants per person with no more than three of which being mature at one time.<ref>{{cite news|url=http://www.huffingtonpost.com/2012/11/06/marijuana-legalization-results_n_2074168.html|title=Marijuana Legalization On The Ballot|date=November 7, 2012|work=Huffington Post|access-date=November 7, 2012|first1=Andrei|last1=Scheinkman|first2=Matt|last2=Sledge}}</ref>
+| {{main|Cannabis in Colorado}}
+*1975: Marijuana decriminalized.<ref>{{cite web|url=https://www.westword.com/news/the-history-of-cannabis-in-coloradoor-how-the-state-went-to-pot-5118475|title=The history of cannabis in Colorado...or how the state went to pot|date=November 1, 2012|access-date=June 25, 2021}}</ref>
+*November, 2000: [[Colorado Amendment 20]] legalized medical marijuana use.
+* November 6, 2012: [[Colorado Amendment 64 (2012)|Colorado Amendment 64]] approved by voters, legalizing the sale and possession of marijuana for non-medical use including cultivation of up to six plants with up to three mature.<ref>{{cite web|title=Colorado Laws and Penalties|url=https://norml.org/laws/colorado-penalties|access-date=November 12, 2016|publisher=[[NORML]]}}</ref><ref name="NORML Colorado Legalization">{{cite web|date=December 10, 2012|title=Colorado Legalization|url=https://norml.org/marijuana/library/colorado-legalization/|access-date=November 12, 2016|publisher=[[NORML]]}}</ref>
+* In Denver, there is a limit of 12 plants per household regardless of the number of adults.<ref>{{Cite web |title=Home grow laws {{!}} Colorado Cannabis |url=https://cannabis.colorado.gov/legal-cannabis-use/home-grow-laws |access-date=May 22, 2023 |website=cannabis.colorado.gov}}</ref> 
+* Colorado became the second state to legalize, going into effect four days after Washington state,<ref name="NORML Colorado Legalization" /> however, it was the first state for legal retail sales to become established.<ref>{{cite news|last=Ingold|first=John|date=January 1, 2014|title=World's first legal recreational marijuana sales begin in Colorado|work=[[The Denver Post]]|url=https://www.denverpost.com/2014/01/01/worlds-first-legal-recreational-marijuana-sales-begin-in-colorado/|url-status=live|access-date=February 19, 2020|archive-url=https://web.archive.org/web/20170326090752/https://www.denverpost.com/2014/01/01/worlds-first-legal-recreational-marijuana-sales-begin-in-colorado/|archive-date=March 26, 2017}}</ref>
+*May 20, 2021: Colorado Governor [[Jared Polis]] signs HB 21–1090, a bill which increases possession limits from 1 oz to 2 oz for adults.
+|- id=Connecticut
+| {{flag|Connecticut}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to carry up to {{convert|1.5|oz|g|abbr=on}} or possess up to {{convert|5|oz|g|abbr=on}} locked inside a home or trunk of a vehicle
+| Legal to possess up to 5 oz (140 g) per month.
+| Legal for medical & recreational use up to an amount of six plants with only three at a time being mature.
+| {{main|Cannabis in Connecticut}}
+*June 22, 2021: Connecticut Governor [[Ned Lamont]] signed SB 1201, a bill legalizing recreational marijuana for adults beginning July 1, 2021. Those between 18 and 20 would be subject to civil fine up to $150, and minors under 18 cannot be arrested for simple possession.<ref>[https://www.marijuanamoment.net/connecticut-governor-signs-marijuana-legalization-into-law/ Connecticut Governor Signs Marijuana Legalization Into Law], June 22, 2021</ref> 
+|- id=Delaware
+| {{flag|Delaware}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to 1 oz (28 g) & 12 g (.4 oz) of concentrate
+| Legal to possess up to 6 oz (171 g)
+| Illegal<ref>{{cite web |title=Delaware Medical Marijuana Law |url=https://norml.org/laws/medical-laws/delaware-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Delaware}}
+* May 13, 2011: Delaware legalizes medical cannabis through state legislature.<ref>{{cite news|title=Delaware Passes Medical Marijuana Law|url=https://blog.mpp.org/medical-marijuana/delaware-passes-medical-marijuana-law/|access-date=April 23, 2023|publisher=[[Marijuana Policy Project]]|date=May 13, 2011}}</ref>
+* February 10, 2012: Governor [[Jack Markell]] suspended medical marijuana after a [[United States Department of Justice|Justice Department]] letter threatened federal prosecution
+* August 31, 2016: Jack Markell signed House Bill 400, expanding medical cannabis programs for those with a [[terminal illness]].<ref>{{cite news|last=[[WUSA (TV)|WUSA]]|date=August 31, 2016|title=Delaware Gov. signs bill to allow marijuana for terminally ill|publisher=[[WKYC]]|url=https://www.wkyc.com/article/news/nation-now/delaware-gov-signs-bill-to-allow-marijuana-for-terminally-ill/65-312036598|access-date=November 12, 2016}}</ref><ref>{{cite news|date=May 19, 2016|title=Measure would expand medical marijuana to terminally ill patients|work=Delaware State News|url=https://delawarestatenews.net/government/measure-expand-medical-marijuana-terminally-ill-patients/|url-status=live|access-date=November 12, 2016|archive-url=https://web.archive.org/web/20160911065556/https://delawarestatenews.net/government/measure-expand-medical-marijuana-terminally-ill-patients/|archive-date=September 11, 2016}}</ref>
+* April 23, 2023: Bill to legalize recreational cannabis became law without governor's signature.<ref>{{cite news |last1=Chase |first1=Randall |title=Delaware governor says he won't block marijuana legalization |url=https://apnews.com/article/delaware-marijuana-legalization-carney-e64e3396afa773d19f7f96add7a8e28d |access-date=April 23, 2023 |publisher=[[Associated Press]] |date=April 21, 2023}}</ref>
+|- id=Florida
+| {{flag|Florida}}
+| style="background:#80CE69;" | {{Hs|3}}
+| Illegal
+| Legal to possess up to three 70-day, or six 35-day "supply limits". One 35-day supply is limited to 2.5 oz (71 g).
+| Illegal<ref>{{cite web |title=Florida Medical Marijuana Law |url=https://norml.org/laws/medical-laws/florida-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Florida}}
+* November 8, 2016: medical marijuana legalized as of July 1, 2017, when voters passed [[Florida Amendment 2 (2016)|Amendment 2]] by 71%.<ref>{{cite news|date=August 1, 2017|title=Florida Amendment 2 — Expand Medical Marijuana — Results: Approved|work=[[The New York Times]]|url=https://www.nytimes.com/elections/2016/results/florida-ballot-measure-2-expand-medical-marijuana|url-status=live|url-access=limited|access-date=November 12, 2016|archive-url=https://web.archive.org/web/20190402155118/https://www.nytimes.com/elections/2016/results/florida-ballot-measure-2-expand-medical-marijuana|archive-date=April 2, 2019}}</ref>
+* In 2019, legislation under Senate Bill 182 was enacted, allowing individuals with eligible medical conditions to acquire smokable cannabis from authorized medical marijuana dispensaries.<ref>{{Cite web |title=Florida Marijuana Laws {{!}} FloridaStateCannabis.org |url=https://floridastatecannabis.org/laws |access-date=September 1, 2023 |website=Florida Cannabis Information Portal |language=en-US}}</ref>
+|- id=Georgia
+| {{flag|Georgia (U.S. state)|name=Georgia}}
+| style="background:#80CE69;" | {{Hs|5}}
+| Illegal; decriminalized in the cities of [[Atlanta]],<ref>{{cite news|url=http://fortune.com/2017/10/03/list-of-cities-that-decriminalized-marijuana/ |title=Atlanta Joins List Of Cities That Decriminalized Marijuana |date=October 3, 2017 |access-date=September 13, 2018}}</ref> [[Clarkston, Georgia|Clarkston]],<ref>{{Cite news|last=Thompson|first=Laura|date=September 16, 2016|title=High hopes for Clarkston's marijuana ordinance|work=[[The Atlanta Journal-Constitution]]|url=https://www.ajc.com/news/local-govt--politics/high-hopes-for-clarkston-marijuana-ordinance/cODE7cmyzgVEb16makQoTK/|url-status=live|access-date=January 29, 2019|archive-url=https://web.archive.org/web/20190914022128/https://www.ajc.com/news/local-govt--politics/high-hopes-for-clarkston-marijuana-ordinance/cODE7cmyzgVEb16makQoTK/|archive-date=September 14, 2019}}</ref> [[Forest Park, Georgia|Forest Park]],<ref>{{Cite news|last=Ervin|first=Camile|date=August 30, 2018|title=Forest Park Becomes 6th Georgia City To Decriminalize Marijuana|publisher=[[Georgia Public Broadcasting]]|url=https://www.gpb.org/news/2018/08/30/forest-park-becomes-6th-georgia-city-decriminalize-marijuana|url-status=live|access-date=January 29, 2019|archive-url=https://web.archive.org/web/20190130000653/http://www.gpbnews.org/post/forest-park-becomes-6th-georgia-city-decriminalize-marijuana|archive-date=January 30, 2019}}</ref> [[Savannah, Georgia|Savannah]], [[South Fulton, Georgia|South Fulton]],<ref>{{Cite news|last=Kass|first=Arielle|date=March 21, 2018|title=City of South Fulton decriminalizes marijuana possession|work=[[The Atlanta Journal-Constitution]]|url=https://www.ajc.com/news/local-govt--politics/city-south-fulton-decriminalizes-marijuana-possession/30RAa0pHamZEsDAMZ67BBJ/|url-status=live|access-date=January 29, 2019|archive-url=https://web.archive.org/web/20190422034714/https://www.ajc.com/news/local-govt--politics/city-south-fulton-decriminalizes-marijuana-possession/30RAa0pHamZEsDAMZ67BBJ/|archive-date=April 22, 2019}}</ref> [[Statesboro, Georgia|Statesboro]],<ref>{{Cite news|last=Szilagyi|first=Jessica|date=December 4, 2018|title=Statesboro Council Makes Marijuana Possession Non-Arrestable Offense, Says "It's Not Decriminalization"|work=AllOnGeorgia|url=https://www.allongeorgia.com/bulloch-local-government/statesboro-council-makes-marijuana-possession-non-arrestable-offense-says-its-not-decriminalization/|url-status=live|access-date=January 29, 2019|archive-url=https://web.archive.org/web/20190422034126/https://allongeorgia.com/bulloch-local-government/statesboro-council-makes-marijuana-possession-non-arrestable-offense-says-its-not-decriminalization/|archive-date=April 22, 2019}}</ref> unincorporated [[Fulton County, Georgia|Fulton County]],<ref>{{Cite news|last=Kass|first=Arielle|date=June 7, 2018|title=Fulton County decriminalizes marijuana in unincorporated area|work=[[The Atlanta Journal-Constitution]]|url=https://www.ajc.com/news/local-govt--politics/fulton-county-decriminalizes-marijuana-unincorporated-area/7PBH0z23M9uZUaBtMKzEaO/|url-status=live|access-date=January 29, 2019|archive-url=https://web.archive.org/web/20190422035116/https://www.ajc.com/news/local-govt--politics/fulton-county-decriminalizes-marijuana-unincorporated-area/7PBH0z23M9uZUaBtMKzEaO/|archive-date=April 22, 2019}}</ref> and [[Macon–Bibb County]].
+| 12,000&nbsp;mg THC possession limit
+| Illegal.
+| {{main|Cannabis in Georgia (U.S. state)}}
+* Misdemeanor possession of {{convert|1|oz|g|abbr=on}} or less can be punished by a fine up to $1000 or up to 12 months in jail.<ref>{{cite web|title=2010 Georgia Code :: TITLE 16 - CRIMES AND OFFENSES :: CHAPTER 13 - CONTROLLED SUBSTANCES :: ARTICLE 1 - GENERAL PROVISIONS :: § 16-13-2 - Conditional discharge for possession of controlled substances as first offense and certain nonviolent property crimes; dismissal of charges; restitution to victims|url=https://law.justia.com/codes/georgia/2010/title-16/chapter-13/article-1/16-13-2/|access-date=January 29, 2019|via=Justia Law}}</ref> It is a felony for anyone to possess more than {{convert|1|oz|g|abbr=on}}, manufacture, deliver, distribute, dispense, administer, purchase, sell, or possess with intent to distribute marijuana and it is punishable by imprisonment for no less than one year and no more than ten years.<ref>{{cite web|title=2010 Georgia Code :: TITLE 16 - CRIMES AND OFFENSES :: CHAPTER 13 - CONTROLLED SUBSTANCES :: ARTICLE 2 - REGULATION OF CONTROLLED SUBSTANCES :: § 16-13-30 - Purchase, possession, manufacture, distribution, or sale of controlled substances or marijuana; penalties|url=https://law.justia.com/codes/georgia/2010/title-16/chapter-13/article-2/16-13-30/|access-date=January 29, 2019|via=Justia Law}}</ref> City and county level punishments for misdemeanor possessions vary.
+* April 16, 2015: use of low-THC CBD oil legalized for medical use, but in-state cultivation, production, and sale remains illegal.<ref>{{cite news|last=Bluestein|first=Greg|date=April 16, 2015|title=Medical marijuana is now legal in Georgia|work=[[The Atlanta Journal-Constitution]]|url=https://www.ajc.com/blog/politics/medical-marijuana-now-legal-georgia/YuP71J9cOTyxia3iquQ0yK/|url-status=live|access-date=April 16, 2015|archive-url=https://web.archive.org/web/20160322041435/http://politics.blog.ajc.com/2015/04/16/medical-marijuana-is-now-legal-in-georgia/|archive-date=March 22, 2016}}</ref>
+* Georgia implements law allowing in-state access to low-THC oil
+* On April 17, 2019, Gov. Brian Kemp (R) signed Georgia's Hope Act — HB 324 — into law. This bill allows patients to safely access low-THC medical cannabis oils (with up to 5% THC) within Georgia. Sales began in the summer of 2023.
+* On May 12, 2026, the 5% THC limit was eliminated and a 12,000 milligram limit placed on patients.<ref>{{cite web|website=Marijuana Moment|title=Georgia Governor Signs Bill To Expand Medical Marijuana Access By Allowing Vaping And Adding New Qualifying |date=May 12, 2026|author= Tom Angell |url=https://www.marijuanamoment.net/georgia-governor-signs-bill-to-expand-medical-marijuana-access-by-allowing-vaping-and-adding-new-qualifying-conditions/}}</ref> 
+|- id=Hawaii
+| {{flag|Hawaii}}
+| style="background:#80CE69; color:#000000; text-align:center;" | {{Hs|2}} <span style="font-size:25px;">●</span>
+| Illegal; Decriminalized up to 0.11 oz (3 g)<ref name=":0">{{Cite news|url=https://www.hawaiipublicradio.org/post/hawaii-governor-backs-decriminalizing-small-amounts-pot|title=Hawaii Governor Backs Decriminalizing Small Amounts Of Pot|publisher=[[Hawaii Public Radio]]|agency=[[Associated Press]]|access-date=June 25, 2019}}</ref>
+| Legal to possess up to 4 oz (114 g).
+| Legal only for medical patients up to an amount not exceeding 7 plants per person.<ref>{{cite web |title=Hawaii Medical Marijuana Law |url=https://norml.org/laws/medical-laws/hawaii-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Hawaii}}
+* June 15, 2000: Governor [[Ben Cayetano]] signed bill legalizing medical marijuana. First state legislature to do so.<ref>{{cite news|date=June 15, 2000|title=Hawaii Becomes First State to Approve Medical Marijuana Bill – New York Times|work=[[The New York Times]]|agency=[[Associated Press]]|url=https://www.nytimes.com/2000/06/15/us/hawaii-becomes-first-state-to-approve-medical-marijuana-bill.html|url-status=live|url-access=limited|access-date=February 4, 2014|archive-url=https://web.archive.org/web/20190611121610/https://www.nytimes.com/2000/06/15/us/hawaii-becomes-first-state-to-approve-medical-marijuana-bill.html|archive-date=June 11, 2019}}</ref><ref>{{cite web|url=https://norml.org/news/2000/06/15/governor-signs-hawaii-s-medical-marijuana-bill-into-law |title=Governor Signs Hawaii's Medical Marijuana Bill Into Law |publisher=[[NORML]] |date=June 15, 2000 |access-date=February 4, 2014}}</ref>
+* July 14, 2015: Governor [[David Ige]] signed bill allowing medical cannabis dispensaries.<ref>{{cite web|url=http://www.thedailychronic.net/2015/45145/hawaii-governor-signs-bill-legalizing-medical-marijuana-dispensaries/|title=Hawaii Governor Signs Bill Legalizing Medical Marijuana Dispensaries|work=The Daily Chronic|date=July 15, 2015}}</ref>
+* July 14, 2016: Governor Ige signed law expanding medical cannabis programs.<ref>{{cite web|date=July 14, 2016|title=Hawaii Governor Signs Medical Marijana Expansion Law|url=http://www.thedailychronic.net/2016/59852/hawaii-governor-signs-medical-marijana-expansion-law/|access-date=November 9, 2016|website=The Daily Chronic}}</ref>
+* June 25, 2019: Governor Ige announced that he would not veto a bill passed by the legislature to decriminalize less than 3 g of marijuana. Law went into effect January 11, 2020.<ref name=":0" />
+|- id=Idaho
+| {{flag|Idaho}}
+| style="background:#C4C9CD;" | {{Hs|5}}
+| Illegal; Misdemeanor ({{convert|85|g|oz|abbr=on}} or less)
+| CBD oil (less than 0.1% THC)
+| Illegal; Felony
+| {{main|Cannabis in Idaho}}
+* Possession of {{convert|85|g|oz|abbr=on}} or less a misdemeanor up to 1-year prison or fine up to $1,000 or both. More than {{convert|3|oz|g|abbr=on}} but less than {{convert|1|lb|kg|abbr=on}} a felony up to 5 years in prison or fine up to $10,000 or both.<ref>{{cite web|url=https://norml.org/laws/idaho-penalties|title=Idaho Laws and Penalties |publisher=[[NORML]] |access-date=March 2, 2015}}</ref>
+* 2015: the [[Idaho Attorney General]] stipulated that CBD must both contain zero THC and be derived from one of the five identified parts of the cannabis plant, otherwise it is illegal in Idaho under current law.<ref>{{cite web|title=Cannabidiol (CBD)|url=https://odp.idaho.gov/cannibidiol/|access-date=November 12, 2019|publisher=Idaho Office of Drug Policy}}</ref>
+*2021: Senate Bill 1017 is signed into law by Governor [[Brad Little]] expanding legal CBD access from 0.0% to 0.1% THC.<ref>{{cite web|title=SENATE BILL 1017 – Idaho State Legislature|url=https://legislature.idaho.gov/sessioninfo/2021/legislation/s1017/|access-date=April 25, 2021|language=en-US}}</ref>
+|- id=Illinois
+| {{flag|Illinois}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal; Residents can possess up to {{convert|60|g|oz|abbr=on}} of cannabis flower, 1000&nbsp;mg of THC in an infused product, and 10 grams of concentrate. Nonresidents can possess up to {{convert|30|g|oz|abbr=on}} of cannabis flower, 500&nbsp;mg of THC in an infused product, and 5 grams of concentrate.<ref name=":2">{{Cite web |date=2026-06-18 |title=Illinois Governor Approves Raising Marijuana Possession Limit |url=https://norml.org/news/2026/06/18/illinois-governor-signs-law-raising-adult-use-marijuana-possession-limits-expanding-expungement-opportunities-and-restricting-sales-of-hemp-derived-products/ |access-date=2026-06-22 |website=NORML |language=en-US}}</ref><ref name=":3">{{Cite web |title=Bill Text: IL SB3222 {{!}} 2025-2026 {{!}} 104th General Assembly {{!}} Enrolled |url=https://legiscan.com/IL/text/SB3222/2025 |access-date=22 June 2026 |website=LegiScan}}</ref>
+| Legal to possess up to 2.5 oz (71 g) per 14 day period.<ref>{{Cite web |title=Illinois Medical Marijuana Laws |url=https://norml.org/laws/medical-laws/illinois-medical-marijuana-law/ |access-date=2026-06-22 |website=NORML |language=en-US}}</ref>
+| Legal only for medical patients up to an amount of 5 plants per person.<ref name="WHAT YOU NEED TO KNOW ABOUT MARIJUANA LEGALIZATION IN ILLINOIS">{{cite web|last=Berg|first=Austin|date=January 1, 2020|title=What You Need to Know About Marijuana Legalization in Illinois|url=https://www.illinoispolicy.org/what-you-need-to-know-about-marijuana-legalization-in-illinois/|url-status=live|archive-url=https://web.archive.org/web/20200220234720/https://www.illinoispolicy.org/what-you-need-to-know-about-marijuana-legalization-in-illinois/|archive-date=February 20, 2020|publisher=[[Illinois Policy Institute]]}}</ref>
+| {{main|Cannabis in Illinois}}
+* Cannabis Control Act of 1978 allowed for medical marijuana but was never implemented.<ref name="chicago-reader">{{Cite news|last=Thompson|first=Claire|date=April 8, 2010|title=Medical Marijuana Is Already Legal in Illinois|work=[[Chicago Reader]]|url=https://www.chicagoreader.com/chicago/medical-marijuana-pot-illinois-cannabis-control-act-legalization/Content?oid=1629059|url-status=live|archive-url=https://web.archive.org/web/20150523112329/https://www.chicagoreader.com/chicago/medical-marijuana-pot-illinois-cannabis-control-act-legalization/Content?oid=1629059|archive-date=May 23, 2015}}</ref><ref name="ILGA-GOV">{{cite web|title=720 ILCS 550/ Cannabis Control Act.|url=https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=1937&ChapterID=53|publisher=[[Illinois General Assembly]]}}</ref>
+* August 1, 2013: Gov. [[Pat Quinn (politician)|Pat Quinn]] signed bill legalizing medical marijuana effective January 1, 2014.<ref name="NBC-Chicago">{{Cite news|last1=Ahern|first1=Mary Ann|last2=Relerford|first2=Michelle|date=July 31, 2013|title=Illinois Becomes 20th State To Legalize Medical Marijuana|publisher=[[WMAQ-TV]]|url=https://www.nbcchicago.com/news/local/illinois-medical-marijuana-11/1960052/|url-status=live|archive-url=https://web.archive.org/web/20160304090003/http://www.nbcchicago.com/blogs/ward-room/illinois-medical-marijuana-217854331.html|archive-date=March 4, 2016}}</ref>
+* May 31, 2019: the [[Illinois General Assembly|General Assembly]] passed the [[Illinois Cannabis Regulation and Tax Act]] to legalize recreational marijuana use beginning January 1, 2020, allowing adults age 21 and over to possess up to {{convert|30|g|oz|abbr=on}} of cannabis flower.<ref>{{cite news|last1=Petrella|first1=Dan|date=May 31, 2019|title=Illinois House approves marijuana legalization bill backed by Gov. J.B. Pritzker|work=[[Chicago Tribune]]|url=https://www.chicagotribune.com/politics/ct-met-illinois-recreational-marijuana-legislation-20190531-story.html|url-status=live|url-access=limited|access-date=June 1, 2019|archive-url=https://web.archive.org/web/20190923051537/https://www.chicagotribune.com/politics/ct-met-illinois-recreational-marijuana-legislation-20190531-story.html|archive-date=September 23, 2019}}</ref> With Gov. [[J. B. Pritzker]]'s signature on June 25, Illinois became the first state in the nation to legalize adult marijuana sales through an act of state legislature.<ref>{{cite news|last=Hansen|first=Claire|date=May 31, 2019|title=Illinois Lawmakers Approve Marijuana Legalization|magazine=[[U.S. News & World Report]]|url=https://www.usnews.com/news/national-news/articles/2019-05-31/illinois-lawmakers-approve-marijuana-legalization|url-status=live|access-date=June 1, 2019|archive-url=https://web.archive.org/web/20201107212249/https://www.usnews.com/news/national-news/articles/2019-05-31/illinois-lawmakers-approve-marijuana-legalization|archive-date=November 7, 2020}}</ref><ref name="Lopez">{{Cite news |last=Lopez |first=German |date=June 25, 2019 |title=Illinois just legalized marijuana |url=https://www.vox.com/2019/6/25/18650478/illinois-marijuana-legalization-governor-jb-pritzker |url-status=live |archive-url=https://web.archive.org/web/20200214165251/https://www.vox.com/2019/6/25/18650478/illinois-marijuana-legalization-governor-jb-pritzker |archive-date=February 14, 2020 |access-date=June 25, 2019 |work=[[Vox (website)|Vox]]}}</ref>
+* 2026: possession limits for Illinois residents increased to {{convert|60|g|oz|abbr=on}} of flower, 1000&nbsp;mg of THC in an infused product, and 10 grams of concentrate.<ref name=":2" /><ref name=":3" />
+|- id=Indiana
+| {{flag|Indiana}}
+| style="background:#C4C9CD;" | {{Hs|5}}
+| Illegal; Misdemeanor (up to 6 months in jail, $1000 fine)
+| CBD oil (less than 0.3% THC) legal for any use
+| Illegal
+| {{main|Cannabis in Indiana}}
+* 1913: prohibited
+* Decriminalized in Marion County<ref>{{Cite news |url=https://www.wthr.com/article/news/crime/marion-county-will-no-longer-prosecute-simple-marijuana-cases/531-f7ad16e8-9110-4c2a-bcaf-071555a2b5d6 |title=Marion County will no longer prosecute simple marijuana cases |last=Van Wyk |first=Rich |date=September 30, 2019 |access-date=July 5, 2022 |archive-date=January 19, 2022 |archive-url=https://web.archive.org/web/20220119205542/https://www.wthr.com/article/news/crime/marion-county-will-no-longer-prosecute-simple-marijuana-cases/531-f7ad16e8-9110-4c2a-bcaf-071555a2b5d6 |url-status=live }}</ref>
+* Delta-8 products allowed<ref>{{cite news | url=https://www.wfyi.org/news/articles/delta-8-thc-survived-the-2022-legislative-session-but-will-it-make-it-next-year | title=Delta 8 THC survived the 2022 legislative session, but will it make it next year? |last=Legan |first=Mitch |publisher=[[WFYI (TV)|WFYI]] | date=March 17, 2022 }}</ref>
+|- id=Iowa
+| {{flag|Iowa}}
+| style="background:#80CE69;" | {{Hs|5}}
+| Illegal; Misdemeanor
+| Legal to possess up to an amount of THC not exceeding 4.5 grams per 90 day period (Approx 5 Cartridges).
+| Illegal; Felony
+| {{main|Cannabis in Iowa}}
+* 2014: CBD oil legalized for less than 3% THC.<ref name="mpp report" />
+* 2017: Medical program expanded to include more qualifying conditions.(Chronic pain, PTSD, Cancer, Epilepsy/seizures, Multiple sclerosis, Crohn's disease / ulcerative colitis).<ref>{{cite news |last1=Murphy |first1=Erin |title=Branstad signs medical cannabis bill into law |url=https://www.thegazette.com/government-politics/branstad-signs-medical-cannabis-bill-into-law/ |access-date=April 21, 2023 |work=The Gazette |date=May 12, 2017}}</ref>
+* 2020: THC limit changed to 4.5 grams per 90 days.<ref>{{cite news |last1=Richardson |first1=Ian |last2=Gruber-Miller |first2=Stephen |title=Gov. Kim Reynolds signs bill to change THC cap for Iowa's medical marijuana program |url=https://www.desmoinesregister.com/story/news/politics/2020/06/29/medical-marijuana-iowa-gov-kim-reynolds-signs-law-changing-thc-cap/3148014001/ |access-date=April 21, 2023 |work=The Des Moines Register |date=June 29, 2020}}</ref>
+|- id=Kansas
+| {{flag|Kansas}}
+| style="background:#C4C9CD;" | {{Hs|5}}
+| Illegal; Misdemeanor
+| CBD oil (containing 0% THC) legal for any use
+| Illegal
+| {{main|Cannabis in Kansas}}
+* 1927: prohibited
+* 2018: CBD oil exempted from the definition of marijuana.<ref>{{cite web|title=Join the Marijuana Policy Project|url=https://salsa4.salsalabs.com/o/51609/blastContent.jsp?email_blast_KEY=1376958|access-date=June 3, 2018|publisher=[[Marijuana Policy Project]]}}{{Dead link|date=June 2022 |bot=InternetArchiveBot |fix-attempted=yes }}</ref><ref>{{cite web|url=https://norml.org/news/2018/05/17/kansas-new-law-excludes-cbd-from-the-criminal-code|title=Kansas: New Law Excludes CBD From The Criminal Code|date=May 17, 2018 |publisher=[[NORML]]|access-date=June 3, 2018}}</ref><ref>{{Cite web|url=http://www.kslegislature.org/li/b2017_18/measures/documents/sb282_enrolled.pdf|title=SB 282}}</ref>
+|- id=Kentucky
+| {{flag|Kentucky}}
+| style="background:#80CE69;" | {{Hs|3}}
+| Illegal; Misdemeanor ({{convert|8|oz|g|abbr=on}} or less)
+| Legal to possess an "uninterrupted 30-day supply"
+| Illegal; Misdemeanor (5 plants or less)
+| {{main|Cannabis in Kentucky}}
+* 2014: CBD legalized
+* 2022: Governor [[Andy Beshear]] signed an executive order, effective January 1, 2023, to pardon anyone possessing up to 8 ounces of cannabis if purchased legally in another state and a doctor certifies that patient has one of 21 qualifying conditions.<ref>{{cite news |last1=Jaeger |first1=Kyle |title=Kentucky Governor Signs Executive Orders Allowing Medical Marijuana Possession From Other States And Regulating Delta-8 THC |url=https://www.marijuanamoment.net/kentucky-governor-signs-executive-orders-allowing-medical-marijuana-possession-from-other-states-and-regulating-delta-8-thc/ |access-date=November 17, 2022 |work=Marijuana Moment |date=November 15, 2022}}</ref><ref>{{Cite press release |date=November 15, 2022 |title=Gov. Beshear To Allow Kentuckians With Severe Medical Conditions To Use Medical Cannabis for Treatment |url=https://www.kentucky.gov/Pages/Activity-stream.aspx?n=GovernorBeshear&prId=1580 |access-date=November 18, 2022 |publisher=Commonwealth of Kentucky}}</ref>
+* 2023: [[Kentucky Senate Bill 47|Senate Bill 47]] to legalize medical use signed into law.<ref>{{Cite web |last=Jaeger |first=Kyle |date=March 31, 2023 |title=Kentucky Governor Signs Medical Marijuana Legalization Bill Into Law |url=https://www.marijuanamoment.net/kentucky-governor-signs-medical-marijuana-legalization-bill-into-law/ |access-date=March 31, 2023 |website=Marijuana Moment |language=en-US}}</ref>
+|- id=Louisiana
+| {{flag|Louisiana}}
+| style="background:#80CE69; color:#000000; text-align:center;" | {{Hs|2}} <span style="font-size:25px;">●</span>
+| Illegal; Decriminalized up to {{convert|14|g|oz|abbr=off}}
+| Legal to possess up to a "30-day supply"
+| Illegal<ref>{{cite web |title=Louisiana Medical Marijuana Law |url=https://norml.org/laws/medical-laws/louisiana-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Louisiana}}
+* 1924: prohibited
+* 2015: medical cannabis legalized
+* 2020: House Bill 819 is signed in to law by Governor [[John Bel Edwards]] expanding cannabis access to "any condition" that a doctor "considers debilitating to an individual patient and is qualified through his medical education and training to treat".
+* 2021: Decriminalization signed into law by Governor Edwards.<ref>{{cite news |last1=Karlin |first1=Sam |title=John Bel Edwards signs bill decriminalizing marijuana, says it's not decriminalization |url=https://www.theadvocate.com/baton_rouge/news/politics/legislature/article_fe7ab00a-cdfc-11eb-95f1-87bbdda37b6b.html |access-date=June 15, 2021 |work=The Advocate |date=June 15, 2021}}</ref>
+|- id=Maine
+| {{flag|Maine}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|2.5|oz|g|abbr=on}}
+| Legal to possess up to 2.5 oz (71 g)
+| Legal for medical & recreational use up to an amount of six plants with no more than three at a time being mature. There is no limit on the amount of seedlings that can be grown at once.<ref>{{cite web|date=December 11, 2018|title=Title 28-B: §1502. Home cultivation of marijuana for personal adult use|url=https://legislature.maine.gov/statutes/28-B/title28-Bsec1502.html|access-date=July 27, 2019|publisher=[[Maine Legislature]]}}</ref>
+| {{main|Cannabis in Maine}}
+* 1913: Prohibited
+* 1976: Decriminalized
+* 1999: Medical cannabis legalized<ref>{{cite web |url=http://www.maine.gov/sos/cec/elec/ref99a.htm |title=Referendum Election Results, Questions 1-3 – November 2, 1999 (Secretary of State, State of Maine, U.S.A.) |publisher=Maine.gov |date=November 2, 1999 |access-date=February 4, 2014 |archive-date=November 6, 2014 |archive-url=https://web.archive.org/web/20141106170958/http://www.maine.gov/sos/cec/elec/ref99a.htm |url-status=dead }}</ref>
+* 2009: Further decriminalized<ref>{{cite web|date=May 7, 2009|title=Maine: Lawmakers Expand Marijuana Decriminalization Law|url=http://norml.org/news/2009/05/07/maine-lawmakers-expand-marijuana-decriminalization-law|url-status=live|archive-url=https://web.archive.org/web/20170701170608/https://norml.org/news/2009/05/07/maine-lawmakers-expand-marijuana-decriminalization-law|archive-date=July 1, 2017|access-date=February 4, 2014|publisher=[[NORML]]}}</ref><ref>{{cite web|title=PUBLIC Law, Chapter 67, An Act To Streamline and Clarify Laws Pertaining to the Civil and Criminal Possession of Marijuana|url=https://www.mainelegislature.org/legis/bills/bills_124th/chapters/PUBLIC67.asp|access-date=February 4, 2014|publisher=[[Maine Legislature]]}}</ref>
+* 2016: Legalized recreational under [[2016 Maine Question 1]]<ref>{{cite news|last=Whittle|first=Patrick|date=November 9, 2016|title=Maine recreational marijuana vote: Narrow victory for Question 1 gives New England two legalized states|work=[[The Cannabist]]|agency=[[Associated Press]]|url=http://www.thecannabist.co/2016/11/08/maine-recreational-marijuana-results-question-1-election-2016/66808/|url-status=live|access-date=November 9, 2016|archive-url=https://web.archive.org/web/20180130013637/https://www.thecannabist.co/2016/11/08/maine-recreational-marijuana-results-question-1-election-2016/66808/|archive-date=January 30, 2018}}</ref>
+|- id=Maryland
+| {{flag|Maryland}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to 1.5 oz (42 g) & 12 g (.4 oz) of concentrate
+| Legal to possess up to 120 g (4.2&nbsp;oz) or 36 g (1.3&nbsp;oz) of concentrate
+| Legal for recreational use up to two plants per household. Registered medical cannabis patients can grow four plants per household.<ref>{{cite web |title=Adult-Use Cannabis Legalization |url=https://mmcc.maryland.gov/Pages/Legalization-of-Non-Medical-Cannabis.aspx |website=maryland.gov |access-date=May 31, 2023}}</ref>
+| {{main|Cannabis in Maryland}}
+* 2014: decriminalized<ref name="maryland">{{cite news|date=April 14, 2014|title=Md. governor signs marijuana bills into law|publisher=[[WUSA (TV)|WUSA]]|url=https://www.wusa9.com/article/news/md-governor-signs-marijuana-bills-into-law/65-285196725|url-status=live|access-date=November 12, 2016|archive-url=https://web.archive.org/web/20160130220212/https://www.wusa9.com/story/news/2014/04/14/maryland-medical-marijuana-law-omalley/7702385/|archive-date=January 30, 2016}}</ref><ref name="HB881">{{cite web|title=House Bill 881|url=http://mgaleg.maryland.gov/2014RS/bills/hb/hb0881e.pdf|url-status=live|archive-url=https://web.archive.org/web/20200919042810/http://mgaleg.maryland.gov/2014RS/bills/hb/hb0881e.pdf|archive-date=September 19, 2020|publisher=[[Maryland General Assembly]]}}</ref>
+* 2022: legalized under [[2022 Maryland Question 4]], effective July 1, 2023<ref>{{cite news|publisher=[[Associated Press]]|title=Maryland voters approve legalization of recreational marijuana|date=November 8, 2022|last=Witte|first=Brian|url=https://apnews.com/article/marijuana-legalization-recreational-maryland-constitutions-613d0bc692afd6e3ac8625dd4e33692a}}</ref>
+|- id=Massachusetts
+| {{flag|Massachusetts}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|2|oz|g|abbr=on}} in public or {{convert|10|oz|g|abbr=on}} at home
+| Legal to possess up to 10 oz (280 g) per every 2-month period
+| Legal for recreational use up to an amount of six plants per person or twelve plants maximum for 2 or more adults in a household.<ref name="Guidance on Types of Marijuana Establishment Licenses">{{cite web|title= Guidance on Types of Marijuana Establishment Licenses|url= https://mass-cannabis-control.com/wp-content/uploads/2018/04/Guidance-License-Types.pdf|publisher= Massachusetts Cannabis Control Commission|access-date= May 2, 2020|archive-date= January 21, 2021|archive-url= https://web.archive.org/web/20210121065846/https://mass-cannabis-control.com/wp-content/uploads/2018/04/Guidance-License-Types.pdf|url-status= dead}}</ref>
+| {{main|Cannabis in Massachusetts}}
+* 2008: decriminalized cannabis by 63% vote on Question 2. {{convert|1|oz|g|abbr=on}} or less punishable by $100 fine.<ref>{{cite news|last=Abel|first=David|date=November 5, 2008|title=Voters approve marijuana law change|work=[[The Boston Globe]]|url=https://archive.boston.com/news/local/articles/2008/11/05/voters_approve_marijuana_law_change/|url-status=live|access-date=September 8, 2014|archive-url=https://web.archive.org/web/20150417164706/http://www.boston.com/news/local/articles/2008/11/05/voters_approve_marijuana_law_change/|archive-date=April 17, 2015}}</ref><ref>{{cite web|last=Galvin|first=William Francis|date=November 28, 2012|title=Return of Votes for Massachusetts State Election November 4, 2008|url=https://www.sec.state.ma.us/ele/elepdf/2008%20Return%20of%20Votes%20Complete.pdf|url-status=dead|archive-url=https://web.archive.org/web/20150225101820/http://www.sec.state.ma.us/ele/elepdf/2008%20Return%20of%20Votes%20Complete.pdf|archive-date=February 25, 2015|access-date=February 4, 2014|publisher=[[Massachusetts Secretary of the Commonwealth]]}}</ref>
+* 2012: medical marijuana legalized when Question 3 passed by 60%.<ref>{{cite web|last=Galvin|first=William Francis|date=November 28, 2012|title=Return of Votes For Massachusetts State Election November 6, 2012|url=https://www.sec.state.ma.us/ele/elepdf/rov12.pdf|url-status=dead|archive-url=https://web.archive.org/web/20130120083954/http://www.sec.state.ma.us/ele/elepdf/rov12.pdf|archive-date=January 20, 2013|publisher=[[Massachusetts Secretary of the Commonwealth]]}}</ref><ref>{{cite news|url=https://www.cbsnews.com/news/medical-marijuana-law-passes-in-massachusetts/ |title=On Marijuana, Massachusetts Voters Say 'Legalize It' |publisher=[[CBS News]] |date=January 22, 2014 |access-date=February 4, 2014 |first=Ryan |last=Jaslow}}</ref>
+* 2016: legalized recreational marijuana when Question 4 passed by 54%.<ref>{{cite news|url=https://www.bostonglobe.com/metro/2016/11/08/pot/nn0rImK95SxMkC9Y0GaKsI/story.html |title=Mass. voters say 'yes' to legalizing marijuana |work=[[The Boston Globe]] |date=November 8, 2016 |access-date=November 12, 2016}}</ref>
+* 2026: possession limit increased to {{convert|2|oz|g|abbr=on}}.<ref>{{Cite web |date=2026-04-23 |title=Massachusetts Governor Signs Bill Doubling Marijuana Possession Limit |url=https://norml.org/news/2026/04/23/massachusetts-governor-signs-legislation-into-law-doubling-adult-use-marijuana-possession-limits/ |access-date=2026-06-22 |website=NORML |language=en-US}}</ref>
+|- id=Michigan
+| {{flag|Michigan}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|2.5|oz|g|abbr=on}} in public or {{convert|10|oz|g|abbr=on}} at home 
+| Legal to possess up to 2.5 oz (71 g)
+| Legal for recreational use up to an amount of 12 plants per household.<ref name="Michigan begins taking applications for first recreational marijuana businesses Friday">{{cite news|title=Michigan begins taking applications for first recreational marijuana businesses Friday|date=October 29, 2019|url=https://www.mlive.com/news/2019/10/michigan-begins-taking-applications-for-first-recreational-marijuana-businesses-friday.html|work=[[Michigan Live]]|last=Burns|first=Gus}}</ref>
+| {{main|Cannabis in Michigan}}
+* 2008: legalized medical cannabis under [[2008 Michigan Proposal 1|Proposal 1]]
+* 2018: legalized recreational cannabis with the voter approval of [[2018 Michigan Proposal 1]]
+|- id=Minnesota
+| {{flag|Minnesota}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to 2&nbsp;lbs (2 oz in public), 8 g of concentrate, and 800&nbsp;mg of infused edibles
+| Legal to possess up to 2.5 oz (71 g) every 14 days.
+| Legal for recreational use up to an amount of 8 plants of which only 4 can be mature at a time.<ref>{{Cite web |date=April 27, 2023 |title=H.F. 100 |url=https://www.house.mn.gov/hrd/bs/93/hf0100.pdf |website=house.mn.gov}}</ref>
+| {{main|Cannabis in Minnesota}}
+* 1976: decriminalization<ref name="MacCounReuter2001">{{cite book|last1=MacCoun|first1=Robert J.|chapter-url=https://archive.org/stream/drugwarheresiesl00macc#page/46/mode/2up|title=Drug War Heresies: Learning from Other Vices, Times, and Places|last2=Reuter|first2=Peter|date=August 27, 2001|publisher=Cambridge University Press|isbn=978-0-521-79997-3|pages=46–|chapter=The Debate|chapter-url-access=registration}}</ref>
+* 2014: medical cannabis legalized<ref>{{cite news|last=Ross|first=Philip|date=June 29, 2015|title=Marijuana Legalization Minnesota 2015: 5 Things To Know About Opening Of State's First Medical Pot Dispensary|work=[[International Business Times]]|url=https://www.ibtimes.com/marijuana-legalization-minnesota-2015-5-things-know-about-opening-states-first-1988462|url-status=live|archive-url=https://web.archive.org/web/20190404024847/https://www.ibtimes.com/marijuana-legalization-minnesota-2015-5-things-know-about-opening-states-first-1988462|archive-date=April 4, 2019}}</ref>
+* 2022: Legislation is passed to allow the sale and consumption of food and beverage products containing 5&nbsp;mg of THC per serving and 50&nbsp;mg per package.<ref>{{cite news |last=Faircloth |first=Ryan |date=June 30, 2022 |title=Edibles, beverages infused with cannabis ingredient THC become legal Friday in Minnesota |url=https://www.startribune.com/edibles-and-beverages-laced-with-cannabis-ingredient-thc-to-become-legal-friday-in-minnesota/600186638/ |access-date=July 2, 2022 |work=[[Star Tribune]]}}</ref>
+* 2023: Governor [[Tim Walz]] signs House File 100 to legalize cannabis for recreational use, effective August 1, 2023.<ref name="MPR">{{Cite news |title=Minnesota Lawmakers Pass Marijuana Legalization Bill |url=https://www.mprnews.org/story/2023/08/01/recreational-cannabis-is-now-legal-in-minnesota-heres-what-we-know |date=August 1, 2023 |access-date=November 8, 2023 |publisher=[[Minnesota Public Radio]] |language=en}}</ref>
+|- id=Mississippi
+| {{flag|Mississippi}}
+| style="background:#80CE69; color:#000000; text-align:center;" | {{Hs|2}} <span style="font-size:25px;">●</span>
+| Illegal; Decriminalized up to 30 g (1.1&nbsp;oz) or less for first offense.
+| Legal to possess up to 3 oz (85 g) per month
+| Illegal
+| {{main|Cannabis in Mississippi}}
+* 1978: decriminalized
+* 2014: CBD legalized
+* 2020: medical cannabis legalized through Initiative 65,<ref>{{cite web|url=https://reason.com/2020/11/03/mississippi-voters-approve-medical-use-of-cannabis/|last=Sullum|first=Jacob|title=Mississippi Voters Approve Medical Use of Cannabis|work=[[Reason (magazine)|Reason]]|date=November 3, 2020|access-date=November 3, 2020}}</ref><ref>{{cite news|url=https://www.wjtv.com/news/medical-marijuana-2020-declares-victory-for-initiative-65/|title=Medical Marijuana 2020 declares victory for Initiative 65|publisher=[[WJTV]]|date=November 3, 2020|access-date=November 3, 2020}}</ref> which was subsequently overturned by the Supreme Court of Mississippi<ref>{{cite news |last1=Pettus |first1=Emily Wagster |title=Mississippi justices toss voter-backed marijuana initiative |url=https://apnews.com/article/ms-state-wire-mississippi-marijuana-health-4f81d577aeb2ed8a04849f62c86c707e |access-date=May 15, 2021 |publisher=[[Associated Press]] |date=May 14, 2021}}</ref>
+* 2022: Medical use made legal again through bill signed by Governor [[Tate Reeves]].<ref>{{cite news |last1=Pettus |first1=Emily Wagster |title=Mississippi governor signs law allowing medical marijuana |url=https://apnews.com/article/health-marijuana-mississippi-tate-reeves-legislature-5a37104452099cf2c133d547e8d55ab5 |access-date=February 2, 2022 |publisher=[[Associated Press News]] |date=February 2, 2022}}</ref><ref>{{cite news |last1=Jaeger |first1=Kyle |title=Mississippi Governor Signs Medical Marijuana Legalization Bill Into Law |url=https://www.marijuanamoment.net/mississippi-governor-signs-medical-marijuana-legalization-bill-into-law/ |access-date=February 2, 2022 |work=Marijuana Moment |date=February 2, 2022}}</ref>
+|- id=Missouri
+| {{flag|Missouri}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|3|oz|g|abbr=on}}
+| Legal to possess up to 6 oz (170 g) per month
+| Legal for medical & recreational use up to an amount of six plants per person or twelve plants for 2 or more adults in a household with a license.
+| {{main|Cannabis in Missouri}}
+* 2014: decriminalized; CBD legalized
+* 2018: Missouri voters approved Amendment 2, allowing for the distribution and regulation of medical cannabis.
+* 2022: Missouri voters approved [[2022 Missouri Amendment 3|Amendment 3]], legalizing recreational use for adults 21 and older.
+|- id=Montana
+| {{flag|Montana}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|1|oz|g|abbr=on}} & 8 g of concentrates
+| Legal to possess up to 1 oz (28 g) 
+| Legal for medical & recreational use up to an amount of four plants per person or 8 maximum per household, no more than 4 plants are allowed to be mature at one time.
+| {{main|Cannabis in Montana}}
+* November 3, 2020: Legalized by [[Montana I-190|Initiative 190]]
+|- id=Nebraska
+| {{flag|Nebraska}}
+| style="background:#80CE69; color:#000000; text-align:center;" | {{Hs|2}} <span style="font-size:25px;">●</span>
+| Illegal; Decriminalized (first offense only)
+| Legal
+| Illegal
+| {{main|Cannabis in Nebraska}}
+
+* November 5, 2024: Ballot measures [[2024 Nebraska Initiative 437|437]] and 438 were approved by voters initially legalizing medical use.<ref name=":1">{{Cite web |last=Jaeger |first=Kyle |date=2024-11-06 |title=Nebraska Voters Approve Medical Marijuana Legalization At The Ballot Amid Legal Challenges |url=https://www.marijuanamoment.net/nebraska-voters-approve-medical-marijuana-legalization-at-the-ballot-amid-legal-challenges/ |access-date=2024-11-07 |website=Marijuana Moment |language=en-US}}</ref>
+* Possession for other purposes up to {{convert|1|oz|g|abbr=on}} fined up to $300 for first offense, with potential mandatory drug education. Second offense fine up to $500 and up to five days' jail, third offense up to $500 fine and maximum one week jail.<ref>{{cite web|url=http://www.mpp.org/states/nebraska/|title=Nebraska|date=July 6, 2012|publisher=[[Marijuana Policy Project]]|access-date=November 9, 2012}}</ref>
+|- id=Nevada
+| {{flag|Nevada}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|2.5|oz|g|abbr=on}} & {{convert|0.25|oz|g|abbr=on}} of concentrate
+| Legal to possess up to {{convert|2.5|oz|g|abbr=on}}
+| Legal for medical & recreational use only for people that live at least 25&nbsp;mi (40&nbsp;km) from the nearest dispensary. Limit is 6 plants for recreational use and 12 plants for medical use.<ref>{{cite web |title=Nevada Laws and Penalties |url=https://norml.org/laws/nevada-penalties-2/ |publisher=[[NORML]] |access-date=May 27, 2023}}</ref><ref>{{cite web |title=Nevada Medical Marijuana Law |url=https://norml.org/laws/medical-laws/nevada-medical-marijuana-law/ |publisher=[[NORML]] |access-date=May 27, 2023}}</ref>
+| {{main|Cannabis in Nevada}}
+* November 7, 2000: medical marijuana legalized with 65% vote on Question 9.<ref>{{cite web|url=http://legalmann.wordpress.com/2012/07/17/nevada-medical-marijuana-dispensaries-and-authorized-users-still-face-potential-criminal-penalties/ |title=Nevada Medical Marijuana Dispensaries and Authorized Users Still Face Potential Criminal Penalties « Las Vegas Criminal Defense Blog |publisher=Legalmann.wordpress.com |access-date=February 4, 2014}}</ref><ref>{{cite web|url=http://ballotpedia.org/Nevada_Medical_Marijuana_Act,_Question_9_%282000%29 |title=Nevada Medical Marijuana Act, Question 9 (2000) |publisher=Ballotpedia |access-date=February 4, 2014}}</ref>
+* November 8, 2016: recreational marijuana legalized when Question 2 passed by 54%.<ref>{{cite news|date=August 1, 2017|title=Nevada Question 2 — Legalize Marijuana — Results: Approved|work=[[The New York Times]]|url=https://www.nytimes.com/elections/results/nevada-ballot-measure-2-legalize-marijuana|url-status=live|url-access=limited|access-date=November 12, 2016|archive-url=https://web.archive.org/web/20200223074846/https://www.nytimes.com/elections/2016/results/nevada-ballot-measure-2-legalize-marijuana|archive-date=February 23, 2020}}</ref>
+* Home cultivation allowed if at least {{convert|25|mi|km|abbr=on}} from store.<ref>{{cite web|url=https://www.mpp.org/states/nevada/ |title=Nevada |date=January 22, 2018 |publisher=[[Marijuana Policy Project]] |access-date=January 22, 2018}}</ref>
+* June 8, 2023: Legal Adult-use possession limits increased from {{convert|1|oz|g|abbr=on}} & one-eighth of an oz (3.5 g) of concentrate to {{convert|2.5|oz|g|abbr=on}} & {{convert|0.25|oz|g|abbr=on}} of concentrate.<ref>{{Cite web |last=Jaeger |first=Kyle |date=June 19, 2023 |title=Nevada Governor Signs Omnibus Marijuana Bill To Increase Possession Limits And Remove Industry Barriers |url=https://www.marijuanamoment.net/nevada-governor-signs-omnibus-marijuana-bill-to-increase-possession-limits-and-remove-industry-barriers/ |access-date=June 20, 2023 |website=Marijuana Moment |language=en-US}}</ref>
+|- id="New Hampshire"
+| {{flag|New Hampshire}}
+| style="background:#80CE69; color:#000000; text-align:center;" | {{Hs|2}} <span style="font-size:25px;">●</span>
+| Illegal; Decriminalized up to {{convert|0.75|oz|g|abbr=on}} or less
+| Legal to possess up to 2 oz (57 g)
+| Illegal<ref>{{cite web |title=New Hampshire Medical Marijuana Law |url=https://norml.org/laws/medical-laws/new-hampshire-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in New Hampshire}}
+* July 23, 2013: medical marijuana legalized when Governor [[Maggie Hassan]] signed HB 573.<ref>{{cite press release|date=July 23, 2013|title=Governor Hassan's Statement on Signing HB 573|url=http://www.governor.nh.gov/media/news/2013/pr-2013-07-23-hb-573.htm|url-status=dead|archive-url=https://web.archive.org/web/20130815174149/http://www.governor.nh.gov/media/news/2013/pr-2013-07-23-hb-573.htm|archive-date=August 15, 2013|access-date=February 4, 2014|publisher=[[Governor of New Hampshire]]}}</ref><ref>{{cite news|last=Leubsdorf|first=Ben|date=July 24, 2013|title=N.H. becomes 19th state to legalize medical marijuana as Hassan signs bipartisan bill|work=[[Concord Monitor]]|url=http://www.concordmonitor.com/home/7744863-95/nh-becomes-19th-state-to-legalize-medical-marijuana-as-hassan-signs-bipartisan-bill|url-status=live|access-date=February 4, 2014|archive-url=https://web.archive.org/web/20150110163019/http://www.concordmonitor.com/home/7744863-95/nh-becomes-19th-state-to-legalize-medical-marijuana-as-hassan-signs-bipartisan-bill|archive-date=January 10, 2015}}</ref>
+* July 11, 2015: Governor Hassan expanded medical marijuana law.<ref>{{cite web|url=http://blog.tenthamendmentcenter.com/2015/07/signed-by-the-governor-new-hampshire-broadens-medical-marijuana-law-further-nullifies-federal-prohibition/|title=Signed by the Governor: New Hampshire Broadens Medical Marijuana Law, Further Nullifies Federal Prohibition|work=Tenth Amendment Center Blog}}</ref>
+* July 18, 2017: Governor [[Chris Sununu]] signed bill decriminalizing up to {{convert|0.75|oz|g|abbr=on}}.<ref>{{Cite news|date=July 19, 2017|title=New Hampshire Decriminalizes Small Amounts Of Marijuana|publisher=[[WBZ-TV]]|agency=[[Associated Press]]|url=https://boston.cbslocal.com/2017/07/19/new-hampshire-decriminalize-weed-marijuana-pot/|url-status=live|access-date=April 16, 2021|archive-url=https://web.archive.org/web/20180219141039/https://boston.cbslocal.com/2017/07/19/new-hampshire-decriminalize-weed-marijuana-pot/|archive-date=February 19, 2018}}</ref>
+|- id="New Jersey"
+| {{flag|New Jersey}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|6|oz|g|abbr=on}}.<ref>{{cite web |title=New Jersey Laws and Penalties |url=https://norml.org/laws/new-jersey-penalties-2/ |publisher=[[NORML]] |access-date=March 1, 2023}}</ref> Licensed delivery services allowed.<ref>{{cite web |title=NJ Recreational Use |url=https://www.nj.gov/cannabis/adult-personal/index.shtml |website=Cannabis Regulatory Commission |access-date=August 1, 2022}}</ref>
+| Legal to possess up to 3 oz (85 g) per month
+| Illegal<ref>{{cite web |title=New Jersey Medical Marijuana Law |url=https://norml.org/laws/medical-laws/new-jersey-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref><ref>{{cite web |title=New Jersey Legalization |url=https://norml.org/laws/new-jersey-legalization/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in New Jersey}}
+*January 18, 2010: medical marijuana law signed by Governor [[Jon Corzine]]. Maximum 1 year in prison and 1,000 dollar fine for possession of up to 50 grams.<ref>{{cite news |url=http://www.njleg.state.nj.us/2008/Bills/A1000/804_R1.PDF |title=ASSEMBLY COMMITTEE SUBSTITUTE FOR ASSEMBLY, No. 804 : STATE OF NEW JERSEY : 213th LEGISLATURE |website=Njleg.state.nj.us |access-date=November 12, 2016 |archive-date=March 4, 2016 |archive-url=https://web.archive.org/web/20160304071148/http://www.njleg.state.nj.us/2008/Bills/A1000/804_R1.PDF |url-status=dead }}</ref><ref>{{cite news|url=https://www.bizjournals.com/philadelphia/stories/2010/01/18/daily11.html|title=Medical marijuana use legalized in N.J.|work=[[Philadelphia Business Journal]]|date=January 19, 2010|last=Merritt|first=Athena D.|access-date=November 12, 2016}}</ref>
+*September 19, 2016: Governor [[Chris Christie]] signed Assembly Bill 457 adding [[PTSD]] as a qualifying condition for medical marijuana, effective immediately.<ref>{{cite web|url=http://blog.tenthamendmentcenter.com/2016/09/signed-into-law-new-jersey-bill-expands-medical-marijuana-program-despite-federal-prohibition/|title=Signed into Law: New Jersey Bill Expands Medical Marijuana Program Despite Federal Prohibition|date=September 19, 2016|website=Blog.tenthamendmentcenter.com|access-date=November 9, 2016}}</ref>
+* November 3, 2020: recreational use legalized by [[2020 New Jersey Public Question 1|referendum]].<ref>{{cite news|title=2020 elections results|publisher=NBC News|url=https://www.nbcnews.com/politics/2020-elections/ballot-measures|access-date=November 3, 2020}}</ref><ref>{{cite news|last=Hoover|first=Amanda|date=November 3, 2020|title=Election 2020: N.J. voters approve legal weed ballot question|work=[[NJ.com]]|url=https://www.nj.com/marijuana/2020/11/election-2020-nj-voters-approve-legal-weed-ballot-question.html|access-date=November 3, 2020}}</ref>
+* February 22, 2021: enabling legislation for cannabis legalization signed by Governor [[Phil Murphy]]. The bill includes provisions for transportation (delivery) and cultivation licensure.<ref>{{cite news |last=Hoover |first=Amanda |title=Murphy signs N.J. legal weed bills, ending 3-year saga |url=https://www.nj.com/marijuana/2021/02/murphy-signs-nj-legal-weed-bills-ending-3-year-saga.html |website=NJ.com |publisher=NJ Advance Media |access-date=February 22, 2021 |language=en |date=February 22, 2021}}</ref>
+|- id="New Mexico"
+| {{flag|New Mexico}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|2|oz|g|abbr=on}}
+| Legal to possess up to 8 oz (230 g) per 90-day period
+| Legal for medical & recreational use up to an amount not to exceed 16 plants, of which no more than 4 can be mature at one time, for medical use, and 6 mature plants, or twelve per household, for recreational use.
+| {{main|Cannabis in New Mexico}}
+* 2007: medical use legalized when Governor [[Bill Richardson]] signed Senate Bill 523.<ref>{{cite web|url=https://norml.org/news/2007/04/05/new-mexico-becomes-twelfth-state-to-authorize-medical-cannabis-use |title=New Mexico Becomes Twelfth State To Authorize Medical Cannabis Use |publisher=[[NORML]] |date=April 5, 2007 |access-date=February 4, 2014}}</ref><ref>{{cite news|url=https://www.nbcnews.com/id/wbna17643246 |title=Richardson to legalize medical marijuana |publisher=[[NBC News]] |agency=[[Associated Press]] |date=March 16, 2007 |access-date=February 4, 2014}}</ref>
+* 2019: legislation to decriminalize was signed into law.<ref>{{cite news |last1=Lopez |first1=German |title=New Mexico Governor Signs Marijuana Decriminalization Bill |url=https://www.vox.com/policy-and-politics/2019/4/4/18295426/new-mexico-marijuana-legalization-decriminalization |access-date=November 8, 2023 |work=[[Vox (website)|Vox]] |date=April 4, 2019}}</ref>
+* 2021: recreational marijuana signed into law by Governor [[Michelle Lujan Grisham]], effective June 29, 2021.<ref>{{cite news|last=McKay|first=Dan|title=Cannabis in NM: How will it work?|url=https://www.abqjournal.com/2378994/how-does-it-work-2.html|access-date=April 13, 2021|work=[[Albuquerque Journal]]|date=April 10, 2021}}</ref>
+* 2022: commercial sales began April 1, 2022.<ref>{{cite news |date= April 1, 2022 |title= New Mexico launches cannabis sales, within Texans' reach |url= https://www.npr.org/2022/04/01/1090194495/new-mexico-launches-cannabis-sales-within-texans-reach?t=1648867860281&t=1648868227612 |work= NPR |agency= Associated Press |access-date= April 2, 2022}}</ref><ref>{{cite news |last1= Lee |first1= Morgan |last2= Attanasio |first2= Cedar |date= April 1, 2022 |title=New Mexico launches cannabis sales on Texas' doorstep |url=https://www.pbs.org/newshour/economy/new-mexico-launches-cannabis-sales-on-texas-doorstep |work= PBS |agency= Associated Press |access-date= April 2, 2022}}</ref>
+|- id="New York"
+| {{flag|New York}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|3|oz|g|abbr=on}} of cannabis or 24&nbsp;g of concentrates at home and {{convert|3|oz|g|abbr=on}} in public or gifting without remuneration.<ref>{{cite news|last1=Ferré-Sadurní |first1=Luis |title=New York Legalizes Recreational Marijuana, Tying Move to Racial Equity |url=https://www.nytimes.com/2021/03/31/nyregion/cuomo-ny-legal-weed.html |work=The New York Times |date=March 31, 2021}}</ref>
+| Legal to possess a 60-day supply.
+| Legal for medical & recreational use up to an amount of three mature and three immature plants per person, with a limit of twelve per household.<ref>{{cite news|last=Campbell|first=Jon|title=What to know about NY's plan to legalize recreational marijuana|url=https://www.democratandchronicle.com/story/news/2021/03/29/ny-marijuana-law-what-know-deal-legalize-adult-use/7044591002/|access-date=March 31, 2021|work=[[Democrat and Chronicle]]}}</ref>
+| {{main|Cannabis in New York}}
+* July 14, 2014: medical marijuana legalized when Governor [[Andrew Cuomo]] signed legislation allowing edibles, oils, pills, and vaporization, but not smoking.<ref>{{cite news|url=http://newyork.cbslocal.com/2014/07/07/new-york-becomes-23rd-state-to-allow-medical-marijuana/ |title=New York Becomes 23rd State To Allow Medical Marijuana |publisher=[[WCBS-TV]] |date=July 7, 2014 |access-date=March 2, 2015}}</ref><ref>{{cite news |last1=Ferrigno |first1=Lorenzo |last2=Assefa |first2=Haimy |url=https://www.cnn.com/2014/07/07/health/new-york-medical-marijuana/index.html |title=New York legalizes medical marijuana |publisher=[[CNN]] |date=September 11, 2014 |access-date=March 2, 2015}}</ref>
+* June 20, 2019: full decriminalization bill passed legislature and signed into law by Governor Cuomo. The bill decriminalizes amounts under {{convert|2|oz|g|abbr=on}}, providing for a $50 fine for under {{convert|1|oz|g|abbr=on}} and $100 for under 2 oz. It also eliminates the "in public view" loophole whereby police would demand suspects empty their pockets, thus causing the cannabis to be in public view.<ref>{{Cite news|url=https://www.vox.com/policy-and-politics/2019/6/21/18700636/new-york-marijuana-decriminalization-legalization|title=New York will expand marijuana decriminalization but falls short of legalization|last=Lopez|first=German|date=June 21, 2019|work=[[Vox (website)|Vox]]}}</ref> The law took effect on August 30, 2019.<ref>{{cite news|url=https://www.amny.com/news/ny-marijuana-bill-1-32714303/|title=Marijuana decriminalization in NY: Here's what the law changes|first=Nicole|last=Brown|publisher=AMNY|date=August 28, 2019|access-date=November 20, 2020}}</ref>
+* March 31, 2021: Marijuana [[New York Cannabis Law|legalization law]] signed by the governor.<ref>{{Cite web|url=https://www.nytimes.com/2021/03/31/nyregion/cuomo-ny-legal-weed.html|title=New York Legalizes Recreational Marijuana}}</ref>
+|- id="North Carolina"
+| {{flag|North Carolina}}
+| style="background:#C4C9CD; color:#000000; text-align:center;" | {{Hs|4}} <span style="font-size:25px;">●</span>
+| Illegal; Decriminalized up to {{convert|42|g|oz|abbr=on}} or less
+| CBD oil
+| Illegal
+| {{main|Cannabis in North Carolina}}
+* 1977: decriminalized{{citation needed|date=October 2024}}
+* 2015: CBD legalized{{citation needed|date=October 2024}}
+|- id="North Dakota"
+| {{flag|North Dakota}}
+| style="background:#80CE69; color:#000000; text-align:center;" | {{Hs|2}} <span style="font-size:25px;">●</span>
+| Illegal; Decriminalized up to {{convert|14|g|oz|abbr=on}} or less
+| Legal to possess up to 3 oz (85 g)
+| Illegal<ref>{{cite web |title=North Dakota Medical Marijuana Law |url=https://norml.org/laws/medical-laws/north-dakota-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in North Dakota}}
+* November 8, 2016: legalized medical marijuana when voters passed Measure 5 by 64%.<ref>{{cite news|date=August 1, 2017|title=North Dakota Measure 5 — Medical Marijuana — Results: Approved|work=[[The New York Times]]|url=https://www.nytimes.com/elections/2016/results/north-dakota-ballot-measure-5-medical-marijuana|url-status=live|url-access=limited|access-date=November 9, 2016|archive-url=https://web.archive.org/web/20190213062656/https://www.nytimes.com/elections/2016/results/north-dakota-ballot-measure-5-medical-marijuana|archive-date=February 13, 2019}}</ref>
+* May 2019: decriminalized<ref>{{cite news |last=Lopez |first=German |title=North Dakota quietly decriminalized marijuana |url=https://www.vox.com/policy-and-politics/2019/5/10/18563776/north-dakota-marijuana-decriminalization-legalization |work=[[Vox (website)|Vox]] |access-date=May 11, 2019 |date=May 10, 2019}}</ref>
+|- id=Ohio
+| {{flag|Ohio}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to 2.5 oz (71 g) and up to 15 grams of cannabis concentrates.
+| Legal to possess a 90-day supply.
+| Legal to grow 6 plants per adult, maximum 12 plants per household.
+| {{main|Cannabis in Ohio}}
+* November 3, 2015: A recreational use initiative fails to pass.<ref>{{cite web | url=https://www.usatoday.com/story/news/politics/2015/11/04/6-reasons-ohio-marijuana-legalization-failed/75143764 | title=6 reasons marijuana legalization failed in Ohio | website=[[USA Today]] }}</ref>
+* June 8, 2016: Governor [[John Kasich]] signed legislation legalizing medical marijuana.<ref>{{cite news|last=Gurciullo|first=Brianna|date=June 8, 2016|title=Kasich legalizes medical marijuana in Ohio|work=[[Politico]]|url=https://www.politico.com/story/2016/06/john-kasich-medical-marijuana-ohio-224091|url-status=live|access-date=November 12, 2016|archive-url=https://web.archive.org/web/20160609044452/http://www.politico.com/story/2016/06/john-kasich-medical-marijuana-ohio-224091|archive-date=June 9, 2016}}</ref>
+* November 7, 2023: Ohio voters passed [[2023 Ohio Issue 2|a ballot referendum]] legalizing recreational cannabis.<ref name="OhioRecreationalCannabisLegal">{{cite news |last=Carr Smyth |first=Julie |date=November 7, 2023 |title=Ohio Becomes Latest State To Legalize Recreational Marijuana |url=https://apnews.com/article/ohio-marijuana-legalization-election-2023-6d15efb27fdcd41e7364f2b7cd3177f4 |publisher=[[Associated Press]] |access-date=November 7, 2023}}</ref>
+* August 6, 2024: First commercial sales began.<ref>{{Cite web |date=2024-08-02 |title=Where Ohioans can buy recreational marijuana Tuesday |url=https://www.news5cleveland.com/news/continuing-coverage/marijuana-in-ohio/where-ohioans-can-buy-recreational-marijuana-tuesday |access-date=2024-08-04 |website=News 5 Cleveland WEWS |language=en}}</ref>
+|- id=Oklahoma
+| {{flag|Oklahoma}}
+| style="background:#80CE69;" | {{Hs|3}}
+| Illegal
+| Legal to possess up to 8 oz (230 g), 1 oz (28 g) of concentrate, and 72 oz (2&nbsp;kg) of edibles in a residence. Patients are able to possess up to 3 oz (85 g) in public.
+| Legal only for medical patients up to an amount of six plants & 6 seedlings per person.<ref>{{cite web |title=Oklahoma Medical Marijuana Law |url=https://norml.org/laws/medical-laws/oklahoma-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Oklahoma}}
+* 1933: criminalized<ref name="Davenport-Hines2003">{{cite book|last=Davenport-Hines|first=Richard|url=https://books.google.com/books?id=dFRd2MMrtiUC&pg=PA240|title=The Pursuit of Oblivion: A Global History of Narcotics|publisher=W.W. Norton|year=2003|isbn=978-0-393-32545-4|pages=240–|lccn=2002071908|author-link=Richard Davenport-Hines}}</ref>
+* 2015: Governor [[Mary Fallin]] signed law allowing CBD oil for children with [[epilepsy]].<ref>{{cite news|last=Backus|first=Stephanie|date=April 30, 2015|title=Gov. Mary Fallin signs bill allowing pilot program for cannabis oil|publisher=[[KOCO-TV]]|url=https://www.koco.com/article/gov-mary-fallin-signs-bill-allowing-pilot-program-for-cannabis-oil/4303904|url-status=live|access-date=July 6, 2015|archive-url=https://web.archive.org/web/20160131032755/http://www.koco.com/news/gov-mary-fallin-signs-bill-allowing-pilot-program-for-cannabis-oil/32663572|archive-date=January 31, 2016}}</ref>
+* June 26, 2018: Voters in Oklahoma approved [[2018 Oklahoma State Question 788|State Question 788]], legalizing medical marijuana.<ref>{{cite news |title=Oklahoma voters approve medical marijuana despite bitter opposition |url=https://www.cbsnews.com/news/oklahoma-votes-to-legalize-medical-marijuanna-state-question-788-tuesday/ |work=CBS News |access-date=April 3, 2021}}</ref>
+|- id=Oregon
+| {{flag|Oregon}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|2|oz|g|abbr=on}} in public or {{convert|8|oz|g|abbr=on}} at home<ref>{{cite web |title=Oregon Laws and Penalties |url=https://norml.org/laws/oregon-penalties-2/ |publisher=[[NORML]] |access-date=March 1, 2023}}</ref>
+| Legal to possess up to 24 oz (680 g)
+| Legal for medical & recreational use up to an amount of six mature plants & 18 seedlings for medical patients or four plants per household for recreational use.<ref name="How To Start A Commercial Grow Operation In Oregon">{{cite web|title= How To Start A Commercial Grow Operation In Oregon|date= March 4, 2018|url= https://www.ilovegrowingmarijuana.com/start-commercial-grow-operation-oregon/#what-kind-of-cannabis-business|publisher= I Love Growing Marijuana}}</ref>
+| {{main|Cannabis in Oregon}}
+* 1973: [[Cannabis in Oregon|Oregon]] became the first state to decriminalize cannabis.<ref name="schlosser">{{cite magazine | url=https://www.rollingstone.com/news/story/17537507/the_politics_of_pot_a_government_in_denial | title=The Politics Of Pot: A Government In Denial | last=Schlosser | first=Eric | date=December 5, 2005 | magazine=[[Rolling Stone]] | access-date=December 17, 2008 | archive-url=https://web.archive.org/web/20080725164556/http://www.rollingstone.com/news/story/17537507/the_politics_of_pot_a_government_in_denial | archive-date=July 25, 2008 | url-status=dead}}</ref>
+* November 4, 2014: voters approved [[Oregon Ballot Measure 91 (2014)|Measure 91]] providing for possession and sale of set amounts of cannabis.<ref>{{cite news|title=Voters legalize recreational pot in Oregon|url=http://www.kgw.com/story/news/politics/2014/11/04/measure-91-legalize-marijuana-oregon/18481827/|access-date=November 5, 2014|agency=KGW Portland|date=November 4, 2014|archive-date=November 5, 2014|archive-url=https://web.archive.org/web/20141105120629/http://www.kgw.com/story/news/politics/2014/11/04/measure-91-legalize-marijuana-oregon/18481827/|url-status=dead}}</ref><ref>{{cite web|title=Oregon Legalized Marijuana Initiative, Measure 91 (2014)|url=http://ballotpedia.org/Oregon_Legalized_Marijuana_Initiative,_Measure_91_(2014)|website=Ballotpedia|access-date=November 5, 2014}}</ref>
+* Cannabis sentencing reform signed July 1, 2015, by Governor [[Kate Brown]].<ref>{{cite web|url=http://www.thedailychronic.net/2015/44802/oregon-governor-signs-marijuana-legalization-sentencing-reform-law/|title=Oregon Governor Signs Marijuana Legalization; Sentencing Reform Law|work=The Daily Chronic|date=July 2015}}</ref><ref>{{cite web|url=http://blog.tenthamendmentcenter.com/2015/07/nullification-in-effect-oregon-implements-marijuana-legalization/|title=Nullification in Effect: Oregon Governor Signs Law to Further Implement Marijuana Legalization|work=Tenth Amendment Center Blog}}</ref>
+* More medical cannabis reforms signed July 28, 2015, by Governor Brown, effective October 1, 2015.<ref>{{cite news|url=http://www.nbcrightnow.com/story/29652200/oregon-governor-signs-bill-allowing-pot-sales-oct-1|title=Oregon Governor Signs Bill Allowing Pot Sales Oct. 1|last=McCoy|first=Marcus|date=July 28, 2015|publisher=[[KNDO]], [[KNDU]]|agency=[[Associated Press]]}}</ref><ref>[https://ihlus.com/blog/legalization-of-cannabis-in-us/] {{Webarchive|url=https://web.archive.org/web/20180822081133/https://ihlus.com/blog/legalization-of-cannabis-in-us/|date=August 22, 2018}}|date(22-Aug-2018)</ref>
+* Governor Brown signed 25% cannabis sales tax.<ref>{{cite news|url=https://www.nwnewsnetwork.org/post/oregon-governor-signs-marijuana-sales-tax|title=Oregon Governor Signs Marijuana Sales Tax|last=Stewart|first=Ashley|website=NW News Network}}</ref>
+* January 1, 2022: Limit on personal possession increased from 1 oz to 2 oz.<ref>{{cite web|url=https://www.oregon.gov/olcc/Docs/news/news_releases/2021/nr122821-Commission-Meeting-Special.pdf|title=Commission approves changes for cannabis industry|website=Oregon.gov}}</ref>
+|- id=Pennsylvania
+| {{flag|Pennsylvania}}
+| style="background:#80CE69;" | {{Hs|3}}
+| Illegal; Decriminalized In Philadelphia, Pittsburgh, Harrisburg, Erie, Lancaster, Phoenixville, Norristown, State College, Steelton, Upper Merion Township, West Norriton Township, East Norriton Township, York, Folcroft, Bethlehem, Doylestown, and Allentown up to 30 g (1.1&nbsp;oz)<ref>{{cite news|url=https://www.wtae.com/article/law-to-decriminalize-marijuana-hash-in-pittsburgh-takes-effect/7476659|title=Law to decriminalize marijuana in Pittsburgh takes effect|date=January 4, 2016|last=Cipriani|first=Marcie|publisher=[[WTAE-TV]]}}</ref><ref>{{cite web |url=https://norml.org/laws/local-decriminalization/pennsylvania-local-decriminalization/ |website=NORML |access-date=July 18, 2024 |title=Pennsylvania Local Decriminalization }}</ref>
+| Legal to possess up to a 90-day supply
+| Illegal<ref>{{cite web |title=Pennsylvania Medical Marijuana Law |url=https://norml.org/laws/medical-laws/pennsylvania-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Pennsylvania}}
+* April 17, 2016: medical use law signed by Governor Wolf. 
+* Possession (non-medical cases) of {{convert|30|g|oz|abbr=on}} or less up to 30 days in jail and fine up to $500. More than 30g a misdemeanor up to a year in jail and $5000 fine.<ref>{{cite web|url=https://norml.org/laws/pennsylvania-penalties-2|title=Pennsylvania Laws and Penalties |publisher=[[NORML]] |access-date=February 4, 2014}}</ref>
+|- id="Rhode Island"
+| {{flag|Rhode Island}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|1|oz|g|abbr=on}}
+| Legal to possess up to 2.5 oz (71 g)
+| Legal for medical & recreational use up to an amount of 12 plants & 12 seedlings for medical patients or six plants of which no more than 3 are mature for recreational use.<ref>{{cite web |title=Rhode Island Medical Marijuana Law |url=https://norml.org/laws/medical-laws/rhode-island-medical-marijuana-law/ |publisher=[[NORML]] |access-date=May 27, 2023}}</ref><ref>{{cite web |title=Rhode Island Legalization |url=https://norml.org/laws/rhode-island-legalization/ |publisher=[[NORML]] |access-date=May 27, 2023}}</ref>
+| {{main|Cannabis in Rhode Island}}
+Legalized by bills signed on May 25, 2022.<ref>{{cite news|title=McKee to sign marijuana legalization bill into law|publisher=[[WPRI-TV]]|date=May 25, 2022|url=https://www.wpri.com/news/cannabis-coverage/mckee-to-sign-marijuana-legalization-bill-into-law/}}</ref><ref>{{cite news|work=Providence Journal|title=What you need to know about legal cannabis in Rhode Island|last=Mooney|first=Tom|date=May 25, 2022|url=https://www.providencejournal.com/story/news/local/2022/05/25/marijuana-legalization-recreational-cannabis-use-legal-weed-ri/9926250002/|url-access=limited}}</ref>
+|- id="South Carolina"
+| {{flag|South Carolina}}
+| style="background:#C4C9CD;" | {{Hs|5}}
+| Misdemeanor<ref>{{cite web|url=https://norml.org/laws/south-carolina-penalties-2|title=South Carolina Laws and Penalties - NORML.org - Working to Reform Marijuana Laws|publisher=[[NORML]]|access-date=July 5, 2016}}</ref>
+| Cannabis oil (less than 0.9% THC)
+| Illegal
+| {{main|Cannabis in South Carolina}}
+* 2014: Governor [[Nikki Haley]] signed Senate Bill 1035, "Julian's Law", allowing children with severe epilepsy to be treated with CBD oil if recommended by a physician.<ref>{{cite web|url=http://www.thedailychronic.net/2014/32945/south-carolina-medical-marijuana-bill-signed-by-gov-nikki-haley/ |title=South Carolina Medical Marijuana Bill Signed by Gov. Nikki Haley |publisher=Thedailychronic.net |date= June 2, 2014|access-date=October 31, 2016}}</ref>
+* Apr 23 2026, Fed govt issued DOJ/DEA order placing certain FDA-approved and state-licensed medical cannabis products into Schedule III, effective immediately. South Carolina's Controlled Substances Act contains a federal conformity provision, requires the state to update its controlled substance schedules to match federal scheduling changes within 30 days (around May 23, 2026), Separately, the South Carolina Controlled Substances Therapeutic Research Act of 1980 authorizes Dept of Health to establish the Therapeutic Cannabis Research Program (TCR). South Carolina Residents with the following conditions are eligible. Cancer (specifically those undergoing chemotherapy),
+Glaucoma, and Patients receiving radiation therapy (or related radiology treatment contexts described in the law).
+|- id="South Dakota"
+|{{flag|South Dakota}}
+|style="background:#80CE69;" | {{Hs|3}}
+| Misdemeanor
+| Legal to possess up to 3 oz (85 g)
+| Legal for medical patients up to an amount not exceeding 2 flowering, and 2 non-flowering plants; more in some cases.<ref>{{cite web |title=South Dakota Medical Marijuana Law |url=https://norml.org/laws/medical-marijuana/south-dakota-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+|{{main|Cannabis in South Dakota}}
+Possession of 2 oz or less a Class 1 misdemeanor punishable by a maximum of 1 year in prison and a maximum fine $2,000.<ref>{{cite web|url=http://norml.org/laws/item/south-dakota-penalties-2 |title=South Dakota Laws & Penalties |publisher=Norml.org |access-date=March 2, 2015}}</ref>
+
+Medical use legal effective July 1, 2021.
+* November 3, 2020: [[2020 South Dakota Measure 26|Medical]] and [[2020 South Dakota Amendment A|recreational]] use legalized by separate referendums.<ref>{{cite news |last=Sneve |first=Joe |title=South Dakotans vote to legalize medical marijuana |url=https://www.argusleader.com/story/news/politics/2020/11/03/2020-election-results-south-dakota-voters-vote-legalize-medical-marijuana/6075719002/ |access-date=November 4, 2020 |work=[[Argus Leader]] |date=November 3, 2020  }}</ref><ref>{{cite news |last=Sneve |first=Joe |title=Recreational marijuana passes in South Dakota |url=https://www.argusleader.com/story/news/politics/2020/11/04/2020-election-results-recreational-marijuana-amendment-a/6147937002/ |access-date=November 4, 2020 |work=[[Argus Leader]] |date=November 3, 2020  }}</ref>
+* February 8, 2021: Recreational legalization referendum (Amendment A) overturned by circuit court judge as unconstitutional.<ref>{{cite news |last1=Sneve |first1=Joe |title=Judge rules recreational marijuana measure unconstitutional in South Dakota |url=https://www.argusleader.com/story/news/2021/02/08/south-dakota-marijuana-court-strikes-down-recreational-pot-measure/4442883001/ |work=[[Argus Leader]] |access-date=February 9, 2021}}</ref>
+* On November 24, 2021, the South Dakota Supreme Court ruled 4–1 that Amendment A was unconstitutional, striking down recreational legalization.<ref>{{cite news |last=Helber |first=Steve |date=November 24, 2021 |title=South Dakota's Supreme Court rules against legalization of recreational marijuana |url=https://www.npr.org/2021/11/24/1058884032/south-dakotas-supreme-court-rules-against-legalization-of-recreational-marijuana |access-date=July 2, 2022 |publisher=NPR}}</ref>
+|- id=Tennessee
+| {{flag|Tennessee}}
+| style="background:#C4C9CD;" | {{Hs|5}}
+| Illegal; Misdemeanor (less than {{convert|.5|oz|g|abbr=on}}; first or second offense only).
+| Cannabis oil (less than 0.9% THC)
+| Illegal; Misdemeanor (nine plants or less),<br />Felony (ten or more plants)
+| {{main|Cannabis in Tennessee}}
+First-time possession one year supervised probation instead of one year in prison; possession of {{convert|.5|oz|g|abbr=on}} or more for resale a felony. CBD oil possession allowed as of May 4, 2015, if suffering seizures or epilepsy with recommendation of doctor.<ref>{{cite news|last=Boucher|first=Dave|date=May 4, 2015|title=Gov. Bill Haslam signs cannabis oil bill|work=[[The Tennessean]]|url=https://www.tennessean.com/story/news/2015/05/04/haslam-signs-cannabis-oil-bill/26866905/}}</ref>
+|- id=Texas
+| {{flag|Texas}}
+| style="background:#80CE69;" | {{Hs|5}}
+| Illegal; ''De facto'' legal by not arresting for less than 4 oz (112 g) in possession in Austin. A "cite and release" policy is in effect in [[Houston]], [[Dallas]], [[San Antonio]], [[Austin, Texas|Austin]], and residents of [[Travis County, Texas|Travis County]]).
+| Legal to possess medically. Patients may now access up to 10&nbsp;mg of THC per serving and 1 gram per package, and are permitted to vape and nebulize THC products in addition to other forms.
+| Illegal
+| {{main|Cannabis in Texas}}
+* December 2014: possession of up to {{convert|2|oz|g|abbr=on}} of marijuana can result in a jail sentence of up to six months and fine of up to $2,000.<ref>{{cite web|date=December 15, 2014|title=Texas|url=https://www.mpp.org/states/texas/|access-date=March 2, 2015|publisher=[[Marijuana Policy Project]]}}</ref>
+* June 1, 2015: governor [[Greg Abbott]] signed a bill legalizing CBD oil for medical use in patients with intractable epilepsy.<ref>{{cite news|last=Hershaw|first=Eva|date=June 1, 2015|title=Abbott Legalizes Cannabis Oil for Epilepsy Patients|work=[[The Texas Tribune]]|url=https://www.texastribune.org/2015/06/01/abbott-signs-law-legalizing-cannabis-oil-epilepsy-/|url-status=live|access-date=June 10, 2015|archive-url=https://web.archive.org/web/20170223220905/https://www.texastribune.org/2015/06/01/abbott-signs-law-legalizing-cannabis-oil-epilepsy-/|archive-date=February 23, 2017}}</ref>
+* May 2019: expanded the qualifying conditions of medical cannabis to include [[Parkinson's disease]], [[ALS]], [[autism]], [[multiple sclerosis]], [[spasticity]], and terminal cancer.<ref>{{Cite news|last=Young|first=Stephen|date=May 23, 2019|title=Texas Moves Toward Expanding Medical THC Program|work=[[Dallas Observer]]|url=https://www.dallasobserver.com/news/texas-set-to-expand-medical-thc-11670617|url-status=live|access-date=June 11, 2019|archive-url=https://web.archive.org/web/20191115164820/https://www.dallasobserver.com/news/texas-set-to-expand-medical-thc-11670617|archive-date=November 15, 2019}}</ref>
+*June 2021: Governor [[Greg Abbott]] signed a bill that expands limited medical program from 0.5% THC to 1.0% THC. Effective September 1, 2021.<ref>{{cite web|last=Angell|first=Tom|date=June 16, 2021|title=Texas Governor Signs Medical Marijuana Expansion Bill|url=https://www.marijuanamoment.net/texas-governor-signs-medical-marijuana-expansion-bill/|access-date=June 16, 2021|website=Marijuana Moment|language=en-US}}</ref>
+*June 21, 2025: Governor [[Greg Abbott]] signed a bill expanding limited medical program to a full medical program. Patients may now access up to 10&nbsp;mg of THC per serving and 1 gram per package, and are permitted to vape and nebulize THC products in addition to other forms.<ref>{{cite web|last=Jaeger|first=Kyle|date=June 21, 2025|title=Texas Governor Signs Bill To Significantly Expand State's Medical Marijuana Program |url= https://www.marijuanamoment.net/texas-governor-signs-bill-to-significantly-expand-states-medical-marijuana-program/ |access-date=June 21, 2025|website=Marijuana Moment|language=en-US}}</ref>
+|- id=Utah
+| {{flag|Utah}}
+| style="background:#80CE69;" | {{Hs|3}}
+| Illegal; Misdemeanor
+| Legal to possess up to 4 oz (113 g) per 30-day period
+| Illegal<ref>{{cite web |title=Utah Medical Marijuana Law |url=https://norml.org/laws/medical-laws/utah-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Utah}}
+* 2014: HB 105 signed which allows use of low-THC cannabis oil for patients with epilepsy.<ref>{{cite web|date=February 19, 2015|title=11 States with Pending Legislation to Legalize Medical Marijuana|url=http://medicalmarijuana.procon.org/view.resource.php?resourceID=002481#UT|access-date=March 2, 2015|publisher=[[ProCon.org]]|archive-date=March 2, 2015|archive-url=https://web.archive.org/web/20150302224008/http://medicalmarijuana.procon.org/view.resource.php?resourceID=002481#UT|url-status=dead}}</ref>
+* March 2018: HB 195 signed which allows cannabis for certain terminally ill patients.<ref>{{cite news|last1=Lockhart|first1=Ben|date=March 21, 2018|title=Utah governor signs bill allowing medical marijuana use by terminally ill patients|work=[[Deseret News]]|url=https://www.deseret.com/2018/3/21/20642063/utah-governor-signs-bill-allowing-medical-marijuana-use-by-terminally-ill-patients|url-status=live|access-date=April 18, 2018|archive-url=https://web.archive.org/web/20190626135703/https://www.deseretnews.com/article/900013574/utah-governor-signs-bill-allowing-medical-marijuana-use-by-terminally-ill-patients.html|archive-date=June 26, 2019}}</ref>
+*Nov 16, 2018 Utah voters passed Proposition 2 — the Utah Medical Cannabis Act.
+*Dec 3, 2018 Replaced by Legislature with HB 3001 — the Utah Medical Cannabis Act. Governor Gary Herbert signed it into law the same day, and it took immediate effect. Qualifying conditions Chronic pain, PTSD, Cancer, Epilepsy / seizures, Multiple sclerosis, Crohn's disease/ulcerative colitis, Autism, Persistent nausea, Terminal illness / hospice care.
+* Possession up to {{convert|1|oz|g|abbr=on}} 6-months prison and maximum fine $1,000. Over {{convert|10|oz|g|abbr=on}} $10,000 fine. Selling any amount a felony with 5 years in prison and $5,000 fine.<ref>{{cite web|url=https://norml.org/laws/utah-penalties-2|title=Utah Laws and Penalties |publisher=[[NORML]] |access-date=November 12, 2016}}</ref>
+|- id=Vermont
+| {{flag|Vermont}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|2|oz|g|abbr=on}} of cannabis and 10 g of hashish.<ref name=":4">{{Cite web |last=NORML |date=2026-06-22 |title=Vermont Doubles Marijuana Possession Limits |url=https://norml.org/blog/2026/06/22/vermont-governor-signs-bill-into-law-raising-adult-use-marijuana-possession-limits/ |access-date=2026-06-22 |website=NORML |language=en-US}}</ref>
+| Legal to possess up to 2 oz (57 g)
+| Legal for medical & recreational use up to an amount of 9 plants, with only 2 at a time being mature for medical patients, or six plants for recreational use of which no more than two can be mature at one time.
+| {{main|Cannabis in Vermont}}
+* May 19, 2004: medical marijuana legalized when Senate Bill 76 was enacted.<ref>{{cite web|date=May 20, 2004|title=Vermont Approves Amended Medical Marijuana Measure|url=https://norml.org/news/2004/05/20/vermont-approves-amended-medical-marijuana-measure|url-status=live|archive-url=https://web.archive.org/web/20170530170021/https://norml.org/news/2004/05/20/vermont-approves-amended-medical-marijuana-measure|archive-date=May 30, 2017|access-date=February 4, 2014|publisher=[[NORML]]}}</ref>
+* June 2007: medical marijuana expanded by the enactment of SB 7.<ref>{{cite web|date=June 7, 2007|title=Vermont Expands State Medi-Pot Law – Legislatures In Connecticut, Rhode Island Also Endorse Medical Cannabis|url=https://norml.org/news/2007/06/07/vermont-expands-state-medi-pot-law-legislatures-in-connecticut-rhode-island-also-endorse-medical-cannabis|url-status=live|archive-url=https://web.archive.org/web/20180412010956/https://norml.org/news/2007/06/07/vermont-expands-state-medi-pot-law-legislatures-in-connecticut-rhode-island-also-endorse-medical-cannabis|archive-date=April 12, 2018|access-date=February 4, 2014|publisher=[[NORML]]}}</ref>
+* June 6, 2013: Governor [[Peter Shumlin]] signed HB200, decriminalizing {{convert|1|oz|g|abbr=on}}.<ref>{{cite press release|url=http://governor.vermont.gov/gov-shumlin-signs-marijuana-decriminalization |title=Gov. Shumlin signs bill decriminalizing possession of limited amounts of marijuana |publisher=[[Governor of Vermont]] |date=June 6, 2013 |access-date=February 4, 2014 |url-status=dead |archive-url=https://web.archive.org/web/20130610093111/http://governor.vermont.gov/gov-shumlin-signs-marijuana-decriminalization |archive-date=June 10, 2013}}</ref>
+* January 2018: HB511 was enacted,<ref>[https://legislature.vermont.gov/bill/status/2018/H.511 H.511 status], [[Vermont General Assembly]]. Accessed January 2018</ref><ref>{{cite news|last=Carter|first=Brandon|date=January 4, 2018|title=Vermont House votes to legalize marijuana|work=[[The Hill (newspaper)|The Hill]]|url=https://thehill.com/homenews/state-watch/367526-vermont-house-votes-to-legalize-marijuana|url-status=live|archive-url=https://web.archive.org/web/20180327154505/https://thehill.com/homenews/state-watch/367526-vermont-house-votes-to-legalize-marijuana|archive-date=March 27, 2018}}</ref><ref>{{cite news|last1=Dumont|first1=Tyler|last2=Midura|first2=Kyle|date=January 4, 2018|title=Vermont House passes bill to legalize pot|publisher=[[WCAX-TV]]|url=https://www.wcax.com/content/news/Vt-house-expected-to-debate-pass-marijuana-proposal-468030683.html|url-status=live|archive-url=https://web.archive.org/web/20180510005257/https://www.wcax.com/content/news/Vt-house-expected-to-debate-pass-marijuana-proposal-468030683.html|archive-date=May 10, 2018}}</ref> legalizing recreational use of {{convert|1|oz|g|abbr=on}} and two plants,<ref name="Kinzel20170109">{{cite news|last=Kinzel|first=Bob|date=January 9, 2017|title=Backers Of A Tax-And-Regulate Marijuana Legalization Bill Vow To Push On For Their Plan|publisher=[[Vermont Public Radio]]|url=https://www.vpr.org/post/backers-tax-and-regulate-marijuana-legalization-bill-vow-push-their-plan|url-status=live|archive-url=https://web.archive.org/web/20180116111046/http://digital.vpr.net/post/backers-tax-and-regulate-marijuana-legalization-bill-vow-push-their-plan|archive-date=January 16, 2018}}</ref> taking effect on July 1, 2018.<ref name="Ring2018">{{cite news|last=Ring|first=Wilson|date=January 2, 2018|title=Vermont lawmakers to take up marijuana legalization again as early as this week: Last year's bill remains active and can be voted on as early as Thursday|work=[[The Cannabist]]|agency=Associated Press|url=https://www.thecannabist.co/2018/01/02/vermont-marijuana-legalization-legislation-3/95746/|url-status=live|archive-url=https://web.archive.org/web/20200620015258/https://www.thecannabist.co/2018/01/02/vermont-marijuana-legalization-legislation-3/95746/|archive-date=June 20, 2020}}</ref><ref>{{cite news|last=Kinzel|first=Bob|date=January 10, 2018|title=Vermont Senate Passes Marijuana Legalization Bill, Which Now Heads To Gov. Scott|publisher=[[Vermont Public Radio]]|url=http://digital.vpr.net/post/vermont-senate-passes-marijuana-legalization-bill-which-now-heads-gov-scott|url-status=live|archive-url=https://web.archive.org/web/20190211074439/https://www.vpr.org/post/vermont-senate-passes-marijuana-legalization-bill-which-now-heads-gov-scott|archive-date=February 11, 2019}}</ref><ref name="Wallace20180122">{{cite news|last=Wallace|first=Alicia|date=January 22, 2018|title=Vermont Gov. Phil Scott signs marijuana legalization bill "with mixed emotions"|work=[[The Cannabist]]|url=https://www.thecannabist.co/2018/01/22/vermont-marijuana-legalization-scott-signs/97283/|url-status=live|archive-url=https://web.archive.org/web/20190415011917/https://www.thecannabist.co/2018/01/22/vermont-marijuana-legalization-scott-signs/97283/|archive-date=April 15, 2019}}</ref> First state legislature to legalize recreational marijuana.<ref>{{Cite news|last=Zezima|first=Katie|date=January 24, 2018|title=Vermont is the first state to legalize marijuana through legislature|newspaper=[[The Washington Post]]|url=https://www.washingtonpost.com/news/post-nation/wp/2018/01/23/vermont-is-the-first-state-to-legalize-marijuana-through-legislature/|url-access=limited|access-date=January 31, 2018}}</ref>
+* 2026: possession limit increased to {{convert|2|oz|g|abbr=on}}.<ref name=":4" />
+|- id=Virginia
+| {{flag|Virginia}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|1|oz|g|abbr=on}} in public; no limit applies at home.<ref>{{cite web |title=Virginia Laws and Penalties |url=https://norml.org/laws/virginia-penalties-2/ |publisher=[[NORML]] |access-date=March 1, 2023}}</ref> Legislature has authorized retail sales start July 1, 2027.
+| Legal to possess up to 4 oz (113 g) per 30-day period; unlike recreational use, commercial sales of medical marijuana is legal.
+| Legal for medical & recreational use up to an amount of 4 plants per household.<ref>{{cite news |last1=Leonor |first1=Mel |title=An ounce of marijuana and limited home cultivation will be legal in Virginia starting July 1 |url=https://richmond.com/news/state-and-regional/govt-and-politics/an-ounce-of-marijuana-and-limited-home-cultivation-will-be-legal-in-virginia-starting-july/article_a8dbcf7a-b911-58cb-824d-95618f649749.html |access-date=April 10, 2021 |work=Richmond Times-Dispatch |date=April 7, 2021}}</ref>
+| {{main|Cannabis in Virginia}}
+* April 2020: decriminalized up to {{convert|1|oz|g|abbr=on}} (punishable by a $25 fine) per legislation signed by Governor [[Ralph Northam]].<ref>{{cite news|last1=Jaeger |first1=Kyle |title=Virginia Governor Approves Marijuana Decriminalization Bill |url=https://www.marijuanamoment.net/virginia-governor-approves-marijuana-decriminalization-bill/ |access-date=April 12, 2020 |work=Marijuana Moment |date=April 12, 2020}}</ref>
+* April 7, 2021: Legalized for recreational use effective July 1, 2021.<ref>{{cite news|last1=Oliver|first1=Ned|date=April 7, 2021|title=Marijuana will be legal in Virginia on July 1. Here's what is and isn't permitted under the new law.|work=Virginia Mercury|url=https://www.virginiamercury.com/2021/04/07/marijuana-will-be-legal-in-virginia-on-july-1-heres-what-is-and-isnt-permitted-under-the-new-law/|access-date=April 10, 2021}}</ref> Retail sales scheduled to begin by July 1, 2027, legislature developed the necessary legal framework.<ref>{{Cite web |last=Branning |first=Rachel |date=2026-07-13 |title=What you need to know as Virginia approves legal recreational marijuana sales |url=https://wset.com/news/local/what-you-need-to-know-as-virginia-approves-legal-recreational-marijuana-sales-july-2026 |access-date=2026-08-04 |website=WSET |language=en}}</ref>
+|- id=Washington
+| {{flag|Washington}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|1|oz|g|abbr=on}}
+| Legal to possess up to 3 oz (85 g), 48 oz (1.3&nbsp;kg) of edibles, 21 g (.74 oz) of concentrate, & 216 oz (6.1&nbsp;kg) of infused-liquids.
+| Legal for medical patients only up to an amount of 6 plants.<ref>{{cite web |title=Washington Medical Marijuana Law |url=https://norml.org/laws/medical-laws/washington-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref><ref>{{cite web |title=Washington Legalization |url=https://norml.org/laws/washington-legalization/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Washington (state)}}
+* 2012: legalized by [[Washington Initiative 502]]. The law permits anyone over 21 to carry {{convert|1|oz|g|abbr=on}}, and it requires licensed sellers, distributors, and growers. Home growing is not allowed except for medical use.<ref>{{cite web|title=I-502 Implementation|url=http://lcb.wa.gov/marijuana/|publisher=[[Washington State Liquor Control Board]]|place=[[Washington (state)|The state of Washington]]|date=2013}}</ref> First state to legalize recreational marijuana on December 6, 2012, four days before Colorado.<ref>[http://norml.org/legal/item/washington-legalization Washington Date of legalization (Dec 6, 2012)] Retrieved April 29, 2018</ref>
+|- id="West Virginia"
+| {{flag|West Virginia}}
+| style="background:#80CE69;" | {{Hs|3}}
+| Illegal; Misdemeanor
+| Legal
+| Illegal<ref>{{cite web |title=West Virginia Medical Marijuana Law |url=https://norml.org/laws/medical-laws/west-virginia-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in West Virginia}}
+"Compassionate Use Act for Medical Cannabis; providing for protections for the medical use of cannabis..."<ref name="ReferenceA">{{cite web |url=http://medicalmarijuana.procon.org/view.resource.php?resourceID=002481 |title=2016 States with Legislation or Ballot Measures to Legalize Medical Marijuana - Medical Marijuana - ProCon.org |website=Medicalmarijuana.procon.org |access-date=November 12, 2016 |archive-date=November 9, 2016 |archive-url=https://web.archive.org/web/20161109083943/http://medicalmarijuana.procon.org/view.resource.php?resourceID=002481 |url-status=dead }}</ref>
+|- id=Wisconsin
+| {{flag|Wisconsin}}
+| style="background:#C4C9CD;" | {{Hs|5}}
+| Illegal; Misdemeanor on first offense, felony on subsequent offenses; possession under 25 or 28 grams considered an ordinance violation in most incorporated municipalities, and decriminalized in the cities of [[Milwaukee, Wisconsin|Milwaukee]] and [[Madison, Wisconsin|Madison]]<ref>{{cite news |title=Milwaukee Moves To Decriminalize Marijuana |url=https://norml.org/news/1997/05/22/milwaukee-moves-to-decriminalize-marijuana |access-date=March 16, 2019 |work=NORML |date=May 22, 1997}}</ref><ref>{{cite news |last1=Taylor |first1=Beverly |title="This is not a free for all:" Fine reduced for possession of small amounts of marijuana |url=https://fox6now.com/2015/06/02/milwaukee-common-council-votes-to-reduce-fine-for-possessing-small-amounts-of-marijuana/ |access-date=March 16, 2019 |work=WITI |date=June 2, 2015}}</ref>
+| CBD oil
+| Illegal; Felony
+| {{main|Cannabis in Wisconsin}}
+* First possession a misdemeanor fine up to $1,000 or imprisonment up to 6 months, or both. Second offense a Class I felony fine up to $10,000 or imprisonment up to 3.5 years, or both.<ref>{{cite web|url=https://norml.org/laws/wisconsin-penalties-2|title=Wisconsin Laws and Penalties|publisher=[[NORML]]|access-date=July 5, 2016}}</ref>
+* Medical CBD oil legalized in 2014 and 2017.<ref name="ReferenceA"/>
+* In 2020, [[Madison, WI]] legalized the possession of up to {{convert|1|oz|g|abbr=on}} of recreational cannabis, including smoking cannabis on public property (not including places where cigarettes are already banned, inside or within {{convert|1000|ft}} of a school, or behind the wheel).<ref>{{cite news|last=Ermon|first=Brittney|date=November 19, 2020|title=Layers to the legality of Madison marijuana ordinance|url=https://www.nbc15.com/2020/11/20/layers-to-the-legality-of-madison-marijuana-ordinance/|access-date=December 5, 2020|publisher=[[WMTV]]}}</ref>
+|- id=Wyoming
+| {{flag|Wyoming}}
+| style="background:#C4C9CD;" | {{Hs|5}}
+| Illegal; Misdemeanor
+| CBD oil
+| Illegal
+| {{main|Cannabis in Wyoming}}
+Being under the influence of marijuana is a misdemeanor up to 90 days in prison and fine up to $100. Possession of {{convert|3|oz|g|abbr=on}} or less a misdemeanor up to 1 year in prison and fine up to $1000.<ref>{{cite web|url=https://norml.org/laws/wyoming-penalties-2|title=Wyoming Laws and Penalties |publisher=[[NORML]] |access-date=November 12, 2016}}</ref>
+|}
+
+==Federal district==
+{{sticky header}}
+{| class="wikitable sortable sticky-header" 
+|-
+!District
+!
+! Recreational
+! Medical
+! Cultivation
+!class="unsortable"|Notes
+|-
+| {{flag|Washington, D.C.|name=District of Columbia}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to {{convert|2|oz|g|abbr=on}}. No commercial sales.<ref>{{cite news|title=Washington DC legalises marijuana possession and use|url=https://www.bbc.com/news/world-us-canada-31634827|access-date=February 26, 2015|work=BBC News|date=February 26, 2015}}</ref>
+| Legal to possess up to 8 oz (230 g)
+| Legal for recreational use up to an amount of six plants with only three being mature at a time; there are no provisions for commercial recreational cultivation.
+| {{main|Cannabis in Washington, D.C.}}
+* 1998: [[Initiative 59]] was voted in to allow medical marijuana, but was blocked from taking effect by Congress until 2009.
+* 2014: D.C. Mayor [[Vincent C. Gray|Vincent Gray]] signed a bill that decriminalized possession of up to {{convert|1|oz|g|abbr=on}} of marijuana in the U.S. capital for persons 18 years of age or older. The law made possession a civil violation with a penalty of $25, lower than most city parking tickets.
+* 2014, D.C. voted by ballot [[2014 Washington, D.C. Initiative 71|Initiative 71]] to legalize recreational marijuana possession, cultivation, and transportation; commercial production and sale prohibited. The law went into effect February 26, 2015, following 30 days of congressional review.<ref>{{cite news|last=Harkinson|first=Josh|date=November 5, 2014|title=DC, Oregon, and Alaska Just Voted to Legalize Marijuana|work=[[Mother Jones (magazine)|Mother Jones]]|url=https://www.motherjones.com/environment/2014/11/dc-voters-legalize-pot-portland-oregon-marijuana|url-status=live|archive-url=https://web.archive.org/web/20180912215830/https://www.motherjones.com/environment/2014/11/dc-voters-legalize-pot-portland-oregon-marijuana/|archive-date=September 12, 2018}}</ref>
+|}
+
+==By inhabited territory==
+{{sticky header}}
+{| class="wikitable sortable sticky-header" 
+|-
+! Territory
+!
+! Recreational
+! Medical
+! Cultivation
+!class="unsortable"|Notes
+|-
+| {{flag|American Samoa}}
+| style="background:#BDC3C7;" | {{Hs|7}}
+| Illegal
+| Illegal
+| Illegal
+| {{main|Cannabis in American Samoa}}
+* In 1999, the territory established a five-year mandatory minimum sentence for possession of any amount of any illegal drug, to explicitly include marijuana, even when medically prescribed in another jurisdiction.<ref name="hawaii1">{{citation|last1=National Drug Intelligence Center, US Department of Justice|title=American Samoa Drug Threat Assessment|date=June 2001|volume=Product No. 2001-S0388AS-001}}</ref>
+|-
+| {{flag|Guam}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to 1 oz (28 g) & 8 g of concentrate
+| Legal to possess up to 2.5 oz (71 g)
+| Legal for medical & recreational use up to an amount not exceeding 6 mature & 12 immature plants for medical patients or up to 6 immature & 3 mature plants for recreational use.<ref>{{cite web |title=Guam Legalization |url=https://norml.org/laws/guam-legalization/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Guam}}
+* November 4, 2014: residents passed a ballot measure that allows cannabis for medical use only.<ref>{{cite news|last=Schwartz|first=Carly|date=November 4, 2014|title=Guam Legalizes Medical Marijuana|work=[[The Huffington Post]]|url=https://www.huffpost.com/entry/guam-medical-marijuana_n_6100972|url-status=live|archive-url=https://web.archive.org/web/20150422011316/http://www.huffingtonpost.com/2014/11/04/guam-medical-marijuana_n_6100972.html|archive-date=April 22, 2015}}</ref>
+* March 2019: the [[Legislature of Guam]] passed a bill (by a close vote of 8–7) to legalize recreational cannabis. The [[Governor of Guam]] signed the bill into law on April 4, 2019, with immediate effect.<ref>{{cite web|date=April 4, 2019|title=Guam Legalizes Marijuana Use By Adults|publisher=[[NORML]]|url=https://norml.org/blog/2019/04/04/guam-legalizes-marijuana-use-by-adults/|url-status=live|access-date=April 4, 2019|archive-url=https://web.archive.org/web/20201107230201/https://norml.org/blog/2019/04/04/guam-legalizes-marijuana-use-by-adults/|archive-date=November 7, 2020}}</ref>
+|-
+| {{flag|Northern Mariana Islands}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal
+| Legal
+| Legal for medical & recreational use up to an amount of 6 mature and 12 immature plants.<ref>{{cite web |title=Summary of the Taulamwaar Sensible CNMI Cannabis Act of 2018 |url=https://www.mpp.org/policy/us-territories/northern-mariana-islands/northern-mariana-islands-marijuana-legalization-and-regulation-bill-summary/ |publisher=[[Marijuana Policy Project]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in the Northern Mariana Islands}}
+* September 21, 2018: Republican governor [[Ralph Torres]] signed a bill into law to legalize the recreational use of cannabis in the territory.<ref>{{cite news|last1=Lopez|first1=German|date=September 21, 2018|title=Governor Signs Marijuana Legalization Bill, Making History In US Territory|work=[[Vox (website)|Vox]]|url=https://www.vox.com/policy-and-politics/2018/9/21/17886612/northern-mariana-islands-marijuana-legalization|url-status=live|access-date=September 21, 2018|archive-url=https://web.archive.org/web/20220618123918/https://www.vox.com/policy-and-politics/2018/9/21/17886612/northern-mariana-islands-marijuana-legalization|archive-date=June 18, 2022}}</ref><ref>{{cite web|title=Summary of the Taulamwaar Sensible CNMI Cannabis Act of 2018|publisher=[[Marijuana Policy Project]]|url=https://www.mpp.org/assets/pdf/policy/us-territories/northern-mariana-islands/northern-mariana-islands-marijuana-legalization-and-regulation-bill-summary.pdf|url-status=live|access-date=September 21, 2018|archive-url=https://web.archive.org/web/20191017092037/https://www.mpp.org/policy/us-territories/northern-mariana-islands/northern-mariana-islands-marijuana-legalization-and-regulation-bill-summary/|archive-date=October 17, 2019}}</ref>
+|-
+| {{flag|Puerto Rico}}
+| style="background:#80CE69;" | {{Hs|3}}
+| Illegal
+| Legal to possess up to a 30-day supply.
+| Illegal<ref>{{cite web |title=Puerto Rico Medical Marijuana Law |url=https://norml.org/laws/medical-laws/puerto-rico-medical-marijuana-law/ |publisher=[[NORML]] |access-date=March 2, 2023}}</ref>
+| {{main|Cannabis in Puerto Rico}}
+* May 4, 2015: the governor of Puerto Rico signed an executive order legalizing medicinal marijuana in the U.S. territory.<ref>{{cite magazine|last=Sifferlin|first=Alexandra|date=May 4, 2015|title=Puerto Rico Governor Signs Executive Order to Legalize Medical Marijuana|magazine=[[Time (magazine)|Time]]|url=https://time.com/3845638/puerto-rico-medical-marijuana/|url-status=live|archive-url=https://web.archive.org/web/20180214191225/https://time.com/3845638/puerto-rico-medical-marijuana/|archive-date=February 14, 2018}}</ref>
+|-
+| {{flag|U.S. Virgin Islands}}
+| style="background:#196E92;" | {{Hs|1}}
+| Legal to possess up to 2 oz (57 g), 1 oz (28 g) of edibles, & 14 g (.5 oz) of concentrate
+| Legal to possess up to 4 oz (113 g)
+| Legal for medical patients up to an amount of 12 plants. Cultivation for non-medical use is only legal for sacramental purposes.<ref>{{cite news |last1=Armentano |first1=Paul |title=Virgin Islands: Lawmakers Advance Legislation Legalizing Cannabis Use, Expunging Past Convictions |url=https://norml.org/blog/2023/01/03/virgin-islands-lawmakers-advance-legislation-legalizing-cannabis-use-expunging-past-convictions/ |access-date=January 18, 2023 |work=NORML |date=January 3, 2023}}</ref>
+| {{main|Cannabis in the United States Virgin Islands}}
+* December 2014: possession of up to {{convert|1|oz|g|abbr=on}} was decriminalized.<ref>{{cite web|last1=Armentano|first1=Paul|date=December 22, 2014|title=Pot Possession Decriminalized In US Virgin Islands|publisher=[[NORML]]|url=https://norml.org/blog/2014/12/22/pot-possession-decriminalized-in-us-virgin-islands/|url-status=live|access-date=January 18, 2019|archive-url=https://web.archive.org/web/20201110232551/https://norml.org/blog/2014/12/22/pot-possession-decriminalized-in-us-virgin-islands/|archive-date=November 10, 2020}}</ref> 
+* January 2019: medical use was legalized.<ref>{{cite news |last1=Jaeger |first1=Kyle |title=Governor Signs Bill Legalizing Medical Marijuana In The U.S. Virgin Islands |url=https://www.marijuanamoment.net/governor-signs-bill-legalizing-medical-marijuana-in-the-u-s-virgin-islands/ |access-date=January 18, 2019 |work=Marijuana Moment |date=January 18, 2019}}</ref>
+* January 2023: Bill to legalize recreational use signed by Governor [[Albert Bryan (politician)|Albert Bryan]] on January 18, 2023.<ref>{{cite news |last1=Gilbert |first1=Ernice |title=Recreational Marijuana Now Legal in U.S. Virgin Islands as Bryan Signs Measure Into Law; Pardons and Expungement Being Offered for People Convicted for Simple Possession |url=https://viconsortium.com/vi-business/virgin-islands-recreational-marijuana-now-legal-in-u-s-virgin-islands-as-bryan-signs-measure-into-law-pardons-and-expungement-being-offered-for-people-convicted-for-simple-possession-of-marijuana |access-date=January 18, 2023 |work=The Virgin Islands Consortium |date=January 18, 2023}}</ref>
+|}
+
+==By tribal nation==
+{{main|Cannabis on American Indian reservations}}
+
+Note: There are approximately 326 federally recognized [[List of Indian reservations in the United States|Indian reservations in the United States]]. This table shows only reservations which are known to have legalized medical or recreational use of cannabis, and may not be a complete list of reservations that have done so.
+
+{{sticky header}}
+{| class="wikitable sortable sticky-header" 
+|-
+! Reservation
+!
+! Recreational
+! Medical
+! Cultivation
+!class="unsortable"|Notes
+|-
+| [[Flandreau Santee Sioux Tribe]]<br /><small>(South Dakota)</small>
+| style="background:#196E92;" | {{Hs|1}}
+| Legal<ref name="Tribe Bets">{{cite news|last=Nelson|first=Steven|date=June 16, 2015|title=Tribe Bets on Legal Pot|work=[[U.S. News & World Report]]|url=https://www.usnews.com/news/articles/2015/06/16/tribe-bets-on-legal-pot|url-status=live|access-date=July 12, 2015|archive-url=https://web.archive.org/web/20150801064052/http://www.usnews.com/news/articles/2015/06/16/tribe-bets-on-legal-pot|archive-date=August 1, 2015}}</ref>
+| Legal
+| Illegal; Only one site has been allowed as the primary growing location.
+| In summer 2015, the tribal authorities voted 5–1 to legalize recreational cannabis, making them the first reservation to do so following the 2013 [[Cole Memorandum]].<ref name="Tribe Bets"/>
+|-
+| [[Oglala|Oglala Lakota Sioux Tribe]] <small>(South Dakota)</small>
+| style="background:#196E92;" | {{Hs|1}}
+| Legal
+| Legal
+| Legal
+| Legalized by referendum in March 2020, ordinance effective November 27, 2020.<ref>{{Cite web|url=https://norml.org/blog/2020/10/28/south-dakota-oglala-sioux-enacts-ordinance-legalizing-marijuana-use-on-tribal-lands/|title=South Dakota: Oglala Sioux Enacts Ordinance Legalizing Marijuana Use on Tribal Lands - NORML|date=October 28, 2020}}</ref>
+|-
+| [[Suquamish Tribe]]<br /><small>(Washington state)</small>
+| style="background:#196E92;" | {{Hs|1}}
+| Legal<ref>{{cite news|title=Suquamish Tribe opens marijuana shop|last=Sooter|first=Tad|date=December 10, 2015|work=[[Kitsap Sun]]|url=https://archive.kitsapsun.com/news/local/suquamish-tribe-opens-marijuana-shop-ep-1406870734-361803151.html/|archive-url=https://web.archive.org/web/20160823034217/http://www.kitsapsun.com/news/local/suquamish-tribe-opens-marijuana-shop-ep-1406870734-361803151.html|archive-date=August 23, 2016|url-status=live}}</ref><ref>{{cite news|last=Coughlin-Bogue|first=Tobias|date=December 8, 2015|title=Washington State's Second Native American-Owned Pot Shop Is a Big Win for Tribal Sovereignty|work=[[The Stranger (newspaper)|The Stranger]]|url=https://www.thestranger.com/blogs/slog/2015/12/08/23245665/washington-states-second-native-american-owned-pot-shop-is-a-big-win-for-tribal-sovereignty|url-status=live|archive-url=https://web.archive.org/web/20200314081010/https://www.thestranger.com/blogs/slog/2015/12/08/23245665/washington-states-second-native-american-owned-pot-shop-is-a-big-win-for-tribal-sovereignty|archive-date=March 14, 2020}}</ref>
+| Legal
+| Legal
+| In September 2015, the tribe signed the nation's first tribe-state cannabis pact, under which the tribe would operate a cannabis retail store with regulations paralleling those of Washington state.<ref>{{cite news|last=Young|first=Bob|date=September 14, 2015|title=Deal to let Suquamish Tribe open Kitsap County pot store|work=[[The Seattle Times]]|url=https://www.seattletimes.com/seattle-news/marijuana/deal-to-let-suquamish-tribe-open-kitsap-county-pot-store/|url-status=live|archive-url=https://web.archive.org/web/20190322201718/https://www.seattletimes.com/seattle-news/marijuana/deal-to-let-suquamish-tribe-open-kitsap-county-pot-store/|archive-date=March 22, 2019}}</ref>
+|-
+| [[Squaxin Island Tribe]]<br /><small>(Washington state)</small>
+| style="background:#196E92;" | {{Hs|1}}
+| Legal<ref>{{cite news|last=Walker|first=Richard|date=December 2, 2015|title=Let It Be Pot: Two Washington State Tribes on Board|work=[[Indian Country Today]]|url=https://indiancountrytoday.com/archive/let-it-be-pot-two-washington-state-tribes-on-board-UIEovn6AhEqqtkaEvi1HxA|url-status=live|access-date=November 15, 2016|archive-url=https://web.archive.org/web/20161114133303/http://indiancountrytodaymedianetwork.com/2015/12/02/let-it-be-pot-two-washington-state-tribes-board-162613|archive-date=November 14, 2016}}</ref>
+| Legal
+| Legal
+| Legalized in November 2015.<ref>{{cite web|title=Squaxin Island Tribe enters marijuana compact in Washington|url=https://www.indianz.com/News/2015/09/24/squaxin-island-tribe-enters-ma.asp|access-date=November 23, 2020|website=Indianz}}</ref>
+|-
+| [[Eastern Band of Cherokee Indians]]<br /><small>(North Carolina)</small>
+| style="background:#196E92;" | {{Hs|1}}
+| Legal
+| Legal<ref>{{cite news |last1=Marusak |first1=Joe |title=Cherokee legalized medical marijuana on Western North Carolina land. Can I buy some? |url=https://www.charlotteobserver.com/news/state/north-carolina/article253328608.html |access-date=September 5, 2021 |work=The Charlotte Observer |date=August 9, 2021}}</ref>
+| Illegal
+|
+* Tribal council voted in May 2021 to allow possession of up to one ounce.<ref>{{cite news |last1=Fowler |first1=Hayley |title=Possessing marijuana now allowed in part of NC after tribal council votes to legalize |url=https://www.charlotteobserver.com/news/state/north-carolina/article251237224.html |access-date=June 29, 2021 |work=The Charlotte Observer |date=May 7, 2021}}</ref><ref>{{cite news |last1=Knoepp |first1=Lilly |title=Eastern Band of Cherokee Decriminalizes Small Amounts Of Marijuana |url=https://www.bpr.org/post/eastern-band-cherokee-decriminalizes-small-amounts-marijuana |access-date=June 29, 2021 |work=Blue Ridge Public Radio |date=May 7, 2021}}</ref>
+* Voters [[2023 Eastern Band of Cherokee Indians Marijuana Legalization Measure|approved a September 2023 referendum]] directing the tribal council to allow recreational sales.<ref>{{cite news |title=Voters in North Carolina tribe back adult use of marijuana in referendum |url=https://apnews.com/article/north-carolina-tribe-marijuana-referendum-328dfbfbc06ab78dd9b43906655cb3dd |access-date=September 30, 2023 |work=Associated Press |date=September 8, 2023}}</ref>
+|-
+| [[St. Regis Mohawk Reservation|St. Regis Mohawk Tribe]]<br /><small>(New York)</small>
+| style="background:#196E92;" | {{Hs|1}}
+| Legal
+| Legal
+| Legal for medical & recreational use up to an amount of twelve plants.
+| Legislation approved in June 2021 legalizing recreational use of cannabis and establishing a dispensary license program where all growing, processing, and sales must take place on tribal land.<ref>{{cite news |last1=Colello |first1=Isabella |title=Saint Regis Mohawk Tribe becomes first NYS tribe to legalize marijuana for adult use |url=https://www.informnny.com/abc50-now/saint-regis-mohawk-tribe-becomes-first-nys-tribe-to-legalizes-marijuana-for-adult-use/ |access-date=July 12, 2021 |work=InformNNY |date=June 29, 2021}}</ref><ref>{{cite news |last1=Meehan |first1=Maureen |title=New York's St. Regis Mohawk Tribe To Start Adult-Use Cannabis Sales Way Ahead Of The Rest Of The State |url=https://finance.yahoo.com/news/yorks-st-regis-mohawk-tribe-202202367.html |access-date=July 12, 2021 |work=Yahoo Finance |date=July 9, 2021}}</ref><ref>{{cite news |last1=Clarke |first1=Celia |title=St Regis Mohawk Tribe adopts adult-use cannabis ordinance |url=https://www.northcountrypublicradio.org/news/story/44039/20210629/st-regis-mohawk-tribe-adopts-adult-use-cannabis-ordinance |access-date=July 12, 2021 |work=North Country Public Radio |date=June 29, 2021}}</ref>
+|-
+|[[Tuscarora Reservation]]<small> (New York)</small>
+| style="background:#196E92;" | {{Hs|1}}
+|Legal
+|Legal
+|Legal
+|Only legal to buy and sell if you're a land owner in the Tuscarora Reservation,<ref>{{Cite news |last=Duffy |first=Terry |date=2022-04-08 |title=Cannabis sales on Tuscarora Nation lands in dispute |url=https://www.wnypapers.com/news/article/featured/2022/04/08/150432/cannabis-sales-on-tuscarora-nation-lands-in-dispute |access-date=2025-05-21 |work=Niagara Frontier Publications}}</ref> little to no regulations.<ref>{{Cite web |last=Schwartz |first=Michael |date=2023-04-20 |title=Cannabis dispensary differences, the difference a few miles can make within WNY |url=https://www.wkbw.com/news/local-news/cannabis-dispensary-differences-the-difference-a-few-miles-can-make-within-wny |access-date=2025-05-21 |website=[[WKBW-TV]] |language=en}}</ref>
+|-
+|[[Omaha Reservation]] <small>(Nebraska)</small>
+| style="background:#196E92;" | {{Hs|1}}
+|Legal<ref name=ref20250715>{{Cite news|title=Omaha Tribe of Nebraska legalizes, regulates medical and recreational marijuana|first= Zach |last=Wendling |date=July 15, 2025|newspaper=Nebraska Examiner|publisher=[[States Newsroom]]|url=https://nebraskaexaminer.com/2025/07/15/omaha-tribe-of-nebraska-legalizes-regulates-medical-and-recreational-marijuana/}}</ref>
+|Legal<ref name=ref20250715/>
+|
+|
+|}
+
+==Legalization timeline==
+{{US cannabis legalization table}}
+
+== More maps ==
+
+<div style="display:inline-table; vertical-align:top; width:310px;">
+{| class=wikitable
+|[[Delta-8 THC]] legal status by US state.
+|-
+|[[File:Map of US State Delta-8 THC Laws.svg|300px|none]]
+|-
+|{{legend|#196E92|Legal, Federally Unregulated}}
+{{legend|#80CE69|Legal, State Regulated}}
+{{legend|#C4C9CD|Illegal}}
+|}
+</div>
+<div style="display:inline-table; vertical-align:top; width:310px;">
+{| class=wikitable
+|Cannabis offense record clearance by state.<ref name=records>{{cite web |last1=Bryan |first1=Kate |title=Cannabis Overview |url=https://www.ncsl.org/civil-and-criminal-justice/cannabis-overview#records |website=[[National Conference of State Legislatures]] |access-date=29 April 2024 |date=9 April 2024}}</ref>
+|-
+|[[File:US map. Cannabis record clearance by state.png|300px|none]]
+|}
+</div>
+
+==Gallery of universal symbols==
+{{Gallery
+|title=Universal symbols mandated by state law for legal cannabis packaging
+|width=120 |height=100
+|align=center
+|captionstyle=text-align: center;
+|file:IICPS Marijuana Symbol.png
+ |Alaska, Montana, South Dakota, Vermont, and Virginia<br />([[ASTM D8441/D8441M]])
+ |alt1=A symbol of a yellow diamond with black outlines with a black marijuana leaf inside, the word "Marijuana" is listed below in black
+
+|file:Colorado-cannabis-universal-symbol.svg
+ |Arizona, Colorado, Florida, and Ohio 
+ |alt2= A red symbol with an exclamation mark above the letters "THC" inside a square diamond outline
+
+|file:ArkansasMedicalMarijuanaSymbol.png
+ |Arkansas
+ |alt3= A black text symbol consisting of the letters "A" "M" "M" (Arkansas Medical Marijuana)
+ 
+|file:California Cannabis Universal Symbol.png
+ |California
+ |alt4= A black symbol featuring a cannabis leaf and exclamation mark inside a rounded triangle outline with "CA" in bold letters below
+
+|file:MassachusettsTHCUniversalSymbol.png
+ |Connecticut, Maine, Massachusetts, and Rhode Island
+ |alt5=A symbol featuring a black cannabis leaf inside a red rounded triangle outline with "Contains THC" in black lettering below
+
+|file:Washington-Universal-Cannabis-Symbol.png
+ |Guam and Washington state
+ |alt6=A symbol of a black outlined square diamond with a yellow fill and a green marijuana leaf inside, there is a black border a third of the way down the diamond with a white backgrounded section with "21+" written in black
+
+|file:Kentucky Cannabis Universal Symbol.png
+ |Kentucky
+ |alt7=A blue symbol with an exclamation point inside and the letters "THC" underneath
+
+|file:MarylandTHCUniversalSymbol.png
+ |Maryland
+ |alt8=A red symbol with a cannabis leaf above the letters "THC" and "Maryland" in a rounded triangle outline
+
+|file:Michigan-Marijuana-Universal-Cannabis-Symbol.svg
+ |Michigan
+ |alt9=A green symbol of an inverted triangle outline with a cannabis leaf inside, the words "Marijuana Product" are written in white inside the top outline of the triangle
+
+|file:Missouri-THC-Universal-Symbol.png
+ |Missouri
+ |alt10=A symbol of red square diamond outline with the letters "THC" inside and a smaller letter "M" below
+
+|file:Nevada-Marijuana-Universal-Cannabis-Symbol.png
+ |Nevada
+ |alt11=A symbol of a black outlined triangle with an exclamation point inside and the letters "THC" underneath
+
+|file:NewJerseyUniversalCannabisSymbol.svg
+ |New Jersey
+ |alt12=A symbol containing a red octagon on the top left with a white open hand next to a yellow diamond on the right with black outlines with a black marijuana leaf inside, below the two icons is a black bar with "Not safe for kids" written in white
+
+|file:THC warning label New Mexico.svg
+ |New Mexico
+ |alt13=A symbol of a thin red outlined square diamond with an exclamation point inside followed by letters "THC" and "NM"
+
+|file:New York Cannabis Universal Symbol.svg
+ |New York
+ |alt14=A symbol containing a yellow diamond on the left with black outlines with a black marijuana leaf inside next to a red outlined circle with the "21+" written inside, below the two icons is a black bar with a white outline of the New York state map and "New York State" written in white
+
+|file:Oklahoma-Universal-Cannabis-Symbol.svg
+ |Oklahoma
+ |alt15=A symbol of a red rounded rectangle containing a white square with a red marijuana leaf on the right and a white exclamation point on a red background on the left. In black text the words "Contains THC Not Safe For Women or Pets"
+
+|file:Oregon-Cannabis-universal-symbol.png
+ |Oregon
+ |alt16=A symbol of a rounded rectangle with a dark gray outline containing a red square with a white marijuana leaf on the right and a white exclamation point on a dark gray background on the left
+}}
+
+== See also ==
+* [[Cannabis and border towns in the United States]]
+* [[Cannabis laws of Canada by province or territory]]
+* [[Legal history of cannabis in the United States]]
+* [[Legality of cannabis]]
+* [[List of United States cannabis regulatory agencies]]
+* [[Solomon–Lautenberg amendment]] ("Smoke a joint, lose your license" laws)
+* [[Timeline of cannabis laws in the United States]]
+
+==Notes==
+{{Notelist}}
+
+==References==
+{{reflist|colwidth=30em}}
+
+==External links==
+* Ebling, Todd; Azagba, Sunday; Hall, Mark; Jensen, Jessica King (2024). "[https://ajph.aphapublications.org/doi/10.2105/AJPH.2024.307874 US State Recreational and Medical Cannabis Delivery Laws, 2024]". ''American Journal of Public Health.''
+* [https://norml.org/laws State marijuana laws (NORML)]
+* [http://www.ncsl.org/research/health/state-medical-marijuana-laws.aspx State medical marijuana laws (NCSL)] {{Webarchive|url=https://web.archive.org/web/20181211125951/http://www.ncsl.org/research/health/state-medical-marijuana-laws.aspx |date=December 11, 2018 }}
+* [https://marijuana.procon.org/view.resource.php?resourceID=006868 State recreational marijuana laws (ProCon.org)]
+* [http://www.ncsl.org/research/agriculture-and-rural-development/state-industrial-hemp-statutes.aspx State industrial hemp laws (NCSL)] {{Webarchive|url=https://web.archive.org/web/20201220165001/https://www.ncsl.org/research/agriculture-and-rural-development/state-industrial-hemp-statutes.aspx |date=December 20, 2020 }}
+
+{{Cannabis in the United States|state=collapsed}}
+{{Cannabis by country|state=collapsed}}
+{{Portal bar|Cannabis|Law|United States}}
+
+[[Category:Cannabis in the United States by state|*]]
+[[Category:Cannabis law in the United States]]
+[[Category:Cannabis-related lists]]
+[[Category:Drug policy of the United States]]
+[[Category:United States law-related lists|Cannabis legality by jurisdiction]]

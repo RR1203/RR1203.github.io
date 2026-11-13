@@ -1,0 +1,823 @@
+---
+title: "US stimulant shortage and fatal crashes: a natural experiment"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r packages}
+library(tidyverse)
+library(data.table)
+library(fixest)
+library(openxlsx)
+library(readxl)
+library(sf)
+```
+
+# =====================================================================
+# 0. DATA CLEANING (raw/ -> clean objects -> clean_data.xlsx)
+# =====================================================================
+
+## 0.1 Calendar helpers
+
+```{r calendar}
+# Quarter index: 2017Q1 = 1
+qid <- function(year, q) (year - 2017) * 4 + q
+q_label <- function(id) paste0(2017 + (id - 1) %/% 4, "Q", (id - 1) %% 4 + 1)
+
+quarters <- expand_grid(year = 2017:2025, q = 1:4) %>%
+  mutate(
+    t = qid(year, q),
+    start = as.Date(sprintf("%d-%02d-01", year, (q - 1) * 3 + 1)),
+    end = as.Date(sprintf("%d-%02d-01", year + (q == 4), ifelse(q == 4, 1, q * 3 + 1))) - 1,
+    days = as.numeric(end - start) + 1
+  )
+
+T_SHORT  <- qid(2022, 4)   # shortage start (FDA announcement, Oct 2022)
+T_END    <- qid(2023, 4)   # last quarter with national ARCOS supply below trend (see feasibility block)
+T_REC24  <- qid(2024, 1)   # supply back at/above trend in ARCOS
+T_DEA    <- qid(2024, 4)   # first amphetamine-class APQ increase (89 FR 72424, 5 Sep 2024)
+T_LAST   <- qid(2024, 4)   # last quarter with FARS data
+```
+
+## 0.2 States and population (Census)
+
+```{r population}
+pop_v2020 <- read_csv("raw/census/SC-EST2020-ALLDATA5.csv", show_col_types = FALSE) %>%
+  filter(SUMLEV == "040", SEX == 0, ORIGIN == 0) %>%
+  select(STATE, NAME, AGE, POPESTIMATE2017:POPESTIMATE2019)
+
+pop_v2025 <- read_csv("raw/census/sc-est2025-alldata5.csv", show_col_types = FALSE) %>%
+  filter(SUMLEV == "040", SEX == 0, ORIGIN == 0) %>%
+  select(STATE, NAME, AGE, POPESTIMATE2020:POPESTIMATE2025)
+
+pop_long <- pop_v2020 %>%
+  pivot_longer(starts_with("POPEST"), names_to = "year", values_to = "pop") %>%
+  bind_rows(pop_v2025 %>% pivot_longer(starts_with("POPEST"), names_to = "year", values_to = "pop")) %>%
+  mutate(year = as.integer(str_sub(year, -4)), fips = as.integer(STATE))
+
+pop <- pop_long %>%
+  mutate(agegrp = case_when(
+    AGE >= 18 & AGE <= 44 ~ "p18_44",
+    AGE >= 55 & AGE <= 74 ~ "p55_74",
+    AGE >= 75             ~ "p75plus"
+  )) %>%
+  filter(!is.na(agegrp)) %>%
+  group_by(fips, NAME, year, agegrp) %>%
+  summarise(pop = sum(pop), .groups = "drop") %>%   # sums the 5 race groups
+  pivot_wider(names_from = agegrp, values_from = pop)
+
+states <- pop %>% distinct(fips, NAME) %>%
+  mutate(STATE_UP = toupper(NAME))
+
+stopifnot(nrow(states) == 51)
+```
+
+## 0.3 Stimulant supply (DEA ARCOS Report 2 -> DDD per 1,000 residents 18-44 per day)
+
+```{r arcos}
+# Report 2 grams (parsed from the PDFs by scripts/parse_arcos.py)
+arcos_raw <- read_csv("raw/arcos/arcos_report2_parsed.csv", show_col_types = FALSE)
+
+# WHO ATC/DDD index (raw/who): amfetamine 15 mg, lisdexamfetamine 30 mg, methylphenidate 30 mg
+ddd_mg <- c("1100" = 15, "1205" = 30, "1724" = 30)
+
+arcos <- arcos_raw %>%
+  filter(drug_code %in% c(1100, 1205, 1724)) %>%
+  inner_join(states, by = c("state" = "STATE_UP")) %>%
+  pivot_longer(q1:q4, names_to = "q", values_to = "grams") %>%
+  mutate(q = as.integer(str_sub(q, 2)),
+         ddd = grams * 1000 / ddd_mg[as.character(drug_code)],
+         class = if_else(drug_code == 1724, "mph", "amph")) %>%
+  group_by(fips, NAME, year, q, class) %>%
+  summarise(grams = sum(grams), ddd = sum(ddd), .groups = "drop") %>%
+  pivot_wider(names_from = class, values_from = c(grams, ddd)) %>%
+  left_join(quarters, by = c("year", "q")) %>%
+  left_join(pop %>% select(fips, year, p18_44), by = c("fips", "year")) %>%
+  mutate(
+    amph_rate = ddd_amph / (p18_44 / 1000) / days,
+    mph_rate  = ddd_mph  / (p18_44 / 1000) / days,
+    all_rate  = (ddd_amph + ddd_mph) / (p18_44 / 1000) / days
+  )
+
+stopifnot(n_distinct(arcos$fips) == 51, nrow(arcos) == 51 * 36)
+```
+
+## 0.4 Shortage intensity per state (observed vs own pre-shortage trend)
+
+```{r intensity}
+# Expected supply = linear trend + quarter-of-year seasonality fitted to 2017Q1-2022Q3.
+# Shortfall (%) = mean over the window of (expected - observed) / expected * 100.
+shortfall <- function(df, var, window) {
+  fit <- lm(reformulate(c("t", "factor(q)"), var), data = filter(df, t < T_SHORT))
+  df %>%
+    filter(t %in% window) %>%
+    mutate(exp = predict(fit, newdata = .)) %>%
+    summarise(sf = mean((exp - .data[[var]]) / exp) * 100) %>%
+    pull(sf)
+}
+
+W_MAIN   <- T_SHORT:T_END                  # 2022Q4-2023Q4 (measured shortage window)
+W_TO_APQ <- T_SHORT:(T_DEA - 1)            # 2022Q4-2024Q3 (up to the APQ increase)
+W_LATEST <- T_SHORT:qid(2025, 4)           # 2022Q4-2025Q4 (shortage to latest ARCOS, as specified)
+
+intensity <- arcos %>%
+  group_by(fips, NAME) %>%
+  group_modify(~ tibble(
+    amph_sf_main   = shortfall(.x, "amph_rate", W_MAIN),
+    amph_sf_latest = shortfall(.x, "amph_rate", W_LATEST),
+    net_sf_main    = shortfall(.x, "all_rate",  W_MAIN),
+    amph_sf_to_apq = shortfall(.x, "amph_rate", W_TO_APQ),
+    # noise benchmark: same method, fake window 2021Q4-2022Q3, trend fitted on 2017Q1-2021Q3
+    amph_sf_fake   = { fit <- lm(amph_rate ~ t + factor(q), data = filter(.x, t < qid(2021, 4)))
+                       d <- filter(.x, t %in% qid(2021, 4):qid(2022, 3))
+                       mean((predict(fit, d) - d$amph_rate) / predict(fit, d)) * 100 },
+    # no-extrapolation alternative: % fall in supply vs 2022Q1-Q3 level
+    amph_chg_main  = (1 - mean(.x$amph_rate[.x$t %in% W_MAIN]) / mean(.x$amph_rate[.x$t %in% qid(2022, 1:3)])) * 100,
+    base_amph_rate = mean(.x$amph_rate[.x$t %in% qid(2022, 1:3)]),
+    base_mph_rate  = mean(.x$mph_rate[.x$t %in% qid(2022, 1:3)])
+  )) %>%
+  ungroup()
+```
+
+## 0.5 Controls (VMT, unemployment, cannabis)
+
+```{r controls}
+# FHWA Highway Statistics VM-2: annual VMT (millions) by state, last column = total
+read_vm2 <- function(y) {
+  f <- list.files("raw/fhwa", pattern = paste0("vm2_", y), full.names = TRUE)
+  x <- read_excel(f, sheet = "A", col_names = FALSE, .name_repair = "minimal")
+  hdr <- which(str_trim(as.character(x[[1]])) == "STATE")[1]          # header row
+  tot <- max(which(str_trim(unlist(x[hdr, ])) == "TOTAL"))           # last 'TOTAL' = rural + urban
+  tibble(NAME = str_trim(str_remove(as.character(x[[1]]), "\\(\\d\\)")),   # drop footnote marks
+         vmt = suppressWarnings(as.numeric(x[[tot]])), year = y) %>%
+    filter(NAME %in% states$NAME)
+}
+vmt <- map_dfr(2017:2024, read_vm2)
+stopifnot(nrow(vmt) == 51 * 8)
+
+# BLS LAUS state unemployment rate, monthly, via FRED (series <ST>UR)
+st_abb <- c(state.abb, "DC"); st_name <- c(state.name, "District of Columbia")
+unemp <- map_dfr(st_abb, function(a) {
+  read_csv(file.path("raw/bls", paste0(a, "UR.csv")), show_col_types = FALSE) %>%
+    set_names(c("date", "ur")) %>% mutate(NAME = st_name[st_abb == a])
+}) %>%
+  mutate(year = year(date), q = quarter(date)) %>%
+  group_by(NAME, year, q) %>% summarise(unemp = mean(ur), .groups = "drop")
+
+# Recreational cannabis effective dates (Wikipedia table, raw/cannabis)
+cannabis <- read_csv("raw/cannabis/cannabis_recreational_legalization_wikipedia.csv", show_col_types = FALSE) %>%
+  transmute(NAME = recode(Jurisdiction, "Washington (state)" = "Washington", "Washington, D.C." = "District of Columbia"),
+            rec_date = mdy(str_remove_all(`Effective date`, "\\[.*?\\]"))) %>%
+  filter(NAME %in% states$NAME)
+```
+
+## 0.6 FARS: driver-level file, 2017-2024
+
+```{r fars-read}
+amph_names <- c("AMPHETAMINE", "AMPHETAMINE SULFATE", "DEXTROAMPHETAMINE")
+meth_names <- c("METHAMPHETAMINE")
+mph_names  <- c("METHYLPHENIDATE")
+untested   <- "NOT GIVEN|NOT REPORTED|UNKNOWN IF TESTED"
+
+ffile <- function(y, name) {
+  f <- list.files(file.path("raw/fars/x", y), recursive = TRUE, full.names = TRUE)
+  f[tolower(basename(f)) == paste0(name, ".csv")]
+}
+rd <- function(f, cols) fread(f, select = cols, encoding = "Latin-1")
+
+read_fars <- function(y) {
+  acc <- rd(ffile(y, "accident"), c("STATE", "ST_CASE", "MONTH", "HOUR", "VE_FORMS", "FATALS"))
+  per <- rd(ffile(y, "person"), c("ST_CASE", "VEH_NO", "PER_NO", "PER_TYP", "AGE", "INJ_SEV", "ALC_RES"))
+  veh <- rd(ffile(y, "vehicle"), c("ST_CASE", "VEH_NO", "SPEEDREL", if (y < 2020) paste0("DR_SF", 1:4)))
+
+  # drug results: one row per person x result
+  if (y == 2017) {
+    p17 <- rd(ffile(y, "person"), c("ST_CASE", "VEH_NO", "PER_NO", paste0("DRUGRES", 1:3, "NAME")))
+    drg <- melt(p17, id.vars = c("ST_CASE", "VEH_NO", "PER_NO"), value.name = "DRUGRESNAME")
+  } else {
+    drg <- rd(ffile(y, "drugs"), c("ST_CASE", "VEH_NO", "PER_NO", "DRUGRESNAME"))
+  }
+  drg[, nm := toupper(trimws(DRUGRESNAME))]
+  drg <- drg[, .(amph = any(nm %in% amph_names), meth = any(nm %in% meth_names),
+                 mph = any(nm %in% mph_names), tested = any(!grepl(untested, nm) & nm != "")),
+             by = .(ST_CASE, VEH_NO, PER_NO)]
+
+  # driver-related factors (any factor recorded, excluding 'none' 0 and unknown 99)
+  if (y < 2020) {
+    rf <- melt(veh[, c("ST_CASE", "VEH_NO", paste0("DR_SF", 1:4)), with = FALSE],
+               id.vars = c("ST_CASE", "VEH_NO"), value.name = "rf")
+  } else {
+    rf <- rd(ffile(y, "driverrf"), c("ST_CASE", "VEH_NO", "DRIVERRF"))
+    setnames(rf, "DRIVERRF", "rf")
+  }
+  rf <- rf[, .(fault = any(rf > 0 & rf < 99)), by = .(ST_CASE, VEH_NO)]
+
+  drv <- per[PER_TYP == 1 & VEH_NO > 0]
+  drv <- merge(drv, veh[, .(ST_CASE, VEH_NO, SPEEDREL)], by = c("ST_CASE", "VEH_NO"), all.x = TRUE)
+  drv <- merge(drv, rf, by = c("ST_CASE", "VEH_NO"), all.x = TRUE)
+  drv <- merge(drv, drg, by = c("ST_CASE", "VEH_NO", "PER_NO"), all.x = TRUE)
+  drv <- merge(drv, acc, by = "ST_CASE")
+
+  peds_killed <- per[PER_TYP == 5 & INJ_SEV == 4, .(ped_deaths = .N), by = ST_CASE]
+  acc <- merge(acc, peds_killed, by = "ST_CASE", all.x = TRUE)
+
+  list(drv = drv[, year := y], acc = acc[, year := y])
+}
+
+fars <- map(2017:2024, read_fars)
+drivers <- rbindlist(map(fars, "drv"), fill = TRUE)
+crashes <- rbindlist(map(fars, "acc"), fill = TRUE)
+crashes[is.na(ped_deaths), ped_deaths := 0]
+```
+
+```{r fars-flags}
+drivers[, `:=`(
+  q        = ceiling(MONTH / 3),
+  age_ok   = AGE < 998,
+  g_young  = AGE >= 18 & AGE <= 44,
+  g_old    = AGE >= 55 & AGE <= 74,
+  g_75     = AGE >= 75 & AGE < 998,
+  speeding = SPEEDREL %in% 2:5,
+  alcohol  = ALC_RES >= 80 & ALC_RES <= 940,
+  fault    = fault %in% TRUE,
+  amph     = amph %in% TRUE, meth = meth %in% TRUE, mph = mph %in% TRUE,
+  tested   = tested %in% TRUE
+)]
+drivers[, amph_rx := amph & !meth]   # amphetamine without methamphetamine (meth metabolises to amphetamine)
+```
+
+## 0.7 FARS: crash counts by state x quarter x driver age group
+
+```{r fars-aggregate}
+# A crash counts for an age group if >= 1 driver in that group; subtype flags refer to that group's driver(s)
+crash_counts <- function(gvar) {
+  d <- drivers[get(gvar) == TRUE]
+  cr <- d[, .(
+    speeding = any(speeding), alcohol = any(alcohol), fault = any(fault),
+    amph_rx = any(amph_rx), meth = any(meth), mph = any(mph), tested = any(tested)
+  ), by = .(ST_CASE, year, STATE, q, VE_FORMS, HOUR, FATALS)]
+  cr <- merge(cr, crashes[, .(ST_CASE, year, ped_deaths)], by = c("ST_CASE", "year"))
+  cr[, .(
+    crashes    = .N,
+    deaths     = sum(FATALS),
+    single_veh = sum(VE_FORMS == 1),
+    multi_veh  = sum(VE_FORMS > 1),
+    daytime    = sum(HOUR >= 6 & HOUR <= 17),
+    nighttime  = sum(HOUR < 6 | (HOUR >= 18 & HOUR <= 23)),
+    fault      = sum(fault),
+    speeding   = sum(speeding),
+    alcohol    = sum(alcohol),
+    amph_rx    = sum(amph_rx),
+    meth       = sum(meth),
+    mph        = sum(mph),
+    tested     = sum(tested),
+    ped_deaths = sum(ped_deaths)
+  ), by = .(fips = STATE, year, q)][, group := gvar]
+}
+
+counts <- rbindlist(map(c("g_young", "g_old", "g_75"), crash_counts)) %>%
+  as_tibble() %>%
+  mutate(group = recode(group, g_young = "18-44", g_old = "55-74", g_75 = "75+"))
+
+# Complete panel (zeros where no crash), attach population, controls, exposure
+panel <- expand_grid(fips = states$fips, year = 2017:2024, q = 1:4, group = c("18-44", "55-74", "75+")) %>%
+  left_join(counts, by = c("fips", "year", "q", "group")) %>%
+  mutate(across(crashes:ped_deaths, ~ replace_na(.x, 0))) %>%
+  left_join(states %>% select(fips, NAME), by = "fips") %>%
+  left_join(quarters %>% select(year, q, t, start, end), by = c("year", "q")) %>%
+  left_join(pop %>% select(fips, year, p18_44, p55_74, p75plus), by = c("fips", "year")) %>%
+  mutate(pop = case_when(group == "18-44" ~ p18_44, group == "55-74" ~ p55_74, TRUE ~ p75plus)) %>%
+  left_join(vmt, by = c("NAME", "year")) %>%
+  left_join(unemp, by = c("NAME", "year", "q")) %>%
+  left_join(cannabis, by = "NAME") %>%
+  left_join(intensity %>% select(fips, amph_sf_main, net_sf_main, amph_sf_latest, amph_sf_to_apq, amph_chg_main), by = "fips") %>%
+  mutate(
+    cannabis_legal = as.integer(!is.na(rec_date) & rec_date <= end),
+    log_vmt = log(vmt),
+    post    = as.integer(t >= T_SHORT & t <= T_END),   # shortage 2022Q4-2023Q4
+    rec24   = as.integer(t >= T_REC24),                  # recovery 2024Q1-Q4 (ARCOS)
+    rec_dea = as.integer(t >= T_DEA),                    # recovery 2024Q4 (DEA quota date)
+    covid   = as.integer(t >= qid(2020, 1) & t <= qid(2021, 4)),
+    young   = as.integer(group == "18-44"),
+    I10     = amph_sf_main / 10,           # shortfall in units of 10 percentage points
+    I10_net = net_sf_main / 10,
+    state_group = paste(fips, group),
+    t_group     = paste(t, group)
+  ) %>%
+  select(-p18_44, -p55_74, -p75plus)
+
+stopifnot(nrow(panel) == 51 * 32 * 3, !anyNA(panel$pop), !anyNA(panel$vmt), !anyNA(panel$unemp))
+young_panel <- filter(panel, group == "18-44")
+```
+
+## 0.8 CDC secondary outcomes
+
+```{r cdc}
+# State x year, all ages (CDC Mapping Injury, Overdose, and Violence - State)
+miov <- read_csv("raw/cdc/miov_state_fpsi-y8tj.csv", show_col_types = FALSE) %>%
+  filter(Period %in% as.character(2019:2024), Intent %in% c("All_Suicide", "Drug_OD")) %>%
+  transmute(NAME, year = as.integer(Period), outcome = Intent,
+            deaths = suppressWarnings(as.numeric(Count)), rate = Rate)
+
+# Psychostimulant (T43.6) overdose deaths, 12-month ending December = calendar year, state of residence, all ages
+psy <- read_csv("raw/cdc/vsrr_overdose_state_xkb8-kh2a.csv", show_col_types = FALSE) %>%
+  filter(Indicator == "Psychostimulants with abuse potential (T43.6)", Month == "December",
+         `State Name` %in% states$NAME, Year %in% 2017:2025) %>%
+  transmute(NAME = `State Name`, year = as.integer(Year), outcome = "Psychostimulant_OD",
+            deaths = as.numeric(str_remove_all(`Data Value`, ",")))
+
+secondary <- bind_rows(miov %>% select(-rate), psy) %>%
+  left_join(states %>% select(NAME, fips), by = "NAME") %>%
+  left_join(pop_long %>% group_by(fips, year) %>% summarise(pop_all = sum(pop), .groups = "drop"),
+            by = c("fips", "year")) %>%
+  left_join(intensity %>% select(fips, amph_sf_main), by = "fips") %>%
+  mutate(post = as.integer(year == 2023), rec24 = as.integer(year >= 2024), I10 = amph_sf_main / 10)
+```
+
+## 0.9 Save clean data
+
+```{r save-clean}
+wb <- createWorkbook()
+for (nm in c("arcos", "intensity", "panel", "secondary")) {
+  addWorksheet(wb, nm); writeData(wb, nm, get(nm))
+}
+saveWorkbook(wb, "clean_data.xlsx", overwrite = TRUE)
+dir.create("figures", showWarnings = FALSE)
+```
+
+## 0.10 Model helpers
+
+```{r helpers}
+# Poisson coefficient -> % change with 95% CI (state-clustered SEs)
+pc <- function(m, term) {
+  stopifnot(term %in% names(coef(m)))
+  b <- unname(coef(m)[term]); s <- unname(se(m)[term])
+  tibble(term = term, pct = 100 * (exp(b) - 1), lo = 100 * (exp(b - 1.96 * s) - 1),
+         hi = 100 * (exp(b + 1.96 * s) - 1), p = unname(pvalue(m)[term]), n = nobs(m))
+}
+fmt <- function(x) sprintf("%.1f%% (%.1f to %.1f), p=%.2f", x$pct, x$lo, x$hi, x$p)
+ctrl <- "log_vmt + unemp + cannabis_legal"
+pois <- function(f, data, offset = ~log(pop)) fepois(as.formula(f), data = data, offset = offset, cluster = ~fips)
+qlab_breaks <- qid(2017:2024, 1)
+theme_set(theme_minimal(base_size = 11))
+```
+
+# =====================================================================
+# 1. FEASIBILITY: supply drop, spread across states, recovery date
+# =====================================================================
+
+## 1.1 Expected effect and power (saved before outcome analysis)
+
+```{r expected-effect}
+# Produced by scripts/expected_effect.R from ARCOS + pre-shortage FARS only; shown here unchanged.
+cat(readLines("expected_effect.md"), sep = "\n")
+```
+
+## 1.2 National supply vs trend
+
+```{r feas-national}
+nat_arcos <- arcos %>%
+  group_by(t, year, q, days) %>%
+  summarise(across(c(ddd_amph, ddd_mph, p18_44), sum), .groups = "drop") %>%
+  mutate(amph_rate = ddd_amph / (p18_44 / 1000) / days,
+         all_rate  = (ddd_amph + ddd_mph) / (p18_44 / 1000) / days)
+fit_nat <- lm(amph_rate ~ t + factor(q), data = filter(nat_arcos, t < T_SHORT))
+fit_all <- lm(all_rate ~ t + factor(q), data = filter(nat_arcos, t < T_SHORT))
+nat_arcos <- nat_arcos %>%
+  mutate(amph_exp = predict(fit_nat, .), all_exp = predict(fit_all, .),
+         amph_gap = (amph_exp - amph_rate) / amph_exp * 100,
+         net_gap  = (all_exp - all_rate) / all_exp * 100)
+nat_arcos %>% filter(t >= qid(2022, 1)) %>%
+  transmute(quarter = q_label(t), amph_rate = round(amph_rate, 1), expected = round(amph_exp, 1),
+            shortfall_pct = round(amph_gap, 1), net_of_mph_pct = round(net_gap, 1))
+```
+
+## 1.3 Spread across states
+
+```{r feas-spread}
+spread <- intensity %>%
+  summarise(across(c(amph_sf_main, net_sf_main, amph_sf_to_apq, amph_sf_latest, amph_chg_main, amph_sf_fake),
+                   list(mean = mean, sd = sd, min = min, max = max))) %>%
+  pivot_longer(everything(), names_to = c("measure", "stat"), names_pattern = "(.*)_(mean|sd|min|max)") %>%
+  pivot_wider(names_from = stat, values_from = value) %>%
+  mutate(cv = sd / abs(mean))
+spread
+cor_fake <- cor(intensity$amph_sf_main, intensity$amph_sf_fake)
+cor_fake
+# Rule: CV < 0.1 -> no usable dose-response. CV here is far above 0.1, so the state design is kept,
+# but the fake-window benchmark shows much of the spread is trend-extrapolation noise (see decisions_log).
+```
+
+```{r fig-map}
+shp <- read_sf("/vsizip/raw/geo/cb_2023_us_state_20m.zip") %>%
+  mutate(fips = as.integer(STATEFP)) %>%
+  inner_join(intensity, by = "fips")
+akhi <- intensity %>% filter(NAME %in% c("Alaska", "Hawaii"))
+p_map <- shp %>% filter(!NAME.x %in% c("Alaska", "Hawaii")) %>%
+  ggplot() +
+  geom_sf(aes(fill = amph_sf_main), colour = "white", linewidth = 0.2) +
+  coord_sf(crs = 5070) +
+  scale_fill_gradient2(low = "#2166ac", mid = "grey95", high = "#b2182b", midpoint = 0,
+                       name = "Shortfall vs\nown trend (%)") +
+  labs(title = "Amphetamine-class supply shortfall, 2022Q4-2023Q4",
+       subtitle = "DEA ARCOS, DDD per 1,000 residents 18-44; positive = below own 2017-2022Q3 trend",
+       caption = sprintf("Alaska %.1f%%, Hawaii %.1f%% (not shown).", akhi$amph_sf_main[akhi$NAME == "Alaska"],
+                         akhi$amph_sf_main[akhi$NAME == "Hawaii"])) +
+  theme_void()
+ggsave("figures/02_shortage_intensity_map.png", p_map, width = 8, height = 5, dpi = 200, bg = "white")
+p_map
+```
+
+## 1.4 Supply-recovery date (Federal Register, GPO copies in raw/fedreg)
+
+```{r feas-recovery}
+fr_line <- function(doc, pattern) {
+  x <- readLines(file.path("raw/fedreg", paste0("fr_", doc, ".htm")), warn = FALSE)
+  x <- str_squish(str_remove_all(x, "<[^>]*>"))
+  x[str_detect(x, regex(pattern, ignore_case = TRUE))][1]
+}
+recovery <- tribble(
+  ~document,    ~citation,      ~published,   ~pattern,
+  "2023-22059", "88 FR 68147",  "2023-10-03", "^Methylphenidate \\(for sale\\)\\.{3,}",
+  "2024-20114", "89 FR 72424",  "2024-09-05", "^lisdexamfetamine\\.{3,}",
+  "2024-20114", "89 FR 72424",  "2024-09-05", "^d-amphetamine \\(for conversion\\)\\.{3,}",
+  "2025-19335", "90 FR 47825",  "2025-10-02", "^d-amphetamine \\(for sale\\)\\.{3,}",
+  "2026-22842", "91 FR 72564",  "2026-11-10", "^d,l-amphetamine\\.{3,}"
+) %>%
+  mutate(line = map2_chr(document, pattern, fr_line),
+         old_apq_g = as.numeric(str_remove_all(str_extract(line, "[\\d,]{6,}"), ",")),
+         new_apq_g = as.numeric(str_remove_all(str_extract(line, "[\\d,]{6,}$"), ",")),
+         pct_increase = round((new_apq_g / old_apq_g - 1) * 100, 1)) %>%
+  select(-pattern)
+recovery
+```
+
+## 1.5 Figure: national series
+
+```{r fig-national-series}
+nat_crash <- young_panel %>% group_by(t) %>%
+  summarise(crashes = sum(crashes), pop = sum(pop)) %>% mutate(rate = crashes / pop * 1e5)
+series <- bind_rows(
+  nat_arcos %>% transmute(t, value = amph_rate, panel = "A. Amphetamine-class supply (DDD/1,000 residents 18-44/day)", line = "Observed"),
+  nat_arcos %>% transmute(t, value = amph_exp, panel = "A. Amphetamine-class supply (DDD/1,000 residents 18-44/day)", line = "Expected (2017-2022Q3 trend)"),
+  nat_crash %>% transmute(t, value = rate, panel = "B. Fatal crashes with a driver 18-44 per 100,000 residents 18-44", line = "Observed")
+)
+p_series <- ggplot(series, aes(t, value, linetype = line)) +
+  annotate("rect", xmin = T_SHORT - 0.5, xmax = T_END + 0.5, ymin = -Inf, ymax = Inf, alpha = 0.12, fill = "red") +
+  annotate("rect", xmin = qid(2020, 1) - 0.5, xmax = qid(2021, 4) + 0.5, ymin = -Inf, ymax = Inf, alpha = 0.08) +
+  geom_vline(xintercept = T_DEA - 0.5, linetype = "dotted") +
+  geom_line() + geom_point(size = 0.8) +
+  facet_wrap(~panel, ncol = 1, scales = "free_y") +
+  scale_x_continuous(breaks = qlab_breaks, labels = 2017:2024) +
+  labs(x = NULL, y = NULL, linetype = NULL,
+       caption = "Red: measured shortage 2022Q4-2023Q4. Grey: COVID 2020-2021.\nDotted: first amphetamine-class quota increase (89 FR 72424). ARCOS through 2025Q4; FARS through 2024Q4.") +
+  theme(legend.position = "bottom", plot.caption = element_text(hjust = 0))
+ggsave("figures/01_national_series.png", p_series, width = 9, height = 7, dpi = 200, bg = "white")
+p_series
+```
+
+# =====================================================================
+# 2. NATIONAL COMPARISON: drivers 18-44 vs 55-74
+# =====================================================================
+
+## 2.1 Data prep
+
+```{r nat-prep}
+nat_df <- panel %>% filter(group %in% c("18-44", "55-74"))
+nat_nocovid <- filter(nat_df, covid == 0)
+```
+
+## 2.2 Difference-in-differences
+
+```{r nat-did}
+m_nat      <- pois("crashes ~ young:post + young:rec24 | state_group + t", nat_nocovid)
+m_nat_cov  <- pois("crashes ~ young:post + young:rec24 + young:covid | state_group + t", nat_df)   # COVID dummies instead
+m_nat_dth  <- pois("deaths ~ young:post + young:rec24 | state_group + t", nat_nocovid)
+nat_res <- bind_rows(
+  pc(m_nat, "young:post") %>% mutate(model = "Crashes, COVID quarters excluded"),
+  pc(m_nat, "young:rec24") %>% mutate(model = "Crashes, COVID quarters excluded"),
+  pc(m_nat_cov, "young:post") %>% mutate(model = "Crashes, young x COVID dummy"),
+  pc(m_nat_dth, "young:post") %>% mutate(model = "Deaths, COVID quarters excluded"),
+  pc(m_nat_dth, "young:rec24") %>% mutate(model = "Deaths, COVID quarters excluded"),
+  pc(pois("crashes ~ young:post + young:rec24 | state_group^q + t", nat_nocovid), "young:post") %>% mutate(model = "Crashes, state x age x season FE")
+)
+nat_res
+```
+
+## 2.3 Event study
+
+```{r nat-es}
+# state_group^q = state x age-group x quarter-of-year FE (age groups differ in crash seasonality)
+# With state x season FE one reference quarter per season is needed: the 4 quarters before the shortage
+REF_T <- (T_SHORT - 4):(T_SHORT - 1)                 # 2021Q4-2022Q3
+REFS  <- paste0("c(", paste(REF_T, collapse = ","), ")")
+# National model drops COVID quarters (incl. 2021Q4), so its season-4 reference is 2019Q4
+REF_T_NAT <- c(qid(2019, 4), qid(2022, 1:3))
+REFS_NAT  <- paste0("c(", paste(REF_T_NAT, collapse = ","), ")")
+m_nat_es <- pois(paste0("crashes ~ i(t, young, ref = ", REFS_NAT, ") | state_group^q + t"), nat_nocovid)
+m_nat_es_raw <- pois(sprintf("crashes ~ i(t, young, ref = %d) | state_group + t", T_SHORT - 1), nat_nocovid)
+es_tidy <- function(m, pattern, refs = REF_T) {
+  ct <- coeftable(m)
+  tibble(term = rownames(ct), b = ct[, 1], s = ct[, 2]) %>%
+    filter(str_detect(term, pattern)) %>%
+    mutate(t = as.integer(str_extract(term, "(?<=t::)\\d+")),
+           pct = 100 * (exp(b) - 1), lo = 100 * (exp(b - 1.96 * s) - 1), hi = 100 * (exp(b + 1.96 * s) - 1)) %>%
+    bind_rows(tibble(t = refs, pct = 0, lo = 0, hi = 0))
+}
+es_plot <- function(d, title, ylab) {
+  ggplot(d, aes(t, pct)) +
+    annotate("rect", xmin = T_SHORT - 0.5, xmax = T_END + 0.5, ymin = -Inf, ymax = Inf, alpha = 0.12, fill = "red") +
+    geom_hline(yintercept = 0, colour = "grey50") +
+    geom_pointrange(aes(ymin = lo, ymax = hi), size = 0.25) +
+    scale_x_continuous(breaks = qlab_breaks, labels = 2017:2024) +
+    labs(title = title, x = NULL, y = ylab, caption = "Reference: one pre-shortage quarter per season (2021Q4-2022Q3; national model 2019Q4, 2022Q1-Q3). 95% CIs, SEs clustered by state.")
+}
+es_nat <- es_tidy(m_nat_es, "young", REF_T_NAT)
+lead_keep <- function(v, refs = REF_T) paste0("^t::(", paste(setdiff(1:(T_SHORT - 1), refs), collapse = "|"), "):", v, "$")   # all non-reference leads
+pre_test_nat <- wald(m_nat_es, keep = lead_keep("young", REF_T_NAT), print = FALSE)
+pre_test_nat_raw <- wald(m_nat_es_raw, keep = paste0("^t::(", paste(1:(T_SHORT - 2), collapse = "|"), "):young$"), print = FALSE)
+pre_test_nat; pre_test_nat_raw
+p_es_nat <- es_plot(es_nat, "A. National: drivers 18-44 vs 55-74 (COVID quarters excluded; state x age x season FE)", "% difference vs reference quarters")
+p_es_nat
+```
+
+# =====================================================================
+# 3. MAIN DESIGN: dose-response by state
+# =====================================================================
+
+## 3.1 Main model
+
+```{r dose-main}
+m_dose     <- pois(paste("crashes ~ I10:post + I10:rec24 +", ctrl, "| fips + t"), young_panel)
+m_dose_vmt <- pois("crashes ~ I10:post + I10:rec24 + unemp + cannabis_legal | fips + t", young_panel, offset = ~log(vmt / 4))
+m_dose_dth <- pois(paste("deaths ~ I10:post + I10:rec24 +", ctrl, "| fips + t"), young_panel)
+etable(m_dose, m_dose_vmt, m_dose_dth)
+dose_main <- pc(m_dose, "I10:post")
+fmt(dose_main)
+```
+
+## 3.2 Event study (leads and lags)
+
+```{r dose-es}
+# fips^q = state x quarter-of-year FE: high-shortfall states (e.g. FL, TX, CA) have different crash seasonality
+m_dose_es <- pois(paste0("crashes ~ i(t, I10, ref = ", REFS, ") + ", ctrl, " | fips^q + t"), young_panel)
+m_dose_es_raw <- pois(sprintf("crashes ~ i(t, I10, ref = %d) + %s | fips + t", T_SHORT - 1, ctrl), young_panel)
+es_dose <- es_tidy(m_dose_es, "I10")
+pre_test_dose <- wald(m_dose_es, keep = lead_keep("I10"), print = FALSE)
+pre_test_dose_raw <- wald(m_dose_es_raw, keep = paste0("^t::(", paste(1:(T_SHORT - 2), collapse = "|"), "):I10$"), print = FALSE)
+pre_test_dose; pre_test_dose_raw
+p_es_dose <- es_plot(es_dose, "B. Dose-response: per 10 pp state supply shortfall, drivers 18-44 (state x season FE)", "% change per 10 pp (vs reference)")
+p_es_dose
+```
+
+## 3.3 Robustness
+
+```{r dose-robust}
+can_states <- cannabis %>% filter(rec_date >= as.Date("2022-01-01"), rec_date <= as.Date("2024-12-31")) %>% pull(NAME)
+dose_rob <- bind_rows(
+  pc(m_dose, "I10:post") %>% mutate(spec = "Main"),
+  pc(m_dose_vmt, "I10:post") %>% mutate(spec = "Rate per VMT (offset)"),
+  pc(m_dose_dth, "I10:post") %>% mutate(spec = "Deaths instead of crashes"),
+  pc(pois(paste("crashes ~ I10_net:post + I10_net:rec24 +", ctrl, "| fips + t"), young_panel), "I10_net:post") %>% mutate(spec = "Net of methylphenidate substitution"),
+  pc(pois(paste("crashes ~ I(amph_sf_to_apq/10):post +", ctrl, "| fips + t"), young_panel %>% mutate(post = as.integer(t >= T_SHORT & t < T_DEA))),
+     "I(amph_sf_to_apq/10):post") %>% mutate(spec = "Intensity and post to APQ increase (2022Q4-2024Q3)"),
+  pc(pois(paste("crashes ~ I(amph_sf_latest/10):post +", ctrl, "| fips + t"), young_panel %>% mutate(post = as.integer(t >= T_SHORT))),
+     "I(amph_sf_latest/10):post") %>% mutate(spec = "Intensity to latest ARCOS (2022Q4-2025Q4), post = 2022Q4-2024Q4"),
+  pc(pois(paste("crashes ~ I(amph_chg_main/10):post + I(amph_chg_main/10):rec24 +", ctrl, "| fips + t"), young_panel),
+     "I(amph_chg_main/10):post") %>% mutate(spec = "No-extrapolation intensity (fall vs 2022Q1-Q3)"),
+  pc(pois(paste("crashes ~ I10:post + I10:rec24 +", ctrl, "| fips + t"), filter(young_panel, covid == 0)), "I10:post") %>% mutate(spec = "COVID quarters excluded"),
+  pc(pois(paste("crashes ~ I10:post + I10:rec24 +", ctrl, "| fips[t] + t"), young_panel), "I10:post") %>% mutate(spec = "State-specific linear trends"),
+  pc(pois(paste("crashes ~ I10:post + I10:rec24 +", ctrl, "| fips + t"), filter(young_panel, !NAME %in% can_states)), "I10:post") %>% mutate(spec = "Excluding states legalising cannabis 2022-2024"),
+  pc(pois(paste("crashes ~ I10:post + I10:rec24 +", ctrl, "| fips + t"), filter(young_panel, year != 2022)), "I10:post") %>% mutate(spec = "Excluding 2022 (telehealth collapse)"),
+  pc(pois("crashes ~ I10:post + I10:rec24 | fips + t", young_panel), "I10:post") %>% mutate(spec = "No controls"),
+  pc(pois(paste("crashes ~ I10:post + I10:rec24 +", ctrl, "| fips^q + t"), young_panel), "I10:post") %>% mutate(spec = "State x season fixed effects")
+)
+dose_rob %>% mutate(across(pct:hi, ~ round(.x, 1)), p = round(p, 3))
+```
+
+## 3.4 Dose-response scatter
+
+```{r fig-dose-scatter}
+scatter_df <- young_panel %>%
+  mutate(per = case_when(t %in% qid(2022, 1:3) | year %in% 2017:2019 ~ "pre", post == 1 ~ "short")) %>%
+  filter(!is.na(per)) %>%
+  group_by(fips, NAME, per) %>% summarise(rate = sum(crashes) / sum(pop) * 1e5 * 4, .groups = "drop") %>%   # annualised rate per 100,000
+  pivot_wider(names_from = per, values_from = rate) %>%
+  mutate(chg = (short / pre - 1) * 100) %>%
+  left_join(intensity %>% select(fips, amph_sf_main), by = "fips") %>%
+  left_join(pop %>% filter(year == 2022) %>% select(fips, p18_44), by = "fips")
+p_scatter <- ggplot(scatter_df, aes(amph_sf_main, chg)) +
+  geom_hline(yintercept = 0, colour = "grey60") + geom_vline(xintercept = 0, colour = "grey60") +
+  geom_point(aes(size = p18_44), alpha = 0.5) +
+  geom_smooth(aes(weight = p18_44), method = "lm", se = TRUE, colour = "black", linewidth = 0.6) +
+  geom_text(aes(label = st_abb[match(NAME, st_name)]), size = 2.4, nudge_y = 1.2) +
+  scale_size_area(max_size = 8, guide = "none") +
+  labs(x = "Amphetamine-class supply shortfall vs own trend, 2022Q4-2023Q4 (%)",
+       y = "Change in young-driver fatal crash rate (%)\n2022Q4-2023Q4 vs 2017-2019 and 2022Q1-Q3",
+       title = "Dose-response: state supply shortfall vs change in fatal crashes with a driver 18-44",
+       caption = "Point size = population 18-44. Line: population-weighted least squares.")
+ggsave("figures/04_dose_response_scatter.png", p_scatter, width = 8, height = 6, dpi = 200, bg = "white")
+p_scatter
+```
+
+# =====================================================================
+# 4. TRIPLE DIFFERENCE: intensity x post x young vs older
+# =====================================================================
+
+```{r ddd}
+m_ddd     <- pois("crashes ~ I10:post:young + I10:rec24:young | state_group + fips^t + t_group", nat_df)
+m_ddd_dth <- pois("deaths ~ I10:post:young + I10:rec24:young | state_group + fips^t + t_group", nat_df)
+m_ddd_nc  <- pois("crashes ~ I10:post:young + I10:rec24:young | state_group + fips^t + t_group", nat_nocovid)
+ddd_res <- bind_rows(
+  pc(m_ddd, "I10:post:young") %>% mutate(model = "Crashes"),
+  pc(m_ddd, "I10:young:rec24") %>% mutate(model = "Crashes"),
+  pc(m_ddd_dth, "I10:post:young") %>% mutate(model = "Deaths"),
+  pc(m_ddd_nc, "I10:post:young") %>% mutate(model = "Crashes, COVID quarters excluded"),
+  pc(pois("crashes ~ I10:post:young + I10:rec24:young | state_group^q + fips^t + t_group", nat_df), "I10:post:young") %>% mutate(model = "Crashes, state x age x season FE")
+)
+ddd_res
+```
+
+```{r ddd-es}
+m_ddd_es <- pois(paste0("crashes ~ i(t, Iy, ref = ", REFS, ") | state_group^q + fips^t + t_group"),
+                 nat_df %>% mutate(Iy = I10 * young))
+es_ddd <- es_tidy(m_ddd_es, "Iy")
+pre_test_ddd <- wald(m_ddd_es, keep = lead_keep("Iy"), print = FALSE)
+pre_test_ddd
+p_es_ddd <- es_plot(es_ddd, "C. Triple difference: per 10 pp shortfall, drivers 18-44 vs 55-74 (state x age x season FE)", "% difference per 10 pp (vs reference)")
+
+ggsave("figures/03a_event_study_national.png", p_es_nat, width = 9, height = 4, dpi = 200, bg = "white")
+ggsave("figures/03b_event_study_dose.png", p_es_dose, width = 9, height = 4, dpi = 200, bg = "white")
+ggsave("figures/03c_event_study_triple.png", p_es_ddd, width = 9, height = 4, dpi = 200, bg = "white")
+p_es_ddd
+```
+
+# =====================================================================
+# 5. REVERSAL: did crashes fall again where supply recovered?
+# =====================================================================
+
+```{r reversal}
+# (a) ARCOS recovery: 2024Q1-Q4 vs shortage; (b) DEA quota date: 2024Q4 only, with 2024Q1-Q3 separate
+m_rev_dea <- pois(paste("crashes ~ I10:post + I10:mid24 + I10:rec_dea +", ctrl, "| fips + t"),
+                  young_panel %>% mutate(mid24 = as.integer(t >= T_REC24 & t < T_DEA)))
+rev_res <- bind_rows(
+  pc(m_dose, "I10:post") %>% mutate(model = "Shortage 2022Q4-2023Q4"),
+  pc(m_dose, "I10:rec24") %>% mutate(model = "Recovery 2024 (ARCOS)"),
+  pc(m_rev_dea, "I10:rec_dea") %>% mutate(model = "Recovery 2024Q4 (DEA quota date)"),
+  pc(m_ddd, "I10:young:rec24") %>% mutate(model = "Triple difference, recovery 2024")
+)
+rev_test <- wald(m_dose, keep = "I10:post|I10:rec24", print = FALSE)   # joint
+rev_diff <- { b <- coef(m_dose); V <- vcov(m_dose)
+  d <- b["I10:rec24"] - b["I10:post"]; s <- sqrt(V["I10:rec24", "I10:rec24"] + V["I10:post", "I10:post"] - 2 * V["I10:rec24", "I10:post"])
+  tibble(diff_logpoints = d, se = s, p = 2 * pnorm(-abs(d / s))) }
+rev_res; rev_diff
+```
+
+# =====================================================================
+# 6. MECHANISM: which crash types move?
+# =====================================================================
+
+```{r mechanism}
+mech_outcomes <- c(crashes = "All crashes", single_veh = "Single-vehicle", multi_veh = "Multi-vehicle",
+                   daytime = "Daytime (06-17h)", nighttime = "Night (18-05h)", fault = "Driver error recorded",
+                   speeding = "Speeding-related", alcohol = "Driver BAC >= 0.08",
+                   amph_rx = "Driver amphetamine+ (no meth)", meth = "Driver methamphetamine+", tested = "Driver drug-tested")
+mech <- map_dfr(names(mech_outcomes), function(y) {
+  bind_rows(
+    pc(pois(paste(y, "~ young:post + young:rec24 | state_group + t"), nat_nocovid), "young:post") %>% mutate(design = "National 18-44 vs 55-74"),
+    pc(pois(paste(y, "~ I10:post + I10:rec24 +", ctrl, "| fips + t"), young_panel), "I10:post") %>% mutate(design = "Dose-response (per 10 pp)")
+  ) %>% mutate(outcome = mech_outcomes[[y]])
+})
+# Drug results as share of drug-tested drivers (offset = tested crashes), to separate drug findings from testing changes
+young_tested <- filter(young_panel, tested > 0)
+nat_tested   <- filter(nat_nocovid, tested > 0)
+drug_share <- map_dfr(c(amph_rx = "Amphetamine+ (no meth) per tested", meth = "Methamphetamine+ per tested") %>% imap(~ c(.y, .x)), function(v) {
+  bind_rows(
+    pc(pois(paste(v[1], "~ young:post + young:rec24 | state_group + t"), nat_tested, offset = ~log(tested)), "young:post") %>% mutate(design = "National 18-44 vs 55-74"),
+    pc(pois(paste(v[1], "~ I10:post + I10:rec24 +", ctrl, "| fips + t"), young_tested, offset = ~log(tested)), "I10:post") %>% mutate(design = "Dose-response (per 10 pp)")
+  ) %>% mutate(outcome = v[2])
+})
+drug_share %>% mutate(across(pct:hi, ~ round(.x, 1)), p = round(p, 3))
+
+# Is the amphetamine+ finding a pre-existing pattern? Same model with fake shortage dates (pre-shortage data only)
+amph_placebo <- map_dfr(list(c(qid(2019, 4), qid(2020, 4)), c(qid(2021, 4), qid(2022, 3))), function(w) {
+  d <- filter(young_panel, t <= w[2]) %>% mutate(fake = as.integer(t >= w[1]))
+  bind_rows(
+    pc(pois(paste("amph_rx ~ I10:fake +", ctrl, "| fips + t"), d), "I10:fake") %>% mutate(outcome = "Amphetamine+ (count)"),
+    pc(pois(paste("amph_rx ~ I10:fake +", ctrl, "| fips + t"), filter(d, tested > 0), offset = ~log(tested)), "I10:fake") %>% mutate(outcome = "Amphetamine+ per tested")
+  ) %>% mutate(placebo_start = q_label(w[1]))
+})
+amph_placebo %>% mutate(across(pct:hi, ~ round(.x, 1)), p = round(p, 3))
+mech %>% mutate(across(pct:hi, ~ round(.x, 1)), p = round(p, 3))
+mech_counts <- young_panel %>% summarise(across(all_of(names(mech_outcomes)), sum))
+mech_counts
+
+p_mech <- mech %>% mutate(outcome = factor(outcome, rev(unname(mech_outcomes)))) %>%
+  ggplot(aes(pct, outcome)) +
+  geom_vline(xintercept = 0, colour = "grey50") +
+  geom_pointrange(aes(xmin = lo, xmax = hi), size = 0.3) +
+  facet_wrap(~design, scales = "free_x") +
+  labs(x = "% change during shortage (95% CI)", y = NULL,
+       title = "Mechanism: change in crash types involving drivers 18-44, 2022Q4-2023Q4",
+       caption = "Drug-test outcomes: testing is incomplete and varies by state; state fixed effects keep comparisons within state.")
+ggsave("figures/05_mechanism_panel.png", p_mech, width = 10, height = 5.5, dpi = 200, bg = "white")
+p_mech
+```
+
+# =====================================================================
+# 7. SECONDARY OUTCOMES (CDC, state x year, all ages)
+# =====================================================================
+
+```{r secondary}
+sec_res <- secondary %>% filter(!is.na(deaths)) %>%
+  group_by(outcome) %>%
+  group_modify(~ bind_rows(
+    pc(fepois(deaths ~ I10:post + I10:rec24 | fips + year, offset = ~log(pop_all), data = .x, cluster = ~fips), "I10:post"),
+    pc(fepois(deaths ~ I10:post + I10:rec24 | fips + year, offset = ~log(pop_all), data = .x, cluster = ~fips), "I10:rec24")
+  ) %>% mutate(years = paste(range(.x$year), collapse = "-"), states = n_distinct(.x$fips))) %>%
+  ungroup()
+sec_res %>% mutate(across(pct:hi, ~ round(.x, 1)), p = round(p, 3))
+```
+
+# =====================================================================
+# 8. PLACEBOS: try to kill the result
+# =====================================================================
+
+## 8.1 Placebo outcomes and age groups
+
+```{r placebo-outcomes}
+old75 <- filter(panel, group == "75+")
+old55 <- filter(panel, group == "55-74")
+plac_out <- bind_rows(
+  pc(pois(paste("crashes ~ I10:post + I10:rec24 +", ctrl, "| fips + t"), old75), "I10:post") %>% mutate(test = "Crashes with a driver 75+ (dose-response)"),
+  pc(pois(paste("ped_deaths ~ I10:post + I10:rec24 +", ctrl, "| fips + t"), old75), "I10:post") %>% mutate(test = "Pedestrian deaths in crashes with a driver 75+ (dose-response)"),
+  pc(pois(paste("crashes ~ I10:post + I10:rec24 +", ctrl, "| fips + t"), old55), "I10:post") %>% mutate(test = "Crashes with a driver 55-74 (dose-response)"),
+  pc(pois("crashes ~ old:post + old:rec24 | state_group + t",
+          filter(panel, group %in% c("55-74", "75+"), covid == 0) %>% mutate(old = as.integer(group == "75+"))), "old:post") %>%
+    mutate(test = "National: drivers 75+ vs 55-74")
+)
+plac_out %>% mutate(across(pct:hi, ~ round(.x, 1)), p = round(p, 3))
+```
+
+## 8.2 Placebo dates
+
+```{r placebo-dates}
+plac_date <- function(t0, t1, label) {   # (names avoid masking by the panel's start/end date columns)
+  d  <- filter(young_panel, t <= t1) %>% mutate(fake = as.integer(t >= t0))
+  dn <- filter(nat_df, t <= t1, covid == 0 | t >= t0) %>% mutate(fake = as.integer(t >= t0))
+  bind_rows(
+    pc(pois(paste("crashes ~ I10:fake +", ctrl, "| fips + t"), d), "I10:fake") %>% mutate(design = "Dose-response"),
+    pc(pois("crashes ~ young:fake | state_group + t", dn), "young:fake") %>% mutate(design = "National 18-44 vs 55-74")
+  ) %>% mutate(placebo = label)
+}
+plac_dates <- bind_rows(
+  plac_date(qid(2019, 4), qid(2020, 4), "Shortage 'starts' 2019Q4 (data to 2020Q4)"),
+  plac_date(qid(2021, 4), qid(2022, 3), "Shortage 'starts' 2021Q4 (data to 2022Q3)")
+)
+plac_dates %>% mutate(across(pct:hi, ~ round(.x, 1)), p = round(p, 3))
+```
+
+# =====================================================================
+# 9. EXCESS CRASHES AND DEATHS ATTRIBUTABLE TO THE SHORTAGE
+# =====================================================================
+
+```{r excess}
+excess_dose <- function(m, var) {
+  b <- coef(m)["I10:post"]; s <- se(m)["I10:post"]
+  d <- young_panel %>% filter(post == 1)
+  map_dfr(c(est = b, lo = b - 1.96 * s, hi = b + 1.96 * s), function(bb)
+    tibble(x = sum(d[[var]] * (1 - exp(-bb * d$I10))))) %>% mutate(bound = c("est", "lo", "hi"))
+}
+excess_nat <- function(m, var) {
+  b <- coef(m)["young:post"]; s <- se(m)["young:post"]
+  obs <- young_panel %>% filter(post == 1) %>% pull(var) %>% sum()
+  tibble(x = obs * (1 - exp(-c(b, b - 1.96 * s, b + 1.96 * s))), bound = c("est", "lo", "hi"))
+}
+excess <- bind_rows(
+  excess_dose(m_dose, "crashes") %>% mutate(design = "Dose-response", outcome = "crashes"),
+  excess_dose(m_dose_dth, "deaths") %>% mutate(design = "Dose-response", outcome = "deaths"),
+  excess_nat(m_nat, "crashes") %>% mutate(design = "National 18-44 vs 55-74", outcome = "crashes"),
+  excess_nat(m_nat_dth, "deaths") %>% mutate(design = "National 18-44 vs 55-74", outcome = "deaths")
+) %>% pivot_wider(names_from = bound, values_from = x)
+shortage_totals <- young_panel %>% filter(post == 1) %>% summarise(crashes = sum(crashes), deaths = sum(deaths))
+excess; shortage_totals
+```
+
+```{r save-results}
+results <- list(nat_res = nat_res, es_nat = es_nat, dose_rob = dose_rob, es_dose = es_dose, ddd_res = ddd_res,
+                es_ddd = es_ddd, rev_res = rev_res, mech = mech, drug_share = drug_share, amph_placebo = amph_placebo, sec_res = sec_res, plac_out = plac_out,
+                plac_dates = plac_dates, excess = excess, spread = spread, recovery = recovery,
+                nat_arcos = nat_arcos, scatter = scatter_df)
+wb <- loadWorkbook("clean_data.xlsx")
+for (nm in names(results)) { if (nm %in% names(wb)) removeWorksheet(wb, nm); addWorksheet(wb, nm); writeData(wb, nm, as.data.frame(lapply(results[[nm]], unname))) }
+saveWorkbook(wb, "clean_data.xlsx", overwrite = TRUE)
+saveRDS(list(results = results, pre = list(nat = pre_test_nat, nat_raw = pre_test_nat_raw, dose = pre_test_dose, dose_raw = pre_test_dose_raw, ddd = pre_test_ddd),
+             rev_diff = rev_diff, cor_fake = cor_fake, mech_counts = mech_counts, shortage_totals = shortage_totals),
+        "results.rds")
+```
