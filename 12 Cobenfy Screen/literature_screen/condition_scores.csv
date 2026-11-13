@@ -1,50 +1,50 @@
 condition,label,group,status,status_source,benefit_score,benefit_human_types,benefit_types,harm_score,harm_human_types,harm_types,n_relevant,n_peripheral,total_pubmed_papers
-dementia_cognition,Alzheimer cognition,neurologic,in trials,"xanomeline AD RCT (PMID 9109749, 9339268); KarXT AD trials NCT07011732, NCT07011745, NCT07212062",7.0,3,1_human_pharm;2_anticholinergic_burden;4_postmortem_imaging;5_animal,0,0,,23,0,101133
-tbi,Traumatic brain injury cognition,neurologic,untested,,7.0,3,1_human_pharm;2_anticholinergic_burden;4_postmortem_imaging;5_animal,0,0,,9,0,14621
-ad_psychosis,Alzheimer psychosis/agitation,neurologic,in trials,"KarXT Ph3 ADEPT program: NCT05511363, NCT06126224, NCT05980949; agitation NCT06937229",6.0,2.5,1_human_pharm;2_anticholinergic_burden;5_animal;6_clinical_obs,0,0,,13,0,4162
-dlb,Lewy body dementia,neurologic,untested,,6.0,3,1_human_pharm;2_anticholinergic_burden;4_postmortem_imaging,0,0,,8,0,15394
-pd_psychosis,Parkinson psychosis,neurologic,untested (1 case report),PMID 42729706,6.0,2.5,1_human_pharm;4_postmortem_imaging;5_animal;6_clinical_obs,0,0,,5,0,3865
+autism_irritability,Autism (irritability),psychiatric,in trials,"KarXT Ph3 NCT07284745, NCT07285798",8.0,3.5,0_antipsychotic_response;1_human_pharm;3_genetics;4_postmortem_imaging;5_animal;6_clinical_obs,0,0,,15,1,93933
+ad_psychosis,Alzheimer psychosis/agitation,neurologic,in trials,"KarXT Ph3 ADEPT program: NCT05511363, NCT06126224, NCT05980949; agitation NCT06937229",8.0,3.5,0_antipsychotic_response;1_human_pharm;2_anticholinergic_burden;5_animal;6_clinical_obs,0,0,,14,0,4162
+pd_psychosis,Parkinson psychosis,neurologic,untested (1 case report),PMID 42729706,8.0,3.5,0_antipsychotic_response;1_human_pharm;4_postmortem_imaging;5_animal;6_clinical_obs,0,0,,7,0,3865
+tourette,Tourette / tics,psychiatric,untested,,7.0,3.0,0_antipsychotic_response;1_human_pharm;4_postmortem_imaging;5_animal;6_clinical_obs,0,0,,10,0,8582
+dementia_cognition,Alzheimer cognition,neurologic,in trials,"xanomeline AD RCT (PMID 9109749, 9339268); KarXT AD trials NCT07011732, NCT07011745, NCT07212062",7.0,3,1_human_pharm;2_anticholinergic_burden;4_postmortem_imaging;5_animal,0,0,,25,0,101133
+tbi,Traumatic brain injury cognition,neurologic,untested,,7.0,3,1_human_pharm;2_anticholinergic_burden;4_postmortem_imaging;5_animal,0,0,,10,0,14621
+dlb,Lewy body dementia,neurologic,untested,,6.0,3,1_human_pharm;2_anticholinergic_burden;4_postmortem_imaging,0,0,,11,0,15394
 down_syndrome,Down syndrome cognition,neurologic,untested,,5.5,2.5,1_human_pharm;2_anticholinergic_burden;4_postmortem_imaging;5_animal,0,0,,10,0,2336
-tourette,Tourette / tics,psychiatric,untested,,5.0,2.0,1_human_pharm;4_postmortem_imaging;5_animal;6_clinical_obs,0,0,,8,0,8582
-pd_cognition,Parkinson cognitive impairment,neurologic,untested (M1 PAM TAK-071 tested),"NCT04334317 (TAK-071, not Cobenfy)",5.0,2,1_human_pharm;4_postmortem_imaging;5_animal,0,0,,8,0,33890
+pd_cognition,Parkinson cognitive impairment,neurologic,untested (M1 PAM TAK-071 tested),"NCT04334317 (TAK-071, not Cobenfy)",5.0,2,1_human_pharm;4_postmortem_imaging;5_animal,0,0,,9,0,33890
+schizophrenia_cog,Cognitive impairment in schizophrenia,psychiatric,tested (approved population),KarXT post hoc PMID 36414626; NCT07084831 withdrawn,5.0,2,1_human_pharm;2_anticholinergic_burden;5_animal,0,0,,15,0,28961
 sjogren,Sjogren dry mouth (peripheral),other,untested,,5.0,2,1_human_pharm;2_anticholinergic_burden;5_animal,0,0,,15,13,22732
-autism_irritability,Autism (irritability),psychiatric,in trials,"KarXT Ph3 NCT07284745, NCT07285798",4.5,2.0,1_human_pharm;3_genetics;4_postmortem_imaging;5_animal;6_clinical_obs,0,0,,12,1,93933
-sleep,Sleep disorders / narcolepsy,neurologic,untested,,4.0,1.5,4_postmortem_imaging;5_animal;6_clinical_obs,0,0,,16,0,60756
-schizophrenia_cog,Cognitive impairment in schizophrenia,psychiatric,tested (approved population),KarXT post hoc PMID 36414626; NCT07084831 withdrawn,4.0,1.5,1_human_pharm;2_anticholinergic_burden;5_animal,0,0,,14,0,28961
-adhd,ADHD,psychiatric,untested,,3.5,2.0,1_human_pharm;4_postmortem_imaging;6_clinical_obs,0,0,,6,0,53577
-alcohol,Alcohol use disorder,psychiatric,untested,,3.5,1.5,1_human_pharm;4_postmortem_imaging;5_animal,0,0,,11,0,94877
-huntington,Huntington disease,neurologic,untested,,3.5,1.5,1_human_pharm;4_postmortem_imaging;5_animal,0,0,,14,0,26258
-epilepsy,Epilepsy,neurologic,"in trials (memory, not seizures)","NCT07228338, NCT07721272 mechanistic memory studies in epilepsy surgery pts",3.5,2.0,2_anticholinergic_burden;3_genetics;6_clinical_obs,2.0,0.5,1_human_pharm;5_animal,15,2,290500
-post_stroke,Post-stroke cognition,neurologic,untested,,3.0,1.5,1_human_pharm;4_postmortem_imaging,0,0,,7,0,31851
-methamphetamine,Methamphetamine use disorder,psychiatric,untested,,2.0,0.5,1_human_pharm;5_animal,0,0,,6,0,16927
-catatonia,Catatonia,psychiatric,untested (case discussion),PMID 42579811,2.0,1,2_anticholinergic_burden,0,0,,2,0,4805
-migraine,Migraine,neurologic,untested,,2.0,1,6_clinical_obs,0,0,,5,0,54079
-gastroparesis,Gastroparesis,other,untested,,2.0,1.0,1_human_pharm;6_clinical_obs,0,0,,3,3,4279
-bipolar_mania,Bipolar mania,psychiatric,in trials,"KarXT Ph3 NCT06951698, NCT06951711, NCT07140913; NBI-1117568 Ph2 NCT07288320",1.0,0.5,4_postmortem_imaging,0,0,,10,0,57077
-ocd,OCD,psychiatric,untested (1 case report),PMID 42069559 (clozapine-induced obsessions),1.0,0.5,6_clinical_obs,0,0,,5,0,30367
-nicotine,Nicotine dependence,psychiatric,untested,,1.0,0.5,1_human_pharm,0,0,,6,0,47852
-anorexia,Anorexia nervosa,psychiatric,untested,,1.0,0.5,1_human_pharm,0,0,,3,1,21768
-tardive,Tardive dyskinesia,neurologic,untested,,0.5,0.5,1_human_pharm,1.0,0.5,6_clinical_obs,9,0,4786
-bipolar_depression,Bipolar depression,psychiatric,untested,,0,0,,1.0,0.5,1_human_pharm,3,0,6228
-mdd,Major depressive disorder,psychiatric,untested,,0,0,,3.0,1,1_human_pharm;5_animal,11,0,72328
-ptsd,PTSD,psychiatric,untested,,0,0,,2.0,0.5,1_human_pharm;5_animal,7,0,69182
-cocaine,Cocaine use disorder,psychiatric,in trials,Cobenfy Ph1/2 NCT07624227,0,0,,0,0,,0,0,46409
-delirium,Delirium,psychiatric,untested,,0,0,,0,0,,3,0,30835
+bipolar_mania,Bipolar mania,psychiatric,in trials,"KarXT Ph3 NCT06951698, NCT06951711, NCT07140913; NBI-1117568 Ph2 NCT07288320",4.0,2,0_antipsychotic_response;4_postmortem_imaging,0,0,,13,0,57077
+alcohol,Alcohol use disorder,psychiatric,untested,,4.0,1.5,1_human_pharm;4_postmortem_imaging;5_animal,0,0,,13,0,94877
+huntington,Huntington disease,neurologic,untested,,4.0,1.5,1_human_pharm;4_postmortem_imaging;5_animal,2.0,1,0_antipsychotic_response,16,0,26258
+post_stroke,Post-stroke cognition,neurologic,untested,,4.0,2,1_human_pharm;4_postmortem_imaging,0,0,,7,0,31851
+adhd,ADHD,psychiatric,untested,,3.5,2.0,1_human_pharm;4_postmortem_imaging;6_clinical_obs,0,0,,8,0,53577
+epilepsy,Epilepsy,neurologic,"in trials (memory, not seizures)","NCT07228338, NCT07721272 mechanistic memory studies in epilepsy surgery pts",3.5,2.0,2_anticholinergic_burden;3_genetics;6_clinical_obs,3.0,1,1_human_pharm;5_animal,15,2,290500
+ocd,OCD,psychiatric,untested (1 case report),PMID 42069559 (clozapine-induced obsessions),3.0,1.5,0_antipsychotic_response;6_clinical_obs,0,0,,9,0,30367
+methamphetamine,Methamphetamine use disorder,psychiatric,untested,,3.0,1,1_human_pharm;5_animal,0,0,,10,0,16927
+sleep,Sleep disorders / narcolepsy,neurologic,untested,,3.0,1,4_postmortem_imaging;5_animal,0,0,,18,0,60756
+nicotine,Nicotine dependence,psychiatric,untested,,2.0,1,1_human_pharm,0,0,,6,0,47852
+catatonia,Catatonia,psychiatric,untested (case discussion),PMID 42579811,2.0,1,2_anticholinergic_burden,0,0,,3,0,4805
+migraine,Migraine,neurologic,untested,,2.0,1,6_clinical_obs,0,0,,9,0,54079
+gastroparesis,Gastroparesis,other,untested,,2.0,1.0,1_human_pharm;6_clinical_obs,0,0,,4,3,4279
+delirium,Delirium,psychiatric,untested,,1.0,0.5,0_antipsychotic_response,0,0,,7,0,30835
+anorexia,Anorexia nervosa,psychiatric,untested,,1.0,0.5,1_human_pharm,0,0,,6,1,21768
+tardive,Tardive dyskinesia,neurologic,untested,,1.0,0.5,1_human_pharm,1.0,0.5,6_clinical_obs,9,0,4786
+bipolar_depression,Bipolar depression,psychiatric,untested,,0,0,,2.0,1,1_human_pharm,7,0,6228
+mdd,Major depressive disorder,psychiatric,untested,,0,0,,3.0,1,1_human_pharm;5_animal,14,0,72328
+ptsd,PTSD,psychiatric,untested,,0,0,,2.0,0.5,1_human_pharm;5_animal,10,0,69182
+cocaine,Cocaine use disorder,psychiatric,in trials,Cobenfy Ph1/2 NCT07624227,0,0,,0,0,,3,0,46409
 binge_eating,Binge eating / obesity,other,untested,,0,0,,0,0,,0,0,416537
-borderline,Borderline personality,psychiatric,untested,,0,0,,2.0,1,1_human_pharm,1,0,12481
+borderline,Borderline personality,psychiatric,untested,,0,0,,2.0,1,1_human_pharm,5,0,12481
 chronic_pain,Chronic pain,neurologic,untested,,0,0,,0,0,,0,0,268827
 long_covid,Long-COVID brain fog,neurologic,untested,,0,0,,0,0,,1,0,2852
 chemo_brain,Chemotherapy-related cognitive impairment,neurologic,untested,,0,0,,0,0,,1,0,4411
 psoriasis,Psoriasis (neg. control),control,untested,,0,0,,1.0,0.5,1_human_pharm,4,1,75465
 hypothyroidism,Hypothyroidism (neg. control),control,untested,,0,0,,0,0,,3,0,59774
 gout,Gout (neg. control),control,untested,,0,0,,0,0,,0,0,23135
-dystonia,Dystonia,harm,safety outcome in EMERGENT trials,,0,0,,2.5,1.0,1_human_pharm;5_animal;6_clinical_obs,8,1,27312
+dystonia,Dystonia,harm,safety outcome in EMERGENT trials,,0,0,,3.0,1.0,1_human_pharm;5_animal;6_clinical_obs,8,1,27312
 pd_tremor,Parkinson tremor / motor,harm,untested,,0,0,,0,0,,2,0,66098
 drug_parkinsonism,Antipsychotic-induced parkinsonism/EPS,harm,safety outcome in EMERGENT trials,,0,0,,2.0,1.0,1_human_pharm;6_clinical_obs,7,0,14538
 asthma,Asthma,harm,untested,,0,0,,3.0,1,1_human_pharm;5_animal,4,4,223667
 copd,COPD,harm,untested,,0,0,,0,0,,0,0,104648
 bradycardia,Bradycardia / conduction,harm,safety data in trials,,0,0,,5.0,2,1_human_pharm;5_animal;6_clinical_obs,8,7,63769
-peptic_ulcer,Peptic ulcer / GERD,harm,untested,,0,0,,2.0,0.5,1_human_pharm;5_animal,4,2,114248
+peptic_ulcer,Peptic ulcer / GERD,harm,untested,,0,0,,3.0,1,1_human_pharm;5_animal,4,2,114248
 sialorrhea,Sialorrhea / hypersecretion,harm,observed adverse effect,,0,0,,4.0,2,1_human_pharm;6_clinical_obs,12,12,3348
 hyperhidrosis,Hyperhidrosis,harm,observed adverse effect,,0,0,,4.0,1.5,1_human_pharm;5_animal;6_clinical_obs,8,8,4347
 myasthenia,Myasthenia gravis (cholinergic crisis),harm,untested,,0,0,,0,0,,2,2,18533

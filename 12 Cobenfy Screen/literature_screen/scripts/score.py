@@ -8,6 +8,12 @@ override=json.load(open('extraction/spotcheck_overrides.json')) if glob.glob('ex
 for r in rows:
     k=f"{r['pmid']}|{r['condition']}"
     if k in override: r.update(override[k]); r['spotcheck_corrected']=True
+# v3 rule: antipsychotic response is a proxy for M4-mediated striatal dopamine reduction only in
+# dopamine-hyperactivity syndromes; elsewhere antipsychotic benefit is likely H1/5-HT2A/CTZ-mediated.
+TYPE0_VALID={'ad_psychosis','pd_psychosis','dlb','bipolar_mania','tourette','huntington','autism_irritability','delirium','ocd','tardive'}
+for r in rows:
+    if r.get('evidence_type')=='0_antipsychotic_response' and r['condition'] not in TYPE0_VALID and r.get('direction') in ('helps','harms'):
+        r['direction']='unclear'; r['type0_rule_applied']=True
 rel=[r for r in rows if r.get('relevant') and r.get('evidence_type')]
 TYPES=['0_antipsychotic_response','1_human_pharm','2_anticholinergic_burden','3_genetics','4_postmortem_imaging','5_animal','6_clinical_obs']
 HUMAN=set(TYPES)-{'5_animal'}
