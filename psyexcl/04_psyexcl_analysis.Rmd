@@ -14,6 +14,9 @@ output:
 library(tidyverse)
 library(readxl)
 
+# Statistics
+library(metafor)
+
 # Export
 library(writexl)
 
@@ -143,8 +146,95 @@ df_clean <- df_clean %>%
     excl_substance, excl_other, any_psych, exclusion_text
   )
 
-# Write analysis-ready data
-write_xlsx(df_clean, "04_psyexcl_clean.xlsx")
+# Results raw data
+df_status <- read_excel("03_psyexcl_status_raw.xlsx")
+df_flow <- read_excel("03_psyexcl_results_flow_raw.xlsx")
+df_groups <- read_excel("03_psyexcl_results_groups_raw.xlsx")
+df_psych_ae <- read_excel("03_psyexcl_results_psych_ae_raw.xlsx")
+df_arms <- read_excel("03_psyexcl_results_arms_raw.xlsx")
+
+# Psychiatric adverse events per group (max over terms = lower bound; sum = upper bound)
+df_group_psych <- df_psych_ae %>%
+  filter(!is.na(num_affected)) %>%
+  group_by(nct_id, group_id) %>%
+  summarise(
+    psych_max = max(num_affected, na.rm = TRUE),
+    psych_sum = sum(num_affected, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Group-level adverse events with registered arm type
+df_groups_clean <- df_groups %>%
+  mutate(title_key = str_squish(str_to_lower(group_title))) %>%
+  left_join(df_group_psych, by = c("nct_id", "group_id")) %>%
+  left_join(
+    df_arms %>%
+      mutate(title_key = str_squish(str_to_lower(arm_label))) %>%
+      distinct(nct_id, title_key, .keep_all = TRUE) %>%
+      select(nct_id, title_key, arm_type),
+    by = c("nct_id", "title_key" = "title_key")
+  ) %>%
+  mutate(
+    psych_max = replace_na(psych_max, 0),
+    psych_sum = replace_na(psych_sum, 0),
+    at_risk = pmax(serious_at_risk, other_at_risk, na.rm = TRUE),
+    title_lower = str_to_lower(group_title),
+    control_inactive = arm_type %in% c("PLACEBO_COMPARATOR", "SHAM_COMPARATOR", "NO_INTERVENTION") |
+      (is.na(arm_type) & str_detect(title_lower, "placebo|sham|vehicle|no treatment|no intervention|usual care|standard care|standard of care")),
+    control_active = !control_inactive & arm_type %in% c("ACTIVE_COMPARATOR"),
+    role = case_when(
+      control_inactive ~ "control_inactive",
+      control_active ~ "control_active",
+      TRUE ~ "experimental"
+    )
+  )
+
+# Trial-level adverse-event flags
+df_trial_ae <- df_groups_clean %>%
+  group_by(nct_id) %>%
+  summarise(
+    has_ae_results = 1,
+    any_psych_ae_reported = as.numeric(any(psych_max > 0))
+  )
+
+# Add stop reason, design, participant flow and adverse-event flags to trials
+df_clean <- df_clean %>%
+  left_join(df_status, by = "nct_id") %>%
+  left_join(df_flow, by = "nct_id") %>%
+  left_join(df_trial_ae, by = "nct_id") %>%
+  mutate(
+    has_ae_results = replace_na(has_ae_results, 0),
+    stopped_low_accrual = as.numeric(
+      overall_status %in% c("TERMINATED", "WITHDRAWN", "SUSPENDED") &
+        str_detect(str_to_lower(replace_na(why_stopped, "")), "accru|enrol|recruit")
+    ),
+    flow_dropped = flow_started - flow_completed
+  )
+
+# Harm data: randomized 2-group trials, 1 experimental arm vs 1 control arm
+df_harm <- df_groups_clean %>%
+  group_by(nct_id) %>%
+  filter(n() == 2, sum(role == "experimental") == 1, sum(role != "experimental") == 1) %>%
+  ungroup() %>%
+  mutate(arm = if_else(role == "experimental", "exp", "ctl")) %>%
+  group_by(nct_id) %>%
+  mutate(control_type = role[arm == "ctl"]) %>%
+  ungroup() %>%
+  select(nct_id, arm, control_type, psych_max, psych_sum, serious_affected, deaths_affected, at_risk) %>%
+  pivot_wider(names_from = arm, values_from = c(psych_max, psych_sum, serious_affected, deaths_affected, at_risk)) %>%
+  inner_join(
+    df_clean %>%
+      filter(allocation == "RANDOMIZED") %>%
+      select(nct_id, any_psych, excl_general, excl_substance, area, phase, sponsor_class, start_year, enrollment),
+    by = "nct_id"
+  ) %>%
+  filter(at_risk_exp > 0, at_risk_ctl > 0, !is.na(at_risk_exp), !is.na(at_risk_ctl))
+
+print(nrow(df_harm))
+print(table(df_harm$control_type, df_harm$any_psych))
+
+# Write analysis-ready data (sheet 1 = trials, sheet 2 = harm)
+write_xlsx(list(trials = df_clean, harm = df_harm), "04_psyexcl_clean.xlsx")
 ```
 
 # 02. CLASSIFIER VALIDATION
@@ -447,6 +537,267 @@ h3_model_treatment <- glm(
 print(exp(cbind(OR = coef(h3_model_treatment), confint.default(h3_model_treatment))))
 ```
 
+# H4. PSYCHIATRIC HARM AND EXCLUSION (CO-PRIMARY)
+
+## H4.1 Data preparation
+```{r}
+################################################################################
+# H4.1 Data preparation
+################################################################################
+
+# Harm sample: inactive control only, at least one psychiatric event in either arm
+h4_df <- read_excel("04_psyexcl_clean.xlsx", sheet = "harm") %>%
+  filter(control_type == "control_inactive") %>%
+  filter(psych_max_exp + psych_max_ctl > 0) %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4")),
+    sponsor_class = factor(sponsor_class, levels = c("Industry", "Government", "Other"))
+  )
+
+# Log risk ratio, experimental vs control
+h4_df <- escalc(
+  measure = "RR",
+  ai = psych_max_exp, n1i = at_risk_exp,
+  ci = psych_max_ctl, n2i = at_risk_ctl,
+  data = h4_df
+)
+
+# Sample
+print(nrow(h4_df))
+print(table(h4_df$any_psych))
+print(h4_df %>% group_by(any_psych) %>% summarise(
+  n = n(),
+  risk_exp = sum(psych_max_exp) / sum(at_risk_exp),
+  risk_ctl = sum(psych_max_ctl) / sum(at_risk_ctl)
+))
+```
+
+## H4.2 Analysis
+```{r}
+################################################################################
+# H4.2 Analysis
+################################################################################
+
+# Pooled psychiatric-harm RR within each group of trials
+h4_model_included <- rma(yi, vi, data = h4_df %>% filter(any_psych == 0), method = "REML")
+h4_model_excluded <- rma(yi, vi, data = h4_df %>% filter(any_psych == 1), method = "REML")
+
+print(h4_model_included)
+print(exp(c(h4_model_included$b, h4_model_included$ci.lb, h4_model_included$ci.ub)))
+print(h4_model_excluded)
+print(exp(c(h4_model_excluded$b, h4_model_excluded$ci.lb, h4_model_excluded$ci.ub)))
+
+# Primary model: meta-regression
+h4_model_primary <- rma(
+  yi, vi,
+  mods = ~ any_psych + area + phase + sponsor_class + start_year,
+  data = h4_df,
+  method = "REML"
+)
+
+print(h4_model_primary)
+print(coef(summary(h4_model_primary))["any_psych", ])
+print(exp(coef(h4_model_primary)["any_psych"]))
+print(exp(c(h4_model_primary$ci.lb[2], h4_model_primary$ci.ub[2])))
+```
+
+## H4.3 Robustness
+```{r}
+################################################################################
+# H4.3 Robustness
+################################################################################
+
+# Unadjusted meta-regression
+h4_model_unadjusted <- rma(yi, vi, mods = ~ any_psych, data = h4_df, method = "REML")
+
+print(coef(summary(h4_model_unadjusted))["any_psych", ])
+print(exp(coef(h4_model_unadjusted)["any_psych"]))
+
+# Sum over terms instead of max
+h4_df_sum <- escalc(
+  measure = "RR",
+  ai = psych_sum_exp, n1i = at_risk_exp,
+  ci = psych_sum_ctl, n2i = at_risk_ctl,
+  data = h4_df %>%
+    select(-yi, -vi) %>%
+    mutate(
+      psych_sum_exp = pmin(psych_sum_exp, at_risk_exp),
+      psych_sum_ctl = pmin(psych_sum_ctl, at_risk_ctl)
+    )
+)
+
+h4_model_sum <- rma(
+  yi, vi,
+  mods = ~ any_psych + area + phase + sponsor_class + start_year,
+  data = h4_df_sum,
+  method = "REML"
+)
+
+print(coef(summary(h4_model_sum))["any_psych", ])
+print(exp(coef(h4_model_sum)["any_psych"]))
+
+# Active comparators included
+h4_df_active <- read_excel("04_psyexcl_clean.xlsx", sheet = "harm") %>%
+  filter(psych_max_exp + psych_max_ctl > 0) %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4")),
+    sponsor_class = factor(sponsor_class, levels = c("Industry", "Government", "Other"))
+  )
+
+h4_df_active <- escalc(
+  measure = "RR",
+  ai = psych_max_exp, n1i = at_risk_exp,
+  ci = psych_max_ctl, n2i = at_risk_ctl,
+  data = h4_df_active
+)
+
+h4_model_active <- rma(
+  yi, vi,
+  mods = ~ any_psych + control_type + area + phase + sponsor_class + start_year,
+  data = h4_df_active,
+  method = "REML"
+)
+
+print(nrow(h4_df_active))
+print(coef(summary(h4_model_active))["any_psych", ])
+print(exp(coef(h4_model_active)["any_psych"]))
+
+# Trials with at least 100 participants
+h4_model_large <- rma(
+  yi, vi,
+  mods = ~ any_psych + area + phase + sponsor_class + start_year,
+  data = h4_df %>% filter(at_risk_exp + at_risk_ctl >= 100),
+  method = "REML"
+)
+
+print(coef(summary(h4_model_large))["any_psych", ])
+print(exp(coef(h4_model_large)["any_psych"]))
+```
+
+# H5. PSYCHIATRIC SAFETY DATA GAP
+
+## H5.1 Data preparation
+```{r}
+################################################################################
+# H5.1 Data preparation
+################################################################################
+
+# Trials with posted adverse-event results
+h5_df <- read_excel("04_psyexcl_clean.xlsx", sheet = "trials") %>%
+  filter(has_ae_results == 1, !is.na(enrollment)) %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4")),
+    sponsor_class = factor(sponsor_class, levels = c("Industry", "Government", "Other"))
+  )
+
+# Sample
+print(nrow(h5_df))
+print(h5_df %>% group_by(any_psych) %>% summarise(n = n(), prop_reported = mean(any_psych_ae_reported)))
+```
+
+## H5.2 Analysis
+```{r}
+################################################################################
+# H5.2 Analysis
+################################################################################
+
+# Primary model
+h5_model_primary <- glm(
+  any_psych_ae_reported ~ any_psych + area + phase + sponsor_class + start_year + log1p(enrollment),
+  family = binomial,
+  data = h5_df
+)
+
+print(summary(h5_model_primary))
+print(summary(h5_model_primary)$coefficients["any_psych", ])
+print(exp(coef(h5_model_primary)["any_psych"]))
+print(exp(confint.default(h5_model_primary)["any_psych", ]))
+```
+
+# H6. RECRUITMENT FAILURE
+
+## H6.1 Data preparation
+```{r}
+################################################################################
+# H6.1 Data preparation
+################################################################################
+
+# Analysis sample
+h6_df <- read_excel("04_psyexcl_clean.xlsx", sheet = "trials") %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4")),
+    sponsor_class = factor(sponsor_class, levels = c("Industry", "Government", "Other"))
+  )
+
+# Sample
+print(nrow(h6_df))
+print(h6_df %>% group_by(any_psych) %>% summarise(n = n(), prop_low_accrual = mean(stopped_low_accrual)))
+```
+
+## H6.2 Analysis
+```{r}
+################################################################################
+# H6.2 Analysis
+################################################################################
+
+# Primary model
+h6_model_primary <- glm(
+  stopped_low_accrual ~ any_psych + area + phase + sponsor_class + start_year,
+  family = binomial,
+  data = h6_df
+)
+
+print(summary(h6_model_primary))
+print(summary(h6_model_primary)$coefficients["any_psych", ])
+print(exp(coef(h6_model_primary)["any_psych"]))
+print(exp(confint.default(h6_model_primary)["any_psych", ]))
+```
+
+# H7. DROP-OUT
+
+## H7.1 Data preparation
+```{r}
+################################################################################
+# H7.1 Data preparation
+################################################################################
+
+# Trials with plausible participant flow
+h7_df <- read_excel("04_psyexcl_clean.xlsx", sheet = "trials") %>%
+  filter(!is.na(flow_started), !is.na(flow_completed), flow_started > 0, flow_completed <= flow_started) %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4")),
+    sponsor_class = factor(sponsor_class, levels = c("Industry", "Government", "Other"))
+  )
+
+# Sample
+print(nrow(h7_df))
+print(h7_df %>% group_by(any_psych) %>% summarise(n = n(), dropout = sum(flow_dropped) / sum(flow_started)))
+```
+
+## H7.2 Analysis
+```{r}
+################################################################################
+# H7.2 Analysis
+################################################################################
+
+# Primary model
+h7_model_primary <- glm(
+  cbind(flow_dropped, flow_completed) ~ any_psych + area + phase + sponsor_class + start_year,
+  family = quasibinomial,
+  data = h7_df
+)
+
+print(summary(h7_model_primary))
+print(summary(h7_model_primary)$coefficients["any_psych", ])
+print(exp(coef(h7_model_primary)["any_psych"]))
+print(exp(confint.default(h7_model_primary)["any_psych", ]))
+```
+
 # E1. CATEGORY PREVALENCE (EXPLORATORY)
 ```{r}
 ################################################################################
@@ -545,6 +896,60 @@ print(exp(coef(e3_model)["us_site"]))
 print(exp(confint.default(e3_model)["us_site", ]))
 ```
 
+# E4. SERIOUS ADVERSE EVENTS AND DEATHS (EXPLORATORY)
+```{r}
+################################################################################
+# E4. SERIOUS ADVERSE EVENTS AND DEATHS (EXPLORATORY)
+################################################################################
+
+# Analysis sample
+e4_df <- read_excel("04_psyexcl_clean.xlsx", sheet = "harm") %>%
+  filter(control_type == "control_inactive") %>%
+  mutate(
+    area = factor(area, levels = c("Oncology", "Cardiovascular", "Metabolic/endocrine", "Infectious", "Respiratory", "Other")),
+    phase = factor(phase, levels = c("Phase 1/2", "Phase 2", "Phase 2/3", "Phase 3", "Phase 4")),
+    sponsor_class = factor(sponsor_class, levels = c("Industry", "Government", "Other"))
+  )
+
+# Serious adverse events
+e4_df_serious <- escalc(
+  measure = "RR",
+  ai = serious_affected_exp, n1i = at_risk_exp,
+  ci = serious_affected_ctl, n2i = at_risk_ctl,
+  data = e4_df %>% filter(!is.na(serious_affected_exp), !is.na(serious_affected_ctl), serious_affected_exp + serious_affected_ctl > 0)
+)
+
+e4_model_serious <- rma(
+  yi, vi,
+  mods = ~ any_psych + area + phase + sponsor_class + start_year,
+  data = e4_df_serious,
+  method = "REML"
+)
+
+print(nrow(e4_df_serious))
+print(coef(summary(e4_model_serious))["any_psych", ])
+print(exp(coef(e4_model_serious)["any_psych"]))
+
+# Deaths
+e4_df_deaths <- escalc(
+  measure = "RR",
+  ai = deaths_affected_exp, n1i = at_risk_exp,
+  ci = deaths_affected_ctl, n2i = at_risk_ctl,
+  data = e4_df %>% filter(!is.na(deaths_affected_exp), !is.na(deaths_affected_ctl), deaths_affected_exp + deaths_affected_ctl > 0)
+)
+
+e4_model_deaths <- rma(
+  yi, vi,
+  mods = ~ any_psych + area + phase + sponsor_class + start_year,
+  data = e4_df_deaths,
+  method = "REML"
+)
+
+print(nrow(e4_df_deaths))
+print(coef(summary(e4_model_deaths))["any_psych", ])
+print(exp(coef(e4_model_deaths)["any_psych"]))
+```
+
 # HOLM CORRECTION (SECONDARY HYPOTHESES)
 ```{r}
 ################################################################################
@@ -552,10 +957,13 @@ print(exp(confint.default(e3_model)["us_site", ]))
 ################################################################################
 
 holm_df <- tibble(
-  hypothesis = c("H2 sponsor_industry", "H3 area (LRT)"),
+  hypothesis = c("H2 sponsor_industry", "H3 area (LRT)", "H5 data gap", "H6 low accrual", "H7 drop-out"),
   p = c(
     summary(h2_model_primary)$coefficients["sponsor_industry", "Pr(>|z|)"],
-    h3_lrt$`Pr(>Chi)`[2]
+    h3_lrt$`Pr(>Chi)`[2],
+    summary(h5_model_primary)$coefficients["any_psych", "Pr(>|z|)"],
+    summary(h6_model_primary)$coefficients["any_psych", "Pr(>|z|)"],
+    summary(h7_model_primary)$coefficients["any_psych", "Pr(>|t|)"]
   )
 ) %>%
   mutate(p_holm = p.adjust(p, method = "holm"))

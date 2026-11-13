@@ -414,7 +414,22 @@ library(tidyverse)</code></pre>
 ## i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <pre class="r"><code>library(readxl)
 
-# Export
+# Statistics
+library(metafor)</code></pre>
+<pre><code>## Loading required package: Matrix
+## 
+## Attaching package: &#39;Matrix&#39;
+## 
+## The following objects are masked from &#39;package:tidyr&#39;:
+## 
+##     expand, pack, unpack
+## 
+## Loading required package: metadat
+## Loading required package: numDeriv
+## 
+## Loading the &#39;metafor&#39; package (version 4.4-0). For an
+## introduction to the package please type: help(metafor)</code></pre>
+<pre class="r"><code># Export
 library(writexl)
 
 # Options
@@ -542,8 +557,99 @@ df_clean &lt;- df_clean %&gt;%
     excl_substance, excl_other, any_psych, exclusion_text
   )
 
-# Write analysis-ready data
-write_xlsx(df_clean, &quot;04_psyexcl_clean.xlsx&quot;)</code></pre>
+# Results raw data
+df_status &lt;- read_excel(&quot;03_psyexcl_status_raw.xlsx&quot;)
+df_flow &lt;- read_excel(&quot;03_psyexcl_results_flow_raw.xlsx&quot;)
+df_groups &lt;- read_excel(&quot;03_psyexcl_results_groups_raw.xlsx&quot;)
+df_psych_ae &lt;- read_excel(&quot;03_psyexcl_results_psych_ae_raw.xlsx&quot;)
+df_arms &lt;- read_excel(&quot;03_psyexcl_results_arms_raw.xlsx&quot;)
+
+# Psychiatric adverse events per group (max over terms = lower bound; sum = upper bound)
+df_group_psych &lt;- df_psych_ae %&gt;%
+  filter(!is.na(num_affected)) %&gt;%
+  group_by(nct_id, group_id) %&gt;%
+  summarise(
+    psych_max = max(num_affected, na.rm = TRUE),
+    psych_sum = sum(num_affected, na.rm = TRUE),
+    .groups = &quot;drop&quot;
+  )
+
+# Group-level adverse events with registered arm type
+df_groups_clean &lt;- df_groups %&gt;%
+  mutate(title_key = str_squish(str_to_lower(group_title))) %&gt;%
+  left_join(df_group_psych, by = c(&quot;nct_id&quot;, &quot;group_id&quot;)) %&gt;%
+  left_join(
+    df_arms %&gt;%
+      mutate(title_key = str_squish(str_to_lower(arm_label))) %&gt;%
+      distinct(nct_id, title_key, .keep_all = TRUE) %&gt;%
+      select(nct_id, title_key, arm_type),
+    by = c(&quot;nct_id&quot;, &quot;title_key&quot; = &quot;title_key&quot;)
+  ) %&gt;%
+  mutate(
+    psych_max = replace_na(psych_max, 0),
+    psych_sum = replace_na(psych_sum, 0),
+    at_risk = pmax(serious_at_risk, other_at_risk, na.rm = TRUE),
+    title_lower = str_to_lower(group_title),
+    control_inactive = arm_type %in% c(&quot;PLACEBO_COMPARATOR&quot;, &quot;SHAM_COMPARATOR&quot;, &quot;NO_INTERVENTION&quot;) |
+      (is.na(arm_type) &amp; str_detect(title_lower, &quot;placebo|sham|vehicle|no treatment|no intervention|usual care|standard care|standard of care&quot;)),
+    control_active = !control_inactive &amp; arm_type %in% c(&quot;ACTIVE_COMPARATOR&quot;),
+    role = case_when(
+      control_inactive ~ &quot;control_inactive&quot;,
+      control_active ~ &quot;control_active&quot;,
+      TRUE ~ &quot;experimental&quot;
+    )
+  )
+
+# Trial-level adverse-event flags
+df_trial_ae &lt;- df_groups_clean %&gt;%
+  group_by(nct_id) %&gt;%
+  summarise(
+    has_ae_results = 1,
+    any_psych_ae_reported = as.numeric(any(psych_max &gt; 0))
+  )
+
+# Add stop reason, design, participant flow and adverse-event flags to trials
+df_clean &lt;- df_clean %&gt;%
+  left_join(df_status, by = &quot;nct_id&quot;) %&gt;%
+  left_join(df_flow, by = &quot;nct_id&quot;) %&gt;%
+  left_join(df_trial_ae, by = &quot;nct_id&quot;) %&gt;%
+  mutate(
+    has_ae_results = replace_na(has_ae_results, 0),
+    stopped_low_accrual = as.numeric(
+      overall_status %in% c(&quot;TERMINATED&quot;, &quot;WITHDRAWN&quot;, &quot;SUSPENDED&quot;) &amp;
+        str_detect(str_to_lower(replace_na(why_stopped, &quot;&quot;)), &quot;accru|enrol|recruit&quot;)
+    ),
+    flow_dropped = flow_started - flow_completed
+  )
+
+# Harm data: randomized 2-group trials, 1 experimental arm vs 1 control arm
+df_harm &lt;- df_groups_clean %&gt;%
+  group_by(nct_id) %&gt;%
+  filter(n() == 2, sum(role == &quot;experimental&quot;) == 1, sum(role != &quot;experimental&quot;) == 1) %&gt;%
+  ungroup() %&gt;%
+  mutate(arm = if_else(role == &quot;experimental&quot;, &quot;exp&quot;, &quot;ctl&quot;)) %&gt;%
+  group_by(nct_id) %&gt;%
+  mutate(control_type = role[arm == &quot;ctl&quot;]) %&gt;%
+  ungroup() %&gt;%
+  select(nct_id, arm, control_type, psych_max, psych_sum, serious_affected, deaths_affected, at_risk) %&gt;%
+  pivot_wider(names_from = arm, values_from = c(psych_max, psych_sum, serious_affected, deaths_affected, at_risk)) %&gt;%
+  inner_join(
+    df_clean %&gt;%
+      filter(allocation == &quot;RANDOMIZED&quot;) %&gt;%
+      select(nct_id, any_psych, excl_general, excl_substance, area, phase, sponsor_class, start_year, enrollment),
+    by = &quot;nct_id&quot;
+  ) %&gt;%
+  filter(at_risk_exp &gt; 0, at_risk_ctl &gt; 0, !is.na(at_risk_exp), !is.na(at_risk_ctl))
+
+print(nrow(df_harm))</code></pre>
+<pre><code>## [1] 5013</code></pre>
+<pre class="r"><code>print(table(df_harm$control_type, df_harm$any_psych))</code></pre>
+<pre><code>##                   
+##                       0    1
+##   control_active   1378  480
+##   control_inactive 2165  990</code></pre>
+<pre class="r"><code># Write analysis-ready data (sheet 1 = trials, sheet 2 = harm)
+write_xlsx(list(trials = df_clean, harm = df_harm), &quot;04_psyexcl_clean.xlsx&quot;)</code></pre>
 </div>
 <div id="classifier-validation" class="section level1">
 <h1>02. CLASSIFIER VALIDATION</h1>
@@ -1087,6 +1193,496 @@ print(exp(cbind(OR = coef(h3_model_treatment), confint.default(h3_model_treatmen
 ## sponsor_classOther      0.943458647692676510843057258 1.010787881593474768493</code></pre>
 </div>
 </div>
+<div id="h4.-psychiatric-harm-and-exclusion-co-primary" class="section level1">
+<h1>H4. PSYCHIATRIC HARM AND EXCLUSION (CO-PRIMARY)</h1>
+<div id="h4.1-data-preparation" class="section level2">
+<h2>H4.1 Data preparation</h2>
+<pre class="r"><code>################################################################################
+# H4.1 Data preparation
+################################################################################
+
+# Harm sample: inactive control only, at least one psychiatric event in either arm
+h4_df &lt;- read_excel(&quot;04_psyexcl_clean.xlsx&quot;, sheet = &quot;harm&quot;) %&gt;%
+  filter(control_type == &quot;control_inactive&quot;) %&gt;%
+  filter(psych_max_exp + psych_max_ctl &gt; 0) %&gt;%
+  mutate(
+    area = factor(area, levels = c(&quot;Oncology&quot;, &quot;Cardiovascular&quot;, &quot;Metabolic/endocrine&quot;, &quot;Infectious&quot;, &quot;Respiratory&quot;, &quot;Other&quot;)),
+    phase = factor(phase, levels = c(&quot;Phase 1/2&quot;, &quot;Phase 2&quot;, &quot;Phase 2/3&quot;, &quot;Phase 3&quot;, &quot;Phase 4&quot;)),
+    sponsor_class = factor(sponsor_class, levels = c(&quot;Industry&quot;, &quot;Government&quot;, &quot;Other&quot;))
+  )
+
+# Log risk ratio, experimental vs control
+h4_df &lt;- escalc(
+  measure = &quot;RR&quot;,
+  ai = psych_max_exp, n1i = at_risk_exp,
+  ci = psych_max_ctl, n2i = at_risk_ctl,
+  data = h4_df
+)
+
+# Sample
+print(nrow(h4_df))</code></pre>
+<pre><code>## [1] 1082</code></pre>
+<pre class="r"><code>print(table(h4_df$any_psych))</code></pre>
+<pre><code>## 
+##   0   1 
+## 723 359</code></pre>
+<pre class="r"><code>print(h4_df %&gt;% group_by(any_psych) %&gt;% summarise(
+  n = n(),
+  risk_exp = sum(psych_max_exp) / sum(at_risk_exp),
+  risk_ctl = sum(psych_max_ctl) / sum(at_risk_ctl)
+))</code></pre>
+<pre><code>## # A tibble: 2 x 4
+##   any_psych     n risk_exp risk_ctl
+##       &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1         0   723   0.0165   0.0147
+## 2         1   359   0.0180   0.0162</code></pre>
+</div>
+<div id="h4.2-analysis" class="section level2">
+<h2>H4.2 Analysis</h2>
+<pre class="r"><code>################################################################################
+# H4.2 Analysis
+################################################################################
+
+# Pooled psychiatric-harm RR within each group of trials
+h4_model_included &lt;- rma(yi, vi, data = h4_df %&gt;% filter(any_psych == 0), method = &quot;REML&quot;)
+h4_model_excluded &lt;- rma(yi, vi, data = h4_df %&gt;% filter(any_psych == 1), method = &quot;REML&quot;)
+
+print(h4_model_included)</code></pre>
+<pre><code>## 
+## Random-Effects Model (k = 723; tau^2 estimator: REML)
+## 
+## tau^2 (estimated amount of total heterogeneity): 0.0087 (SE = 0.0074)
+## tau (square root of estimated tau^2 value):      0.0933
+## I^2 (total heterogeneity / total variability):   3.37%
+## H^2 (total variability / sampling variability):  1.03
+## 
+## Test for Heterogeneity:
+## Q(df = 722) = 517.7917, p-val = 1.0000
+## 
+## Model Results:
+## 
+## estimate      se    zval    pval    ci.lb   ci.ub    
+##   0.0317  0.0204  1.5569  0.1195  -0.0082  0.0716    
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>print(exp(c(h4_model_included$b, h4_model_included$ci.lb, h4_model_included$ci.ub)))</code></pre>
+<pre><code>## [1] 1.0321938 0.9918305 1.0741998</code></pre>
+<pre class="r"><code>print(h4_model_excluded)</code></pre>
+<pre><code>## 
+## Random-Effects Model (k = 359; tau^2 estimator: REML)
+## 
+## tau^2 (estimated amount of total heterogeneity): 0.0387 (SE = 0.0173)
+## tau (square root of estimated tau^2 value):      0.1968
+## I^2 (total heterogeneity / total variability):   14.56%
+## H^2 (total variability / sampling variability):  1.17
+## 
+## Test for Heterogeneity:
+## Q(df = 358) = 300.0023, p-val = 0.9884
+## 
+## Model Results:
+## 
+## estimate      se    zval    pval   ci.lb   ci.ub    
+##   0.0678  0.0345  1.9661  0.0493  0.0002  0.1354  * 
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>print(exp(c(h4_model_excluded$b, h4_model_excluded$ci.lb, h4_model_excluded$ci.ub)))</code></pre>
+<pre><code>## [1] 1.070175 1.000211 1.145033</code></pre>
+<pre class="r"><code># Primary model: meta-regression
+h4_model_primary &lt;- rma(
+  yi, vi,
+  mods = ~ any_psych + area + phase + sponsor_class + start_year,
+  data = h4_df,
+  method = &quot;REML&quot;
+)
+
+print(h4_model_primary)</code></pre>
+<pre><code>## 
+## Mixed-Effects Model (k = 1082; tau^2 estimator: REML)
+## 
+## tau^2 (estimated amount of residual heterogeneity):     0.0234 (SE = 0.0084)
+## tau (square root of estimated tau^2 value):             0.1530
+## I^2 (residual heterogeneity / unaccounted variability): 8.41%
+## H^2 (unaccounted variability / sampling variability):   1.09
+## R^2 (amount of heterogeneity accounted for):            0.00%
+## 
+## Test for Residual Heterogeneity:
+## QE(df = 1068) = 808.5697, p-val = 1.0000
+## 
+## Test of Moderators (coefficients 2:14):
+## QM(df = 13) = 10.9420, p-val = 0.6157
+## 
+## Model Results:
+## 
+##                 estimate       se     zval    pval     ci.lb    ci.ub    
+## intrcpt           0.2084  10.4011   0.0200  0.9840  -20.1774  20.5941    
+## any_psych         0.0502   0.0413   1.2148  0.2244   -0.0308   0.1311    
+## area1             0.0868   0.0361   2.4033  0.0162    0.0160   0.1575  * 
+## area2            -0.0119   0.0680  -0.1754  0.8608   -0.1452   0.1213    
+## area3            -0.1052   0.0689  -1.5267  0.1268   -0.2403   0.0299    
+## area4            -0.0176   0.0531  -0.3306  0.7410   -0.1216   0.0865    
+## area5             0.0085   0.0878   0.0966  0.9230   -0.1635   0.1805    
+## phase1            0.1050   0.2175   0.4826  0.6294   -0.3213   0.5312    
+## phase2           -0.0278   0.0692  -0.4018  0.6879   -0.1633   0.1078    
+## phase3           -0.1036   0.1021  -1.0142  0.3105   -0.3038   0.0966    
+## phase4           -0.0219   0.0661  -0.3310  0.7406   -0.1515   0.1077    
+## sponsor_class1   -0.0112   0.0515  -0.2176  0.8277   -0.1121   0.0897    
+## sponsor_class2    0.0388   0.0915   0.4245  0.6712   -0.1405   0.2182    
+## start_year       -0.0001   0.0052  -0.0190  0.9849   -0.0102   0.0100    
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>print(coef(summary(h4_model_primary))[&quot;any_psych&quot;, ])</code></pre>
+<pre><code>##             estimate         se     zval     pval       ci.lb     ci.ub
+## any_psych 0.05017172 0.04129956 1.214825 0.224433 -0.03077393 0.1311174</code></pre>
+<pre class="r"><code>print(exp(coef(h4_model_primary)[&quot;any_psych&quot;]))</code></pre>
+<pre><code>## any_psych 
+##  1.051452</code></pre>
+<pre class="r"><code>print(exp(c(h4_model_primary$ci.lb[2], h4_model_primary$ci.ub[2])))</code></pre>
+<pre><code>## [1] 0.9696948 1.1401016</code></pre>
+</div>
+<div id="h4.3-robustness" class="section level2">
+<h2>H4.3 Robustness</h2>
+<pre class="r"><code>################################################################################
+# H4.3 Robustness
+################################################################################
+
+# Unadjusted meta-regression
+h4_model_unadjusted &lt;- rma(yi, vi, mods = ~ any_psych, data = h4_df, method = &quot;REML&quot;)
+
+print(coef(summary(h4_model_unadjusted))[&quot;any_psych&quot;, ])</code></pre>
+<pre><code>##             estimate         se     zval      pval       ci.lb     ci.ub
+## any_psych 0.03978262 0.03871089 1.027685 0.3040979 -0.03608934 0.1156546</code></pre>
+<pre class="r"><code>print(exp(coef(h4_model_unadjusted)[&quot;any_psych&quot;]))</code></pre>
+<pre><code>## any_psych 
+##  1.040585</code></pre>
+<pre class="r"><code># Sum over terms instead of max
+h4_df_sum &lt;- escalc(
+  measure = &quot;RR&quot;,
+  ai = psych_sum_exp, n1i = at_risk_exp,
+  ci = psych_sum_ctl, n2i = at_risk_ctl,
+  data = h4_df %&gt;%
+    select(-yi, -vi) %&gt;%
+    mutate(
+      psych_sum_exp = pmin(psych_sum_exp, at_risk_exp),
+      psych_sum_ctl = pmin(psych_sum_ctl, at_risk_ctl)
+    )
+)
+
+h4_model_sum &lt;- rma(
+  yi, vi,
+  mods = ~ any_psych + area + phase + sponsor_class + start_year,
+  data = h4_df_sum,
+  method = &quot;REML&quot;
+)
+
+print(coef(summary(h4_model_sum))[&quot;any_psych&quot;, ])</code></pre>
+<pre><code>##             estimate         se     zval       pval        ci.lb     ci.ub
+## any_psych 0.06596867 0.03819365 1.727216 0.08412894 -0.008889507 0.1408268</code></pre>
+<pre class="r"><code>print(exp(coef(h4_model_sum)[&quot;any_psych&quot;]))</code></pre>
+<pre><code>## any_psych 
+##  1.068193</code></pre>
+<pre class="r"><code># Active comparators included
+h4_df_active &lt;- read_excel(&quot;04_psyexcl_clean.xlsx&quot;, sheet = &quot;harm&quot;) %&gt;%
+  filter(psych_max_exp + psych_max_ctl &gt; 0) %&gt;%
+  mutate(
+    area = factor(area, levels = c(&quot;Oncology&quot;, &quot;Cardiovascular&quot;, &quot;Metabolic/endocrine&quot;, &quot;Infectious&quot;, &quot;Respiratory&quot;, &quot;Other&quot;)),
+    phase = factor(phase, levels = c(&quot;Phase 1/2&quot;, &quot;Phase 2&quot;, &quot;Phase 2/3&quot;, &quot;Phase 3&quot;, &quot;Phase 4&quot;)),
+    sponsor_class = factor(sponsor_class, levels = c(&quot;Industry&quot;, &quot;Government&quot;, &quot;Other&quot;))
+  )
+
+h4_df_active &lt;- escalc(
+  measure = &quot;RR&quot;,
+  ai = psych_max_exp, n1i = at_risk_exp,
+  ci = psych_max_ctl, n2i = at_risk_ctl,
+  data = h4_df_active
+)
+
+h4_model_active &lt;- rma(
+  yi, vi,
+  mods = ~ any_psych + control_type + area + phase + sponsor_class + start_year,
+  data = h4_df_active,
+  method = &quot;REML&quot;
+)
+
+print(nrow(h4_df_active))</code></pre>
+<pre><code>## [1] 1767</code></pre>
+<pre class="r"><code>print(coef(summary(h4_model_active))[&quot;any_psych&quot;, ])</code></pre>
+<pre><code>##             estimate         se      zval      pval       ci.lb      ci.ub
+## any_psych 0.01829956 0.02997056 0.6105846 0.5414746 -0.04044165 0.07704077</code></pre>
+<pre class="r"><code>print(exp(coef(h4_model_active)[&quot;any_psych&quot;]))</code></pre>
+<pre><code>## any_psych 
+##  1.018468</code></pre>
+<pre class="r"><code># Trials with at least 100 participants
+h4_model_large &lt;- rma(
+  yi, vi,
+  mods = ~ any_psych + area + phase + sponsor_class + start_year,
+  data = h4_df %&gt;% filter(at_risk_exp + at_risk_ctl &gt;= 100),
+  method = &quot;REML&quot;
+)
+
+print(coef(summary(h4_model_large))[&quot;any_psych&quot;, ])</code></pre>
+<pre><code>##             estimate         se      zval      pval       ci.lb     ci.ub
+## any_psych 0.04069648 0.04466142 0.9112222 0.3621783 -0.04683829 0.1282312</code></pre>
+<pre class="r"><code>print(exp(coef(h4_model_large)[&quot;any_psych&quot;]))</code></pre>
+<pre><code>## any_psych 
+##  1.041536</code></pre>
+</div>
+</div>
+<div id="h5.-psychiatric-safety-data-gap" class="section level1">
+<h1>H5. PSYCHIATRIC SAFETY DATA GAP</h1>
+<div id="h5.1-data-preparation" class="section level2">
+<h2>H5.1 Data preparation</h2>
+<pre class="r"><code>################################################################################
+# H5.1 Data preparation
+################################################################################
+
+# Trials with posted adverse-event results
+h5_df &lt;- read_excel(&quot;04_psyexcl_clean.xlsx&quot;, sheet = &quot;trials&quot;) %&gt;%
+  filter(has_ae_results == 1, !is.na(enrollment)) %&gt;%
+  mutate(
+    area = factor(area, levels = c(&quot;Oncology&quot;, &quot;Cardiovascular&quot;, &quot;Metabolic/endocrine&quot;, &quot;Infectious&quot;, &quot;Respiratory&quot;, &quot;Other&quot;)),
+    phase = factor(phase, levels = c(&quot;Phase 1/2&quot;, &quot;Phase 2&quot;, &quot;Phase 2/3&quot;, &quot;Phase 3&quot;, &quot;Phase 4&quot;)),
+    sponsor_class = factor(sponsor_class, levels = c(&quot;Industry&quot;, &quot;Government&quot;, &quot;Other&quot;))
+  )
+
+# Sample
+print(nrow(h5_df))</code></pre>
+<pre><code>## [1] 22353</code></pre>
+<pre class="r"><code>print(h5_df %&gt;% group_by(any_psych) %&gt;% summarise(n = n(), prop_reported = mean(any_psych_ae_reported)))</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   any_psych     n prop_reported
+##       &lt;dbl&gt; &lt;int&gt;         &lt;dbl&gt;
+## 1         0 14887         0.415
+## 2         1  7466         0.477</code></pre>
+</div>
+<div id="h5.2-analysis" class="section level2">
+<h2>H5.2 Analysis</h2>
+<pre class="r"><code>################################################################################
+# H5.2 Analysis
+################################################################################
+
+# Primary model
+h5_model_primary &lt;- glm(
+  any_psych_ae_reported ~ any_psych + area + phase + sponsor_class + start_year + log1p(enrollment),
+  family = binomial,
+  data = h5_df
+)
+
+print(summary(h5_model_primary))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = any_psych_ae_reported ~ any_psych + area + phase + 
+##     sponsor_class + start_year + log1p(enrollment), family = binomial, 
+##     data = h5_df)
+## 
+## Coefficients:
+##                      Estimate  Std. Error z value             Pr(&gt;|z|)    
+## (Intercept)       -2.41252887  8.36160517  -0.289               0.7729    
+## any_psych          0.28306201  0.03282797   8.623 &lt; 0.0000000000000002 ***
+## area1              1.49618556  0.03394052  44.083 &lt; 0.0000000000000002 ***
+## area2             -0.35460821  0.05513887  -6.431       0.000000000127 ***
+## area3             -0.27387482  0.04524023  -6.054       0.000000001415 ***
+## area4             -0.02692260  0.03848687  -0.700               0.4842    
+## area5             -0.56162321  0.05358844 -10.480 &lt; 0.0000000000000002 ***
+## phase1             0.53576992  0.04785309  11.196 &lt; 0.0000000000000002 ***
+## phase2             0.27594937  0.03181291   8.674 &lt; 0.0000000000000002 ***
+## phase3            -0.00908246  0.08108954  -0.112               0.9108    
+## phase4            -0.01505796  0.03623265  -0.416               0.6777    
+## sponsor_class1     0.55663124  0.03162376  17.602 &lt; 0.0000000000000002 ***
+## sponsor_class2     0.08680620  0.04988909   1.740               0.0819 .  
+## start_year        -0.00001918  0.00414663  -0.005               0.9963    
+## log1p(enrollment)  0.35776969  0.01249856  28.625 &lt; 0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 30617  on 22352  degrees of freedom
+## Residual deviance: 24815  on 22338  degrees of freedom
+## AIC: 24845
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code>print(summary(h5_model_primary)$coefficients[&quot;any_psych&quot;, ])</code></pre>
+<pre><code>##                   Estimate                 Std. Error 
+## 0.283062014212504264865089 0.032827973532027023007007 
+##                    z value                   Pr(&gt;|z|) 
+## 8.622585671831023645950154 0.000000000000000006545896</code></pre>
+<pre class="r"><code>print(exp(coef(h5_model_primary)[&quot;any_psych&quot;]))</code></pre>
+<pre><code>## any_psych 
+##  1.327187</code></pre>
+<pre class="r"><code>print(exp(confint.default(h5_model_primary)[&quot;any_psych&quot;, ]))</code></pre>
+<pre><code>##    2.5 %   97.5 % 
+## 1.244483 1.415388</code></pre>
+</div>
+</div>
+<div id="h6.-recruitment-failure" class="section level1">
+<h1>H6. RECRUITMENT FAILURE</h1>
+<div id="h6.1-data-preparation" class="section level2">
+<h2>H6.1 Data preparation</h2>
+<pre class="r"><code>################################################################################
+# H6.1 Data preparation
+################################################################################
+
+# Analysis sample
+h6_df &lt;- read_excel(&quot;04_psyexcl_clean.xlsx&quot;, sheet = &quot;trials&quot;) %&gt;%
+  mutate(
+    area = factor(area, levels = c(&quot;Oncology&quot;, &quot;Cardiovascular&quot;, &quot;Metabolic/endocrine&quot;, &quot;Infectious&quot;, &quot;Respiratory&quot;, &quot;Other&quot;)),
+    phase = factor(phase, levels = c(&quot;Phase 1/2&quot;, &quot;Phase 2&quot;, &quot;Phase 2/3&quot;, &quot;Phase 3&quot;, &quot;Phase 4&quot;)),
+    sponsor_class = factor(sponsor_class, levels = c(&quot;Industry&quot;, &quot;Government&quot;, &quot;Other&quot;))
+  )
+
+# Sample
+print(nrow(h6_df))</code></pre>
+<pre><code>## [1] 75972</code></pre>
+<pre class="r"><code>print(h6_df %&gt;% group_by(any_psych) %&gt;% summarise(n = n(), prop_low_accrual = mean(stopped_low_accrual)))</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   any_psych     n prop_low_accrual
+##       &lt;dbl&gt; &lt;int&gt;            &lt;dbl&gt;
+## 1         0 51144           0.0470
+## 2         1 24828           0.0497</code></pre>
+</div>
+<div id="h6.2-analysis" class="section level2">
+<h2>H6.2 Analysis</h2>
+<pre class="r"><code>################################################################################
+# H6.2 Analysis
+################################################################################
+
+# Primary model
+h6_model_primary &lt;- glm(
+  stopped_low_accrual ~ any_psych + area + phase + sponsor_class + start_year,
+  family = binomial,
+  data = h6_df
+)
+
+print(summary(h6_model_primary))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = stopped_low_accrual ~ any_psych + area + phase + 
+##     sponsor_class + start_year, family = binomial, data = h6_df)
+## 
+## Coefficients:
+##                 Estimate Std. Error z value             Pr(&gt;|z|)    
+## (Intercept)    120.25854    7.66001  15.700 &lt; 0.0000000000000002 ***
+## any_psych        0.01783    0.03679   0.485               0.6279    
+## area1            0.28182    0.03498   8.056  0.00000000000000079 ***
+## area2            0.04568    0.05343   0.855               0.3926    
+## area3           -0.26699    0.06151  -4.340  0.00001422152152631 ***
+## area4            0.10890    0.04709   2.312               0.0208 *  
+## area5           -0.11158    0.07699  -1.449               0.1473    
+## phase1           0.05492    0.04813   1.141               0.2539    
+## phase2           0.28101    0.03224   8.716 &lt; 0.0000000000000002 ***
+## phase3          -0.19431    0.07602  -2.556               0.0106 *  
+## phase4          -0.26373    0.04256  -6.197  0.00000000057695852 ***
+## sponsor_class1  -0.29522    0.03709  -7.960  0.00000000000000172 ***
+## sponsor_class2   0.07133    0.05603   1.273               0.2030    
+## start_year      -0.06123    0.00380 -16.114 &lt; 0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 29228  on 75971  degrees of freedom
+## Residual deviance: 28469  on 75958  degrees of freedom
+## AIC: 28497
+## 
+## Number of Fisher Scoring iterations: 6</code></pre>
+<pre class="r"><code>print(summary(h6_model_primary)$coefficients[&quot;any_psych&quot;, ])</code></pre>
+<pre><code>##   Estimate Std. Error    z value   Pr(&gt;|z|) 
+## 0.01782961 0.03678646 0.48467860 0.62790435</code></pre>
+<pre class="r"><code>print(exp(coef(h6_model_primary)[&quot;any_psych&quot;]))</code></pre>
+<pre><code>## any_psych 
+##   1.01799</code></pre>
+<pre class="r"><code>print(exp(confint.default(h6_model_primary)[&quot;any_psych&quot;, ]))</code></pre>
+<pre><code>##     2.5 %    97.5 % 
+## 0.9471758 1.0940974</code></pre>
+</div>
+</div>
+<div id="h7.-drop-out" class="section level1">
+<h1>H7. DROP-OUT</h1>
+<div id="h7.1-data-preparation" class="section level2">
+<h2>H7.1 Data preparation</h2>
+<pre class="r"><code>################################################################################
+# H7.1 Data preparation
+################################################################################
+
+# Trials with plausible participant flow
+h7_df &lt;- read_excel(&quot;04_psyexcl_clean.xlsx&quot;, sheet = &quot;trials&quot;) %&gt;%
+  filter(!is.na(flow_started), !is.na(flow_completed), flow_started &gt; 0, flow_completed &lt;= flow_started) %&gt;%
+  mutate(
+    area = factor(area, levels = c(&quot;Oncology&quot;, &quot;Cardiovascular&quot;, &quot;Metabolic/endocrine&quot;, &quot;Infectious&quot;, &quot;Respiratory&quot;, &quot;Other&quot;)),
+    phase = factor(phase, levels = c(&quot;Phase 1/2&quot;, &quot;Phase 2&quot;, &quot;Phase 2/3&quot;, &quot;Phase 3&quot;, &quot;Phase 4&quot;)),
+    sponsor_class = factor(sponsor_class, levels = c(&quot;Industry&quot;, &quot;Government&quot;, &quot;Other&quot;))
+  )
+
+# Sample
+print(nrow(h7_df))</code></pre>
+<pre><code>## [1] 22127</code></pre>
+<pre class="r"><code>print(h7_df %&gt;% group_by(any_psych) %&gt;% summarise(n = n(), dropout = sum(flow_dropped) / sum(flow_started)))</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   any_psych     n dropout
+##       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
+## 1         0 14756   0.246
+## 2         1  7371   0.235</code></pre>
+</div>
+<div id="h7.2-analysis" class="section level2">
+<h2>H7.2 Analysis</h2>
+<pre class="r"><code>################################################################################
+# H7.2 Analysis
+################################################################################
+
+# Primary model
+h7_model_primary &lt;- glm(
+  cbind(flow_dropped, flow_completed) ~ any_psych + area + phase + sponsor_class + start_year,
+  family = quasibinomial,
+  data = h7_df
+)
+
+print(summary(h7_model_primary))</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = cbind(flow_dropped, flow_completed) ~ any_psych + 
+##     area + phase + sponsor_class + start_year, family = quasibinomial, 
+##     data = h7_df)
+## 
+## Coefficients:
+##                  Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)    -33.647489   6.001809  -5.606 0.000000020925479137 ***
+## any_psych       -0.125158   0.024303  -5.150 0.000000262956925563 ***
+## area1            1.443655   0.024367  59.247 &lt; 0.0000000000000002 ***
+## area2           -0.667789   0.036461 -18.315 &lt; 0.0000000000000002 ***
+## area3           -0.532684   0.033348 -15.973 &lt; 0.0000000000000002 ***
+## area4           -0.065301   0.020892  -3.126             0.001777 ** 
+## area5           -0.303017   0.037313  -8.121 0.000000000000000487 ***
+## phase1          -0.118047   0.055595  -2.123             0.033738 *  
+## phase2          -0.185163   0.029033  -6.378 0.000000000183254301 ***
+## phase3           0.587538   0.039313  14.945 &lt; 0.0000000000000002 ***
+## phase4          -0.079439   0.021299  -3.730             0.000192 ***
+## sponsor_class1   0.372959   0.026063  14.310 &lt; 0.0000000000000002 ***
+## sponsor_class2  -0.267304   0.046640  -5.731 0.000000010099650325 ***
+## start_year       0.016009   0.002978   5.376 0.000000077097013931 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for quasibinomial family taken to be 140.1373)
+## 
+##     Null deviance: 3821981  on 22126  degrees of freedom
+## Residual deviance: 3152260  on 22113  degrees of freedom
+## AIC: NA
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<pre class="r"><code>print(summary(h7_model_primary)$coefficients[&quot;any_psych&quot;, ])</code></pre>
+<pre><code>##         Estimate       Std. Error          t value         Pr(&gt;|t|) 
+## -0.1251579667134  0.0243033173161 -5.1498305801360  0.0000002629569</code></pre>
+<pre class="r"><code>print(exp(coef(h7_model_primary)[&quot;any_psych&quot;]))</code></pre>
+<pre><code>## any_psych 
+## 0.8823575</code></pre>
+<pre class="r"><code>print(exp(confint.default(h7_model_primary)[&quot;any_psych&quot;, ]))</code></pre>
+<pre><code>##     2.5 %    97.5 % 
+## 0.8413129 0.9254045</code></pre>
+</div>
+</div>
 <div id="e1.-category-prevalence-exploratory" class="section level1">
 <h1>E1. CATEGORY PREVALENCE (EXPLORATORY)</h1>
 <pre class="r"><code>################################################################################
@@ -1209,6 +1805,68 @@ print(summary(e3_model)$coefficients[&quot;us_site&quot;, ])</code></pre>
 <pre><code>##     2.5 %    97.5 % 
 ## 0.9494176 1.0136200</code></pre>
 </div>
+<div id="e4.-serious-adverse-events-and-deaths-exploratory" class="section level1">
+<h1>E4. SERIOUS ADVERSE EVENTS AND DEATHS (EXPLORATORY)</h1>
+<pre class="r"><code>################################################################################
+# E4. SERIOUS ADVERSE EVENTS AND DEATHS (EXPLORATORY)
+################################################################################
+
+# Analysis sample
+e4_df &lt;- read_excel(&quot;04_psyexcl_clean.xlsx&quot;, sheet = &quot;harm&quot;) %&gt;%
+  filter(control_type == &quot;control_inactive&quot;) %&gt;%
+  mutate(
+    area = factor(area, levels = c(&quot;Oncology&quot;, &quot;Cardiovascular&quot;, &quot;Metabolic/endocrine&quot;, &quot;Infectious&quot;, &quot;Respiratory&quot;, &quot;Other&quot;)),
+    phase = factor(phase, levels = c(&quot;Phase 1/2&quot;, &quot;Phase 2&quot;, &quot;Phase 2/3&quot;, &quot;Phase 3&quot;, &quot;Phase 4&quot;)),
+    sponsor_class = factor(sponsor_class, levels = c(&quot;Industry&quot;, &quot;Government&quot;, &quot;Other&quot;))
+  )
+
+# Serious adverse events
+e4_df_serious &lt;- escalc(
+  measure = &quot;RR&quot;,
+  ai = serious_affected_exp, n1i = at_risk_exp,
+  ci = serious_affected_ctl, n2i = at_risk_ctl,
+  data = e4_df %&gt;% filter(!is.na(serious_affected_exp), !is.na(serious_affected_ctl), serious_affected_exp + serious_affected_ctl &gt; 0)
+)
+
+e4_model_serious &lt;- rma(
+  yi, vi,
+  mods = ~ any_psych + area + phase + sponsor_class + start_year,
+  data = e4_df_serious,
+  method = &quot;REML&quot;
+)
+
+print(nrow(e4_df_serious))</code></pre>
+<pre><code>## [1] 2112</code></pre>
+<pre class="r"><code>print(coef(summary(e4_model_serious))[&quot;any_psych&quot;, ])</code></pre>
+<pre><code>##             estimate         se     zval       pval        ci.lb      ci.ub
+## any_psych 0.02797345 0.01694879 1.650469 0.09884704 -0.005245565 0.06119247</code></pre>
+<pre class="r"><code>print(exp(coef(e4_model_serious)[&quot;any_psych&quot;]))</code></pre>
+<pre><code>## any_psych 
+##  1.028368</code></pre>
+<pre class="r"><code># Deaths
+e4_df_deaths &lt;- escalc(
+  measure = &quot;RR&quot;,
+  ai = deaths_affected_exp, n1i = at_risk_exp,
+  ci = deaths_affected_ctl, n2i = at_risk_ctl,
+  data = e4_df %&gt;% filter(!is.na(deaths_affected_exp), !is.na(deaths_affected_ctl), deaths_affected_exp + deaths_affected_ctl &gt; 0)
+)
+
+e4_model_deaths &lt;- rma(
+  yi, vi,
+  mods = ~ any_psych + area + phase + sponsor_class + start_year,
+  data = e4_df_deaths,
+  method = &quot;REML&quot;
+)
+
+print(nrow(e4_df_deaths))</code></pre>
+<pre><code>## [1] 884</code></pre>
+<pre class="r"><code>print(coef(summary(e4_model_deaths))[&quot;any_psych&quot;, ])</code></pre>
+<pre><code>##              estimate         se      zval      pval       ci.lb      ci.ub
+## any_psych 0.008631612 0.01485728 0.5809687 0.5612615 -0.02048811 0.03775134</code></pre>
+<pre class="r"><code>print(exp(coef(e4_model_deaths)[&quot;any_psych&quot;]))</code></pre>
+<pre><code>## any_psych 
+##  1.008669</code></pre>
+</div>
 <div id="holm-correction-secondary-hypotheses" class="section level1">
 <h1>HOLM CORRECTION (SECONDARY HYPOTHESES)</h1>
 <pre class="r"><code>################################################################################
@@ -1216,20 +1874,26 @@ print(summary(e3_model)$coefficients[&quot;us_site&quot;, ])</code></pre>
 ################################################################################
 
 holm_df &lt;- tibble(
-  hypothesis = c(&quot;H2 sponsor_industry&quot;, &quot;H3 area (LRT)&quot;),
+  hypothesis = c(&quot;H2 sponsor_industry&quot;, &quot;H3 area (LRT)&quot;, &quot;H5 data gap&quot;, &quot;H6 low accrual&quot;, &quot;H7 drop-out&quot;),
   p = c(
     summary(h2_model_primary)$coefficients[&quot;sponsor_industry&quot;, &quot;Pr(&gt;|z|)&quot;],
-    h3_lrt$`Pr(&gt;Chi)`[2]
+    h3_lrt$`Pr(&gt;Chi)`[2],
+    summary(h5_model_primary)$coefficients[&quot;any_psych&quot;, &quot;Pr(&gt;|z|)&quot;],
+    summary(h6_model_primary)$coefficients[&quot;any_psych&quot;, &quot;Pr(&gt;|z|)&quot;],
+    summary(h7_model_primary)$coefficients[&quot;any_psych&quot;, &quot;Pr(&gt;|t|)&quot;]
   )
 ) %&gt;%
   mutate(p_holm = p.adjust(p, method = &quot;holm&quot;))
 
 print(holm_df)</code></pre>
-<pre><code>## # A tibble: 2 x 3
+<pre><code>## # A tibble: 5 x 3
 ##   hypothesis                  p    p_holm
 ##   &lt;chr&gt;                   &lt;dbl&gt;     &lt;dbl&gt;
-## 1 H2 sponsor_industry 5.76e-  1 5.76e-  1
-## 2 H3 area (LRT)       5.51e-115 1.10e-114</code></pre>
+## 1 H2 sponsor_industry 5.76e-  1 1   e+  0
+## 2 H3 area (LRT)       5.51e-115 2.75e-114
+## 3 H5 data gap         6.55e- 18 2.62e- 17
+## 4 H6 low accrual      6.28e-  1 1   e+  0
+## 5 H7 drop-out         2.63e-  7 7.89e-  7</code></pre>
 </div>
 <div id="session-info" class="section level1">
 <h1>SESSION INFO</h1>
@@ -1252,21 +1916,25 @@ print(holm_df)</code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] writexl_1.5.0   readxl_1.4.3    lubridate_1.9.3 forcats_1.0.0  
-##  [5] stringr_1.5.1   dplyr_1.1.4     purrr_1.0.2     readr_2.1.5    
-##  [9] tidyr_1.3.1     tibble_3.2.1    ggplot2_3.4.4   tidyverse_2.0.0
+##  [1] writexl_1.5.0       metafor_4.4-0       numDeriv_2016.8-1.1
+##  [4] metadat_1.2-0       Matrix_1.6-5        readxl_1.4.3       
+##  [7] lubridate_1.9.3     forcats_1.0.0       stringr_1.5.1      
+## [10] dplyr_1.1.4         purrr_1.0.2         readr_2.1.5        
+## [13] tidyr_1.3.1         tibble_3.2.1        ggplot2_3.4.4      
+## [16] tidyverse_2.0.0    
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] gtable_0.3.4     jsonlite_1.8.8   compiler_4.3.3   tidyselect_1.2.0
-##  [5] jquerylib_0.1.4  scales_1.3.0     yaml_2.3.8       fastmap_1.1.1   
-##  [9] R6_2.5.1         generics_0.1.3   knitr_1.45       munsell_0.5.0   
-## [13] bslib_0.6.1      pillar_1.9.0     tzdb_0.4.0       rlang_1.1.3     
-## [17] utf8_1.2.4       stringi_1.8.3    cachem_1.0.8     xfun_0.41       
-## [21] sass_0.4.8       timechange_0.3.0 cli_3.6.2        withr_2.5.0     
-## [25] magrittr_2.0.3   digest_0.6.34    grid_4.3.3       hms_1.1.3       
-## [29] lifecycle_1.0.4  vctrs_0.6.5      evaluate_0.23    glue_1.7.0      
-## [33] cellranger_1.1.0 fansi_1.0.5      colorspace_2.1-0 rmarkdown_2.25  
-## [37] tools_4.3.3      pkgconfig_2.0.3  htmltools_0.5.7</code></pre>
+##  [1] sass_0.4.8       utf8_1.2.4       generics_0.1.3   stringi_1.8.3   
+##  [5] lattice_0.22-5   hms_1.1.3        digest_0.6.34    magrittr_2.0.3  
+##  [9] evaluate_0.23    grid_4.3.3       timechange_0.3.0 fastmap_1.1.1   
+## [13] cellranger_1.1.0 jsonlite_1.8.8   fansi_1.0.5      scales_1.3.0    
+## [17] jquerylib_0.1.4  cli_3.6.2        rlang_1.1.3      munsell_0.5.0   
+## [21] withr_2.5.0      cachem_1.0.8     yaml_2.3.8       tools_4.3.3     
+## [25] tzdb_0.4.0       colorspace_2.1-0 mathjaxr_1.6-0   vctrs_0.6.5     
+## [29] R6_2.5.1         lifecycle_1.0.4  pkgconfig_2.0.3  pillar_1.9.0    
+## [33] bslib_0.6.1      gtable_0.3.4     glue_1.7.0       xfun_0.41       
+## [37] tidyselect_1.2.0 knitr_1.45       htmltools_0.5.7  nlme_3.1-164    
+## [41] rmarkdown_2.25   compiler_4.3.3</code></pre>
 </div>
 
 

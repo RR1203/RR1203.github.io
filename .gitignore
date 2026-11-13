@@ -38,3 +38,5 @@ node_modules/
 # psyexcl large data files (recreate with psyexcl/03_psyexcl_download.py + knit 04_psyexcl_analysis.Rmd)
 psyexcl/03_psyexcl_raw.xlsx
 psyexcl/04_psyexcl_clean.xlsx
+psyexcl/03_psyexcl_results_*_raw.xlsx
+psyexcl/03_psyexcl_status_raw.xlsx
