@@ -1,0 +1,770 @@
+[
+{
+"condition": "bipolar_mania",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 1
+},
+{
+"condition": "bipolar_depression",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 1
+},
+{
+"condition": "mdd",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 2.0,
+"n_for": 3,
+"n_against": 1
+},
+{
+"condition": "mdd",
+"type": "5_animal",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "ocd",
+"type": "6_clinical_obs",
+"want": "helps",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "tourette",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "tourette",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 2
+},
+{
+"condition": "tourette",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "tourette",
+"type": "6_clinical_obs",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "autism_irritability",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 0.5,
+"n_for": 2,
+"n_against": 2
+},
+{
+"condition": "autism_irritability",
+"type": "3_genetics",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "autism_irritability",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 1
+},
+{
+"condition": "autism_irritability",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "autism_irritability",
+"type": "6_clinical_obs",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "adhd",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 0.5,
+"n_for": 1,
+"n_against": 3
+},
+{
+"condition": "adhd",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "adhd",
+"type": "6_clinical_obs",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "ptsd",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 2
+},
+{
+"condition": "ptsd",
+"type": "5_animal",
+"want": "harms",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 1
+},
+{
+"condition": "methamphetamine",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 2
+},
+{
+"condition": "methamphetamine",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "alcohol",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 0.5,
+"n_for": 1,
+"n_against": 1
+},
+{
+"condition": "alcohol",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 2.0,
+"n_for": 4,
+"n_against": 0
+},
+{
+"condition": "alcohol",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 3,
+"n_against": 1
+},
+{
+"condition": "nicotine",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 2
+},
+{
+"condition": "catatonia",
+"type": "2_anticholinergic_burden",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "anorexia",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "borderline",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "ad_psychosis",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 2.0,
+"n_for": 4,
+"n_against": 1
+},
+{
+"condition": "ad_psychosis",
+"type": "2_anticholinergic_burden",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "ad_psychosis",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 5,
+"n_against": 0
+},
+{
+"condition": "ad_psychosis",
+"type": "6_clinical_obs",
+"want": "helps",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "dementia_cognition",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 2.0,
+"n_for": 7,
+"n_against": 0
+},
+{
+"condition": "dementia_cognition",
+"type": "2_anticholinergic_burden",
+"want": "helps",
+"weight": 2.0,
+"n_for": 3,
+"n_against": 0
+},
+{
+"condition": "dementia_cognition",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 2.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "dementia_cognition",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 6,
+"n_against": 0
+},
+{
+"condition": "dlb",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 2.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "dlb",
+"type": "2_anticholinergic_burden",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "dlb",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "pd_psychosis",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 2.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "pd_psychosis",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "pd_psychosis",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "pd_psychosis",
+"type": "6_clinical_obs",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "pd_cognition",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 2.0,
+"n_for": 3,
+"n_against": 0
+},
+{
+"condition": "pd_cognition",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 2.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "pd_cognition",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "huntington",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 4
+},
+{
+"condition": "huntington",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "huntington",
+"type": "5_animal",
+"want": "helps",
+"weight": 0.5,
+"n_for": 2,
+"n_against": 2
+},
+{
+"condition": "tardive",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 0.5,
+"n_for": 2,
+"n_against": 2
+},
+{
+"condition": "tardive",
+"type": "6_clinical_obs",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "migraine",
+"type": "6_clinical_obs",
+"want": "helps",
+"weight": 2.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "epilepsy",
+"type": "2_anticholinergic_burden",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "epilepsy",
+"type": "3_genetics",
+"want": "helps",
+"weight": 0.5,
+"n_for": 1,
+"n_against": 2
+},
+{
+"condition": "epilepsy",
+"type": "6_clinical_obs",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "epilepsy",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 1
+},
+{
+"condition": "epilepsy",
+"type": "5_animal",
+"want": "harms",
+"weight": 1.0,
+"n_for": 5,
+"n_against": 2
+},
+{
+"condition": "sleep",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 1
+},
+{
+"condition": "sleep",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "sleep",
+"type": "6_clinical_obs",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "post_stroke",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 2.0,
+"n_for": 2,
+"n_against": 1
+},
+{
+"condition": "post_stroke",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 1
+},
+{
+"condition": "gastroparesis",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "gastroparesis",
+"type": "6_clinical_obs",
+"want": "helps",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "schizophrenia_cog",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 1
+},
+{
+"condition": "schizophrenia_cog",
+"type": "2_anticholinergic_burden",
+"want": "helps",
+"weight": 2.0,
+"n_for": 3,
+"n_against": 1
+},
+{
+"condition": "schizophrenia_cog",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 3,
+"n_against": 0
+},
+{
+"condition": "tbi",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 2.0,
+"n_for": 4,
+"n_against": 0
+},
+{
+"condition": "tbi",
+"type": "2_anticholinergic_burden",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "tbi",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "tbi",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "down_syndrome",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 0.5,
+"n_for": 1,
+"n_against": 2
+},
+{
+"condition": "down_syndrome",
+"type": "2_anticholinergic_burden",
+"want": "helps",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "down_syndrome",
+"type": "4_postmortem_imaging",
+"want": "helps",
+"weight": 2.0,
+"n_for": 3,
+"n_against": 0
+},
+{
+"condition": "down_syndrome",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "sjogren",
+"type": "1_human_pharm",
+"want": "helps",
+"weight": 2.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "sjogren",
+"type": "2_anticholinergic_burden",
+"want": "helps",
+"weight": 2.0,
+"n_for": 3,
+"n_against": 0
+},
+{
+"condition": "sjogren",
+"type": "5_animal",
+"want": "helps",
+"weight": 1.0,
+"n_for": 8,
+"n_against": 0
+},
+{
+"condition": "psoriasis",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "dystonia",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 0.5,
+"n_for": 1,
+"n_against": 1
+},
+{
+"condition": "dystonia",
+"type": "5_animal",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "dystonia",
+"type": "6_clinical_obs",
+"want": "harms",
+"weight": 1.0,
+"n_for": 4,
+"n_against": 1
+},
+{
+"condition": "drug_parkinsonism",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 5
+},
+{
+"condition": "drug_parkinsonism",
+"type": "6_clinical_obs",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "asthma",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "asthma",
+"type": "5_animal",
+"want": "harms",
+"weight": 1.0,
+"n_for": 3,
+"n_against": 0
+},
+{
+"condition": "bradycardia",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 2.0,
+"n_for": 5,
+"n_against": 0
+},
+{
+"condition": "bradycardia",
+"type": "5_animal",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "bradycardia",
+"type": "6_clinical_obs",
+"want": "harms",
+"weight": 2.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "peptic_ulcer",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 1
+},
+{
+"condition": "peptic_ulcer",
+"type": "5_animal",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+},
+{
+"condition": "sialorrhea",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 2.0,
+"n_for": 8,
+"n_against": 0
+},
+{
+"condition": "sialorrhea",
+"type": "6_clinical_obs",
+"want": "harms",
+"weight": 2.0,
+"n_for": 4,
+"n_against": 0
+},
+{
+"condition": "hyperhidrosis",
+"type": "1_human_pharm",
+"want": "harms",
+"weight": 2.0,
+"n_for": 5,
+"n_against": 0
+},
+{
+"condition": "hyperhidrosis",
+"type": "5_animal",
+"want": "harms",
+"weight": 1.0,
+"n_for": 2,
+"n_against": 0
+},
+{
+"condition": "hyperhidrosis",
+"type": "6_clinical_obs",
+"want": "harms",
+"weight": 1.0,
+"n_for": 1,
+"n_against": 0
+}
+]

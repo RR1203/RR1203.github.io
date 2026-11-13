@@ -1,0 +1,1656 @@
+{
+ "CHRM1": [
+  {
+   "trait": "amount of uteroglobin in blood",
+   "p": 2e-13,
+   "pubmed": "39789286",
+   "snp": [
+    "rs1942499-G"
+   ]
+  },
+  {
+   "trait": "insomnia",
+   "p": 1e-11,
+   "pubmed": "35835914",
+   "snp": [
+    "rs544978-A"
+   ]
+  },
+  {
+   "trait": "insomnia",
+   "p": 2e-15,
+   "pubmed": "35835914",
+   "snp": [
+    "rs7940070-A"
+   ]
+  },
+  {
+   "trait": "insomnia",
+   "p": 2e-11,
+   "pubmed": "35835914",
+   "snp": [
+    "rs2507821-T"
+   ]
+  },
+  {
+   "trait": "disease free survival",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "34309201",
+   "snp": [
+    "rs72929497-?"
+   ]
+  },
+  {
+   "trait": "disease free survival",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "34309201",
+   "snp": [
+    "rs72931310-?"
+   ]
+  },
+  {
+   "trait": "disease free survival",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "34309201",
+   "snp": [
+    "rs66896469-?"
+   ]
+  },
+  {
+   "trait": "disease free survival",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "34309201",
+   "snp": [
+    "rs12295992-?"
+   ]
+  },
+  {
+   "trait": "disease free survival",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "34309201",
+   "snp": [
+    "rs73487887-?"
+   ]
+  },
+  {
+   "trait": "disease free survival",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "34309201",
+   "snp": [
+    "rs67487724-?"
+   ]
+  },
+  {
+   "trait": "disease free survival",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "34309201",
+   "snp": [
+    "rs12279355-?"
+   ]
+  },
+  {
+   "trait": "BMI-adjusted waist-hip ratio",
+   "p": 1e-09,
+   "pubmed": "34021172",
+   "snp": [
+    "rs143846972-A"
+   ]
+  },
+  {
+   "trait": "BMI-adjusted waist-hip ratio",
+   "p": 2e-09,
+   "pubmed": "34021172",
+   "snp": [
+    "rs143846972-A"
+   ]
+  },
+  {
+   "trait": "complement C4 measurement",
+   "p": 1e-06,
+   "pubmed": "33941608",
+   "snp": [
+    "rs58520479-G"
+   ]
+  },
+  {
+   "trait": "BMI-adjusted waist-hip ratio",
+   "p": 4e-08,
+   "pubmed": "31669095",
+   "snp": [
+    "rs143846972-?"
+   ]
+  },
+  {
+   "trait": "urate measurement",
+   "p": 9e-27,
+   "pubmed": "31578528",
+   "snp": [
+    "rs78526584-A"
+   ]
+  },
+  {
+   "trait": "insomnia measurement",
+   "p": 4e-10,
+   "pubmed": "30804565",
+   "snp": [
+    "rs4592425-T"
+   ]
+  },
+  {
+   "trait": "insomnia measurement",
+   "p": 1e-09,
+   "pubmed": "30804565",
+   "snp": [
+    "rs544978-A"
+   ]
+  }
+ ],
+ "CHRM2": [
+  {
+   "trait": "right ventricular diastolic volume to left ventricular diastolic volume ratio",
+   "p": 4e-09,
+   "pubmed": "35697867",
+   "snp": [
+    "rs112206296-A"
+   ]
+  },
+  {
+   "trait": "heart rate",
+   "p": 1e-21,
+   "pubmed": "39024449",
+   "snp": [
+    "rs6943656-A"
+   ]
+  },
+  {
+   "trait": "heart rate",
+   "p": 2e-19,
+   "pubmed": "39024449",
+   "snp": [
+    "rs17168819-T"
+   ]
+  },
+  {
+   "trait": "heart rate",
+   "p": 6e-37,
+   "pubmed": "39024449",
+   "snp": [
+    "rs6943656-A"
+   ]
+  },
+  {
+   "trait": "heart rate",
+   "p": 9e-35,
+   "pubmed": "39024449",
+   "snp": [
+    "rs6943656-A"
+   ]
+  },
+  {
+   "trait": "Epiretinal membrane",
+   "p": 2e-09,
+   "pubmed": "38870908",
+   "snp": [
+    "rs7801770-A"
+   ]
+  },
+  {
+   "trait": "cognitive function measurement",
+   "p": 4e-06,
+   "pubmed": "35364053",
+   "snp": [
+    "rs17417920-?"
+   ]
+  },
+  {
+   "trait": "cognitive function measurement",
+   "p": 6e-06,
+   "pubmed": "35364053",
+   "snp": [
+    "rs17417920-?"
+   ]
+  },
+  {
+   "trait": "cognitive function measurement",
+   "p": 3e-06,
+   "pubmed": "35364053",
+   "snp": [
+    "rs62487091-?"
+   ]
+  },
+  {
+   "trait": "cognitive function measurement",
+   "p": 4e-06,
+   "pubmed": "35364053",
+   "snp": [
+    "rs17417920-?"
+   ]
+  },
+  {
+   "trait": "heart rate",
+   "p": 1e-26,
+   "pubmed": "39789286",
+   "snp": [
+    "rs6969811-C"
+   ]
+  },
+  {
+   "trait": "gamma-glutamylglutamate measurement",
+   "p": 2e-06,
+   "pubmed": "40360795",
+   "snp": [
+    "rs143996241-?"
+   ]
+  },
+  {
+   "trait": "physical activity measurement",
+   "p": 3.0000000000000004e-08,
+   "pubmed": "38965376",
+   "snp": [
+    "rs199537034-?"
+   ]
+  },
+  {
+   "trait": "pulse pressure measurement",
+   "p": 7e-08,
+   "pubmed": "38689001",
+   "snp": [
+    "rs10267979-A"
+   ]
+  },
+  {
+   "trait": "bone tissue density",
+   "p": 3.0000000000000004e-08,
+   "pubmed": "37500982",
+   "snp": [
+    "rs150022820-?"
+   ]
+  },
+  {
+   "trait": "bone tissue density",
+   "p": 2e-08,
+   "pubmed": "37500982",
+   "snp": [
+    "rs77151195-?"
+   ]
+  },
+  {
+   "trait": "bone tissue density",
+   "p": 1e-08,
+   "pubmed": "37500982",
+   "snp": [
+    "rs139870019-?"
+   ]
+  },
+  {
+   "trait": "bone tissue density",
+   "p": 5e-09,
+   "pubmed": "37500982",
+   "snp": [
+    "rs369603384-?"
+   ]
+  },
+  {
+   "trait": "bone tissue density",
+   "p": 4e-09,
+   "pubmed": "37500982",
+   "snp": [
+    "rs377536093-?"
+   ]
+  },
+  {
+   "trait": "bone tissue density",
+   "p": 6e-10,
+   "pubmed": "37500982",
+   "snp": [
+    "rs143390918-?"
+   ]
+  },
+  {
+   "trait": "bone tissue density",
+   "p": 3e-11,
+   "pubmed": "37500982",
+   "snp": [
+    "rs77305840-?"
+   ]
+  },
+  {
+   "trait": "color vision disorder",
+   "p": 3e-06,
+   "pubmed": "37359372",
+   "snp": [
+    "rs192276056-T"
+   ]
+  },
+  {
+   "trait": "t-tau measurement",
+   "p": 1e-08,
+   "pubmed": "37208024",
+   "snp": [
+    "rs1795325153-?"
+   ]
+  },
+  {
+   "trait": "heart rate variability measurement",
+   "p": 3.0000000000000004e-08,
+   "pubmed": "37803156",
+   "snp": [
+    "rs71784944-GT"
+   ]
+  },
+  {
+   "trait": "neuroticism measurement",
+   "p": 6.000000000000001e-09,
+   "pubmed": "37365406",
+   "snp": [
+    "rs6947206-?"
+   ]
+  },
+  {
+   "trait": "body height",
+   "p": 7e-22,
+   "pubmed": "36224396",
+   "snp": [
+    "rs6948054-A"
+   ]
+  },
+  {
+   "trait": "R-warfarin measurement",
+   "p": 9e-06,
+   "pubmed": "36210801",
+   "snp": [
+    "rs148412233-?"
+   ]
+  },
+  {
+   "trait": "alcohol consumption characteristic",
+   "p": 2e-14,
+   "pubmed": "36477530",
+   "snp": [
+    "rs13230245-T"
+   ]
+  },
+  {
+   "trait": "alcohol consumption characteristic",
+   "p": 3e-12,
+   "pubmed": "36477530",
+   "snp": [
+    "rs13230245-T"
+   ]
+  },
+  {
+   "trait": "heart rate",
+   "p": 2e-08,
+   "pubmed": "36329257",
+   "snp": [
+    "rs1364408-?"
+   ]
+  },
+  {
+   "trait": "vaginal microbiome measurement",
+   "p": 7e-06,
+   "pubmed": "34282934",
+   "snp": [
+    "rs11762896-T"
+   ]
+  },
+  {
+   "trait": "vaginal microbiome measurement",
+   "p": 2e-06,
+   "pubmed": "34282934",
+   "snp": [
+    "rs62487065-T"
+   ]
+  },
+  {
+   "trait": "vaginal microbiome measurement",
+   "p": 3e-06,
+   "pubmed": "34282934",
+   "snp": [
+    "rs706553-C"
+   ]
+  },
+  {
+   "trait": "vaginal microbiome measurement",
+   "p": 3e-06,
+   "pubmed": "34282934",
+   "snp": [
+    "rs77151195-A"
+   ]
+  },
+  {
+   "trait": "vaginal microbiome measurement",
+   "p": 3e-06,
+   "pubmed": "34282934",
+   "snp": [
+    "rs150022820-T"
+   ]
+  },
+  {
+   "trait": "vaginal microbiome measurement",
+   "p": 1e-06,
+   "pubmed": "34282934",
+   "snp": [
+    "rs11762896-T"
+   ]
+  },
+  {
+   "trait": "vaginal microbiome measurement",
+   "p": 8e-06,
+   "pubmed": "34282934",
+   "snp": [
+    "rs62487065-T"
+   ]
+  },
+  {
+   "trait": "amino acid measurement",
+   "p": 2e-06,
+   "pubmed": "31882771",
+   "snp": [
+    "rs8191992-?"
+   ]
+  },
+  {
+   "trait": "pulse pressure measurement",
+   "p": 3.0000000000000004e-09,
+   "pubmed": "35762941",
+   "snp": [
+    "rs10267979-A"
+   ]
+  },
+  {
+   "trait": "abdominal fat cell number",
+   "p": 9e-06,
+   "pubmed": "35320353",
+   "snp": [
+    "rs12154638-T"
+   ]
+  },
+  {
+   "trait": "mortality",
+   "p": 2e-08,
+   "pubmed": "32592749",
+   "snp": [
+    "rs142021422-C"
+   ]
+  },
+  {
+   "trait": "PHF-tau measurement",
+   "p": 2e-08,
+   "pubmed": "32450446",
+   "snp": [
+    "rs17506824-?",
+    "rs17649742-?"
+   ]
+  },
+  {
+   "trait": "PR interval",
+   "p": 5e-08,
+   "pubmed": "32439900",
+   "snp": [
+    "rs1424569-C"
+   ]
+  },
+  {
+   "trait": "PR interval",
+   "p": 1e-07,
+   "pubmed": "32439900",
+   "snp": [
+    "rs1424569-C"
+   ]
+  },
+  {
+   "trait": "triacylglycerol 56:6 measurement",
+   "p": 4e-06,
+   "pubmed": "23823483",
+   "snp": [
+    "rs11765746-?"
+   ]
+  },
+  {
+   "trait": "waist-hip ratio",
+   "p": 2e-10,
+   "pubmed": "30239722",
+   "snp": [
+    "rs13229637-T"
+   ]
+  },
+  {
+   "trait": "risk-taking behaviour",
+   "p": 8e-10,
+   "pubmed": "30643258",
+   "snp": [
+    "rs13233131-A"
+   ]
+  },
+  {
+   "trait": "pulse pressure measurement",
+   "p": 2e-09,
+   "pubmed": "30224653",
+   "snp": [
+    "rs10267979-T"
+   ]
+  },
+  {
+   "trait": "reaction time measurement",
+   "p": 8e-07,
+   "pubmed": "29844566",
+   "snp": [
+    "rs28590034-?"
+   ]
+  },
+  {
+   "trait": "osteoarthritis",
+   "p": 7e-06,
+   "pubmed": "29559693",
+   "snp": [
+    "rs201708019-T"
+   ]
+  },
+  {
+   "trait": "heart rate response to recovery post exercise",
+   "p": 1e-14,
+   "pubmed": "29497042",
+   "snp": [
+    "rs17168815-G"
+   ]
+  },
+  {
+   "trait": "heart rate response to recovery post exercise",
+   "p": 4e-13,
+   "pubmed": "29497042",
+   "snp": [
+    "rs17168815-G"
+   ]
+  },
+  {
+   "trait": "heart rate response to recovery post exercise",
+   "p": 5e-13,
+   "pubmed": "29497042",
+   "snp": [
+    "rs6943656-A"
+   ]
+  },
+  {
+   "trait": "heart rate response to recovery post exercise",
+   "p": 6.999999999999999e-11,
+   "pubmed": "29497042",
+   "snp": [
+    "rs6952499-G"
+   ]
+  },
+  {
+   "trait": "heart rate response to recovery post exercise",
+   "p": 6e-12,
+   "pubmed": "29497042",
+   "snp": [
+    "rs6943656-A"
+   ]
+  },
+  {
+   "trait": "heart rate response to recovery post exercise",
+   "p": 2e-10,
+   "pubmed": "29769521",
+   "snp": [
+    "rs6943656-A"
+   ]
+  },
+  {
+   "trait": "heart rate",
+   "p": 6.000000000000001e-09,
+   "pubmed": "29769521",
+   "snp": [
+    "rs73158705-A"
+   ]
+  },
+  {
+   "trait": "pulse pressure measurement",
+   "p": 3e-07,
+   "pubmed": "28135244",
+   "snp": [
+    "rs71784944-?"
+   ]
+  },
+  {
+   "trait": "heart rate",
+   "p": 3.0000000000000002e-18,
+   "pubmed": "27798624",
+   "snp": [
+    "rs73158705-G"
+   ]
+  },
+  {
+   "trait": "forced expiratory volume",
+   "p": 4e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs73157032-A"
+   ]
+  },
+  {
+   "trait": "forced expiratory volume",
+   "p": 3e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs73157036-A"
+   ]
+  },
+  {
+   "trait": "heart rate",
+   "p": 1e-12,
+   "pubmed": "23583979",
+   "snp": [
+    "rs2350782-C"
+   ]
+  },
+  {
+   "trait": "migraine with aura",
+   "p": 4e-06,
+   "pubmed": "23793025",
+   "snp": [
+    "rs1364402-?"
+   ]
+  }
+ ],
+ "CHRM3": [
+  {
+   "trait": "pilonidal sinus",
+   "p": 4e-13,
+   "pubmed": "39024449",
+   "snp": [
+    "rs149306791-T"
+   ]
+  },
+  {
+   "trait": "free cholesterol measurement",
+   "p": 4e-12,
+   "pubmed": "39091897",
+   "snp": [
+    "rs75037698-G"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 4e-48,
+   "pubmed": "41565855",
+   "snp": [
+    "rs2355210-?"
+   ]
+  },
+  {
+   "trait": "forced expiratory volume",
+   "p": 1e-25,
+   "pubmed": "41565855",
+   "snp": [
+    "rs1019882-?"
+   ]
+  },
+  {
+   "trait": "treatment-resistant hypertension",
+   "p": 8e-07,
+   "pubmed": "38162683",
+   "snp": [
+    "rs116645995-T"
+   ]
+  },
+  {
+   "trait": "treatment-resistant hypertension",
+   "p": 2e-06,
+   "pubmed": "38162683",
+   "snp": [
+    "rs116645995-T"
+   ]
+  },
+  {
+   "trait": "forced expiratory volume",
+   "p": 3.0000000000000003e-13,
+   "pubmed": "40374629",
+   "snp": [
+    "rs6429153-A"
+   ]
+  },
+  {
+   "trait": "Furuncle",
+   "p": 9.000000000000001e-09,
+   "pubmed": "40465716",
+   "snp": [
+    "rs140514629-?"
+   ]
+  },
+  {
+   "trait": "chronic kidney disease",
+   "p": 2e-07,
+   "pubmed": "40465716",
+   "snp": [
+    "rs61834818-?"
+   ]
+  },
+  {
+   "trait": "peak expiratory flow",
+   "p": 2e-13,
+   "pubmed": "39789286",
+   "snp": [
+    "rs6688537-A"
+   ]
+  },
+  {
+   "trait": "forced expiratory volume",
+   "p": 6e-23,
+   "pubmed": "39789286",
+   "snp": [
+    "rs7513757-A"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 1e-40,
+   "pubmed": "39789286",
+   "snp": [
+    "rs2355210-T"
+   ]
+  },
+  {
+   "trait": "schizophrenia",
+   "p": 3.0000000000000004e-08,
+   "pubmed": "33686288",
+   "snp": [
+    "rs10802742-?"
+   ]
+  },
+  {
+   "trait": "25-hydroxyvitamin D3 measurement",
+   "p": 5e-10,
+   "pubmed": "38484975",
+   "snp": [
+    "rs2355237-G"
+   ]
+  },
+  {
+   "trait": "X-11787 measurement",
+   "p": 4e-06,
+   "pubmed": "40360795",
+   "snp": [
+    "rs10925984-?"
+   ]
+  },
+  {
+   "trait": "n-methyl-2-pyridone-5-carboxamide measurement",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "40360795",
+   "snp": [
+    "rs11581597-?"
+   ]
+  },
+  {
+   "trait": "gut microbiome measurement",
+   "p": 1e-07,
+   "pubmed": "40187613",
+   "snp": [
+    "rs7512158-T"
+   ]
+  },
+  {
+   "trait": "gut microbiome measurement",
+   "p": 4e-08,
+   "pubmed": "40187613",
+   "snp": [
+    "rs2353426-C"
+   ]
+  },
+  {
+   "trait": "gut microbiome measurement",
+   "p": 4e-08,
+   "pubmed": "40187613",
+   "snp": [
+    "rs12035510-A"
+   ]
+  },
+  {
+   "trait": "growth rate attribute",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "38483351",
+   "snp": [
+    "rs1396903-G"
+   ]
+  },
+  {
+   "trait": "oligodendroglioma",
+   "p": 2e-06,
+   "pubmed": "36810956",
+   "snp": [
+    "rs72754690-?"
+   ]
+  },
+  {
+   "trait": "pain measurement",
+   "p": 5e-09,
+   "pubmed": "38429522",
+   "snp": [
+    "rs200167152-?"
+   ]
+  },
+  {
+   "trait": "schizophrenia",
+   "p": 2e-15,
+   "pubmed": "39753749",
+   "snp": [
+    "rs11587347-?"
+   ]
+  },
+  {
+   "trait": "diet measurement",
+   "p": 7e-06,
+   "pubmed": "38411962",
+   "snp": [
+    "rs17641257-G"
+   ]
+  },
+  {
+   "trait": "amyloid-beta measurement",
+   "p": 8e-06,
+   "pubmed": "35623891",
+   "snp": [
+    "rs12043301-?"
+   ]
+  },
+  {
+   "trait": "lactate measurement",
+   "p": 9e-06,
+   "pubmed": "38239409",
+   "snp": [
+    "rs4517336-C"
+   ]
+  },
+  {
+   "trait": "forced expiratory volume",
+   "p": 2e-08,
+   "pubmed": "38102678",
+   "snp": [
+    "rs1431721-?"
+   ]
+  },
+  {
+   "trait": "vascular dementia",
+   "p": 1e-05,
+   "pubmed": "39046104",
+   "snp": [
+    "rs9662820-T"
+   ]
+  },
+  {
+   "trait": "dementia",
+   "p": 7e-06,
+   "pubmed": "39046104",
+   "snp": [
+    "rs1899611-G"
+   ]
+  },
+  {
+   "trait": "2-O-methylascorbic acid measurement",
+   "p": 1e-05,
+   "pubmed": "39144724",
+   "snp": [
+    "rs74527587-?"
+   ]
+  },
+  {
+   "trait": "able to hear with hearing aids",
+   "p": 8e-08,
+   "pubmed": "34847940",
+   "snp": [
+    "rs561706452-?"
+   ]
+  },
+  {
+   "trait": "faecalibacterium seropositivity",
+   "p": 2e-08,
+   "pubmed": "37164013",
+   "snp": [
+    "rs6690612-?"
+   ]
+  },
+  {
+   "trait": "fetal genotype effect measurement",
+   "p": 9e-10,
+   "pubmed": "37798380",
+   "snp": [
+    "rs10925945-T"
+   ]
+  },
+  {
+   "trait": "parental genotype effect measurement",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "37798380",
+   "snp": [
+    "rs10925945-T"
+   ]
+  },
+  {
+   "trait": "fetal genotype effect measurement",
+   "p": 2e-09,
+   "pubmed": "37798380",
+   "snp": [
+    "rs10925945-T"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 2e-43,
+   "pubmed": "36914875",
+   "snp": [
+    "rs2355210-T"
+   ]
+  },
+  {
+   "trait": "esophageal squamous cell carcinoma",
+   "p": 3e-06,
+   "pubmed": "37673066",
+   "snp": [
+    "rs10802794-C"
+   ]
+  },
+  {
+   "trait": "triglyceride measurement",
+   "p": 4e-08,
+   "pubmed": "37669986",
+   "snp": [
+    "rs12118522-G"
+   ]
+  },
+  {
+   "trait": "lung disease severity measurement",
+   "p": 2e-06,
+   "pubmed": "36921087",
+   "snp": [
+    "rs192349033-?"
+   ]
+  },
+  {
+   "trait": "eosinophilic esophagitis",
+   "p": 4e-06,
+   "pubmed": "36400179",
+   "snp": [
+    "rs78400480-?"
+   ]
+  },
+  {
+   "trait": "chronic obstructive pulmonary disease",
+   "p": 8e-30,
+   "pubmed": "37069358",
+   "snp": [
+    "rs2355210-C"
+   ]
+  },
+  {
+   "trait": "protein measurement",
+   "p": 6.0000000000000005e-15,
+   "pubmed": "34648354",
+   "snp": [
+    "rs10495440-T"
+   ]
+  },
+  {
+   "trait": "body height",
+   "p": 1e-11,
+   "pubmed": "36224396",
+   "snp": [
+    "rs12028626-G"
+   ]
+  },
+  {
+   "trait": "body height",
+   "p": 3e-19,
+   "pubmed": "36224396",
+   "snp": [
+    "rs2689143-T"
+   ]
+  },
+  {
+   "trait": "S-6-hydroxywarfarin measurement",
+   "p": 9e-06,
+   "pubmed": "36210801",
+   "snp": [
+    "rs563404720-?"
+   ]
+  },
+  {
+   "trait": "R-warfarin measurement",
+   "p": 2e-07,
+   "pubmed": "36210801",
+   "snp": [
+    "rs16832149-?"
+   ]
+  },
+  {
+   "trait": "schizophrenia",
+   "p": 6e-06,
+   "pubmed": "35396580",
+   "snp": [
+    "rs1396901-T"
+   ]
+  },
+  {
+   "trait": "schizophrenia",
+   "p": 5e-07,
+   "pubmed": "35396580",
+   "snp": [
+    "rs17640659-C"
+   ]
+  },
+  {
+   "trait": "schizophrenia",
+   "p": 4e-15,
+   "pubmed": "35396580",
+   "snp": [
+    "rs11587347-C"
+   ]
+  },
+  {
+   "trait": "Alzheimer disease",
+   "p": 4e-06,
+   "pubmed": "35851147",
+   "snp": [
+    "rs61829244-G"
+   ]
+  },
+  {
+   "trait": "pyridoxate measurement",
+   "p": 7e-07,
+   "pubmed": "31882771",
+   "snp": [
+    "rs78633206-?"
+   ]
+  },
+  {
+   "trait": "lipid measurement",
+   "p": 4e-06,
+   "pubmed": "31882771",
+   "snp": [
+    "rs77652383-?"
+   ]
+  },
+  {
+   "trait": "amino acid measurement",
+   "p": 4e-06,
+   "pubmed": "31882771",
+   "snp": [
+    "rs10925806-?"
+   ]
+  },
+  {
+   "trait": "gut microbiome measurement",
+   "p": 5e-09,
+   "pubmed": "35115689",
+   "snp": [
+    "rs1796829-C"
+   ]
+  },
+  {
+   "trait": "pulmonary fibrosis",
+   "p": 9.000000000000001e-09,
+   "pubmed": "34594039",
+   "snp": [
+    "rs12084421-T"
+   ]
+  },
+  {
+   "trait": "milk amount",
+   "p": 8e-11,
+   "pubmed": "33831438",
+   "snp": [
+    "rs76250538-?"
+   ]
+  },
+  {
+   "trait": "bone tissue density",
+   "p": 3.0000000000000004e-08,
+   "pubmed": "34046847",
+   "snp": [
+    "rs12081830-?"
+   ]
+  },
+  {
+   "trait": "acute respiratory distress syndrome",
+   "p": 2e-07,
+   "pubmed": "34032881",
+   "snp": [
+    "rs619652-G"
+   ]
+  },
+  {
+   "trait": "schizophrenia",
+   "p": 3.0000000000000004e-09,
+   "pubmed": "33479212",
+   "snp": [
+    "rs72769124-A"
+   ]
+  },
+  {
+   "trait": "bipolar disorder",
+   "p": 2e-08,
+   "pubmed": "33479212",
+   "snp": [
+    "rs72769124-A"
+   ]
+  },
+  {
+   "trait": "cytokine measurement",
+   "p": 9e-06,
+   "pubmed": "33104735",
+   "snp": [
+    "rs16837489-G"
+   ]
+  },
+  {
+   "trait": "pulmonary non-tuberculous mycobacterial infection",
+   "p": 7e-06,
+   "pubmed": "33115937",
+   "snp": [
+    "rs9428778-G"
+   ]
+  },
+  {
+   "trait": "gut microbiome measurement",
+   "p": 3e-06,
+   "pubmed": "33208821",
+   "snp": [
+    "rs6691263-G"
+   ]
+  },
+  {
+   "trait": "cognitive decline measurement",
+   "p": 1e-07,
+   "pubmed": "32573913",
+   "snp": [
+    "rs16837642-T"
+   ]
+  },
+  {
+   "trait": "protein measurement",
+   "p": 4e-10,
+   "pubmed": "32778093",
+   "snp": [
+    "rs76016051-T"
+   ]
+  },
+  {
+   "trait": "schizophrenia",
+   "p": 3.0000000000000004e-08,
+   "pubmed": "32606422",
+   "snp": [
+    "rs72769124-?"
+   ]
+  },
+  {
+   "trait": "gut microbiome measurement",
+   "p": 2e-06,
+   "pubmed": "32572223",
+   "snp": [
+    "rs148495475-A"
+   ]
+  },
+  {
+   "trait": "diffuse plaque measurement",
+   "p": 5e-08,
+   "pubmed": "32450446",
+   "snp": [
+    "rs10925907-?",
+    "rs895565-?"
+   ]
+  },
+  {
+   "trait": "neurofibrillary tangles measurement",
+   "p": 6.000000000000001e-08,
+   "pubmed": "32450446",
+   "snp": [
+    "rs10802769-?",
+    "rs1565892-?"
+   ]
+  },
+  {
+   "trait": "cleft lip",
+   "p": 2e-06,
+   "pubmed": "31372216",
+   "snp": [
+    "rs7541537-?"
+   ]
+  },
+  {
+   "trait": "cleft lip",
+   "p": 2e-06,
+   "pubmed": "31372216",
+   "snp": [
+    "rs7419201-?"
+   ]
+  },
+  {
+   "trait": "schizophrenia",
+   "p": 3e-10,
+   "pubmed": "31740837",
+   "snp": [
+    "rs11587347-?"
+   ]
+  },
+  {
+   "trait": "hallucinations",
+   "p": 6e-11,
+   "pubmed": "31740666",
+   "snp": [
+    "rs115455482-T"
+   ]
+  },
+  {
+   "trait": "hallucinations",
+   "p": 1e-10,
+   "pubmed": "31740666",
+   "snp": [
+    "rs115455482-T"
+   ]
+  },
+  {
+   "trait": "chronic obstructive pulmonary disease",
+   "p": 7.000000000000001e-09,
+   "pubmed": "30804561",
+   "snp": [
+    "rs11579382-C"
+   ]
+  },
+  {
+   "trait": "reflective stress response",
+   "p": 7e-06,
+   "pubmed": "30886212",
+   "snp": [
+    "rs10925907-G"
+   ]
+  },
+  {
+   "trait": "aspartate aminotransferase measurement",
+   "p": 2e-06,
+   "pubmed": "30589442",
+   "snp": [
+    "rs113975060-?"
+   ]
+  },
+  {
+   "trait": "peak expiratory flow",
+   "p": 9e-31,
+   "pubmed": "30804560",
+   "snp": [
+    "rs2355237-A"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 2e-31,
+   "pubmed": "30804560",
+   "snp": [
+    "rs2355237-A"
+   ]
+  },
+  {
+   "trait": "forced expiratory volume",
+   "p": 1e-17,
+   "pubmed": "30804560",
+   "snp": [
+    "rs2355237-A"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 2e-52,
+   "pubmed": "30595370",
+   "snp": [
+    "rs1155612-?"
+   ]
+  },
+  {
+   "trait": "major depressive disorder",
+   "p": 1e-06,
+   "pubmed": "30219690",
+   "snp": [
+    "rs12036147-A"
+   ]
+  },
+  {
+   "trait": "creatinine clearance measurement",
+   "p": 9e-06,
+   "pubmed": "26148204",
+   "snp": [
+    "rs10399860-?"
+   ]
+  },
+  {
+   "trait": "worry measurement",
+   "p": 4e-08,
+   "pubmed": "29500382",
+   "snp": [
+    "rs4659554-A"
+   ]
+  },
+  {
+   "trait": "empathy measurement",
+   "p": 7e-06,
+   "pubmed": "28584286",
+   "snp": [
+    "rs9662316-T"
+   ]
+  },
+  {
+   "trait": "susceptibility to shingles measurement",
+   "p": 9e-06,
+   "pubmed": "28928442",
+   "snp": [
+    "rs1509701-?"
+   ]
+  },
+  {
+   "trait": "susceptibility to mumps measurement",
+   "p": 6e-06,
+   "pubmed": "28928442",
+   "snp": [
+    "rs34148991-?"
+   ]
+  },
+  {
+   "trait": "alpha-linoleic acid measurement",
+   "p": 5e-08,
+   "pubmed": "28820441",
+   "snp": [
+    "rs16838623-?"
+   ]
+  },
+  {
+   "trait": "trait in response to sulfasalazine",
+   "p": 3.0000000000000004e-08,
+   "pubmed": "28762467",
+   "snp": [
+    "rs12082628-?"
+   ]
+  },
+  {
+   "trait": "amount of vascular endothelial growth factor A",
+   "p": 7e-06,
+   "pubmed": "27989323",
+   "snp": [
+    "rs61829244-G"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 7e-22,
+   "pubmed": "28166213",
+   "snp": [
+    "rs6688537-A"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 4e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs9970786-A"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 4.9999999999999996e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs6676535-A"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 4e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs6669578-T"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 4e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs112425727-A"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 4e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs113177748-A"
+   ]
+  },
+  {
+   "trait": "FEV/FVC ratio",
+   "p": 4e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs144892944-A"
+   ]
+  },
+  {
+   "trait": "response to bronchodilator",
+   "p": 4e-07,
+   "pubmed": "26634245",
+   "snp": [
+    "rs187984862-C"
+   ]
+  },
+  {
+   "trait": "response to bronchodilator",
+   "p": 1e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs77830002-T"
+   ]
+  },
+  {
+   "trait": "response to bronchodilator",
+   "p": 1e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs188686089-A"
+   ]
+  },
+  {
+   "trait": "response to bronchodilator",
+   "p": 1e-06,
+   "pubmed": "26634245",
+   "snp": [
+    "rs185275068-A"
+   ]
+  },
+  {
+   "trait": "response to bronchodilator",
+   "p": 7e-07,
+   "pubmed": "26634245",
+   "snp": [
+    "rs76759221-C"
+   ]
+  },
+  {
+   "trait": "schizophrenia",
+   "p": 2e-07,
+   "pubmed": "26198764",
+   "snp": [
+    "rs1033023-A"
+   ]
+  },
+  {
+   "trait": "aggressive behavior characteristic",
+   "p": 8e-06,
+   "pubmed": "27021288",
+   "snp": [
+    "rs72752681-A"
+   ]
+  },
+  {
+   "trait": "white matter hyperintensity measurement",
+   "p": 4e-07,
+   "pubmed": "25663218",
+   "snp": [
+    "rs2883428-A"
+   ]
+  },
+  {
+   "trait": "white matter hyperintensity measurement",
+   "p": 4e-07,
+   "pubmed": "25663218",
+   "snp": [
+    "rs2883428-A"
+   ]
+  },
+  {
+   "trait": "neuritic plaque measurement",
+   "p": 7e-06,
+   "pubmed": "25188341",
+   "snp": [
+    "rs11805526-T"
+   ]
+  },
+  {
+   "trait": "electroencephalogram measurement",
+   "p": 9e-06,
+   "pubmed": "25387704",
+   "snp": [
+    "rs7536133-?"
+   ]
+  },
+  {
+   "trait": "venous thromboembolism",
+   "p": 3.0000000000000004e-09,
+   "pubmed": "23509962",
+   "snp": [
+    "rs1937920-?",
+    "rs536477-?"
+   ]
+  },
+  {
+   "trait": "serum IgG glycosylation measurement",
+   "p": 7e-06,
+   "pubmed": "23382691",
+   "snp": [
+    "rs1339738-C"
+   ]
+  },
+  {
+   "trait": "tumor necrosis factor alpha level",
+   "p": 8e-06,
+   "pubmed": "23251661",
+   "snp": [
+    "rs13373941-C"
+   ]
+  },
+  {
+   "trait": "epilepsy",
+   "p": 4e-08,
+   "pubmed": "22949513",
+   "snp": [
+    "rs12059546-G"
+   ]
+  },
+  {
+   "trait": "response to xenobiotic stimulus",
+   "p": 2e-06,
+   "pubmed": "22310353",
+   "snp": [
+    "rs1915279-?"
+   ]
+  },
+  {
+   "trait": "platelet count",
+   "p": 3e-06,
+   "pubmed": "21507922",
+   "snp": [
+    "rs6677208-?"
+   ]
+  },
+  {
+   "trait": "hypertensive disorder",
+   "p": 8e-07,
+   "pubmed": "17554300",
+   "snp": [
+    "rs2820037-T"
+   ]
+  }
+ ],
+ "CHRM4": [
+  {
+   "trait": "bone tissue density",
+   "p": 6.000000000000001e-141,
+   "pubmed": "37500982",
+   "snp": [
+    "rs72910092-?"
+   ]
+  },
+  {
+   "trait": "triglyceride:HDL cholesterol ratio",
+   "p": 4e-08,
+   "pubmed": "38200128",
+   "snp": [
+    "rs147244995-C"
+   ]
+  },
+  {
+   "trait": "triglyceride:HDL cholesterol ratio",
+   "p": 3e-06,
+   "pubmed": "38200128",
+   "snp": [
+    "rs147244995-C"
+   ]
+  },
+  {
+   "trait": "triglyceride:HDL cholesterol ratio",
+   "p": 2e-12,
+   "pubmed": "38200128",
+   "snp": [
+    "rs147244995-C"
+   ]
+  },
+  {
+   "trait": "Headache",
+   "p": 5e-09,
+   "pubmed": "36939796",
+   "snp": [
+    "rs2067482-?"
+   ]
+  }
+ ],
+ "CHRM5": [
+  {
+   "trait": "glioma pathogenesis-related protein 1 measurement",
+   "p": 2e-12,
+   "pubmed": "39789286",
+   "snp": [
+    "rs573280870-A"
+   ]
+  },
+  {
+   "trait": "internet addiction disorder",
+   "p": 2e-08,
+   "pubmed": "36566681",
+   "snp": [
+    "rs8030094-?"
+   ]
+  },
+  {
+   "trait": "Vertigo",
+   "p": 3e-06,
+   "pubmed": "34620984",
+   "snp": [
+    "rs193168841-A"
+   ]
+  },
+  {
+   "trait": "attempted suicide",
+   "p": 6e-06,
+   "pubmed": "31164008",
+   "snp": [
+    "rs5016373-C"
+   ]
+  }
+ ]
+}

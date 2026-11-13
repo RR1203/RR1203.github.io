@@ -1,0 +1,387 @@
+[
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=xanomeline",
+  "count": 46
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=KarXT",
+  "count": 48
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=Cobenfy",
+  "count": 14
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=emraclidine",
+  "count": 14
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=CVL-231",
+  "count": 13
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=NBI-1117568",
+  "count": 6
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=cevimeline",
+  "count": 6
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=pilocarpine",
+  "count": 78
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=bethanechol",
+  "count": 7
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=M1 positive allosteric modulator",
+  "count": 4
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=M4 positive allosteric modulator",
+  "count": 0
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=muscarinic agonist",
+  "count": 86
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=HTL0016878",
+  "count": 3
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=NBI-1117567",
+  "count": 1
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=MK-7622",
+  "count": 1
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=TAK-071",
+  "count": 3
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=VU319",
+  "count": 2
+ },
+ {
+  "source": "ClinicalTrials.gov v2",
+  "query": "query.intr=ML-007",
+  "count": 0
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND (mania OR bipolar)",
+  "count": 243
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND \"bipolar depression\"",
+  "count": 53
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND (depression OR depressive)",
+  "count": 431
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND \"obsessive compulsive\"",
+  "count": 64
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND (tourette OR tic)",
+  "count": 43
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND autism",
+  "count": 101
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND ADHD",
+  "count": 79
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND PTSD",
+  "count": 56
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND cocaine",
+  "count": 120
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND methamphetamine",
+  "count": 73
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND alcohol",
+  "count": 158
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND nicotine",
+  "count": 158
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Delirium",
+  "count": 48
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Catatonia",
+  "count": 29
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND \"anorexia nervosa\"",
+  "count": 23
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND (\"binge eating\" OR obesity)",
+  "count": 112
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND \"borderline personality\"",
+  "count": 25
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND alzheimer AND (psychosis OR agitation)",
+  "count": 97
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND alzheimer AND cognition",
+  "count": 127
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND \"lewy body\"",
+  "count": 49
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND parkinson AND psychosis",
+  "count": 36
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND parkinson AND (cognitive OR dementia)",
+  "count": 45
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Huntington disease",
+  "count": 18
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND \"tardive dyskinesia\"",
+  "count": 102
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Migraine",
+  "count": 54
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Epilepsy",
+  "count": 109
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND pain",
+  "count": 204
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND (sleep OR narcolepsy)",
+  "count": 236
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND stroke",
+  "count": 120
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND (\"long COVID\" OR \"post-COVID\")",
+  "count": 12
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND chemotherapy AND cognitive",
+  "count": 34
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Gastroparesis",
+  "count": 10
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND schizophrenia AND cognition",
+  "count": 425
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND \"traumatic brain injury\"",
+  "count": 49
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND \"down syndrome\"",
+  "count": 17
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND (sjogren OR xerostomia)",
+  "count": 9
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Psoriasis",
+  "count": 23
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Hypothyroidism",
+  "count": 16
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Gout",
+  "count": 10
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Dystonia",
+  "count": 83
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND parkinson AND tremor",
+  "count": 18
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND (extrapyramidal OR parkinsonism)",
+  "count": 272
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Asthma",
+  "count": 57
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND COPD",
+  "count": 32
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND bradycardia",
+  "count": 52
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND (ulcer OR reflux)",
+  "count": 66
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Sialorrhea",
+  "count": 16
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Hyperhidrosis",
+  "count": 25
+ },
+ {
+  "source": "Europe PMC",
+  "query": "(xanomeline OR KarXT OR Cobenfy OR \"xanomeline-trospium\") AND Myasthenia gravis",
+  "count": 17
+ },
+ {
+  "source": "Open Targets",
+  "query": "CHRM1 associatedDiseases",
+  "count": 300
+ },
+ {
+  "source": "Open Targets",
+  "query": "CHRM2 associatedDiseases",
+  "count": 300
+ },
+ {
+  "source": "Open Targets",
+  "query": "CHRM3 associatedDiseases",
+  "count": 300
+ },
+ {
+  "source": "Open Targets",
+  "query": "CHRM4 associatedDiseases",
+  "count": 298
+ },
+ {
+  "source": "Open Targets",
+  "query": "CHRM5 associatedDiseases",
+  "count": 95
+ },
+ {
+  "source": "GWAS Catalog v2",
+  "query": "associations?mapped_gene=CHRM1",
+  "count": 18
+ },
+ {
+  "source": "GWAS Catalog v2",
+  "query": "associations?mapped_gene=CHRM2",
+  "count": 63
+ },
+ {
+  "source": "GWAS Catalog v2",
+  "query": "associations?mapped_gene=CHRM3",
+  "count": 115
+ },
+ {
+  "source": "GWAS Catalog v2",
+  "query": "associations?mapped_gene=CHRM4",
+  "count": 5
+ },
+ {
+  "source": "GWAS Catalog v2",
+  "query": "associations?mapped_gene=CHRM5",
+  "count": 4
+ }
+]

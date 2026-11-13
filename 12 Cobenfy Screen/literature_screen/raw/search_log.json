@@ -1,0 +1,4492 @@
+[
+ {
+  "condition": "bipolar_mania",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(mania[tiab] OR manic[tiab] OR \"Bipolar Disorder\"[mh])",
+  "count": 57077
+ },
+ {
+  "condition": "bipolar_mania",
+  "evidence": "1a_human_agonist",
+  "query": "(mania[tiab] OR manic[tiab] OR \"Bipolar Disorder\"[mh]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 17,
+  "retrieved": [
+   "25076776",
+   "17532044",
+   "34843030",
+   "35461339",
+   "40531190",
+   "11986996"
+  ]
+ },
+ {
+  "condition": "bipolar_mania",
+  "evidence": "1b_human_chei",
+  "query": "(mania[tiab] OR manic[tiab] OR \"Bipolar Disorder\"[mh]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 22,
+  "retrieved": [
+   "339869",
+   "27010579",
+   "10549687",
+   "23653426",
+   "39715268",
+   "16411983"
+  ]
+ },
+ {
+  "condition": "bipolar_mania",
+  "evidence": "1c_scopolamine",
+  "query": "(mania[tiab] OR manic[tiab] OR \"Bipolar Disorder\"[mh]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 16,
+  "retrieved": [
+   "32616212",
+   "23334071",
+   "26630954",
+   "30120418",
+   "19585799",
+   "27623122"
+  ]
+ },
+ {
+  "condition": "bipolar_mania",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(mania[tiab] OR manic[tiab] OR \"Bipolar Disorder\"[mh]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 34,
+  "retrieved": [
+   "3930473",
+   "29048190",
+   "40859322",
+   "12776393",
+   "40432343",
+   "33758045"
+  ]
+ },
+ {
+  "condition": "bipolar_mania",
+  "evidence": "3_genetics",
+  "query": "(mania[tiab] OR manic[tiab] OR \"Bipolar Disorder\"[mh]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 9,
+  "retrieved": [
+   "26630954",
+   "33895417",
+   "22356822",
+   "17373692",
+   "33224242",
+   "26475745"
+  ]
+ },
+ {
+  "condition": "bipolar_mania",
+  "evidence": "4_postmortem_imaging",
+  "query": "(mania[tiab] OR manic[tiab] OR \"Bipolar Disorder\"[mh]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 16,
+  "retrieved": [
+   "26630954",
+   "22691454",
+   "30120418",
+   "29533425",
+   "16818863",
+   "19780705"
+  ]
+ },
+ {
+  "condition": "bipolar_mania",
+  "evidence": "5_animal",
+  "query": "(mania[tiab] OR manic[tiab] OR \"Bipolar Disorder\"[mh]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 2,
+  "retrieved": [
+   "9523584",
+   "1718537"
+  ]
+ },
+ {
+  "condition": "bipolar_mania",
+  "evidence": "6_clinical_obs",
+  "query": "(mania[tiab] OR manic[tiab] OR \"Bipolar Disorder\"[mh]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "34843030",
+   "40531190",
+   "35461339"
+  ]
+ },
+ {
+  "condition": "bipolar_depression",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"bipolar depression\"[tiab] OR (bipolar[tiab] AND depressive episode*[tiab]))",
+  "count": 6228
+ },
+ {
+  "condition": "bipolar_depression",
+  "evidence": "1a_human_agonist",
+  "query": "(\"bipolar depression\"[tiab] OR (bipolar[tiab] AND depressive episode*[tiab])) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "bipolar_depression",
+  "evidence": "1b_human_chei",
+  "query": "(\"bipolar depression\"[tiab] OR (bipolar[tiab] AND depressive episode*[tiab])) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "10386177"
+  ]
+ },
+ {
+  "condition": "bipolar_depression",
+  "evidence": "1c_scopolamine",
+  "query": "(\"bipolar depression\"[tiab] OR (bipolar[tiab] AND depressive episode*[tiab])) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 9,
+  "retrieved": [
+   "24353110",
+   "26630954",
+   "23334071",
+   "40064389",
+   "41412339",
+   "35461262"
+  ]
+ },
+ {
+  "condition": "bipolar_depression",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"bipolar depression\"[tiab] OR (bipolar[tiab] AND depressive episode*[tiab])) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 2,
+  "retrieved": [
+   "34476565",
+   "24346956"
+  ]
+ },
+ {
+  "condition": "bipolar_depression",
+  "evidence": "3_genetics",
+  "query": "(\"bipolar depression\"[tiab] OR (bipolar[tiab] AND depressive episode*[tiab])) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 1,
+  "retrieved": [
+   "26630954"
+  ]
+ },
+ {
+  "condition": "bipolar_depression",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"bipolar depression\"[tiab] OR (bipolar[tiab] AND depressive episode*[tiab])) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "26630954"
+  ]
+ },
+ {
+  "condition": "bipolar_depression",
+  "evidence": "5_animal",
+  "query": "(\"bipolar depression\"[tiab] OR (bipolar[tiab] AND depressive episode*[tiab])) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "bipolar_depression",
+  "evidence": "6_clinical_obs",
+  "query": "(\"bipolar depression\"[tiab] OR (bipolar[tiab] AND depressive episode*[tiab])) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "mdd",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Depressive Disorder, Major\"[mh] OR \"major depression\"[tiab] OR \"major depressive\"[tiab])",
+  "count": 72328
+ },
+ {
+  "condition": "mdd",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Depressive Disorder, Major\"[mh] OR \"major depression\"[tiab] OR \"major depressive\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 15,
+  "retrieved": [
+   "38993656",
+   "36269510",
+   "42105998",
+   "7951639",
+   "2903510",
+   "7932282"
+  ]
+ },
+ {
+  "condition": "mdd",
+  "evidence": "1b_human_chei",
+  "query": "(\"Depressive Disorder, Major\"[mh] OR \"major depression\"[tiab] OR \"major depressive\"[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 20,
+  "retrieved": [
+   "35850165",
+   "26801406",
+   "40101707",
+   "22760171",
+   "1775604",
+   "30035339"
+  ]
+ },
+ {
+  "condition": "mdd",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Depressive Disorder, Major\"[mh] OR \"major depression\"[tiab] OR \"major depressive\"[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 41,
+  "retrieved": [
+   "39150032",
+   "30058481",
+   "38198569",
+   "26724279",
+   "32739296",
+   "36269510"
+  ]
+ },
+ {
+  "condition": "mdd",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Depressive Disorder, Major\"[mh] OR \"major depression\"[tiab] OR \"major depressive\"[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 14,
+  "retrieved": [
+   "39202628",
+   "34382488",
+   "1354413",
+   "22021954",
+   "39155964",
+   "2663013"
+  ]
+ },
+ {
+  "condition": "mdd",
+  "evidence": "3_genetics",
+  "query": "(\"Depressive Disorder, Major\"[mh] OR \"major depression\"[tiab] OR \"major depressive\"[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 16,
+  "retrieved": [
+   "26630954",
+   "19181679",
+   "24530440",
+   "12116189",
+   "39809809",
+   "30219690"
+  ]
+ },
+ {
+  "condition": "mdd",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Depressive Disorder, Major\"[mh] OR \"major depression\"[tiab] OR \"major depressive\"[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 17,
+  "retrieved": [
+   "26630954",
+   "22691454",
+   "36269510",
+   "30120418",
+   "16818863",
+   "1710105"
+  ]
+ },
+ {
+  "condition": "mdd",
+  "evidence": "5_animal",
+  "query": "(\"Depressive Disorder, Major\"[mh] OR \"major depression\"[tiab] OR \"major depressive\"[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "2017450"
+  ]
+ },
+ {
+  "condition": "mdd",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Depressive Disorder, Major\"[mh] OR \"major depression\"[tiab] OR \"major depressive\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 5,
+  "retrieved": [
+   "38993656",
+   "36269510",
+   "42105998",
+   "38868733",
+   "40430486"
+  ]
+ },
+ {
+  "condition": "ocd",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Obsessive-Compulsive Disorder\"[mh] OR obsessive-compulsive[tiab])",
+  "count": 30367
+ },
+ {
+  "condition": "ocd",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Obsessive-Compulsive Disorder\"[mh] OR obsessive-compulsive[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 3,
+  "retrieved": [
+   "42069559",
+   "11122916",
+   "3678059"
+  ]
+ },
+ {
+  "condition": "ocd",
+  "evidence": "1b_human_chei",
+  "query": "(\"Obsessive-Compulsive Disorder\"[mh] OR obsessive-compulsive[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "27223667",
+   "18343255"
+  ]
+ },
+ {
+  "condition": "ocd",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Obsessive-Compulsive Disorder\"[mh] OR obsessive-compulsive[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "37584834"
+  ]
+ },
+ {
+  "condition": "ocd",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Obsessive-Compulsive Disorder\"[mh] OR obsessive-compulsive[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 4,
+  "retrieved": [
+   "20301587",
+   "39202628",
+   "29731446",
+   "37852856"
+  ]
+ },
+ {
+  "condition": "ocd",
+  "evidence": "3_genetics",
+  "query": "(\"Obsessive-Compulsive Disorder\"[mh] OR obsessive-compulsive[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "ocd",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Obsessive-Compulsive Disorder\"[mh] OR obsessive-compulsive[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "39029696",
+   "15214506"
+  ]
+ },
+ {
+  "condition": "ocd",
+  "evidence": "5_animal",
+  "query": "(\"Obsessive-Compulsive Disorder\"[mh] OR obsessive-compulsive[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "23685859"
+  ]
+ },
+ {
+  "condition": "ocd",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Obsessive-Compulsive Disorder\"[mh] OR obsessive-compulsive[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 2,
+  "retrieved": [
+   "42069559",
+   "40430486"
+  ]
+ },
+ {
+  "condition": "tourette",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Tourette Syndrome\"[mh] OR tourette*[tiab] OR \"tic disorder*\"[tiab])",
+  "count": 8582
+ },
+ {
+  "condition": "tourette",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Tourette Syndrome\"[mh] OR tourette*[tiab] OR \"tic disorder*\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "tourette",
+  "evidence": "1b_human_chei",
+  "query": "(\"Tourette Syndrome\"[mh] OR tourette*[tiab] OR \"tic disorder*\"[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "18343255"
+  ]
+ },
+ {
+  "condition": "tourette",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Tourette Syndrome\"[mh] OR tourette*[tiab] OR \"tic disorder*\"[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "6957735"
+  ]
+ },
+ {
+  "condition": "tourette",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Tourette Syndrome\"[mh] OR tourette*[tiab] OR \"tic disorder*\"[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "11072762",
+   "19892136",
+   "16869393"
+  ]
+ },
+ {
+  "condition": "tourette",
+  "evidence": "3_genetics",
+  "query": "(\"Tourette Syndrome\"[mh] OR tourette*[tiab] OR \"tic disorder*\"[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "tourette",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Tourette Syndrome\"[mh] OR tourette*[tiab] OR \"tic disorder*\"[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 4,
+  "retrieved": [
+   "28791334",
+   "28090804",
+   "1972320",
+   "19941350"
+  ]
+ },
+ {
+  "condition": "tourette",
+  "evidence": "5_animal",
+  "query": "(\"Tourette Syndrome\"[mh] OR tourette*[tiab] OR \"tic disorder*\"[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "38689378"
+  ]
+ },
+ {
+  "condition": "tourette",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Tourette Syndrome\"[mh] OR tourette*[tiab] OR \"tic disorder*\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "38689378"
+  ]
+ },
+ {
+  "condition": "autism_irritability",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Autism Spectrum Disorder\"[mh] OR autis*[tiab])",
+  "count": 93933
+ },
+ {
+  "condition": "autism_irritability",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Autism Spectrum Disorder\"[mh] OR autis*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 2,
+  "retrieved": [
+   "30340090",
+   "27592227"
+  ]
+ },
+ {
+  "condition": "autism_irritability",
+  "evidence": "1b_human_chei",
+  "query": "(\"Autism Spectrum Disorder\"[mh] OR autis*[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 12,
+  "retrieved": [
+   "38296815",
+   "17069550",
+   "31264943",
+   "22752489",
+   "21851192",
+   "12427297"
+  ]
+ },
+ {
+  "condition": "autism_irritability",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Autism Spectrum Disorder\"[mh] OR autis*[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "31495925"
+  ]
+ },
+ {
+  "condition": "autism_irritability",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Autism Spectrum Disorder\"[mh] OR autis*[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 7,
+  "retrieved": [
+   "31495925",
+   "33773463",
+   "40433175",
+   "36613969",
+   "38108575",
+   "42592704"
+  ]
+ },
+ {
+  "condition": "autism_irritability",
+  "evidence": "3_genetics",
+  "query": "(\"Autism Spectrum Disorder\"[mh] OR autis*[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 6,
+  "retrieved": [
+   "34212451",
+   "28772121",
+   "31019551",
+   "23253743",
+   "38925359",
+   "41985299"
+  ]
+ },
+ {
+  "condition": "autism_irritability",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Autism Spectrum Disorder\"[mh] OR autis*[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 7,
+  "retrieved": [
+   "28720872",
+   "11431227",
+   "11252289",
+   "30514927",
+   "41714951",
+   "12076999"
+  ]
+ },
+ {
+  "condition": "autism_irritability",
+  "evidence": "5_animal",
+  "query": "(\"Autism Spectrum Disorder\"[mh] OR autis*[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "23228615"
+  ]
+ },
+ {
+  "condition": "autism_irritability",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Autism Spectrum Disorder\"[mh] OR autis*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "40621552"
+  ]
+ },
+ {
+  "condition": "adhd",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Attention Deficit Disorder with Hyperactivity\"[mh] OR ADHD[tiab])",
+  "count": 53577
+ },
+ {
+  "condition": "adhd",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Attention Deficit Disorder with Hyperactivity\"[mh] OR ADHD[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "adhd",
+  "evidence": "1b_human_chei",
+  "query": "(\"Attention Deficit Disorder with Hyperactivity\"[mh] OR ADHD[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 6,
+  "retrieved": [
+   "16379515",
+   "17069550",
+   "35915506",
+   "18343255",
+   "16481671",
+   "16633145"
+  ]
+ },
+ {
+  "condition": "adhd",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Attention Deficit Disorder with Hyperactivity\"[mh] OR ADHD[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 4,
+  "retrieved": [
+   "21334367",
+   "7549382",
+   "6775333",
+   "12577370"
+  ]
+ },
+ {
+  "condition": "adhd",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Attention Deficit Disorder with Hyperactivity\"[mh] OR ADHD[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "11869410",
+   "40866166",
+   "37824694"
+  ]
+ },
+ {
+  "condition": "adhd",
+  "evidence": "3_genetics",
+  "query": "(\"Attention Deficit Disorder with Hyperactivity\"[mh] OR ADHD[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 1,
+  "retrieved": [
+   "32227770"
+  ]
+ },
+ {
+  "condition": "adhd",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Attention Deficit Disorder with Hyperactivity\"[mh] OR ADHD[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "19863190"
+  ]
+ },
+ {
+  "condition": "adhd",
+  "evidence": "5_animal",
+  "query": "(\"Attention Deficit Disorder with Hyperactivity\"[mh] OR ADHD[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "adhd",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Attention Deficit Disorder with Hyperactivity\"[mh] OR ADHD[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "ptsd",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Stress Disorders, Post-Traumatic\"[mh] OR PTSD[tiab] OR posttraumatic stress[tiab])",
+  "count": 69182
+ },
+ {
+  "condition": "ptsd",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Stress Disorders, Post-Traumatic\"[mh] OR PTSD[tiab] OR posttraumatic stress[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 2,
+  "retrieved": [
+   "38993656",
+   "42096531"
+  ]
+ },
+ {
+  "condition": "ptsd",
+  "evidence": "1b_human_chei",
+  "query": "(\"Stress Disorders, Post-Traumatic\"[mh] OR PTSD[tiab] OR posttraumatic stress[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 3,
+  "retrieved": [
+   "38955788",
+   "27930500",
+   "26361060"
+  ]
+ },
+ {
+  "condition": "ptsd",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Stress Disorders, Post-Traumatic\"[mh] OR PTSD[tiab] OR posttraumatic stress[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "37584834",
+   "33991066"
+  ]
+ },
+ {
+  "condition": "ptsd",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Stress Disorders, Post-Traumatic\"[mh] OR PTSD[tiab] OR posttraumatic stress[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "29731446",
+   "33991066",
+   "32712590"
+  ]
+ },
+ {
+  "condition": "ptsd",
+  "evidence": "3_genetics",
+  "query": "(\"Stress Disorders, Post-Traumatic\"[mh] OR PTSD[tiab] OR posttraumatic stress[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 2,
+  "retrieved": [
+   "32009883",
+   "37073664"
+  ]
+ },
+ {
+  "condition": "ptsd",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Stress Disorders, Post-Traumatic\"[mh] OR PTSD[tiab] OR posttraumatic stress[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "ptsd",
+  "evidence": "5_animal",
+  "query": "(\"Stress Disorders, Post-Traumatic\"[mh] OR PTSD[tiab] OR posttraumatic stress[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "37666411"
+  ]
+ },
+ {
+  "condition": "ptsd",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Stress Disorders, Post-Traumatic\"[mh] OR PTSD[tiab] OR posttraumatic stress[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 2,
+  "retrieved": [
+   "38993656",
+   "42096531"
+  ]
+ },
+ {
+  "condition": "cocaine",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(cocaine[tiab] OR \"Cocaine-Related Disorders\"[mh])",
+  "count": 46409
+ },
+ {
+  "condition": "cocaine",
+  "evidence": "1a_human_agonist",
+  "query": "(cocaine[tiab] OR \"Cocaine-Related Disorders\"[mh]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 23,
+  "retrieved": [
+   "10176110",
+   "16197355",
+   "2330117",
+   "2729817",
+   "22732119",
+   "937427"
+  ]
+ },
+ {
+  "condition": "cocaine",
+  "evidence": "1b_human_chei",
+  "query": "(cocaine[tiab] OR \"Cocaine-Related Disorders\"[mh]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 12,
+  "retrieved": [
+   "39432105",
+   "31430484",
+   "31757262",
+   "21477060",
+   "29286595",
+   "27392137"
+  ]
+ },
+ {
+  "condition": "cocaine",
+  "evidence": "1c_scopolamine",
+  "query": "(cocaine[tiab] OR \"Cocaine-Related Disorders\"[mh]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 19,
+  "retrieved": [
+   "30813289",
+   "3887041",
+   "12579470",
+   "2055158",
+   "12832229",
+   "41861452"
+  ]
+ },
+ {
+  "condition": "cocaine",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(cocaine[tiab] OR \"Cocaine-Related Disorders\"[mh]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 17,
+  "retrieved": [
+   "26922134",
+   "8486081",
+   "35203563",
+   "23925710",
+   "32313025",
+   "3769509"
+  ]
+ },
+ {
+  "condition": "cocaine",
+  "evidence": "3_genetics",
+  "query": "(cocaine[tiab] OR \"Cocaine-Related Disorders\"[mh]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 3,
+  "retrieved": [
+   "42556717",
+   "17608938",
+   "27269905"
+  ]
+ },
+ {
+  "condition": "cocaine",
+  "evidence": "4_postmortem_imaging",
+  "query": "(cocaine[tiab] OR \"Cocaine-Related Disorders\"[mh]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 6,
+  "retrieved": [
+   "38321545",
+   "10089005",
+   "11577527",
+   "12468013",
+   "1569924",
+   "30625474"
+  ]
+ },
+ {
+  "condition": "cocaine",
+  "evidence": "5_animal",
+  "query": "(cocaine[tiab] OR \"Cocaine-Related Disorders\"[mh]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 22,
+  "retrieved": [
+   "40967301",
+   "28544993",
+   "38950842",
+   "30724803",
+   "42562046",
+   "19996296"
+  ]
+ },
+ {
+  "condition": "cocaine",
+  "evidence": "6_clinical_obs",
+  "query": "(cocaine[tiab] OR \"Cocaine-Related Disorders\"[mh]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 8,
+  "retrieved": [
+   "40967301",
+   "41887015",
+   "29250738",
+   "19996296",
+   "42090842",
+   "42562046"
+  ]
+ },
+ {
+  "condition": "methamphetamine",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(methamphetamine[tiab] OR amphetamine-related[tiab])",
+  "count": 16927
+ },
+ {
+  "condition": "methamphetamine",
+  "evidence": "1a_human_agonist",
+  "query": "(methamphetamine[tiab] OR amphetamine-related[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "3448811"
+  ]
+ },
+ {
+  "condition": "methamphetamine",
+  "evidence": "1b_human_chei",
+  "query": "(methamphetamine[tiab] OR amphetamine-related[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 6,
+  "retrieved": [
+   "22230648",
+   "450929",
+   "21624391",
+   "21803113",
+   "18207225",
+   "18248689"
+  ]
+ },
+ {
+  "condition": "methamphetamine",
+  "evidence": "1c_scopolamine",
+  "query": "(methamphetamine[tiab] OR amphetamine-related[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 12,
+  "retrieved": [
+   "30858063",
+   "7195816",
+   "34639047",
+   "22134122",
+   "14325382",
+   "450929"
+  ]
+ },
+ {
+  "condition": "methamphetamine",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(methamphetamine[tiab] OR amphetamine-related[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 5,
+  "retrieved": [
+   "8486081",
+   "6136621",
+   "11062864",
+   "1835370",
+   "7713361"
+  ]
+ },
+ {
+  "condition": "methamphetamine",
+  "evidence": "3_genetics",
+  "query": "(methamphetamine[tiab] OR amphetamine-related[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "methamphetamine",
+  "evidence": "4_postmortem_imaging",
+  "query": "(methamphetamine[tiab] OR amphetamine-related[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 3,
+  "retrieved": [
+   "20729719",
+   "10089005",
+   "20404009"
+  ]
+ },
+ {
+  "condition": "methamphetamine",
+  "evidence": "5_animal",
+  "query": "(methamphetamine[tiab] OR amphetamine-related[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 2,
+  "retrieved": [
+   "31299348",
+   "41887015"
+  ]
+ },
+ {
+  "condition": "methamphetamine",
+  "evidence": "6_clinical_obs",
+  "query": "(methamphetamine[tiab] OR amphetamine-related[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 2,
+  "retrieved": [
+   "31299348",
+   "41887015"
+  ]
+ },
+ {
+  "condition": "alcohol",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Alcoholism\"[mh] OR \"alcohol use disorder\"[tiab] OR \"alcohol dependence\"[tiab])",
+  "count": 94877
+ },
+ {
+  "condition": "alcohol",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Alcoholism\"[mh] OR \"alcohol use disorder\"[tiab] OR \"alcohol dependence\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "6687018"
+  ]
+ },
+ {
+  "condition": "alcohol",
+  "evidence": "1b_human_chei",
+  "query": "(\"Alcoholism\"[mh] OR \"alcohol use disorder\"[tiab] OR \"alcohol dependence\"[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 8,
+  "retrieved": [
+   "39111388",
+   "33284058",
+   "36346349",
+   "17190371",
+   "16328375",
+   "4939833"
+  ]
+ },
+ {
+  "condition": "alcohol",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Alcoholism\"[mh] OR \"alcohol use disorder\"[tiab] OR \"alcohol dependence\"[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 4,
+  "retrieved": [
+   "14488721",
+   "101817",
+   "21715413",
+   "1655072"
+  ]
+ },
+ {
+  "condition": "alcohol",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Alcoholism\"[mh] OR \"alcohol use disorder\"[tiab] OR \"alcohol dependence\"[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 5,
+  "retrieved": [
+   "33648697",
+   "11526808",
+   "1655072",
+   "10747",
+   "16869393"
+  ]
+ },
+ {
+  "condition": "alcohol",
+  "evidence": "3_genetics",
+  "query": "(\"Alcoholism\"[mh] OR \"alcohol use disorder\"[tiab] OR \"alcohol dependence\"[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 25,
+  "retrieved": [
+   "16961766",
+   "17982586",
+   "16612210",
+   "21176104",
+   "15210286",
+   "23712313"
+  ]
+ },
+ {
+  "condition": "alcohol",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Alcoholism\"[mh] OR \"alcohol use disorder\"[tiab] OR \"alcohol dependence\"[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 19,
+  "retrieved": [
+   "37005377",
+   "3067606",
+   "32331824",
+   "1669010",
+   "37402853",
+   "2541736"
+  ]
+ },
+ {
+  "condition": "alcohol",
+  "evidence": "5_animal",
+  "query": "(\"Alcoholism\"[mh] OR \"alcohol use disorder\"[tiab] OR \"alcohol dependence\"[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 4,
+  "retrieved": [
+   "38135508",
+   "21372126",
+   "1386257",
+   "42562046"
+  ]
+ },
+ {
+  "condition": "alcohol",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Alcoholism\"[mh] OR \"alcohol use disorder\"[tiab] OR \"alcohol dependence\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 2,
+  "retrieved": [
+   "38135508",
+   "42562046"
+  ]
+ },
+ {
+  "condition": "nicotine",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Tobacco Use Disorder\"[mh] OR \"nicotine dependence\"[tiab] OR \"smoking cessation\"[tiab])",
+  "count": 47852
+ },
+ {
+  "condition": "nicotine",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Tobacco Use Disorder\"[mh] OR \"nicotine dependence\"[tiab] OR \"smoking cessation\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 2,
+  "retrieved": [
+   "19702528",
+   "31220988"
+  ]
+ },
+ {
+  "condition": "nicotine",
+  "evidence": "1b_human_chei",
+  "query": "(\"Tobacco Use Disorder\"[mh] OR \"nicotine dependence\"[tiab] OR \"smoking cessation\"[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 9,
+  "retrieved": [
+   "29250815",
+   "17190371",
+   "29926988",
+   "18560630",
+   "19640356",
+   "18550339"
+  ]
+ },
+ {
+  "condition": "nicotine",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Tobacco Use Disorder\"[mh] OR \"nicotine dependence\"[tiab] OR \"smoking cessation\"[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 4,
+  "retrieved": [
+   "10702628",
+   "18484799",
+   "33376193",
+   "3781691"
+  ]
+ },
+ {
+  "condition": "nicotine",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Tobacco Use Disorder\"[mh] OR \"nicotine dependence\"[tiab] OR \"smoking cessation\"[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 14,
+  "retrieved": [
+   "32627702",
+   "38713046",
+   "3278783",
+   "18484799",
+   "33935078",
+   "15283307"
+  ]
+ },
+ {
+  "condition": "nicotine",
+  "evidence": "3_genetics",
+  "query": "(\"Tobacco Use Disorder\"[mh] OR \"nicotine dependence\"[tiab] OR \"smoking cessation\"[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 4,
+  "retrieved": [
+   "30219690",
+   "17608938",
+   "16874522",
+   "19644963"
+  ]
+ },
+ {
+  "condition": "nicotine",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Tobacco Use Disorder\"[mh] OR \"nicotine dependence\"[tiab] OR \"smoking cessation\"[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "nicotine",
+  "evidence": "5_animal",
+  "query": "(\"Tobacco Use Disorder\"[mh] OR \"nicotine dependence\"[tiab] OR \"smoking cessation\"[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "42562046"
+  ]
+ },
+ {
+  "condition": "nicotine",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Tobacco Use Disorder\"[mh] OR \"nicotine dependence\"[tiab] OR \"smoking cessation\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "42562046"
+  ]
+ },
+ {
+  "condition": "delirium",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Delirium\"[mh] OR delirium[tiab])",
+  "count": 30835
+ },
+ {
+  "condition": "delirium",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Delirium\"[mh] OR delirium[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "delirium",
+  "evidence": "1b_human_chei",
+  "query": "(\"Delirium\"[mh] OR delirium[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 40,
+  "retrieved": [
+   "12171061",
+   "37202140",
+   "32682169",
+   "19424763",
+   "40101707",
+   "32114617"
+  ]
+ },
+ {
+  "condition": "delirium",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Delirium\"[mh] OR delirium[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 40,
+  "retrieved": [
+   "1591736",
+   "330911",
+   "30252437",
+   "2196841",
+   "31665073",
+   "30192928"
+  ]
+ },
+ {
+  "condition": "delirium",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Delirium\"[mh] OR delirium[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 258,
+  "retrieved": [
+   "22810284",
+   "15909390",
+   "27056860",
+   "27025096",
+   "18332297",
+   "28318209"
+  ]
+ },
+ {
+  "condition": "delirium",
+  "evidence": "3_genetics",
+  "query": "(\"Delirium\"[mh] OR delirium[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 5,
+  "retrieved": [
+   "35137267",
+   "29478862",
+   "39814058",
+   "42308581",
+   "34674705"
+  ]
+ },
+ {
+  "condition": "delirium",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Delirium\"[mh] OR delirium[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "11382794"
+  ]
+ },
+ {
+  "condition": "delirium",
+  "evidence": "5_animal",
+  "query": "(\"Delirium\"[mh] OR delirium[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "delirium",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Delirium\"[mh] OR delirium[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "catatonia",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(catatoni*[tiab])",
+  "count": 4805
+ },
+ {
+  "condition": "catatonia",
+  "evidence": "1a_human_agonist",
+  "query": "(catatoni*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "42579811"
+  ]
+ },
+ {
+  "condition": "catatonia",
+  "evidence": "1b_human_chei",
+  "query": "(catatoni*[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "catatonia",
+  "evidence": "1c_scopolamine",
+  "query": "(catatoni*[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "14161544",
+   "7192759"
+  ]
+ },
+ {
+  "condition": "catatonia",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(catatoni*[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 8,
+  "retrieved": [
+   "10457974",
+   "1974219",
+   "34382488",
+   "32722730",
+   "24800686",
+   "37059654"
+  ]
+ },
+ {
+  "condition": "catatonia",
+  "evidence": "3_genetics",
+  "query": "(catatoni*[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "catatonia",
+  "evidence": "4_postmortem_imaging",
+  "query": "(catatoni*[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "catatonia",
+  "evidence": "5_animal",
+  "query": "(catatoni*[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "catatonia",
+  "evidence": "6_clinical_obs",
+  "query": "(catatoni*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "42579811"
+  ]
+ },
+ {
+  "condition": "anorexia",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Anorexia Nervosa\"[mh] OR \"anorexia nervosa\"[tiab])",
+  "count": 21768
+ },
+ {
+  "condition": "anorexia",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Anorexia Nervosa\"[mh] OR \"anorexia nervosa\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "7249894"
+  ]
+ },
+ {
+  "condition": "anorexia",
+  "evidence": "1b_human_chei",
+  "query": "(\"Anorexia Nervosa\"[mh] OR \"anorexia nervosa\"[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "7880938"
+  ]
+ },
+ {
+  "condition": "anorexia",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Anorexia Nervosa\"[mh] OR \"anorexia nervosa\"[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "anorexia",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Anorexia Nervosa\"[mh] OR \"anorexia nervosa\"[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "anorexia",
+  "evidence": "3_genetics",
+  "query": "(\"Anorexia Nervosa\"[mh] OR \"anorexia nervosa\"[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "anorexia",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Anorexia Nervosa\"[mh] OR \"anorexia nervosa\"[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "41792102"
+  ]
+ },
+ {
+  "condition": "anorexia",
+  "evidence": "5_animal",
+  "query": "(\"Anorexia Nervosa\"[mh] OR \"anorexia nervosa\"[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "anorexia",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Anorexia Nervosa\"[mh] OR \"anorexia nervosa\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "binge_eating",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Binge-Eating Disorder\"[mh] OR \"binge eating\"[tiab] OR obesity[tiab])",
+  "count": 416537
+ },
+ {
+  "condition": "binge_eating",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Binge-Eating Disorder\"[mh] OR \"binge eating\"[tiab] OR obesity[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 5,
+  "retrieved": [
+   "38206684",
+   "33160331",
+   "40009761",
+   "30995799",
+   "18281379"
+  ]
+ },
+ {
+  "condition": "binge_eating",
+  "evidence": "1b_human_chei",
+  "query": "(\"Binge-Eating Disorder\"[mh] OR \"binge eating\"[tiab] OR obesity[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 3,
+  "retrieved": [
+   "33776997",
+   "9426377",
+   "21294702"
+  ]
+ },
+ {
+  "condition": "binge_eating",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Binge-Eating Disorder\"[mh] OR \"binge eating\"[tiab] OR obesity[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 6,
+  "retrieved": [
+   "8583665",
+   "15251226",
+   "31344423",
+   "29510125",
+   "32020642",
+   "9787862"
+  ]
+ },
+ {
+  "condition": "binge_eating",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Binge-Eating Disorder\"[mh] OR \"binge eating\"[tiab] OR obesity[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 9,
+  "retrieved": [
+   "29671539",
+   "35686842",
+   "36576462",
+   "25370474",
+   "25246782",
+   "27069366"
+  ]
+ },
+ {
+  "condition": "binge_eating",
+  "evidence": "3_genetics",
+  "query": "(\"Binge-Eating Disorder\"[mh] OR \"binge eating\"[tiab] OR obesity[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 10,
+  "retrieved": [
+   "34935917",
+   "41870649",
+   "38674857",
+   "42540671",
+   "25155933",
+   "41153348"
+  ]
+ },
+ {
+  "condition": "binge_eating",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Binge-Eating Disorder\"[mh] OR \"binge eating\"[tiab] OR obesity[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "36499229",
+   "30625474"
+  ]
+ },
+ {
+  "condition": "binge_eating",
+  "evidence": "5_animal",
+  "query": "(\"Binge-Eating Disorder\"[mh] OR \"binge eating\"[tiab] OR obesity[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "31700039"
+  ]
+ },
+ {
+  "condition": "binge_eating",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Binge-Eating Disorder\"[mh] OR \"binge eating\"[tiab] OR obesity[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "40009761"
+  ]
+ },
+ {
+  "condition": "borderline",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Borderline Personality Disorder\"[mh] OR \"borderline personality\"[tiab])",
+  "count": 12481
+ },
+ {
+  "condition": "borderline",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Borderline Personality Disorder\"[mh] OR \"borderline personality\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "borderline",
+  "evidence": "1b_human_chei",
+  "query": "(\"Borderline Personality Disorder\"[mh] OR \"borderline personality\"[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "9326751"
+  ]
+ },
+ {
+  "condition": "borderline",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Borderline Personality Disorder\"[mh] OR \"borderline personality\"[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "borderline",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Borderline Personality Disorder\"[mh] OR \"borderline personality\"[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "borderline",
+  "evidence": "3_genetics",
+  "query": "(\"Borderline Personality Disorder\"[mh] OR \"borderline personality\"[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "borderline",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Borderline Personality Disorder\"[mh] OR \"borderline personality\"[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "42979337"
+  ]
+ },
+ {
+  "condition": "borderline",
+  "evidence": "5_animal",
+  "query": "(\"Borderline Personality Disorder\"[mh] OR \"borderline personality\"[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "borderline",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Borderline Personality Disorder\"[mh] OR \"borderline personality\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "ad_psychosis",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (psychosis[tiab] OR psychotic[tiab] OR agitation[tiab] OR hallucinat*[tiab] OR delusion*[tiab])",
+  "count": 4162
+ },
+ {
+  "condition": "ad_psychosis",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (psychosis[tiab] OR psychotic[tiab] OR agitation[tiab] OR hallucinat*[tiab] OR delusion*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 18,
+  "retrieved": [
+   "36273943",
+   "35758639",
+   "39623197",
+   "39715912",
+   "33048274",
+   "9109749"
+  ]
+ },
+ {
+  "condition": "ad_psychosis",
+  "evidence": "1b_human_chei",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (psychosis[tiab] OR psychotic[tiab] OR agitation[tiab] OR hallucinat*[tiab] OR delusion*[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 85,
+  "retrieved": [
+   "34983978",
+   "37358841",
+   "30891742",
+   "24164733",
+   "21561398",
+   "21335973"
+  ]
+ },
+ {
+  "condition": "ad_psychosis",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (psychosis[tiab] OR psychotic[tiab] OR agitation[tiab] OR hallucinat*[tiab] OR delusion*[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "36269510"
+  ]
+ },
+ {
+  "condition": "ad_psychosis",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (psychosis[tiab] OR psychotic[tiab] OR agitation[tiab] OR hallucinat*[tiab] OR delusion*[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 10,
+  "retrieved": [
+   "37334595",
+   "23062764",
+   "19182468",
+   "24812655",
+   "17317453",
+   "37626588"
+  ]
+ },
+ {
+  "condition": "ad_psychosis",
+  "evidence": "3_genetics",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (psychosis[tiab] OR psychotic[tiab] OR agitation[tiab] OR hallucinat*[tiab] OR delusion*[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "ad_psychosis",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (psychosis[tiab] OR psychotic[tiab] OR agitation[tiab] OR hallucinat*[tiab] OR delusion*[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 20,
+  "retrieved": [
+   "27042903",
+   "9869326",
+   "36269510",
+   "11577527",
+   "18033152",
+   "23027418"
+  ]
+ },
+ {
+  "condition": "ad_psychosis",
+  "evidence": "5_animal",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (psychosis[tiab] OR psychotic[tiab] OR agitation[tiab] OR hallucinat*[tiab] OR delusion*[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 7,
+  "retrieved": [
+   "34389398",
+   "33342996",
+   "9990560",
+   "18842902",
+   "21558436",
+   "12700711"
+  ]
+ },
+ {
+  "condition": "ad_psychosis",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (psychosis[tiab] OR psychotic[tiab] OR agitation[tiab] OR hallucinat*[tiab] OR delusion*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 20,
+  "retrieved": [
+   "36273943",
+   "39623197",
+   "35758639",
+   "36269510",
+   "39715912",
+   "9109749"
+  ]
+ },
+ {
+  "condition": "dementia_cognition",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (cognit*[tiab] OR memory[tiab])",
+  "count": 101133
+ },
+ {
+  "condition": "dementia_cognition",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 101,
+  "retrieved": [
+   "38993656",
+   "39623197",
+   "36273943",
+   "35758639",
+   "36414626",
+   "28141924"
+  ]
+ },
+ {
+  "condition": "dementia_cognition",
+  "evidence": "1b_human_chei",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 985,
+  "retrieved": [
+   "16437532",
+   "22397651",
+   "9443470",
+   "38439609",
+   "18686744",
+   "38875437"
+  ]
+ },
+ {
+  "condition": "dementia_cognition",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 363,
+  "retrieved": [
+   "3541051",
+   "3417793",
+   "36205074",
+   "21334367",
+   "39129007",
+   "40340067"
+  ]
+ },
+ {
+  "condition": "dementia_cognition",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 146,
+  "retrieved": [
+   "25621434",
+   "32878992",
+   "41121438",
+   "38052993",
+   "40567948",
+   "38063254"
+  ]
+ },
+ {
+  "condition": "dementia_cognition",
+  "evidence": "3_genetics",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 18,
+  "retrieved": [
+   "42157023",
+   "36475335",
+   "36221993",
+   "35701806",
+   "30090216",
+   "32956608"
+  ]
+ },
+ {
+  "condition": "dementia_cognition",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 215,
+  "retrieved": [
+   "27042903",
+   "38706271",
+   "37846816",
+   "25348064",
+   "40816766",
+   "39865328"
+  ]
+ },
+ {
+  "condition": "dementia_cognition",
+  "evidence": "5_animal",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 60,
+  "retrieved": [
+   "40854422",
+   "10069521",
+   "36655909",
+   "30395575",
+   "28944835",
+   "33342996"
+  ]
+ },
+ {
+  "condition": "dementia_cognition",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 41,
+  "retrieved": [
+   "36273943",
+   "39623197",
+   "38993656",
+   "35758639",
+   "36414626",
+   "28141924"
+  ]
+ },
+ {
+  "condition": "dlb",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Lewy Body Disease\"[mh] OR \"lewy bod*\"[tiab])",
+  "count": 15394
+ },
+ {
+  "condition": "dlb",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Lewy Body Disease\"[mh] OR \"lewy bod*\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 5,
+  "retrieved": [
+   "31577469",
+   "40340060",
+   "17197083",
+   "9853196",
+   "15834036"
+  ]
+ },
+ {
+  "condition": "dlb",
+  "evidence": "1b_human_chei",
+  "query": "(\"Lewy Body Disease\"[mh] OR \"lewy bod*\"[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 106,
+  "retrieved": [
+   "38436963",
+   "37358841",
+   "14587496",
+   "30891742",
+   "25941104",
+   "35006557"
+  ]
+ },
+ {
+  "condition": "dlb",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Lewy Body Disease\"[mh] OR \"lewy bod*\"[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "22280345",
+   "15621213"
+  ]
+ },
+ {
+  "condition": "dlb",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Lewy Body Disease\"[mh] OR \"lewy bod*\"[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 23,
+  "retrieved": [
+   "15909390",
+   "41121438",
+   "40567948",
+   "33763383",
+   "24292000",
+   "19182468"
+  ]
+ },
+ {
+  "condition": "dlb",
+  "evidence": "3_genetics",
+  "query": "(\"Lewy Body Disease\"[mh] OR \"lewy bod*\"[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 2,
+  "retrieved": [
+   "34806612",
+   "41985299"
+  ]
+ },
+ {
+  "condition": "dlb",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Lewy Body Disease\"[mh] OR \"lewy bod*\"[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 69,
+  "retrieved": [
+   "27042903",
+   "39865328",
+   "31731914",
+   "32631924",
+   "9869326",
+   "28794446"
+  ]
+ },
+ {
+  "condition": "dlb",
+  "evidence": "5_animal",
+  "query": "(\"Lewy Body Disease\"[mh] OR \"lewy bod*\"[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 3,
+  "retrieved": [
+   "28422371",
+   "31299348",
+   "30856192"
+  ]
+ },
+ {
+  "condition": "dlb",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Lewy Body Disease\"[mh] OR \"lewy bod*\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "28422371",
+   "30856192",
+   "31299348"
+  ]
+ },
+ {
+  "condition": "pd_psychosis",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (psychosis[tiab] OR hallucinat*[tiab])",
+  "count": 3865
+ },
+ {
+  "condition": "pd_psychosis",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (psychosis[tiab] OR hallucinat*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 3,
+  "retrieved": [
+   "40056428",
+   "14274823",
+   "11830757"
+  ]
+ },
+ {
+  "condition": "pd_psychosis",
+  "evidence": "1b_human_chei",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (psychosis[tiab] OR hallucinat*[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 55,
+  "retrieved": [
+   "37358841",
+   "40464628",
+   "18665659",
+   "37530610",
+   "19221317",
+   "26371623"
+  ]
+ },
+ {
+  "condition": "pd_psychosis",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (psychosis[tiab] OR hallucinat*[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "pd_psychosis",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (psychosis[tiab] OR hallucinat*[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 29,
+  "retrieved": [
+   "31866817",
+   "27785919",
+   "2567051",
+   "21898597",
+   "2574068",
+   "10785836"
+  ]
+ },
+ {
+  "condition": "pd_psychosis",
+  "evidence": "3_genetics",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (psychosis[tiab] OR hallucinat*[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "pd_psychosis",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (psychosis[tiab] OR hallucinat*[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 15,
+  "retrieved": [
+   "27042903",
+   "38864492",
+   "9869326",
+   "31731914",
+   "41672204",
+   "35029300"
+  ]
+ },
+ {
+  "condition": "pd_psychosis",
+  "evidence": "5_animal",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (psychosis[tiab] OR hallucinat*[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "pd_psychosis",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (psychosis[tiab] OR hallucinat*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "40056428",
+   "42729706",
+   "42345506"
+  ]
+ },
+ {
+  "condition": "pd_cognition",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (cognit*[tiab] OR dementia[tiab])",
+  "count": 33890
+ },
+ {
+  "condition": "pd_cognition",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (cognit*[tiab] OR dementia[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 8,
+  "retrieved": [
+   "31577469",
+   "40056428",
+   "40340060",
+   "24214089",
+   "25230223",
+   "39761063"
+  ]
+ },
+ {
+  "condition": "pd_cognition",
+  "evidence": "1b_human_chei",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (cognit*[tiab] OR dementia[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 173,
+  "retrieved": [
+   "38436963",
+   "37358841",
+   "30891742",
+   "40464628",
+   "14587496",
+   "28088312"
+  ]
+ },
+ {
+  "condition": "pd_cognition",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (cognit*[tiab] OR dementia[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 13,
+  "retrieved": [
+   "30858063",
+   "3541051",
+   "3631918",
+   "40023605",
+   "39270528",
+   "10413563"
+  ]
+ },
+ {
+  "condition": "pd_cognition",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (cognit*[tiab] OR dementia[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 110,
+  "retrieved": [
+   "15909390",
+   "38502289",
+   "20301389",
+   "35633757",
+   "38797973",
+   "34765683"
+  ]
+ },
+ {
+  "condition": "pd_cognition",
+  "evidence": "3_genetics",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (cognit*[tiab] OR dementia[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 1,
+  "retrieved": [
+   "36155524"
+  ]
+ },
+ {
+  "condition": "pd_cognition",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (cognit*[tiab] OR dementia[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 110,
+  "retrieved": [
+   "27042903",
+   "36795878",
+   "35248201",
+   "38109781",
+   "31471503",
+   "24132837"
+  ]
+ },
+ {
+  "condition": "pd_cognition",
+  "evidence": "5_animal",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (cognit*[tiab] OR dementia[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 4,
+  "retrieved": [
+   "19407080",
+   "31620809",
+   "33735392",
+   "17594079"
+  ]
+ },
+ {
+  "condition": "pd_cognition",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (cognit*[tiab] OR dementia[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "40056428"
+  ]
+ },
+ {
+  "condition": "huntington",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Huntington Disease\"[mh] OR huntington*[tiab])",
+  "count": 26258
+ },
+ {
+  "condition": "huntington",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Huntington Disease\"[mh] OR huntington*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 4,
+  "retrieved": [
+   "11830757",
+   "6225034",
+   "25230223",
+   "7197631"
+  ]
+ },
+ {
+  "condition": "huntington",
+  "evidence": "1b_human_chei",
+  "query": "(\"Huntington Disease\"[mh] OR huntington*[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 12,
+  "retrieved": [
+   "35006557",
+   "25734590",
+   "40791064",
+   "15390067",
+   "17030764",
+   "25191771"
+  ]
+ },
+ {
+  "condition": "huntington",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Huntington Disease\"[mh] OR huntington*[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 10,
+  "retrieved": [
+   "30858063",
+   "6273940",
+   "41539579",
+   "12832229",
+   "6222635",
+   "2938571"
+  ]
+ },
+ {
+  "condition": "huntington",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Huntington Disease\"[mh] OR huntington*[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 8,
+  "retrieved": [
+   "26922134",
+   "9375213",
+   "2938571",
+   "9471103",
+   "874521",
+   "7936089"
+  ]
+ },
+ {
+  "condition": "huntington",
+  "evidence": "3_genetics",
+  "query": "(\"Huntington Disease\"[mh] OR huntington*[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 4,
+  "retrieved": [
+   "18199763",
+   "23151521",
+   "23455440",
+   "41985299"
+  ]
+ },
+ {
+  "condition": "huntington",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Huntington Disease\"[mh] OR huntington*[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 34,
+  "retrieved": [
+   "24076101",
+   "27983560",
+   "11577527",
+   "4733",
+   "136582",
+   "4157009"
+  ]
+ },
+ {
+  "condition": "huntington",
+  "evidence": "5_animal",
+  "query": "(\"Huntington Disease\"[mh] OR huntington*[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "26508634"
+  ]
+ },
+ {
+  "condition": "huntington",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Huntington Disease\"[mh] OR huntington*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "tardive",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Tardive Dyskinesia\"[mh] OR \"tardive dyskinesia\"[tiab])",
+  "count": 4786
+ },
+ {
+  "condition": "tardive",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Tardive Dyskinesia\"[mh] OR \"tardive dyskinesia\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 11,
+  "retrieved": [
+   "38904739",
+   "40056428",
+   "39348764",
+   "3315156",
+   "2858901",
+   "42105309"
+  ]
+ },
+ {
+  "condition": "tardive",
+  "evidence": "1b_human_chei",
+  "query": "(\"Tardive Dyskinesia\"[mh] OR \"tardive dyskinesia\"[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 17,
+  "retrieved": [
+   "1979500",
+   "15610922",
+   "19142126",
+   "379689",
+   "29553158",
+   "11816865"
+  ]
+ },
+ {
+  "condition": "tardive",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Tardive Dyskinesia\"[mh] OR \"tardive dyskinesia\"[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 6,
+  "retrieved": [
+   "2858901",
+   "6273940",
+   "29341071",
+   "10796321",
+   "6108720",
+   "4418481"
+  ]
+ },
+ {
+  "condition": "tardive",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Tardive Dyskinesia\"[mh] OR \"tardive dyskinesia\"[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 72,
+  "retrieved": [
+   "38502289",
+   "30192094",
+   "32722730",
+   "29246613",
+   "3315156",
+   "39202628"
+  ]
+ },
+ {
+  "condition": "tardive",
+  "evidence": "3_genetics",
+  "query": "(\"Tardive Dyskinesia\"[mh] OR \"tardive dyskinesia\"[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 3,
+  "retrieved": [
+   "30623717",
+   "40445323",
+   "32368127"
+  ]
+ },
+ {
+  "condition": "tardive",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Tardive Dyskinesia\"[mh] OR \"tardive dyskinesia\"[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "9286184"
+  ]
+ },
+ {
+  "condition": "tardive",
+  "evidence": "5_animal",
+  "query": "(\"Tardive Dyskinesia\"[mh] OR \"tardive dyskinesia\"[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "tardive",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Tardive Dyskinesia\"[mh] OR \"tardive dyskinesia\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 8,
+  "retrieved": [
+   "38904739",
+   "40056428",
+   "39348764",
+   "42105309",
+   "41779005",
+   "15610922"
+  ]
+ },
+ {
+  "condition": "migraine",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Migraine Disorders\"[mh] OR migraine[tiab])",
+  "count": 54079
+ },
+ {
+  "condition": "migraine",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Migraine Disorders\"[mh] OR migraine[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 14,
+  "retrieved": [
+   "35382731",
+   "22081517",
+   "35760585",
+   "6627383",
+   "1810837",
+   "23812529"
+  ]
+ },
+ {
+  "condition": "migraine",
+  "evidence": "1b_human_chei",
+  "query": "(\"Migraine Disorders\"[mh] OR migraine[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "12482211"
+  ]
+ },
+ {
+  "condition": "migraine",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Migraine Disorders\"[mh] OR migraine[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 8,
+  "retrieved": [
+   "21142898",
+   "15823712",
+   "12482211",
+   "15680276",
+   "19420813",
+   "2071397"
+  ]
+ },
+ {
+  "condition": "migraine",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Migraine Disorders\"[mh] OR migraine[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 2,
+  "retrieved": [
+   "16556516",
+   "29431143"
+  ]
+ },
+ {
+  "condition": "migraine",
+  "evidence": "3_genetics",
+  "query": "(\"Migraine Disorders\"[mh] OR migraine[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 2,
+  "retrieved": [
+   "29168350",
+   "42795812"
+  ]
+ },
+ {
+  "condition": "migraine",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Migraine Disorders\"[mh] OR migraine[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "19751370"
+  ]
+ },
+ {
+  "condition": "migraine",
+  "evidence": "5_animal",
+  "query": "(\"Migraine Disorders\"[mh] OR migraine[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "31945385"
+  ]
+ },
+ {
+  "condition": "migraine",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Migraine Disorders\"[mh] OR migraine[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "epilepsy",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Epilepsy\"[mh] OR epilep*[tiab] OR seizure*[tiab])",
+  "count": 290500
+ },
+ {
+  "condition": "epilepsy",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Epilepsy\"[mh] OR epilep*[tiab] OR seizure*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 423,
+  "retrieved": [
+   "39136073",
+   "36804714",
+   "37648036",
+   "39617893",
+   "23763517",
+   "38965228"
+  ]
+ },
+ {
+  "condition": "epilepsy",
+  "evidence": "1b_human_chei",
+  "query": "(\"Epilepsy\"[mh] OR epilep*[tiab] OR seizure*[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 14,
+  "retrieved": [
+   "34825872",
+   "32682169",
+   "40877496",
+   "38580328",
+   "1620139",
+   "33295809"
+  ]
+ },
+ {
+  "condition": "epilepsy",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Epilepsy\"[mh] OR epilep*[tiab] OR seizure*[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 28,
+  "retrieved": [
+   "12536341",
+   "30858063",
+   "33714677",
+   "31766938",
+   "23524966",
+   "16417670"
+  ]
+ },
+ {
+  "condition": "epilepsy",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Epilepsy\"[mh] OR epilep*[tiab] OR seizure*[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 78,
+  "retrieved": [
+   "20301587",
+   "23386597",
+   "23910220",
+   "38664300",
+   "34251950",
+   "17496766"
+  ]
+ },
+ {
+  "condition": "epilepsy",
+  "evidence": "3_genetics",
+  "query": "(\"Epilepsy\"[mh] OR epilep*[tiab] OR seizure*[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 11,
+  "retrieved": [
+   "34212451",
+   "28772121",
+   "33930374",
+   "23253743",
+   "29478862",
+   "31564953"
+  ]
+ },
+ {
+  "condition": "epilepsy",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Epilepsy\"[mh] OR epilep*[tiab] OR seizure*[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 20,
+  "retrieved": [
+   "11577527",
+   "8501520",
+   "6097311",
+   "8095556",
+   "12076999",
+   "11160966"
+  ]
+ },
+ {
+  "condition": "epilepsy",
+  "evidence": "5_animal",
+  "query": "(\"Epilepsy\"[mh] OR epilep*[tiab] OR seizure*[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 62,
+  "retrieved": [
+   "30395575",
+   "12667913",
+   "7805641",
+   "11388441",
+   "29432603",
+   "18711127"
+  ]
+ },
+ {
+  "condition": "epilepsy",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Epilepsy\"[mh] OR epilep*[tiab] OR seizure*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "22863677",
+   "31238068",
+   "41195345"
+  ]
+ },
+ {
+  "condition": "chronic_pain",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Chronic Pain\"[mh] OR \"neuropathic pain\"[tiab] OR \"chronic pain\"[tiab] OR analges*[tiab])",
+  "count": 268827
+ },
+ {
+  "condition": "chronic_pain",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Chronic Pain\"[mh] OR \"neuropathic pain\"[tiab] OR \"chronic pain\"[tiab] OR analges*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 25,
+  "retrieved": [
+   "33212113",
+   "4581246",
+   "40358683",
+   "26931765",
+   "19926555",
+   "25413004"
+  ]
+ },
+ {
+  "condition": "chronic_pain",
+  "evidence": "1b_human_chei",
+  "query": "(\"Chronic Pain\"[mh] OR \"neuropathic pain\"[tiab] OR \"chronic pain\"[tiab] OR analges*[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 25,
+  "retrieved": [
+   "11369163",
+   "4581246",
+   "12482211",
+   "7893023",
+   "8098758",
+   "25544263"
+  ]
+ },
+ {
+  "condition": "chronic_pain",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Chronic Pain\"[mh] OR \"neuropathic pain\"[tiab] OR \"chronic pain\"[tiab] OR analges*[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 124,
+  "retrieved": [
+   "35025078",
+   "35272331",
+   "28387362",
+   "12356036",
+   "36521791",
+   "20294429"
+  ]
+ },
+ {
+  "condition": "chronic_pain",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Chronic Pain\"[mh] OR \"neuropathic pain\"[tiab] OR \"chronic pain\"[tiab] OR analges*[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 60,
+  "retrieved": [
+   "25324330",
+   "36302937",
+   "30609834",
+   "37725991",
+   "37573886",
+   "34173033"
+  ]
+ },
+ {
+  "condition": "chronic_pain",
+  "evidence": "3_genetics",
+  "query": "(\"Chronic Pain\"[mh] OR \"neuropathic pain\"[tiab] OR \"chronic pain\"[tiab] OR analges*[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 7,
+  "retrieved": [
+   "38219886",
+   "30327427",
+   "39163289",
+   "22074755",
+   "30466987",
+   "42921774"
+  ]
+ },
+ {
+  "condition": "chronic_pain",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Chronic Pain\"[mh] OR \"neuropathic pain\"[tiab] OR \"chronic pain\"[tiab] OR analges*[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 6,
+  "retrieved": [
+   "11577527",
+   "16296359",
+   "23630294",
+   "20089882",
+   "13678406",
+   "11741475"
+  ]
+ },
+ {
+  "condition": "chronic_pain",
+  "evidence": "5_animal",
+  "query": "(\"Chronic Pain\"[mh] OR \"neuropathic pain\"[tiab] OR \"chronic pain\"[tiab] OR analges*[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 41,
+  "retrieved": [
+   "10780968",
+   "23701118",
+   "12667913",
+   "14607263",
+   "12168532",
+   "9431549"
+  ]
+ },
+ {
+  "condition": "chronic_pain",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Chronic Pain\"[mh] OR \"neuropathic pain\"[tiab] OR \"chronic pain\"[tiab] OR analges*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 5,
+  "retrieved": [
+   "9152396",
+   "25413004",
+   "18537768",
+   "22018972",
+   "23597304"
+  ]
+ },
+ {
+  "condition": "sleep",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Narcolepsy\"[mh] OR narcolep*[tiab] OR insomnia[tiab] OR \"REM sleep\"[tiab])",
+  "count": 60756
+ },
+ {
+  "condition": "sleep",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Narcolepsy\"[mh] OR narcolep*[tiab] OR insomnia[tiab] OR \"REM sleep\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 25,
+  "retrieved": [
+   "38993656",
+   "39880004",
+   "38608118",
+   "8711728",
+   "7766284",
+   "21441606"
+  ]
+ },
+ {
+  "condition": "sleep",
+  "evidence": "1b_human_chei",
+  "query": "(\"Narcolepsy\"[mh] OR narcolep*[tiab] OR insomnia[tiab] OR \"REM sleep\"[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 43,
+  "retrieved": [
+   "39134455",
+   "24272458",
+   "22021174",
+   "26371623",
+   "31424411",
+   "27010071"
+  ]
+ },
+ {
+  "condition": "sleep",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Narcolepsy\"[mh] OR narcolep*[tiab] OR insomnia[tiab] OR \"REM sleep\"[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 28,
+  "retrieved": [
+   "39150032",
+   "31599872",
+   "31225769",
+   "21715413",
+   "24494624",
+   "7905288"
+  ]
+ },
+ {
+  "condition": "sleep",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Narcolepsy\"[mh] OR narcolep*[tiab] OR insomnia[tiab] OR \"REM sleep\"[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 34,
+  "retrieved": [
+   "27785919",
+   "36935184",
+   "41466923",
+   "38269564",
+   "38467994",
+   "33773463"
+  ]
+ },
+ {
+  "condition": "sleep",
+  "evidence": "3_genetics",
+  "query": "(\"Narcolepsy\"[mh] OR narcolep*[tiab] OR insomnia[tiab] OR \"REM sleep\"[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 8,
+  "retrieved": [
+   "32009883",
+   "30157420",
+   "36475335",
+   "12116189",
+   "42896555",
+   "22091728"
+  ]
+ },
+ {
+  "condition": "sleep",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Narcolepsy\"[mh] OR narcolep*[tiab] OR insomnia[tiab] OR \"REM sleep\"[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 22,
+  "retrieved": [
+   "27042903",
+   "37939636",
+   "25393613",
+   "23943367",
+   "9818849",
+   "9372219"
+  ]
+ },
+ {
+  "condition": "sleep",
+  "evidence": "5_animal",
+  "query": "(\"Narcolepsy\"[mh] OR narcolep*[tiab] OR insomnia[tiab] OR \"REM sleep\"[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 9,
+  "retrieved": [
+   "8455816",
+   "26617071",
+   "2482113",
+   "22138442",
+   "6138122",
+   "32868847"
+  ]
+ },
+ {
+  "condition": "sleep",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Narcolepsy\"[mh] OR narcolep*[tiab] OR insomnia[tiab] OR \"REM sleep\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 5,
+  "retrieved": [
+   "38993656",
+   "39880004",
+   "26617071",
+   "32868847",
+   "42096531"
+  ]
+ },
+ {
+  "condition": "post_stroke",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(stroke[tiab] AND (cognit*[tiab] OR aphasia[tiab] OR dementia[tiab]))",
+  "count": 31851
+ },
+ {
+  "condition": "post_stroke",
+  "evidence": "1a_human_agonist",
+  "query": "(stroke[tiab] AND (cognit*[tiab] OR aphasia[tiab] OR dementia[tiab])) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 2,
+  "retrieved": [
+   "9853196",
+   "23000013"
+  ]
+ },
+ {
+  "condition": "post_stroke",
+  "evidence": "1b_human_chei",
+  "query": "(stroke[tiab] AND (cognit*[tiab] OR aphasia[tiab] OR dementia[tiab])) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 49,
+  "retrieved": [
+   "15733022",
+   "33704781",
+   "29984673",
+   "18989105",
+   "22514795",
+   "26646039"
+  ]
+ },
+ {
+  "condition": "post_stroke",
+  "evidence": "1c_scopolamine",
+  "query": "(stroke[tiab] AND (cognit*[tiab] OR aphasia[tiab] OR dementia[tiab])) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "28807671",
+   "20172537"
+  ]
+ },
+ {
+  "condition": "post_stroke",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(stroke[tiab] AND (cognit*[tiab] OR aphasia[tiab] OR dementia[tiab])) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 32,
+  "retrieved": [
+   "20301758",
+   "38725892",
+   "37101056",
+   "26003249",
+   "37620654",
+   "11083349"
+  ]
+ },
+ {
+  "condition": "post_stroke",
+  "evidence": "3_genetics",
+  "query": "(stroke[tiab] AND (cognit*[tiab] OR aphasia[tiab] OR dementia[tiab])) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 2,
+  "retrieved": [
+   "40052261",
+   "22371606"
+  ]
+ },
+ {
+  "condition": "post_stroke",
+  "evidence": "4_postmortem_imaging",
+  "query": "(stroke[tiab] AND (cognit*[tiab] OR aphasia[tiab] OR dementia[tiab])) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 7,
+  "retrieved": [
+   "21988073",
+   "11577527",
+   "18386631",
+   "22877922",
+   "7936259",
+   "19776575"
+  ]
+ },
+ {
+  "condition": "post_stroke",
+  "evidence": "5_animal",
+  "query": "(stroke[tiab] AND (cognit*[tiab] OR aphasia[tiab] OR dementia[tiab])) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "post_stroke",
+  "evidence": "6_clinical_obs",
+  "query": "(stroke[tiab] AND (cognit*[tiab] OR aphasia[tiab] OR dementia[tiab])) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "long_covid",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "((\"post-COVID\"[tiab] OR \"long COVID\"[tiab] OR \"post-acute sequelae\"[tiab]) AND (cognit*[tiab] OR \"brain fog\"[tiab]))",
+  "count": 2852
+ },
+ {
+  "condition": "long_covid",
+  "evidence": "1a_human_agonist",
+  "query": "((\"post-COVID\"[tiab] OR \"long COVID\"[tiab] OR \"post-acute sequelae\"[tiab]) AND (cognit*[tiab] OR \"brain fog\"[tiab])) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "long_covid",
+  "evidence": "1b_human_chei",
+  "query": "((\"post-COVID\"[tiab] OR \"long COVID\"[tiab] OR \"post-acute sequelae\"[tiab]) AND (cognit*[tiab] OR \"brain fog\"[tiab])) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "37952347"
+  ]
+ },
+ {
+  "condition": "long_covid",
+  "evidence": "1c_scopolamine",
+  "query": "((\"post-COVID\"[tiab] OR \"long COVID\"[tiab] OR \"post-acute sequelae\"[tiab]) AND (cognit*[tiab] OR \"brain fog\"[tiab])) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "long_covid",
+  "evidence": "2_anticholinergic_burden",
+  "query": "((\"post-COVID\"[tiab] OR \"long COVID\"[tiab] OR \"post-acute sequelae\"[tiab]) AND (cognit*[tiab] OR \"brain fog\"[tiab])) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "36347056"
+  ]
+ },
+ {
+  "condition": "long_covid",
+  "evidence": "3_genetics",
+  "query": "((\"post-COVID\"[tiab] OR \"long COVID\"[tiab] OR \"post-acute sequelae\"[tiab]) AND (cognit*[tiab] OR \"brain fog\"[tiab])) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "long_covid",
+  "evidence": "4_postmortem_imaging",
+  "query": "((\"post-COVID\"[tiab] OR \"long COVID\"[tiab] OR \"post-acute sequelae\"[tiab]) AND (cognit*[tiab] OR \"brain fog\"[tiab])) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "long_covid",
+  "evidence": "5_animal",
+  "query": "((\"post-COVID\"[tiab] OR \"long COVID\"[tiab] OR \"post-acute sequelae\"[tiab]) AND (cognit*[tiab] OR \"brain fog\"[tiab])) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "long_covid",
+  "evidence": "6_clinical_obs",
+  "query": "((\"post-COVID\"[tiab] OR \"long COVID\"[tiab] OR \"post-acute sequelae\"[tiab]) AND (cognit*[tiab] OR \"brain fog\"[tiab])) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "chemo_brain",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(chemotherapy[tiab] AND (cognit*[tiab] OR \"chemo brain\"[tiab]))",
+  "count": 4411
+ },
+ {
+  "condition": "chemo_brain",
+  "evidence": "1a_human_agonist",
+  "query": "(chemotherapy[tiab] AND (cognit*[tiab] OR \"chemo brain\"[tiab])) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "chemo_brain",
+  "evidence": "1b_human_chei",
+  "query": "(chemotherapy[tiab] AND (cognit*[tiab] OR \"chemo brain\"[tiab])) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 3,
+  "retrieved": [
+   "32384481",
+   "38709986",
+   "26130292"
+  ]
+ },
+ {
+  "condition": "chemo_brain",
+  "evidence": "1c_scopolamine",
+  "query": "(chemotherapy[tiab] AND (cognit*[tiab] OR \"chemo brain\"[tiab])) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "chemo_brain",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(chemotherapy[tiab] AND (cognit*[tiab] OR \"chemo brain\"[tiab])) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "37559866"
+  ]
+ },
+ {
+  "condition": "chemo_brain",
+  "evidence": "3_genetics",
+  "query": "(chemotherapy[tiab] AND (cognit*[tiab] OR \"chemo brain\"[tiab])) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "chemo_brain",
+  "evidence": "4_postmortem_imaging",
+  "query": "(chemotherapy[tiab] AND (cognit*[tiab] OR \"chemo brain\"[tiab])) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "6327657"
+  ]
+ },
+ {
+  "condition": "chemo_brain",
+  "evidence": "5_animal",
+  "query": "(chemotherapy[tiab] AND (cognit*[tiab] OR \"chemo brain\"[tiab])) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "chemo_brain",
+  "evidence": "6_clinical_obs",
+  "query": "(chemotherapy[tiab] AND (cognit*[tiab] OR \"chemo brain\"[tiab])) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gastroparesis",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(gastroparesis[tiab])",
+  "count": 4279
+ },
+ {
+  "condition": "gastroparesis",
+  "evidence": "1a_human_agonist",
+  "query": "(gastroparesis[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 8,
+  "retrieved": [
+   "10751126",
+   "16959934",
+   "7350052",
+   "8348856",
+   "3895390",
+   "17633090"
+  ]
+ },
+ {
+  "condition": "gastroparesis",
+  "evidence": "1b_human_chei",
+  "query": "(gastroparesis[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gastroparesis",
+  "evidence": "1c_scopolamine",
+  "query": "(gastroparesis[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "33646999"
+  ]
+ },
+ {
+  "condition": "gastroparesis",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(gastroparesis[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 2,
+  "retrieved": [
+   "24673805",
+   "42454711"
+  ]
+ },
+ {
+  "condition": "gastroparesis",
+  "evidence": "3_genetics",
+  "query": "(gastroparesis[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gastroparesis",
+  "evidence": "4_postmortem_imaging",
+  "query": "(gastroparesis[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gastroparesis",
+  "evidence": "5_animal",
+  "query": "(gastroparesis[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gastroparesis",
+  "evidence": "6_clinical_obs",
+  "query": "(gastroparesis[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "schizophrenia_cog",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(schizophreni*[tiab] AND cognit*[tiab])",
+  "count": 28961
+ },
+ {
+  "condition": "schizophrenia_cog",
+  "evidence": "1a_human_agonist",
+  "query": "(schizophreni*[tiab] AND cognit*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 75,
+  "retrieved": [
+   "38904739",
+   "38993656",
+   "41507454",
+   "40145363",
+   "36273943",
+   "35758639"
+  ]
+ },
+ {
+  "condition": "schizophrenia_cog",
+  "evidence": "1b_human_chei",
+  "query": "(schizophreni*[tiab] AND cognit*[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 59,
+  "retrieved": [
+   "28705532",
+   "18665659",
+   "32835925",
+   "16012272",
+   "17762319",
+   "23215841"
+  ]
+ },
+ {
+  "condition": "schizophrenia_cog",
+  "evidence": "1c_scopolamine",
+  "query": "(schizophreni*[tiab] AND cognit*[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 24,
+  "retrieved": [
+   "21334367",
+   "18655798",
+   "20930482",
+   "21420999",
+   "24917542",
+   "20861374"
+  ]
+ },
+ {
+  "condition": "schizophrenia_cog",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(schizophreni*[tiab] AND cognit*[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 112,
+  "retrieved": [
+   "38000206",
+   "33985348",
+   "36441495",
+   "37006704",
+   "40007252",
+   "40086906"
+  ]
+ },
+ {
+  "condition": "schizophrenia_cog",
+  "evidence": "3_genetics",
+  "query": "(schizophreni*[tiab] AND cognit*[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 15,
+  "retrieved": [
+   "26818859",
+   "21557953",
+   "37994870",
+   "26481978",
+   "37079947",
+   "40445323"
+  ]
+ },
+ {
+  "condition": "schizophrenia_cog",
+  "evidence": "4_postmortem_imaging",
+  "query": "(schizophreni*[tiab] AND cognit*[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 34,
+  "retrieved": [
+   "39412783",
+   "38815885",
+   "26818859",
+   "40394282",
+   "38537670",
+   "23027418"
+  ]
+ },
+ {
+  "condition": "schizophrenia_cog",
+  "evidence": "5_animal",
+  "query": "(schizophreni*[tiab] AND cognit*[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 28,
+  "retrieved": [
+   "28422371",
+   "40854422",
+   "33342996",
+   "34445318",
+   "26108886",
+   "26617071"
+  ]
+ },
+ {
+  "condition": "schizophrenia_cog",
+  "evidence": "6_clinical_obs",
+  "query": "(schizophreni*[tiab] AND cognit*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 97,
+  "retrieved": [
+   "38904739",
+   "38993656",
+   "36273943",
+   "40145363",
+   "41507454",
+   "41201439"
+  ]
+ },
+ {
+  "condition": "tbi",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Brain Injuries, Traumatic\"[mh] OR \"traumatic brain injury\"[tiab]) AND (cognit*[tiab] OR memory[tiab])",
+  "count": 14621
+ },
+ {
+  "condition": "tbi",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Brain Injuries, Traumatic\"[mh] OR \"traumatic brain injury\"[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "23000013"
+  ]
+ },
+ {
+  "condition": "tbi",
+  "evidence": "1b_human_chei",
+  "query": "(\"Brain Injuries, Traumatic\"[mh] OR \"traumatic brain injury\"[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 25,
+  "retrieved": [
+   "38436963",
+   "39628282",
+   "18989105",
+   "26624881",
+   "38294196",
+   "35113764"
+  ]
+ },
+ {
+  "condition": "tbi",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Brain Injuries, Traumatic\"[mh] OR \"traumatic brain injury\"[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 3,
+  "retrieved": [
+   "32810143",
+   "7804294",
+   "12043833"
+  ]
+ },
+ {
+  "condition": "tbi",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Brain Injuries, Traumatic\"[mh] OR \"traumatic brain injury\"[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "41482110",
+   "26003249",
+   "26287759"
+  ]
+ },
+ {
+  "condition": "tbi",
+  "evidence": "3_genetics",
+  "query": "(\"Brain Injuries, Traumatic\"[mh] OR \"traumatic brain injury\"[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "tbi",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Brain Injuries, Traumatic\"[mh] OR \"traumatic brain injury\"[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 4,
+  "retrieved": [
+   "34266614",
+   "18033152",
+   "15548553",
+   "27834536"
+  ]
+ },
+ {
+  "condition": "tbi",
+  "evidence": "5_animal",
+  "query": "(\"Brain Injuries, Traumatic\"[mh] OR \"traumatic brain injury\"[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "9259007"
+  ]
+ },
+ {
+  "condition": "tbi",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Brain Injuries, Traumatic\"[mh] OR \"traumatic brain injury\"[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "down_syndrome",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Down Syndrome\"[mh]) AND (cognit*[tiab] OR dementia[tiab])",
+  "count": 2336
+ },
+ {
+  "condition": "down_syndrome",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Down Syndrome\"[mh]) AND (cognit*[tiab] OR dementia[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "down_syndrome",
+  "evidence": "1b_human_chei",
+  "query": "(\"Down Syndrome\"[mh]) AND (cognit*[tiab] OR dementia[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 18,
+  "retrieved": [
+   "16838317",
+   "35630721",
+   "21186971",
+   "15852458",
+   "17201619",
+   "27061338"
+  ]
+ },
+ {
+  "condition": "down_syndrome",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Down Syndrome\"[mh]) AND (cognit*[tiab] OR dementia[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "down_syndrome",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Down Syndrome\"[mh]) AND (cognit*[tiab] OR dementia[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "41078246",
+   "39187934",
+   "17363283"
+  ]
+ },
+ {
+  "condition": "down_syndrome",
+  "evidence": "3_genetics",
+  "query": "(\"Down Syndrome\"[mh]) AND (cognit*[tiab] OR dementia[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "down_syndrome",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Down Syndrome\"[mh]) AND (cognit*[tiab] OR dementia[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 8,
+  "retrieved": [
+   "41521149",
+   "39485646",
+   "39914061",
+   "24519975",
+   "6228286",
+   "40189807"
+  ]
+ },
+ {
+  "condition": "down_syndrome",
+  "evidence": "5_animal",
+  "query": "(\"Down Syndrome\"[mh]) AND (cognit*[tiab] OR dementia[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 1,
+  "retrieved": [
+   "15869949"
+  ]
+ },
+ {
+  "condition": "down_syndrome",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Down Syndrome\"[mh]) AND (cognit*[tiab] OR dementia[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "sjogren",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Sjogren's Syndrome\"[mh] OR xerostomia[tiab])",
+  "count": 22732
+ },
+ {
+  "condition": "sjogren",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Sjogren's Syndrome\"[mh] OR xerostomia[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 302,
+  "retrieved": [
+   "31672775",
+   "12614037",
+   "34598858",
+   "39614391",
+   "30187289",
+   "26935515"
+  ]
+ },
+ {
+  "condition": "sjogren",
+  "evidence": "1b_human_chei",
+  "query": "(\"Sjogren's Syndrome\"[mh] OR xerostomia[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "3525770",
+   "4061965"
+  ]
+ },
+ {
+  "condition": "sjogren",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Sjogren's Syndrome\"[mh] OR xerostomia[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 4,
+  "retrieved": [
+   "30298452",
+   "8935644",
+   "23900923",
+   "4028625"
+  ]
+ },
+ {
+  "condition": "sjogren",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Sjogren's Syndrome\"[mh] OR xerostomia[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 46,
+  "retrieved": [
+   "27172124",
+   "34698291",
+   "37185465",
+   "36628441",
+   "36539885",
+   "28276076"
+  ]
+ },
+ {
+  "condition": "sjogren",
+  "evidence": "3_genetics",
+  "query": "(\"Sjogren's Syndrome\"[mh] OR xerostomia[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 5,
+  "retrieved": [
+   "31717706",
+   "42057406",
+   "31289718",
+   "36017844",
+   "21450750"
+  ]
+ },
+ {
+  "condition": "sjogren",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Sjogren's Syndrome\"[mh] OR xerostomia[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "sjogren",
+  "evidence": "5_animal",
+  "query": "(\"Sjogren's Syndrome\"[mh] OR xerostomia[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 10,
+  "retrieved": [
+   "31717706",
+   "20224203",
+   "31461497",
+   "9080365",
+   "23925155",
+   "16109168"
+  ]
+ },
+ {
+  "condition": "sjogren",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Sjogren's Syndrome\"[mh] OR xerostomia[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "25413004"
+  ]
+ },
+ {
+  "condition": "psoriasis",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Psoriasis\"[mh] OR psoriasis[tiab])",
+  "count": 75465
+ },
+ {
+  "condition": "psoriasis",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Psoriasis\"[mh] OR psoriasis[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 3,
+  "retrieved": [
+   "39422283",
+   "35257417",
+   "14042659"
+  ]
+ },
+ {
+  "condition": "psoriasis",
+  "evidence": "1b_human_chei",
+  "query": "(\"Psoriasis\"[mh] OR psoriasis[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "psoriasis",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Psoriasis\"[mh] OR psoriasis[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "42742566",
+   "33570237"
+  ]
+ },
+ {
+  "condition": "psoriasis",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Psoriasis\"[mh] OR psoriasis[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "psoriasis",
+  "evidence": "3_genetics",
+  "query": "(\"Psoriasis\"[mh] OR psoriasis[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 2,
+  "retrieved": [
+   "31011876",
+   "23308107"
+  ]
+ },
+ {
+  "condition": "psoriasis",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Psoriasis\"[mh] OR psoriasis[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "psoriasis",
+  "evidence": "5_animal",
+  "query": "(\"Psoriasis\"[mh] OR psoriasis[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "psoriasis",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Psoriasis\"[mh] OR psoriasis[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "hypothyroidism",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Hypothyroidism\"[mh] OR hypothyroid*[tiab])",
+  "count": 59774
+ },
+ {
+  "condition": "hypothyroidism",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Hypothyroidism\"[mh] OR hypothyroid*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 5,
+  "retrieved": [
+   "34562169",
+   "937427",
+   "3288493",
+   "34620766",
+   "1490245"
+  ]
+ },
+ {
+  "condition": "hypothyroidism",
+  "evidence": "1b_human_chei",
+  "query": "(\"Hypothyroidism\"[mh] OR hypothyroid*[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 3,
+  "retrieved": [
+   "19027467",
+   "24780092",
+   "12417358"
+  ]
+ },
+ {
+  "condition": "hypothyroidism",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Hypothyroidism\"[mh] OR hypothyroid*[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "hypothyroidism",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Hypothyroidism\"[mh] OR hypothyroid*[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "32135532",
+   "25628904",
+   "42512904"
+  ]
+ },
+ {
+  "condition": "hypothyroidism",
+  "evidence": "3_genetics",
+  "query": "(\"Hypothyroidism\"[mh] OR hypothyroid*[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "hypothyroidism",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Hypothyroidism\"[mh] OR hypothyroid*[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "hypothyroidism",
+  "evidence": "5_animal",
+  "query": "(\"Hypothyroidism\"[mh] OR hypothyroid*[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 2,
+  "retrieved": [
+   "2482794",
+   "6279669"
+  ]
+ },
+ {
+  "condition": "hypothyroidism",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Hypothyroidism\"[mh] OR hypothyroid*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gout",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Gout\"[mh] OR gout[tiab])",
+  "count": 23135
+ },
+ {
+  "condition": "gout",
+  "evidence": "1a_human_agonist",
+  "query": "(\"Gout\"[mh] OR gout[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab]) AND humans[mh] NOT (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gout",
+  "evidence": "1b_human_chei",
+  "query": "(\"Gout\"[mh] OR gout[tiab]) AND (donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR open-label[tiab] OR trial[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gout",
+  "evidence": "1c_scopolamine",
+  "query": "(\"Gout\"[mh] OR gout[tiab]) AND (scopolamine[tiab] OR \"anticholinergic challenge\"[tiab]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "23506688"
+  ]
+ },
+ {
+  "condition": "gout",
+  "evidence": "2_anticholinergic_burden",
+  "query": "(\"Gout\"[mh] OR gout[tiab]) AND (\"anticholinergic burden\"[tiab] OR \"anticholinergic load\"[tiab] OR \"anticholinergic drug*\"[tiab] OR \"anticholinergic medication*\"[tiab] OR \"anticholinergic exposure\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "7501168"
+  ]
+ },
+ {
+  "condition": "gout",
+  "evidence": "3_genetics",
+  "query": "(\"Gout\"[mh] OR gout[tiab]) AND (CHRM1[tiab] OR CHRM2[tiab] OR CHRM3[tiab] OR CHRM4[tiab] OR CHRM5[tiab] OR \"muscarinic receptor gene\"[tiab] OR (\"muscarinic\"[tiab] AND \"mendelian randomization\"[tiab]))",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gout",
+  "evidence": "4_postmortem_imaging",
+  "query": "(\"Gout\"[mh] OR gout[tiab]) AND (muscarinic[tiab] OR \"choline acetyltransferase\"[tiab] OR \"vesicular acetylcholine transporter\"[tiab] OR \"cholinergic denervation\"[tiab] OR FEOBV[tiab] OR \"basal forebrain\"[tiab]) AND (postmortem[tiab] OR post-mortem[tiab] OR autopsy[tiab] OR PET[tiab] OR SPECT[tiab] OR autoradiograph*[tiab] OR \"receptor binding\"[tiab]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gout",
+  "evidence": "5_animal",
+  "query": "(\"Gout\"[mh] OR gout[tiab]) AND (xanomeline[tiab] OR \"M4 positive allosteric\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M1 agonist\"[tiab] OR \"M4 agonist\"[tiab] OR VU0467154[tiab] OR VU0152100[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M4 PAM\"[tiab] OR \"M1 PAM\"[tiab]) AND (animals[mh] NOT humans[mh])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "gout",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Gout\"[mh] OR gout[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "dystonia",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Dystonia\"[mh] OR dystoni*[tiab])",
+  "count": 27312
+ },
+ {
+  "condition": "dystonia",
+  "evidence": "H1_anticholinergic_helps",
+  "query": "(\"Dystonia\"[mh] OR dystoni*[tiab]) AND (anticholinergic*[tiab] OR antimuscarinic*[tiab] OR trihexyphenidyl[tiab] OR benztropine[tiab] OR biperiden[tiab] OR tiotropium[tiab] OR ipratropium[tiab] OR glycopyrr*[tiab] OR atropine[tiab] OR scopolamine[tiab] OR botulinum[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR systematic review[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 452,
+  "retrieved": [
+   "29494321",
+   "25347760",
+   "21663705",
+   "32053883",
+   "36422957",
+   "19445800"
+  ]
+ },
+ {
+  "condition": "dystonia",
+  "evidence": "H2_cholinergic_worsens",
+  "query": "(\"Dystonia\"[mh] OR dystoni*[tiab]) AND ((donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) OR (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab])) AND (adverse[tiab] OR induced[tiab] OR worsen*[tiab] OR exacerbat*[tiab] OR risk[tiab]) AND humans[mh]",
+  "count": 21,
+  "retrieved": [
+   "18029952",
+   "3315156",
+   "28756934",
+   "39183048",
+   "23561545",
+   "7174619"
+  ]
+ },
+ {
+  "condition": "dystonia",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Dystonia\"[mh] OR dystoni*[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 2,
+  "retrieved": [
+   "43010316",
+   "12700711"
+  ]
+ },
+ {
+  "condition": "pd_tremor",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (tremor[tiab] OR motor[tiab] OR parkinsonism[tiab])",
+  "count": 66098
+ },
+ {
+  "condition": "pd_tremor",
+  "evidence": "H1_anticholinergic_helps",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (tremor[tiab] OR motor[tiab] OR parkinsonism[tiab]) AND (anticholinergic*[tiab] OR antimuscarinic*[tiab] OR trihexyphenidyl[tiab] OR benztropine[tiab] OR biperiden[tiab] OR tiotropium[tiab] OR ipratropium[tiab] OR glycopyrr*[tiab] OR atropine[tiab] OR scopolamine[tiab] OR botulinum[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR systematic review[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 125,
+  "retrieved": [
+   "29570866",
+   "32722730",
+   "36828396",
+   "41556478",
+   "22021174",
+   "25224676"
+  ]
+ },
+ {
+  "condition": "pd_tremor",
+  "evidence": "H2_cholinergic_worsens",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (tremor[tiab] OR motor[tiab] OR parkinsonism[tiab]) AND ((donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) OR (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab])) AND (adverse[tiab] OR induced[tiab] OR worsen*[tiab] OR exacerbat*[tiab] OR risk[tiab]) AND humans[mh]",
+  "count": 130,
+  "retrieved": [
+   "32044947",
+   "24756517",
+   "29510692",
+   "25224676",
+   "31825391",
+   "34285451"
+  ]
+ },
+ {
+  "condition": "pd_tremor",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (tremor[tiab] OR motor[tiab] OR parkinsonism[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 2,
+  "retrieved": [
+   "40056428",
+   "42729706"
+  ]
+ },
+ {
+  "condition": "drug_parkinsonism",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(extrapyramidal[tiab] OR \"drug-induced parkinsonism\"[tiab] OR akathisia[tiab])",
+  "count": 14538
+ },
+ {
+  "condition": "drug_parkinsonism",
+  "evidence": "H1_anticholinergic_helps",
+  "query": "(extrapyramidal[tiab] OR \"drug-induced parkinsonism\"[tiab] OR akathisia[tiab]) AND (anticholinergic*[tiab] OR antimuscarinic*[tiab] OR trihexyphenidyl[tiab] OR benztropine[tiab] OR biperiden[tiab] OR tiotropium[tiab] OR ipratropium[tiab] OR glycopyrr*[tiab] OR atropine[tiab] OR scopolamine[tiab] OR botulinum[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR systematic review[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 229,
+  "retrieved": [
+   "38451521",
+   "34757514",
+   "33075160",
+   "33626254",
+   "39547246",
+   "24825770"
+  ]
+ },
+ {
+  "condition": "drug_parkinsonism",
+  "evidence": "H2_cholinergic_worsens",
+  "query": "(extrapyramidal[tiab] OR \"drug-induced parkinsonism\"[tiab] OR akathisia[tiab]) AND ((donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) OR (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab])) AND (adverse[tiab] OR induced[tiab] OR worsen*[tiab] OR exacerbat*[tiab] OR risk[tiab]) AND humans[mh]",
+  "count": 63,
+  "retrieved": [
+   "38691387",
+   "38104575",
+   "38993656",
+   "33626254",
+   "39637717",
+   "18029952"
+  ]
+ },
+ {
+  "condition": "drug_parkinsonism",
+  "evidence": "6_clinical_obs",
+  "query": "(extrapyramidal[tiab] OR \"drug-induced parkinsonism\"[tiab] OR akathisia[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 30,
+  "retrieved": [
+   "38691387",
+   "38104575",
+   "39525169",
+   "33626254",
+   "38993656",
+   "40047530"
+  ]
+ },
+ {
+  "condition": "asthma",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Asthma\"[mh] OR asthma[tiab])",
+  "count": 223667
+ },
+ {
+  "condition": "asthma",
+  "evidence": "H1_anticholinergic_helps",
+  "query": "(\"Asthma\"[mh] OR asthma[tiab]) AND (anticholinergic*[tiab] OR antimuscarinic*[tiab] OR trihexyphenidyl[tiab] OR benztropine[tiab] OR biperiden[tiab] OR tiotropium[tiab] OR ipratropium[tiab] OR glycopyrr*[tiab] OR atropine[tiab] OR scopolamine[tiab] OR botulinum[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR systematic review[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 703,
+  "retrieved": [
+   "6320443",
+   "21718577",
+   "38782483",
+   "2885730",
+   "31582314",
+   "6372560"
+  ]
+ },
+ {
+  "condition": "asthma",
+  "evidence": "H2_cholinergic_worsens",
+  "query": "(\"Asthma\"[mh] OR asthma[tiab]) AND ((donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) OR (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab])) AND (adverse[tiab] OR induced[tiab] OR worsen*[tiab] OR exacerbat*[tiab] OR risk[tiab]) AND humans[mh]",
+  "count": 35,
+  "retrieved": [
+   "10176110",
+   "29158154",
+   "12171061",
+   "24269928",
+   "41400820",
+   "17383686"
+  ]
+ },
+ {
+  "condition": "asthma",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Asthma\"[mh] OR asthma[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "copd",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Pulmonary Disease, Chronic Obstructive\"[mh] OR COPD[tiab])",
+  "count": 104648
+ },
+ {
+  "condition": "copd",
+  "evidence": "H1_anticholinergic_helps",
+  "query": "(\"Pulmonary Disease, Chronic Obstructive\"[mh] OR COPD[tiab]) AND (anticholinergic*[tiab] OR antimuscarinic*[tiab] OR trihexyphenidyl[tiab] OR benztropine[tiab] OR biperiden[tiab] OR tiotropium[tiab] OR ipratropium[tiab] OR glycopyrr*[tiab] OR atropine[tiab] OR scopolamine[tiab] OR botulinum[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR systematic review[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 1031,
+  "retrieved": [
+   "37583267",
+   "32727455",
+   "16844726",
+   "26391969",
+   "6372560",
+   "28877027"
+  ]
+ },
+ {
+  "condition": "copd",
+  "evidence": "H2_cholinergic_worsens",
+  "query": "(\"Pulmonary Disease, Chronic Obstructive\"[mh] OR COPD[tiab]) AND ((donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) OR (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab])) AND (adverse[tiab] OR induced[tiab] OR worsen*[tiab] OR exacerbat*[tiab] OR risk[tiab]) AND humans[mh]",
+  "count": 21,
+  "retrieved": [
+   "28117615",
+   "37313500",
+   "20118141",
+   "31929157",
+   "41400820",
+   "17320912"
+  ]
+ },
+ {
+  "condition": "copd",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Pulmonary Disease, Chronic Obstructive\"[mh] OR COPD[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "40722217"
+  ]
+ },
+ {
+  "condition": "bradycardia",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Bradycardia\"[mh] OR bradycardia[tiab] OR \"heart block\"[tiab] OR syncope[tiab])",
+  "count": 63769
+ },
+ {
+  "condition": "bradycardia",
+  "evidence": "H1_anticholinergic_helps",
+  "query": "(\"Bradycardia\"[mh] OR bradycardia[tiab] OR \"heart block\"[tiab] OR syncope[tiab]) AND (anticholinergic*[tiab] OR antimuscarinic*[tiab] OR trihexyphenidyl[tiab] OR benztropine[tiab] OR biperiden[tiab] OR tiotropium[tiab] OR ipratropium[tiab] OR glycopyrr*[tiab] OR atropine[tiab] OR scopolamine[tiab] OR botulinum[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR systematic review[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 274,
+  "retrieved": [
+   "32310006",
+   "40645282",
+   "36114133",
+   "30156728",
+   "41134986",
+   "32091590"
+  ]
+ },
+ {
+  "condition": "bradycardia",
+  "evidence": "H2_cholinergic_worsens",
+  "query": "(\"Bradycardia\"[mh] OR bradycardia[tiab] OR \"heart block\"[tiab] OR syncope[tiab]) AND ((donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) OR (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab])) AND (adverse[tiab] OR induced[tiab] OR worsen*[tiab] OR exacerbat*[tiab] OR risk[tiab]) AND humans[mh]",
+  "count": 110,
+  "retrieved": [
+   "25941104",
+   "24777654",
+   "34285451",
+   "32691984",
+   "35665915",
+   "40187985"
+  ]
+ },
+ {
+  "condition": "bradycardia",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Bradycardia\"[mh] OR bradycardia[tiab] OR \"heart block\"[tiab] OR syncope[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 6,
+  "retrieved": [
+   "9109749",
+   "38305989",
+   "42621264",
+   "37036495",
+   "9052903",
+   "11181912"
+  ]
+ },
+ {
+  "condition": "peptic_ulcer",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Peptic Ulcer\"[mh] OR \"peptic ulcer\"[tiab] OR \"gastroesophageal reflux\"[tiab])",
+  "count": 114248
+ },
+ {
+  "condition": "peptic_ulcer",
+  "evidence": "H1_anticholinergic_helps",
+  "query": "(\"Peptic Ulcer\"[mh] OR \"peptic ulcer\"[tiab] OR \"gastroesophageal reflux\"[tiab]) AND (anticholinergic*[tiab] OR antimuscarinic*[tiab] OR trihexyphenidyl[tiab] OR benztropine[tiab] OR biperiden[tiab] OR tiotropium[tiab] OR ipratropium[tiab] OR glycopyrr*[tiab] OR atropine[tiab] OR scopolamine[tiab] OR botulinum[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR systematic review[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 114,
+  "retrieved": [
+   "29494321",
+   "40435992",
+   "18855991",
+   "23239914",
+   "35484068",
+   "23892829"
+  ]
+ },
+ {
+  "condition": "peptic_ulcer",
+  "evidence": "H2_cholinergic_worsens",
+  "query": "(\"Peptic Ulcer\"[mh] OR \"peptic ulcer\"[tiab] OR \"gastroesophageal reflux\"[tiab]) AND ((donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) OR (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab])) AND (adverse[tiab] OR induced[tiab] OR worsen*[tiab] OR exacerbat*[tiab] OR risk[tiab]) AND humans[mh]",
+  "count": 25,
+  "retrieved": [
+   "39880004",
+   "4040471",
+   "12171061",
+   "29275924",
+   "6146192",
+   "37905683"
+  ]
+ },
+ {
+  "condition": "peptic_ulcer",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Peptic Ulcer\"[mh] OR \"peptic ulcer\"[tiab] OR \"gastroesophageal reflux\"[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 3,
+  "retrieved": [
+   "39880004",
+   "43010223",
+   "40621552"
+  ]
+ },
+ {
+  "condition": "sialorrhea",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(sialorrhea[tiab] OR hypersalivation[tiab] OR drooling[tiab])",
+  "count": 3348
+ },
+ {
+  "condition": "sialorrhea",
+  "evidence": "H1_anticholinergic_helps",
+  "query": "(sialorrhea[tiab] OR hypersalivation[tiab] OR drooling[tiab]) AND (anticholinergic*[tiab] OR antimuscarinic*[tiab] OR trihexyphenidyl[tiab] OR benztropine[tiab] OR biperiden[tiab] OR tiotropium[tiab] OR ipratropium[tiab] OR glycopyrr*[tiab] OR atropine[tiab] OR scopolamine[tiab] OR botulinum[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR systematic review[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 160,
+  "retrieved": [
+   "38577753",
+   "32053883",
+   "37821573",
+   "22021174",
+   "26467676",
+   "35593746"
+  ]
+ },
+ {
+  "condition": "sialorrhea",
+  "evidence": "H2_cholinergic_worsens",
+  "query": "(sialorrhea[tiab] OR hypersalivation[tiab] OR drooling[tiab]) AND ((donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) OR (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab])) AND (adverse[tiab] OR induced[tiab] OR worsen*[tiab] OR exacerbat*[tiab] OR risk[tiab]) AND humans[mh]",
+  "count": 14,
+  "retrieved": [
+   "24756517",
+   "40831207",
+   "30747326",
+   "36948626",
+   "7623616",
+   "10188788"
+  ]
+ },
+ {
+  "condition": "sialorrhea",
+  "evidence": "6_clinical_obs",
+  "query": "(sialorrhea[tiab] OR hypersalivation[tiab] OR drooling[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 5,
+  "retrieved": [
+   "40831207",
+   "7535938",
+   "41694131",
+   "41985280",
+   "41909822"
+  ]
+ },
+ {
+  "condition": "hyperhidrosis",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(hyperhidrosis[tiab])",
+  "count": 4347
+ },
+ {
+  "condition": "hyperhidrosis",
+  "evidence": "H1_anticholinergic_helps",
+  "query": "(hyperhidrosis[tiab]) AND (anticholinergic*[tiab] OR antimuscarinic*[tiab] OR trihexyphenidyl[tiab] OR benztropine[tiab] OR biperiden[tiab] OR tiotropium[tiab] OR ipratropium[tiab] OR glycopyrr*[tiab] OR atropine[tiab] OR scopolamine[tiab] OR botulinum[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR systematic review[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 160,
+  "retrieved": [
+   "37235376",
+   "26467676",
+   "34653261",
+   "29573391",
+   "38133193",
+   "27976476"
+  ]
+ },
+ {
+  "condition": "hyperhidrosis",
+  "evidence": "H2_cholinergic_worsens",
+  "query": "(hyperhidrosis[tiab]) AND ((donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) OR (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab])) AND (adverse[tiab] OR induced[tiab] OR worsen*[tiab] OR exacerbat*[tiab] OR risk[tiab]) AND humans[mh]",
+  "count": 17,
+  "retrieved": [
+   "41506001",
+   "37009806",
+   "35765109",
+   "41181099",
+   "35393764",
+   "33794540"
+  ]
+ },
+ {
+  "condition": "hyperhidrosis",
+  "evidence": "6_clinical_obs",
+  "query": "(hyperhidrosis[tiab]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 1,
+  "retrieved": [
+   "41506001"
+  ]
+ },
+ {
+  "condition": "myasthenia",
+  "evidence": "TOTAL_LITERATURE",
+  "query": "(\"Myasthenia Gravis\"[mh])",
+  "count": 18533
+ },
+ {
+  "condition": "myasthenia",
+  "evidence": "H1_anticholinergic_helps",
+  "query": "(\"Myasthenia Gravis\"[mh]) AND (anticholinergic*[tiab] OR antimuscarinic*[tiab] OR trihexyphenidyl[tiab] OR benztropine[tiab] OR biperiden[tiab] OR tiotropium[tiab] OR ipratropium[tiab] OR glycopyrr*[tiab] OR atropine[tiab] OR scopolamine[tiab] OR botulinum[tiab]) AND (clinical trial[pt] OR randomized[tiab] OR systematic review[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 6,
+  "retrieved": [
+   "35075066",
+   "40776639",
+   "34929650",
+   "41488758",
+   "6226224",
+   "14699228"
+  ]
+ },
+ {
+  "condition": "myasthenia",
+  "evidence": "H2_cholinergic_worsens",
+  "query": "(\"Myasthenia Gravis\"[mh]) AND ((donepezil[tiab] OR rivastigmine[tiab] OR galantamine[tiab] OR physostigmine[tiab] OR \"cholinesterase inhibitor*\"[tiab]) OR (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR emraclidine[tiab] OR \"NBI-1117568\"[tiab] OR cevimeline[tiab] OR pilocarpine[tiab] OR bethanechol[tiab] OR \"muscarinic agonist*\"[tiab] OR \"M1 positive allosteric\"[tiab] OR \"M4 positive allosteric\"[tiab] OR \"muscarinic receptor agonist*\"[tiab])) AND (adverse[tiab] OR induced[tiab] OR worsen*[tiab] OR exacerbat*[tiab] OR risk[tiab]) AND humans[mh]",
+  "count": 55,
+  "retrieved": [
+   "17986328",
+   "21534375",
+   "38365379",
+   "32929722",
+   "18180646",
+   "34272198"
+  ]
+ },
+ {
+  "condition": "myasthenia",
+  "evidence": "6_clinical_obs",
+  "query": "(\"Myasthenia Gravis\"[mh]) AND (xanomeline[tiab] OR KarXT[tiab] OR cobenfy[tiab] OR \"xanomeline-trospium\"[tiab] OR \"xanomeline and trospium\"[tiab])",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "bipolar_mania",
+  "evidence": "0_antipsychotic_response",
+  "query": "(mania[tiab] OR manic[tiab] OR \"Bipolar Disorder\"[mh]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 695,
+  "retrieved": [
+   "37595997",
+   "34642461",
+   "33177610",
+   "35778967"
+  ]
+ },
+ {
+  "condition": "bipolar_depression",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"bipolar depression\"[tiab] OR (bipolar[tiab] AND depressive episode*[tiab])) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 195,
+  "retrieved": [
+   "38360024",
+   "37595997",
+   "33177610",
+   "39557452"
+  ]
+ },
+ {
+  "condition": "mdd",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Depressive Disorder, Major\"[mh] OR \"major depression\"[tiab] OR \"major depressive\"[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 287,
+  "retrieved": [
+   "38360024",
+   "34986373",
+   "39876682",
+   "42090141"
+  ]
+ },
+ {
+  "condition": "ocd",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Obsessive-Compulsive Disorder\"[mh] OR obsessive-compulsive[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 98,
+  "retrieved": [
+   "25432131",
+   "40396498",
+   "21809258",
+   "18280710"
+  ]
+ },
+ {
+  "condition": "tourette",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Tourette Syndrome\"[mh] OR tourette*[tiab] OR \"tic disorder*\"[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 65,
+  "retrieved": [
+   "36528030",
+   "36628546",
+   "26310194",
+   "32191124"
+  ]
+ },
+ {
+  "condition": "autism_irritability",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Autism Spectrum Disorder\"[mh] OR autis*[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 147,
+  "retrieved": [
+   "35246237",
+   "34906264",
+   "40396498",
+   "35470032"
+  ]
+ },
+ {
+  "condition": "adhd",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Attention Deficit Disorder with Hyperactivity\"[mh] OR ADHD[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 68,
+  "retrieved": [
+   "35246237",
+   "32845025",
+   "33492013",
+   "38499117"
+  ]
+ },
+ {
+  "condition": "ptsd",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Stress Disorders, Post-Traumatic\"[mh] OR PTSD[tiab] OR posttraumatic stress[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 40,
+  "retrieved": [
+   "38924898",
+   "23842024",
+   "25015709",
+   "38795401"
+  ]
+ },
+ {
+  "condition": "cocaine",
+  "evidence": "0_antipsychotic_response",
+  "query": "(cocaine[tiab] OR \"Cocaine-Related Disorders\"[mh]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 37,
+  "retrieved": [
+   "31183685",
+   "24434105",
+   "28350194",
+   "23357467"
+  ]
+ },
+ {
+  "condition": "methamphetamine",
+  "evidence": "0_antipsychotic_response",
+  "query": "(methamphetamine[tiab] OR amphetamine-related[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 16,
+  "retrieved": [
+   "24535654",
+   "31328345",
+   "24434105",
+   "33385693"
+  ]
+ },
+ {
+  "condition": "alcohol",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Alcoholism\"[mh] OR \"alcohol use disorder\"[tiab] OR \"alcohol dependence\"[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 50,
+  "retrieved": [
+   "37703012",
+   "35653782",
+   "23945459",
+   "39744406"
+  ]
+ },
+ {
+  "condition": "nicotine",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Tobacco Use Disorder\"[mh] OR \"nicotine dependence\"[tiab] OR \"smoking cessation\"[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 21,
+  "retrieved": [
+   "22579146",
+   "30460884",
+   "38385357",
+   "26310877"
+  ]
+ },
+ {
+  "condition": "delirium",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Delirium\"[mh] OR delirium[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 184,
+  "retrieved": [
+   "41690769",
+   "38561588",
+   "34379152",
+   "30346242"
+  ]
+ },
+ {
+  "condition": "catatonia",
+  "evidence": "0_antipsychotic_response",
+  "query": "(catatoni*[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 4,
+  "retrieved": [
+   "34906264",
+   "7393998",
+   "22560048",
+   "6886033"
+  ]
+ },
+ {
+  "condition": "anorexia",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Anorexia Nervosa\"[mh] OR \"anorexia nervosa\"[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 19,
+  "retrieved": [
+   "37393954",
+   "35020271",
+   "32448045",
+   "28980344"
+  ]
+ },
+ {
+  "condition": "binge_eating",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Binge-Eating Disorder\"[mh] OR \"binge eating\"[tiab] OR obesity[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 126,
+  "retrieved": [
+   "40900607",
+   "37393954",
+   "40506208",
+   "41335431"
+  ]
+ },
+ {
+  "condition": "borderline",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Borderline Personality Disorder\"[mh] OR \"borderline personality\"[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 43,
+  "retrieved": [
+   "34495494",
+   "17012981",
+   "41667836",
+   "20075647"
+  ]
+ },
+ {
+  "condition": "ad_psychosis",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (psychosis[tiab] OR psychotic[tiab] OR agitation[tiab] OR hallucinat*[tiab] OR delusion*[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 106,
+  "retrieved": [
+   "38763935",
+   "24549548",
+   "34289275",
+   "37929672"
+  ]
+ },
+ {
+  "condition": "dementia_cognition",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Alzheimer Disease\"[mh] OR alzheimer*[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 55,
+  "retrieved": [
+   "24549548",
+   "39210432",
+   "40681915",
+   "11520478"
+  ]
+ },
+ {
+  "condition": "dlb",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Lewy Body Disease\"[mh] OR \"lewy bod*\"[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 10,
+  "retrieved": [
+   "26085043",
+   "34289275",
+   "32662076",
+   "34256210"
+  ]
+ },
+ {
+  "condition": "pd_psychosis",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (psychosis[tiab] OR hallucinat*[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 61,
+  "retrieved": [
+   "38412585",
+   "34289275",
+   "24183563",
+   "17070675"
+  ]
+ },
+ {
+  "condition": "pd_cognition",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Parkinson Disease\"[mh] OR parkinson*[tiab]) AND (cognit*[tiab] OR dementia[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 40,
+  "retrieved": [
+   "26085043",
+   "17443602",
+   "34289275",
+   "36370124"
+  ]
+ },
+ {
+  "condition": "huntington",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Huntington Disease\"[mh] OR huntington*[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 12,
+  "retrieved": [
+   "32275276",
+   "42912861",
+   "4139622",
+   "125578"
+  ]
+ },
+ {
+  "condition": "tardive",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Tardive Dyskinesia\"[mh] OR \"tardive dyskinesia\"[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 178,
+  "retrieved": [
+   "28146614",
+   "34506552",
+   "18646098",
+   "28320223"
+  ]
+ },
+ {
+  "condition": "migraine",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Migraine Disorders\"[mh] OR migraine[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 7,
+  "retrieved": [
+   "39364614",
+   "26048068",
+   "38644702",
+   "16643581"
+  ]
+ },
+ {
+  "condition": "epilepsy",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Epilepsy\"[mh] OR epilep*[tiab] OR seizure*[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 56,
+  "retrieved": [
+   "35470032",
+   "40561150",
+   "10682225",
+   "37929672"
+  ]
+ },
+ {
+  "condition": "chronic_pain",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Chronic Pain\"[mh] OR \"neuropathic pain\"[tiab] OR \"chronic pain\"[tiab] OR analges*[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 55,
+  "retrieved": [
+   "38924898",
+   "32156151",
+   "33048901",
+   "40922021"
+  ]
+ },
+ {
+  "condition": "sleep",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Narcolepsy\"[mh] OR narcolep*[tiab] OR insomnia[tiab] OR \"REM sleep\"[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 168,
+  "retrieved": [
+   "37433427",
+   "36463762",
+   "28700715",
+   "38795401"
+  ]
+ },
+ {
+  "condition": "post_stroke",
+  "evidence": "0_antipsychotic_response",
+  "query": "(stroke[tiab] AND (cognit*[tiab] OR aphasia[tiab] OR dementia[tiab])) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 19,
+  "retrieved": [
+   "31221107",
+   "28431909",
+   "40738683",
+   "38651546"
+  ]
+ },
+ {
+  "condition": "long_covid",
+  "evidence": "0_antipsychotic_response",
+  "query": "((\"post-COVID\"[tiab] OR \"long COVID\"[tiab] OR \"post-acute sequelae\"[tiab]) AND (cognit*[tiab] OR \"brain fog\"[tiab])) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "chemo_brain",
+  "evidence": "0_antipsychotic_response",
+  "query": "(chemotherapy[tiab] AND (cognit*[tiab] OR \"chemo brain\"[tiab])) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "30359166",
+   "25404537"
+  ]
+ },
+ {
+  "condition": "gastroparesis",
+  "evidence": "0_antipsychotic_response",
+  "query": "(gastroparesis[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "28646590"
+  ]
+ },
+ {
+  "condition": "schizophrenia_cog",
+  "evidence": "0_antipsychotic_response",
+  "query": "(schizophreni*[tiab] AND cognit*[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 623,
+  "retrieved": [
+   "34653393",
+   "33862018",
+   "38879276",
+   "39412783"
+  ]
+ },
+ {
+  "condition": "tbi",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Brain Injuries, Traumatic\"[mh] OR \"traumatic brain injury\"[tiab]) AND (cognit*[tiab] OR memory[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 2,
+  "retrieved": [
+   "23013802",
+   "35833454"
+  ]
+ },
+ {
+  "condition": "down_syndrome",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Down Syndrome\"[mh]) AND (cognit*[tiab] OR dementia[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ },
+ {
+  "condition": "sjogren",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Sjogren's Syndrome\"[mh] OR xerostomia[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "9272401"
+  ]
+ },
+ {
+  "condition": "psoriasis",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Psoriasis\"[mh] OR psoriasis[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 1,
+  "retrieved": [
+   "36854031"
+  ]
+ },
+ {
+  "condition": "hypothyroidism",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Hypothyroidism\"[mh] OR hypothyroid*[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 4,
+  "retrieved": [
+   "22265699",
+   "23525591",
+   "15669892",
+   "19289454"
+  ]
+ },
+ {
+  "condition": "gout",
+  "evidence": "0_antipsychotic_response",
+  "query": "(\"Gout\"[mh] OR gout[tiab]) AND (antipsychotic*[tiab] OR neuroleptic*[tiab] OR haloperidol[tiab] OR risperidone[tiab] OR olanzapine[tiab] OR quetiapine[tiab] OR aripiprazole[tiab] OR ziprasidone[tiab] OR lurasidone[tiab] OR clozapine[tiab]) AND (randomized controlled trial[pt] OR meta-analysis[pt]) AND humans[mh]",
+  "count": 0,
+  "retrieved": []
+ }
+]

@@ -1,0 +1,1194 @@
+[
+{
+"pmid": "31757262",
+"year": "2019",
+"doi": "10.1016/j.jsat.2019.08.009",
+"title": "Randomized placebo-controlled trial of galantamine in individuals with cocaine use disorder.",
+"abstract": "No pharmacotherapies are approved for the treatment of cocaine use disorder (CUD). Galantamine, a cholinesterase inhibitor, has shown initial promise for cocaine use reduction in methadone-maintained individuals with CUD and cognitive improvement in abstinent individuals with past CUD. However, galantamine has not previously tested in individuals with current CUD and no comorbid opioid use disorder or methadone maintenance. The goal of this 13-week, double-blind, placebo-controlled, randomized controlled trial was to test the efficacy of galantamine (8\u202fmg or 16\u202fmg/day; extended release (ER)) for reducing cocaine use and improving cognitive function in individuals with cocaine use disorder (CUD). Ninety-three treatment-seeking cocaine users were randomized to placebo (n\u202f=\u202f32), 8\u202fmg/day galantamine (n\u202f=\u202f31) or 16\u202fmg/day galantamine (n\u202f=\u202f30). The medication was well-tolerated with minimal reports of side-effects. However, there were no significant treatment group differences in cocaine use outcomes (as measured by self-report or urines). The 16\u202fmg galantamine group had a greater improvement in working memory capacity (Backwards Digit Span), but there were no other significant treatment group differences on key cognitive outcomes. These findings did not provide support for the efficacy of galantamine as a treatment for cocaine use in this sample of individuals with CUD.",
+"pubtypes": [
+"Journal Article",
+"Randomized Controlled Trial",
+"Research Support, N.I.H., Extramural",
+"Research Support, U.S. Gov't, Non-P.H.S."
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "21477060",
+"year": "2011",
+"doi": "10.1111/j.1521-0391.2011.00130.x",
+"title": "Effects of galantamine on cocaine use in chronic cocaine users.",
+"abstract": "(no abstract)",
+"pubtypes": [
+"Letter",
+"Randomized Controlled Trial",
+"Research Support, N.I.H., Extramural",
+"Research Support, U.S. Gov't, Non-P.H.S."
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "29286595",
+"year": "2018",
+"doi": "10.4088/JCP.17m11669",
+"title": "Galantamine and Computerized Cognitive Behavioral Therapy for Cocaine Dependence: A Randomized Clinical Trial.",
+"abstract": "[OBJECTIVE] To examine whether galantamine, a cognitive-enhancing medication that is both acetylcholinesterase inhibitor and agonist at nicotinic acetylcholine receptors, is effective at improving cocaine use outcomes and cognitive functioning, alone and in combination with computerized cognitive behavioral therapy (CBT). [METHOD] A 12-week, randomized 2 \u00d7 2, factorial trial was conducted to evaluate galantamine versus placebo (double-blind) and computerized CBT plus standard methadone treatment versus standard methadone treatment alone in a community-based methadone maintenance program (September 2009-April 2015). One hundred twenty individuals diagnosed with DSM-IV cocaine use disorder were randomly assigned to the following conditions: (1) galantamine (8 mg/d) plus standard methadone maintenance treatment (treatment as usual [TAU]), (2) placebo plus TAU, (3) galantamine plus computerized CBT plus TAU, or (4) placebo plus computerized CBT plus TAU; medication administration was supervised at the time of daily methadone dosing. The primary cocaine use outcome was change in percent days of abstinence over time. Number of cocaine-negative urine toxicology screens submitted and cognitive function were secondary outcomes. [RESULTS] Random effect regression analysis indicated significant reductions in frequency of cocaine use over time, with significant treatment-by-time effects for both galantamine over placebo (F = 5.3, P = .02, d = 0.34) and computerized CBT over standard methadone treatment (F = 4.2, P = .04, d = 0.30) but no evidence of significant benefit of the combination over either treatment alone. Pretreatment to posttreatment comparisons of multiple indices of cognitive functioning, including sustained attention, indicated no benefit of galantamine over placebo. [CONCLUSIONS] Findings suggest benefits of galantamine and computerized CBT for reducing cocaine use in this sample. Although galantamine did not improve measures of cognitive function in this sample, multiple measures of cognitive function were associated with cocaine use outcomes, underlining the significance of cognitive function in cocaine treatment outcomes. [TRIAL REGISTRATION] ClinicalTrials.gov identifier: NCT00809835.",
+"pubtypes": [
+"Journal Article",
+"Randomized Controlled Trial"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "27392137",
+"year": "2016",
+"doi": "10.1111/ajad.12402",
+"title": "Cocaine cardiovascular effects and pharmacokinetics after treatment with the acetylcholinesterase inhibitor donepezil.",
+"abstract": "[BACKGROUND] In rodents, cholinesterase inhibitors can cause sustained decreases in the reinforcing effects of cocaine. Nonetheless, cocaine is metabolized by butyrylcholinesterase (BuChE), raising concerns that cholinesterase inhibition could increase its peripheral concentrations, perhaps augmenting toxicity. Although donepezil is approved for use in patients and selective for inhibiting acetylcholinesterase over BuChE, no studies have reported cocaine bioavailability in human subjects receiving donepezil. [METHODS] Twelve cocaine-dependent veterans received three days of treatment with either oral placebo or 5\u2009mg daily of donepezil, followed by cross-over to the opposite treatment. During both oral treatments, double-blind intravenous cocaine was administered at .0, .18, and .36\u2009mg/kg in a laboratory setting, followed by determinations of heart rate, blood pressure, and plasma concentrations of cocaine and major metabolites. [RESULTS] Intravenous cocaine produced dose-related increases in systolic blood pressure that were most pronounced over the initial 30\u2009minutes after treatment. Oral donepezil attenuated drug-induced elevations of systolic blood pressure following low-dose cocaine (.18\u2009mg/kg). No significant difference in blood pressure following treatment with placebo or donepezil after high-dose cocaine (.36\u2009mg/kg). Peak values of blood pressure and heart rate were unaffected by donepezil. Plasma concentrations of cocaine and metabolites did not differ in donepezil- and placebo-treated participants. [CONCLUSIONS AND SCIENTIFIC SIGNIFICANCE] We conclude that donepezil can attenuate drug-induced increases in systolic blood pressure following low-dose cocaine, but does not otherwise modify the cardiovascular effects of intravenous cocaine. Clinically significant changes in cocaine bioavailability and cardiovascular effects do not occur following this dose of donepezil. (Am J Addict 2016;25:392-399).",
+"pubtypes": [
+"Journal Article",
+"Randomized Controlled Trial"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "30813289",
+"year": "2019",
+"doi": "10.3390/molecules24040796",
+"title": "Tropane Alkaloids: Chemistry, Pharmacology, Biosynthesis and Production.",
+"abstract": "Tropane alkaloids (TA) are valuable secondary plant metabolites which are mostly found in high concentrations in the Solanaceae and Erythroxylaceae families. The TAs, which are characterized by their unique bicyclic tropane ring system, can be divided into three major groups: hyoscyamine and scopolamine, cocaine and calystegines. Although all TAs have the same basic structure, they differ immensely in their biological, chemical and pharmacological properties. Scopolamine, also known as hyoscine, has the largest legitimate market as a pharmacological agent due to its treatment of nausea, vomiting, motion sickness, as well as smooth muscle spasms while cocaine is the 2nd most frequently consumed illicit drug globally. This review provides a comprehensive overview of TAs, highlighting their structural diversity, use in pharmaceutical therapy from both historical and modern perspectives, natural biosynthesis in planta and emerging production possibilities using tissue culture and microbial biosynthesis of these compounds.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "3887041",
+"year": "1985",
+"doi": "10.1016/0378-8741(85)90060-1",
+"title": "A multidisciplinary overview of intoxicating snuff rituals in the western hemisphere.",
+"abstract": "Part one of the paper discusses ethnobotanical, chemical and general pharmacological aspects of intoxicating snuff rituals in the western hemisphere. Four categories of ritual snuff ingredients arise from this multidisciplinary approach: It is well established that the plant contains one or more psychoactive principles and the Indian use of the plant as a ritual snuff ingredient is confirmed or quite probable: Anadenanthera, Erythroxylum, Nicotiana, Virola; It is well established that the plant contains one or more psychoactive principles, but the Indian use of the plant as a ritual snuff ingredient is not well recorded or even unlikely: Banisteriopsis, Cannabis, Datura, Ilex guayusa; The Indian use of the plant as a ritual snuff ingredient is confirmed or quite probable, but it is not well established that the plant contains one or more psychoactive principles: Justicia pectoralis, Pagamea macrophylla, Tanaecium nocturnum; The Indian use of the plant as a ritual snuff ingredient is not well recorded, and it is not well established that the plant contains one or more psychoactive principles: Acorus calamus, Capsicum, Macquira sclerophylla, Piper interitum. Part two of the paper discusses the nasal pharmacokinetics and efficacy of possible ritual snuff constituents. The literature yields convincing clinical evidence that atropine, cocaine, nicotine and scopolamine are effective following nasal application, but experimental confirmation of the efficacy of nasal tryptamine alkaloids is still awaited. In self-experiments, 6.4 mg/kg of caffeine produced substantial plasma levels via the nasal route, but 0.5 mg/kg of harmine did not produce measurable plasma levels, when taken as a nasal powder. Without additional experiments, it is difficult to give a definite explanation for this negative result.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "12579470",
+"year": "2003",
+"doi": "10.1055/s-2003-37216",
+"title": "[Functional magnetic resonance imaging of psychopharmacological brain effects: an update].",
+"abstract": "Functional magnetic resonance imaging (fMRI) is well established for the examination of functional activity in the living brain. The method permits the development of functional activation maps during perceptual, cognitive and emotional efforts with a high temporal and spatial resolution. As of late there has been growing interest in using this technique to investigate regionally specific brain activity following the administration of drugs such as nicotine, cocaine, lorazepam, scopolamine, antipsychotics or antidepressants. Studies in experimental animals investigate signal changes associated with the administration of psychopharmacological substances in different brain areas using a high magnetising field (> 4 Tesla). FMRI-studies in healthy human volunteers and psychiatric patients focus on cerebral activity following acute drug administration (single challenge) and on adaptive effects of the CNS due to long- term medication. Their results provide insights into brain physiology and neuropharmacological mechanisms which are in turn relevant for preclinical pharmacological studies, responder analyses and for the investigation of pathogenetic models in psychiatric diseases. However, with these new opportunities, additional methodological considerations and limitations emerge. Besides the need of controlling motion artefacts, the influence of interfering psychological variables, an exact specification of the experimental design, a standardised analysis for data adjustment and technical limitations have to be considered. This article provides an overview of the underlying model of brain function, present applications, future possibilities and methodological limitations of fMRI for the understanding of human psychopharmacology.",
+"pubtypes": [
+"English Abstract",
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "2055158",
+"year": "1991",
+"doi": "10.1016/0376-8716(91)90028-w",
+"title": "Acute scopolamine poisoning after sniffing adulterated cocaine.",
+"abstract": "Five cases of acute poisoning by scopolamine bought as cocaine, are reported. All the cases presented a serious anticholinergic syndrome which needed physostigmine administration. The presence of scopolamine in urine and the specimen sniffed was demonstrated in all the cases.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "12832229",
+"year": "2003",
+"doi": "10.1007/BF03033379",
+"title": "A possible physiological role for cerebral tetrahydroisoquinolines.",
+"abstract": "Tetrahydroisoquinolines present in the mammalian brain, 1,2,3,4-tetrahydroisoquinoline (TIQ) and salsolinol, suspected to cause neurodegeneration leading to Parkinson's disease, were investigated to find their possible physiological role. To this aim their behavioral and receptor effects induced after a single dose were tested in mice and rats. Both compounds do not affect significantly the basal locomotor activity, very effectively block hyperactivity induced by apomorphine (rats) and amphetamine (mice), only partially block hyperactivity induced by scopolamine, do not affect locomotor stimulation induced by cocaine, and strongly augment the running fit induced by morphine (mice). They do not produce extrapyramidal symptoms and do not potentiate haloperidol-induced catalepsy (rats). TIQ and salsolinol do not displace antagonists of several receptors (including D(1) and D(2)) from their binding sites, but displace the agonists of Alpha(2)-adrenoceptors, [(3)H]clonidine and of dopamine receptors, [(3)H]apomorphine. The results indicate that salsolinol and TIQ act as specific antagonists of agonistic conformation of dopamine receptors, and owing to that may play a role of endogenous feed-back regulators of the dopaminergic system. Those properties make tetrahydroisoquinolines potential antidopaminergic drugs devoid of extrapyramidal effects, with possible application in substance addiction disorder as anti-craving agents.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1c_scopolamine"
+]
+},
+{
+"condition": "huntington",
+"label": "Huntington disease",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "41861452",
+"year": "2026",
+"doi": "10.1016/j.bios.2026.118628",
+"title": "Smartphone-assisted lateral flow nanosensor for the selective detection of GHB in urine.",
+"abstract": "We report a rapid test strip based on mesoporous silica nanoparticles functionalized with a specific GABAB receptor agonist to selectively detect \u03b3-hydroxybutyric acid (GHB) in urine samples. The sensing mechanism involves rhodamine B-loaded MCM-41 silica nanoparticles whose pores are capped with a GABA-derived ligand (baclofen) acting as a gatekeeper via supramolecular interactions with the GABAB receptor protein. In the presence of GHB, competitive binding produces GABAB receptor protein displacement, leading to pore opening and fluorophore release, which is detected via fluorescence readout. The nanosensor demonstrated high sensitivity, with a limit of detection (LOD) of 168\u202f\u03bcM in buffer solution and 41\u202f\u03bcM in diluted urine. Selectivity assays showed highly specific sensor response over common drugs such as cocaine, morphine, MDMA, heroin, scopolamine, 1,4-butenediol (1,4-BD), \u03b3-aminobutyric acid (GABA), and \u03b3-butyrolactone (GBL). The sensing material was also incorporated into a lateral flow assay (LFA) platform with a smartphone-assisted fluorescence readout, providing a rapid, portable, and low-cost analysis of GHB. The resulting test strip exhibited high sensitivity, with a LOD of 0.28\u202f\u03bcM in diluted urine, which is low enough to clearly distinguish between physiological endogenous GHB levels (\u223c96\u202f\u03bcM) and exogenous intake within only 1\u202fmin, a crucial requirement in forensic and clinical toxicology. This portable, cost-effective method holds strong potential for on-site forensic and clinical GHB screening.",
+"pubtypes": [
+"Journal Article",
+"Evaluation Study"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "26922134",
+"year": "2016",
+"doi": "10.1016/j.encep.2015.12.021",
+"title": "[Prevention and treatment of tardive dyskinesia caused by antipsychotic drugs].",
+"abstract": "[INTRODUCTION] Tardive dyskinesia (TD) is a movement disorder of tongue, jawbone, trunk and/or limbs that may appear after a prolonged use of dopamine receptor blocking agents (after 3 months of treatment or after 1 month for patients over 60), and that are present during at least four consecutive weeks. TD is a frequent side effect of both classical neuroleptics and new generation antipsychotic drugs. The prevalence of iatrogenic TD is between 24 and 32\u00a0% after treatment with classical neuroleptics and about 13\u00a0% after treatment with a new generation antipsychotic. [OBJECTIVE] This paper presents an updated literature review of data on diagnosis, prevention and treatment of TD. [METHODS] We conducted a review of literature using the Medline Browser tool, screening studies from 1950 to 2013 in English or French with keywords \u00ab\u00a0tardive dyskinesia\u00a0\u00bb, \u00ab\u00a0tardive dystonia\u00a0\u00bb, and \u00ab\u00a0abnormal movements caused by antipsychotic drugs\u00a0\u00bb. [RESULTS] We first describe and define semeiological features of TD: dystonia, tremor, myoclonus, acathisie, chorea, ballism and athetosia. Secondarily, we resume the main differential diagnoses to exclude when confronted with this kind of movement disorders. Differential diagnoses for dyskinesia can be classified between primary (Parkinson and Huntington diseases) and secondary (Wilson disease, intoxication, metabolic abnormality, cerebrovascular accident) abnormal movements. Psychogenic TD can be evocated if previous pathologies are excluded in case of atypical clinical presentation. We detail the risk factors for TD. Endogenous risk factors are related to the patient's age, underlying psychiatric disease (bipolar disorder or Alzheimer dementia), addiction to alcohol or cocaine, female gender, or neurodevelopmental vulnerability. Iatrogenic risk factors are high doses of antipsychotics, long or intermittent administration, and particular pharmaceutical classes or associations of antipsychotics. As a comprehensive tool, we review the main physiopathological hypotheses to explain the occurrence of TD in some patients: hypersensitivity of D2 neuronal receptor or neurotoxicity associated with oxidative stress mechanisms. We also summarize the current guidelines for prevention and treatment of TD. Three successive curative strategies are suggested in the literature. First, the clinician can adapt the current antipsychotic treatment (switch to a new generation antipsychotic, diminution or cessation of antipsychotic drugs). If this first intervention is not pertinent or ineffective, the clinician can prescribe an antikinetic therapeutic agent, such as tetrabenazine, or an antioxidant. Review of the published studies does not show proof of efficacy of cholinergic or anticholinergic drugs, benzodiazepine or other GABAergic drugs, nor for amantadine. Non-medication therapeutics such as ECT and TMS are discussed, but the level of proof is insufficient to promote them as a curative treatment for TD. In case of high resistance and discomfort for the patient, a neurosurgical intervention should be discussed. These curative interventions are limited, emphasising the importance of TD prevention, by limiting the prescription and doses of antipsychotics, regularly evaluating their side effects and informing the patient of TD's risk. [CONCLUSION] We propose to practitioners a synthesised update of literature concerning a frequent iatrogenic effect of antipsychotics. Nevertheless, no solid guidelines have as yet been established, a",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+},
+{
+"condition": "huntington",
+"label": "Huntington disease",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "8486081",
+"year": "1993",
+"doi": "10.1016/0376-8716(93)90016-j",
+"title": "Preliminary note: dangerous use of anticholinergic drugs in Brazil.",
+"abstract": "To better evaluate the non-medical use of anticholinergic substances in Brazil, a review of the local literature was performed. Synthetic compounds such as triexyphenidyl (Artane), benactizine (Asmosterona), dicyclomine (Bentyl) as well as Datura sp. tea were reported as being used by first and second grade students and by street children of several Brazilian cities. In several cases the percentage of youngsters indulging in such use was higher than the percentage found for cocaine, barbiturates, cough syrups and amphetamine-related drugs. Several cases of patients seeking treatment for dependence or for acute psychotic symptoms were also described.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't",
+"Review"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+},
+{
+"condition": "methamphetamine",
+"label": "Methamphetamine use disorder",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "35203563",
+"year": "2022",
+"doi": "10.3390/biomedicines10020355",
+"title": "Misuse of Anticholinergic Medications: A Systematic Review.",
+"abstract": "(1) Background: Over the last decade, misuse and diversion of medications has appeared to be increasingly concerning phenomena, including a range of different molecules. As current knowledge on the abuse of centrally acting anticholinergics is limited, the aim of the present study is to review the relevant published data, focusing on the following molecules: benztropine, biperiden, scopolamine, orphenadrine, and benzhexol/trihexyphenidyl (THP). (2) Methods: A systematic literature review was carried out using Pubmed, Scopus, and Web of Science databases following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA). Research methods were registered on PROSPERO (CRD42021257293). (3) Results: A total of 48 articles, including case reports, surveys, and retrospective case series analyses, were included. Most articles focused on benzhexol/THP (n = 25), and benztropine (n = 4). The routes of administration were mostly oral, and macrodoses together concomitant illicit drugs, e.g., cocaine, have been recorded. Toxidromes included both physical (e.g., tachycardia, tachypnoea, dilatated pupils, dry skin, urinary retention, ataxia, etc.) and psychiatric symptoms (e.g., anxiety, agitation, delirium, etc.). Fatal outcomes were very rare but reported. (4) Conclusion: Results from the present study show that anticholinergic misusing issues are both widespread worldwide and popular. Considering the potential adverse effects associated, healthcare professionals should be vigilant and monitor eventual misusing issues.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "23925710",
+"year": "2013",
+"doi": "10.1001/jamapsychiatry.2013.75",
+"title": "Reward signals, attempted suicide, and impulsivity in late-life depression.",
+"abstract": "IMPORTANCE\u2014Suicide can be viewed as an escape from unendurable punishment at the cost of any future rewards. Could faulty estimation of these outcomes predispose to suicidal behavior? In behavioral studies, many of those who have attempted suicide misestimate expected rewards on gambling and probabilistic learning tasks.OBJECTIVES\u2014To describe the neural circuit abnormalities that underlie disadvantageous choices in people at risk for suicide and to relate these abnormalities to impulsivity, which is one of the components of vulnerability to suicide.DESIGN\u2014Case-control functional magnetic resonance imaging study of reward learning using are inforcement learning model.SETTING\u2014University hospital and outpatient clinic.PATIENTS\u2014Fifty-three participants 60 years or older, including 15 depressed patients who had attempted suicide, 18 depressed patients who had never attempted suicide (depressed control subjects), and 20 psychiatrically healthy controls.MAIN OUTCOMES AND MEASURES\u2014Components of the cortical blood oxygenation level\u2013dependent response tracking expected and unpredicted rewards.RESULTS\u2014Depressed elderly participants displayed 2 distinct disruptions of control over reward-guided behavior. First, impulsivity and a history of suicide attempts (particularly poorly planned ones) were associated with a weakened expected reward signal in the paralimbic cortex,which in turn predicted the behavioral insensitivity to contingency change. Second, depression was associated with disrupted corticostriatothalamic encoding of unpredicted rewards, which in turn predicted the behavioral over sensitivity to punishment. These results were robust to the effects of possible brain damage from suicide attempts, depressive severity, co-occurring substance use and anxiety disorders, antidepressant and anticholinergic exposure, lifetime exposure to electroconvulsive therapy, vascular illness, and incipient dementia.CONCLUSIONS AND RELEVANCE\u2014Altered paralimbic reward signals and impulsivity and/or carelessness may facilitate unplanned suicidal acts. This pattern, also seen in gambling and cocaine use, may reflect a primary deficit in the paralimbic cortex or in its mesolimbic input. The over reactivity to punishment in depression may be caused in part by a disruption of appetitive learning in the corticostriatothalamic circuits.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "32313025",
+"year": "2020",
+"doi": "10.1038/s41598-020-63426-5",
+"title": "The non-receptor tyrosine kinase Pyk2 modulates acute locomotor effects of cocaine in D1 receptor-expressing neurons of the nucleus accumbens.",
+"abstract": "The striatum is critical for cocaine-induced locomotor responses. Although the role of D1 receptor-expressing neurons is established, underlying molecular pathways are not fully understood. We studied the role of Pyk2, a non-receptor, calcium-dependent protein-tyrosine kinase. The locomotor coordination and basal activity of Pyk2 knock-out mice were not altered and major striatal protein markers were normal. Cocaine injection increased Pyk2 tyrosine phosphorylation in mouse striatum. Pyk2-deficient mice displayed decreased locomotor response to acute cocaine injection. In contrast, locomotor sensitization and conditioned place preference were normal. Cocaine-activated ERK phosphorylation, a signaling pathway essential for these late responses, was unaltered. Conditional deletion of Pyk2 in the nucleus accumbens or in D1 neurons reproduced decreased locomotor response to cocaine, whereas deletion of Pyk2 in the dorsal striatum or in A2A receptor-expressing neurons did not. In mice lacking Pyk2 in D1-neurons locomotor response to D1 agonist SKF-81297, but not to an anticholinergic drug, was blunted. Our results identify Pyk2 as a regulator of acute locomotor responses to psychostimulants. They highlight the role of tyrosine phosphorylation pathways in striatal neurons and suggest that changes in Pyk2 expression or activation may alter specific responses to drugs of abuse, or possibly other behavioral responses linked to dopamine action.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "3769509",
+"year": "1986",
+"doi": "10.1097/00003246-198611000-00011",
+"title": "Hyperthermia associated with drug intoxication.",
+"abstract": "Hyperthermia (temperature of at least 40.5 degrees C for at least one hour) associated with drug intoxication was identified in 12 patients over a 5-yr period. Intoxication was due to anticholinergic drugs (tricyclic antidepressants, antipsychotics, antihistamines), CNS stimulants (phencyclidine, cocaine, 3,4-methylene dioxyamphetamine, mescaline, lysergic acid diethylamide), salicylates, or combinations of these. Hyperthermia was present in four patients on admission, but its onset was delayed up to 12 h in the remainder. Outcome of hyperthermic patients was poor: five died and four had severe permanent neurologic sequelae. Clinical signs common to patients who developed hyperthermia were increased muscular activity and absence of sweating. Five patients suffered seizures, and four did not respond to anticonvulsant medication until body temperature was lowered. Cooling did not appear to favorably affect the outcome after body temperature had remained above 40.5 degrees C for a prolonged period. Prevention of death or neurologic sequelae from drug-induced hyperthermia depends upon the recognition of risk factors and the prompt treatment of hyperthermia.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "42556717",
+"year": "2026",
+"doi": "10.1016/j.neuropharm.2026.111144",
+"title": "M3 muscarinic receptor antagonism attenuates cocaine-induced hippocampal oligodendroglial changes and relapse-like behavior in male mice.",
+"abstract": "Acetylcholine (ACh) signaling regulates oligodendrocyte lineage progression via muscarinic ACh receptors (mAChRs), yet its role in cocaine-induced myelin-associated and relapse-like changes remains unexplored. Here, we examined whether hippocampal cholinergic and oligodendroglial alterations were associated with cocaine-related outcomes and pharmacologically sensitive to M3-preferential antagonism. Adult male C57BL/6J mice were subjected to cocaine-conditioned place preference (CPP), extinction, and cocaine-primed reinstatement, and treated with benztropine (BZT), the M1-selective mAChR antagonist VU0255035, or the M3-preferential mAChR antagonist solifenacin (SOL). Cocaine conditioning increased dorsal hippocampal ACh levels and reduced the expression of selected myelin-related genes and oligodendroglial transcription factors, including Mbp, Plp, Olig2, and Olig1, predominantly in the dorsal hippocampus. These changes were accompanied by reduced myelin basic protein (MBP) immunoreactivity, increased cholinergic terminal apposition to oligodendrocyte-lineage cells, and upregulation of Chrm3 in O4-sorted hippocampal oligodendrocytes. BZT reduced cocaine-primed reinstatement and increased Mbp and Plp expression and MBP immunoreactivity in several hippocampal layers. BZT also normalized cocaine-induced changes in Fosb, \u0394Fosb, Creb, and Slc6a3 in the dorsal hippocampus, whereas dorsal Bdnf remained different from vehicle-treated controls. SOL reduced reinstatement relative to both cocaine-conditioned and VU0255035-treated mice. SOL also increased open-arm time and entry ratio in the elevated plus maze test relative to cocaine-conditioned mice. In CD140a-sorted oligodendrocyte precursor cell-derived cultures, SOL increased MBP-positive oligodendrocyte volume relative to cocaine alone; however, the lack of a SOL-VU0255035 difference precluded conclusions about subtype specificity. These findings provide evidence consistent with a contribution of M3-sensitive muscarinic mechanisms to cocaine-associated oligodendroglial and behavioral alterations.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"3_genetics"
+]
+}
+]
+},
+{
+"pmid": "17608938",
+"year": "2007",
+"doi": "10.1186/1471-2156-8-46",
+"title": "Variation in the gene coding for the M5 muscarinic receptor (CHRM5) influences cigarette dose but is not associated with dependence to drugs of addiction: evidence from a prospective population based cohort study of young adults.",
+"abstract": "[BACKGROUND] The mesolimbic structures of the brain are important in the anticipation and perception of reward. Moreover, many drugs of addiction elicit their response in these structures. The M5 muscarinic receptor (M5R) is expressed in dopamine-containing neurones of the substantia nigra pars compacta and ventral tegmental area, and regulates the release of mesolimbic dopamine. Mice lacking M5R show a substantial reduction in both reward and withdrawal responses to morphine and cocaine. The CHRM5, the gene that codes for the M5R, is a strong biological candidate for a role in human addiction. We screened the coding and core promoter sequences of CHRM5 using denaturing high performance liquid chromatography to identify common polymorphisms. Additional polymorphisms within the coding and core promoter regions that were identified through dbSNP were validated in the test population. We investigated whether these polymorphisms influence substance dependence and dose in a cohort of 1947 young Australians. [RESULTS] Analysis was performed on 815 participants of European ancestry who were interviewed at wave 8 of the cohort study and provided DNA. We observed a 26.8% increase in cigarette consumption in carriers of the rs7162140 T-allele, equating to 20.1 cigarettes per week (p=0.01). Carriers of the rs7162140 T-allele were also found to have nearly a 3-fold increased risk of developing cannabis dependence (OR=2.9 (95%CI 1.1-7.4); p=0.03). [CONCLUSION] Our data suggest that variation within the CHRM5 locus may play an important role in tobacco and cannabis but not alcohol addiction in European ancestry populations. This is the first study to show an association between CHRM5 and substance use in humans. These data support the further investigation of this gene as a risk factor in substance use and dependence.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"3_genetics"
+]
+},
+{
+"condition": "nicotine",
+"label": "Nicotine dependence",
+"query_bucket": [
+"3_genetics"
+]
+}
+]
+},
+{
+"pmid": "27269905",
+"year": "2016",
+"doi": "10.2217/pgs-2016-0028",
+"title": "African-specific variability in the acetylcholine muscarinic receptor M4: association with cocaine and heroin addiction.",
+"abstract": "[AIM] This study was designed to determine whether polymorphisms in acetylcholine receptors contribute to opioid dependence and/or cocaine dependence. [PATIENTS & METHODS] The sample (n = 1860) was divided by drug and ancestry, and 55 polymorphisms (nine genes) were analyzed. [RESULTS] Of the 20 SNPs that showed nominally significant associations, the association of the African-specific CHRM4 SNP rs2229163 (Asn417=) with cocaine dependence survived correction for multiple testing (Pcorrected = 0.047). CHRM4 is located in a region of strong linkage disequilibrium on chromosome 11 that includes genes associated with schizophrenia. CHRM4 SNP rs2229163 is in strong linkage disequilibrium with several African-specific SNPs in DGKZ and AMBRA1. [CONCLUSION] Cholinergic receptors' variants may contribute to drug addiction and have a potential role as pharmacogenetic markers.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"3_genetics"
+]
+}
+]
+},
+{
+"pmid": "38321545",
+"year": "2024",
+"doi": "10.1186/s12989-024-00566-w",
+"title": "Influence of polyethylene terephthalate (PET) microplastic on selected active substances in the intramural neurons of the porcine duodenum.",
+"abstract": "[BACKGROUND] Currently, society and industry generate huge amounts of plastics worldwide. The ubiquity of microplastics is obvious, but its impact on the animal and human organism remains not fully understood. The digestive tract is one of the first barriers between pathogens and xenobiotics and a living organism. Its proper functioning is extremely important in order to maintain homeostasis. The aim of this study was to determine the effect of microplastic on enteric nervous system and histological structure of swine duodenum. The experiment was carried out on 15 sexually immature gilts, approximately 8\u00a0weeks old. The animals were randomly divided into 3 study groups (n\u2009=\u20095/group). The control group received empty gelatin capsules once a day for 28\u00a0days, the first research group received daily gelatin capsules with polyethylene terephthalate (PET) particles as a mixture of particles of various sizes (maximum particle size 300\u00a0\u00b5m) at a dose of 0.1\u00a0g/animal/day. The second study group received a dose ten times higher-1\u00a0g/animal/day. [RESULTS] A dose of 1\u00a0g/day/animal causes more changes in the enteric nervous system and in the histological structure of duodenum. Statistically significant differences in the expression of cocaine and amphetamine regulated transcript, galanin, neuronal nitric oxide synthase, substance P, vesicular acetylcholine transporter and vasoactive intestinal peptide between control and high dose group was noted. The histopathological changes were more frequently observed in the pigs receiving higher dose of PET. [CONCLUSION] Based on this study it may be assumed, that oral intake of microplastic might have potential negative influence on digestive tract, but it is dose-dependent.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+}
+]
+},
+{
+"pmid": "10089005",
+"year": "1999",
+"doi": "10.1038/sj.mp.4000462",
+"title": "Brain choline acetyltransferase activity in chronic, human users of cocaine, methamphetamine, and heroin.",
+"abstract": "Cognitive impairment has been reported in some chronic users of psychostimulants, raising the possibility that long-term drug exposure might damage brain neuronal systems, including the cholinergic system, which are responsible for normal cognition. We measured the activity of choline acetyltransferase (ChAT), the marker enzyme for cholinergic neurones, in autopsied brain of chronic users of cocaine, methamphetamine, and, for comparison, heroin. As compared with the controls, mean ChAT levels were normal in all cortical and subcortical brain areas examined. However, the two of 12 methamphetamine users, who had the highest brain/blood drug levels at autopsy, had a severe (up to 94%) depletion of ChAT activity in cerebral cortex, striatum, and thalamus. Based on the subjects examined in the present study, our neurochemical data suggest that brain cholinergic neurone damage is unlikely to be a typical feature of chronic use of cocaine, methamphetamine, or heroin, but that exposure to very high doses of methamphetamine could impair, at least acutely, cognitive function requiring a normal nucleus basalis cholinergic neuronal system. Reduced brain ChAT might be explained in part by a hyperthermia-related mechanism as low ChAT levels have also been observed in brain of some patients with neuroleptic drug-associated hyperthermia. Studies of cognitive and brain cholinergic status in high dose users of MA are warranted.",
+"pubtypes": [
+"Comparative Study",
+"Journal Article",
+"Research Support, U.S. Gov't, P.H.S."
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+},
+{
+"condition": "methamphetamine",
+"label": "Methamphetamine use disorder",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+}
+]
+},
+{
+"pmid": "12468013",
+"year": "2002",
+"doi": "10.1016/s0924-977x(02)00099-8",
+"title": "The role of in vivo molecular imaging with PET and SPECT in the elucidation of psychiatric drug action and new drug development.",
+"abstract": "This paper reviews the contribution of human PET and SPECT neuroreceptor occupancy studies to the understanding of drug action in psychiatric illness, and how they can aid the development of new drugs. All effective antipsychotics show significant D(2) receptor occupancy. However, at least for atypical antipsychotics, there is no clear relationship between occupancy and clinical response. The mechanisms underlying antipsychotic efficacy, and the minimal effective D(2) occupancy, remain to be elucidated, particularly for drugs with modest or transient occupancy. The low liability of some atypical antipsychotics for extrapyramidal side effects does not appear to be explained by their 5-HT(2A) antagonism, and the muscarinic receptor occupancy of some drugs may be partly explanatory. Previous reports of apparent 'limbic selectivity' of atypical antipsychotics may be in error, and may be due to technical differences in radiotracers. For SSRIs, high occupancies at the serotonin transporter (SERT) are achieved at therapeutic doses, although the minimum SERT occupancy required for therapeutic response remains undefined. Previous attempts to augment the antidepressant effect of SSRIs by pindolol have generally used daily doses which result in inadequate 5-HT(1A) receptor occupancy. For benzodiazepines, clinical doses would appear to leave a wide margin of unoccupied receptors. For methylphenidate and cocaine, typical doses occupy more than 50% of dopamine transporters, and their profiles are extremely similar. In therapeutic drug development, these techniques may be used to assess receptor occupancy profiles, likely drug dosages and dosing intervals which cannot be reliably assessed in humans by other methods.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't",
+"Research Support, U.S. Gov't, P.H.S.",
+"Review"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+}
+]
+},
+{
+"pmid": "1569924",
+"year": "1992",
+"doi": "",
+"title": "Interactions of cocaine with primary and secondary recognition sites on muscarinic receptors.",
+"abstract": "Several lines of evidence have suggested that muscarinic receptors may possess more than one ligand binding site. In this study, the interactions of cocaine with primary and secondary (allosteric) sites on muscarinic receptors in membrane homogenates from post-mortem human brainstem were examined. (-)-Cocaine inhibited the binding of the tritiated muscarinic antagonists N-methylscopolamine (NMS) and pirenzepine to an apparent single class of sites, with Ki values of 200-300 microM. The binding of the muscarinic agonist [3H]oxotremorine-M was inhibited with a similar Ki value (200 microM). (+)-Cocaine, although not the naturally occurring stereoisomer, was 10-20-fold more potent than (-)-cocaine in competing for binding to the primary muscarinic recognition site. The binding of cocaine was unaffected by guanine nucleotides or N-ethylmaleimide, consistent with its purported action as a competitive antagonist. Cocaine was not selective for muscarinic receptor subtypes. Rosenthal analysis of the [3H]NMS saturation binding data in the presence of increasing concentrations of either (-)-cocaine or (+)-cocaine indicated that both isomers produced an apparent competitive-like reduction in the [3H]NMS affinity. Schild regression analysis of the saturation binding data resulted in curvilinear plots suggestive of cooperative or allosteric interactions of (-)-cocaine with the [3H]NMS-labeled receptors. The effects of (-)-cocaine on the kinetics of [3H]NMS binding were consistent with an allosteric interaction with the receptor. Increasing concentrations of cocaine markedly slowed the rate of [3H]NMS dissociation from the primary recognition site. The allosteric modulation of [3H] NMS binding by (-)-cocaine was abolished with increasing ionic strength. Taken together, these data demonstrate that (-)-cocaine interacts with primary and allosteric recognition sites on muscarinic receptors.",
+"pubtypes": [
+"Journal Article",
+"Research Support, U.S. Gov't, P.H.S."
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+}
+]
+},
+{
+"pmid": "40967301",
+"year": "2025",
+"doi": "10.1016/j.neuropharm.2025.110686",
+"title": "Xanomeline treatment attenuates cocaine self-administration in rats and nonhuman primates.",
+"abstract": "The lack of an FDA-approved pharmacotherapy to combat cocaine use disorder (CUD) is an ongoing and urgent public health challenge. Emerging evidence suggests that the muscarinic acetylcholine system modulates mesolimbic dopamine release and thus may serve as a suitable target for novel CUD medications. The M1/M4-preferring muscarinic agonist xanomeline was recently approved by the Food and Drug Administration for schizophrenia management, and a previous study in male rats suggested that xanomeline treatment attenuated cocaine self-administration in a cocaine-vs-food choice procedure. The present study was conducted to further examine xanomeline treatment effectiveness on cocaine self-administration in male and female rats and nonhuman primates. Both male and female rats and monkeys were trained to self-administer cocaine during daily behavioral sessions. Repeated xanomeline treatment significantly decreased cocaine choice in rats similar to both pharmacological (amphetamine maintenance) and non-pharmacological (increasing alternative reinforcer value) positive controls. In separate groups of monkeys, acute xanomeline pretreatment decreased cocaine-vs-food choice in three out of four monkeys and selectively decreased cocaine-, but not food-maintained responding, under a multiple schedule of cocaine and food reinforcement in three out of four monkeys. Overall, the consistent effectiveness of xanomeline to reduce IV cocaine self-administration in both rodents and nonhuman primate supports its further evaluation as a CUD medication in humans.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Extramural"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"5_animal",
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "28544993",
+"year": "2017",
+"doi": "10.1016/j.drugalcdep.2017.03.014",
+"title": "Muscarinic receptor M4 positive allosteric modulators attenuate central effects of cocaine.",
+"abstract": "[BACKGROUND] Cocaine addiction is a chronic brain disease affecting neurotransmission. Muscarinic cholinergic receptors modulate dopaminergic signaling in the reward system, and muscarinic receptor stimulation can block direct reinforcing effects of cocaine. Here, we tested the hypothesis that specific muscarinic M4 receptor stimulation can attenuate the discriminative stimulus effects and conditioned rewarding effects of cocaine, measures believed to predict the ability of cocaine and cocaine-associated cues to elicit relapse to drug taking. [METHODS] We tested the M4-selective positive allosteric modulators VU0152100 and VU0467154 in a drug discrimination assay and a conditioned place preference assay, including extinction and reinstatement of place preference. Specificity of the cocaine discrimination effect was verified using knockout mice lacking either M1 or M4 receptors (M1-/-, M4-/-). We also replicated previous findings in cocaine-induced locomotor hyperactivity and striatal dopamine microdialysis assays. [RESULTS] VU0152100 attenuated the discriminative stimulus effect of cocaine in wild-type mice and M1-/- mice, but not in M4-/- mice, without affecting rates of responding. As previously shown with VU0152100, VU0467154 almost eliminated cocaine-induced hyperactivity and striatal dopamine efflux. VU0467154 failed to attenuate acquisition of cocaine-conditioned place preference, but facilitated extinction and prevented reinstatement of the conditioned place preference. [CONCLUSIONS] These findings further support the notion that M4 receptors are promising targets for the treatment of cocaine addiction, by showing that results can be replicated using distinct ligands, and that in addition to blocking reinforcing effects of cocaine relevant to ongoing drug taking, M4 positive allosteric modulators can also attenuate subjective and conditioned effects relevant to relapse.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"5_animal"
+]
+}
+]
+},
+{
+"pmid": "38950842",
+"year": "2024",
+"doi": "10.1016/j.pnpbp.2024.111079",
+"title": "Co-stimulation of muscarinic M1 and M4 acetylcholine receptors prevents later cocaine reinforcement in male and female mice, but not place-conditioning.",
+"abstract": "Acute stimulation of M1 or M4 muscarinic cholinergic receptors reduces cocaine abuse-related effects in mice and rats. The combined activation of these receptor subtypes produces synergistic effects on some behavioural endpoints in mice. M1 and M1\u00a0+\u00a0M4 receptor stimulation in a cocaine vs. food choice assay in rats and microdialysis in rats showed delayed and lasting \"anticocaine effects\". Here, we tested whether these putative lasting neuroplastic changes are sufficient to occlude the reinforcing effects of cocaine at the behavioural level in mice. Mice were pre-treated with the M1 receptor partial agonist VU0364572, M4 receptor positive allosteric modulator VU0152100, or VU0364572\u00a0+\u00a0VU0152100 two weeks prior to acquisition of cocaine intravenous self-administration (IVSA). Male C57BL/6JRj mice received vehicle, VU0364572, VU0152100, or VU0364572\u00a0+\u00a0VU0152100. Female mice were tested with two VU0364572\u00a0+\u00a0VU0152100 dose combinations or vehicle. To attribute potential effects to either reduced rewarding effects or increased aversion to cocaine, we tested VU0364572 alone and VU0364572\u00a0+\u00a0VU0152100 in acquisition of cocaine-conditioned place preference (CPP) in male mice using an unbiased design. The acquisition of cocaine IVSA was drastically reduced and/or slowed in male and female mice receiving VU0364572\u00a0+\u00a0VU0152100, but not either drug alone. Food-maintained operant behaviour was unaffected, indicating that the treatment effects were cocaine-specific. No treatment altered the acquisition of cocaine-CPP, neither in the post-test, nor in a challenge 14\u00a0days later. The cocaine IVSA findings confirm unusual long-lasting \"anticocaine\" effects of muscarinic M1\u00a0+\u00a0M4 receptor stimulation. Thus, in mice, simultaneous stimulation of both receptor subtypes seems to produce potential neuroplastic changes that yield lasting effects.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Extramural",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"5_animal"
+]
+}
+]
+},
+{
+"pmid": "30724803",
+"year": "2019",
+"doi": "10.1097/FBP.0000000000000472",
+"title": "The muscarinic agonist pilocarpine modifies cocaine-reinforced and food-reinforced responding in rats: comparison with the cholinesterase inhibitor tacrine.",
+"abstract": "Activation of muscarinic receptors in the brain antagonizes the actions of cocaine, blocking both its discriminative stimulus and reinforcing properties. Pilocarpine is a nonselective muscarinic agonist that is used clinically, but has not been well characterized for its actions during cocaine-reinforced behavior. This study evaluated its effects on cocaine-reinforced and food-reinforced behaviors in rats, using the cholinesterase inhibitor tacrine as a comparator. Intraperitoneal pilocarpine or tacrine at doses of 1.0 mg/kg or more attenuated self-administration of low-dose cocaine (0.1 mg/kg injection) but also increased oral movements. Pilocarpine was less potent than tacrine in decreasing responding supported by low or intermediate amounts of liquid food. Combined treatment with pilocarpine and tacrine was more effective than either compound alone in attenuating self-administration of intermediate-dose cocaine. At a low (0.66 mg/kg) dose which did not modify reinforced responding, pilocarpine increased nonspecific behavior (sniffing, rearing, and activity) in cocaine-reinforced but not in food-reinforced animals; with greater doses increasing cholinergic or gastrointestinal signs. These effects were most consistently correlated with changes in reinforcement in rats responding for cocaine relative to food-reinforced animals. Overall, pilocarpine exhibited modest selectivity for attenuating self-administration of low-dose cocaine without affecting a nondrug reinforcer.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Extramural",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"5_animal"
+]
+}
+]
+},
+{
+"pmid": "19996296",
+"year": "2010",
+"doi": "10.1124/jpet.109.162057",
+"title": "Attenuation of cocaine's reinforcing and discriminative stimulus effects via muscarinic M1 acetylcholine receptor stimulation.",
+"abstract": "Muscarinic cholinergic receptors modulate dopaminergic function in brain pathways thought to mediate cocaine's abuse-related effects. Here, we sought to confirm and extend in the mouse species findings that nonselective muscarinic receptor antagonists can enhance cocaine's discriminative stimulus. More importantly, we tested the hypothesis that muscarinic receptor agonists with varied receptor subtype selectivity can blunt cocaine's discriminative stimulus and reinforcing effects; we hypothesized a critical role for the M(1) and/or M(4) receptor subtypes in this modulation. Mice were trained to discriminate cocaine from saline, or to self-administer intravenous cocaine chronically. The nonselective muscarinic antagonists scopolamine and methylscopolamine, the nonselective muscarinic agonists oxotremorine and pilocarpine, the M(1)/M(4)-preferring agonist xanomeline, the putative M(1)-selective agonist (4-hydroxy-2-butynyl)-1-trimethylammonium-3-chlorocarbanilate chloride (McN-A-343), and the novel M(1)-selective agonist 1-(1-2-methylbenzyl)-1,4-bipiperidin-4-yl)-1H benzo[d]imidazol-2(3H)-one (TBPB) were tested as substitution and/or pretreatment to cocaine. Both muscarinic antagonists partially substituted for cocaine and enhanced its discriminative stimulus. Conversely, muscarinic agonists blunted cocaine discrimination and abolished cocaine self-administration with varying effects on food-maintained behavior. Specifically, increasing selectivity for the M(1) subtype (oxotremorine < xanomeline < TBPB) conferred lesser nonspecific rate-suppressing effects, with no rate suppression for TBPB. In mutant mice lacking M(1) and M(4) receptors, xanomeline failed to diminish cocaine discrimination while rate-decreasing effects were intact. Our data suggest that central M(1) receptor activation attenuates cocaine's abuse-related effects, whereas non-M(1)/M(4) receptors probably contribute to undesirable effects of muscarinic stimulation. These data provide the first demonstration of anticocaine effects of systemically applied, M(1) receptor agonists and suggest the possibility of a new approach to pharmacotherapy for cocaine addiction.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Extramural",
+"Research Support, N.I.H., Intramural",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"5_animal",
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "41887015",
+"year": "2026",
+"doi": "10.1016/j.drugalcdep.2026.113131",
+"title": "Effects of nonpharmacological manipulations and repeated xanomeline treatment on methamphetamine-vs-food choice in Sprague Dawley and Long Evans rats.",
+"abstract": "[BACKGROUND] The absence of Food and Drug Administration (FDA)-approved pharmacotherapies for methamphetamine use disorder (MUD) highlights the need for preclinical research to understand both the basic biological mechanisms of methamphetamine reinforcement and evaluate novel MUD pharmacotherapies. Recent studies demonstrated that repeated treatment with the muscarinic receptor agonist xanomeline attenuated cocaine self-administration. Whether these xanomeline treatment effects extend to methamphetamine self-administration remains unknown. [METHODS] The first aim established sensitivity of methamphetamine-vs-food choice in male and female Sprague Dawley (SD) and Long Evans (LE) rats to reinforcer magnitude and response requirement manipulations. A within-session methamphetamine choice dose-effect function (0.032-0.32mg/kg/infusion) was determined daily, and food reinforcer magnitude was manipulated weekly by changing the concentration (0, 10, 32, and 100%) of vanilla-flavored Ensure. Additionally, methamphetamine response requirement (i.e., fixed ratio (FR) 1, 5, 25, 125) was manipulated each week while holding the food FR constant. The second aim determined the effectiveness of repeated 5-day xanomeline (3.2-10mg/kg, SC) to attenuate methamphetamine choice. [RESULTS] Both increasing Ensure concentrations and methamphetamine FR values resulted in rightward shifts in the methamphetamine choice dose-effect function in both SD and LE rats. Repeated 5-day xanomeline treatment significantly decreased methamphetamine choice across all doses tested in LE, but not SD, rats. Time course of xanomeline treatment effectiveness revealed effects were greatest during the first 30min of choice session. [CONCLUSIONS] These results demonstrate that methamphetamine-vs-food choice was sensitive to parametric manipulations in rats and that xanomeline may warrant further consideration as a MUD pharmacotherapy.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"6_clinical_obs"
+]
+},
+{
+"condition": "methamphetamine",
+"label": "Methamphetamine use disorder",
+"query_bucket": [
+"5_animal",
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "29250738",
+"year": "2018",
+"doi": "10.1007/s00213-017-4797-0",
+"title": "Effects of muscarinic M1 and M4 acetylcholine receptor stimulation on extinction and reinstatement of cocaine seeking in male mice, independent of extinction learning.",
+"abstract": "[RATIONALE] Stimulating muscarinic M1/M4 receptors can blunt reinforcing and other effects of cocaine. A hallmark of addiction is continued drug seeking/craving after abstinence and relapse. [OBJECTIVES] We tested whether stimulating M1 and/or M4 receptors could facilitate extinction of cocaine seeking, and whether this was mediated via memory consolidation. [METHODS] Experimentally na\u00efve C57BL/6J mice were allowed to acquire self-administration of intravenous cocaine (1\u00a0mg/kg/infusion) under a fixed-ratio 1 schedule of reinforcement. Then, saline was substituted for cocaine until responding extinguished to \u226430% of cocaine-reinforced responding. Immediately after each extinction session, mice received saline, the M1/M4 receptor-preferring agonist xanomeline, the M1 receptor-selective allosteric agonist VU0357017, the M4 receptor-selective positive allosteric modulator VU0152100, or VU0357017\u00a0+\u00a0VU0152100. In additional experiments, xanomeline was administered delayed after the session or in the home cage before extinction training began. In the latter group, reinstatement of responding by a 10-mg/kg cocaine injection was also tested. [RESULTS] Stimulating M1\u00a0+\u00a0M4 receptors significantly expedited extinction from 17.2 sessions to 8.3 using xanomeline or 7.8 using VU0357017\u00a0+\u00a0VU0152100. VU0357017 alone and VU0152100 alone did not significantly modify rates of extinction (12.6 and 14.6 sessions). The effect of xanomeline was fully preserved when administered delayed after or unpaired from extinction sessions (7.5 and 6.4 sessions). Xanomeline-treated mice showed no cocaine-induced reinstatement. [CONCLUSIONS] These findings show that M1/M4 receptor stimulation can decrease cocaine seeking in mice. The effect lasted beyond treatment duration and was not dependent upon extinction learning. This suggests that M1/M4 receptor stimulation modulated or reversed some neurochemical effects of cocaine exposure.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Extramural",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "42090842",
+"year": "2026",
+"doi": "10.1016/j.drugalcdep.2026.113180",
+"title": "The effects of acute and repeated M1 agonist VU0364572 administration on cocaine-vs-food choice in male and female Sprague-Dawley rats.",
+"abstract": "Cocaine use disorder (CUD) represents a public health crisis for which there are currently no pharmacotherapies. Repeated administration of the muscarinic agonist xanomeline significantly decreased cocaine self-administration. However, the pharmacological mechanisms mediating xanomeline effects on cocaine reinforcement remain to be determined. The present aim was to determine whether selective M1 receptor activation with the M1 agonist VU0364572 was sufficient to attenuate cocaine-vs-food choice in male and female rats. Rats were trained to respond under a concurrent fixed-ratio (FR)5:FR5 schedule of intravenous cocaine infusions and liquid food during daily 2h sessions. VU0364572 (0.32-10mg/kg, IP) or vehicle was administered acutely before the cocaine choice session and VU034572 effects were observed for two-to-four weeks. Additionally, VU0364572 was administered using a 5-day dosing regimen to model clinical aspects of substance use disorder medication dosing regimens. During saline administration, cocaine maintained a dose-dependent increase in percent cocaine choice. Neither acute nor repeated VU0364572 administration up to 10mg/kg significantly altered cocaine choice in male and female rats. These results do not support VU0364572 as a candidate CUD pharmacotherapy and further suggest that xanomeline effectiveness to attenuate cocaine choice is not exclusively mediated by M1 receptors.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "37583267",
+"year": "2023",
+"doi": "10.1080/03007995.2023.2247969",
+"title": "Mortality risk reduction with budesonide/glycopyrrolate/formoterol fumarate versus fluticasone furoate/umeclidinium/vilanterol in COPD: a matching-adjusted indirect comparison based on ETHOS and IMPACT.",
+"abstract": "[OBJECTIVE] Chronic obstructive pulmonary disease (COPD) is a leading cause of death worldwide. While two approved fixed-dose inhaled corticosteroid/long-acting muscarinic antagonist (LAMA)/long-acting \u03b22-agonist (LABA) triple therapies reduce all-cause mortality (ACM) versus dual LAMA/LABA therapy in patients with COPD, head-to-head studies have not compared the effects of these therapies on ACM. We compared ACM in adults with moderate-to-very severe COPD receiving budesonide/glycopyrrolate/formoterol fumarate (BGF) in ETHOS versus fluticasone furoate/umeclidinium/vilanterol (FF/UMEC/VI) in IMPACT using a matching-adjusted indirect comparison (MAIC). [METHODS] A systematic literature review identified two studies (ETHOS [NCT02465567]; IMPACT [NCT02164513]) of \u226552\u2009weeks reporting ACM as an efficacy endpoint in patients receiving triple therapy. As ETHOS and IMPACT lack a common comparator, an unanchored MAIC compared ACM between licensed doses of BGF (320/18/9.6\u2009\u03bcg) from ETHOS and FF/UMEC/VI (100/62.5/25\u2009\u03bcg) from IMPACT in patients with moderate-to-very severe COPD. Using on- and off-treatment data from the final retrieved datasets of the intention-to-treat populations, BGF data were adjusted according to aggregate FF/UMEC/VI data using 11 baseline covariates; a supplementary unadjusted indirect treatment comparison was also conducted. P-values for these post-hoc analyses are not adjusted for Type I error. [RESULTS] ACM over 52\u2009weeks was statistically significantly reduced by 39% for BGF versus FF/UMEC/VI in the MAIC (hazard ratio [HR] [95% CI]: 0.61 [0.38, 0.95], p\u2009=\u20090.030) and unadjusted analysis (HR [95% CI]: 0.61 [0.41, 0.92], p\u2009=\u20090.019). [CONCLUSION] In this MAIC, which adjusted for population heterogeneity between ETHOS and IMPACT, ACM was significantly reduced with BGF versus FF/UMEC/VI in patients with moderate-to-very severe COPD.",
+"pubtypes": [
+"Comparative Study",
+"Journal Article",
+"Meta-Analysis",
+"Systematic Review"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"H1_anticholinergic_helps"
+]
+}
+]
+},
+{
+"pmid": "32727455",
+"year": "2020",
+"doi": "10.1186/s12931-020-01407-y",
+"title": "Tiotropium in chronic obstructive pulmonary disease - a review of clinical development.",
+"abstract": "[BACKGROUND] Bronchodilators are the mainstay of pharmacological treatment in chronic obstructive pulmonary disease (COPD), and long-acting muscarinic antagonist (LAMA) monotherapy is recommended as initial treatment for Global Initiative for Chronic Obstructive Lung Disease (GOLD) groups B, C, and D. [MAIN BODY] Tiotropium bromide was the first LAMA available for COPD in clinical practice and, because of its long duration of action, is administered once daily. Tiotropium was initially available as an inhalation powder delivered via a dry-powder inhaler (DPI). Later, tiotropium also became available as an inhalation spray delivered via a soft mist inhaler (SMI). The SMI was designed to overcome or minimize some of the issues associated with other inhaler types (eg, the need for strong inspiratory airflow with DPIs). Results of short- and long-term randomized, controlled clinical trials of tiotropium in patients with COPD indicated tiotropium was safe and significantly improved lung function, health-related quality of life, and exercise endurance, and reduced dyspnea, lung hyperinflation, exacerbations, and use of rescue medication compared with placebo or active comparators. These positive efficacy findings triggered the evaluation of tiotropium in fixed-dose combination with olodaterol (a long-acting \u03b22-agonist). In this review, we provide an overview of studies of tiotropium for the treatment of COPD, with a focus on pivotal studies. [CONCLUSION] Tiotropium is safe and efficacious as a long-term, once-daily LAMA for the maintenance treatment of COPD and for reducing COPD exacerbations. The SMI generates a low-velocity, long-duration aerosol spray with a high fine-particle fraction, which results in marked lung drug deposition. In addition, high inspiratory flow rates are not required.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"H1_anticholinergic_helps"
+]
+}
+]
+},
+{
+"pmid": "16844726",
+"year": "2006",
+"doi": "10.1136/thx.2006.063271",
+"title": "Tiotropium for stable chronic obstructive pulmonary disease: A meta-analysis.",
+"abstract": "[BACKGROUND] A systematic review was undertaken to evaluate the efficacy of tiotropium, a long acting anticholinergic drug, on clinical events, symptom scales, pulmonary function, and adverse events in stable chronic obstructive pulmonary disease (COPD). [METHODS] A systematic search was made of the Cochrane trials database, MEDLINE, EMBASE, CINAHL, and a hand search of 20 respiratory journals. Missing data were obtained from authors and the manufacturer. Randomised controlled trials of > or =12 weeks' duration comparing tiotropium with placebo, ipratropium bromide, or long acting beta2 agonists (LABA) were reviewed. Studies were pooled to yield odds ratios (OR) or weighted mean differences with 95% confidence intervals (CI). [RESULTS] Nine trials (8002 patients) met the inclusion criteria. Tiotropium reduced the odds of a COPD exacerbation (OR 0.73; 95% CI 0.66 to 0.81) and related hospitalisation (OR 0.68; 95% CI 0.54 to 0.84) but not pulmonary (OR 0.50; 95% CI 0.19 to 1.29) or all-cause (OR 0.96; 95% CI 0.63 to 1.47) mortality compared with placebo and ipratropium. Reductions in exacerbations and hospitalisations compared with LABA were not statistically significant. Similar patterns were evident for quality of life and symptom scales. Tiotropium yielded greater increases in forced expiratory volume in 1 second (FEV1) and forced vital capacity (FVC) from baseline to 6-12 months than did placebo, ipratropium, and LABA. Decline in FEV1 over 1 year was 30 ml (95% CI 7 to 53) slower with tiotropium than with placebo and ipratropium (data were not available for LABA). Reports of dry mouth and urinary tract infections were increased with tiotropium. [CONCLUSIONS] Tiotropium reduced COPD exacerbations and related hospitalisations, improved quality of life and symptoms, and may have slowed the decline in FEV1. Long term trials are warranted to evaluate the effects of tiotropium on decline in FEV1 and to clarify its role compared with LABA.",
+"pubtypes": [
+"Journal Article",
+"Meta-Analysis",
+"Research Support, N.I.H., Extramural",
+"Research Support, Non-U.S. Gov't",
+"Systematic Review"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"H1_anticholinergic_helps"
+]
+}
+]
+},
+{
+"pmid": "26391969",
+"year": "2015",
+"doi": "10.1002/14651858.CD009552.pub3",
+"title": "Tiotropium versus ipratropium bromide for chronic obstructive pulmonary disease.",
+"abstract": "[BACKGROUND] Tiotropium and ipratropium bromide are both recognised treatments in the management of people with stable chronic obstructive pulmonary disease (COPD). There are new studies which have compared tiotropium with ipratropium bromide, making an update necessary. [OBJECTIVES] To compare the relative effects of tiotropium to ipratropium bromide on markers of quality of life, exacerbations, symptoms, lung function and serious adverse events in patients with COPD using available randomised controlled trial (RCT) data. [SEARCH METHODS] We identified RCTs from the Cochrane Airways Group Specialised Register of trials (CAGR) and ClinicalTrials.gov up to August 2015. [SELECTION CRITERIA] We included parallel group RCTs of 12 weeks duration or longer comparing treatment with tiotropium with ipratropium bromide for patients with stable COPD. [DATA COLLECTION AND ANALYSIS] Two review authors independently assessed studies for inclusion and then extracted data on study quality and outcome results. We contacted trial sponsors for additional information. We analysed the data using Cochrane Review Manager. [MAIN RESULTS] This review included two studies of good methodological quality that enrolled 1073 participants with COPD. The studies used a similar design and inclusion criteria and were of at least 12 weeks duration; the participants had a mean forced expiratory volume in one second (FEV1) of 40% predicted value at baseline. One study used tiotropium via the HandiHaler (18 \u00b5g) for 12 months and the other via the Respimat device (5 \u00b5g and 10 \u00b5g) for 12 weeks. In general, the treatment groups were well matched at baseline but not all outcomes were reported for both studies. Overall the risk of bias across the included RCTs was low.For primary outcomes this review found that at the three months trough (the lowest level measured before treatment) FEV1 significantly increased with tiotropium compared to ipratropium bromide (mean difference (MD) 109 mL; 95% confidence interval (CI) 81 to 137, moderate quality evidence, I(2) = 62%). There were fewer people experiencing one or more non-fatal serious adverse events on tiotropium compared to ipratropium (odds ratio (OR) 0.5; 95% CI 0.34 to 0.73, high quality evidence). This represents an absolute reduction in risk from 176 to 97 per 1000 people over three to 12 months. Concerning disease specific adverse events, the tiotropium group were also less likely to experience a COPD-related serious adverse event when compared to ipratropium bromide (OR 0.59; 95% CI 0.41 to 0.85, moderate quality evidence).For secondary outcomes, both studies reported fewer hospital admissions in the tiotropium group (OR 0.34; 95% CI 0.15 to 0.70, moderate quality evidence); as well as fewer patients experiencing one or more exacerbations leading to hospitalisation in the people on tiotropium in both studies (OR 0.56; 95% CI 0.31 to 0.99, moderate quality evidence). There was no significant difference in mortality between the treatments (OR 1.39; 95% CI 0.44 to 4.39, moderate quality evidence). One study measured quality of life using the St George's Respiratory Questionnaire (SGRQ); the mean SGRQ score at 52 weeks was lower in the tiotropium group than the ipratropium group (lower on the scale is favourable) (MD -3.30; 95% CI -5.63 to -0.97, moderate quality evidence). There were fewer participants suffering one of more exacerbations in the tiotropium arm (OR 0.71; 95% CI 0.52 to 0.95, high quality evidence) and there was ",
+"pubtypes": [
+"Journal Article",
+"Meta-Analysis",
+"Systematic Review"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"H1_anticholinergic_helps"
+]
+}
+]
+},
+{
+"pmid": "28877027",
+"year": "2017",
+"doi": "10.1056/NEJMoa1700228",
+"title": "Tiotropium in Early-Stage Chronic Obstructive Pulmonary Disease.",
+"abstract": "[BACKGROUND] Patients with mild or moderate chronic obstructive pulmonary disease (COPD) rarely receive medications, because they have few symptoms. We hypothesized that long-term use of tiotropium would improve lung function and ameliorate the decline in lung function in patients with mild or moderate COPD. [METHODS] In a multicenter, randomized, double-blind, placebo-controlled trial that was conducted in China, we randomly assigned 841 patients with COPD of Global Initiative for Chronic Obstructive Lung Disease (GOLD) stage 1 (mild) or 2 (moderate) severity to receive a once-daily inhaled dose (18 \u03bcg) of tiotropium (419 patients) or matching placebo (422) for 2 years. The primary end point was the between-group difference in the change from baseline to 24 months in the forced expiratory volume in 1 second (FEV1) before bronchodilator use. Secondary end points included the between-group difference in the change from baseline to 24 months in the FEV1 after bronchodilator use and the between-group difference in the annual decline in the FEV1 before and after bronchodilator use from day 30 to month 24. [RESULTS] Of 841 patients who underwent randomization, 388 patients in the tiotropium group and 383 in the placebo group were included in the full analysis set. The FEV1 in patients who received tiotropium was higher than in those who received placebo throughout the trial (ranges of mean differences, 127 to 169 ml before bronchodilator use and 71 to 133 ml after bronchodilator use; P<0.001 for all comparisons). There was no significant amelioration of the mean (\u00b1SE) annual decline in the FEV1 before bronchodilator use: the decline was 38\u00b16 ml per year in the tiotropium group and 53\u00b16 ml per year in the placebo group (difference, 15 ml per year; 95% confidence interval [CI], -1 to 31; P=0.06). In contrast, the annual decline in the FEV1 after bronchodilator use was significantly less in the tiotropium group than in the placebo group (29\u00b15 ml per year vs. 51\u00b16 ml per year; difference, 22 ml per year [95% CI, 6 to 37]; P=0.006). The incidence of adverse events was generally similar in the two groups. [CONCLUSIONS] Tiotropium resulted in a higher FEV1 than placebo at 24 months and ameliorated the annual decline in the FEV1 after bronchodilator use in patients with COPD of GOLD stage 1 or 2. (Funded by Boehringer Ingelheim and others; Tie-COPD ClinicalTrials.gov number, NCT01455129 .).",
+"pubtypes": [
+"Clinical Trial, Phase IV",
+"Journal Article",
+"Multicenter Study",
+"Randomized Controlled Trial"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"H1_anticholinergic_helps"
+]
+}
+]
+},
+{
+"pmid": "28117615",
+"year": "2017",
+"doi": "10.1080/13543784.2017.1287172",
+"title": "Investigational beta-2 adrenergic agonists for the treatment of chronic obstructive pulmonary disease.",
+"abstract": "Long-acting bronchodilators are pivotal in the therapeutic management of COPD patients with moderate-to-severe airflow obstruction. New ultra-long-acting \u03b22-agnoists (ultra-LABAs) have been developed, some of which have been licensed for use as monotherapy and/or in combination with other bronchodilators or inhaled corticosteroids, for use in COPD patients with persistent symptoms and worsening airflow limitation. These new agents are faster in onset and have a prolonged duration of action, with a similar safety profile to the traditional twice-daily bronchodilators which may have an impact on patient concordance. Areas covered: A number of these ultra-LABAs are still under development and bi-functional hybrid molecules containing regions functioning as \u03b22-agonists, and as muscarinic agonists (MABAs) has been developed. This review summarizes these (excluding the licensed ultra-LABAs) with attention on phase II studies data available to-date on their pharmacological profiles, clinical efficacy and safety, and future perspectives. Expert opinion: Despite all the new agents' available, the challenges that persist include any differences in efficacy and safety between the various possible LAMA/LABA combinations, relative advantages of MABAs over fixed-dose LAMA/LABAs, and the impact of these new molecules in terms of long term safety, especially in certain populations in co-morbidities frequently associated with COPD.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"H2_cholinergic_worsens"
+]
+}
+]
+},
+{
+"pmid": "37313500",
+"year": "2023",
+"doi": "10.2147/COPD.S406007",
+"title": "Impact of COPD Exacerbations and Burden of Disease in Spain: AVOIDEX Study.",
+"abstract": "[PURPOSE] Chronic obstructive pulmonary disease (COPD) is characterized by high morbidity and mortality, with a considerable consumption of healthcare resources (HRU). This study aims to obtain real world evidence regarding the consequences of COPD exacerbations and to provide updated data on the burden of this disease and its treatment. [PATIENTS AND METHODS] A retrospective study in seven Spanish regions was conducted among COPD patients diagnosed between 1/01/2010 and 31/12/2017. The index date was the diagnosis of COPD and patients were followed until lost to follow-up, death or end of the study, whichever occurred first. Patients were classified by patient pattern (incident or prevalent), type and severity of exacerbations, and treatments prescribed. Demographic and clinical characteristics were evaluated, together with the incidence of exacerbations, comorbidities, and the use of HRU, during the baseline (12 months before the index date) and the follow-up periods by incident/prevalent and treatment prescribed. Mortality rate was also measured. [RESULTS] The study included 34,557 patients with a mean age of 70 years (standard deviation: 12). The most frequent comorbidities were diabetes, osteoporosis, and anxiety. Most patients received inhaled corticosteroids (ICS) with long-acting beta agonists (LABA), or long-acting muscarinic agonists (LAMA), followed by LABA with LAMA. Incident patients (N=8229; 23.8%) had fewer exacerbations than prevalent patients (N=26328; 76.2%), 0.3 vs 1.2 exacerbations per 100 patient-years. All treatment patterns present a substantial disease burden, which seems to increase with the evolution of the disease (ie moving from initial treatments to combination therapies). The overall mortality rate was 40.2 deaths/1000 patient-years. General practitioner visits and tests were the HRU most frequently required. The frequency and severity of exacerbations positively correlated with the use of HRU. [CONCLUSION] Despite receiving treatment, patients with COPD suffer a considerable burden mainly due to exacerbations and comorbidities, which require a substantial use of HRU.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"H2_cholinergic_worsens"
+]
+}
+]
+},
+{
+"pmid": "20118141",
+"year": "2010",
+"doi": "10.1345/aph.1M409",
+"title": "Accidental overdose of tiotropium in a patient with atrial fibrillation.",
+"abstract": "[OBJECTIVE] To report a case of refractory tachycardia after an excessive dose of inhaled tiotropium. [CASE SUMMARY] A 74-year-old male with atrial fibrillation was admitted for increased heart rate and shortness of breath. The patient's heart rate was initially stabilized between 80 and 90 beats/min with metoprolol succinate 50 mg daily. During hospitalization, he accidentally received 5 capsules of tiotropium 18 microg inhaled as a single dose (total 90 microg) and, approximately 15 minutes later, his heart rate increased from 80 to 160 beats/min. Over 5 days of hospitalization, the patient's tachycardia was difficult to control and he required multiple atrioventricular (AV) nodal blocking agents (physostigmine, metoprolol tartrate, diltiazem) for effective stabilization prior to discharge. On outpatient follow-up 11 days after the ingestion the patient's heart rate was in the 40s and the AV nodal blocking agents were proportionately decreased. [DISCUSSION] Tiotropium is a long-acting anticholinergic medication used to treat chronic obstructive pulmonary disease. Little has been reported as to the potential systemic toxicities of tiotropium. Tachycardia is listed as a potential adverse effect, but based on a MEDLINE search (1966-July 2009) using tiotropium, tachycardia, and overdose as search terms, there have been no case reports published. Renal impairment may increase plasma concentrations of tiotropium; our patient's creatinine clearance was estimated to be below 50 mL/min. According to the Naranjo probability scale, our patient's development of tachycardia was probably associated with tiotropium inhalation. [CONCLUSIONS] Tiotropium can be temporally implicated in a rapid heart rate following excessive ingestion. Health care professionals should be aware of tachycardic effects of tiotropium, particularly in patients with underlying structural heart disease, atrial fibrillation, and renal impairment.",
+"pubtypes": [
+"Case Reports",
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"H2_cholinergic_worsens"
+]
+}
+]
+},
+{
+"pmid": "31929157",
+"year": "2020",
+"doi": "10.3233/JAD-190850",
+"title": "Asthma and Chronic Obstructive Pulmonary Disease as a Comorbidity and Association with the Choice of Antidementia Medication Among Persons with Alzheimer's Disease.",
+"abstract": "[BACKGROUND] Asthma and chronic obstructive pulmonary disease (COPD) are common comorbidities in persons with Alzheimer's disease (AD). However, pharmacotherapy of these diseases may have opposite mechanisms of action; anticholinergics in asthma/COPD and acetylcholinesterase inhibitors (AChEI) in AD. [OBJECTIVE] To investigate whether existing asthma/COPD affects the choice of AD medication, and the survival of the patients with AD. [METHODS] In this retrospective cohort study, data from the MEDALZ-study, which includes all community-dwelling persons with AD during 2005-2011 in Finland (n\u200a=\u200a70718) was utilized. Persons with asthma/COPD (N\u200a=\u200a7211) were defined as having a special reimbursement for asthma/COPD, or long-term use (\u2265250 days) of inhaled anticholinergics, inhaled corticosteroids, or leukotriene antagonists during the year before AD diagnosis. We compared persons with and without asthma/COPD regarding the choice of the initial antidementia medication (AChEI versus memantine) with logistic regression and mortality with Cox regression model during the follow-up (up to end of 2015). [RESULTS] Memantine was favored over AChEIs as first-line treatment to AD in persons with asthma/COPD compared to those without asthma/COPD (odds ratio 1.23, 95% confidence interval (CI) 1.15-1.31). Memantine was also more commonly used among those who used multiple asthma/COPD medications (7.9% of memantine initiators used \u22653 asthma/COPD medications compared with 5.5% of those who initiated with AChEI). Mortality was higher in persons with asthma/COPD compared to those without asthma/COPD (adjusted hazard ratio 1.10, 95% CI 1.07-1.13). [CONCLUSION] More frequent use of memantine instead of AChEI may result from an attempt to prevent possible worsening of asthma/COPD by AChEIs. Vulnerable persons with both AD and asthma/COPD need individually assessed pharmacotherapy for their medical conditions.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"H2_cholinergic_worsens"
+]
+}
+]
+},
+{
+"pmid": "17320912",
+"year": "2007",
+"doi": "10.1016/j.lfs.2007.01.027",
+"title": "Dysfunctional inhibitory muscarinic receptors mediate enhanced histamine release in isolated human bronchi.",
+"abstract": "In human airways mucosal mast cells are under the control of inhibitory muscarinic receptors. The described experiments tested, whether the inhibitory potency of two muscarinic receptor agonists (oxotremorine, acetylcholine) becomes impaired in advanced chronic obstructive pulmonary disease (COPD). Isolated human bronchi obtained from 26 patients with lung cancer were separated into two groups. Group 1 patients suffered from moderate COPD (mean FEV1 56%; range 34-71%; mean pack years of cigarette smoking 50, range 20-96; one non-smoker). Group 2 patients had no or only a mild form of COPD; mean FEV1 was 82% (62-97%) and the number of pack years 22 (6-45; 3 non-smoker). The calcium ionophore A23187 induced a maximal histamine release of 4100+/-870 pmol/g/5 min in group 1 bronchi, in contrast to only 1730+/-240 pmol/g/5 min in group 2 bronchi (p<0.02). Oxotremorine (1 nmol/L) reduced the stimulated histamine release by 81+/-5% in group 2 bronchi, but did not produce a significant effect in group 1 bronchi (11+/-14%). In conclusion, the present experiments show an enhanced histamine release in advanced COPD, which can be explained by a dysfunction of inhibitory muscarinic receptors.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"H2_cholinergic_worsens"
+]
+}
+]
+},
+{
+"pmid": "40722217",
+"year": "2025",
+"doi": "10.1097/01.NPR.0000000000000344",
+"title": "The Drug Update: Recent drug approvals, summer 2025 edition.",
+"abstract": "In the final half of 2024, the US FDA approved several new drugs that have relevance for those practicing in primary care. This article highlights the following new medications: donanemab-azbt (Kisunla), nalmefene injection (Zurnai), epinephrine nasal spray (neffy), palopegteriparatide (Yorvipath), xanomeline and trospium chloride (Cobenfy), and sulopenem etzadroxil/probenecid (Orlynvah). Additionally, this article highlights the recent approval of obstructive sleep apnea as a new indication for tirzepatide (Zepbound) and chronic obstructive pulmonary disease as a new indication for dupilumab (Dupixent).",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "copd",
+"label": "COPD",
+"query_bucket": [
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "40101707",
+"year": "2025",
+"doi": "10.1111/acps.13803",
+"title": "Confusional States During Electroconvulsive Therapy for Late-Life Depression: A Prospective Cohort Study.",
+"abstract": "[INTRODUCTION] Cognitive side effects, such as memory loss, associated with electroconvulsive therapy (ECT) have been extensively studied. However, knowledge about (sub)acute confusional states during ECT is limited, particularly in older adults with depression. Their incidence, recurrence, and co-occurrence remain unclear. This study aimed to describe the incidence, recurrence, co-occurrence, and clinical course of various subtypes of confusional states during ECT. [METHODS] Data were derived from the 'Rivastigmine for ECT-induced Cognitive Adverse effects in Late-Life depression' (RECALL) prospective cohort study, involving 145 older adults (\u2265\u200955\u2009years) with a major depressive episode receiving ECT. We assessed different subtypes of confusional states: postictal and interictal delirium (PID and IID), postictal agitation (PIA), prolonged time to reorientation (TRO), and subacute general cognitive decline (Mini Mental State Examination decline \u2265\u20094 points) throughout the ECT course. [RESULTS] Over half of the older adults (55.9%) experienced at least one subtype of confusional state during their ECT course. The most prevalent subtypes were PIA (29.5%) and prolonged TRO (28.3%), while postictal (5.9%) and interictal delirium (4.2%) were less common. Recurrence rates varied, with interictal delirium (66.7%) and prolonged TRO (50.0%) showing the highest rates compared to postictal delirium (12.5%). Notably, 18.0% of older adults experienced more than one subtype of confusional state during their ECT course, and these states could emerge at any time during the ECT course. [CONCLUSION] This is the first study to comprehensively examine the clinical course of various subtypes of confusional states during ECT in older adults with depression Our findings reveal that confusional states are highly prevalent, heterogeneous, and may emerge at any time during the ECT course. Notably, since the instruments used were not designed to measure (subtypes of) confusional states during ECT, further research into the differentiation of (sub)acute confusional states is warranted. [TRIAL REGISTRATION] EudraCT 2014-003385-24.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1b_human_chei"
+]
+},
+{
+"condition": "mdd",
+"label": "Major depressive disorder",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "37202140",
+"year": "2023",
+"doi": "10.1136/bmjopen-2022-068405",
+"title": "Preoperative hypoalbuminaemia in liver surgery: an observational study at a university medical centre.",
+"abstract": "[OBJECTIVES] Preoperative hypoalbuminaemia is associated with adverse outcome, including increased postoperative mortality in cardiovascular surgery, neurosurgery, trauma and orthopaedic surgery. However, much less is known about the association between preoperative serum albumin and clinical outcomes after liver surgery. In this study, we sought to determine whether hypoalbuminaemia before partial hepatectomy is associated with a worse postoperative outcome. [DESIGN] Observational study. [SETTING] University Medical Centre in Germany. [PARTICIPANTS] We analysed 154 patients enrolled in the perioperative PHYsostigmine prophylaxis for liver resection patients at risk for DELIrium and postOperative cognitive dysfunction (PHYDELIO) trial with a preoperative serum albumin assessment. Hypoalbuminaemia was defined as serum albumin <35\u2009g/L. Subgroups classified as hypoalbuminaemia and non-hypoalbuminaemia consisted of 32 (20.8%) and 122 (79.2%) patients, respectively. [OUTCOME MEASURES] The outcome parameters of interest were postoperative complications according to Clavien (moderate: I, II; major: \u2265III), length of intensive care unit (ICU) stay, length of hospital stay and survival rates 1\u2009year after surgery. [RESULTS] Preoperative hypoalbuminaemia was associated with the occurrence of major postoperative complications (OR 3.051 (95% CI 1.197 to 7.775); p=0.019) after adjusting for age, sex, randomisation, American Society of Anesthesiologists physical status, preoperative diagnosis and Child-Pugh class. Both ICU and hospital lengths of stay were significantly prolonged in patients with preoperative hypoalbuminaemia (OR 2.573 (95% CI 1.015 to 6.524); p=0.047\u2009and OR 1.296 (95% CI 0.254 to 3.009); p=0.012, respectively). One-year survival was comparable between patients with and without hypoalbuminaemia. [CONCLUSIONS] We found that low serum albumin before surgery was associated with a worse short-term outcome after partial hepatectomy, which strengthens the prognostic value of serum albumin in the setting of liver surgery. [TRIAL REGISTRATION NUMBERS] ISRCTN18978802 and EudraCT 2008-007237-47.",
+"pubtypes": [
+"Observational Study",
+"Journal Article",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "32682169",
+"year": "2020",
+"doi": "10.1016/j.archger.2020.104171",
+"title": "Pharmacologic interventions for prevention of delirium in hospitalized older people: A meta-analysis.",
+"abstract": "[INTRODUCTION] To comprehensively assess the effects of pharmacologic interventions for prevention of delirium in hospitalized older people. [MATERIALS AND METHODS] A systematic review with meta-analysis following Preferred Reporting Items for Systematic reviews and Meta-Analyses methodology was performed. Hospitalized people aged 65 and older, recruited to randomized controlled clinical trials. The electronic databases MEDLINE, EMBASE, WOS and Cochrane Central Register of Controlled Trials were consulted (March 2019). Predefined criteria were used to determine inclusion of studies and to assess their methodologic quality. [RESULTS] 1855 records were identified in the database, and after removing the duplicates, the titles and abstracts evaluated were 1250 records. Finally, 25 randomized controlled trials contributed to meta-analysis (n\u202f=\u202f5820): 1 anti-epileptics (n\u202f=\u202f697), 2 anti-inflammatories (n\u202f=\u202f615), 4 antipsychotics (n\u202f=\u202f1193), 2 cholinesterase inhibitors (n\u202f=\u202f87), 13 hypnotics/sedatives (n\u202f=\u202f2909), 1 opioids (n\u202f=\u202f52), 1 psychostimulants/nootropics (n\u202f=\u202f81), 1 yokukansan (n\u202f=\u202f186). Olanzapine (RR\u202f=\u202f0.36; 95 %CI: 0.24, 0.52; k\u202f=\u202f1; n\u202f=\u202f400), rivastigmine (RR\u202f=\u202f0.36; 95 %CI: 0.15, 0.87; k\u202f=\u202f1; n\u202f=\u202f62), dexmedetomidine (RR\u202f=\u202f0.52; 95 %CI: 0.38, 0.71; I\u00b2\u202f=\u202f55 %; k\u202f=\u202f6; n\u202f=\u202f2084), and ramelteon (RR\u202f=\u202f0.09; 95 %CI: 0.01, 0.64; k\u202f=\u202f1; n\u202f=\u202f65) reduced the incidence of delirium compared to placebo/usual care. Only dexmedetomidine was also associated with a shorter duration of delirium (0.70 days reduction) and a lower consumption of psychotropic drugs (48 %). No effect was found in mortality, adverse events, urinary tract infections or post-operative complications. [CONCLUSIONS] This meta-analysis suggests that dexmedetomidine is effective in reducing the incidence and duration of delirium in hospitalized older patients. Individual studies reveal effects of ramelteon, olanzapine and rivastigmine on the incidence of delirium but the evidence is insufficient to draw a robust conclusion.",
+"pubtypes": [
+"Journal Article",
+"Meta-Analysis",
+"Research Support, Non-U.S. Gov't",
+"Systematic Review"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1b_human_chei"
+]
+},
+{
+"condition": "epilepsy",
+"label": "Epilepsy",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "19424763",
+"year": "2009",
+"doi": "10.1007/s11606-009-0996-7",
+"title": "Pharmacological management of delirium in hospitalized adults--a systematic evidence review.",
+"abstract": "[BACKGROUND AND OBJECTIVES] Despite the significant burden of delirium among hospitalized adults, there is no approved pharmacologic intervention for delirium. This systematic review evaluates the efficacy and safety of pharmacologic interventions targeting either prevention or management of delirium. [DATA SOURCES] We searched Medline, PubMed, the Cochrane Register of Controlled Trials, and the Cumulative Index to Nursing and Allied Health Literature (CINAHL) information systems from January 1966 to October 2008. We included randomized, controlled trials comparing pharmacologic compounds either to each other or placebo. We excluded non-comparison trials, studies with patients aged < 18 years, a history of an Axis I psychiatric disorder, and patients with alcohol-related delirium. [REVIEW METHODS] Three reviewers independently extracted the data for participants, interventions and outcome measures, and critically appraised each study using the JADAD scale. [RESULTS] We identified 13 studies that met our inclusion criteria and evaluated 15 compounds: second-generation antipsychotics, first-generation antipsychotics, cholinergic enhancers, an antiepileptic agent, an inhaled anesthetic, injectable sedatives, and a benzodiazepine. Four trials evaluated delirium treatment and suggested no differences in efficacy or safety among the evaluated treatment methods (first and second generation antipsychotics). Neither cholinesterase inhibitors nor procholinergic drugs were effective in preventing delirium. Multiple studies, however, suggest either shorter severity and duration, or prevention of delirium with the use of haloperidol, risperidone, gabapentin, or a mixture of sedatives in patients undergoing elective or emergent surgical procedures. [CONCLUSION] The existing limited data indicates no superiority for second-generation antipsychotics over haloperidol in managing delirium. Although preliminary results suggest delirium prevention may be accomplished through various mechanisms, further studies are necessary to prove effectiveness.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Extramural",
+"Research Support, Non-U.S. Gov't",
+"Systematic Review"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "32114617",
+"year": "2020",
+"doi": "10.4037/ajcc2020579",
+"title": "Effect of Delirium on Physical Function in Noncardiac Thoracic Surgery Patients.",
+"abstract": "[BACKGROUND] The effect of delirium on physical function in patients undergoing noncardiac thoracic surgery has not been well described and may differ from that in other surgical populations. [OBJECTIVE] To determine the effects of delirium on muscle strength and functional independence. The primary end point was change in Medical Research Council sum score (MRC-SS) by delirium status. [METHODS] A secondary analysis of data from a clinical trial involving English-speaking adults aged 18 years or older who were undergoing major noncardiac thoracic surgery. Exclusion criteria were history of schizophrenia, Parkinson disease, dementia, alcohol abuse, or neuroleptic malignant syndrome; haloperidol allergy; being pregnant or nursing; QT prolongation; and taking levodopa or cholinesterase inhibitors. Delirium was assessed twice daily using the Confusion Assessment Method for the Intensive Care Unit. Preoperatively and postoperatively, muscle strength was assessed using the modified MRC-SS and functional independence was assessed using the Katz scale of activities of daily living. Changes in MRC-SS and Katz score by delirium status were analyzed using the Fisher exact test. [RESULTS] Seventy-three patients were included in the analysis. Median (interquartile range) MRC-SS and Katz score before surgery did not differ significantly between patients without and with delirium (MRC-SS: 30 [30-30] vs 30 [30-30], P > .99; Katz score: 6 [6-6] vs 6 [6-6], P = .63). The percentage of patients with a change in MRC-SS was similar in patients without and with delirium (17% vs 13%, respectively; P > .99). More patients in the delirium group had a change in Katz score (13% vs 0%, P = .04). [CONCLUSIONS] Postoperative delirium was not associated with change in muscle strength. Follow-up studies using other muscle measures may be needed.",
+"pubtypes": [
+"Journal Article",
+"Randomized Controlled Trial",
+"Research Support, N.I.H., Extramural",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "1591736",
+"year": "1992",
+"doi": "10.1097/00002826-199204000-00004",
+"title": "Datura delirium.",
+"abstract": "Poisoning with tropine alkaloids from cultivated plants and pharmaceuticals is an uncommon cause of delirium and coma. We report a patient with a toxic delirium following ingestion of the tropine alkaloid-containing root of Datura innoxia. Thin-layer chromatography and gas chromatography/mass spectrometry confirmed the presence of atropine and scopolamine in samples of the ingested root. Routine clinical toxin screens may not include an assay for tropine alkaloids. A specific tropine alkaloid assay may provide supporting evidence. The clinical, electroencephalographic, and therapeutic aspects of anticholinergic poisoning are discussed.",
+"pubtypes": [
+"Case Reports",
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "330911",
+"year": "1977",
+"doi": "",
+"title": "Sleep aids and sedatives.",
+"abstract": "Proprietary sleep aids and sedatives can cause delirium, coma and occasionally death in children and adults. The constituents in sleep aids that significantly effect central nervous system activity are bromides, methapyrilene, pyrilamine and scopolamine (hyoscine). Constituent proportions and mixtures vary greatly at different times since manufacturers make frequent adjustments. The effects of toxicity resulting from the misuse of ethylenediamines include nausea, vomiting, blurred vision, incoordination, tremors, dry mouth, constipation and an acute poisoning syndrome. Management of adverse reactions produced by either methapyrilene or pyrilamine consists of dosage reduction or discontinuation. The acute poisoning syndrome requires implementation of general symptomatic and supportive principles.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "30252437",
+"year": "2019",
+"doi": "10.1021/acschemneuro.8b00433",
+"title": "Understanding Central Nervous System Effects of Deliriant Hallucinogenic Drugs through Experimental Animal Models.",
+"abstract": "Hallucinogenic drugs potently alter human behavior and have a millennia-long history of use for medicinal and religious purposes. Interest is rapidly growing in their potential as CNS modulators and therapeutic agents for brain conditions. Antimuscarinic cholinergic drugs, such as atropine and scopolamine, induce characteristic hyperactivity and dream-like hallucinations and form a separate group of hallucinogens known as \"deliriants\". Although atropine and scopolamine are relatively well-studied drugs in cholinergic physiology, deliriants represent the least-studied class of hallucinogens in terms of their behavioral and neurological phenotypes. As such, novel approaches and new model organisms are needed to investigate the CNS effects of these compounds. Here, we comprehensively evaluate the preclinical effects of deliriant hallucinogens in various animal models, their mechanisms of action, and potential interplay with other signaling pathways. We also parallel experimental and clinical findings on deliriant agents and outline future directions of translational research in this field.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't",
+"Review"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "2196841",
+"year": "1990",
+"doi": "10.1016/s0750-7658(05)80190-x",
+"title": "[Central anticholinergic syndrome during postoperative period].",
+"abstract": "The central anticholinergic syndrome (CAS) includes central signs (somnolence, confusion, amnesia, agitation, hallucinations, dysarthria, ataxia, delirium, stupor, coma) and peripheral signs (dry mouth, dry skin, tachycardia, visual disturbances and difficulty in micturition). It occurs when central cholinergic sites are occupied by specific drugs and also as a result of an insufficient release of acetylcholine. The CAS can be caused by atropine sulphate, hyoscine (scopolamine), promethazine, benzodiazepines, opioids, halothane, influrane, ketamine. The incidence of CAS during the postoperative period depends on choice and dose of anaesthetic agents, type of surgery, patient's condition and diagnostic criteria. It is close to 10% following general anaesthesia and 4% following regional anaesthesia with sedation. The differential diagnosis of CAS includes an overdose of anaesthetic drugs or an alteration in pharmacokinetics, altered hydratation, electrolyte or acid-base state, hypoglycaemia, hypoxia, hypercapnia, hypocapnia, hyperthermia, hypothermia, hormonal disorders, neurological damage resulting from surgery, embolism, haemorrhage or trauma. The diagnosis of CAS is often determined by a process of exclusion and not actually made until a positive therapeutic response to physostigmine, a centrally active anticholinesterase agent has taken place.",
+"pubtypes": [
+"English Abstract",
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "31665073",
+"year": "2019",
+"doi": "10.1186/s13256-019-2250-1",
+"title": "Unknowing ingestion of Brugmansia suaveolens leaves presenting with signs of anticholinergic toxicity: a case report.",
+"abstract": "[BACKGROUND] Brugmansia suaveolens is the commonest species under the Solanacea (\"Angels Trumpet\" in English; \"Attana\" in Sinhalese) plant family in Sri Lanka. It contains alkaloids like scopolamine, atropine and hyoscyamine which can cause an anticholinergic toxindrome. There have been a few reported cases of accidental ingestion of Brugmansia seeds among children, seeds being the most toxic part, but no such reported cases of Brugmansia leaves poisoning among adults. [CASE PRESENTATION] A 60-year-old-female Sinhalese presented with acute confusion, delirium, and agitation. She had ingested a herbal drink made from leaves of an unknown plant from her garden prior to onset of symptoms. She had urinary retention, mydriasis and sinus tachycardia. She was managed supportively with activated charcoal and hydration and the delirium completely resolved within 15\u2009hours. The presented unkown plant leaves were identified as Brugmansia suaveolens. [CONCLUSION] Although seeds are the most toxic plant part in most cases of Brugmansia poisoning, leaves also have a significant degree of toxicity. It is important that medical professionals promptly recognize the features of anticholinergic syndrome, and have a high index to suspect Brugmansia poisoning and start prompt treatment. It is also important to improve awareness of toxic plants among the general community to prevent toxicities and fatalities.",
+"pubtypes": [
+"Case Reports",
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "30192928",
+"year": "2019",
+"doi": "10.1093/cercor/bhy214",
+"title": "Anticholinergic Amnesia is Mediated by Alterations in Human Network Connectivity Architecture.",
+"abstract": "Disrupted cholinergic neurotransmission plays a central role in Alzheimer's disease, medication-induced memory impairment, and delirium. At the systems level, this suggests anticholinergic drugs may alter the activity and interplay of anatomically distributed neural networks critical for memory function. Using a network-sensitive imaging technique (functional connectivity MRI) and a double-blind, crossover design, we examined the consequences of anticholinergic drug administration on episodic memory and functional network architecture in a group of clinically normal elderly. We observed that low-dose scopolamine (0.2 mg IV) decreased episodic memory performance and selectively decreased connectivity strength in 3 of 7 cortical networks. Both memory and connectivity effects were independent of \u03b2-amyloid burden. Drug-induced connectivity changes within the Default and Salience networks, as well as reductions in the strength of anticorrelation between these 2 networks, were sufficient to fully statistically mediate the effects of scopolamine on memory performance. These results provide experimental support for the importance of the Default and Salience networks to memory performance and suggest scopolamine-induced amnesia is underpinned by disrupted connectivity within and between these 2 networks. More broadly, these results support the potential utility of fcMRI as tool examine the systems-level pharmacology of psychoactive drugs.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "22810284",
+"year": "2010",
+"doi": "10.1212/01.CON.0000368215.71588.22",
+"title": "Delirium.",
+"abstract": "Delirium is a commonly encountered clinical problem and, contrary to popular belief, should be treated as an acute neurologic emergency. It can be caused by a multitude of conditions and is frequently observed in hospitalized patients. In some cases, delirium results from the direct effect of a toxin, as observed with anticholinergic medications, or from neuronal injury, as seen in herpes simplex virus encephalitis. Because the treatment of delirium rests on the identification and treatment of the underlying illness, the astute clinician must tease apart these various possibilities with a careful history and physical examination and judicious use of laboratory tests and imaging studies. This chapter will review an approach to the patient with delirium and discuss management strategies based on current evidence.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "15909390",
+"year": "2005",
+"doi": "",
+"title": "[Guideline 'Delirium'].",
+"abstract": "The Dutch Association of Psychiatry, together with the Dutch Association of Clinical Geriatrics and with methodological support from the Dutch Institute for Healthcare Improvement (CBO) has developed a guideline for the optimal diagnosis, treatment and prevention of delirium. Delirium is caused by somatic illness or the use of medication, drugs or alcohol. Delirium is common among the somatically ill admitted to a general hospital and is associated with increased morbidity and mortality. Important predisposing factors for delirium are: age > or =70 years, cognitive disturbances, sensory impairments, problems in daily activities, and the use of alcohol and opiates. Precipitating factors that may provoke delirium are: infection, fever, dehydration, serum electrolyte imbalance, polypharmacy, and the use of psychotropic medication, particularly anticholinergic drugs. Detection, diagnosis, and assessment of the severity of delirium are based on clinical examination, case history, observation, mental status examination including tests of cognitive function, and diagnosis of underlying somatic diseases. For daily practice, measurement tools are not necessary, nor are laboratory or imaging tests, such as electroencephalography. Haloperidol is the treatment of first choice for delirium due to somatic illness, except in patients with delirium due to drug use or medication, Parkinson's disease or Lewy body dementia. In cases of concurrent alcohol withdrawal syndrome, delirium may be treated with haloperidol and a benzodiazepine and B-vitamins. Medical and environmental interventions have been shown to reduce the incidence and duration of delirium.",
+"pubtypes": [
+"English Abstract",
+"Journal Article",
+"Research Support, Non-U.S. Gov't",
+"Review"
+],
+"screen_for": [
+{
+"condition": "delirium",
+"label": "Delirium",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+},
+{
+"condition": "dlb",
+"label": "Lewy body dementia",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+},
+{
+"condition": "pd_cognition",
+"label": "Parkinson cognitive impairment",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+}
+]

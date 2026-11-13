@@ -1,0 +1,355 @@
+{
+ "dlb": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:\"lewy\"",
+  "count": 0,
+  "hits": []
+ },
+ "pd_psychosis": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:parkinson",
+  "count": 0,
+  "hits": []
+ },
+ "huntington": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:huntington",
+  "count": 0,
+  "hits": []
+ },
+ "delirium": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:delirium",
+  "count": 0,
+  "hits": []
+ },
+ "tbi": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:\"brain injury\"",
+  "count": 0,
+  "hits": []
+ },
+ "down_syndrome": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:\"down syndrome\"",
+  "count": 0,
+  "hits": []
+ },
+ "sleep": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(sleep OR narcolepsy)",
+  "count": 0,
+  "hits": []
+ },
+ "chronic_pain": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(pain OR analgesi*)",
+  "count": 1,
+  "hits": [
+   [
+    "22018972",
+    "2011",
+    "The M1/M4 preferring agonist xanomeline is analgesic in rodent models of chronic inflammatory and neuropathic pain via central site of action."
+   ]
+  ]
+ },
+ "cocaine": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:cocaine",
+  "count": 3,
+  "hits": [
+   [
+    "40967301",
+    "2025",
+    "Xanomeline treatment attenuates cocaine self-administration in rats and nonhuman primates."
+   ],
+   [
+    "10.1101/2025.03.03.641295",
+    "2025",
+    "Effects of the muscarinic M1 agonist VU0364572 and the M1/M4-prefering agonist xanomeline on cocaine choice in male and female rats"
+   ],
+   [
+    "23995301",
+    "2014",
+    "Acute and chronic effects of the M1/M4-preferring muscarinic agonist xanomeline on cocaine vs. food choice in rats."
+   ]
+  ]
+ },
+ "alcohol": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:alcohol",
+  "count": 0,
+  "hits": []
+ },
+ "ocd": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:obsessive",
+  "count": 0,
+  "hits": []
+ },
+ "tourette": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(tourette OR tic)",
+  "count": 0,
+  "hits": []
+ },
+ "mdd": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:depress*",
+  "count": 1,
+  "hits": [
+   [
+    "42105998",
+    "2026",
+    "Comparative network pharmacology analysis of ketamine and xanomeline in major depressive disorder: Shared and distinct molecular mechanisms."
+   ]
+  ]
+ },
+ "bipolar_mania": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(mania OR bipolar)",
+  "count": 2,
+  "hits": [
+   [
+    "40531190",
+    "2025",
+    "Acetylcholine and muscarinic receptor targeting in bipolar disorder: does xanomeline-trospium chloride and other investigational muscarinic agonists hold promise as mechanistically informed treatments for manic episodes, mixed features and cognitive deficits in bipolar disorder?"
+   ],
+   [
+    "EP0821955",
+    "1998",
+    "Use of 3-(4-hexyloxy-1,2,5-thiadiazol-3-yl)-1,2,5,6-tetrahydro-1-methylpyridine (xanomeline) for treating bipolar disorder"
+   ]
+  ]
+ },
+ "autism_irritability": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:autis*",
+  "count": 0,
+  "hits": []
+ },
+ "dementia_cognition": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(alzheimer OR dementia)",
+  "count": 6,
+  "hits": [
+   [
+    "41618768",
+    "2026",
+    "From schizophrenia to dementia: Is Cobenfy a potential treatment for behavioral and psychological symptoms of dementia?"
+   ],
+   [
+    "21651893",
+    "2011",
+    "Attenuation of neurodegenerative phenotypes in Alzheimer-like presenilin 1/presenilin 2 conditional double knockout mice by EUK1001, a promising derivative of xanomeline."
+   ],
+   [
+    "11790638",
+    "2002",
+    "Brain proton magnetic resonance spectroscopy in Alzheimer disease: changes after treatment with xanomeline."
+   ],
+   [
+    "9876958",
+    "1998",
+    "Efficacy of xanomeline in Alzheimer disease: cognitive improvement measured using the Computerized Neuropsychological Test Battery (CNTB)."
+   ],
+   [
+    "9109749",
+    "1997",
+    "Effects of xanomeline, a selective muscarinic receptor agonist, on cognitive function and behavioral symptoms in Alzheimer disease."
+   ],
+   [
+    "9339268",
+    "1997",
+    "The selective muscarinic agonist xanomeline improves both the cognitive deficits and behavioral symptoms of Alzheimer disease."
+   ]
+  ]
+ },
+ "epilepsy": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(epilep* OR seizure*)",
+  "count": 0,
+  "hits": []
+ },
+ "catatonia": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:catatoni*",
+  "count": 1,
+  "hits": [
+   [
+    "42579811",
+    "2026",
+    "Combining Clozapine and Xanomeline/Trospium Chloride: Mechanisms of Action and the Genesis of Catatonia."
+   ]
+  ]
+ },
+ "migraine": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:migraine",
+  "count": 0,
+  "hits": []
+ },
+ "ptsd": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(ptsd OR posttraumatic)",
+  "count": 0,
+  "hits": []
+ },
+ "tardive": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:tardive",
+  "count": 0,
+  "hits": []
+ },
+ "adhd": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(adhd OR attention)",
+  "count": 0,
+  "hits": []
+ },
+ "anorexia": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:anorexia",
+  "count": 0,
+  "hits": []
+ },
+ "binge_eating": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(obesity OR \"binge eating\" OR weight)",
+  "count": 0,
+  "hits": []
+ },
+ "nicotine": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(nicotine OR smoking)",
+  "count": 0,
+  "hits": []
+ },
+ "methamphetamine": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:methamphetamine",
+  "count": 2,
+  "hits": [
+   [
+    "41887015",
+    "2026",
+    "Effects of nonpharmacological manipulations and repeated xanomeline treatment on methamphetamine-vs-food choice in Sprague Dawley and Long Evans rats."
+   ],
+   [
+    "10.64898/2025.12.22.696048",
+    "2025",
+    "Effects of nonpharmacological manipulations and repeated xanomeline treatment on methamphetamine-vs-food choice in Sprague Dawley and Long Evans rats"
+   ]
+  ]
+ },
+ "chemo_brain": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:chemotherapy",
+  "count": 0,
+  "hits": []
+ },
+ "long_covid": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:covid",
+  "count": 0,
+  "hits": []
+ },
+ "post_stroke": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:stroke",
+  "count": 0,
+  "hits": []
+ },
+ "pd_cognition": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:parkinson",
+  "count": 0,
+  "hits": []
+ },
+ "gastroparesis": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:gastroparesis",
+  "count": 0,
+  "hits": []
+ },
+ "borderline": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:borderline",
+  "count": 0,
+  "hits": []
+ },
+ "bipolar_depression": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:\"bipolar depression\"",
+  "count": 0,
+  "hits": []
+ },
+ "psoriasis": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:psoriasis",
+  "count": 0,
+  "hits": []
+ },
+ "hypothyroidism": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:hypothyroid*",
+  "count": 0,
+  "hits": []
+ },
+ "gout": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:gout",
+  "count": 0,
+  "hits": []
+ },
+ "schizophrenia_cog": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:cognit*",
+  "count": 15,
+  "hits": [
+   [
+    "42161933",
+    "2026",
+    "Xanomeline-trospium reverses phencyclidine-induced cognitive deficits through modulation of the gut microbiota-brain axis in mice."
+   ],
+   [
+    "41418563",
+    "2026",
+    "Efficacy of xanomeline and xanomeline trospium in the treatment of cognitive impairment: A systematic review of preclinical and clinical trials."
+   ],
+   [
+    "40887947",
+    "2025",
+    "Does Xanomeline/Trospium Have Unique Benefits for Cognitive Impairment Associated With Schizophrenia?"
+   ],
+   [
+    "40887953",
+    "2025",
+    "Does Xanomeline/Trospium Have Unique Benefits for Cognitive Impairment Associated With Schizophrenia? Response to Tandon."
+   ],
+   [
+    "40022530",
+    "2025",
+    "Xanomeline-Trospium Treatment of Cognitive Impairments of Schizophrenia: Hope for Some, or Hope for All?"
+   ],
+   [
+    "40531190",
+    "2025",
+    "Acetylcholine and muscarinic receptor targeting in bipolar disorder: does xanomeline-trospium chloride and other investigational muscarinic agonists hold promise as mechanistically informed treatments for manic episodes, mixed features and cognitive deficits in bipolar disorder?"
+   ],
+   [
+    "36414626",
+    "2022",
+    "Effectiveness of KarXT (xanomeline-trospium) for cognitive impairment in schizophrenia: post hoc analyses from a randomised, double-blind, placebo-controlled phase 2 study."
+   ],
+   [
+    "PMC12740381",
+    "2025",
+    "Therapeutic Efficacy of Xanomeline on Psychotropic Drug\u2010Induced Cognitive Dysfunction in Rats"
+   ],
+   [
+    "39659157",
+    "2025",
+    "The Impact of Xanomeline and Trospium Chloride on Cognitive Impairment in Acute Schizophrenia: Replication in Pooled Data From Two Phase 3 Trials."
+   ],
+   [
+    "25491927",
+    "2015",
+    "Improved cognition without adverse effects: novel M1 muscarinic potentiator compares favorably to donepezil and xanomeline in rhesus monkey."
+   ],
+   [
+    "20178835",
+    "2010",
+    "A novel derivative of xanomeline improves fear cognition in aged mice."
+   ],
+   [
+    "21211109",
+    "2011",
+    "The M\u2081/M\u2084 preferring agonist xanomeline reverses amphetamine-, MK801- and scopolamine-induced abnormalities of latent inhibition: putative efficacy against positive, negative and cognitive symptoms in schizophrenia."
+   ],
+   [
+    "9876958",
+    "1998",
+    "Efficacy of xanomeline in Alzheimer disease: cognitive improvement measured using the Computerized Neuropsychological Test Battery (CNTB)."
+   ],
+   [
+    "9109749",
+    "1997",
+    "Effects of xanomeline, a selective muscarinic receptor agonist, on cognitive function and behavioral symptoms in Alzheimer disease."
+   ],
+   [
+    "9339268",
+    "1997",
+    "The selective muscarinic agonist xanomeline improves both the cognitive deficits and behavioral symptoms of Alzheimer disease."
+   ]
+  ]
+ },
+ "sjogren": {
+  "query": "TITLE:(xanomeline OR KarXT OR cobenfy OR \"xanomeline-trospium\" OR \"xanomeline/trospium\") AND TITLE:(sjogren OR xerostomia)",
+  "count": 0,
+  "hits": []
+ }
+}

@@ -1,0 +1,1135 @@
+[
+{
+"pmid": "26130292",
+"year": "2016",
+"doi": "10.1007/s11764-015-0463-x",
+"title": "A study of donepezil in female breast cancer survivors with self-reported cognitive dysfunction 1 to 5\u00a0years following adjuvant chemotherapy.",
+"abstract": "[PURPOSE] Some breast cancer survivors report cognitive difficulties greater than 1 year after chemotherapy. Acetylcholinesterase inhibitors (AChEI) may improve cognitive impairment. We conducted a randomized, placebo-controlled, pilot study to assess the feasibility of using the AChEI, donepezil, to improve subjective and objective measures of cognitive function in breast cancer survivors. [METHODS] Women who received adjuvant chemotherapy 1-5 years prior with current cognitive dysfunction symptoms were randomized to 5 mg of donepezil/day vs placebo for 6 weeks and if tolerated 10 mg/day for 18 weeks for a total of 24 weeks. A battery of validated measures of attention, memory, language, visuomotor skills, processing speed, executive function, and motor dexterity and speed was administered at baseline and at 24 and 36 weeks. Subjective cognitive function, fatigue, sleep, mood, and health-related quality of life were evaluated at baseline and at 12, 24, and 36 weeks. [RESULTS] Sixty-two patients were enrolled, 76 % completed the study, self-reported compliance was 98 %, and toxicities were minimal. At the end of treatment, the donepezil group performed significantly better than the control group on two parameters of memory-the Hopkins Verbal Learning Test -Revised (HVLT-R) Total Recall (p\u2009=\u20090.033) and HVLT-R Discrimination (p\u2009=\u20090.036). There were no significant differences on other cognitive variables or in subjective cognitive function or quality of life. [CONCLUSION] Accrual to this feasibility trial was robust, retention was good, compliance was excellent, and toxicities were minimal. [IMPLICATIONS FOR CANCER SURVIVORS] Randomized clinical trials in breast cancer survivors to improve cognitive dysfunction are feasible. A phase III trial testing the efficacy of donepezil is warranted given these pilot results.",
+"pubtypes": [
+"Journal Article",
+"Randomized Controlled Trial",
+"Research Support, N.I.H., Extramural"
+],
+"screen_for": [
+{
+"condition": "chemo_brain",
+"label": "Chemotherapy-related cognitive impairment",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "37559866",
+"year": "2023",
+"doi": "10.1016/j.jsps.2023.101710",
+"title": "Anticholinergic burden risk and prevalence of medications carrying anticholinergic properties in elderly cancer patients in Jordan.",
+"abstract": "[BACKGROUND] Geriatric cancer patients are susceptible to adverse drug events due to the complexity of their chemotherapy regimens and collateral treatments for their comorbid conditions. Prescribing medications with anticholinergic burden characteristics can complicate their condition, leading to negative impacts on their health outcomes and quality of life, including an increase in adverse drug event frequency, physical and cognitive impairments. [OBJECTIVE] This study aims to examine the prevalence of anticholinergic prescribing and identify the cumulative anticholinergic load risk associated with drugs prescribed to elderly cancer patients. Also, to identify the predictors that might lead to raised anticholinergic burden in these patients. [METHODOLOGY] This retrospective cross-sectional study included elderly patients (age\u00a0\u2265\u00a065) diagnosed with cancer and admitted to the adult oncology unit at King Abdullah University Hospital (KAUH) in Jordan during the period between (January 1st, 2019, and January 1st, 2022). The medication charts of 420 patients were evaluated for study outcomes. [RESULTS] Of the total subjects, females represented 49.3%, and the average age was 72.95 (SD\u00a0=\u00a07.33). A total of 354 (84.3%) patients were prescribed at least one drug carrying anticholinergic burden properties. Median for anticholinergic medications was 3 (IQR\u00a0=\u00a04). Our study found that 194 (46.2%) patients were at a high risk of adverse events associated with anticholinergic load (cumulative score\u00a0\u2265\u00a03). Metoclopramide, furosemide, and tramadol were the most frequently prescribed drugs with anticholinergic properties. Alimentary tract drugs with anticholinergic action were the most commonly encountered items in our study population. [CONCLUSION] Our study revealed a significantly high prevalence of anticholinergic prescribing among elderly cancer patients. Nearly half of the patients were at high risk of developing serious effects related to anticholinergic activity from the drugs administered. Polypharmacy was strongly associated with increased anticholinergic burden score. Evidence-based recommendations utilizing prescribing strategies for safer alternatives and deprescribing of inappropriate medications could reduce such inappropriate prescribing.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chemo_brain",
+"label": "Chemotherapy-related cognitive impairment",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "6327657",
+"year": "1984",
+"doi": "",
+"title": "Chemotherapy of cognitive disorders in geriatric subjects.",
+"abstract": "Many of the neurochemical changes associated with aging brain, particularly lower choline acetyltransferase and higher monoamine oxidase, occur with greater severity in senile dementia, Alzheimer's type (SDAT). These alterations correlate with neuropathologic indices, e.g., the number of senile plaques and tangles. Although many different treatment techniques have been used, most have been unsuccessful. No strong data have supported the use of stimulants, Gerovital H3, or hyperbaric oxygen. Among the vasodilators, cyclandelate and hydergine may be of value in some but not most patients. Much recent work has focused on techniques to increase acetylcholine brain concentrations. To date, precursors, such as choline, seem to have very limited value. Postsynaptic treatments, e.g., physostigmine, hold more hope for future benefit, if longer acting oral preparations are developed. Other compounds, such as ACTH, vasopressin, and piracetam, may have some value but need better definition and treatment indications. Recent discoveries on the influences of lecithin on membrane fluidity and receptor binding, may affect the focus of future pharmacologic investigation.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chemo_brain",
+"label": "Chemotherapy-related cognitive impairment",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+}
+]
+},
+{
+"pmid": "12482211",
+"year": "2002",
+"doi": "10.1046/j.1526-4610.2002.02146.x",
+"title": "Central cholinergic challenging of migraine by testing second-generation anticholinesterase drugs.",
+"abstract": "The antinociceptive activity of donepezil, a novel cholinesterase inhibitor, was investigated in the mouse hot plate test. Donepezil (5 to 10 mg kg(-1) i.p.) induced a dose-dependent antinociception that reached its maximum effect 15 minutes after injection. Donepezil antinociception was prevented by the antimuscarinic drug scopolamine. At analgesic doses, donepezil did not alter gross animal behavior. These results indicate that donepezil is endowed by muscarinic antinociceptive properties, suggesting this compound as a potential therapeutic approach for the treatment of painful pathologies. Therefore, we investigated donepezil's effect in migraine. Donepezil (5 mg per os, evening assumption) was effective as a prophylatic agent in patients suffering from migraine with or without aura by reducing the number of hours with pain, the number of attacks, and the severity of the pain attack. The efficacy of donepezil was compared with that of the beta-blocker propranolol (40 mg bid per os), showing higher activity. Response rates of a large-sized open study devoid of entry criteria regarding migraine subtypes suggest the drug as an excellent prophylactic compound for migraine in general practice. Clinical results also indicate that the activation of the cholinergic system can represent a novel prophylactic approach to migraine.",
+"pubtypes": [
+"Clinical Trial",
+"Comparative Study",
+"Journal Article",
+"Randomized Controlled Trial"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1b_human_chei"
+]
+},
+{
+"condition": "migraine",
+"label": "Migraine",
+"query_bucket": [
+"1b_human_chei",
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "12667913",
+"year": "2003",
+"doi": "10.1016/s0091-3057(03)00022-4",
+"title": "Regulation of muscarinic acetylcholine receptor function in acetylcholinesterase knockout mice.",
+"abstract": "Acetylcholinesterase (AChE) hydrolyzes acetylcholine to terminate cholinergic neurotransmission. Overstimulation of cholinergic receptors by excess acetylcholine is known to be lethal. However, AChE knockout mice live to adulthood, although they have weak muscles, do not eat solid food, and die early from seizures. We wanted to know what compensatory factors allowed these mice to survive. We had previously shown that their butyrylcholinesterase activity was normal and had not increased. In this report, we tested the hypothesis that AChE-/- mice adapted to the absence of AChE by downregulating cholinergic receptors. Receptor downregulation is expected to reduce sensitivity to agonists and to increase sensitivity to antagonists. Physiological response to the muscarinic agonists, oxotremorine (OXO) and pilocarpine, showed that AChE-/- mice were resistant to OXO-induced hypothermia, tremor, salivation, and analgesia, and to pilocarpine-induced seizures. AChE+/- mice had an intermediate response. The muscarinic receptor binding sites measured with [3H]quinuclinyl benzilate, as well as the protein levels of M1, M2, and M4 receptors measured with specific antibodies on Western blots, were reduced to be approximately 50% in AChE-/- brain. However, mRNA levels for muscarinic receptors were unchanged. These results indicate that one adaptation to the absence of AChE is downregulation of muscarinic receptors, thus reducing response to cholinergic stimulation.",
+"pubtypes": [
+"Comparative Study",
+"Journal Article",
+"Research Support, Non-U.S. Gov't",
+"Research Support, U.S. Gov't, Non-P.H.S.",
+"Research Support, U.S. Gov't, P.H.S."
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"5_animal"
+]
+},
+{
+"condition": "epilepsy",
+"label": "Epilepsy",
+"query_bucket": [
+"5_animal"
+]
+}
+]
+},
+{
+"pmid": "33212113",
+"year": "2021",
+"doi": "10.1016/j.neuropharm.2020.108406",
+"title": "Hemopressin as a breakthrough for the cannabinoid field.",
+"abstract": "Hemopressin (PVNFKFLSH in rats, and PVNFKLLSH in humans and mice), a fragment derived from the \u03b1-chain of hemoglobin, was the first peptide described to have type 1 cannabinoid receptor activity. While hemopressin was shown to have inverse agonist/antagonistic activity, extended forms of hemopressin (i.e. RVD-hemopressin, also called pepcan-12) exhibit type 1 and type 2 cannabinoid receptor agonistic/allosteric activity, and recent studies suggest that they can activate intracellular mitochondrial cannabinoid receptors. Therefore, hemopressin and hemopressin-related peptides could have location-specific and biased pharmacological action, which would increase the possibilities for fine-tunning and broadening cannabinoid receptor signal transduction. Consistent with this, hemopressins were shown to play a role in a number of physiological processes including antinociceptive and anti-inflammatory activity, regulation of food intake, learning and memory. The shortest active hemopressin fragment, NFKF, delays the first seizure induced by pilocarpine, and prevents neurodegeneration in an experimental model of autoimmune encephalomyelitis. These functions of hemopressins could be due to engagement of both cannabinoid and non-cannabinoid receptor systems. Self-assembled nanofibrils of hemopressin have pH-sensitive switchable surface-active properties, and show potential as inflammation and cancer targeted drug-delivery systems. Upon disruption of the self-assembled hemopressin nanofibril emulsion, the intrinsic analgesic and anti-inflammatory properties of hemopressin could help bolster the therapeutic effect of anti-inflammatory or anti-cancer formulations. In this article, we briefly review the molecular and behavioral pharmacological properties of hemopressins, and summarize studies on the intricate and unique mode of generation and binding of these peptides to cannabinoid receptors. Thus, the review provides a window into the current status of hemopressins in expanding the repertoire of signaling and activity by the endocannabinoid system, in addition to their new potential for pharmaceutic formulations.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Extramural",
+"Research Support, Non-U.S. Gov't",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1a_human_agonist"
+]
+}
+]
+},
+{
+"pmid": "4581246",
+"year": "1973",
+"doi": "10.1111/j.1476-5381.1973.tb08179.x",
+"title": "Some initial animal and human pharmacological studies with benapryzine (BRL 1288).",
+"abstract": "1. The pA2 anti-acetylcholine activity in vitro for benapryzine was 6.55 compared with 9.02 for benzhexol.2. In vivo, the anti-acetylcholine activity of benapryzine relative to benzhexol was 0.038 as assessed by the mydriatic response of mice after subcutaneous administration. The relative activity assessed by the inhibition of pilocarpine-induced salivation was 0.13 after oral administration and 0.056 following subcutaneous administration of the drugs.3. Benapryzine had the same order of activity as benzhexol in inhibiting oxotremorine-induced tremors in mice.4. Benapryzine had anticonvulsant properties but no analgesic activity, whilst in high doses it antagonized the extrapyramidal symptoms induced by perphenazine in rats.5. In patients benapryzine was effective in reducing the symptoms of Parkinson's disease without overt anti-cholinergic effects or central hallucinogenic actions.6. Benapryzine abolished the excess tremor and reduced the rigidity and akinesia induced by physostigmine in Parkinsonian subjects.",
+"pubtypes": [
+"Clinical Trial",
+"Comparative Study",
+"Controlled Clinical Trial",
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1a_human_agonist",
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "40358683",
+"year": "2025",
+"doi": "10.1007/s00210-025-03964-9",
+"title": "Repurposing of modafinil as an anti-inflammatory drug: a systematic review of experimental studies.",
+"abstract": "Previous studies suggested the anti-inflammatory properties of modafinil. This study aimed to review the current literature to provide a comprehensive insight into the anti-inflammatory uses of modafinil in experimental studies. We conducted a systematic search using Medline (via PubMed), Web of Science, Scopus, and Embase databases from their commencement until 10 October 2022. All original articles focusing on modafinil anti-inflammatory effects were included. Our initial search yielded 1398 articles. Fourteen publications were included in our systematic review. Recent studies attempted to provide evidence for repurposing modafinil for several diseases, including autoimmune encephalomyelitis, nonalcoholic liver disease, gastric mucosal injury, neuropathic pain, atherosclerosis, intestinal ischemia, pulmonary hypertension, pancreatitis, ischemic stroke, testicular torsion, and lithium-pilocarpine-induced status epilepticus. Current evidence supports that modafinil can modulate inflammation, suppress the immune response, and improve disease severity partly by inhibiting NF-\u03baB, NOS, Kca3.1, Kca2.3, and COX-2. By reviewing recent findings from experimental studies, we discussed the beneficial effects of modafinil on several inflammatory diseases, with a particular focus on the underlying mechanisms.",
+"pubtypes": [
+"Systematic Review",
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1a_human_agonist"
+]
+}
+]
+},
+{
+"pmid": "26931765",
+"year": "2016",
+"doi": "10.2174/1871524916666160302103033",
+"title": "Analgesic Effects Mediated by Muscarinic Receptors: Mechanisms and Pharmacological Approaches.",
+"abstract": "Chronic pain represents a research field on great clinical relevance and social impactful. It is associated to a variety of pathological events causing un altered excitability of peripheral nerves derived by tissue damage depending on physical, biological and chemical injury. In the last years much attention has been paid in the identification of novel molecules involved in mediating pain sensation useful as therapeutic tools for the development of new analgesic drugs. Muscarinic receptors are widely distributed both in the central and peripheral nervous system. It is known that muscarinic agonists cause analgesic effects via spinal and supraspinal mechanisms. Considering that the analgesia induced by cholinergic agonists is comparable to that observed with morphine, the identification of receptor subtypes involved and the identification of the muscarinic ligands capable of selectively activate these receptors, is of considerable interest for potential therapeutic application. In the present review we describe the role of muscarinic receptors in mediating central and peripheral pain and the mechanisms downstream these receptors responsible of the modulation of nociceptive stimuli. Moreover the therapeutic perspectives and the identification of potential drugs binding muscarinic receptors involved in pain modulation will also be discussed.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1a_human_agonist"
+]
+}
+]
+},
+{
+"pmid": "19926555",
+"year": "2009",
+"doi": "10.1331/JAPhA.2009.08102",
+"title": "National study of medications associated with injury in elderly Medicare/Medicaid dual enrollees during 2003.",
+"abstract": "[OBJECTIVES] To address the association between inappropriate prescribing for the elderly and adverse outcomes and to identify the magnitude of the cost of medication-associated injury in this population. [DESIGN] Cross sectional. [SETTING] United States, 2003. [PATIENTS] 5,412,678 dually eligible Medicare/Medicaid enrollees aged 65 years or older. [INTERVENTION] Beers and non-Beers medications with potential central nervous system adverse effects of dizziness/vertigo, drowsiness, and/or fainting were assessed. Emergency department (ED) visits with admitting diagnoses pertaining to injuries for elderly enrollees dually eligible for Medicare and Medicaid during the calendar year were linked to prescriptions filled during the 90 days preceding the visit. [MAIN OUTCOME MEASURE] For each drug, the proportion of ED-related fills and the Medicare average revenue charge per injury-related ED visit were calculated. [RESULTS] Several drugs not currently on the Beers list were found to be associated with high proportions of ED-related fills: methadone had the highest proportion of any of the drugs studied (12.3 per 1,000 fills), and bethanechol (7.8 per 1,000 fills) had the highest proportion among genitourinary products. Regarding narcotic analgesics, propoxyphene (7.7 per 1,000 fills) had a higher association with injury than morphine (6.6 per 1,000 fills) or tramadol (6.5 per 1,000 fills). For cardiovascular agents, clonidine (4.7 per 1,000 fills) and doxazosin (3.6 per 1,000 fills) had higher associations with injury than nifedipine (3.3 per 1,000 fills). Fentanyl, a non-Beers medication, was associated with the most expensive injury-related ED visits ($1,263 average revenue charge). [CONCLUSION] Beers medications are associated with high injury-related ED visit rates for the elderly, and a number of drugs not currently on the Beers list also pose an apparent risk for injury-related visits.",
+"pubtypes": [
+"Journal Article",
+"Research Support, U.S. Gov't, Non-P.H.S."
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1a_human_agonist"
+]
+}
+]
+},
+{
+"pmid": "25413004",
+"year": "2014",
+"doi": "10.2174/1574889809666141120131238",
+"title": "Pharmacological approaches to targeting muscarinic acetylcholine receptors.",
+"abstract": "The presence of cholinergic system markers and muscarinic receptor subtypes in several tissues also of nonneuronal type has been largely demonstrated. Acetylcholine, synthesized in the nervous system, can locally contribute to modulate cell proliferation, survival and apoptosis. Considering that the cholinergic system functions are impaired in a number of disorders, the identification of new drugs regulating these functions appears of great clinical relevance. The possible involvement of muscarinic acetylcholine receptors in different pathologies has been proposed in recent years and is becoming an important area of study. However, the lack of selective muscarinic receptor ligands has for long time limited the therapeutic treatment based on muscarinic receptors as targets. To date, some muscarinic ligands such as xanomeline (patent, US5980933) or cevimeline (patents US4855290, US5571918) have been developed for the treatment of several pathologies (Alzheimer's and Sjogren's diseases). The present review will be focused on the potential effects produced by muscarinic receptor activation in different pathologies, including tumors. In fact, the potential use of muscarinic ligands in therapeutic protocols in cancer therapy will be discussed, considering that several muscarinic antagonists, already used in the treatment of genitourinary diseases (e.g. darifenacin, patent, US5096890, US6106864), have also been demonstrated to arrest the tumor growth in vivo. Moreover, the contribution of muscarinic receptors to analgesia is also reviewed. Finally, some of the most significant achievements in the field of bitopic/dualsteric ligands will be discussed and the molecules patented so far will be presented.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1a_human_agonist",
+"6_clinical_obs"
+]
+},
+{
+"condition": "sjogren",
+"label": "Sjogren dry mouth (peripheral)",
+"query_bucket": [
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "11369163",
+"year": "2001",
+"doi": "10.1016/s0885-3924(01)00270-6",
+"title": "Donepezil in the treatment of opioid-induced sedation: report of six cases.",
+"abstract": "Donepezil, an oral acetylcholinesterase inhibitor approved for the treatment of Alzheimer's disease, was given to 6 cancer pain patients having sedation related to the analgesic use of opioids. Each patient was taking more than 200 mg of oral morphine equivalents per day, and several were receiving complex analgesic regimens consisting of multiple adjuvant medications. Sedation improved at least moderately in 5 of the patients and mildly in 1 after they began taking donepezil. Patients reported a decrease in episodes of spontaneous sleeping during the day, fewer myoclonic twitches, improved daily function and greater social interaction. Several also reported improved sleep at night. Analgesia was not compromised by the use of donepezil, and in some cases it appeared improved. Donepezil may be a valuable alternative to psychostimulants in the treatment of opioid-induced sedation. A prospective controlled trial comparing the treatment effects of psychostimulants and donepezil on patients having opioid-induced sedation is underway.",
+"pubtypes": [
+"Case Reports",
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "7893023",
+"year": "1995",
+"doi": "10.1097/00000539-199504000-00011",
+"title": "Effect of antagonism of mivacurium-induced neuromuscular block on postoperative emesis in children.",
+"abstract": "The routine use of cholinesterase inhibitors to antagonize residual neuromuscular block may be associated with increased postoperative emesis. Rapid spontaneous recovery from mivacurium may obviate the need for these drugs. In this randomized, double-blind, placebo-controlled study of 113 healthy children who had received mivacurium as part of a standardized anesthetic regimen, we compared the incidence of postoperative complications after spontaneous recovery and after the use of neostigmine-glycopyrrolate or edrophonium-atropine. The anesthetic regimen consisted of halothane, nitrous oxide, fentanyl, 2 micrograms/kg intravenous (i.v.), mivacurium in an initial dose of 0.2 mg/kg, followed by an infusion, adjusted to maintain > or = 1 evoked contraction response to a supramaximum train-of-four stimulus. At the end of the procedure, patients received by random assignment one of three drug combinations: 1) neostigmine 70 micrograms/kg + glycopyrrolate 10 micrograms/kg, i.v., 2) edrophonium 1 mg/kg + atropine 10 micrograms/kg, i.v., and 3) saline. The trachea was extubated when evoked responses to peripheral nerve stimulation and clinical signs of adequate neuromuscular recovery were present. Postoperative pain was treated with morphine and emesis with metoclopramide. There were no significant differences between the three groups with respect to age, surgery, intraoperative fentanyl, and mivacurium use, time from the end of surgery to tracheal extubation, postanesthesia care unit (PACU) arrival and discharge, or in postoperative oxygen saturation values and analgesic requirements. Compared to the placebo group, emesis occurred more often in the PACU in patients receiving the neostigmine-glycopyrrolate combination, but not after edrophonium-atropine.(ABSTRACT TRUNCATED AT 250 WORDS)",
+"pubtypes": [
+"Clinical Trial",
+"Comparative Study",
+"Journal Article",
+"Randomized Controlled Trial",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "8098758",
+"year": "1993",
+"doi": "",
+"title": "A cholinergic interaction in alpha 2 adrenoceptor-mediated antinociception in sheep.",
+"abstract": "Intraspinal administration of alpha 2 adrenergic agonists produces analgesia, but clinical application of these agents is limited by dose-dependent sedation and hypotension. Recently, neostigmine has been demonstrated to counteract hypotension in sheep and enhance antinociception to tail flick in rats from spinally administered alpha 2 adrenergic agonists. We investigated this spinal interaction further in chronically prepared, conscious sheep, testing antinociception with a mechanical pressure stimulus on the forelimb. Clonidine produced dose-dependent antinociception which was antagonized by idazoxan and enhanced by neostigmine, although it was unaltered by methylatropine. Clonidine increased acetylcholine in cerebrospinal fluid, an effect potentiated by physostigmine and blocked by idazoxan. The highly lipid-soluble alpha 2 adrenergic agonists dexmedetomidine and clonidine produced antinociception, whereas the poorly lipid-soluble ST-91 (2,[2,6-diethylphenylamino]-2-imidazoline) produced antinociception only at much larger doses and did not affect cerebrospinal fluid levels of acetylcholine. In human volunteers, epidurally administered clonidine increased cerebrospinal fluid acetylcholine levels at the time of peak analgesia. These results support the existence of an interaction between alpha 2 adrenergic and cholinergic mechanisms of analgesia at the spinal level and underscore the importance of lipid solubility in the actions of spinally administered drugs in sheep.",
+"pubtypes": [
+"Clinical Trial",
+"Journal Article",
+"Randomized Controlled Trial",
+"Research Support, U.S. Gov't, P.H.S."
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "25544263",
+"year": "2015",
+"doi": "10.1016/j.jclinane.2014.08.010",
+"title": "Comparison of sugammadex and conventional reversal on postoperative nausea and vomiting: a randomized, blinded trial.",
+"abstract": "[STUDY OBJECTIVE] To determine whether the new selective binding agent sugammadex causes less postoperative nausea and vomiting (PONV) than the cholinesterase inhibitor neostigmine. [DESIGN] Prospective, randomized, double-blinded study. [SETTING] University-affiliated hospital. [PATIENTS] One hundred American Society of Anesthesiologists physical status 1 and 2 patients scheduled for extremity surgery. [INTERVENTIONS] Patients were randomly assigned to neostigmine (70 \u03bcg/kg) and atropine (0.4 mg per mg neostigmine) or sugammadex 2 mg/kg for neuromuscular antagonism at the end of anesthesia, when 4 twitches in response to train-of-four stimulation were visible with fade. [MEASUREMENTS] We recorded PONV, recovery parameters, antiemetic consumption, and side effects. [MAIN RESULTS] Nausea and vomiting scores were lower in the sugammadex patients upon arrival in the postanesthesia care unit (med: 0 [min-max, 0-3] vs med: 0 [min-max, 0-3]; P < .05), but thereafter low and comparable. Postoperative antiemetic and analgesic consumption were similar in each group. Extubation (median [interquartile range], 3 [1-3.25] vs 4 [1-3.25]; P < .001) first eye opening (4 [3-7.25] vs 7 [5-11]; P < .001), and head lift (4 [2-7.25] vs 8 [11-25]; P < .001) in minutes were shorter in patients given sugammadex. Postoperative heart rates were significantly lower in all measured times patients given neostigmine. [CONCLUSIONS] Nondepolarizing neuromuscular blocking antagonism with sugammadex speeds recovery of neuromuscular strength but only slightly and transiently reduces PONV compared with neostigmine and atropine.",
+"pubtypes": [
+"Comparative Study",
+"Journal Article",
+"Randomized Controlled Trial",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "35025078",
+"year": "2022",
+"doi": "10.1007/s40265-021-01660-5",
+"title": "Treatment of Non-Infectious Corneal Injury: Review of Diagnostic Agents, Therapeutic Medications, and Future Targets.",
+"abstract": "Corneal injuries can occur secondary to traumatic, chemical, inflammatory, metabolic, autoimmune, and iatrogenic causes. Ocular infection may frequently occur concurrent to corneal injury; however, antimicrobial agents are excluded from this present review. While practitioners may primarily rely on clinical examination techniques to assess these injuries, several pharmacological agents, such as fluorescein, lissamine green, and rose bengal, can be used to formulate a diagnosis and develop effective treatment strategies. Practitioners may choose from several analgesic medications to help with patient comfort without risking further injury or delaying ocular healing. Atropine, cyclopentolate, scopolamine, and homatropine are among the most frequently used medications for this purpose. Additional topical analgesic agents may be used judiciously to augment patient comfort to facilitate diagnosis. Steroidal anti-inflammatory agents are frequently used as part of the therapeutic regimen. A variety of commonly used agents, including prednisolone acetate, loteprednol, difluprednate, dexamethasone, fluorometholone, and methylprednisolone are discussed. While these medications are effective for controlling ocular inflammation, side effects, such as elevated intraocular pressure and cataract formation, must be monitored by clinicians. Non-steroidal medications, such as ketorolac, bromfenac, nepafenac, and diclofenac, are additionally used for their efficacy in controlling ocular inflammation without incurring side effects seen with steroids. However, these agents have their own respective side effects, warranting close monitoring by clinicians. Additionally, ophthalmologists routinely employ several agents in an off-label manner for supplementary control of inflammation and treatment of corneal injuries. Patients with corneal injuries not infrequently have significant ocular surface disease, either as a concurrent pathology or as an exacerbation of previously existing disease. Several agents used in the management of ocular surface disease have also been found to be useful as part of the therapeutic armamentarium for treatment of corneal injuries. For example, several antibiotics, such as doxycycline and macrolides, have been used for their anti-inflammatory effects on specific cytokines that are upregulated during acute injuries. There has been a recent wave of interest in amniotic membrane therapies (AMTs), including topical, cryopreserved and dehydrated variants. AMT is particularly effective in ocular injuries with violation of corneal surface integrity due to its ability to promote re-epithelialization of the corneal epithelium. Blood-based therapies, including autologous serum tears, plasma-enriched growth factor eyedrops and autologous blood drops, have additionally been explored in small case series for effectiveness in challenging and recalcitrant cases. Protection of the ocular surface is also a vital component in the treatment of corneal injuries. Temporary protective methods, such as bandage contact lenses and mechanical closure of the eyelids (tarsorrhaphy) can be particularly helpful in selective cases. Glue therapies, including biologic and non-biologic variants, can also be used in cases of severe injury and risk of corneal perforation. Finally, there are a variety of recently introduced and in-development agents that may be used as adjuvant therapies in challenging patient populations. Neurotrophic corneal disease may occur as a r",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "35272331",
+"year": "2022",
+"doi": "10.1097/SPV.0000000000001141",
+"title": "Effects of Preoperative Gabapentin on Clinical Outcomes After Outpatient Midurethral Sling Placement.",
+"abstract": "[OBJECTIVES] This study aimed to evaluate transient urinary retention in women undergoing outpatient midurethral sling placement who received preoperative gabapentin (treated) versus those who did not (untreated). Secondary outcomes included unexpected admission rates, analgesic usage, time to discharge, and pain. [METHODS] This was a retrospective cohort study including women who underwent outpatient midurethral sling placement from 2015 to 2019. Exclusion criteria included suprapubic catheter placement, planned overnight admission, abnormal preoperative postvoid residual volume, and prolonged postoperative catheterization. Logistic regression was performed to evaluate gabapentin usage and urinary retention after adjusting for patient characteristics. [RESULTS] Three hundred two women met the inclusion criteria, with 19.5% experiencing urinary retention after midurethral sling placement. Women older than 65 years were more likely to have urinary retention than those aged 18-65 years (29.8% vs 17.6%, P = 0.054). Of treated participants, 26% had urinary retention versus 18% of untreated participants (P = 0.162). Adjusting for age, parity, pain, operative time, blood loss, sling type, analgesic, scopolamine patch, or hemostatic agent use, treated participants had 72% higher odds of urinary retention (adjusted odds ratio, 1.72; 95% confidence interval, 0.88-3.38; P = 0.113). There was no difference in unexpected admission, analgesic usage, time to discharge, or pain between groups. [CONCLUSIONS] One of 5 women had urinary retention after outpatient midurethral sling placement. Although no statistically significant difference was found in urinary retention between groups, the odds of urinary retention in the treated group were increased. Because there was no difference in pain, analgesic usage, or time to discharge between groups, investigation regarding gabapentin use for outpatient urogynecologic surgery is needed.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "28387362",
+"year": "2017",
+"doi": "10.1038/srep46067",
+"title": "Discovery of new muscarinic acetylcholine receptor antagonists from Scopolia tangutica.",
+"abstract": "Scopolia tangutica (S. tangutica) is a traditional Chinese medicinal plant used for antispasmodics, anesthesia, analgesia and sedation. Its pharmacological activities are mostly associated with the antagonistic activity at muscarinic acetylcholine receptors (mAchRs) of several known alkaloids such as atropine and scopolamine. With our recent identification of four hydroxycinnamic acid amides from S. tangutica, we hypothesized that this plant may contain previously unidentified alkaloids that may also contribute to its in vivo effect. Herein, we used a bioassay-guided multi-dimension separation strategy to discover novel mAchR antagonists from S. tangutica. The core of this approach is to use label-free cell phenotypic assay to first identify active fractions, and then to guide purification of active ligands. Besides four tropanes and six cinnamic acid amides that have been previously isolated from S. tangutica, we recently identified two new tropanes, one new cinnamic acid amide, and nine other compounds. Six tropane compounds purified from S. tangutica for the first time were confirmed to be competitive antagonists of muscarinic receptor 3 (M3), including the two new ones 8 and 12 with IC50 values of 1.97\u2009\u03bcM and 4.47\u2009\u03bcM, respectively. Furthermore, the cinnamic acid amide 17 displayed 15-fold selectivity for M1 over M3 receptors. These findings will be useful in designing lead compounds for mAchRs and elucidating mechanisms of action of S. tangutica.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "12356036",
+"year": "2002",
+"doi": "",
+"title": "Adjuncts to opioid therapy.",
+"abstract": "Administration of opioids to alleviate moderate to severe acute pain and chronic cancer pain is an established management process. However, advancements in clinical pharmacologic research have shown that opioids are also effective in chronic noncancerous pain. Many patients properly treated for prolonged periods with opioids develop tolerance and subsequently, physical dependence. This process is not necessarily harmful to the patient and will not cause the patient to develop an addiction (properly defined as psychologic dependence). For many patients who have been on opioid therapy for months or years, analgesic effectiveness tragically becomes less. In addition, opioid-induced constipation can be severe and cause pain; patients do not develop tolerance to this adverse reaction. Therefore, such issues become a management problem and require additional intervention. Currently, many different classes of drugs can serve as effective adjuncts to opioids for treatment of pain. Adding adjunctive medication to opioid therapy improves pain management primarily by nonopioid mechanisms of action. Clinical outcomes of such combinations include greater analgesia and attenuation of opioid-induced adverse reactions such as nausea and vomiting, constipation, sedation, and respiratory depression. Adjuncts include acetaminophen, antiarrhythmics, anticonvulsants, antidepressants, antipsychotics, baclofen, benzodiazepines, capsaicin, calcium channel blockers, clonidine hydrochloride, central nervous system stimulants, corticosteroids, local anesthetics, N-methyl-D-aspartate receptor antagonists, nonsteroidal antiinflammatory drugs, pentoxifylline, and scopolamine. Some adjuncts (eg, acetaminophen) are routinely used today, whereas others (eg, nifedipine [calcium channel blocker]) are used on a limited basis but have great potential for more widespread application. All professionals (eg, nurses, pharmacists, physicians, physicians' assistants, social workers, members of the clergy) involved in treating patients with unresolved pain recognize this to be an extraordinary and delicate time. It is when patients are likely to request physicians to provide some method to accelerate their death. Thus, inadequate analgesia can become a suicidogen, ie, any factor that causes a patient to want to commit suicide. Incorporation of adjuncts to opioid therapy can serve to lessen pain and improve quality of life for a suffering patient.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "36521791",
+"year": "2023",
+"doi": "10.1016/j.jvir.2022.12.018",
+"title": "Pain, Nausea, and Hospital Admission after Uterine Fibroid Embolization: A Comparison of 2 Protocols.",
+"abstract": "Uterine fibroid embolization (UFE) procedures performed from 2013 to 2019 were reviewed. Seventy-two patients were treated with a standard protocol consisting of sedation, ketorolac, ondansetron, and overnight parenteral analgesics and antiemetics. Ninety-six patients were treated with a new protocol, which added transdermal scopolamine, lorazepam, and intravenous acetaminophen. Outpatient uterine fibroid embolization (OP-UFE) not requiring hospitalization was successful in 81.4% and 2.7% of patients treated with the new and old protocols, respectively (odds ratio [OR], 141.4; P < .0001). Procedural fentanyl doses were lower with the new protocol than with the old one (mean, 148 vs 186 mcg; P\u00a0= .0016). In the new protocol subset, patients were 1.01 times more likely to fail OP-UFE for every microgram increase in procedural fentanyl (OR, 0.99, P = .009), and those presenting with pain were less likely to succeed with OP-UFE than those with bleeding or bulk symptoms (OR, 0.31, P = .04). In conclusion, decreasing the opioid dose while increasing the antiemetic and nonopioid analgesic medications improves the chances of same day discharge after UFE.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "20294429",
+"year": "1947",
+"doi": "10.1016/s0002-9378(15)31598-2",
+"title": "Combined evipal and scopolamine analgesia and cyclopropane anesthesia in obstetrics.",
+"abstract": "(no abstract)",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"1c_scopolamine"
+]
+}
+]
+},
+{
+"pmid": "25324330",
+"year": "2015",
+"doi": "10.1093/ageing/afu145",
+"title": "STOPP/START criteria for potentially inappropriate prescribing in older people: version 2.",
+"abstract": "[PURPOSE] Screening tool of older people's prescriptions (STOPP) and screening tool to alert to right treatment (START) criteria were first published in 2008. Due to an expanding therapeutics evidence base, updating of the criteria was required. [METHODS] We reviewed the 2008 STOPP/START criteria to add new evidence-based criteria and remove any obsolete criteria. A thorough literature review was performed to reassess the evidence base of the 2008 criteria and the proposed new criteria. Nineteen experts from 13 European countries reviewed a new draft of STOPP & START criteria including proposed new criteria. These experts were also asked to propose additional criteria they considered important to include in the revised STOPP & START criteria and to highlight any criteria from the 2008 list they considered less important or lacking an evidence base. The revised list of criteria was then validated using the Delphi consensus methodology. [RESULTS] The expert panel agreed a final list of 114 criteria after two Delphi validation rounds, i.e. 80 STOPP criteria and 34 START criteria. This represents an overall 31% increase in STOPP/START criteria compared with version 1. Several new STOPP categories were created in version 2, namely antiplatelet/anticoagulant drugs, drugs affecting, or affected by, renal function and drugs that increase anticholinergic burden; new START categories include urogenital system drugs, analgesics and vaccines. [CONCLUSION] STOPP/START version 2 criteria have been expanded and updated for the purpose of minimizing inappropriate prescribing in older people. These criteria are based on an up-to-date literature review and consensus validation among a European panel of experts.",
+"pubtypes": [
+"Journal Article",
+"Practice Guideline",
+"Research Support, Non-U.S. Gov't",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "36302937",
+"year": "2022",
+"doi": "10.1038/s41598-022-23141-9",
+"title": "Synthesis and preliminary biological evaluation of gabactyzine, a benactyzine-GABA mutual prodrug, as an organophosphate antidote.",
+"abstract": "Organophosphates (OPs) are inhibitors of acetylcholinesterase and have deleterious effects on the central nervous system. Clinical manifestations of OP poisoning include convulsions, which represent an underlying toxic neuro-pathological process, leading to permanent neuronal damage. This neurotoxicity is mediated through the cholinergic, GABAergic and glutamatergic (NMDA) systems. Pharmacological interventions in OP poisoning are designed to mitigate these specific neuro-pathological pathways, using anticholinergic drugs and GABAergic agents. Benactyzine is a combined anticholinergic, anti-NMDA compound. Based on previous development of novel GABA derivatives (such as prodrugs based on perphenazine for the treatment of schizophrenia and nortriptyline against neuropathic pain), we describe the synthesis and preliminary testing of a mutual prodrug ester of benactyzine and GABA. It is assumed that once the ester crosses the blood-brain-barrier it will undergo hydrolysis, releasing benactyzine and GABA, which are expected to act synergistically. The combined release of both compounds in the brain offers several advantages over the current OP poisoning treatment protocol: improved efficacy and safety profile (where the inhibitory properties of GABA are expected to counteract the anticholinergic cognitive adverse effects of benactyzine) and enhanced chemical stability compared to benactyzine alone. We present here preliminary results of animal studies, showing promising results with early gabactyzine administration.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "30609834",
+"year": "2019",
+"doi": "10.3390/ijerph16010111",
+"title": "Gulf War Illness: Unifying Hypothesis for a Continuing Health Problem.",
+"abstract": "An estimated 25%\u207b32% of veterans of the 1991 Gulf War continue to experience multiple unexplained health problems known as Gulf War Illness (GWI). GWI encompasses chronic pain, musculoskeletal weakness, headache, fatigue, cognitive deficits, alterations in mood, and numerous multi-system complaints. Most potential exposures implicated in GWI were not well documented but included varying levels of several neurotoxicants as well as the anticholinergic drug pyridostigmine bromide (PB), which was routinely taken as prophylaxis against the nerve agent soman. While some veterans also took chloroquine as an antimalarial agent, the literature suggests an association between receipt of multiple vaccinations prior to or during the conflict (perhaps combined with other exposures), and GWI. In-theater exposures may account for any single individual veteran's ill health but many veterans of the same era who were not deployed overseas also suffer the same or similar symptoms. The features of GWI also overlap with those of fibromyalgia, chronic fatigue syndrome and multiple chemical sensitivity, in all of which liver dysfunction has been documented, suggesting a unifying hypothesis. It is proposed that multiple vaccinations, with concurrent or subsequent exposure to PB or additional chemical insults of a liver-damaging nature, plausibly explain the pathogenesis and the observed chronicity of GWI. The suggested mechanism for GWI is thus a chemically-induced impaired liver function, with the spillage of stored vitamin A compounds (\"retinoids\") into the circulation in toxic concentrations, resulting in an endogenous chronic form of hypervitaminosis A. Implications of the hypothesis are briefly reviewed.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "37725991",
+"year": "2023",
+"doi": "10.1055/a-2065-3764",
+"title": "[Non-pharmacological Management of Postoperative Delirium].",
+"abstract": "Postoperative delirium is common especially in the elderly and is associated with high rates of morbidity and mortality. Non-pharmacological multicomponent interventions are effective in reducing the incidence and to a degree the duration of postoperative delirium and are recommended in international guidelines on postoperative delirium as first line intervention for management of delirium. Non-pharmacological management of postoperative delirium consists of strategies for risk stratification, risk reduction by non-pharmacological bundle interventions, early recognition of delirium by screening protocols and immediate therapy of underlying causes of delirium and continuation of non-pharmacological bundles. Non-pharmacological bundle interventions address common perioperative risk factors. Bundles comprise strategies for oxygenation, mobilization, hydration and nutrition, sensory and cognitive stimulation, reorientation, modifications of environmental factors such as design aspects and noise reduction, adequate analgesia, management of agitation and anxiety, protecting circadian rhythms for example by adequate light exposure during daytime, family involvement and timely reduction of unnecessary catheters and anticholinergic drugs. The article aims at providing an overview of non-pharmacological management of postoperative delirium in the hospital.",
+"pubtypes": [
+"English Abstract",
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "37573886",
+"year": "2023",
+"doi": "10.1016/j.jamda.2023.07.003",
+"title": "Assessing the Risk of Developing Delirium on Admission to Inpatient Rehabilitation: A Clinical Prediction Model.",
+"abstract": "[OBJECTIVES] To develop a clinical model to predict the risk of an individual patient developing delirium during inpatient rehabilitation, based on patient characteristics and clinical data available on admission. [DESIGN] Retrospective observational study based on electronic health record data. [SETTING AND PARTICIPANTS] We studied a previously validated data set of inpatients including incident delirium episodes during rehabilitation. These patients were admitted to ZURZACH Care, Rehaklinik Bad Zurzach, a Swiss inpatient rehabilitation clinic, between January 1, 2015, and December 31,\u00a02018. [METHODS] We performed logistic regression analysis using backward and forward selection with alpha\u00a0= 0.01 to remove any noninformative potential predictor. We subsequentially used the Akaike information criterion (AIC) to select the final model among the resulting \"intermediate\" models. Discrimination of the final prediction model was evaluated using the C-statistic. [RESULTS] Of the 20 candidate predictor variables, 6 were included in the final prediction model: a linear spline of age with 1 knot at 60\u00a0years and a linear spline of the functional independence measure (FIM), a measure of the functional degree of patients independency, with 1 knot at 64 points, diagnosis of disorders of fluid, electrolyte, and acid-base balance (E87), use of other analgesic and antipyretics (N02B), use of anti-parkinson drugs (N04B), and an anticholinergic burden score (ACB) of \u22653 points. [CONCLUSIONS AND IMPLICATIONS] Our clinical prediction model could, upon validation, identify patients at risk of incident delirium at admission to inpatient rehabilitation, and thus enable targeted prevention strategies.",
+"pubtypes": [
+"Observational Study",
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "34173033",
+"year": "2021",
+"doi": "10.1007/s00213-021-05903-x",
+"title": "Effects of chronic tramadol administration on cognitive flexibility in mice.",
+"abstract": "[RATIONALE] Tramadol is widely used for pain relief especially in seniors. However, long-term use of tramadol has serious adverse effects, including cognitive impairment. Besides its memory effects, already demonstrated in animals, a recent clinical report suggests that tramadol could also affect executive function in seniors. Several studies have hypothesized that the anti-muscarinic properties of tramadol could be responsible for the deleterious effects of tramadol on cognition. [OBJECTIVES] We aimed at investigating the effects of chronic administration of tramadol on cognitive flexibility in adult male mice, as assessed by a visual discrimination reversal task using a touchscreen device. The effects of tramadol were further compared to those of scopolamine, a reference muscarinic antagonist. [RESULTS] We found that, during the early phase of the reversal task, when cognitive flexibility is most in demand, both tramadol-treated mice (20\u00a0mg/kg, s.c., twice a day) and scopolamine-treated mice (0.5\u00a0mg/kg, s.c., twice a day) needed more correction trials and showed a higher perseveration index than saline-treated mice. Therefore, tramadol affects cognitive flexibility, and its anticholinergic properties could be at least partly involved in these deficits. [CONCLUSIONS] In view of these deleterious cognitive effects of tramadol, physicians should be cautious when prescribing this analgesic, especially in seniors who are more vulnerable to adverse drug events and in which alternative prescription should be preferred whenever possible.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"2_anticholinergic_burden"
+]
+}
+]
+},
+{
+"pmid": "38219886",
+"year": "2024",
+"doi": "10.1016/j.jep.2024.117769",
+"title": "Experimental and pharmacoinformatic approaches unveil the neuropharmacological and analgesic potential of chloroform fraction of Roktoshirinchi (Achyranthes ferruginea Roxb.).",
+"abstract": "[ETHNOPHARMACOLOGICAL RELEVANCE] Achyranthes ferruginea (A. ferruginea) Roxb. is a common plant used in traditional medicine in Asia and Africa. It has a variety of local names, including \"Gulmanci\" in Nigeria, \"Dangar\" in Pakistan, \"Thola\" in Ethiopia, and \"Roktoshirinchi\" in Bangladesh. It is edible and has several ethnomedical uses for a wide range of illnesses, including hysteria, dropsy, constipation, piles, boils, asthma, and shigellosis. However, the neuropharmacological and analgesic potential of A. ferruginea remains uninvestigated. [AIM OF THE STUDY] To assess the neuropharmacological and analgesic potential of A. ferruginea through a multifaceted approach encompassing both experimental and computational models. [MATERIALS AND METHODS] Methanol was used to extract the leaves of A. ferruginea. It was then fractionated with low to high polar solvents (n-hexane, chloroform, ethyl acetate, and water) to get different fractions, including chloroform fraction (CLF). The study selected CLF at different doses and conducted advanced chemical element and proximate analyses, as well as phytochemical profiling using GC-MS. Toxicological studies were done at 300\u00a0\u03bcg per rat per day for 14 days. Cholinesterase inhibitory potential was checked using an in-vitro colorimetric assay. Acetic acid-induced writhing (AAWT) and formalin-induced licking tests (FILT) were used to assess anti-nociceptive effects. The forced swim test (FST), tail suspension test (TST), elevated plus maze (EPM), hole board test (HBT), and light and dark box test (LDB) were among the behavioral tests used to assess depression and anxiolytic activity. Network pharmacology-based analysis was performed on selected compounds using the search tool for interacting chemicals-5 (STITCH 5), Swiss target prediction tool, and search tool for the retrieval of interacting genes and proteins (STRING) database to link their role with genes involved in neurological disorders through gene ontology and reactome analysis. [RESULTS] Qualitative chemical element analysis revealed the presence of 15 elements, including Na, K, Ca, Mg, P, and Zn. The moisture content, ash value, and organic matter were found to be 11.12, 11.03, and 88.97%, respectively. GC-MS data revealed that the CLF possesses 25 phytoconstituents. Toxicological studies suggested the CLF has no effects on normal growth, hematological and biochemical parameters, or cellular organs after 14 days at 300\u00a0\u03bcg per rat. The CLF markedly reduced the activity of both acetylcholinesterase and butyrylcholinesterase (IC50: 56.22 and 13.22\u00a0\u03bcg/mL, respectively). Promising dose-dependent analgesic activity (p\u00a0<\u00a00.05) was observed in chemically-induced pain models. The TST and FST showed a dose-dependent substantial reduction in immobility time due to the CLF. Treatment with CLF notably increased the number of open arm entries and time spent in the EPM test at doses of 200 and 400\u00a0mg/kg b.w. The CLF showed significant anxiolytic activity at 200\u00a0mg/kg b.w. in the HBT test, whereas a similar activity was observed at 400\u00a0mg/kg b.w. in the EPM test. A notable increase in the amount of time spent in the light compartment was observed in the LDB test by mice treated with CLF, suggesting an anxiolytic effect. A network pharmacology study demonstrated the relationship between the phytochemicals and a number of targets, such as PPARA, PPARG, CHRM1, and HTR2, which are connected to the shown bioactivities. [CONCLUSIONS] This study demonstrated the safety",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"3_genetics"
+]
+}
+]
+},
+{
+"pmid": "30327427",
+"year": "2018",
+"doi": "10.1074/jbc.RA118.005846",
+"title": "RE1-silencing transcription factor controls the acute-to-chronic neuropathic pain transition and Chrm2 receptor gene expression in primary sensory neurons.",
+"abstract": "Neuropathic pain is associated with persistent changes in gene expression in primary sensory neurons, but the underlying epigenetic mechanisms that cause these changes remain unclear. The muscarinic cholinergic receptors (mAChRs), particularly the M2 subtype (encoded by the cholinergic receptor muscarinic 2 (Chrm2) gene), are critically involved in the regulation of spinal nociceptive transmission. However, little is known about how Chrm2 expression is transcriptionally regulated. Here we show that nerve injury persistently increased the expression of RE1-silencing transcription factor (REST, also known as neuron-restrictive silencing factor [NRSF]), a gene-silencing transcription factor, in the dorsal root ganglion (DRG). Remarkably, nerve injury-induced chronic but not acute pain hypersensitivity was attenuated in mice with Rest knockout in DRG neurons. Also, siRNA-mediated Rest knockdown reversed nerve injury-induced chronic pain hypersensitivity in rats. Nerve injury persistently reduced Chrm2 expression in the DRG and diminished the analgesic effect of muscarine. The RE1 binding site on the Chrm2 promoter is required for REST-mediated Chrm2 repression, and nerve injury increased the enrichment of REST in the Chrm2 promoter in the DRG. Furthermore, Rest knockdown or genetic ablation in DRG neurons normalized Chrm2 expression and augmented muscarine's analgesic effect on neuropathic pain and fully reversed the nerve injury-induced reduction in the inhibitory effect of muscarine on glutamatergic input to spinal dorsal horn neurons. Our findings indicate that nerve injury-induced REST up-regulation in DRG neurons plays an important role in the acute-to-chronic pain transition and is essential for the transcriptional repression of Chrm2 in neuropathic pain.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Extramural",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"3_genetics"
+]
+}
+]
+},
+{
+"pmid": "39163289",
+"year": "2024",
+"doi": "10.1371/journal.pone.0309136",
+"title": "CHRM3 (rs2165870) gene polymorphism is related to postoperative vomiting in female patients undergoing laparoscopic surgery. Prospective observational study.",
+"abstract": "[BACKGROUND] Postoperative nausea and vomiting are common complications after surgery, and female patients are more likely to experience these adverse events. The goal of this study was to explore the relationship between the CHRM3 rs2165870 polymorphism and postoperative vomiting incidence in female patients who underwent laparoscopic surgery. [METHODS] Two hundred female patients who underwent elective laparoscopic surgery with subsequent patient-controlled intravenous analgesia using dexmedetomidine and sufentanil were prospectively enrolled. The CHRM3 rs2165870 and KCNB2 rs349358 polymorphisms were genotyped using MassARRAY SNP typing technology. Demographic data and preoperative laboratory results of all patients were recorded. Postoperative analgesia-related information, incidence of postoperative nausea and vomiting, and other adverse events were followed up and recorded for analysis. [RESULTS] No significant differences were observed in any of the demographic characteristics of these patients among the different genotype carriers (P>0.05). The percentages of patients with each genotype of CHRM3 were 67% (GG), 28.5% (GA) and 4.5% (AA). We found that the AA or A allele of the CHRM3 rs2165870 polymorphism elevated the risk of postoperative vomiting (AA versus GG; OR, 6.94; 95% CI, 1.49-32.46; P = 0.014; A versus G; OR, 2.52; 95% CI, 1.22-5.19; P = 0.012). The percentages of patients with each genotype of KCNB2 were 84.5% (TT), 15.5% (CT) and 0% (CC). There were no significant differences in the postoperative nausea or vomiting rate across the KCNB2 rs349358 polymorphisms (P>0.05). [CONCLUSION] The CHRM3 rs2165870 polymorphism is associated with the occurrence of postoperative vomiting in female patients who have undergone laparoscopic surgery. The AA genotype or A allele of the CHRM3 rs2165870 polymorphism elevates the risk of postoperative vomiting. [TRIAL REGISTRATION] www.chictr.org.cn, registration number: ChiCTR2200062425.",
+"pubtypes": [
+"Journal Article",
+"Observational Study",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"3_genetics"
+]
+}
+]
+},
+{
+"pmid": "22074755",
+"year": "2011",
+"doi": "10.1016/j.jpain.2011.08.005",
+"title": "Potential genetic risk factors for chronic TMD: genetic associations from the OPPERA case control study.",
+"abstract": "[UNLABELLED] Genetic factors play a role in the etiology of persistent pain conditions, putatively by modulating underlying processes such as nociceptive sensitivity, psychological well-being, inflammation, and autonomic response. However, to date, only a few genes have been associated with temporomandibular disorders (TMD). This study evaluated 358 genes involved in pain processes, comparing allelic frequencies between 166 cases with chronic TMD and 1,442 controls enrolled in the OPPERA (Orofacial Pain: Prospective Evaluation and Risk Assessment) study cooperative agreement. To enhance statistical power, 182 TMD cases and 170 controls from a similar study were included in the analysis. Genotyping was performed using the Pain Research Panel, an Affymetrix gene chip representing 3,295 single nucleotide polymorphisms, including ancestry-informative markers that were used to adjust for population stratification. Adjusted associations between genetic markers and TMD case status were evaluated using logistic regression. The OPPERA findings provided evidence supporting previously reported associations between TMD and 2 genes: HTR2A and COMT. Other genes were revealed as potential new genetic risk factors for TMD, including NR3C1, CAMK4, CHRM2, IFRD1, and GRK5. While these findings need to be replicated in independent cohorts, the genes potentially represent important markers of risk for TMD, and they identify potential targets for therapeutic intervention. [PERSPECTIVE] Genetic risk factors for TMD pain were explored in the case-control component of the OPPERA cooperative agreement, a large population-based prospective cohort study. Over 350 candidate pain genes were assessed using a candidate gene panel, with several genes displaying preliminary evidence for association with TMD status.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Extramural",
+"Research Support, N.I.H., Intramural"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"3_genetics"
+]
+}
+]
+},
+{
+"pmid": "30466987",
+"year": "2018",
+"doi": "10.1016/j.phymed.2018.09.204",
+"title": "Novel molecular mechanisms for the adaptogenic effects of herbal extracts on isolated brain cells using systems biology.",
+"abstract": "[INTRODUCTION] Adaptogens are natural compounds or plant extracts that increase adaptability and survival of organisms under stress. Adaptogens stimulate cellular and organismal defense systems by activating intracellular and extracellular signaling pathways and expression of stress-activated proteins and neuropeptides. The effects adaptogens on mediators of adaptive stress response and longevity signaling pathways have been reported, but their stress-protective mechanisms are still not fully understood. [AIM OF THE STUDY] The aim of this study was to identify key molecular mechanisms of adaptogenic plants traditionally used to treat stress and aging-related disorders, i.e., Rhodiola rosea, Eleutherococcus senticosus, Withania somnifera, Rhaponticum carthamoides, and Bryonia alba. [MATERIALS AND METHODS] To investigate the underlying molecular mechanisms of adaptogens, we conducted RNA sequencing to profile gene expression alterations in T98G neuroglia cells upon treatment of adaptogens and analyzed the relevance of deregulated genes to adaptive stress-response signaling pathways using in silico pathway analysis software. [RESULTS AND DISCUSSION] At least 88 of the 3516 genes regulated by adaptogens were closely associated with adaptive stress response and adaptive stress-response signaling pathways (ASRSPs), including neuronal signaling related to corticotropin-releasing hormone, cAMP-mediated, protein kinase A, and CREB; pathways related to signaling involving CXCR4, melatonin, nitric oxide synthase, GP6, G\u03b1s, MAPK, neuroinflammation, neuropathic pain, opioids, renin-angiotensin, AMPK, calcium, and synapses; and pathways associated with dendritic cell maturation and G-coupled protein receptor-mediated nutrient sensing in enteroendocrine cells. All samples tested showed significant effects on the expression of genes encoding neurohormones CRH, GNRH, UCN, G-protein-coupled and other transmembrane receptors TLR9, PRLR, CHRNE, GP1BA, PLXNA4, a ligand-dependent nuclear receptor RORA, transmembrane channels, transcription regulators FOS, FOXO6, SCX, STAT5A, ZFPM2, ZNF396, ZNF467, protein kinases MAPK10, MAPK13, MERTK, FLT1, PRKCH, ROS1, TTN), phosphatases PTPRD, PTPRR, peptidases, metabolic enzymes, a chaperone (HSPA6), and other proteins, all of which modulate numerous life processes, playing key roles in several canonical pathways involved in defense response and regulation of homeostasis in organisms. It is for the first time we report that the molecular mechanism of actions of melatonin and plant adaptogens are alike, all adaptogens tested activated the melatonin signaling pathway by acting through two G-protein-coupled membrane receptors MT1 and MT2 and upregulation of the ligand-specific nuclear receptor RORA, which plays a role in intellectual disability, neurological disorders, retinopathy, hypertension, dyslipidemia, and cancer, which are common in aging. Furthermore, melatonin activated adaptive signaling pathways and upregulated expression of UCN, GNRH1, TLR9, GP1BA, PLXNA4, CHRM4, GPR19, VIPR2, RORA, STAT5A, ZFPM2, ZNF396, FLT1, MAPK10, MERTK, PRKCH, and TTN, which were commonly regulated by all adaptogens tested. We conclude that melatonin is an adaptation hormone playing an important role in regulation of homeostasis. Adaptogens presumably worked as eustressors (\"stress-vaccines\") to activate the cellular adaptive system by inducing the expression of ASRSPs, which then reciprocally protected cells from damage caused by distres",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"3_genetics"
+]
+}
+]
+},
+{
+"pmid": "42921774",
+"year": "2026",
+"doi": "10.3791/74233",
+"title": "Multi-Target Mechanism of Corydalis yanhusuo Against Fibromyalgia Syndrome: A Network Pharmacology and Molecular Docking Study.",
+"abstract": "Fibromyalgia syndrome (FMS) is a chronic pain disorder with limited therapeutic options. This study aimed to predict the multi-target mechanism of Corydalis yanhusuo against FMS using network pharmacology and molecular docking. Active ingredients were retrieved from the Traditional Chinese Medicine Systems Pharmacology Database and Analysis Platform (TCMSP) with oral bioavailability (OB) \u226530% and drug-likeness (DL) \u22650.18. Disease targets were obtained from GeneCards. Overlapping targets were used for protein-protein interaction (PPI), Gene Ontology (GO), and Kyoto Encyclopedia of Genes and Genomes (KEGG) analyses. Molecular docking was performed using CB-Dock2. A total of 49 active ingredients and 53 overlapping targets were identified. Hub targets included tumor necrosis factor (TNF), interleukin-6 (IL6), interleukin-1 beta (IL1B), estrogen receptor 1 (ESR1), and prostaglandin-endoperoxide synthase 2 (PTGS2). KEGG analysis revealed interleukin-17 (IL-17), TNF, nuclear factor kappa B (NF-\u03baB), and neuroactive ligand-receptor interaction pathways. Predicted docking scores ranged from -10.1 to -6.5 kcal/mol, with stigmasterol showing the lowest predicted binding energy to cholinergic receptor muscarinic 3 (CHRM3) (-10.1 kcal/mol). These findings suggest that C. yanhusuo may exert potential anti-FMS effects through multi-component, multi-target, and multi-pathway mechanisms, particularly by modulating neuroinflammation and neurotransmitter signaling. Experimental validation is required.",
+"pubtypes": [
+"Journal Article",
+"Video-Audio Media"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"3_genetics"
+]
+}
+]
+},
+{
+"pmid": "16296359",
+"year": "2005",
+"doi": "",
+"title": "[Recent evidences in the pharmacological mechanisms of the tramadol].",
+"abstract": "Tramadol [(1R, 2R) and (1S, 2S)-2-dimethyl-amino-methyl-1-(3-methoxyphenyl) -cyclohexanol hydrochloride] has been used clinically. It binds to micro-opioid receptors with lower affinity than morphine, which suggests that the antinociceptive action of tramadol may not be due to opioid receptor binding. Several lines of evidence have shown that tramadol inhibits the reuptake of monoamines, as do antidepressant drugs such as desipramine. Tramadol inhibits the reuptake of NE and serotonin. The mechanisms of action of tramadol have not been well understood. Recently, some evidences in the mechanisms of action of tramadol have been published. Tramadol inhibits the muscarinic receptor, serotonin receptor, and nicotinic acetylcholine receptor ion-channel, suggesting these receptors might be related to the mechanisms of action of tramadol. In this review, the mechanisms of action of tramadol were reviewed form these findings. Tramadol does not alter renal blood flow (RBF) in normal rats. This suggests that tramadol would be a safe analgesic maintaining RBF during the postoperative period. It would be necessary to study the effects of tramadol on orphan G-ptotein coupled receptor which is related to the pain.",
+"pubtypes": [
+"English Abstract",
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+}
+]
+},
+{
+"pmid": "23630294",
+"year": "2013",
+"doi": "10.1073/pnas.1214696110",
+"title": "Regulator of G protein signaling 4 [corrected] is a crucial modulator of antidepressant drug action in depression and neuropathic pain models.",
+"abstract": "Regulator of G protein signaling 4 (Rgs4) is a signal transduction protein that controls the function of monoamine, opiate, muscarinic, and other G protein-coupled receptors via interactions with G\u03b1 subunits. Rgs4 is expressed in several brain regions involved in mood, movement, cognition, and addiction and is regulated by psychotropic drugs, stress, and corticosteroids. In this study, we use genetic mouse models and viral-mediated gene transfer to examine the role of Rgs4 in the actions of antidepressant medications. We first analyzed human postmortem brain tissue and found robust up-regulation of RGS4 expression in the nucleus accumbens (NAc) of subjects receiving standard antidepressant medications that target monoamine systems. Behavioral studies of mice lacking Rgs4, including specific knockdowns in NAc, demonstrate that Rgs4 in this brain region acts as a positive modulator of the antidepressant-like and antiallodynic-like actions of several monoamine-directed antidepressant drugs, including tricyclic antidepressants, selective serotonin reuptake inhibitors, and norepinephrine reuptake inhibitors. Studies using viral-mediated increases in Rgs4 activity in NAc further support this hypothesis. Interestingly, in prefrontal cortex, Rgs4 acts as a negative modulator of the actions of nonmonoamine-directed drugs that are purported to act as antidepressants: the N-methyl-D-aspartate glutamate receptor antagonist ketamine and the delta opioid agonist (+)-4-[(\u03b1R)-\u03b1-((2S,5R)-4-Allyl-2,5-dimethyl-1-piperazinyl)-3-methoxybenzyl]-N,N-diethylbenzamide. Together, these data reveal a unique modulatory role of Rgs4 in the brain region-specific actions of a wide range of antidepressant drugs and indicate that pharmacological interventions at the level of RGS4 activity may enhance the actions of such drugs used for the treatment of depression and neuropathic pain.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+}
+]
+},
+{
+"pmid": "20089882",
+"year": "2010",
+"doi": "10.1124/mol.109.057083",
+"title": "Sigma 1 receptor modulation of G-protein-coupled receptor signaling: potentiation of opioid transduction independent from receptor binding.",
+"abstract": "sigma Ligands modulate opioid actions in vivo, with agonists diminishing morphine analgesia and antagonists enhancing the response. Using human BE(2)-C neuroblastoma cells that natively express opioid receptors and human embryonic kidney (HEK) cells transfected with a cloned mu opioid receptor, we now demonstrate a similar modulation of opioid function, as assessed by guanosine 5'-O-(3-[(35)S]thio)triphosphate ([(35)S]GTP gamma S) binding, by sigma(1) receptors. sigma Ligands do not compete opioid receptor binding. Administered alone, neither sigma agonists nor antagonists significantly stimulated [(35)S]GTP gamma S binding. Yet sigma receptor selective antagonists, but not agonists, shifted the EC(50) of opioid-induced stimulation of [(35)S]GTP gamma S binding by 3- to 10-fold to the left. This enhanced potency was seen without a change in the efficacy of the opioid, as assessed by the maximal stimulation of [(35)S]GTP gamma S binding. sigma(1) Receptors physically associate with mu opioid receptors, as shown by coimmunoprecipitation studies in transfected HEK cells, implying a direct interaction between the proteins. Thus, sigma receptors modulate opioid transduction without influencing opioid receptor binding. RNA interference knockdown of sigma(1) in BE(2)-C cells also potentiated mu opioid-induced stimulation of [(35)S]GTP gamma S binding. These modulatory actions are not limited to mu and delta opioid receptors. In mouse brain membrane preparations, sigma(1)-selective antagonists also potentiated both opioid receptor and muscarinic acetylcholine receptor-mediated stimulation of [(35)S]GTP gamma S binding, suggesting a broader role for sigma receptors in modulating G-protein-coupled receptor signaling.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Extramural",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+}
+]
+},
+{
+"pmid": "13678406",
+"year": "2003",
+"doi": "10.1021/jm0301235",
+"title": "Synthesis and biological characterization of 1-methyl-1,2,5,6-tetrahydropyridyl-1,2,5-thiadiazole derivatives as muscarinic agonists for the treatment of neurological disorders.",
+"abstract": "Muscarinic agonists might be useful in the treatment of neurological disorders, including Alzheimer's disease, schizophrenia, chronic pain, and drug abuse. Previous studies identified a series of bis-1,2,5-thiadiazole derivatives of 1,2,5,6-tetrahydropyridine with high activity and selectivity for muscarinic receptors. To develop compounds with improved central nervous system penetration, several new derivatives were synthesized and characterized for muscarinic receptor binding and activity. One ligand (11) exhibited agonist activity at M(1), M(2), and M(4) receptors, a selectivity profile suggesting potential utility in the treatment of schizophrenia.",
+"pubtypes": [
+"Journal Article",
+"Research Support, U.S. Gov't, P.H.S."
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+}
+]
+},
+{
+"pmid": "11741475",
+"year": "2001",
+"doi": "10.1021/jm0102405",
+"title": "Design, synthesis, and biological characterization of bivalent 1-methyl-1,2,5,6-tetrahydropyridyl-1,2,5-thiadiazole derivatives as selective muscarinic agonists.",
+"abstract": "Selective muscarinic agonists could be useful in the treatment of neurological disorders such as Alzheimer's disease, schizophrenia, and chronic pain. Many muscarinic agonists have been developed, yet most exhibit at best limited functional selectivity for a given receptor subtype perhaps because of the high degree of sequence homology within the putative binding site, which appears to be buried within the transmembrane domains. Bivalent compounds containing essentially two agonist pharmacophores within the same molecule were synthesized and tested for receptor binding affinity and muscarinic agonist activity. A series of bis-1,2,5-thiadiazole derivatives of 1,2,5,6-tetrahydropyridine linked by an alkyloxy moiety exhibited very high affinity (K(i) < 1 nM) and strong agonist activity. The degree of activity depended on the length of the linking alkyl group, which could be replaced by a poly(ethylene glycol) moiety, resulting in improved water solubility, binding affinity, and agonist potency.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't",
+"Research Support, U.S. Gov't, P.H.S."
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"4_postmortem_imaging"
+]
+}
+]
+},
+{
+"pmid": "10780968",
+"year": "2000",
+"doi": "10.1038/sj.bjp.0703268",
+"title": "Loss of muscarinic antinociception by antisense inhibition of M(1) receptors.",
+"abstract": "The effect on cholinergic analgesia of inactivation of the M(1) gene by an antisense oligodeoxyribonucleotide (aODN) was investigated in the mouse hot plate test. Mice received a single intracerebroventricular (i.c.v.) injection of anti-M(1) aODN (0.3, 1. 0 or 2.0 nmol per injection), degenerate ODN (dODN) or vehicle on days 1, 4 and 7. A dose-dependent inhibition of the antinociception induced by the muscarinic agonists oxotremorine (0.1 mg kg(-1) s.c.) and McN-A-343 (30 microg per mouse i.c.v.) and the cholinesterase inhibitor physostigmine (0.2 mg kg(-1) s.c.) was observed 24 h after the last i.c.v. injection of aODN. Time-course experiments revealed that, after the end of the aODN treatment, sensitivity to analgesic drugs progressively appeared reaching the normal range at 96 h. The anti-M(1) aODN was selective against muscarinic antinociception since the enhancement of pain threshold produced by morphine and baclofen were not affected by the above-mentioned treatment. dODN, used as control, did not affect muscarinic antinociception. Binding studies evidenced a selective reduction of M(1) receptor levels in the hippocampus of aODN-treated mice. Neither aODN, dODN nor vehicle produced any behavioural impairment of mice as revealed by the rota-rod and Animex experiments. These results indicate that activation of M(1) muscarinic receptor subtype is fundamental to induce central cholinergic analgesia in mice.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"5_animal"
+]
+}
+]
+},
+{
+"pmid": "23701118",
+"year": "2013",
+"doi": "10.1111/1440-1681.12123",
+"title": "Muscarinic agonists in the treatment of neuropathic pain: a novel finding.",
+"abstract": "(no abstract)",
+"pubtypes": [
+"Editorial",
+"Comment"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"5_animal"
+]
+}
+]
+},
+{
+"pmid": "14607263",
+"year": "2003",
+"doi": "10.1016/j.lfs.2003.09.022",
+"title": "Novel insights into M5 muscarinic acetylcholine receptor function by the use of gene targeting technology.",
+"abstract": "Until recently, little was known about the possible physiological functions of the M(5) muscarinic acetylcholine receptor subtype, the last member of the muscarinic receptor family (M(1)-M(5)) to be cloned. To learn more about the potential physiological roles of this receptor subtype, we generated and analyzed M(5) receptor-deficient mice (M5 -/- mice). Strikingly, acetylcholine, a potent dilator of most vascular beds, virtually lost the ability to dilate cerebral arteries and arterioles in M5 -/- mice, suggesting that endothelial M(5) receptors mediate this activity in wild-type mice. This effect was specific for cerebral blood vessels, since acetylcholine-mediated dilation of extra-cerebral arteries remained fully intact in M5 -/- mice. In addition, in vitro neurotransmitter release experiments indicated that M(5) receptors located on dopaminergic nerve terminals play a role in facilitating muscarinic agonist-induced dopamine release in the striatum, consistent with the observation that the dopaminergic neurons innervating the striatum almost exclusively express the M(5) receptor subtype. We also found that the rewarding effects of morphine, the prototypical opiate analgesic, were substantially reduced in M5 -/- mice, as measured in the conditioned place preference paradigm. Furthermore, both the somatic and affective components of naloxone-induced morphine withdrawal symptoms were significantly attenuated in M5 -/- mice. It is likely that these behavioral deficits are caused by the lack of mesolimbic M(5) receptors, activation of which is known to stimulate dopamine release in the nucleus accumbens. These results convincingly demonstrate that the M(5) muscarinic receptor is involved in modulating several important pharmacological and behavioral functions. These findings may lead to novel therapeutic strategies for the treatment of drug addiction and certain cerebrovascular disorders.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"5_animal"
+]
+}
+]
+},
+{
+"pmid": "12168532",
+"year": "2002",
+"doi": "",
+"title": "Combined use of tertiary amine parasympathomimetics with a quaternary amine parasympatholitic--a new perspective to use parasympathomimetic drugs for systemic analgesia.",
+"abstract": "The interactions on antinociception between a muscarinic agonist arecoline (arec), an anticholinesterase physostigmine (physo) which both cross CNS, and a peripherally acting antimuscarinic hyoscine-N-butyl bromide (hyo), were assessed by tail flick test in mice. All drugs were administered intraperitoneally (i.p.). While hyoscine-N-butyl bromide (0.15 and 4.00 mg/kg, i.p.) did not produce antinociception, physostigmine salicylate (0.3 mg/kg, i.p.) and arecoline hydrobromide (8.00 mg/kg, i.p.) exerted significant antinociceptive effect. In combined applications, physo + hyo (0.075 + 0.15; 0.15 + 0.30; 0.30 + 0.60 mg/kg) and arec + hyo (1.00 + 0.50; 2.00 + 1.00; 4.00 + 2.00; 8.00 + 4.00 mg/kg), respectively, produced significant antinociception and the tail flick latencies produced by physo 0.30 + hyo 0.60 mg/kg and arec 8.00 + hyo 4.00 mg/kg were not significantly different from those of physo 0.30 mg/kg and arec 8.00 mg/kg, respectively, showing that hyo did not antagonise the antinociceptive effects of physo and arec. We believe that combining an centrally acting cholinergic drug applied systemically with a peripherally acting (quaternary amine) antimuscarinic compound might be used as an effective analgesic in clinical practice.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"5_animal"
+]
+}
+]
+},
+{
+"pmid": "9431549",
+"year": "1997",
+"doi": "",
+"title": "Nitric oxide synthase inhibitors enhance the antinociceptive effects of oxotremorine in mice.",
+"abstract": "Recent studies suggested that the L-arginine/nitric oxide (NO)/cyclic GMP pathway is involved in the modulation of pain perception. The present experiments were undertaken to find out the role of this pathway in the antinociception induced by oxotremorine administration. Male mice of the CD-1 strain were injected with different doses of the muscarinic agonist oxotremorine (0.005, 0.01, 0.02, 0.03 mg/kg i.p.) 5 min after the administration of saline solution or the inhibitors of NO synthase NG-nitro-L-arginine methyl ester (L-NAME: 10 and 20 mg/kg, i.p.) or NG-nitro-L-arginine (N-ARG: 10 and 20 mg/kg i.p.). Oxotremorine induced a dose- and time-dependent analgesic effect in mice, which was significantly increased by L-NAME and N-ARG administration. Either doses of the NO inhibitors given alone had no effect on the nociceptive threshold. The present results show a role of NO in the antinociception mediated by the muscarinic receptor stimulation and suggest that it exerts an inhibitory action on cholinergic analgesia.",
+"pubtypes": [
+"Journal Article",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"5_animal"
+]
+}
+]
+},
+{
+"pmid": "9152396",
+"year": "1997",
+"doi": "",
+"title": "M1 receptor agonist activity is not a requirement for muscarinic antinociception.",
+"abstract": "The analgesic effects of a series of muscarinic agonists were investigated by use of the mouse acetic acid writhing, grid-shock, hot-plate and tail-flick tests. The compounds tested were oxotremorine, pilocarpine, arecoline, aceclidine, RS86 and four 3-3(substituted-1,2,5-thiadiazol-4-yl)-1,2,5,6-tetrahy-dro-1 -methyl pyridines (substituted TZTP), these being propoxy-TZTP, 3-Cl-propylthio-TZTP, xanomeline (hexyloxy-TZTP) and hexylthio-TZTP. These agonists were also assayed for their ability to displace [3H]oxotremorine-M and [3H]pirenz-epine binding and for their functional selectivity at pharmaco-logic M1, M2 and M3 receptors. These compounds all produced dose-dependent antinociceptive effects in all of the mouse analgesia tests. The effects of oxotremorine in the writhing test were fully antagonized by the muscarinic antagonist scopolamine (0.1 mg/kg), but only partially antagonized by methsco-polamine (10 mg/kg) and unaffected by the opioid antagonist naltrexone. 3-Cl-propylthio-TZTP and propoxy-TZTP had virtually no effect at the M1 receptor subtype as measured by the human m1 clone expressed in baby hamster kidney cells or the rabbit vas deferens assay. These compounds, however, were more potent in the analgesia tests than the selective M1 agonists xanomeline and hexylthio-TZTP. These data suggest that muscarinic analgesia is mediated by central muscarinic receptors. However, activity at the M1 receptor subtype is not a requirement for antinociceptive activity.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "18537768",
+"year": "2008",
+"doi": "10.2174/157488908784534621",
+"title": "Muscarinic acetylcholine receptors: new potential therapeutic targets in antinociception and in cancer therapy.",
+"abstract": "The presence and function of muscarinic receptor subtypes both in neuronal and non-neuronal cells have been demonstrated using extensive pharmacological data emerging from studies on transgenic mice. Acetylcholine, in fact is synthesized not only in the nervous system but also in other tissues where its local action contributes to the modulation of various cell functions (e.g. survival, proliferation). The possible involvement of acetylcholine and muscarinic receptors in different pathologies has been proposed in recent years and is becoming an important area of study. Although the lack of selective muscarinic receptor ligands has for a long time limited the definition of therapeutic treatment based on muscarinic receptors as targets, some muscarinic ligands such as cevimeline (patents US4855290; US5571918) or xanomeline (patent, US5980933) have been developed and used in pre-clinical or in clinical studies for the treatment of nervous system diseases (Alzheimer and Sjogren's diseases). This review will focus on the potential implications of muscarinic receptors in tumour progression and in nociception and the future use of muscarinic ligands in therapeutic protocols in cancer therapy will be discussed, considering that some muscarinic antagonists currently used in the treatment of genitourinary disease (e.g. darifenacin,; patent, US5096890; US6106864 ) have also been demonstrated to arrest tumour progression in nude mice. Moreover muscarinic agonists such as vedaclidine, CMI- 936 and CMI-1145 have been demonstrated to have analgesic effects, in animal models comparable or more pronounced to those produced by morphine or opiates.",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "22018972",
+"year": "2011",
+"doi": "10.1016/j.pain.2011.09.017",
+"title": "The M1/M4 preferring agonist xanomeline is analgesic in rodent models of chronic inflammatory and neuropathic pain via central site of action.",
+"abstract": "The role of muscarinic receptor subtype-1 (M1) in chronic pain is unclear. In an attempt to gain an understanding of its role, we have tested xanomeline, an M1/M4-preferring agonist, together with nonselective (scopolamine and pirenzepine), and selective (MT-7 and MT-3) muscarinic receptor (M1 and M4, respectively) antagonists in a number of inflammatory and neuropathic pain models. Xanomeline potently and effectively reversed tactile allodynia and heat hyperalgesia associated with established neuropathic and inflammatory pain in both rat and mouse models. Scopolamine and pirenzepine completely blocked the analgesic response to xanomeline, confirming that the analgesic effect is mediated by the muscarinic system. The highly selective M1 receptor toxin, MT-7, almost completely abolished the analgesic response to xanomeline when administered supraspinally. However, the highly selective M4 receptor toxin, MT-3, only marginally reversed the analgesia when given supraspinally, and had no effect when given spinally. In conclusion, the data presented show that the nonselective muscarinic agonist xanomeline is analgesic in models of persistent pain and suggest that the activation of supraspinal M1 receptors, and to a lesser extent supraspinal M4 receptors, contributes to that analgesia.",
+"pubtypes": [
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "23597304",
+"year": "2013",
+"doi": "10.2174/1574889811308020003",
+"title": "New pharmacological approaches to the cholinergic system: an overview on muscarinic receptor ligands and cholinesterase inhibitors.",
+"abstract": "The cholinergic system is expressed in neuronal and in non-neuronal tissues. Acetylcholine (ACh), synthesized in and out of the nervous system can locally contribute to modulation of various cell functions (e.g. survival, proliferation). Considering that the cholinergic system and its functions are impaired in a number of disorders, the identification of new pharmacological approaches to regulate cholinergic system components appears of great relevance. The present review focuses on recent pharmacological drugs able to modulate the activity of cholinergic receptors and thereby, cholinergic function, with an emphasis on the muscarinic receptor subtype, and additionally covers the cholinesterases, the main enzymes involved in ACh hydrolysis. The presence and function of muscarinic receptor subtypes both in neuronal and non-neuronal cells has been demonstrated using extensive pharmacological data emerging from studies on transgenic mice. The possible involvement of ACh in different pathologies has been proposed in recent years and is becoming an important area of study. Although the lack of selective muscarinic receptor ligands has for a long time limited the definition of therapeutic treatment based on muscarinic receptors as targets, some muscarinic ligands such as cevimeline (patents US4855290; US5571918) or xanomeline (patent, US5980933) have been developed and used in pre-clinical or in clinical studies for the treatment of nervous system diseases (Alzheimer' and Sjogren's diseases). The present review focuses on the potential implications of muscarinic receptors in different pathologies, including tumors. Moreover, the future use of muscarinic ligands in therapeutic protocols in cancer therapy will be discussed, considering that some muscarinic antagonists currently used in the treatment of genitourinary disease (e.g. darifenacin, patent, US5096890; US6106864) have also been demonstrated to arrest tumor progression in nude mice. The involvement of muscarinic receptors in nociception also is over-viewed. In fact, muscarinic agonists such as vedaclidine, CMI-936 and CMI-1145 have been demonstrated to have analgesic effects in animal models comparable or more pronounced to those produced by morphine or opiates. Likewise, the crucial role of cholinesterases (acetylcholinesterase and butirylcholinesterase) in neural transmission is discussed, as large number of drugs inhibiting cholinesterase activity have become of increasing relevance particularly for the treatment of neurodegenerative disorders. Herein we summarize the current knowledge of the cholinesterase inhibitors with particular attention to recent patents for Alzheimer's disease drugs.",
+"pubtypes": [
+"Journal Article",
+"Research Support, N.I.H., Intramural",
+"Research Support, Non-U.S. Gov't",
+"Review"
+],
+"screen_for": [
+{
+"condition": "chronic_pain",
+"label": "Chronic pain",
+"query_bucket": [
+"6_clinical_obs"
+]
+}
+]
+},
+{
+"pmid": "16197355",
+"year": "2005",
+"doi": "10.1517/14656566.6.12.2007",
+"title": "Pharmacological testing of anisocoria.",
+"abstract": "Anisocoria, or a difference in pupil size, is a common condition. Its aetiology ranges from benign to life-threatening conditions. The clinical evaluation of anisocoria is discussed, emphasising the pharmacological aids (e.g., cocaine 10% eye drops, hydroxyamphetamine eye drops, pilocarpine 0.1% eye drops, pilocarpine 1% eye drops, apraclonidine) used in differentiating the different causes of anisocoria (e.g., physiological anisocoria, Horner syndrome, Adie pupil, pharmacological anisocoria, third nerve palsy).",
+"pubtypes": [
+"Journal Article",
+"Review"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1a_human_agonist"
+]
+}
+]
+},
+{
+"pmid": "2330117",
+"year": "1990",
+"doi": "10.1212/wnl.40.5.847",
+"title": "Loss of facial sweating and flushing in Holmes-Adie syndrome.",
+"abstract": "We investigated pupillary responses to parasympathetic (pilocarpine) and sympathetic agents (tyramine, cocaine, and phenylephrine) in a 51-year-old woman with tonic pupils, loss of muscle stretch reflexes in the limbs, and hemifacial loss of sweating and flushing (Ross' syndrome). A smaller pupillary response to tyramine and cocaine eyedrops on the symptomatic side indicated that outflow was disrupted in the postganglionic section of the ocular sympathetic pathway. A greater response to phenylephrine eyedrops on this side was consistent with denervation supersensitivity to adrenergic agents. Loss of thermoregulatory sweating and flushing and emotional blushing in the forehead, cheek, and chin indicated that sympathetic disruption was proximal to the bifurcation of the common carotid artery, probably in the superior cervical ganglion. A similar degenerative process may be responsible for loss of muscle stretch reflexes, tonic pupils, and other autonomic disturbances in Ross' syndrome.",
+"pubtypes": [
+"Case Reports",
+"Journal Article",
+"Research Support, Non-U.S. Gov't"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1a_human_agonist"
+]
+}
+]
+},
+{
+"pmid": "2729817",
+"year": "1989",
+"doi": "",
+"title": "Pupil responsiveness in diabetes mellitus.",
+"abstract": "The authors compared pupil responsiveness to light, convergence, and the effects of topical cocaine 4%, epinephrine 1%, phenylephrine 1%, homatropine 10%, and pilocarpine 1% in a group of 62 diabetics with a sex- and age-matched group of normal subjects. The duration of disease, metabolic control, and type of diabetes mellitus, the presence and severity of diabetic retinopathy, and evidence of systemic vegetative neuropathy were considered. It was found that sympathetic denervation was related significantly to the duration of disease and to the development of systemic autonomic neuropathy. There were also signs of iris myopathy in the pupil alterations of long-standing diabetics, explaining the poor pupil responsiveness to mydriatics occasionally found in these patients. Pupillary autonomic diabetic neuropathy should be considered an early and major sign of the development of systemic vegetative diabetic disease.",
+"pubtypes": [
+"Comparative Study",
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1a_human_agonist"
+]
+}
+]
+},
+{
+"pmid": "22732119",
+"year": "2012",
+"doi": "10.1016/j.oftal.2012.04.012",
+"title": "[Everyday anisocoria: anisocoria epidemiology in a secondary care setting].",
+"abstract": "[OBJECTIVE] [corrected] To determine the relative importance of the different forms of anisocoria in a General Hospital. [METHODS] A prospective, longitudinal study was conducted including all patients referred for this reason to the Neuro-Ophthalmology Unit of the Henares University Hospital, Madrid (Spain), from November 2008 to October 2011. The differences in pupil diameter were studied under high and low luminosity. The patients were given a full ophthalmological examination, as well as performing the apraclonidine, cocaine, pilocarpine 0.125% and pilocarpine 2% tests, if they were considered necessary. [RESULTS] Thirty-two cases of anisocoria were referred during the three years of the study. No relationship was found with age or gender. The diagnostic results were: Adie's pupil, 4 cases; Horner syndrome, 5 cases; benign episodic unilateral mydriasis, 3 cases; local causes, 4 cases; physiological anisocoria, 5 cases. Despite a full clinical history and examination, the cause of the anisocoria could not be determined in 11 cases. In 4 of these cases, the patient suffered from migraines and in another 4 psychotropic drugs were taken. Both risk factors were present in 3 cases. In one case the anisocoria was the initial clue that led to the diagnosis of a cervical paraganglioma. [CONCLUSIONS] Anisocoria is a clinical sign that does not usually signify a serious disease. With our protocols, a high number of anisocoria cases are still of unknown origin. Migraines and psychotropic drugs could be linked to these forms of anisocoria.",
+"pubtypes": [
+"English Abstract",
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1a_human_agonist"
+]
+}
+]
+},
+{
+"pmid": "937427",
+"year": "1976",
+"doi": "10.1016/0002-9394(76)90356-1",
+"title": "Ocular manifestations of acute pandysautonomia.",
+"abstract": "A 33-year-old white man developed premature presbyopia and anisocoria as initial manifestations of acute pandysautonomia. Nine months later signs and symptoms of generalized, severe autonomic dysfunction developed, and six years later only paralysis of pupillary reactions, presbyopia, and orthostatic hypotension were unresolved. Pharmacologic testing of the pupils demonstrated no mydriasis to cocaine 4% or hydroxyamphetamine 1% and hypersensitivity to epinephrine 0.1%, methacholine 2.5%, and pilocarpine 0.0625%, suggesting the presence of sympathetic and parasympathetic, postganglionic blockage of autonomic innervation of the iris.",
+"pubtypes": [
+"Case Reports",
+"Journal Article"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1a_human_agonist"
+]
+},
+{
+"condition": "hypothyroidism",
+"label": "Hypothyroidism (neg. control)",
+"query_bucket": [
+"1a_human_agonist"
+]
+}
+]
+},
+{
+"pmid": "39432105",
+"year": "2024",
+"doi": "10.1007/s00213-024-06696-5",
+"title": "Exploring the efficacy of cholinergic agents for the treatment of psychostimulant use disorder: a systematic review.",
+"abstract": "[RATIONALE] No drugs are currently validated to treat psychostimulant use disorder (PUD). Pathophysiological studies consistently highlight the contribution of cholinergic mechanisms in psychostimulant use, including the vulnerability to PUD, paving the way for potential therapeutic strategies. [OBJECTIVES] The aim of this systematic review is to describe and discuss the efficacy of cholinergic agents in drug trials for patients with PUD. [METHODS] A systematic review was conducted on April 4, 2024 in MedLine, Embase and Cochrane Library databases on controlled clinical drug trial of cholinergic agents in humans with PUD, psychostimulant abuse or dependence and psychostimulant use in recent year. [RESULTS] Twenty-eight articles were included, twenty-one on cocaine and seven on amphetamines. Cholinergic agents used in these studies were biperiden (a muscarinic antagonist), mecamylamine (a nicotinic antagonist), nicotinic agonists, acetylcholinesterase inhibitors (AChEI), or citicoline. Two types of trials were identified. There were seventeen randomized controlled clinical trials evaluating cholinergic agents on psychostimulant use reduction in outpatients seeking treatment. Additionally, we retrieved eleven short-term \u00abproof-of-concept\u00bb laboratory trials mainly with supervised psychostimulant administration and/or triggered craving challenges. Outpatient trials were heterogeneous and for most, inconclusive. Only two studies on galantamine (AChEI) and citicoline, reported a significant reduction of cocaine consumption. \u00abProof-of-concept\u00bb laboratory trials showed no evidence of efficacy on the selected outcomes, notably on craving. [CONCLUSIONS] This review does not support the current prescription of cholinergic agents to treat PUD. Replication clinical trials notably on galantamine or other AChEI, and proof-of-concept trials on comedown symptoms will be necessary to identify a potential therapeutic indication for cholinergic agents in PUD.",
+"pubtypes": [
+"Journal Article",
+"Systematic Review"
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+},
+{
+"pmid": "31430484",
+"year": "2019",
+"doi": "10.1016/j.pbb.2019.172758",
+"title": "Rivastigmine does not alter cocaine-induced subjective effects or self-administration.",
+"abstract": "[BACKGROUND] Acetylcholinergic (ACh) neurons interface with the mesolimbic dopamine pathway implicated in addiction, and acetylcholinesterase inhibitors (AChEis) have been shown to reduce the immediate effects of cocaine and amount used. Our study is the first to examine if the safe and low-interaction AChEi rivastigmine (riv) alters the subjective effects produced by cocaine administration. [METHODS] Cocaine-dependent subjects were randomized to daily placebo, riv 3\u202fmg, or riv 6\u202fmg, administered inpatient for 10\u202fdays. On day 1 (pre-dose) and day 9, subjects received both IV cocaine 40\u202fmg or placebo in a randomized order with subsequent serial assessments of visual analog scale (VAS) subjective effects and pharmacokinetic measurements. On day 10 all participants received one baseline dose of cocaine 20\u202fmg with assessment of subjective effects, and were then able to purchase additional doses at 15\u202fmin intervals with study earnings. [RESULTS] 40 subjects were randomized to placebo (n\u202f=\u202f16), riv 3\u202fmg (n\u202f=\u202f13), or riv 6\u202fmg (n\u202f=\u202f12). All subjects completed the study and there were no demographic differences between treatment groups. Pre- and post- treatment, there were no significant pharmacokinetic differences (blood levels of cocaine, BE, EME) following cocaine administration. In a two-way ANOVA, IV cocaine significantly increased positive VAS category ratings compared to placebo, but rivastigmine treatment at either dose had no significant effect on any VAS category ratings. Similarly, there was no significant rivastigmine effect on any category in the day 10 cocaine administration, and no effect on number of subsequent doses participants purchased. [CONCLUSION] Rivastigmine 3 or 6\u202fmg had no significant effect on the subjective effects of cocaine after 9\u202fdays of treatment. This is an important finding as other drugs in the AChEi class (donepezil, Huperzine A) have produced significant results, but differ in their receptor specificity and PK parameters.",
+"pubtypes": [
+"Journal Article",
+"Randomized Controlled Trial",
+"Research Support, N.I.H., Extramural",
+"Research Support, U.S. Gov't, Non-P.H.S."
+],
+"screen_for": [
+{
+"condition": "cocaine",
+"label": "Cocaine use disorder",
+"query_bucket": [
+"1b_human_chei"
+]
+}
+]
+}
+]
