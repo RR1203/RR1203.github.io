@@ -1,0 +1,127 @@
+---
+title: "Cobenfy trial vs label: figures"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 9, fig.height = 7)
+```
+
+# 00. SETUP
+
+```{r s00}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+
+# Options
+theme_set(theme_classic(base_size = 13))
+status_colors <- c(
+  "Listed (6.1 Table 1)" = "#2a78d6",
+  "Listed (6.1 text, not Table 1)" = "#1baf7a",
+  "Mentioned elsewhere" = "#eb6834",
+  "Missing" = "#eda100"
+)
+status_shapes <- c(
+  "Listed (6.1 Table 1)" = 16,
+  "Listed (6.1 text, not Table 1)" = 15,
+  "Mentioned elsewhere" = 17,
+  "Missing" = 18
+)
+```
+
+# H3. FOREST PLOT OF GROUPED TERMS (POOLED EMERGENT-1/2/3)
+
+```{r h3_figure}
+################################################################################
+# H3. Forest plot: grouped terms, risk difference, label status
+################################################################################
+
+# Grouped terms with label status (clinical groups only; label-footnote groups excluded)
+h3_df <- read_excel("data/h3_screen_results.xlsx", sheet = "group") %>%
+  filter(!str_detect(group, "^Label:")) %>%
+  mutate(
+    label_status = factor(label_status, levels = names(status_colors)),
+    group_label = paste0(group, "  (", round(pct_active, 1), "% vs ", round(pct_placebo, 1), "%)"),
+    group_label = fct_reorder(group_label, rd_pct)
+  )
+print(select(h3_df, group, label_status, pct_active, pct_placebo, rd_pct, rd_lo_pct, rd_hi_pct))
+
+h3_figure_forest <- ggplot(h3_df, aes(x = rd_pct, y = group_label, colour = label_status, shape = label_status)) +
+  geom_vline(xintercept = 0, colour = "grey60") +
+  geom_errorbarh(aes(xmin = rd_lo_pct, xmax = rd_hi_pct), height = 0, linewidth = 0.8) +
+  geom_point(size = 3) +
+  scale_colour_manual(values = status_colors, drop = FALSE, name = "US label status") +
+  scale_shape_manual(values = status_shapes, drop = FALSE, name = "US label status") +
+  labs(
+    x = "Risk difference, Cobenfy minus placebo (percentage points, MH 95% CI)",
+    y = NULL,
+    title = "Grouped adverse events, pooled 5-week placebo-controlled trials",
+    subtitle = "EMERGENT-1/2/3, ClinicalTrials.gov results; trials not reporting a term omitted for that term"
+  ) +
+  theme(legend.position = "bottom", legend.direction = "vertical", plot.title.position = "plot")
+print(h3_figure_forest)
+```
+
+# H4. FAERS REPORTING ODDS RATIOS (GROUPED TERMS)
+
+```{r h4_figure}
+################################################################################
+# H4. Forest plot: FAERS ROR vs newer antipsychotics, grouped terms
+################################################################################
+
+h4_df <- read_excel("data/h4_faers_results.xlsx", sheet = "faers") %>%
+  filter(level == "group", !str_detect(event, "^Label:"), a_newer >= 3, c_newer >= 1) %>%
+  left_join(
+    read_excel("data/clean_trials.xlsx", sheet = "term_groups") %>%
+      left_join(read_excel("data/clean_trials.xlsx", sheet = "label_status"), by = "meddra_pt") %>%
+      group_by(group) %>%
+      summarise(
+        label_status = case_when(
+          any(label_status == "Listed (6.1 Table 1)") ~ "Listed (6.1 Table 1)",
+          any(label_status == "Listed (6.1 text, not Table 1)") ~ "Listed (6.1 text, not Table 1)",
+          any(str_detect(label_status, "Mentioned")) ~ "Mentioned elsewhere",
+          TRUE ~ "Missing"
+        ),
+        .groups = "drop"
+      ),
+    by = c("event" = "group")
+  ) %>%
+  mutate(
+    label_status = factor(label_status, levels = names(status_colors)),
+    event_label = paste0(event, "  (n = ", a_newer, ")"),
+    event_label = fct_reorder(event_label, ror_newer)
+  )
+print(select(h4_df, event, label_status, a_newer, ror_newer, ror_lo_newer, ror_hi_newer, ror_lo_newer_hcp, confirmed_faers))
+
+h4_figure_forest <- ggplot(h4_df, aes(x = ror_newer, y = event_label, colour = label_status, shape = label_status)) +
+  geom_vline(xintercept = 1, colour = "grey60") +
+  geom_errorbarh(aes(xmin = ror_lo_newer, xmax = ror_hi_newer), height = 0, linewidth = 0.8) +
+  geom_point(size = 3) +
+  scale_x_log10() +
+  scale_colour_manual(values = status_colors, drop = FALSE, name = "US label status") +
+  scale_shape_manual(values = status_shapes, drop = FALSE, name = "US label status") +
+  labs(
+    x = "ROR vs lumateperone, brexpiprazole, cariprazine (95% CI, log scale)",
+    y = NULL,
+    title = "FAERS 2024Q3-2026Q3, deduplicated, Cobenfy as suspect drug",
+    subtitle = "n = Cobenfy reports with the event; groups with at least 3 Cobenfy and 1 comparator report"
+  ) +
+  theme(legend.position = "bottom", legend.direction = "vertical", plot.title.position = "plot")
+print(h4_figure_forest)
+```
+
+# SAVE
+
+```{r save}
+################################################################################
+# SAVE
+################################################################################
+
+ggsave("figures/forest_grouped_terms_trials.png", h3_figure_forest, width = 9, height = 7, dpi = 200)
+ggsave("figures/forest_grouped_terms_faers.png", h4_figure_forest, width = 9, height = 7, dpi = 200)
+```

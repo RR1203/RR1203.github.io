@@ -1,0 +1,12 @@
+,value
+quarters,"['2024q3', '2024q4', '2025q1', '2025q2', '2025q3', '2025q4', '2026q1', '2026q2', '2026q3']"
+demo_rows_all,3674893
+unique_caseids,3238161
+deleted_caseids_matched,14555
+cases_after_dedup_and_deletion,3223606
+ap_cases,130953
+cobenfy_suspect_cases,2841
+cobenfy_any_cases,2881
+newer_comparator_cases,10060
+all_ap_comparator_cases,99237
+case_pt_rows,597627

@@ -1,0 +1,778 @@
+---
+title: "Cobenfy: trial adverse events vs US label vs FAERS"
+output:
+  html_document:
+    toc: true
+    df_print: paged
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# 00. SETUP
+
+```{r s00}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+library(writexl)
+
+# Options
+options(scipen = 999, width = 200, dplyr.print_max = 200, tibble.width = Inf)
+set.seed(1234)
+```
+
+# 01. DATA CLEANING
+
+```{r s01_trials}
+################################################################################
+# 01. DATA CLEANING: trials
+################################################################################
+
+# Raw extraction (built by scripts/04_build_long.py from raw/)
+trial_raw <- read_csv("trial_ae_long.csv", show_col_types = FALSE)
+print(nrow(trial_raw))
+print(count(trial_raw, source))
+
+# ClinicalTrials.gov rows only (patient counts per arm)
+ctgov <- trial_raw %>%
+  filter(source == "ClinicalTrials.gov")
+print(nrow(ctgov))
+
+# Harmonise terms to MedDRA preferred terms
+ctgov <- ctgov %>%
+  mutate(
+    pt = case_when(
+      term_as_written == "Gamma-Glutamyltransferase increased" ~ "Gamma-glutamyltransferase increased",
+      TRUE ~ term_as_written
+    )
+  )
+
+# Arm roles: placebo-controlled double-blind arms and open-label arms
+ctgov <- ctgov %>%
+  mutate(
+    arm_role = case_when(
+      arm %in% c("KarXT", "Double-Blind Part: KarXT") & study %in% c("EMERGENT-1", "EMERGENT-2", "EMERGENT-3", "UNITE-001 (China)", "ARISE") ~ "active",
+      arm %in% c("Placebo", "Double-Blind Part: Placebo") ~ "placebo",
+      TRUE ~ "open_label"
+    )
+  )
+print(count(ctgov, study, arm, arm_role, n_arm))
+
+# Patients per study-arm-PT ('other' + 'serious' summed; overlap assumed negligible)
+trial_pt <- ctgov %>%
+  filter(arm_role %in% c("active", "placebo")) %>%
+  group_by(study, arm_role, n_arm, pt) %>%
+  summarise(n_patients = sum(n_patients), .groups = "drop")
+print(nrow(trial_pt))
+
+# Open-label arms (long-term studies and open-label parts)
+ol_pt <- ctgov %>%
+  filter(arm_role == "open_label") %>%
+  group_by(study, arm, n_arm, pt) %>%
+  summarise(n_patients = sum(n_patients), .groups = "drop")
+print(nrow(ol_pt))
+
+# Reporting threshold per study
+thresholds <- ctgov %>%
+  distinct(study, source_location) %>%
+  mutate(threshold_pct = as.numeric(str_extract(source_location, "(?<=threshold )[0-9.]+"))) %>%
+  distinct(study, threshold_pct)
+print(thresholds)
+
+# Label Table 1 percentages (EMERGENT-2 + EMERGENT-3 pooled)
+label_table1 <- trial_raw %>%
+  filter(str_detect(source, "US label")) %>%
+  mutate(
+    arm_role = if_else(arm == "COBENFY", "active", "placebo"),
+    label_term = case_when(
+      term_as_written == "Dyspepsiaa" ~ "Dyspepsia",
+      term_as_written == "Hypertensionb" ~ "Hypertension",
+      term_as_written == "Abdominal Painc" ~ "Abdominal Pain",
+      term_as_written == "Tachycardiad" ~ "Tachycardia",
+      term_as_written == "Coughe" ~ "Cough",
+      term_as_written == "Extrapyramidal symptoms (EPS), non-akathisiaf" ~ "Extrapyramidal symptoms (EPS), non-akathisia",
+      TRUE ~ term_as_written
+    )
+  ) %>%
+  select(label_term, arm_role, pct_reported)
+print(label_table1)
+
+# Term groups and label status
+term_groups <- read_csv("term_groups.csv", show_col_types = FALSE)
+label_status <- read_csv("label_status.csv", show_col_types = FALSE)
+print(nrow(term_groups))
+print(count(label_status, label_status))
+
+# Save clean trial data
+write_xlsx(
+  list(
+    trial_pt = trial_pt,
+    ol_pt = ol_pt,
+    thresholds = thresholds,
+    label_table1 = label_table1,
+    term_groups = term_groups,
+    label_status = label_status,
+    paper_rows = filter(trial_raw, source != "ClinicalTrials.gov", !str_detect(source, "US label"))
+  ),
+  "data/clean_trials.xlsx"
+)
+```
+
+```{r s01_faers}
+################################################################################
+# 01. DATA CLEANING: FAERS
+################################################################################
+
+# Deduplicated antipsychotic reports (built by scripts/07-08 from the FAERS quarterly files)
+faers_cases <- read_csv("data/faers_cases.csv.gz", show_col_types = FALSE, col_types = cols(.default = "c"))
+faers_case_pt <- read_csv("data/faers_case_pt.csv.gz", show_col_types = FALSE, col_types = cols(.default = "c"))
+print(read_csv("data/faers_dedup_log.csv", show_col_types = FALSE))
+print(nrow(faers_cases))
+
+# Logical flags
+faers_cases <- faers_cases %>%
+  mutate(across(c(cobenfy_suspect, cobenfy_any, newer_ap_suspect, other_ap_suspect, hcp), ~ .x == "True"))
+
+# Exposure groups: Cobenfy suspect vs comparator suspect without Cobenfy in any role
+faers_clean <- faers_cases %>%
+  mutate(
+    grp_newer = case_when(
+      cobenfy_suspect ~ "cobenfy",
+      newer_ap_suspect & !cobenfy_any ~ "comparator",
+      TRUE ~ NA_character_
+    ),
+    grp_all = case_when(
+      cobenfy_suspect ~ "cobenfy",
+      other_ap_suspect & !cobenfy_any ~ "comparator",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  select(primaryid, quarter, occp_cod, hcp, grp_newer, grp_all)
+print(count(faers_clean, grp_newer))
+print(count(faers_clean, grp_all))
+print(count(filter(faers_clean, hcp), grp_newer))
+
+# Save clean FAERS data (csv.gz: too many rows for a practical Excel file)
+write_csv(faers_clean, "data/faers_clean_cases.csv.gz")
+write_csv(faers_case_pt, "data/faers_clean_case_pt.csv.gz")
+```
+
+# H1. POSITIVE AND NEGATIVE CONTROLS
+
+## H1.1 Data preparation
+
+```{r h1_1}
+################################################################################
+# H1.1 Data preparation
+################################################################################
+
+# Label pool: EMERGENT-2 + EMERGENT-3 (the two studies behind label Table 1)
+h1_df <- read_excel("data/clean_trials.xlsx", sheet = "trial_pt") %>%
+  filter(study %in% c("EMERGENT-2", "EMERGENT-3"))
+
+h1_n <- h1_df %>%
+  distinct(study, arm_role, n_arm) %>%
+  group_by(arm_role) %>%
+  summarise(n = sum(n_arm), .groups = "drop")
+print(h1_n)
+
+h1_label <- read_excel("data/clean_trials.xlsx", sheet = "label_table1")
+print(nrow(h1_label))
+```
+
+## H1.2 Analysis
+
+```{r h1_2}
+################################################################################
+# H1.2 Analysis
+################################################################################
+
+# Crude pooled % per arm for the positive controls (unreported in a trial = 0 events)
+h1_controls <- tibble(
+  pt = c("Nausea", "Constipation", "Dyspepsia", "Vomiting", "Urinary retention"),
+  label_term = c("Nausea", "Constipation", "Dyspepsia", "Vomiting", NA)
+)
+
+h1_pipeline <- h1_df %>%
+  filter(pt %in% h1_controls$pt) %>%
+  group_by(pt, arm_role) %>%
+  summarise(events = sum(n_patients), .groups = "drop") %>%
+  right_join(expand_grid(pt = h1_controls$pt, arm_role = c("active", "placebo")), by = c("pt", "arm_role")) %>%
+  mutate(events = replace_na(events, 0)) %>%
+  left_join(h1_n, by = "arm_role") %>%
+  mutate(pct_pipeline = 100 * events / n)
+
+h1_check <- h1_pipeline %>%
+  left_join(h1_controls, by = "pt") %>%
+  left_join(h1_label, by = c("label_term", "arm_role")) %>%
+  mutate(
+    pct_label = as.numeric(str_remove(pct_reported, "<")),
+    abs_diff = abs(pct_pipeline - pct_label),
+    within_1pp = abs_diff <= 1
+  )
+print(h1_check)
+
+# Urinary retention: label 6.1 text gives 0.8% vs 0.4% (grouped: urinary hesitation, dysuria, urinary retention)
+print(filter(h1_df, pt %in% c("Urinary retention", "Urinary hesitation", "Dysuria")))
+```
+
+## H1.3 Robustness
+
+```{r h1_3}
+################################################################################
+# H1.3 Robustness
+################################################################################
+
+# All label Table 1 rows that map to a single PT reported in ClinicalTrials.gov
+h1_all_rows <- h1_df %>%
+  group_by(pt, arm_role) %>%
+  summarise(events = sum(n_patients), .groups = "drop") %>%
+  left_join(h1_n, by = "arm_role") %>%
+  mutate(pct_pipeline = 100 * events / n) %>%
+  inner_join(
+    h1_label %>% mutate(pt = recode(label_term, "Diarrhea" = "Diarrhoea", "Gastroesophageal reflux disease" = "Gastrooesophageal reflux disease")),
+    by = c("pt", "arm_role")
+  ) %>%
+  mutate(
+    pct_label = as.numeric(str_remove(pct_reported, "<")),
+    abs_diff = abs(pct_pipeline - pct_label),
+    within_1pp = abs_diff <= 1
+  )
+print(h1_all_rows)
+```
+
+# H2. POOLED 5-WEEK PLACEBO-CONTROLLED TRIALS
+
+## H2.1 Data preparation
+
+```{r h2_1}
+################################################################################
+# H2.1 Data preparation
+################################################################################
+
+# EMERGENT-1/2/3, wide format: a = active events, c = placebo events
+h2_df <- read_excel("data/clean_trials.xlsx", sheet = "trial_pt") %>%
+  filter(study %in% c("EMERGENT-1", "EMERGENT-2", "EMERGENT-3"))
+
+h2_n <- h2_df %>%
+  distinct(study, arm_role, n_arm) %>%
+  pivot_wider(names_from = arm_role, values_from = n_arm, names_prefix = "n_")
+print(h2_n)
+
+h2_wide <- h2_df %>%
+  select(study, arm_role, pt, n_patients) %>%
+  pivot_wider(names_from = arm_role, values_from = n_patients, values_fill = 0) %>%
+  rename(a = active, c = placebo) %>%
+  left_join(h2_n, by = "study")
+print(nrow(h2_wide))
+
+# Grouped terms: sum of member PTs within study-arm, capped at n
+h2_groups <- read_excel("data/clean_trials.xlsx", sheet = "term_groups")
+
+h2_group_wide <- h2_wide %>%
+  inner_join(h2_groups, by = c("pt" = "meddra_pt"), relationship = "many-to-many") %>%
+  group_by(study, group, n_active, n_placebo) %>%
+  summarise(
+    a_sum = sum(a), c_sum = sum(c),
+    a_max = max(a), c_max = max(c),
+    members = paste(pt, collapse = "; "),
+    .groups = "drop"
+  ) %>%
+  mutate(a = pmin(a_sum, n_active), c = pmin(c_sum, n_placebo))
+print(nrow(h2_group_wide))
+```
+
+## H2.2 Analysis
+
+```{r h2_2}
+################################################################################
+# H2.2 Analysis
+################################################################################
+
+# Mantel-Haenszel risk difference by PT (stratified by trial, available-case,
+# Greenland-Robins/Sato variance, no continuity correction)
+h2_pooled_pt <- h2_wide %>%
+  mutate(
+    w = n_active * n_placebo / (n_active + n_placebo),
+    num = (a * n_placebo - c * n_active) / (n_active + n_placebo),
+    v = (a * (n_active - a) * n_placebo^3 + c * (n_placebo - c) * n_active^3) / (n_active * n_placebo * (n_active + n_placebo)^2)
+  ) %>%
+  group_by(pt) %>%
+  summarise(
+    trials = paste(study, collapse = "; "),
+    events_active = sum(a), n_active = sum(n_active), events_placebo = sum(c), n_placebo = sum(n_placebo),
+    rd = sum(num) / sum(w),
+    se = sqrt(sum(v) / sum(w)^2),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    pct_active = 100 * events_active / n_active,
+    pct_placebo = 100 * events_placebo / n_placebo,
+    rd_pct = 100 * rd, rd_lo_pct = 100 * (rd - 1.96 * se), rd_hi_pct = 100 * (rd + 1.96 * se)
+  ) %>%
+  arrange(desc(rd_lo_pct))
+print(select(h2_pooled_pt, pt, trials, pct_active, pct_placebo, rd_pct, rd_lo_pct, rd_hi_pct))
+
+# Mantel-Haenszel risk difference by grouped term
+h2_pooled_group <- h2_group_wide %>%
+  mutate(
+    w = n_active * n_placebo / (n_active + n_placebo),
+    num = (a * n_placebo - c * n_active) / (n_active + n_placebo),
+    v = (a * (n_active - a) * n_placebo^3 + c * (n_placebo - c) * n_active^3) / (n_active * n_placebo * (n_active + n_placebo)^2)
+  ) %>%
+  group_by(group) %>%
+  summarise(
+    trials = paste(study, collapse = "; "),
+    members = paste(unique(members), collapse = " | "),
+    events_active = sum(a), n_active = sum(n_active), events_placebo = sum(c), n_placebo = sum(n_placebo),
+    rd = sum(num) / sum(w),
+    se = sqrt(sum(v) / sum(w)^2),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    pct_active = 100 * events_active / n_active,
+    pct_placebo = 100 * events_placebo / n_placebo,
+    rd_pct = 100 * rd, rd_lo_pct = 100 * (rd - 1.96 * se), rd_hi_pct = 100 * (rd + 1.96 * se)
+  ) %>%
+  arrange(desc(rd_lo_pct))
+print(select(h2_pooled_group, group, trials, pct_active, pct_placebo, rd_pct, rd_lo_pct, rd_hi_pct))
+
+# Cross-check against scripts/05_pool.py output
+h2_python <- read_csv("pooled_ae.csv", show_col_types = FALSE) %>%
+  filter(pool == "E123", method == "available_case", level == "PT")
+h2_compare <- h2_pooled_pt %>%
+  inner_join(h2_python, by = c("pt" = "term"), suffix = c("_r", "_py")) %>%
+  mutate(max_abs_diff = pmax(abs(rd_pct_r - rd_pct_py), abs(rd_lo_pct_r - rd_lo_pct_py), abs(rd_hi_pct_r - rd_hi_pct_py)))
+print(nrow(h2_compare))
+print(max(h2_compare$max_abs_diff))
+```
+
+## H2.3 Robustness
+
+```{r h2_3}
+################################################################################
+# H2.3 Robustness
+################################################################################
+
+# Unreported in a trial = 0 events in both arms (PT level)
+h2_zero_pt <- h2_wide %>%
+  select(study, pt, a, c) %>%
+  complete(study, pt, fill = list(a = 0, c = 0)) %>%
+  left_join(h2_n, by = "study") %>%
+  mutate(
+    w = n_active * n_placebo / (n_active + n_placebo),
+    num = (a * n_placebo - c * n_active) / (n_active + n_placebo),
+    v = (a * (n_active - a) * n_placebo^3 + c * (n_placebo - c) * n_active^3) / (n_active * n_placebo * (n_active + n_placebo)^2)
+  ) %>%
+  group_by(pt) %>%
+  summarise(rd = sum(num) / sum(w), se = sqrt(sum(v) / sum(w)^2), .groups = "drop") %>%
+  mutate(rd_lo_pct_zero = 100 * (rd - 1.96 * se), rd_pct_zero = 100 * rd) %>%
+  select(pt, rd_pct_zero, rd_lo_pct_zero)
+print(arrange(h2_zero_pt, desc(rd_lo_pct_zero)))
+
+# Unreported in a trial = 0 events in both arms (grouped terms)
+h2_zero_group <- h2_group_wide %>%
+  select(study, group, a, c) %>%
+  complete(study, group, fill = list(a = 0, c = 0)) %>%
+  left_join(h2_n, by = "study") %>%
+  mutate(
+    w = n_active * n_placebo / (n_active + n_placebo),
+    num = (a * n_placebo - c * n_active) / (n_active + n_placebo),
+    v = (a * (n_active - a) * n_placebo^3 + c * (n_placebo - c) * n_active^3) / (n_active * n_placebo * (n_active + n_placebo)^2)
+  ) %>%
+  group_by(group) %>%
+  summarise(rd = sum(num) / sum(w), se = sqrt(sum(v) / sum(w)^2), .groups = "drop") %>%
+  mutate(rd_lo_pct_zero = 100 * (rd - 1.96 * se), rd_pct_zero = 100 * rd) %>%
+  select(group, rd_pct_zero, rd_lo_pct_zero)
+print(arrange(h2_zero_group, desc(rd_lo_pct_zero)))
+
+# Grouped terms counted as the largest single member (lower bound on patients)
+h2_max_group <- h2_group_wide %>%
+  mutate(
+    w = n_active * n_placebo / (n_active + n_placebo),
+    num = (a_max * n_placebo - c_max * n_active) / (n_active + n_placebo),
+    v = (a_max * (n_active - a_max) * n_placebo^3 + c_max * (n_placebo - c_max) * n_active^3) / (n_active * n_placebo * (n_active + n_placebo)^2)
+  ) %>%
+  group_by(group) %>%
+  summarise(rd = sum(num) / sum(w), se = sqrt(sum(v) / sum(w)^2), .groups = "drop") %>%
+  mutate(rd_lo_pct_max = 100 * (rd - 1.96 * se), rd_pct_max = 100 * rd) %>%
+  select(group, rd_pct_max, rd_lo_pct_max)
+print(arrange(h2_max_group, desc(rd_lo_pct_max)))
+
+# Adding the 5-week China trial (UNITE-001), PT level
+h2_china_wide <- read_excel("data/clean_trials.xlsx", sheet = "trial_pt") %>%
+  filter(study %in% c("EMERGENT-1", "EMERGENT-2", "EMERGENT-3", "UNITE-001 (China)")) %>%
+  select(study, arm_role, n_arm, pt, n_patients) %>%
+  pivot_wider(names_from = arm_role, values_from = c(n_patients, n_arm), values_fill = 0) %>%
+  group_by(study) %>%
+  mutate(n_active = max(n_arm_active), n_placebo = max(n_arm_placebo)) %>%
+  ungroup() %>%
+  rename(a = n_patients_active, c = n_patients_placebo)
+
+h2_china_pt <- h2_china_wide %>%
+  mutate(
+    w = n_active * n_placebo / (n_active + n_placebo),
+    num = (a * n_placebo - c * n_active) / (n_active + n_placebo),
+    v = (a * (n_active - a) * n_placebo^3 + c * (n_placebo - c) * n_active^3) / (n_active * n_placebo * (n_active + n_placebo)^2)
+  ) %>%
+  group_by(pt) %>%
+  summarise(trials = paste(study, collapse = "; "), rd = sum(num) / sum(w), se = sqrt(sum(v) / sum(w)^2), .groups = "drop") %>%
+  mutate(rd_pct_china = 100 * rd, rd_lo_pct_china = 100 * (rd - 1.96 * se)) %>%
+  select(pt, trials, rd_pct_china, rd_lo_pct_china) %>%
+  arrange(desc(rd_lo_pct_china))
+print(h2_china_pt)
+
+# Save pooled tables
+write_xlsx(
+  list(pt = h2_pooled_pt, group = h2_pooled_group, pt_zero = h2_zero_pt, group_zero = h2_zero_group,
+       group_max = h2_max_group, pt_with_china = h2_china_pt),
+  "data/h2_pooled_results.xlsx"
+)
+```
+
+# H3. LABEL COMPARISON AND CANDIDATES
+
+## H3.1 Data preparation
+
+```{r h3_1}
+################################################################################
+# H3.1 Data preparation
+################################################################################
+
+h3_status <- read_excel("data/clean_trials.xlsx", sheet = "label_status")
+h3_groups <- read_excel("data/clean_trials.xlsx", sheet = "term_groups")
+h3_pt <- read_excel("data/h2_pooled_results.xlsx", sheet = "pt")
+h3_group <- read_excel("data/h2_pooled_results.xlsx", sheet = "group")
+h3_pt_zero <- read_excel("data/h2_pooled_results.xlsx", sheet = "pt_zero")
+h3_group_zero <- read_excel("data/h2_pooled_results.xlsx", sheet = "group_zero")
+
+# Group label status: Listed if any member in Table 1; else Mentioned if any member mentioned; else Missing
+h3_group_status <- h3_groups %>%
+  left_join(h3_status, by = "meddra_pt") %>%
+  group_by(group) %>%
+  summarise(
+    label_status = case_when(
+      any(label_status == "Listed (6.1 Table 1)") ~ "Listed (6.1 Table 1)",
+      any(str_detect(label_status, "6.1 text")) ~ "Listed (6.1 text, not Table 1)",
+      any(str_detect(label_status, "Mentioned")) ~ "Mentioned elsewhere",
+      TRUE ~ "Missing"
+    ),
+    .groups = "drop"
+  )
+print(h3_group_status)
+```
+
+## H3.2 Analysis
+
+```{r h3_2}
+################################################################################
+# H3.2 Analysis
+################################################################################
+
+# Candidate rule: RD lower bound > 0 (available-case AND unreported-as-zero) and label status Missing or Mentioned elsewhere
+h3_pt_screen <- h3_pt %>%
+  left_join(h3_pt_zero, by = "pt") %>%
+  left_join(h3_status, by = c("pt" = "meddra_pt")) %>%
+  mutate(
+    candidate = rd_lo_pct > 0 & rd_lo_pct_zero > 0 & str_detect(label_status, "Missing|Mentioned elsewhere")
+  ) %>%
+  select(pt, label_status, trials, pct_active, pct_placebo, rd_pct, rd_lo_pct, rd_hi_pct, rd_lo_pct_zero, candidate)
+print(h3_pt_screen)
+print(filter(h3_pt_screen, candidate))
+
+h3_group_screen <- h3_group %>%
+  left_join(h3_group_zero, by = "group") %>%
+  left_join(h3_group_status, by = "group") %>%
+  mutate(
+    candidate = rd_lo_pct > 0 & rd_lo_pct_zero > 0 & str_detect(label_status, "Missing|Mentioned elsewhere")
+  ) %>%
+  select(group, label_status, members, trials, pct_active, pct_placebo, rd_pct, rd_lo_pct, rd_hi_pct, rd_lo_pct_zero, candidate)
+print(h3_group_screen)
+print(filter(h3_group_screen, candidate))
+
+# Negative control: headache must not be a candidate
+print(filter(h3_pt_screen, pt == "Headache"))
+
+# Understated: grouped % at least 1.5 x and 2 points above the largest Table 1-listed member PT,
+# and at least one member with trial events that is not itself a Table 1 term
+h3_member_status <- h3_groups %>%
+  left_join(h3_status, by = "meddra_pt") %>%
+  inner_join(select(h3_pt, pt, pct_active), by = c("meddra_pt" = "pt"))
+print(h3_member_status)
+
+h3_understated <- h3_member_status %>%
+  group_by(group) %>%
+  summarise(
+    max_listed_pct = max(c(0, pct_active[label_status == "Listed (6.1 Table 1)"])),
+    n_unlisted_members = sum(label_status != "Listed (6.1 Table 1)"),
+    .groups = "drop"
+  ) %>%
+  inner_join(select(h3_group, group, members, pct_active), by = "group") %>%
+  mutate(understated = n_unlisted_members > 0 & max_listed_pct > 0 & pct_active >= 1.5 * max_listed_pct & pct_active - max_listed_pct >= 2)
+print(h3_understated)
+
+# Near-misses (descriptive): not listed in Table 1, Cobenfy > placebo, RD point estimate > 0
+h3_near_miss <- h3_pt_screen %>%
+  filter(label_status != "Listed (6.1 Table 1)", rd_pct > 0) %>%
+  arrange(desc(rd_lo_pct))
+print(h3_near_miss)
+
+write_xlsx(list(pt = h3_pt_screen, group = h3_group_screen, understated = h3_understated, near_miss = h3_near_miss),
+           "data/h3_screen_results.xlsx")
+```
+
+# H4. FAERS DISPROPORTIONALITY
+
+## H4.1 Data preparation
+
+```{r h4_1}
+################################################################################
+# H4.1 Data preparation
+################################################################################
+
+h4_cases <- read_csv("data/faers_clean_cases.csv.gz", show_col_types = FALSE, col_types = cols(primaryid = "c", hcp = "l", .default = "c"))
+h4_case_pt <- read_csv("data/faers_clean_case_pt.csv.gz", show_col_types = FALSE, col_types = cols(.default = "c"))
+h4_groups <- read_excel("data/clean_trials.xlsx", sheet = "term_groups")
+h4_status <- read_excel("data/clean_trials.xlsx", sheet = "label_status")
+
+# Events tested: every PT in the label-status table, plus every grouped term
+h4_events <- bind_rows(
+  h4_case_pt %>%
+    filter(pt %in% h4_status$meddra_pt) %>%
+    transmute(primaryid, level = "PT", event = pt),
+  h4_case_pt %>%
+    inner_join(h4_groups, by = c("pt" = "meddra_pt"), relationship = "many-to-many") %>%
+    transmute(primaryid, level = "group", event = group)
+) %>%
+  distinct()
+print(count(h4_events, level))
+
+h4_event_list <- distinct(h4_events, level, event)
+print(nrow(h4_event_list))
+print(count(h4_cases, grp_newer))
+print(count(h4_cases, grp_all))
+```
+
+## H4.2 Analysis
+
+```{r h4_2}
+################################################################################
+# H4.2 Analysis
+################################################################################
+
+# Main: Cobenfy vs newer antipsychotics (lumateperone, brexpiprazole, cariprazine)
+h4_set_newer <- h4_cases %>% filter(!is.na(grp_newer)) %>% select(primaryid, grp = grp_newer)
+h4_newer <- h4_event_list %>%
+  left_join(
+    h4_events %>% inner_join(h4_set_newer, by = "primaryid") %>% count(level, event, grp) %>% pivot_wider(names_from = grp, values_from = n, values_fill = 0),
+    by = c("level", "event")
+  ) %>%
+  mutate(
+    across(c(cobenfy, comparator), ~ replace_na(.x, 0)),
+    a = cobenfy, c = comparator,
+    b = sum(h4_set_newer$grp == "cobenfy") - a, d = sum(h4_set_newer$grp == "comparator") - c,
+    ror = if_else(a > 0 & c > 0, (a / b) / (c / d), NA_real_),
+    ror_lo = exp(log(ror) - 1.96 * sqrt(1 / a + 1 / b + 1 / c + 1 / d)),
+    ror_hi = exp(log(ror) + 1.96 * sqrt(1 / a + 1 / b + 1 / c + 1 / d)),
+    expected = (a + b) * (a + c) / (a + b + c + d),
+    ic = log2((a + 0.5) / (expected + 0.5)),
+    ic025 = ic - 3.3 * (a + 0.5)^-0.5 - 2 * (a + 0.5)^-1.5
+  )
+print(arrange(filter(h4_newer, a >= 3), desc(ror_lo)))
+
+# Main, health professionals only
+h4_set_newer_hcp <- h4_cases %>% filter(!is.na(grp_newer), hcp) %>% select(primaryid, grp = grp_newer)
+h4_newer_hcp <- h4_event_list %>%
+  left_join(
+    h4_events %>% inner_join(h4_set_newer_hcp, by = "primaryid") %>% count(level, event, grp) %>% pivot_wider(names_from = grp, values_from = n, values_fill = 0),
+    by = c("level", "event")
+  ) %>%
+  mutate(
+    across(c(cobenfy, comparator), ~ replace_na(.x, 0)),
+    a = cobenfy, c = comparator,
+    b = sum(h4_set_newer_hcp$grp == "cobenfy") - a, d = sum(h4_set_newer_hcp$grp == "comparator") - c,
+    ror = if_else(a > 0 & c > 0, (a / b) / (c / d), NA_real_),
+    ror_lo = exp(log(ror) - 1.96 * sqrt(1 / a + 1 / b + 1 / c + 1 / d)),
+    ror_hi = exp(log(ror) + 1.96 * sqrt(1 / a + 1 / b + 1 / c + 1 / d)),
+    expected = (a + b) * (a + c) / (a + b + c + d),
+    ic = log2((a + 0.5) / (expected + 0.5)),
+    ic025 = ic - 3.3 * (a + 0.5)^-0.5 - 2 * (a + 0.5)^-1.5
+  )
+print(arrange(filter(h4_newer_hcp, a >= 3), desc(ror_lo)))
+
+# Cobenfy vs all antipsychotics
+h4_set_all <- h4_cases %>% filter(!is.na(grp_all)) %>% select(primaryid, grp = grp_all)
+h4_all <- h4_event_list %>%
+  left_join(
+    h4_events %>% inner_join(h4_set_all, by = "primaryid") %>% count(level, event, grp) %>% pivot_wider(names_from = grp, values_from = n, values_fill = 0),
+    by = c("level", "event")
+  ) %>%
+  mutate(
+    across(c(cobenfy, comparator), ~ replace_na(.x, 0)),
+    a = cobenfy, c = comparator,
+    b = sum(h4_set_all$grp == "cobenfy") - a, d = sum(h4_set_all$grp == "comparator") - c,
+    ror = if_else(a > 0 & c > 0, (a / b) / (c / d), NA_real_),
+    ror_lo = exp(log(ror) - 1.96 * sqrt(1 / a + 1 / b + 1 / c + 1 / d)),
+    ror_hi = exp(log(ror) + 1.96 * sqrt(1 / a + 1 / b + 1 / c + 1 / d)),
+    expected = (a + b) * (a + c) / (a + b + c + d),
+    ic = log2((a + 0.5) / (expected + 0.5)),
+    ic025 = ic - 3.3 * (a + 0.5)^-0.5 - 2 * (a + 0.5)^-1.5
+  )
+print(arrange(filter(h4_all, a >= 3), desc(ror_lo)))
+
+# Cobenfy vs all antipsychotics, health professionals only
+h4_set_all_hcp <- h4_cases %>% filter(!is.na(grp_all), hcp) %>% select(primaryid, grp = grp_all)
+h4_all_hcp <- h4_event_list %>%
+  left_join(
+    h4_events %>% inner_join(h4_set_all_hcp, by = "primaryid") %>% count(level, event, grp) %>% pivot_wider(names_from = grp, values_from = n, values_fill = 0),
+    by = c("level", "event")
+  ) %>%
+  mutate(
+    across(c(cobenfy, comparator), ~ replace_na(.x, 0)),
+    a = cobenfy, c = comparator,
+    b = sum(h4_set_all_hcp$grp == "cobenfy") - a, d = sum(h4_set_all_hcp$grp == "comparator") - c,
+    ror = if_else(a > 0 & c > 0, (a / b) / (c / d), NA_real_),
+    ror_lo = exp(log(ror) - 1.96 * sqrt(1 / a + 1 / b + 1 / c + 1 / d)),
+    ror_hi = exp(log(ror) + 1.96 * sqrt(1 / a + 1 / b + 1 / c + 1 / d)),
+    expected = (a + b) * (a + c) / (a + b + c + d),
+    ic = log2((a + 0.5) / (expected + 0.5)),
+    ic025 = ic - 3.3 * (a + 0.5)^-0.5 - 2 * (a + 0.5)^-1.5
+  )
+print(arrange(filter(h4_all_hcp, a >= 3), desc(ror_lo)))
+
+# Combined table; confirmed = ROR lower bound > 1 in main AND health-professional analysis (newer comparators)
+h4_faers <- h4_newer %>%
+  select(level, event, a_newer = a, c_newer = c, ror_newer = ror, ror_lo_newer = ror_lo, ror_hi_newer = ror_hi, ic025_newer = ic025) %>%
+  left_join(select(h4_newer_hcp, level, event, a_newer_hcp = a, ror_newer_hcp = ror, ror_lo_newer_hcp = ror_lo, ror_hi_newer_hcp = ror_hi), by = c("level", "event")) %>%
+  left_join(select(h4_all, level, event, a_all = a, c_all = c, ror_all = ror, ror_lo_all = ror_lo, ror_hi_all = ror_hi, ic025_all = ic025), by = c("level", "event")) %>%
+  left_join(select(h4_all_hcp, level, event, a_all_hcp = a, ror_all_hcp = ror, ror_lo_all_hcp = ror_lo, ror_hi_all_hcp = ror_hi), by = c("level", "event")) %>%
+  mutate(confirmed_faers = coalesce(ror_lo_newer > 1 & ror_lo_newer_hcp > 1, FALSE)) %>%
+  arrange(desc(ror_lo_newer))
+print(h4_faers)
+
+# Exposure-group sizes
+print(count(h4_set_newer, grp))
+print(count(h4_set_newer_hcp, grp))
+print(count(h4_set_all, grp))
+print(count(h4_set_all_hcp, grp))
+```
+
+## H4.3 Robustness
+
+```{r h4_3}
+################################################################################
+# H4.3 Robustness
+################################################################################
+
+# Positive controls (labelled) and negative control in FAERS
+print(filter(h4_faers, event %in% c("Nausea", "Vomiting", "Constipation", "Dyspepsia", "Urinary retention", "Headache")))
+
+# Pre-specified trial near-misses and the pilot event
+print(filter(h4_faers, event %in% c("Sweating", "Hyperhidrosis", "Cold sweat", "Night sweats", "Akathisia",
+                                     "Weight", "Weight decreased", "Decreased appetite", "Suicidal ideation", "Mood")))
+
+write_xlsx(list(faers = h4_faers, newer = h4_newer, newer_hcp = h4_newer_hcp, all = h4_all, all_hcp = h4_all_hcp),
+           "data/h4_faers_results.xlsx")
+```
+
+# S1. SECONDARY: LONG-TERM OPEN-LABEL STUDIES
+
+## S1.1 Data preparation
+
+```{r s1_1}
+################################################################################
+# S1.1 Data preparation
+################################################################################
+
+s1_df <- read_excel("data/clean_trials.xlsx", sheet = "ol_pt") %>%
+  filter(study %in% c("EMERGENT-4", "EMERGENT-5"))
+print(distinct(s1_df, study, arm, n_arm))
+```
+
+## S1.2 Analysis
+
+```{r s1_2}
+################################################################################
+# S1.2 Analysis
+################################################################################
+
+# Crude incidence with Wilson 95% CI (exposure time not available in retrieved sources)
+s1_incidence <- s1_df %>%
+  group_by(study, pt) %>%
+  summarise(n_patients = sum(n_patients), n = sum(n_arm), .groups = "drop") %>%
+  mutate(
+    p = n_patients / n,
+    pct = 100 * p,
+    wilson_lo = 100 * (p + 1.96^2 / (2 * n) - 1.96 * sqrt(p * (1 - p) / n + 1.96^2 / (4 * n^2))) / (1 + 1.96^2 / n),
+    wilson_hi = 100 * (p + 1.96^2 / (2 * n) + 1.96 * sqrt(p * (1 - p) / n + 1.96^2 / (4 * n^2))) / (1 + 1.96^2 / n)
+  ) %>%
+  left_join(read_excel("data/clean_trials.xlsx", sheet = "label_status"), by = c("pt" = "meddra_pt")) %>%
+  arrange(study, desc(pct))
+print(select(s1_incidence, study, pt, n_patients, n, pct, wilson_lo, wilson_hi, label_status))
+write_xlsx(s1_incidence, "data/s1_longterm.xlsx")
+```
+
+# S2. SECONDARY: SOURCE AGREEMENT
+
+## S2.1 Data preparation
+
+```{r s2_1}
+################################################################################
+# S2.1 Data preparation
+################################################################################
+
+s2_papers <- read_excel("data/clean_trials.xlsx", sheet = "paper_rows") %>%
+  mutate(
+    arm_role = if_else(str_detect(arm, "Placebo"), "placebo", "active"),
+    pt = case_when(
+      term_as_written == "Diarrhea" ~ "Diarrhoea",
+      term_as_written == "Increased weight" ~ "Weight increased",
+      str_detect(term_as_written, "glutamyltransferase") ~ "Gamma-glutamyltransferase increased",
+      term_as_written == "diarrhea" ~ "Diarrhoea",
+      TRUE ~ str_to_sentence(term_as_written)
+    )
+  )
+s2_trials <- read_excel("data/clean_trials.xlsx", sheet = "trial_pt")
+s2_ol <- read_excel("data/clean_trials.xlsx", sheet = "ol_pt")
+print(count(s2_papers, study, source))
+```
+
+## S2.2 Analysis
+
+```{r s2_2}
+################################################################################
+# S2.2 Analysis
+################################################################################
+
+# Journal tables (EMERGENT-1 NEJM, EMERGENT-3 JAMA Psychiatry) vs ClinicalTrials.gov
+s2_rct <- s2_papers %>%
+  filter(study %in% c("EMERGENT-1", "EMERGENT-3")) %>%
+  select(study, arm_role, pt, n_paper = n_patients, n_arm_paper = n_arm) %>%
+  left_join(select(s2_trials, study, arm_role, pt, n_ctgov = n_patients, n_arm_ctgov = n_arm), by = c("study", "arm_role", "pt")) %>%
+  mutate(agree = n_paper == n_ctgov & n_arm_paper == n_arm_ctgov)
+print(s2_rct)
+print(count(s2_rct, agree))
+
+# EMERGENT-5 abstract % vs ClinicalTrials.gov ('other' + 'serious')
+s2_e5 <- s2_papers %>%
+  filter(study == "EMERGENT-5") %>%
+  select(pt, pct_abstract = pct_reported) %>%
+  left_join(filter(s2_ol, study == "EMERGENT-5") %>% select(pt, n_ctgov = n_patients, n_arm), by = "pt") %>%
+  mutate(
+    pct_ctgov = round(100 * n_ctgov / n_arm, 1),
+    diff_pp = as.numeric(pct_abstract) - pct_ctgov
+  )
+print(s2_e5)
+```
+
+# SESSION INFO
+
+```{r session}
+print(sessionInfo())
+```

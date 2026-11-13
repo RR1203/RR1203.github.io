@@ -1,0 +1,164 @@
+=== PAGE 1
+Supplemental Online Content
+Kaul I, Sawchak S, Walling DP, et al. Efficacy and safety of xanomeline–trospium in
+schizophrenia: a randomized clinical trial. JAMA Psychiatry. Published online May 1, 2024.
+doi:10.1001/jamapsychiatry.2024.0785
+eAppendix. Inclusion and Exclusion Criteria
+eTable 1. Efficacy Measures at Week 5 (mITT Population)
+eTable 2. Primary and Supportive Analyses for Primary End Point: Change From Baseline at
+Week 5 in PANSS Total Score
+eTable 3. Treatment-Emergent Adverse Events Leading to Trial Discontinuation
+eFigure. Mean Systolic and Diastolic Blood Pressure Measures Recorded at 2 Hours Post
+Dose (C )
+max
+This supplemental material has been provided by the authors to give readers additional
+information about their work.
+© 2024 Kaul I et al. JAMA Psychiatry.
+=== PAGE 2
+eAppendix 1. Inclusion and Exclusion Criteria
+Inclusion criteria
+• Age 18 to 65 years, inclusive, at screening
+• Capable of providing informed consent
+− Signed informed consent form
+− Fluent (oral and written) in local language to consent
+• Primary diagnosis of schizophrenia established by a comprehensive psychiatric evaluation based on the
+Diagnostic and Statistical Manual for Mental Disorders, Fifth Edition (DSM-5) criteria and confirmed by Mini
+International Neuropsychiatric Interview for Schizophrenia and Psychotic Disorder Studies version 7.0.2
+• Experiencing an acute exacerbation or relapse of psychotic symptoms, with onset <2 months before screening
+− Required hospitalization for this acute exacerbation or relapse of psychotic symptoms
+− If already an inpatient at screening, had been hospitalized for <2 weeks for the current exacerbation at
+the time of screening
+• Positive and Negative Syndrome Scale (PANSS) total score between 80 and 120, inclusive. Score of ≥4
+(moderate or greater) for ≥2 of the following positive scale (P) items
+− Item 1 (P1; delusions)
+− Item 2 (P2; conceptual disorganization)
+− Item 3 (P3; hallucinatory behavior)
+− Item 6 (P6; suspiciousness/persecution)
+• No change (improvement) in PANSS total score between screening and baseline of >20%
+• Clinical Global Impression–Severity score of ≥4 at screening and baseline
+• Off lithium therapy for >2 weeks before baseline and free of all oral antipsychotic medications for ≥5 half-lives
+or 1 week, whichever was longer, before baseline
+• Participants taking a long-acting injectable antipsychotic were not to have received a dose of medication for ≥12
+weeks (24 weeks for paliperidone palmitate) before baseline
+• Willing and able to be confined to an inpatient setting for the trial duration, follow instructions, and comply
+with the protocol requirements
+• BMI between 18 and ≤40 kg/m2, inclusive
+• Participant resided in a stable living situation and was anticipated to return to that same stable living situation
+after discharge, in the opinion of the investigator
+• Had an identified, reliable informant if the trial participant had not been a patient of the investigator for ≥1 year
+• Willing to adhere to defined contraception guidelines
+© 2024 Kaul I et al. JAMA Psychiatry.
+=== PAGE 3
+Exclusion criteria
+• Any primary DSM-5 disorder other than schizophrenia within 12 months before screening
+− Mild substance abuse disorder within the 12 months before screening, unless agreed upon with the
+medical monitor
+• Newly diagnosed or experiencing first treated episode of schizophrenia
+• History or presence of clinically significant cardiovascular, pulmonary, hepatic, renal, hematologic,
+gastrointestinal, endocrine, immunologic, dermatologic, neurologic, or oncologic disease or any other condition
+that, in the opinion of the investigator, would have jeopardized the safety of the participant or the validity of the
+trial results
+• Participants with HIV, cirrhosis, biliary duct abnormalities, hepatobiliary carcinoma, and/or active hepatic viral
+infections based on either medical history or liver function test results
+• History or high risk of urinary retention, gastric retention, or narrow-angle glaucoma
+• History of irritable bowel syndrome (with or without constipation) or serious constipation requiring treatment
+within the last 6 months
+• Risk for suicidal behavior during the trial as determined by the investigator’s clinical assessment and Columbia
+Suicide Severity Rating Scale (C-SSRS), as confirmed by the following
+− Answered “Yes” on items 4 or 5 (C-SSRS–ideation) with the most recent episode occurring within the
+2 months before screening or answered “Yes” to any of the 5 items (C-SSRS–behavior) with an
+episode occurring within the 12 months before screening. Nonsuicidal, self-injurious behavior was not
+exclusionary
+• Clinically significant abnormal finding on the physical examination, medical history, electrocardiogram, or
+clinical laboratory results at screening
+• Could not currently (within 5 half-lives or 1 week, whichever was longer, before baseline) have received oral
+antipsychotic medications, monoamine oxidase inhibitors, anticonvulsants, tricyclic antidepressants, selective
+serotonin reuptake inhibitors, or any other psychoactive medications, except for as-needed anxiolytics
+• Pregnant, lactating, or <3 months postpartum
+• Positive test for SARS-CoV-2 (COVID-19) within 2 weeks before screening and at screening
+• Extreme concerns relating to global pandemics, such as COVID-19, which preclude trial participation
+• Had psychiatric hospitalization(s) for >30 days (cumulative) during the 90 days before screening
+• History of treatment resistance to schizophrenia medications, defined as failure to respond to 2 adequate courses
+of pharmacotherapy (a minimum of 4 weeks at an adequate dose per the label) or required clozapine within the
+last 12 months
+• Prior exposure to KarXT
+• Experienced any adverse effects due to xanomeline or trospium chloride
+• Risk of violent or destructive behavior
+• Current involuntary hospitalization or incarceration
+© 2024 Kaul I et al. JAMA Psychiatry.
+=== PAGE 4
+eTable 1. Efficacy Measures at Week 5 (mITT Population)
+KarXT Placebo Difference Cohen’s
+Variable (n = 114) (n = 120) (95% CI) d P value
+Primary endpoint
+PANSS total score, LSM change (SE) from baseline -20.6 (1.6) -12.2 (1.6) -8.4 (-12.4 to -4.3) 0.60 <.0001
+Secondary outcome measures
+PANSS positive symptom subscale score, LSM change (SE) from baseline -7.1 (0.5) -3.6 (0.5) -3.5 (-4.7 to -2.2) 0.80 <.0001
+PANSS negative symptom subscale score, LSM change (SE) from baseline -2.7 (0.4) -1.8 (0.4) -0.8 (-1.9 to 0.2) 0.23 .1224
+PANSS Marder negative factor score, LSM change (SE) from baseline -3.5 (0.5) -2.7 (0.5) -0.8 (-2.1 to 0.4) 0.19 .1957
+CGI-S scale score, LSM change (SE) from baseline -1.1 (0.1) -0.6 (0.1) -0.5 (-0.8 to -0.3) 0.63 <.0001
+PANSS responders (≥30% reduction from baseline in PANSS total score),a n/N (%) 40/79 (50.6%) 23/91 (25.3%) 25.4% (10.8 to 38.6) .0056
+a Floor-adjusted total score (total score minus 30); last observation carried forward. Assessed in participants with available week 5 scores.
+Abbreviations: CGI-S, Clinical Global Impression‒Severity; LSM, least squares mean; mITT, modified intent-to-treat; PANSS, Positive and Negative Syndrome Scale.
+© 2024 Kaul I et al. JAMA Psychiatry.
+=== PAGE 5
+eTable 2. Primary and Supportive Analyses for Primary End Point: Change From Baseline at Week 5 in PANSS
+Total Score
+KarXT Placebo Difference
+LSM change (SE) LSM change (SE)
+Analysis Difference (95% CI) P value
+n from baseline n from baseline
+Primary analysis
+114 -20.6 (1.6) 120 -12.2 (1.6) -8.4 (-12.4 to -4.3) <.0001
+(mITT)
+Completer
+79 -20.8 (1.6) 91 -13.6 (1.6) -7.1 (-11.2 to -3.0) .0008
+analysis
+Placebo-based
+114 -18.7 (1.6) 120 -11.6 (1.6) -7.1 (-11.3 to -2.8)
+MI (mITT) .0010
+Post-hoc
+125 -20.6 (1.6) 131 -12.2 (1.6) -8.4 (-12.4 to -4.3) <.0001
+analysis (ITT)
+Abbreviations: ITT, intent-to-treat; LSM, least squares mean; MI, multiple imputation; mITT, modified intent-to-treat; PANSS, Positive and Negative Syndrome Scale; SE, standard
+error.
+© 2024 Kaul I et al. JAMA Psychiatry.
+=== PAGE 6
+eTable 3. Treatment-Emergent Adverse Events Leading to Trial Discontinuation
+KarXT Placebo
+Variable (n = 125) (n = 128)
+At least one TEAE leading to discontinuation, n (%) 8 (6.4) 7 (5.5)
+Psychiatric disorders
+Schizophrenia 0 5 (3.9)
+Insomnia 1 (0.8) 1 (0.8)
+Mental disorder 0 1 (0.8)
+Gastrointestinal disorders
+Nausea 3 (2.4) 0
+Abdominal pain 1 (0.8) 0
+Diarrhea 1 (0.8) 0
+Gastroesophogeal reflux disease 1 (0.8) 0
+Vomiting 1 (0.8) 0
+General disorders and administration site conditions
+Asthenia 1 (0.8) 0
+Chest discomfort 1 (0.8) 0
+Investigations
+Heart rate increased 1 (0.8) 0
+Hepatic enzyme increased 1 (0.8) 0
+Metabolism and nutrition disorders
+Decreased appetite 1 (0.8) 0
+Nervous system disorders
+Dyskinesia 1 (0.8) 0
+Renal and urinary disorders
+Dysuria 1 (0.8) 0
+Skin and subcutaneous tissue disorders
+Angioedema 1 (0.8) 0
+Abbreviation: TEAE, treatment-emergent adverse event.
+© 2024 Kaul I et al. JAMA Psychiatry.
+=== PAGE 7
+eFigure. Mean Systolic and Diastolic Blood Pressure Measures Recorded at 2
+Hours Post Dose (C )
+max
+During treatment, beginning on day 1, blood pressure was measured 2 (±1) hours after morning dose of trial treatment.
+Abbreviation: C , maximum concentration
+max
+© 2024 Kaul I et al. JAMA Psychiatry.

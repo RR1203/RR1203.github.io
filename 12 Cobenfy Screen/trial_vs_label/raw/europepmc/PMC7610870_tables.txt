@@ -1,0 +1,64 @@
+##### Table 1 | Characteristics of the Patients at Baseline (Intention-to-Treat Population).*
+Characteristic | Xanomeline–Trospium(N = 90) | Placebo(N = 92)
+Age — yr | 43.4±10.1 | 41.6±10.1
+Male sex — no. (%) | 72 (80) | 68 (74)
+Race — no. (%)† |  | 
+Black | 67 (74) | 70 (76)
+White | 20 (22) | 17 (18)
+Other | 3 (3) | 5 (5)
+Non-Hispanic or non-Latino ethnic group — no. (%)† | 71 (79) | 79 (86)
+Body-mass index‡ | 28.1±5.0 | 29.6±5.4
+PANSS score§ |  | 
+Total | 97.7±9.7 | 96.6±8.3
+Positive symptom subscore | 26.4±3.4 | 26.3±3.2
+Negative symptom subscore | 22.6±4.4 | 22.8±4.6
+Marder negative symptom subscore | 22.3±4.7 | 22.3±5.0
+Score on the CGI-S scale¶ | 5.0±0.6 | 4.9±0.6
+FOOT: *Plus-minus values are means ±SD. The intention-to-treat population included all the patients who had undergone randomization. Percentages may not total 100 because of rounding.†Race and Hispanic or Latino ethnic group were reported by the patients.‡The body-mass index is the weight in kilograms divided by the square of the height in meters.§The total score on the Positive and Negative Syndrome Scale (PANSS) ranges from 30 to 210, and the PANSS positive symptom subscore, negative symptom subscore, and Marder negative symptom subscore each range from 7 to 49; higher scores indicate more severe symptoms of schizophrenia.¶Scores on the Clinical Global Impression–Severity (CGI-S) scale range from 1 to 7; higher scores indicate greater severity of illness.
+##### Table 2 | Efficacy Measures (Modified Intention-to-Treat Population).*
+Efficacy Measure† | Xanomeline–Trospium(N = 83) | Placebo(N = 87) | Difference(95% CI) | P Value
+Primary end point
+Least-squares mean change from baseline in PANSS total score | −17.4±1.8 | −5.9±1.7 | −11.6 (−16.1 to −7.1)‡ | <0.001‡
+Secondary end points §
+Least-squares mean change from baseline in PANSS positive symptom subscore | −5.6±0.6 | −2.4±0.6 | −3.2 (−4.8 to −1.7) | <0.001
+Score on the CGI-S scale — % |  |  |  | <0.001
+1: normal | 1 | 0 | 1 | 
+2: borderline ill | 4 | 1 | 3 | 
+3: mildly ill | 32 | 10 | 22 | 
+4: moderately ill | 29 | 29 | 0 | 
+5: markedly ill | 29 | 52 | -23 | 
+6: severely ill | 3 | 6 | -3 | 
+7: extremely ill | 1 | 3 | -1 | 
+Least-squares mean change from baseline in PANSS negative symptom subscore | −3.2±0.5 | −0.9±0.5 | −2.3 (−3.5 to −1.1) | <0.001
+Least-squares mean change from baseline in PANSS Marder negative symptom subscore | −3.9±0.5 | −1.3±0.5 | −2.5 (−3.9 to −1.2) | <0.001
+Response according to CGI-S score of 1 or 2 — % | 6 | 1 | 4 (-3 to 12) | 0.15
+FOOT: *Plus-minus values are means ±SE. The modified intention-to-treat population included all the patients who had undergone randomization, had received at least one dose of xanomeline–trospium, and had received a PANSS assessment at baseline and at least once after baseline.†For continuous end points (PANSS total score and all PANSS subscores), the difference in least-squares mean change from baseline between the xanomeline–trospium group and the placebo group at week 5 was estimated with the use of mixed models for repeated measurements. For the score on the CGI-S scale, the difference between the xanomeline–trospium and placebo groups at week 5 was evaluated with the Mann–Whitney–Wilcoxon test. For the analysis of response according to a CGI-S score of 1 or 2, the difference between the xanomeline–trospium and placebo groups at week 5 was evaluated with the Cochran-Mantel-Haenszel test. There was no imputation of missing data for the primary end point or secondary end points.‡The effect size (0.75) was calculated as the absolute value of the difference in unadjusted mean change in score from baseline at week 5 between the xanomeline–trospium group and the placebo group, divided by the pooled standard deviation of the between-group difference.§Secondary end points are presented in the hierarchical order in which they were tested in the statistical analysis plan.
+##### Table 3 | Adverse Events and Safety during the Treatment Period (Safety Population).*
+Variable | Xanomeline–Trospium(N = 89) | Placebo(N = 90)
+Any adverse event — no (%) | 48 (54) | 39 (43)
+Serious adverse event — no. (%)† | 1 (1) | 0
+Severe adverse event — no. (%)‡ | 1 (1) | 1 (1)
+Adverse event leading to discontinuation of the active drug or placebo — no. (%) | 2 (2) | 2 (2)
+Adverse events occurring in ≥2% of the patients in the xanomeline–trospium group — no. (%) |  | 
+Constipation | 15 (17) | 3 (3)
+Nausea | 15 (17) | 4 (4)
+Dry mouth | 8 (9) | 1 (1)
+Dyspepsia | 8 (9) | 4 (4)
+Vomiting | 8 (9) | 4 (4)
+Headache | 6 (7) | 5 (6)
+Somnolence | 5 (6) | 4 (4)
+Akathisia | 3 (3) | 0
+Dizziness | 3 (3) | 3 (3)
+Increased weight | 3 (3) | 4 (4)
+Tachycardia | 3 (3) | 2 (2)
+Sedation | 2 (2) | 2 (2)
+Diarrhea | 2 (2) | 4 (4)
+Increased γ-glutamyltransferase level | 2 (2) | 0
+Agitation | 2 (2) | 1 (1)
+Insomnia | 2 (2) | 2 (2)
+Decreased appetite | 2 (2) | 0
+Hyperhidrosis | 2 (2) | 1 (1)
+Mean change from baseline in body weight at wk 5 — kg | 1.5±2.8 | 1.1±3.5
+Mean change from baseline in score on Simpson–Angus Scale at wk 5§ | −0.1±0.7 | −0.1±0.8
+Mean change from baseline in score on Barnes Akathisia Rating Scale at wk 5¶ | −0.1±1.0 | 0.0±0.7
+FOOT: *The safety population included all the patients who had undergone randomization and had received at least one dose of xanomeline–trospium or placebo. Adverse events that occurred during the treatment period were defined as those that started or worsened from the time of the first dose of xanomeline–trospium or placebo (visit 1 at day 2) to the time of discharge (visit 9 at day 35). Plus–minus values are means ±SD.†A serious adverse event was defined as any adverse event that resulted in death, was immediately life-threatening, led to inpatient hospitalization or prolongation of hospitalization, or caused persistent or clinically significant disability or incapacity.‡A severe adverse event was defined as any event that was incapacitating or caused an inability to perform normal activities of daily living.§Scores on the Simpson–Angus Scale range from 0 to 40; higher scores indicate greater severity of drug-induced parkinsonian symptoms.¶Scores on the Barnes Akathisia Rating Scale range from 0 to 14; higher scores indicate greater symptoms of akathisia.

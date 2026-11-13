@@ -1,0 +1,136 @@
+meddra_pt,label_status,label_wording,first_label_version
+Abdominal discomfort,Listed (6.1 Table 1),"T1: ""abdominal discomfort""",v1
+Abdominal distension,Missing,,
+Abdominal pain,Listed (6.1 Table 1),"T1: ""abdominal pain""",v1
+Abdominal pain lower,Listed (6.1 Table 1),"T1: ""abdominal pain lower""",v1
+Abdominal pain upper,Listed (6.1 Table 1),"T1: ""abdominal pain upper""",v1
+Abdominal tenderness,Listed (6.1 Table 1),"T1: ""abdominal tenderness""",v1
+Abnormal dreams,Missing,,
+Acute kidney injury,Missing,,
+Agitation,Mentioned elsewhere (10),"10: ""agitation""",v1
+Akathisia,Missing,,
+Alanine aminotransferase increased,"Listed (6.1 text, not Table 1)","6.1txt: ""ALT or AST elevations"" ; 5.3: ""liver enzymes""",v1
+Anaemia,Missing,,
+Angina pectoris,Missing,,
+Angioedema,"Mentioned elsewhere (5.5, 6.2)","5.5: ""Angioedema"" ; 6.2: ""angioedema""",v1
+Anxiety,Missing,,
+Appendicitis,Missing,,
+Arthralgia,Missing,,
+Aspartate aminotransferase increased,"Listed (6.1 text, not Table 1)","6.1txt: ""ALT or AST elevations"" ; 5.3: ""liver enzymes""",v1
+Asthenia,Missing,,
+Asthma,Missing,,
+Back pain,Missing,,
+Biliary colic,Mentioned elsewhere (5.3),"5.3: ""biliary""",v1
+Blood bilirubin increased,"Listed (6.1 text, not Table 1)","6.1txt: ""increase in bilirubin""",v1
+Blood creatine phosphokinase increased,Missing,,
+Blood pressure increased,Listed (6.1 Table 1),"T1: ""blood pressure increased""",v1
+Blood pressure orthostatic decreased,Missing,,
+Blood prolactin increased,Missing,,
+Burns third degree,Missing,,
+COVID-19,Missing,,
+Cellulitis,Missing,,
+Cholecystitis,Mentioned elsewhere (5.3),"5.3: ""gallbladder disorders""",v1
+Cholecystitis acute,Mentioned elsewhere (5.3),"5.3: ""gallbladder disorders""",v1
+Cholelithiasis,Mentioned elsewhere (5.3),"5.3: ""gallstone""",v1
+Cognitive disorder,Missing,,
+Cold sweat,Missing,,
+Completed suicide,Missing,,
+Confusional state,"Mentioned elsewhere (5.9, 6.2)","5.9: ""confusion"" ; 6.2: ""confusion""",v1
+Constipation,Listed (6.1 Table 1),"T1: ""Constipation""",v1
+Death,Missing,,
+Decreased appetite,Missing,,
+Depression,Missing,,
+Depressive symptom,Missing,,
+Diarrhoea,Listed (6.1 Table 1),"T1: ""Diarrhea""",v1
+Diverticulitis,Missing,,
+Dizziness,Listed (6.1 Table 1),"T1: ""Dizziness""",v1
+Dizziness postural,Missing,,
+Drooling,Listed (6.1 Table 1),"T1: ""drooling""",v1
+Dry eye,Mentioned elsewhere (10),"10: ""dry mouth and eyes""",v1
+Dry mouth,Listed (6.1 Table 1),"T1: ""Dry mouth""",v1
+Dysarthria,Mentioned elsewhere (10),"10: ""garbled speech""",v1
+Dyskinesia,Listed (6.1 Table 1),"T1: ""dyskinesia""",v1
+Dyspepsia,Listed (6.1 Table 1),"T1: ""Dyspepsia""",v1
+Dystonia,Listed (6.1 Table 1),"T1: ""dystonia""",v1
+Dysuria,"Listed (6.1 text, not Table 1)","6.1txt: ""dysuria"" ; 5.1: ""dysuria""",v1
+Electrocardiogram T wave abnormal,Missing,,
+Extrapyramidal disorder,Listed (6.1 Table 1),"T1: ""extrapyramidal disorder""",v1
+Eye injury,Missing,,
+Fall,Missing,,
+Fibula fracture,Missing,,
+Gamma-glutamyltransferase increased,"Listed (6.1 text, not Table 1)","6.1txt: ""elevated liver enzymes"" ; 5.3: ""liver enzymes""",v1
+Gastrooesophageal reflux disease,Listed (6.1 Table 1),"T1: ""Gastroesophageal reflux disease""",v1
+Hallucination,"Mentioned elsewhere (5.9, 6.2)","5.9: ""hallucinations"" ; 6.2: ""hallucinations""",v1
+"Hallucination, auditory",Mentioned elsewhere (5.9),"5.9: ""hallucinations""",v1
+Headache,Missing,,
+Heart rate increased,Listed (6.1 Table 1),"T1: ""heart rate increased""",v1
+Hepatic enzyme increased,"Listed (6.1 text, not Table 1)","6.1txt: ""elevated liver enzymes""",v1
+Hyperhidrosis,Mentioned elsewhere (10),"10: ""hyperhidrosis""",v1
+Hyperlipidaemia,Missing,,
+Hyperprolactinaemia,Missing,,
+Hypertension,Listed (6.1 Table 1),"T1: ""Hypertension""",v1
+Hyperuricaemia,Missing,,
+Hypokalaemia,Missing,,
+Hyponatraemia,Missing,,
+Ileus,Mentioned elsewhere (10),"10: ""ileus""",v1
+Impulsive behaviour,Missing,,
+Influenza,Missing,,
+Insomnia,Missing,,
+Intestinal obstruction,Mentioned elsewhere (5.4),"5.4: ""gastrointestinal obstructive disorders""",v1
+Labile hypertension,Listed (6.1 Table 1),"T1: ""labile hypertension""",v1
+Liver function test increased,"Listed (6.1 text, not Table 1)","6.1txt: ""elevated liver enzymes""",v1
+Localised infection,Missing,,
+Lumbar vertebral fracture,Missing,,
+Major depression,Missing,,
+Mania,Missing,,
+Memory impairment,Missing,,
+Muscle contraction involuntary,Listed (6.1 Table 1),"T1: ""muscle contraction involuntary""",v1
+Muscle spasms,Listed (6.1 Table 1),"T1: ""muscle spasms""",v1
+Nasal turbinate hypertrophy,Missing,,
+Nasopharyngitis,Missing,,
+Nausea,Listed (6.1 Table 1),"T1: ""Nausea""",v1
+Night sweats,Missing,,
+Oesophageal discomfort,Listed (6.1 Table 1),"T1: ""esophageal discomfort""",v1
+Oropharyngeal pain,Missing,,
+Orthostatic hypertension,Listed (6.1 Table 1),"T1: ""orthostatic hypertension""",v1
+Orthostatic hypotension,Listed (6.1 Table 1),"T1: ""Orthostatic hypotension""",v1
+Palpitations,Mentioned elsewhere (6.2),"6.2: ""palpitations""",v1
+Panic attack,Missing,,
+Paraesthesia,Missing,,
+Pneumonia,Missing,,
+Post procedural hypothyroidism,Missing,,
+Postural orthostatic tachycardia syndrome,Missing,,
+Protein urine present,Missing,,
+Pruritus,Mentioned elsewhere (5.3),"5.3: ""pruritus""",v1
+Psychosocial support,Missing,,
+Psychotic disorder,Missing,,
+Rash,Mentioned elsewhere (6.2),"6.2: ""rash""",v1
+Red blood cells urine positive,Missing,,
+Retching,Missing,,
+Rib fracture,Missing,,
+Salivary hypersecretion,Listed (6.1 Table 1),"T1: ""Salivary hypersecretion""",v1
+Schizophrenia,Missing,,
+Sedation,Missing,,
+Sinus bradycardia,Missing,,
+Sinus tachycardia,Listed (6.1 Table 1),"T1: ""sinus tachycardia""",v1
+Skin abrasion,Missing,,
+Skin laceration,Missing,,
+Somnolence,Listed (6.1 Table 1),"T1: ""Somnolence""",v1
+Spinal compression fracture,Missing,,
+Suicidal ideation,Missing,,
+Suicide attempt,Missing,,
+Sweating increased,Missing,,
+Syncope,Mentioned elsewhere (6.2),"6.2: ""syncope""",v1
+Tachycardia,Listed (6.1 Table 1),"T1: ""Tachycardia""",v1
+Tibia fracture,Missing,,
+Toothache,Missing,,
+Transaminases increased,"Listed (6.1 text, not Table 1)","6.1txt: ""ALT or AST elevations""",v1
+Tremor,Missing,,
+Upper respiratory tract infection,Missing,,
+Urinary hesitation,"Listed (6.1 text, not Table 1)","6.1txt: ""urinary hesitation"" ; 5.1: ""urinary hesitancy""",v1
+Urinary retention,"Listed (6.1 text, not Table 1)","6.1txt: ""urinary retention"" ; 5.1: ""urinary retention"" ; 10: ""urinary retention""",v1
+Urinary tract infection,"Listed (6.1 text, not Table 1)","6.1txt: ""urinary tract infections"" ; 5.8: ""urinary tract infection""",v1
+Vision blurred,Listed (6.1 Table 1),"T1: ""Vision blurred""",v1
+Vomiting,Listed (6.1 Table 1),"T1: ""Vomiting""",v1
+Weight decreased,Missing,,
+Weight increased,Missing,,

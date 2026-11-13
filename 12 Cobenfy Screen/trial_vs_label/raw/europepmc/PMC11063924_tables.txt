@@ -1,0 +1,41 @@
+##### Table 1. | Baseline Demographics and Characteristics (Intent-to-Treat Population)
+Characteristic | Participants, No. (%)
+Xanomeline-trospium chloride (n = 125) | Placebo (n = 131) | Overall (N = 256)
+Age, mean (SD), y | 43.6 (11.4) | 42.6 (12.2) | 43.1 (11.8)
+Sex |  |  | 
+Female | 38 (30.4) | 27 (20.6) | 65 (25.4)
+Male | 87 (69.6) | 104 (79.4) | 191 (74.6)
+Race |  |  | 
+Asian | 1 (0.8) | 0 | 1 (0.4)
+Black or African American | 79 (63.2) | 77 (58.8) | 156 (60.9)
+White | 45 (36.0) | 53 (40.5) | 98 (38.3)
+Not reported | 0 | 1 (0.8) | 1 (0.4)
+Body mass index, mean (SD)a | 28.8 (5.6) | 28.0 (5.2) | 28.38 (5.4)
+Baseline PANSS score, mean (SD) |  |  | 
+Total | 97.3 (8.9) | 96.7 (8.9) | 97.0 (8.9)
+Positive subscale score | 26.9 (3.7) | 26.4 (3.3) | 26.7 (3.5)
+Negative subscale score | 22.6 (3.2) | 22.0 (3.7) | 22.3 (3.5)
+Marder negative factor score | 22.0 (3.7) | 21.8 (4.2) | 21.9 (3.9)
+Baseline CGI-S score, mean (SD) | 5.1 (0.6) | 5.0 (0.6) | 5.1 (0.6)
+FOOT: Abbreviations: CGI-S, Clinical Global Improvement–Severity; PANSS, Positive and Negative Syndrome Scale. a Body mass index is calculated as weight in kilograms divided by height in meters squared.
+##### Table 2. | Safety and Tolerability During the 5-Week Treatment Period (Safety Population)
+Variable | Participants, No. (%)
+Xanomeline-trospium chloride (n = 125) | Placebo (n = 128)
+Any TEAE | 88 (70.4) | 64 (50.0)
+Serious TEAEa | 1 (0.8) | 0
+TEAE leading to discontinuation | 8 (6.4) | 7 (5.5)
+TEAE occurring in ≥5% of participants in the xanomeline-trospium chloride group |  | 
+Nausea | 24 (19.2) | 2 (1.6)
+Dyspepsia | 20 (16.0) | 2 (1.6)
+Vomiting | 20 (16.0) | 1 (0.8)
+Constipation | 16 (12.8) | 5 (3.9)
+Headache | 14 (11.2) | 15 (11.7)
+Hypertensionb | 8 (6.4) | 2 (1.6)
+Insomnia | 7 (5.6) | 10 (7.8)
+Diarrhea | 7 (5.6) | 1 (0.8)
+Mean (SD) change from baseline in body weight at week 5, kg | 1.4 (3.37) | 2.0 (3.08)
+≥7% Increase in body weight from baseline to week 5, No./total No. (%) | 5/78 (6.4) | 12/92 (13.0)
+Mean (SD) change from baseline to week 5 in Simpson-Angus Scale score | −0.1 (0.56) | −0.1 (0.36)
+Mean (SD) change from baseline to week 5 in Barnes Akathisia Rating Scale score | −0.1 (0.75) | −0.1 (0.88)
+Mean (SD) change from baseline to week 5 in Abnormal Involuntary Movement Scale score | 0.0 (0.45) | 0.0 (0.15)
+FOOT: Abbreviation: TEAE, treatment-emergent adverse event. a One serious TEAE of gastroesophageal reflux disease was reported. b Hypertension is the Medical Dictionary for Regulatory Activities preferred term and is not necessarily reflective of clinical hypertension.

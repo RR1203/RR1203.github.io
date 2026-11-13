@@ -1,0 +1,82 @@
+group,meddra_pt,in_prompt_spec,note
+Sweating,Hyperhidrosis,yes,
+Sweating,Cold sweat,yes,
+Sweating,Night sweats,yes,
+Sweating,Sweating increased,yes,LLT (maps to PT Hyperhidrosis); kept for FAERS free-text safety
+Salivation,Salivary hypersecretion,yes,
+Salivation,Drooling,yes,
+Gut slowdown,Constipation,yes,
+Gut slowdown,Ileus,yes,
+Gut slowdown,Intestinal obstruction,yes,
+Gut slowdown,Abdominal distension,yes,
+Urinary,Urinary retention,yes,
+Urinary,Urinary hesitation,yes,
+Urinary,Dysuria,yes,
+Cholinergic GI,Nausea,yes,
+Cholinergic GI,Vomiting,yes,
+Cholinergic GI,Dyspepsia,yes,
+Cholinergic GI,Diarrhoea,yes,
+Heart,Tachycardia,yes,
+Heart,Heart rate increased,yes,
+Heart,Palpitations,yes,
+Heart,Sinus tachycardia,added,direct synonym; also in label footnote d
+Blood pressure,Hypertension,yes,
+Blood pressure,Blood pressure increased,yes,
+Orthostatic,Orthostatic hypotension,yes,
+Orthostatic,Syncope,yes,
+Orthostatic,Dizziness postural,yes,
+Orthostatic,Blood pressure orthostatic decreased,added,direct synonym (investigation PT)
+Anticholinergic CNS,Confusional state,yes,PT for 'confusion'
+Anticholinergic CNS,Cognitive disorder,yes,PT for 'cognitive complaints'
+Anticholinergic CNS,Memory impairment,yes,
+Sleep,Insomnia,yes,
+Sleep,Somnolence,yes,
+Sleep,Sedation,added,direct synonym of somnolence
+Vision,Vision blurred,yes,
+Vision,Dry eye,yes,
+Mood,Agitation,yes,
+Mood,Anxiety,yes,
+Mood,Mania,yes,
+Mood,Depression,yes,
+Mood,Suicidal ideation,yes,'suicidality'
+Mood,Suicide attempt,yes,'suicidality'
+Mood,Completed suicide,yes,'suicidality'
+Movement,Extrapyramidal disorder,yes,'EPS'
+Movement,Akathisia,yes,
+Movement,Tremor,yes,
+Movement,Dyskinesia,yes,
+Movement,Dystonia,added,in label EPS footnote f
+Liver,Alanine aminotransferase increased,yes,'liver enzymes increased'
+Liver,Aspartate aminotransferase increased,yes,'liver enzymes increased'
+Liver,Gamma-glutamyltransferase increased,yes,'liver enzymes increased'
+Liver,Hepatic enzyme increased,yes,'liver enzymes increased'
+Liver,Transaminases increased,yes,'liver enzymes increased'
+Liver,Liver function test increased,yes,'liver enzymes increased'
+Biliary,Cholelithiasis,yes,'gallbladder events'
+Biliary,Cholecystitis,yes,'gallbladder events'
+Biliary,Biliary colic,yes,'gallbladder events'
+Biliary,Cholecystitis acute,yes,'gallbladder events'
+Weight,Weight decreased,yes,
+Weight,Decreased appetite,yes,
+Allergy,Angioedema,yes,
+Allergy,Rash,yes,
+Label: Dyspepsia (footnote a),Dyspepsia,label,label Table 1 footnote a
+Label: Dyspepsia (footnote a),Oesophageal discomfort,label,label Table 1 footnote a
+Label: Hypertension (footnote b),Hypertension,label,label Table 1 footnote b
+Label: Hypertension (footnote b),Blood pressure increased,label,label Table 1 footnote b
+Label: Hypertension (footnote b),Labile hypertension,label,label Table 1 footnote b
+Label: Hypertension (footnote b),Orthostatic hypertension,label,label Table 1 footnote b
+Label: Abdominal pain (footnote c),Abdominal discomfort,label,label Table 1 footnote c
+Label: Abdominal pain (footnote c),Abdominal pain upper,label,label Table 1 footnote c
+Label: Abdominal pain (footnote c),Abdominal pain,label,label Table 1 footnote c
+Label: Abdominal pain (footnote c),Abdominal pain lower,label,label Table 1 footnote c
+Label: Abdominal pain (footnote c),Abdominal tenderness,label,label Table 1 footnote c
+Label: Tachycardia (footnote d),Tachycardia,label,label Table 1 footnote d
+Label: Tachycardia (footnote d),Heart rate increased,label,label Table 1 footnote d
+Label: Tachycardia (footnote d),Sinus tachycardia,label,label Table 1 footnote d
+Label: EPS non-akathisia (footnote f),Dyskinesia,label,label Table 1 footnote f
+Label: EPS non-akathisia (footnote f),Drooling,label,label Table 1 footnote f
+Label: EPS non-akathisia (footnote f),Dystonia,label,label Table 1 footnote f
+Label: EPS non-akathisia (footnote f),Extrapyramidal disorder,label,label Table 1 footnote f
+Label: EPS non-akathisia (footnote f),Muscle contraction involuntary,label,label Table 1 footnote f
+Label: EPS non-akathisia (footnote f),Muscle spasms,label,label Table 1 footnote f

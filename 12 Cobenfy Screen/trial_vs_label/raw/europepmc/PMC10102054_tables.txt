@@ -1,0 +1,66 @@
+##### Table 1 | Baseline demographics and characteristics
+Characteristic | Xanomeline Alone(n = 33) | Xanomeline + Trospium(n = 35)
+Age, mean (SD), years | 34.8 (8.8) | 40.9 (12.3)a
+Sex, n (%) |  | 
+Male | 21 (63.6) | 27 (77.1)
+Female | 12 (36.4) | 8 (22.9)
+Race, n (%) |  | 
+White | 9 (27.3) | 13 (37.1)
+Black or African American | 23 (69.7) | 21 (60.0)
+Other | 1 (3.0) | 1 (2.9)
+Ethnicity, n (%) |  | 
+Hispanic or Latino | 0 | 0
+Not Hispanic or Latino | 33 (100) | 35 (100)
+Weight, mean (SD), kg | 88.4 (16.6) | 87.8 (15.8)
+BMI, mean (SD), kg/m2 | 29.1 (5.0) | 28.8 (5.0)
+FOOT: BMI body mass index; df degrees of freedom; SD standard deviationap = 0.024 versus xanomeline alone (t = 2.32; df = 66)
+##### Table 2 | Overview of all AEs
+Characteristic, No. subjects (% subjects) [No. events] | Xanomeline Alone(n = 33) | Xanomeline + Trospium(n = 35)
+TEAE |  | 
+≥ 1 | 27 (81.8) [108] | 23 (65.7) [73]
+None | 6 (18.2) | 12 (34.3)
+Maximum severity of TEAEs |  | 
+Mild | 22 (66.7) | 20 (57.1)
+Moderate | 5 (15.2) | 3 (8.6)
+Severe | 0 | 0
+Any clinically significant TEAEa | 5 (15.2) [5] | 3 (8.6) [6]
+Any study drug–related TEAE | 23 (69.7) [92] | 18 (51.4) [57]
+Maximum severity of study drug–related TEAEs |  | 
+Mild | 19 (57.6) | 15 (42.9)
+Moderate | 4 (12.1) | 3 (8.6)
+Severe | 0 | 0
+Any SAE | 0 | 0
+Any AE leading to discontinuation | 2 (6.1) [2] | 1 (2.9) [1]
+Any study drug–related AE leading to discontinuation | 1 (3.0) [1] | 0
+FOOT: AE adverse event; No. number; SAE serious adverse event; TEAE treatment-emergent adverse eventaDefined as moderate or higher severity
+##### Table 3 | Incidence of cholinergic TEAEs
+Preferred term, No. subjects (% subjects) | Xanomeline Alone(N = 33) | Xanomeline + Trospium(N = 35) | Difference in Incidence Rate
+Any cholinergic TEAEa | 21 (63.6) | 12 (34.3)b | 46%
+Sweating | 16 (48.5) | 7 (20.0)c | 59%
+Salivary hypersecretion | 12 (36.4) | 9 (25.7) | 29%
+Nausea | 8 (24.2) | 6 (17.1) | 29%
+Diarrhea | 7 (21.2) | 2 (5.7) | 73%
+Vomiting | 5 (15.2) | 2 (5.7) | 62%
+FOOT: df degrees of freedom; No. number; TEAE treatment-emergent adverse eventaTEAE was defined as any adverse event (Medical Dictionary for Regulatory Activities [Version 19.0]) that happened for the first time or worsened in severity after the dosing of study drug. Nausea, vomiting, diarrhea, excessive sweating, and salivary hypersecretion were prespecified cholinergic adverse eventsbp = 0.016 versus xanomeline alone (X2 = 5.86, df = 1 [any cholinergic TEAE])cp = 0.013 versus xanomeline alone (X2 = 6.16, df = 1 [sweating])
+##### Table 4 | Pharmacokinetic parameters
+Parameter | Xanomeline Alone | Xanomeline + Trospium
+n | Mean (SD) | n | Mean (SD)
+Day 3 |  |  |  | 
+Cmax, ng/mL | 32 | 4.42 (4.74) | 34 | 3.98 (3.12)
+Tmax, h | 32 | 2.65 (0.93) | 34 | 2.62 (1.00)
+AUC0-last, h*ng/mL | 32 | 15.31 (16.22) | 34 | 13.95 (10.82)
+T1/2, h | 11a | 3.53 (1.18) | 17a | 3.28 (1.21)
+Day 9 |  |  |  | 
+Cmax, ng/mL | 31 | 6.78 (6.03) | 32 | 6.23 (5.67)
+Tmax, h | 31 | 2.12 (1.09) | 32 | 2.13 (0.91)
+AUC0-last, h*ng/mL | 31 | 26.08 (20.38) | 32 | 25.33 (16.70)
+T1/2, h | 21a | 4.69 (2.12) | 21a | 4.44 (2.45)
+FOOT: AUC0-last area under the concentration–time curve from time 0 to time of last measurable concentration; Cmax maximum observed concentration; SD standard deviation; T1/2 apparent terminal half-life; Tmax time to reach maximum observed concentrationaOnly reported for subjects who exhibited a terminal elimination phase in their concentration versus time profiles. The short duration of the dosing interval may not have allowed for adequate characterization of the terminal elimination phase in some subjects
+##### Table 5 | Comparison of placebo-adjusted ratesa (%) of five cholinergic AEs from three clinical trials
+Preferred term (%) | Xanomeline AloneAD(Bodick et al. 1997)(n = 87b) | Xanomeline AloneSchizophrenia(Shekhar et al. 2008)(n = 10) | Xanomeline + TrospiumSchizophrenia Phase 2(Brannan et al. 2021)(n = 89c)
+Sweating | 71 | 20 | 1
+Salivary hypersecretion | 24 | 10 | 0
+Nausea | 32 | 30 | 13
+Diarrhea | 7d | 20 | -2
+Vomiting | 33 | 50 | 5
+FOOT: AD Alzheimer’s disease; AE adverse eventaCalculated as the incidence in the xanomeline-alone and KarXT treatment arms minus the incidence rate in the placebo treatment armsbHigh-dose treatment arm (225 mg/day)c89 of the 90 subjects assigned to xanomeline + trospium qualified for the safety populationdAE was reported as “fecal incontinence”
