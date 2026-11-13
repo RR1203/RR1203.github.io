@@ -1,0 +1,2422 @@
+{
+ "epmc_chrm_mr": {
+  "query": "(CHRM4 OR CHRM1 OR \"muscarinic\") AND (\"mendelian randomization\" OR \"mendelian randomisation\")",
+  "hitCount": 253,
+  "results": [
+   {
+    "id": "41718003",
+    "title": "Proteome-wide Mendelian randomisation identifies causal links between blood proteins and myopia.",
+    "year": "2026",
+    "journal": "J Glob Health"
+   },
+   {
+    "id": "41591692",
+    "title": "Integrating transcriptomics and Mendelian randomisation identifies immune-related genes causally linked to prostate cancer lymph node metastasis.",
+    "year": "2026",
+    "journal": "Discov Oncol"
+   },
+   {
+    "id": "41558814",
+    "title": "Genetic dissection of stool frequency implicates vitamin B1 metabolism and other actionable pathways in the modulation of gut motility.",
+    "year": "2026",
+    "journal": "Gut"
+   },
+   {
+    "id": "40908685",
+    "title": "From Anesthetic to Neuroprotector: Multi-Omics Reveals Ketamine's Previously Unexplored Neuroprotective Role in Alzheimer's Disease.",
+    "year": "2025",
+    "journal": "CNS Neurol Disord Drug Targets"
+   },
+   {
+    "id": "42798127",
+    "title": "Bidirectional causal associations between Sj\u00f6gren syndrome and gastrointestinal disorders: A two-sample Mendelian randomization study.",
+    "year": "2026",
+    "journal": "Medicine (Baltimore)"
+   },
+   {
+    "id": "38030236",
+    "title": "Association of Antipsychotic Drugs with Venous Thromboembolism: Data Mining of Food and Drug Administration Adverse Event Reporting System and Mendelian Randomization Analysis.",
+    "year": "2024",
+    "journal": "J Atheroscler Thromb"
+   },
+   {
+    "id": "38674857",
+    "title": "Mendelian Randomization Analysis Identifies Inverse Causal Relationship between External Eating and Metabolic Phenotypes.",
+    "year": "2024",
+    "journal": "Nutrients"
+   },
+   {
+    "id": "41315851",
+    "title": "N-palmitoyl glycine differentially modulates TRPM4 and TRPC5 and is causally linked to Brugada syndrome.",
+    "year": "2025",
+    "journal": "Commun Biol"
+   },
+   {
+    "id": "41683289",
+    "title": "Dietary Nutrients, Gut Microbiota, and Cardiac Function: From Metabolic Mechanisms to Clinical Applications.",
+    "year": "2026",
+    "journal": "Nutrients"
+   },
+   {
+    "id": "41710145",
+    "title": "Exploring Endoplasmic Reticulum Stress in Gestational Diabetes Mellitus: MultiOmics Insights Through Mendelian Randomization.",
+    "year": "2026",
+    "journal": "Int J Womens Health"
+   },
+   {
+    "id": "41178126",
+    "title": "Gut microbiome and atrial fibrillation: mechanistic insights metabolites and comorbidities. Systematic review.",
+    "year": "2025",
+    "journal": "Gut Microbes"
+   },
+   {
+    "id": "42365605",
+    "title": "Genetic overlap between treatment-resistant schizophrenia and smoking initiation.",
+    "year": "2026",
+    "journal": "Int J Neuropsychopharmacol"
+   },
+   {
+    "id": "41195067",
+    "title": "Exploring the molecular mechanisms of Pueraria in Alzheimer's disease treatment using machine learning and network pharmacology.",
+    "year": "2025",
+    "journal": "Front Nutr"
+   },
+   {
+    "id": "PPR981337",
+    "title": "Understanding the Bidirectional Relationship Between Chronic Respiratory Disease and Cardiovascular Disease Using Genetic Evidence",
+    "year": "2025",
+    "journal": null
+   },
+   {
+    "id": "41572266",
+    "title": "Assessing the comorbidity between asthma and depression through polygenic risk scoring and time-to-event models.",
+    "year": "2026",
+    "journal": "BMC Med"
+   },
+   {
+    "id": "41620312",
+    "title": "Genetic and epigenetic insights into perioperative neurocognitive disorders: a narrative review.",
+    "year": "2026",
+    "journal": "Br J Anaesth"
+   },
+   {
+    "id": "40988230",
+    "title": "Identification of novel protein biomarkers and drug targets for functional dyspepsia by integrating human plasma proteome with genome.",
+    "year": "2025",
+    "journal": "Medicine (Baltimore)"
+   },
+   {
+    "id": "40806641",
+    "title": "Common Genomic and Proteomic Alterations Related to Disturbed Neural Oscillatory Activity in Schizophrenia.",
+    "year": "2025",
+    "journal": "Int J Mol Sci"
+   },
+   {
+    "id": "42788344",
+    "title": "Tumor\u2011immune spatiotemporal co\u2011evolution: A new paradigm for understanding and overcoming therapy resistance in metastatic castration\u2011resistant prostate cancer (Review).",
+    "year": "2026",
+    "journal": "Int J Mol Med"
+   },
+   {
+    "id": "39993091",
+    "title": "Causal role of common autoimmune diseases in interstitial cystitis/bladder pain syndrome: Mendelian randomization (MR) study.",
+    "year": "2025",
+    "journal": "Medicine (Baltimore)"
+   },
+   {
+    "id": "40903476",
+    "title": "Mendelian randomization analysis of the association between vitamin B12 deficiency anaemia and the risk of developing lung disease.",
+    "year": "2025",
+    "journal": "Sci Rep"
+   },
+   {
+    "id": "40352659",
+    "title": "The Causal Association Analysis between Depression and Cerebrospinal Fluid: From the Perspective of Mendelian Randomization.",
+    "year": "2025",
+    "journal": "Psychol Res Behav Manag"
+   },
+   {
+    "id": "42795267",
+    "title": "Mental Health Across the Atrial Fibrillation Continuum: Mechanisms, Outcomes, and Clinical Implications.",
+    "year": "2026",
+    "journal": "Life (Basel)"
+   },
+   {
+    "id": "40770287",
+    "title": "Atrophy of hypothalamic subregions increases migraine risk: cross-sectional study and mendelian randomization analysis.",
+    "year": "2025",
+    "journal": "J Headache Pain"
+   },
+   {
+    "id": "42504194",
+    "title": "A Narrative Review of the Correlation Between Comorbidity and Acute Exacerbation of COPD Patients.",
+    "year": "2026",
+    "journal": "Int J Chron Obstruct Pulmon Dis"
+   }
+  ]
+ },
+ "epmc_chrm4_mr": {
+  "query": "CHRM4 AND (\"mendelian randomization\" OR \"mendelian randomisation\")",
+  "hitCount": 11,
+  "results": [
+   {
+    "id": "41620312",
+    "title": "Genetic and epigenetic insights into perioperative neurocognitive disorders: a narrative review.",
+    "year": "2026",
+    "journal": "Br J Anaesth"
+   },
+   {
+    "id": "38030236",
+    "title": "Association of Antipsychotic Drugs with Venous Thromboembolism: Data Mining of Food and Drug Administration Adverse Event Reporting System and Mendelian Randomization Analysis.",
+    "year": "2024",
+    "journal": "J Atheroscler Thromb"
+   },
+   {
+    "id": "38674857",
+    "title": "Mendelian Randomization Analysis Identifies Inverse Causal Relationship between External Eating and Metabolic Phenotypes.",
+    "year": "2024",
+    "journal": "Nutrients"
+   },
+   {
+    "id": "42788344",
+    "title": "Tumor\u2011immune spatiotemporal co\u2011evolution: A new paradigm for understanding and overcoming therapy resistance in metastatic castration\u2011resistant prostate cancer (Review).",
+    "year": "2026",
+    "journal": "Int J Mol Med"
+   },
+   {
+    "id": "38016951",
+    "title": "The genetic relationships between brain structure and schizophrenia.",
+    "year": "2023",
+    "journal": "Nat Commun"
+   },
+   {
+    "id": "41639063",
+    "title": "Identifying drug targets for schizophrenia through gene prioritization.",
+    "year": "2026",
+    "journal": "Transl Psychiatry"
+   },
+   {
+    "id": "36800925",
+    "title": "Genetics of migraine: where are we now?",
+    "year": "2023",
+    "journal": "J Headache Pain"
+   },
+   {
+    "id": "PMC10912539",
+    "title": "A review and analysis of key biomarkers in Alzheimer\u2019s disease",
+    "year": "2024",
+    "journal": "Front Neurosci"
+   },
+   {
+    "id": "30805717",
+    "title": "Shared genetic architecture between metabolic traits and Alzheimer's disease: a large-scale genome-wide cross-trait analysis.",
+    "year": "2019",
+    "journal": "Hum Genet"
+   },
+   {
+    "id": "PMC6777611",
+    "title": "Abstracts from the 50th European Society of Human Genetics Conference: Posters",
+    "year": "2018",
+    "journal": "Eur J Hum Genet"
+   },
+   {
+    "id": "PMC5719066",
+    "title": "ACNP 56th Annual Meeting: Poster Session II, December 5, 2017",
+    "year": "2017",
+    "journal": "Neuropsychopharmacology"
+   }
+  ]
+ },
+ "epmc_chrm1_mr": {
+  "query": "CHRM1 AND (\"mendelian randomization\" OR \"mendelian randomisation\")",
+  "hitCount": 21,
+  "results": [
+   {
+    "id": "41591692",
+    "title": "Integrating transcriptomics and Mendelian randomisation identifies immune-related genes causally linked to prostate cancer lymph node metastasis.",
+    "year": "2026",
+    "journal": "Discov Oncol"
+   },
+   {
+    "id": "41718003",
+    "title": "Proteome-wide Mendelian randomisation identifies causal links between blood proteins and myopia.",
+    "year": "2026",
+    "journal": "J Glob Health"
+   },
+   {
+    "id": "40908685",
+    "title": "From Anesthetic to Neuroprotector: Multi-Omics Reveals Ketamine's Previously Unexplored Neuroprotective Role in Alzheimer's Disease.",
+    "year": "2025",
+    "journal": "CNS Neurol Disord Drug Targets"
+   },
+   {
+    "id": "41195067",
+    "title": "Exploring the molecular mechanisms of Pueraria in Alzheimer's disease treatment using machine learning and network pharmacology.",
+    "year": "2025",
+    "journal": "Front Nutr"
+   },
+   {
+    "id": "38030236",
+    "title": "Association of Antipsychotic Drugs with Venous Thromboembolism: Data Mining of Food and Drug Administration Adverse Event Reporting System and Mendelian Randomization Analysis.",
+    "year": "2024",
+    "journal": "J Atheroscler Thromb"
+   },
+   {
+    "id": "38674857",
+    "title": "Mendelian Randomization Analysis Identifies Inverse Causal Relationship between External Eating and Metabolic Phenotypes.",
+    "year": "2024",
+    "journal": "Nutrients"
+   },
+   {
+    "id": "40806641",
+    "title": "Common Genomic and Proteomic Alterations Related to Disturbed Neural Oscillatory Activity in Schizophrenia.",
+    "year": "2025",
+    "journal": "Int J Mol Sci"
+   },
+   {
+    "id": "38249960",
+    "title": "Identification of diagnostic molecules and potential traditional Chinese medicine components for Alzheimer's disease by single cell RNA sequencing combined with a systematic framework for network pharmacology.",
+    "year": "2023",
+    "journal": "Front Med (Lausanne)"
+   },
+   {
+    "id": "42938431",
+    "title": "Genetic and Molecular Mechanisms of Synaptic Plasticity in Perioperative Delirium: From Neuroinflammation to Circuit Dysfunction and Recovery.",
+    "year": "2026",
+    "journal": "Genes (Basel)"
+   },
+   {
+    "id": "36574990",
+    "title": "De novo discovery of traits co-occurring with chronic obstructive pulmonary disease.",
+    "year": "2023",
+    "journal": "Life Sci Alliance"
+   },
+   {
+    "id": "36369282",
+    "title": "Collective genomic segments with differential pleiotropic patterns between cognitive dimensions and psychopathology.",
+    "year": "2022",
+    "journal": "Nat Commun"
+   },
+   {
+    "id": "31073081",
+    "title": "Epigenome-wide association study of lung function level and its change.",
+    "year": "2019",
+    "journal": "Eur Respir J"
+   },
+   {
+    "id": "PMC10912539",
+    "title": "A review and analysis of key biomarkers in Alzheimer\u2019s disease",
+    "year": "2024",
+    "journal": "Front Neurosci"
+   },
+   {
+    "id": "30817828",
+    "title": "IMI - Myopia Genetics Report.",
+    "year": "2019",
+    "journal": "Invest Ophthalmol Vis Sci"
+   },
+   {
+    "id": "36456694",
+    "title": "ACNP 61<sup>st</sup> Annual Meeting: Poster Abstracts P271-P540.",
+    "year": "2022",
+    "journal": "Neuropsychopharmacology"
+   },
+   {
+    "id": "PMC11627199",
+    "title": "Abstracts from the 57th European Society of Human Genetics (ESHG) Conference: e-Posters",
+    "year": "2024",
+    "journal": "Eur J Hum Genet"
+   },
+   {
+    "id": "35142107",
+    "title": "New developments in the biology of fibroblast growth factors.",
+    "year": "2022",
+    "journal": "WIREs Mech Dis"
+   },
+   {
+    "id": "PMC5719066",
+    "title": "ACNP 56th Annual Meeting: Poster Session II, December 5, 2017",
+    "year": "2017",
+    "journal": "Neuropsychopharmacology"
+   },
+   {
+    "id": "23620888",
+    "title": "Abstracts of the 14th International Congress on Schizophrenia Research (ICOSR). April 21-15, 2013. Orlando Grande Lakes, Florida, USA.",
+    "year": "2013",
+    "journal": "Schizophr Bull"
+   },
+   {
+    "id": "PMC6777611",
+    "title": "Abstracts from the 50th European Society of Human Genetics Conference: Posters",
+    "year": "2018",
+    "journal": "Eur J Hum Genet"
+   },
+   {
+    "id": "PMC10576948",
+    "title": "UEG Week 2023 Poster Presentations",
+    "year": "2023",
+    "journal": "United European Gastroenterol J"
+   }
+  ]
+ },
+ "epmc_chrm_coloc": {
+  "query": "(CHRM4 OR CHRM1) AND (colocalization OR colocalisation)",
+  "hitCount": 157,
+  "results": [
+   {
+    "id": "42540671",
+    "title": "Receptor Contribution Reallocation After Removal of Literature-Derived Weights: A Secondary Sensitivity Analysis of the Integrated Ki-DDD-TWAS Pipeline for Antipsychotic Lipid-Trait Prioritization.",
+    "year": "2026",
+    "journal": "Cureus"
+   },
+   {
+    "id": "41718003",
+    "title": "Proteome-wide Mendelian randomisation identifies causal links between blood proteins and myopia.",
+    "year": "2026",
+    "journal": "J Glob Health"
+   },
+   {
+    "id": "39558340",
+    "title": "Exercise-conditioned plasma ameliorates postoperative cognitive dysfunction by activating hippocampal cholinergic circuit and enhancing BDNF/TrkB signaling.",
+    "year": "2024",
+    "journal": "Cell Commun Signal"
+   },
+   {
+    "id": "42077848",
+    "title": "Wheat Peptides Promote Recovery of the Enteric Nervous System via mAChR Activation to Relieve Constipation in Mice.",
+    "year": "2026",
+    "journal": "ACS Omega"
+   },
+   {
+    "id": "PPR1240231",
+    "title": "Pathways regulating the excitability of sympathetic neurons derived from human induced pluripotent stem cells",
+    "year": "2026",
+    "journal": null
+   },
+   {
+    "id": "38063486",
+    "title": "Stimulation of the muscarinic receptor M4 regulates neural precursor cell proliferation and promotes adult hippocampal neurogenesis.",
+    "year": "2024",
+    "journal": "Development"
+   },
+   {
+    "id": "40836099",
+    "title": "mAChR4 suppresses liver disease via GAP-induced antimicrobial immunity.",
+    "year": "2025",
+    "journal": "Nature"
+   },
+   {
+    "id": "42502305",
+    "title": "Autophagy-Related Gene-Set Signals in the Genetic Architecture of Obsessive-Compulsive Disorder: A Hypothesis-Generating Link to Nicotinamide Adenine Dinucleotide-Associated Cellular Maintenance Biology.",
+    "year": "2026",
+    "journal": "Cureus"
+   },
+   {
+    "id": "42323316",
+    "title": "A synaptoid connectome differentiates tanycytic subpopulations and underlies neuroglial communication and neuroendocrine regulation.",
+    "year": "2026",
+    "journal": "Nat Commun"
+   },
+   {
+    "id": "38427478",
+    "title": "Cholinergic Receptor Muscarinic 1 Co-Localized with Mitochondria in Cultured Dorsal Root Ganglion Neurons, and Its Deletion Disrupted Mitochondrial Ultrastructure in Peripheral Neurons: Implications in Alzheimer's Disease.",
+    "year": "2024",
+    "journal": "J Alzheimers Dis"
+   },
+   {
+    "id": "38505261",
+    "title": "Editorial: Proteins and protein-complexes underlying mitochondrial structure-function and metabolism: implications in diseases.",
+    "year": "2024",
+    "journal": "Front Cell Dev Biol"
+   },
+   {
+    "id": "41969611",
+    "title": "Integrative Multiomics and Single-Cell Analyses Identify FKBP10 as a Predictor of Radiotherapy Outcome in Colorectal Cancer.",
+    "year": "2026",
+    "journal": "Hum Mutat"
+   },
+   {
+    "id": "39493347",
+    "title": "Guanine nucleotide exchange factors and colon neoplasia.",
+    "year": "2024",
+    "journal": "Front Cell Dev Biol"
+   },
+   {
+    "id": "42523036",
+    "title": "An Anterior Cingulate Cortex-Anterior Insular Cortex Glutamatergic Circuit Gates Stress-Induced Visceral Hypersensitivity and Anxiety via Ionotropic Glutamate Receptors Trafficking.",
+    "year": "2026",
+    "journal": "Adv Sci (Weinh)"
+   },
+   {
+    "id": "37137892",
+    "title": "G protein-coupled receptors in neurodegenerative diseases and psychiatric disorders.",
+    "year": "2023",
+    "journal": "Signal Transduct Target Ther"
+   },
+   {
+    "id": "41845130",
+    "title": "Organization of neuropeptide systems in the human brain.",
+    "year": "2026",
+    "journal": "Nat Neurosci"
+   },
+   {
+    "id": "39422297",
+    "title": "Clemastine Induces Oligodendrocyte Progenitor Pool Exhaustion and Senescence in the Context of Chronic Demyelination in a Rabbit Model.",
+    "year": "2025",
+    "journal": "Ann Neurol"
+   },
+   {
+    "id": "41060748",
+    "title": "Goblet cells dictate viral tropism and pathogenesis in nasal and intestinal mucosae.",
+    "year": "2025",
+    "journal": "Proc Natl Acad Sci U S A"
+   },
+   {
+    "id": "42634656",
+    "title": "When Literature Priors Are Removed: Clinical Rank Shifts and Transancestral Stability in Antipsychotic Low-Density Lipoprotein (LDL)-Risk Modelling.",
+    "year": "2026",
+    "journal": "Cureus"
+   },
+   {
+    "id": "39107789",
+    "title": "Network proteomics of the Lewy body dementia brain reveals presynaptic signatures distinct from Alzheimer's disease.",
+    "year": "2024",
+    "journal": "Mol Neurodegener"
+   },
+   {
+    "id": "34056840",
+    "title": "Hidden talents: Poly (I:C)-induced maternal immune activation improves mouse visual discrimination performance and reversal learning in a sex-dependent manner.",
+    "year": "2021",
+    "journal": "Genes Brain Behav"
+   },
+   {
+    "id": "40956809",
+    "title": "Dopaminergic short axon cells integrate sensory and top-down inputs to enhance discriminative learning in the mouse olfactory bulb.",
+    "year": "2025",
+    "journal": "PLoS Biol"
+   },
+   {
+    "id": "42396193",
+    "title": "Molecular mechanisms and therapeutic targets in lung cancer-nerve crosstalk.",
+    "year": "2026",
+    "journal": "Chin Med J Pulm Crit Care Med"
+   },
+   {
+    "id": "38846081",
+    "title": "ORP9-PH domain-based fluorescent reporters for visualizing phosphatidylinositol 4-phosphate dynamics in living cells.",
+    "year": "2024",
+    "journal": "RSC Chem Biol"
+   },
+   {
+    "id": "42938431",
+    "title": "Genetic and Molecular Mechanisms of Synaptic Plasticity in Perioperative Delirium: From Neuroinflammation to Circuit Dysfunction and Recovery.",
+    "year": "2026",
+    "journal": "Genes (Basel)"
+   }
+  ]
+ },
+ "epmc_chrm4_cognition": {
+  "query": "CHRM4 AND (cognition OR \"cognitive performance\" OR \"reaction time\" OR intelligence) AND (GWAS OR eQTL OR genetic)",
+  "hitCount": 155,
+  "results": [
+   {
+    "id": "42006053",
+    "title": "Beyond dopamine blockade: mechanistic humility and the rise of muscarinic, TAAR1, and glutamatergic pathways in schizophrenia.",
+    "year": "2026",
+    "journal": "Front Psychiatry"
+   },
+   {
+    "id": "40364647",
+    "title": "Schizophrenia: Genetics, neurological mechanisms, and therapeutic approaches.",
+    "year": "2026",
+    "journal": "Neural Regen Res"
+   },
+   {
+    "id": "41620312",
+    "title": "Genetic and epigenetic insights into perioperative neurocognitive disorders: a narrative review.",
+    "year": "2026",
+    "journal": "Br J Anaesth"
+   },
+   {
+    "id": "42703538",
+    "title": "Whole-Exome and Whole-Genome Sequencing of Candidate Pharmacogenomic and Schizophrenia-Related Genes in Sudanese Families with Schizophrenia.",
+    "year": "2026",
+    "journal": "Pharmgenomics Pers Med"
+   },
+   {
+    "id": "41639063",
+    "title": "Identifying drug targets for schizophrenia through gene prioritization.",
+    "year": "2026",
+    "journal": "Transl Psychiatry"
+   },
+   {
+    "id": "42305118",
+    "title": "Decoding GPCR signaling in living cells to advance early therapeutic discovery for neurological disorders.",
+    "year": "2026",
+    "journal": "Front Mol Neurosci"
+   },
+   {
+    "id": "42679819",
+    "title": "Cross-species single-cell atlas of the striatum defines cell-type and subregion disease vulnerabilities.",
+    "year": "2026",
+    "journal": "Cell"
+   },
+   {
+    "id": "40836099",
+    "title": "mAChR4 suppresses liver disease via GAP-induced antimicrobial immunity.",
+    "year": "2025",
+    "journal": "Nature"
+   },
+   {
+    "id": "42788344",
+    "title": "Tumor\u2011immune spatiotemporal co\u2011evolution: A new paradigm for understanding and overcoming therapy resistance in metastatic castration\u2011resistant prostate cancer (Review).",
+    "year": "2026",
+    "journal": "Int J Mol Med"
+   },
+   {
+    "id": "42762881",
+    "title": "Translational dysregulation as a mechanistic driver of cognitive, behavioral, and affective phenotypes in FXS and TSC.",
+    "year": "2026",
+    "journal": "Neurosci Biobehav Rev"
+   },
+   {
+    "id": "41268562",
+    "title": "Transcriptomic analysis of skin biopsies in Prurigo nodularis patients: with and without atopic dermatitis.",
+    "year": "2025",
+    "journal": "Front Immunol"
+   },
+   {
+    "id": "38334615",
+    "title": "Dementia with Lewy Bodies: Genomics, Transcriptomics, and Its Future with Data Science.",
+    "year": "2024",
+    "journal": "Cells"
+   },
+   {
+    "id": "40867848",
+    "title": "Exploring the Impact of Bioactive Compounds Found in Extra Virgin Olive Oil on NRF2 Modulation in Alzheimer's Disease.",
+    "year": "2025",
+    "journal": "Antioxidants (Basel)"
+   },
+   {
+    "id": "PPR632519",
+    "title": "The genetic relationships between brain structure and schizophrenia",
+    "year": "2023",
+    "journal": null
+   },
+   {
+    "id": "PPR1219430",
+    "title": "Differential and regionally distinct molecular responses distinguish FLASH and conventional RT in a medulloblastoma model while preserving therapeutic outcomes",
+    "year": "2026",
+    "journal": null
+   },
+   {
+    "id": "34674705",
+    "title": "Association between genetic variants of the cholinergic system and postoperative delirium and cognitive dysfunction in elderly patients.",
+    "year": "2021",
+    "journal": "BMC Med Genomics"
+   },
+   {
+    "id": "42645222",
+    "title": "Trichostatin A Modulates Ethanol Consumption and Reveals Dose- and Sex-Specific Transcriptomic Signatures in the Nucleus Accumbens Shell.",
+    "year": "2026",
+    "journal": "Cells"
+   },
+   {
+    "id": "40091535",
+    "title": "DNA methylation confers a cerebellum-specific identity in non-human primates.",
+    "year": "2025",
+    "journal": "Zool Res"
+   },
+   {
+    "id": "41004228",
+    "title": "Oxytocin and vasopressin enhance social pain empathy via common and distinct of neural expressions, genetic pathways, and networks.",
+    "year": "2025",
+    "journal": "Proc Natl Acad Sci U S A"
+   },
+   {
+    "id": "36909280",
+    "title": "A growing understanding of the role of muscarinic receptors in the molecular pathology and treatment of schizophrenia.",
+    "year": "2023",
+    "journal": "Front Cell Neurosci"
+   },
+   {
+    "id": "41839854",
+    "title": "Single-cell spatial map of cis-regulatory elements for disease-related genes in the macaque cortex.",
+    "year": "2026",
+    "journal": "Nat Commun"
+   },
+   {
+    "id": "PMC13661396",
+    "title": "Gestational benzene exposure programs sex-specific neuroimmune responses to postnatal viral infection",
+    "year": null,
+    "journal": "Front Immunol"
+   },
+   {
+    "id": "41205203",
+    "title": "Deciphering the Multitarget Neuroprotective Potential of Ficus microcarpa L. f. Leaf Extract: Insights From Phytochemical, Computational, and Experimental Approaches.",
+    "year": "2026",
+    "journal": "Chem Biodivers"
+   },
+   {
+    "id": "38305989",
+    "title": "Muscarinic control of cardiovascular function in humans: a review of current clinical evidence.",
+    "year": "2024",
+    "journal": "Clin Auton Res"
+   },
+   {
+    "id": "41229685",
+    "title": "The gut-lung axis in asthma: microbiota-driven mechanisms and therapeutic perspectives.",
+    "year": "2025",
+    "journal": "Front Microbiol"
+   }
+  ]
+ },
+ "epmc_xanomeline_cognition": {
+  "query": "xanomeline AND (cognition OR cognitive)",
+  "hitCount": 727,
+  "results": [
+   {
+    "id": "PMC13643683",
+    "title": "Beyond dopamine: KarXT and emerging mechanism-based therapies in schizophrenia",
+    "year": null,
+    "journal": "Front Psychiatry"
+   },
+   {
+    "id": "42947585",
+    "title": "An Update on Xanomeline-trospium (Cobenfy) for Schizophrenia: Emerging Evidence and Clinical Implications.",
+    "year": "2026",
+    "journal": "Clin Psychopharmacol Neurosci"
+   },
+   {
+    "id": "42533695",
+    "title": "A Case Report: Cobenfy in a Middle-Aged Man with Schizophrenia.",
+    "year": "2026",
+    "journal": "J Am Psychiatr Nurses Assoc"
+   },
+   {
+    "id": "42728876",
+    "title": "Xanomeline and Trospium Chloride: Mechanism of Action, Clinical, and Translational Science.",
+    "year": "2026",
+    "journal": "Clin Transl Sci"
+   },
+   {
+    "id": "42450007",
+    "title": "Xanomeline-Trospium Validates Muscarinic Agonism as an Effective Non-Dopaminergic Treatment for Schizophrenia.",
+    "year": "2026",
+    "journal": "Int J Mol Sci"
+   },
+   {
+    "id": "43011897",
+    "title": "Xanomeline/Trospium (Cobenfy) for Schizophrenia: Is It Revolutionary? A Systematic Review.",
+    "year": "2026",
+    "journal": "Innov Clin Neurosci"
+   },
+   {
+    "id": "42418174",
+    "title": "Toward a Pluralistic Model for the Schizophrenia Spectrum-Dopamine and Beyond.",
+    "year": "2026",
+    "journal": "JAMA Psychiatry"
+   },
+   {
+    "id": "42161933",
+    "title": "Xanomeline-trospium reverses phencyclidine-induced cognitive deficits through modulation of the gut microbiota-brain axis in mice.",
+    "year": "2026",
+    "journal": "Transl Psychiatry"
+   },
+   {
+    "id": "41418563",
+    "title": "Efficacy of xanomeline and xanomeline trospium in the treatment of cognitive impairment: A systematic review of preclinical and clinical trials.",
+    "year": "2026",
+    "journal": "Eur Neuropsychopharmacol"
+   },
+   {
+    "id": "40621959",
+    "title": "Efficacy and safety of the muscarinic receptor agonist KarXT (Xanomeline-Trospium) in schizophrenia: a systematic review, meta-analysis and Bayesian sensitivity analysis.",
+    "year": "2026",
+    "journal": "Int J Neuropsychopharmacol"
+   },
+   {
+    "id": "41742980",
+    "title": "Xanomeline-Trospium Chloride as a New Paradigm in the Treatment of Schizophrenia Through Muscarinic Modulation: A Renewed Hope in Psychiatric Care.",
+    "year": "2026",
+    "journal": "Cureus"
+   },
+   {
+    "id": "42310370",
+    "title": "Serotonin type 3 receptor (5-HT&lt;sub&gt;3&lt;/sub&gt;R) antagonists for negative symptoms and cognitive impairment associated with schizophrenia: a systematic review and meta-analysis.",
+    "year": "2026",
+    "journal": "Neuropsychopharmacology"
+   },
+   {
+    "id": "42621264",
+    "title": "The mechanism of action and clinical efficacy of xanomeline-trospium in schizophrenia: A comprehensive review.",
+    "year": "2026",
+    "journal": "Ther Adv Psychopharmacol"
+   },
+   {
+    "id": "41633901",
+    "title": "Targeting muscarinic receptors for treating schizophrenia.",
+    "year": "2026",
+    "journal": "Neurotherapeutics"
+   },
+   {
+    "id": "42729706",
+    "title": "Treatment-resistant Parkinson's disease psychosis responding to xanomeline-trospium: A case report.",
+    "year": "2026",
+    "journal": "Clin Park Relat Disord"
+   },
+   {
+    "id": "41618768",
+    "title": "From schizophrenia to dementia: Is Cobenfy a potential treatment for behavioral and psychological symptoms of dementia?",
+    "year": "2026",
+    "journal": "J Int Med Res"
+   },
+   {
+    "id": "PMC13444589",
+    "title": "Xanomeline/trospium chloride: a new therapeutic strategy in schizophrenia",
+    "year": null,
+    "journal": "Eur Psychiatry"
+   },
+   {
+    "id": "42285196",
+    "title": "Lower Muscarinic M&lt;sub&gt;1&lt;/sub&gt; Receptor Availability in Schizophrenia: In Vivo Positron Emission Tomography Evidence.",
+    "year": "2026",
+    "journal": "Biol Psychiatry"
+   },
+   {
+    "id": "42006053",
+    "title": "Beyond dopamine blockade: mechanistic humility and the rise of muscarinic, TAAR1, and glutamatergic pathways in schizophrenia.",
+    "year": "2026",
+    "journal": "Front Psychiatry"
+   },
+   {
+    "id": "41540764",
+    "title": "Exploring Adjunctive Novel Therapeutic Approach of KarXT (Xanomeline-Trospium Chloride) for Managing Psychotic Symptoms in Patients With Schizophrenia and Alzheimer's Disease.",
+    "year": "2026",
+    "journal": "Brain Behav"
+   },
+   {
+    "id": "PMC13691541",
+    "title": "Exercise for the negative symptoms of schizophrenia: a review",
+    "year": null,
+    "journal": "Front Psychiatry"
+   },
+   {
+    "id": "PMC12737967",
+    "title": "Rationale for Selective Muscarinic Receptor Agonists as Candidates for the Management of Cognitive and Neuropsychiatric Symptoms in Alzheimer's Disease",
+    "year": "2025",
+    "journal": "Alzheimers Dement"
+   },
+   {
+    "id": "42551974",
+    "title": "Muscarinic agonists for schizophrenia: Bridging preclinical evidence and clinical enthusiasm.",
+    "year": "2026",
+    "journal": "Br J Pharmacol"
+   },
+   {
+    "id": "41756233",
+    "title": "From dopamine to muscarine: xanomeline-trospium (KarXT) as a novel direction in the psychopharmacotherapy of schizophrenia.",
+    "year": "2026",
+    "journal": "Front Pharmacol"
+   },
+   {
+    "id": "PMC13444550",
+    "title": "Beyond Dopamine: A Review of KarXT (Xanomeline-Trospium) as a Novel M1/M4 Muscarinic Agonist for Schizophrenia",
+    "year": null,
+    "journal": "Eur Psychiatry"
+   }
+  ]
+ },
+ "epmc_kart_cognition": {
+  "query": "(\"KarXT\" OR \"xanomeline-trospium\" OR \"xanomeline and trospium\" OR Cobenfy) AND (cognition OR cognitive)",
+  "hitCount": 346,
+  "results": [
+   {
+    "id": "42728876",
+    "title": "Xanomeline and Trospium Chloride: Mechanism of Action, Clinical, and Translational Science.",
+    "year": "2026",
+    "journal": "Clin Transl Sci"
+   },
+   {
+    "id": "43011897",
+    "title": "Xanomeline/Trospium (Cobenfy) for Schizophrenia: Is It Revolutionary? A Systematic Review.",
+    "year": "2026",
+    "journal": "Innov Clin Neurosci"
+   },
+   {
+    "id": "PMC13643683",
+    "title": "Beyond dopamine: KarXT and emerging mechanism-based therapies in schizophrenia",
+    "year": null,
+    "journal": "Front Psychiatry"
+   },
+   {
+    "id": "41756233",
+    "title": "From dopamine to muscarine: xanomeline-trospium (KarXT) as a novel direction in the psychopharmacotherapy of schizophrenia.",
+    "year": "2026",
+    "journal": "Front Pharmacol"
+   },
+   {
+    "id": "41540764",
+    "title": "Exploring Adjunctive Novel Therapeutic Approach of KarXT (Xanomeline-Trospium Chloride) for Managing Psychotic Symptoms in Patients With Schizophrenia and Alzheimer's Disease.",
+    "year": "2026",
+    "journal": "Brain Behav"
+   },
+   {
+    "id": "42530555",
+    "title": "Systematic review and network meta-analysis of the efficacy, safety and tolerability of xanomeline plus trospium chloride compared with eight oral antipsychotics for the acute treatment of schizophrenia.",
+    "year": "2026",
+    "journal": "J Comp Eff Res"
+   },
+   {
+    "id": "42450007",
+    "title": "Xanomeline-Trospium Validates Muscarinic Agonism as an Effective Non-Dopaminergic Treatment for Schizophrenia.",
+    "year": "2026",
+    "journal": "Int J Mol Sci"
+   },
+   {
+    "id": "41618768",
+    "title": "From schizophrenia to dementia: Is Cobenfy a potential treatment for behavioral and psychological symptoms of dementia?",
+    "year": "2026",
+    "journal": "J Int Med Res"
+   },
+   {
+    "id": "42621264",
+    "title": "The mechanism of action and clinical efficacy of xanomeline-trospium in schizophrenia: A comprehensive review.",
+    "year": "2026",
+    "journal": "Ther Adv Psychopharmacol"
+   },
+   {
+    "id": "41742980",
+    "title": "Xanomeline-Trospium Chloride as a New Paradigm in the Treatment of Schizophrenia Through Muscarinic Modulation: A Renewed Hope in Psychiatric Care.",
+    "year": "2026",
+    "journal": "Cureus"
+   },
+   {
+    "id": "41633901",
+    "title": "Targeting muscarinic receptors for treating schizophrenia.",
+    "year": "2026",
+    "journal": "Neurotherapeutics"
+   },
+   {
+    "id": "41045433",
+    "title": "Efficacy and Safety of KarXT (Xanomeline-Trospium; Cobenfy\u2122) in Schizophrenia: A Systematic and Meta-Analysis Review of Randomized Controlled Trials.",
+    "year": "2025",
+    "journal": "Psychiatr Q"
+   },
+   {
+    "id": "42947585",
+    "title": "An Update on Xanomeline-trospium (Cobenfy) for Schizophrenia: Emerging Evidence and Clinical Implications.",
+    "year": "2026",
+    "journal": "Clin Psychopharmacol Neurosci"
+   },
+   {
+    "id": "42161933",
+    "title": "Xanomeline-trospium reverses phencyclidine-induced cognitive deficits through modulation of the gut microbiota-brain axis in mice.",
+    "year": "2026",
+    "journal": "Transl Psychiatry"
+   },
+   {
+    "id": "42533695",
+    "title": "A Case Report: Cobenfy in a Middle-Aged Man with Schizophrenia.",
+    "year": "2026",
+    "journal": "J Am Psychiatr Nurses Assoc"
+   },
+   {
+    "id": "40574777",
+    "title": "Targeting muscarinic receptors in schizophrenia treatment: Novel antipsychotic xanomeline/trospium chloride.",
+    "year": "2025",
+    "journal": "World J Psychiatry"
+   },
+   {
+    "id": "41877882",
+    "title": "Commentary: Real-world effectiveness and safety of xanomeline and trospium for treatment-resistant schizophrenia in a state hospital system.",
+    "year": "2026",
+    "journal": "Front Psychiatry"
+   },
+   {
+    "id": "42170669",
+    "title": "A Qualitative Investigation of the Experience of Taking Xanomeline and Trospium Chloride for Schizophrenia, Part 2: Perceived Changes in Subjective Quality of Life and Medication Satisfaction.",
+    "year": "2026",
+    "journal": "Schizophr Bull Open"
+   },
+   {
+    "id": "40621959",
+    "title": "Efficacy and safety of the muscarinic receptor agonist KarXT (Xanomeline-Trospium) in schizophrenia: a systematic review, meta-analysis and Bayesian sensitivity analysis.",
+    "year": "2026",
+    "journal": "Int J Neuropsychopharmacol"
+   },
+   {
+    "id": "PMC13444550",
+    "title": "Beyond Dopamine: A Review of KarXT (Xanomeline-Trospium) as a Novel M1/M4 Muscarinic Agonist for Schizophrenia",
+    "year": null,
+    "journal": "Eur Psychiatry"
+   },
+   {
+    "id": "40671308",
+    "title": "From betel nuts to Cobenfy: how an ancient recreational drug gave rise to a new class of schizophrenia medications.",
+    "year": "2025",
+    "journal": "CNS Spectr"
+   },
+   {
+    "id": "41868713",
+    "title": "A Qualitative Investigation of the Experience of Taking Xanomeline and Trospium Chloride for Schizophrenia, Part 1: Perceived Impact on Symptoms.",
+    "year": "2026",
+    "journal": "Schizophr Bull Open"
+   },
+   {
+    "id": "42124748",
+    "title": "Inpatient Initiation of Cobenfy (Xanomeline-Trospium Chloride) During Acute Psychotic Decompensation in a Patient With Schizoaffective Disorder: A Case Report.",
+    "year": "2026",
+    "journal": "Cureus"
+   },
+   {
+    "id": "39659157",
+    "title": "The Impact of Xanomeline and Trospium Chloride on Cognitive Impairment in Acute Schizophrenia: Replication in Pooled Data From Two Phase 3 Trials.",
+    "year": "2025",
+    "journal": "Am J Psychiatry"
+   },
+   {
+    "id": "40903813",
+    "title": "Xanomeline-trospium: defining its place among the current antipsychotic landscape.",
+    "year": "2025",
+    "journal": "Acta Neuropsychiatr"
+   }
+  ]
+ },
+ "epmc_chrm4_eqtl_drug": {
+  "query": "(CHRM4 OR CHRM1) AND \"drug target\" AND (eQTL OR genetic)",
+  "hitCount": 127,
+  "results": [
+   {
+    "id": "42829528",
+    "title": "Comparative Analysis of Antidepressant Mechanisms and Side Effects: Network Pharmacology and Molecular Docking Study of Amitriptyline, Mirtazapine, and Escitalopram for Treating Major Depressive Disorder.",
+    "year": "2026",
+    "journal": "Depress Anxiety"
+   },
+   {
+    "id": "38030236",
+    "title": "Association of Antipsychotic Drugs with Venous Thromboembolism: Data Mining of Food and Drug Administration Adverse Event Reporting System and Mendelian Randomization Analysis.",
+    "year": "2024",
+    "journal": "J Atheroscler Thromb"
+   },
+   {
+    "id": "42305118",
+    "title": "Decoding GPCR signaling in living cells to advance early therapeutic discovery for neurological disorders.",
+    "year": "2026",
+    "journal": "Front Mol Neurosci"
+   },
+   {
+    "id": "41495531",
+    "title": "A Single-cell Transcriptome-wide Association Study Reveals Susceptibility Genes for Age-related Hearing Loss.",
+    "year": "2026",
+    "journal": "Genomics Proteomics Bioinformatics"
+   },
+   {
+    "id": "38212777",
+    "title": "Identification of potential crucial genes and therapeutic targets for epilepsy.",
+    "year": "2024",
+    "journal": "Eur J Med Res"
+   },
+   {
+    "id": "36909280",
+    "title": "A growing understanding of the role of muscarinic receptors in the molecular pathology and treatment of schizophrenia.",
+    "year": "2023",
+    "journal": "Front Cell Neurosci"
+   },
+   {
+    "id": "42374032",
+    "title": "The cell-type specific interaction based drug repurposing for psychiatric disorders.",
+    "year": "2026",
+    "journal": "Transl Psychiatry"
+   },
+   {
+    "id": "41718003",
+    "title": "Proteome-wide Mendelian randomisation identifies causal links between blood proteins and myopia.",
+    "year": "2026",
+    "journal": "J Glob Health"
+   },
+   {
+    "id": "41195325",
+    "title": "Enhancing drug-target interaction prediction with graph representation learning and knowledge-based regularization.",
+    "year": "2025",
+    "journal": "Front Bioinform"
+   },
+   {
+    "id": "41798904",
+    "title": "Neuroimmunological Mechanisms of Xiao-Yao-San Against Chronic Stress-Induced Colorectal Cancer: A Bioinformatics and Single-Cell Sequencing Study.",
+    "year": "2026",
+    "journal": "Cancer Manag Res"
+   },
+   {
+    "id": "39605182",
+    "title": "Chemogenomic Screening in a Patient-Derived 3D Fatty Liver Disease Model Reveals the CHRM1-TRPM8 Axis as a Novel Module for Targeted Intervention.",
+    "year": "2025",
+    "journal": "Adv Sci (Weinh)"
+   },
+   {
+    "id": "39210294",
+    "title": "Common molecular and pathophysiological underpinnings of delirium and Alzheimer's disease: molecular signatures and therapeutic indications.",
+    "year": "2024",
+    "journal": "BMC Geriatr"
+   },
+   {
+    "id": "40959509",
+    "title": "Prediction of Drug Targets based on In Vitro Activity Profiles Toward Drug Repurposing for Rare Diseases.",
+    "year": "2023",
+    "journal": "IEEE Int Conf Bioinform Biomed Workshops"
+   },
+   {
+    "id": "42795812",
+    "title": "Integrating Pharmacodynamic Data to Prioritise Candidate Migraine Genes and Pathways Using a Novel Bioinformatics Workflow.",
+    "year": "2026",
+    "journal": "J Clin Med"
+   },
+   {
+    "id": "42769555",
+    "title": "Myelin Impairment and Regeneration in the Central Nervous System: Molecular Mechanisms, Diseases, and Prospective Therapeutic Targets.",
+    "year": "2026",
+    "journal": "MedComm (2020)"
+   },
+   {
+    "id": "34884958",
+    "title": "Differential Actions of Muscarinic Receptor Subtypes in Gastric, Pancreatic, and Colon Cancer.",
+    "year": "2021",
+    "journal": "Int J Mol Sci"
+   },
+   {
+    "id": "34727686",
+    "title": "A network pharmacology approach to explore the potential role of Panax ginseng on exercise performance.",
+    "year": "2021",
+    "journal": "Phys Act Nutr"
+   },
+   {
+    "id": "35386099",
+    "title": "Network-based stage-specific drug repurposing for Alzheimer's disease.",
+    "year": "2022",
+    "journal": "Comput Struct Biotechnol J"
+   },
+   {
+    "id": "39273521",
+    "title": "Non-Negative Matrix Tri-Factorization for Representation Learning in Multi-Omics Datasets with Applications to Drug Repurposing and Selection.",
+    "year": "2024",
+    "journal": "Int J Mol Sci"
+   },
+   {
+    "id": "42973959",
+    "title": "SCOPE-based target and pathway enrichment identifies the histamine H1 receptor as a regulator of exodosis.",
+    "year": "2026",
+    "journal": "Front Pharmacol"
+   },
+   {
+    "id": "37217845",
+    "title": "Prioritized polycystic kidney disease drug targets and repurposing candidates from pre-cystic and cystic mouse Pkd2 model gene expression reversion.",
+    "year": "2023",
+    "journal": "Mol Med"
+   },
+   {
+    "id": "35338153",
+    "title": "The druggable schizophrenia genome: from repurposing opportunities to unexplored drug targets.",
+    "year": "2022",
+    "journal": "NPJ Genom Med"
+   },
+   {
+    "id": "41639063",
+    "title": "Identifying drug targets for schizophrenia through gene prioritization.",
+    "year": "2026",
+    "journal": "Transl Psychiatry"
+   },
+   {
+    "id": "38736684",
+    "title": "Mapping drug biology to disease genetics to discover drug impacts on the human phenome.",
+    "year": "2024",
+    "journal": "Bioinform Adv"
+   },
+   {
+    "id": "40861173",
+    "title": "Repurposing terfenadine and domperidone for inhibition of apoptotic gene association in colorectal cancer: A system pharmacology approach integrated with molecular docking, MD simulations, and post-MD simulation analysis.",
+    "year": "2025",
+    "journal": "Bioinform Biol Insights"
+   }
+  ]
+ },
+ "pubmed_chrm_mr": {
+  "query": "(CHRM4[tiab] OR CHRM1[tiab]) AND (\"mendelian randomization\"[tiab] OR \"mendelian randomisation\"[tiab])",
+  "hitCount": 2,
+  "results": [
+   {
+    "id": "40908685",
+    "title": "From Anesthetic to Neuroprotector: Multi-Omics Reveals Ketamine's Previously Unexplored Neuroprotective Role in Alzheimer's Disease.",
+    "year": "2025"
+   },
+   {
+    "id": "38674857",
+    "title": "Mendelian Randomization Analysis Identifies Inverse Causal Relationship between External Eating and Metabolic Phenotypes.",
+    "year": "2024"
+   }
+  ]
+ },
+ "pubmed_chrm4_cog": {
+  "query": "CHRM4[tiab] AND (cognit*[tiab] OR \"reaction time\"[tiab] OR intelligence[tiab])",
+  "hitCount": 12,
+  "results": [
+   {
+    "id": "40052261",
+    "title": "Clemastine attenuates subarachnoid haemorrhage pathology in a mouse model via Nrf2/SQSTM1-mediated autophagy.",
+    "year": "2025"
+   },
+   {
+    "id": "39379070",
+    "title": "Acute Hypobaric Hypoxia Causes Alterations in Acetylcholine-Mediated Signaling Through Varying Expression of Muscarinic Receptors in the Prefrontal Cortex and Cerebellum of Rats' Brain.",
+    "year": "2025"
+   },
+   {
+    "id": "36221993",
+    "title": "Proteomics Evidence of the Role of TDMQ20 in the Cholinergic System and Synaptic Transmission in a Mouse Model of Alzheimer's Disease.",
+    "year": "2022"
+   },
+   {
+    "id": "34806612",
+    "title": "Muscarinic Receptors Expression in the Peripheral Blood Cells Differentiate Dementia with Lewy Bodies from Alzheimer's Disease.",
+    "year": "2022"
+   },
+   {
+    "id": "34674705",
+    "title": "Association between genetic variants of the cholinergic system and postoperative delirium and cognitive dysfunction in elderly patients.",
+    "year": "2021"
+   },
+   {
+    "id": "33401985",
+    "title": "Identification of vascular dementia and Alzheimer's disease hub genes expressed in the frontal lobe and temporal cortex by weighted co-expression network analysis and construction of a protein-protein interaction.",
+    "year": "2022"
+   },
+   {
+    "id": "30466987",
+    "title": "Novel molecular mechanisms for the adaptogenic effects of herbal extracts on isolated brain cells using systems biology.",
+    "year": "2018"
+   },
+   {
+    "id": "29523700",
+    "title": "Total RNA Sequencing of Rett Syndrome Autopsy Samples Identifies the M(4) Muscarinic Receptor as a Novel Therapeutic Target.",
+    "year": "2018"
+   },
+   {
+    "id": "27805868",
+    "title": "Ovariectomy Alters Gene Expression of the Hippocampal Formation in Middle-Aged Rats.",
+    "year": "2017"
+   },
+   {
+    "id": "26818859",
+    "title": "The Cholinergic System: An Emerging Drug Target for Schizophrenia.",
+    "year": "2016"
+   },
+   {
+    "id": "22371606",
+    "title": "Repressor element-1 silencing transcription factor (REST)-dependent epigenetic remodeling is critical to ischemia-induced neuronal death.",
+    "year": "2012"
+   },
+   {
+    "id": "21747397",
+    "title": "Association between genetic variation in a region on chromosome 11 and schizophrenia in large samples from Europe.",
+    "year": "2012"
+   }
+  ]
+ },
+ "pubmed_xanomeline_cog": {
+  "query": "xanomeline[tiab] AND cognit*[tiab]",
+  "hitCount": 116,
+  "results": [
+   {
+    "id": "42978501",
+    "title": "[Xanomeline-trospium: A review of clinical studies in patients with schizophrenia].",
+    "year": "2026"
+   },
+   {
+    "id": "42947585",
+    "title": "An Update on Xanomeline-trospium (Cobenfy) for Schizophrenia: Emerging Evidence and Clinical Implications.",
+    "year": "2026"
+   },
+   {
+    "id": "42551974",
+    "title": "Muscarinic agonists for schizophrenia: Bridging preclinical evidence and clinical enthusiasm.",
+    "year": "2026"
+   },
+   {
+    "id": "42533695",
+    "title": "A Case Report: Cobenfy in a Middle-Aged Man with Schizophrenia.",
+    "year": "2026"
+   },
+   {
+    "id": "42450007",
+    "title": "Xanomeline-Trospium Validates Muscarinic Agonism as an Effective Non-Dopaminergic Treatment for Schizophrenia.",
+    "year": "2026"
+   },
+   {
+    "id": "42418174",
+    "title": "Toward a Pluralistic Model for the Schizophrenia Spectrum-Dopamine and Beyond.",
+    "year": "2026"
+   },
+   {
+    "id": "42310370",
+    "title": "Serotonin type 3 receptor (5-HT(3)R) antagonists for negative symptoms and cognitive impairment associated with schizophrenia: a systematic review and meta-analysis.",
+    "year": "2026"
+   },
+   {
+    "id": "42285196",
+    "title": "Lower Muscarinic M(1) Receptor Availability in Schizophrenia: In Vivo Positron Emission Tomography Evidence.",
+    "year": "2026"
+   },
+   {
+    "id": "42232685",
+    "title": "Next-step treatment for schizophrenia non-responsive to antipsychotics: a systematic review and network meta-analysis.",
+    "year": "2026"
+   },
+   {
+    "id": "42162691",
+    "title": "Advances in schizophrenia research and treatment: exploring neurotransmitter imbalances, genetics, and innovative therapies.",
+    "year": "2026"
+   },
+   {
+    "id": "42161933",
+    "title": "Xanomeline-trospium reverses phencyclidine-induced cognitive deficits through modulation of the gut microbiota-brain axis in mice.",
+    "year": "2026"
+   },
+   {
+    "id": "41985280",
+    "title": "A real-world pharmacovigilance study of Xanomeline-Trospium events in the FDA adverse event reporting system (FAERS).",
+    "year": "2026"
+   },
+   {
+    "id": "41909822",
+    "title": "Adjunctive xanomeline/trospium in clozapine-resistant schizophrenia: two case reports demonstrating limited response.",
+    "year": "2026"
+   },
+   {
+    "id": "41868713",
+    "title": "A Qualitative Investigation of the Experience of Taking Xanomeline and Trospium Chloride for Schizophrenia, Part 1: Perceived Impact on Symptoms.",
+    "year": "2026"
+   },
+   {
+    "id": "41786037",
+    "title": "New interventions for schizophrenia: Navigating the treatment landscape.",
+    "year": "2026"
+   },
+   {
+    "id": "41756233",
+    "title": "From dopamine to muscarine: xanomeline-trospium (KarXT) as a novel direction in the psychopharmacotherapy of schizophrenia.",
+    "year": "2026"
+   },
+   {
+    "id": "41742980",
+    "title": "Xanomeline-Trospium Chloride as a New Paradigm in the Treatment of Schizophrenia Through Muscarinic Modulation: A Renewed Hope in Psychiatric Care.",
+    "year": "2026"
+   },
+   {
+    "id": "41633901",
+    "title": "Targeting muscarinic receptors for treating schizophrenia.",
+    "year": "2026"
+   },
+   {
+    "id": "41613741",
+    "title": "Xanomeline-Trospium for the Treatment of Schizophrenia.",
+    "year": "2025"
+   },
+   {
+    "id": "41609993",
+    "title": "New Pharmacological Treatment Approaches for Schizophrenia: Navigating the Post-iclepertin Landscape.",
+    "year": "2026"
+   },
+   {
+    "id": "41588897",
+    "title": "Clinical Effects of Recently Developed Antipsychotic Drugs in Schizophrenia.",
+    "year": "2026"
+   },
+   {
+    "id": "41507454",
+    "title": "Novel drug treatments for schizophrenia.",
+    "year": "2026"
+   },
+   {
+    "id": "41418563",
+    "title": "Efficacy of xanomeline and xanomeline trospium in the treatment of cognitive impairment: A systematic review of preclinical and clinical trials.",
+    "year": "2026"
+   },
+   {
+    "id": "41201439",
+    "title": "Real-World Implementation of Xanomeline-Trospium in Schizophrenia: A Consensus Panel Report.",
+    "year": "2025"
+   },
+   {
+    "id": "41191868",
+    "title": "Impact of selected second and third generation antipsychotics on cognitive dysfunction in schizophrenia-spectrum disorders. Systematic review and network meta-analysis.",
+    "year": "2026"
+   },
+   {
+    "id": "41147362",
+    "title": "Targeting disrupted networks in schizophrenia: Can muscarinic drugs make a fundamental difference?",
+    "year": "2025"
+   },
+   {
+    "id": "41056016",
+    "title": "Xanomeline/Trospium (Cobenfy): A Novel Approach for the Treatment of Schizophrenia in Adults.",
+    "year": "2025"
+   },
+   {
+    "id": "41052274",
+    "title": "Antipsychotic drugs at 75: the past, present, and future of psychosis management.",
+    "year": "2025"
+   },
+   {
+    "id": "41045433",
+    "title": "Efficacy and Safety of KarXT (Xanomeline-Trospium; Cobenfy\u2122) in Schizophrenia: A Systematic and Meta-Analysis Review of Randomized Controlled Trials.",
+    "year": "2025"
+   },
+   {
+    "id": "40908715",
+    "title": "Analytical Methods for Xanomeline and Trospium Chloride: A Review and Future Outlook.",
+    "year": "2025"
+   },
+   {
+    "id": "40903813",
+    "title": "Xanomeline-trospium: defining its place among the current antipsychotic landscape.",
+    "year": "2025"
+   },
+   {
+    "id": "40887953",
+    "title": "Does Xanomeline/Trospium Have Unique Benefits for Cognitive Impairment Associated With Schizophrenia? Response to Tandon.",
+    "year": "2025"
+   },
+   {
+    "id": "40887947",
+    "title": "Does Xanomeline/Trospium Have Unique Benefits for Cognitive Impairment Associated With Schizophrenia?",
+    "year": "2025"
+   },
+   {
+    "id": "40774882",
+    "title": "Shared and unique therapeutic targets of KarXT and clozapine for schizophrenia treatment revealed by network pharmacology and molecular docking analyses: Implications for differential clinical responses.",
+    "year": "2025"
+   },
+   {
+    "id": "40621959",
+    "title": "Efficacy and safety of the muscarinic receptor agonist KarXT (Xanomeline-Trospium) in schizophrenia: a systematic review, meta-analysis and Bayesian sensitivity analysis.",
+    "year": "2026"
+   },
+   {
+    "id": "40621552",
+    "title": "Early outpatient clinical experience with xanomeline and trospium chloride for schizophrenia: a case report.",
+    "year": "2025"
+   },
+   {
+    "id": "40574777",
+    "title": "Targeting muscarinic receptors in schizophrenia treatment: Novel antipsychotic xanomeline/trospium chloride.",
+    "year": "2025"
+   },
+   {
+    "id": "40531190",
+    "title": "Acetylcholine and muscarinic receptor targeting in bipolar disorder: does xanomeline-trospium chloride and other investigational muscarinic agonists hold promise as mechanistically informed treatments for manic episodes, mixed features and cognitive deficits in bipolar disorder?",
+    "year": "2025"
+   },
+   {
+    "id": "40427508",
+    "title": "The Role of Astrocytes in the Molecular Pathophysiology of Schizophrenia: Between Neurodevelopment and Neurodegeneration.",
+    "year": "2025"
+   },
+   {
+    "id": "40165106",
+    "title": "Does KarXT (xanomeline-trospium) represent a novel approach to schizophrenia management? A GRADE-assessed systematic review and meta-analysis of randomized controlled clinical trials.",
+    "year": "2025"
+   },
+   {
+    "id": "40145363",
+    "title": "Xanomeline-Trospium: A Novel Therapeutic for the Treatment of Schizophrenia.",
+    "year": "2025"
+   },
+   {
+    "id": "40073951",
+    "title": "IUPHAR review - Novel therapeutic targets for schizophrenia treatment: A translational perspective.",
+    "year": "2025"
+   },
+   {
+    "id": "40056428",
+    "title": "From theory to therapy: unlocking the potential of muscarinic receptor activation in schizophrenia with the dual M1/M4 muscarinic receptor agonist xanomeline and trospium chloride and insights from clinical trials.",
+    "year": "2025"
+   },
+   {
+    "id": "40022530",
+    "title": "Xanomeline-Trospium Treatment of Cognitive Impairments of Schizophrenia: Hope for Some, or Hope for All?",
+    "year": "2025"
+   },
+   {
+    "id": "39951117",
+    "title": "Novel pharmaceutical treatment approaches for schizophrenia: a systematic literature review.",
+    "year": "2025"
+   },
+   {
+    "id": "39884448",
+    "title": "IUPHAR review: Drug repurposing in Schizophrenia - An updated review of clinical trials.",
+    "year": "2025"
+   },
+   {
+    "id": "39844929",
+    "title": "Muscarinic receptor agonists and positive allosteric modulators in animal models of psychosis: protocol for a systematic review and meta-analysis.",
+    "year": "2024"
+   },
+   {
+    "id": "39741904",
+    "title": "A Clinically Oriented Review of New Antipsychotics for Schizophrenia.",
+    "year": "2024"
+   },
+   {
+    "id": "39724748",
+    "title": "Efficacy, tolerability, and safety of xanomeline-trospium chloride for schizophrenia: A systematic review and meta-analysis.",
+    "year": "2025"
+   },
+   {
+    "id": "39659157",
+    "title": "The Impact of Xanomeline and Trospium Chloride on Cognitive Impairment in Acute Schizophrenia: Replication in Pooled Data From Two Phase 3 Trials.",
+    "year": "2025"
+   }
+  ]
+ },
+ "clinicaltrials": {
+  "ct_xanomeline": [
+   {
+    "nct": "NCT06729970",
+    "title": "A Study to Evaluate the Effects of Lithium, Valproic Acid, and Lamotrigine on the Pharmacokinetics of KarXT and Effects of KarXT on the Pharmacokinetics of Lithium, Valproic Acid, and Lamotrigine in Healthy Participants",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT04659161",
+    "title": "A Study to Assess Efficacy and Safety of KarXT in Acutely Psychotic Hospitalized Adult Patients With Schizophrenia (EMERGENT-2)",
+    "conditions": [
+     "Schizophrenia",
+     "Schizophrenia; Psychosis"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07379827",
+    "title": "Effectiveness and Adverse-effect Switch Evaluation of Xanomeline and Trospium Chloride (KarXT)",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06924255",
+    "title": "An 8-week Open-label Study of an Accelerated and Slower Switching to Xanomeline/Trospium Following Atypical Antipsychotic Treatment in Participants With Schizophrenia",
+    "conditions": [
+     "Schizophrenia Disorders"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT04820309",
+    "title": "An Open-label Study to Assess the Long-term Safety, Tolerability, and Efficacy of KarXT in Adult Patients With Schizophrenia (EMERGENT-5)",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07686263",
+    "title": "Relapse Prevention Trial Evaluating KarXT Treatment in Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT03697252",
+    "title": "A Study to Assess Safety and Efficacy of KarXT in Adult Patients With Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT05511363",
+    "title": "A Study to Assess Efficacy and Safety of KarXT for the Treatment of Psychosis Associated With Alzheimer's Disease (ADEPT-1)",
+    "conditions": [
+     "Psychosis Associated With Alzheimer's Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07212062",
+    "title": "The Purpose of This Study is to Evaluate the Safety and Tolerability of X/T+X-EC in Participants With Alzheimer's Disease Who Are Currently Treated With Lecanemab.",
+    "conditions": [
+     "Alzheimers Disease"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT07011732",
+    "title": "A Phase 3 Study to Evaluate the Safety and Efficacy of KarXT + KarX-EC for the Treatment of Agitation Associated With Alzheimer's Disease (ADAGIO-1)",
+    "conditions": [
+     "Alzheimer Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07624227",
+    "title": "The Impact of Cobenfy Maintenance on Cocaine's Effects",
+    "conditions": [
+     "Cocaine Use Disorder (CUD)"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT05980949",
+    "title": "Open-Label Extension Study to Assess the Long-Term Safety and Tolerability of KarXT in Subjects With Psychosis Associated With Alzheimer's Disease (ADEPT-3)",
+    "conditions": [
+     "Psychosis Associated With Alzheimer's Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07084831",
+    "title": "A Study Evaluating the Efficacy of Xanomeline/Trospium (XT) on Cognitive Impairment After 24 and 52 Weeks of Treatment in Adult Participants With Schizophrenia",
+    "conditions": [
+     "Schizophrenia; Psychosis",
+     "Cognitive Impairment"
+    ],
+    "status": "WITHDRAWN"
+   },
+   {
+    "nct": "NCT07221877",
+    "title": "A Study to Evaluate the Effect of KarXT on Urological Safety",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07118215",
+    "title": "A Study to Evaluate the Effects of KarXT on the Drug Levels of Midazolam, Fexofenadine, and Digoxin",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT06605950",
+    "title": "A Study to Assess the Safety, Tolerability and Pharmacokinetics (PK) of Xanomeline With Trospium Chloride Versus KarXT in Healthy Adult and Elderly Participants of Japanese Ethnicity and to Assess the Effect of Omeprazole on the PK of Xanomeline With Trospium Chloride in Healthy Adult Participants",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07681076",
+    "title": "Study to Assess Safety and Tolerability of KarXT With Administration of Antiemetics in Healthy Volunteers",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07257120",
+    "title": "KarXT Concentrations in the Breast Milk and Plasma of Lactating Females",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT06572449",
+    "title": "Study to Assess Safety and Effectiveness of Slowly Increasing Dose and Food Effect of KarXT in Participants With Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT06853171",
+    "title": "Safety, Tolerability, and Pharmacokinetics of KarXT and Dual-burst Release of Xanomeline With Immediate-release Trospium Chloride in Adolescents With Psychiatric Disorders",
+    "conditions": [
+     "Psychiatric Disorders"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07011745",
+    "title": "A Phase 3 Study to Evaluate the Safety and Efficacy of KarXT + KarX-EC for the Treatment of Agitation Associated With Alzheimer's Disease",
+    "conditions": [
+     "Alzheimer's Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07423546",
+    "title": "A PET/MRI Study of Cobenfy on Dopamine Transmission in Schizophrenia",
+    "conditions": [
+     "SCHIZOPHRENIA 1 (Disorder)",
+     "Schizoaffecitve Disorder"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT04738123",
+    "title": "A Study to Assess Efficacy and Safety of KarXT in Acutely Psychotic Hospitalized Adult Patients With Schizophrenia (EMERGENT-3)",
+    "conditions": [
+     "Schizophrenia",
+     "Schizophrenia; Psychosis"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07204418",
+    "title": "A Study to Evaluate the Effects of CYP2D6 Phenotypes on the Pharmacokinetics of Xanomeline Following KarXT Administration in Healthy Adult Participants",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06126224",
+    "title": "A Study to Assess Efficacy and Safety of KarXT for the Treatment of Psychosis Associated With Alzheimer's Disease (ADEPT-2)",
+    "conditions": [
+     "Psychosis Associated With Alzheimer's Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07063342",
+    "title": "A Study to Evaluate Novel KarX and KarT Prototypes Versus the KarXT and KarX-EC Reference Following Single Doses, Explore the Effect of Food After Multiple Doses of Selected Prototypes, and Evaluate Alternative Formulations of KarX and KarXT Following Single and Multiple Ascending Doses",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06923891",
+    "title": "An Open-Label Study to Evaluate the Efficacy and Tolerability of Xanomeline/Trospium In First Episode/Early Phase Schizophrenia Patients",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT06947941",
+    "title": "A Study to Evaluate Safety and Efficacy of KarXT + KarX-EC as a Treatment for Psychosis Associated With Alzheimer's Disease (ADEPT-5)",
+    "conditions": [
+     "Alzheimer Disease",
+     "Psychosis"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07228338",
+    "title": "Cholinergic Enhancement of Theta",
+    "conditions": [
+     "Epilepsy",
+     "Seizures",
+     "Cognitive Impairment, Mild",
+     "Memory Disorder",
+     "Memory Loss"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT07571148",
+    "title": "Real-world Patient Characteristics, Treatment Patterns, and Healthcare Utilization Among KarXT Users",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07802132",
+    "title": "A Prospective, Observational, Single-Arm, Multicenter Real-World Study Evaluating the Treatment Pattern, Safety and Effectiveness of Xanomeline and Trospium Chloride Capsules (KarXT) in the Treatment of Chinese Adult Participants With Schizophrenia",
+    "conditions": [
+     "Schizophrenia Disorder"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT06929273",
+    "title": "A Study to Assess the Long-term Safety of KarXT for the Treatment of Manic Episodes in Bipolar-I Disorder (BALSAM-3)",
+    "conditions": [
+     "Bipolar Disorder Type I With Mania"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT04659174",
+    "title": "An Extension Study to Assess Long-term Safety, Tolerability, and Efficacy of KarXT in Adult Patients With Schizophrenia (EMERGENT-4)",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT05145413",
+    "title": "A Study to Assess Efficacy and Safety of Adjunctive KarXT in Subjects With Inadequately Controlled Symptoms of Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT05304767",
+    "title": "An Extension Study to Assess Long-Term Safety and Tolerability of Adjunctive KarXT in Subjects With Inadequately Controlled Symptoms of Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT02831231",
+    "title": "Pilot Study Comparing Effects of Xanomeline Alone to Xanomeline Plus Trospium",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07721272",
+    "title": "Human Cognition During Surgery: Stimulation-based and Cholinergic Modulation",
+    "conditions": [
+     "Epilepsy",
+     "Essential Tremor",
+     "Seizures",
+     "Memory Consolidation",
+     "Memory Disorders",
+     "Memory Replay",
+     "Memory Encoding",
+     "Cognitive Control",
+     "Motor Abilities"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT07284745",
+    "title": "A Study of KarXT + KarX-EC for Treatment of Irritability in Children and Adolescents With Autism",
+    "conditions": [
+     "Irritability Associated With Autism Spectrum Disorder"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07424404",
+    "title": "A Study to Evaluate the Long-term Safety and Tolerability of Xanomeline and Trospium Chloride for the Treatment of Psychiatric Disorders in Children and Adolescents",
+    "conditions": [
+     "Schizophrenia",
+     "Autism-Related Irritability"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07140913",
+    "title": "A Study to Evaluate the Efficacy and Safety of Adjunctive KarXT for the Treatment of Mania, With or Without Mixed Features, in Participants With Bipolar-I Disorder Taking Lithium, Valproate, or Lamotrigine",
+    "conditions": [
+     "Mania",
+     "Bipolar Disorder"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT05643170",
+    "title": "An Open-label Study to Assess the Long-term Safety, Tolerability, Effectiveness, and Durability of Effect of KarXT in Patients With DSM-5 Diagnosis of Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "TERMINATED"
+   },
+   {
+    "nct": "NCT07285798",
+    "title": "A Study of KarXT + KarX-EC for Treatment of Irritability in Children and Adolescents With Autism Spectrum Disorder",
+    "conditions": [
+     "Irritability Associated With Autism Spectrum Disorder"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06937229",
+    "title": "A Study to Evaluate the Long-term Efficacy and Safety of KarXT + KarX-EC for Agitation in Alzheimer's Disease (ADAGIO-3)",
+    "conditions": [
+     "Alzheimer Disease",
+     "Agitation"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07101094",
+    "title": "Evaluation of Treatment Satisfaction and KarXT Utilization Registry (RESKU)",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06951698",
+    "title": "A Study to Evaluate the Efficacy and Safety of KarXT for the Treatment of Manic Episodes in Bipolar-I Disorder",
+    "conditions": [
+     "Bipolar-I Disorder With Mania or Mania With Mixed Features"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT05919823",
+    "title": "A Study to Assess the Efficacy and Safety of KarXT in Acutely Psychotic Hospitalized Chinese Adult Subjects With DSM-5 Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07783373",
+    "title": "Long-Term Real-World Safety of Cobenfy in Adults With Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "ACTIVE_NOT_RECRUITING"
+   },
+   {
+    "nct": "NCT06951711",
+    "title": "A Study to Evaluate the Efficacy and Safety of KarXT for the Treatment of Manic Episodes in Bipolar-I Disorder (BALSAM-2)",
+    "conditions": [
+     "Bipolar Disorder Type I With Mania or Mania With Mixed Features"
+    ],
+    "status": "RECRUITING"
+   }
+  ],
+  "ct_cobenfy": [
+   {
+    "nct": "NCT07686263",
+    "title": "Relapse Prevention Trial Evaluating KarXT Treatment in Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07624227",
+    "title": "The Impact of Cobenfy Maintenance on Cocaine's Effects",
+    "conditions": [
+     "Cocaine Use Disorder (CUD)"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07084831",
+    "title": "A Study Evaluating the Efficacy of Xanomeline/Trospium (XT) on Cognitive Impairment After 24 and 52 Weeks of Treatment in Adult Participants With Schizophrenia",
+    "conditions": [
+     "Schizophrenia; Psychosis",
+     "Cognitive Impairment"
+    ],
+    "status": "WITHDRAWN"
+   },
+   {
+    "nct": "NCT07118215",
+    "title": "A Study to Evaluate the Effects of KarXT on the Drug Levels of Midazolam, Fexofenadine, and Digoxin",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07257120",
+    "title": "KarXT Concentrations in the Breast Milk and Plasma of Lactating Females",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07423546",
+    "title": "A PET/MRI Study of Cobenfy on Dopamine Transmission in Schizophrenia",
+    "conditions": [
+     "SCHIZOPHRENIA 1 (Disorder)",
+     "Schizoaffecitve Disorder"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07204418",
+    "title": "A Study to Evaluate the Effects of CYP2D6 Phenotypes on the Pharmacokinetics of Xanomeline Following KarXT Administration in Healthy Adult Participants",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06923891",
+    "title": "An Open-Label Study to Evaluate the Efficacy and Tolerability of Xanomeline/Trospium In First Episode/Early Phase Schizophrenia Patients",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT07228338",
+    "title": "Cholinergic Enhancement of Theta",
+    "conditions": [
+     "Epilepsy",
+     "Seizures",
+     "Cognitive Impairment, Mild",
+     "Memory Disorder",
+     "Memory Loss"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT07061288",
+    "title": "A Study to Evaluate the Safety, Tolerability, and PK of an Injectable Form of KarXT",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07571148",
+    "title": "Real-world Patient Characteristics, Treatment Patterns, and Healthcare Utilization Among KarXT Users",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07721272",
+    "title": "Human Cognition During Surgery: Stimulation-based and Cholinergic Modulation",
+    "conditions": [
+     "Epilepsy",
+     "Essential Tremor",
+     "Seizures",
+     "Memory Consolidation",
+     "Memory Disorders",
+     "Memory Replay",
+     "Memory Encoding",
+     "Cognitive Control",
+     "Motor Abilities"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT07284745",
+    "title": "A Study of KarXT + KarX-EC for Treatment of Irritability in Children and Adolescents With Autism",
+    "conditions": [
+     "Irritability Associated With Autism Spectrum Disorder"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07783373",
+    "title": "Long-Term Real-World Safety of Cobenfy in Adults With Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "ACTIVE_NOT_RECRUITING"
+   }
+  ],
+  "ct_karxt": [
+   {
+    "nct": "NCT06729970",
+    "title": "A Study to Evaluate the Effects of Lithium, Valproic Acid, and Lamotrigine on the Pharmacokinetics of KarXT and Effects of KarXT on the Pharmacokinetics of Lithium, Valproic Acid, and Lamotrigine in Healthy Participants",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT04659161",
+    "title": "A Study to Assess Efficacy and Safety of KarXT in Acutely Psychotic Hospitalized Adult Patients With Schizophrenia (EMERGENT-2)",
+    "conditions": [
+     "Schizophrenia",
+     "Schizophrenia; Psychosis"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07379827",
+    "title": "Effectiveness and Adverse-effect Switch Evaluation of Xanomeline and Trospium Chloride (KarXT)",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT04820309",
+    "title": "An Open-label Study to Assess the Long-term Safety, Tolerability, and Efficacy of KarXT in Adult Patients With Schizophrenia (EMERGENT-5)",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07686263",
+    "title": "Relapse Prevention Trial Evaluating KarXT Treatment in Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT03697252",
+    "title": "A Study to Assess Safety and Efficacy of KarXT in Adult Patients With Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT05511363",
+    "title": "A Study to Assess Efficacy and Safety of KarXT for the Treatment of Psychosis Associated With Alzheimer's Disease (ADEPT-1)",
+    "conditions": [
+     "Psychosis Associated With Alzheimer's Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07011732",
+    "title": "A Phase 3 Study to Evaluate the Safety and Efficacy of KarXT + KarX-EC for the Treatment of Agitation Associated With Alzheimer's Disease (ADAGIO-1)",
+    "conditions": [
+     "Alzheimer Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT05980949",
+    "title": "Open-Label Extension Study to Assess the Long-Term Safety and Tolerability of KarXT in Subjects With Psychosis Associated With Alzheimer's Disease (ADEPT-3)",
+    "conditions": [
+     "Psychosis Associated With Alzheimer's Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07084831",
+    "title": "A Study Evaluating the Efficacy of Xanomeline/Trospium (XT) on Cognitive Impairment After 24 and 52 Weeks of Treatment in Adult Participants With Schizophrenia",
+    "conditions": [
+     "Schizophrenia; Psychosis",
+     "Cognitive Impairment"
+    ],
+    "status": "WITHDRAWN"
+   },
+   {
+    "nct": "NCT07221877",
+    "title": "A Study to Evaluate the Effect of KarXT on Urological Safety",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07118215",
+    "title": "A Study to Evaluate the Effects of KarXT on the Drug Levels of Midazolam, Fexofenadine, and Digoxin",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT06605950",
+    "title": "A Study to Assess the Safety, Tolerability and Pharmacokinetics (PK) of Xanomeline With Trospium Chloride Versus KarXT in Healthy Adult and Elderly Participants of Japanese Ethnicity and to Assess the Effect of Omeprazole on the PK of Xanomeline With Trospium Chloride in Healthy Adult Participants",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07681076",
+    "title": "Study to Assess Safety and Tolerability of KarXT With Administration of Antiemetics in Healthy Volunteers",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07257120",
+    "title": "KarXT Concentrations in the Breast Milk and Plasma of Lactating Females",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT06882785",
+    "title": "A Study to Evaluate the Efficacy and Safety of KarXT in Acutely Psychotic Japanese Adult Participants With Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06976216",
+    "title": "A Study to Evaluate the Efficacy and Safety of KarXT + KarX-EC for Cognitive Impairment in Alzheimer's Disease",
+    "conditions": [
+     "Alzheimer's Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06572449",
+    "title": "Study to Assess Safety and Effectiveness of Slowly Increasing Dose and Food Effect of KarXT in Participants With Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT06853171",
+    "title": "Safety, Tolerability, and Pharmacokinetics of KarXT and Dual-burst Release of Xanomeline With Immediate-release Trospium Chloride in Adolescents With Psychiatric Disorders",
+    "conditions": [
+     "Psychiatric Disorders"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07011745",
+    "title": "A Phase 3 Study to Evaluate the Safety and Efficacy of KarXT + KarX-EC for the Treatment of Agitation Associated With Alzheimer's Disease",
+    "conditions": [
+     "Alzheimer's Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07423546",
+    "title": "A PET/MRI Study of Cobenfy on Dopamine Transmission in Schizophrenia",
+    "conditions": [
+     "SCHIZOPHRENIA 1 (Disorder)",
+     "Schizoaffecitve Disorder"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT04738123",
+    "title": "A Study to Assess Efficacy and Safety of KarXT in Acutely Psychotic Hospitalized Adult Patients With Schizophrenia (EMERGENT-3)",
+    "conditions": [
+     "Schizophrenia",
+     "Schizophrenia; Psychosis"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07204418",
+    "title": "A Study to Evaluate the Effects of CYP2D6 Phenotypes on the Pharmacokinetics of Xanomeline Following KarXT Administration in Healthy Adult Participants",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06126224",
+    "title": "A Study to Assess Efficacy and Safety of KarXT for the Treatment of Psychosis Associated With Alzheimer's Disease (ADEPT-2)",
+    "conditions": [
+     "Psychosis Associated With Alzheimer's Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07063342",
+    "title": "A Study to Evaluate Novel KarX and KarT Prototypes Versus the KarXT and KarX-EC Reference Following Single Doses, Explore the Effect of Food After Multiple Doses of Selected Prototypes, and Evaluate Alternative Formulations of KarX and KarXT Following Single and Multiple Ascending Doses",
+    "conditions": [
+     "Healthy Volunteers"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06947941",
+    "title": "A Study to Evaluate Safety and Efficacy of KarXT + KarX-EC as a Treatment for Psychosis Associated With Alzheimer's Disease (ADEPT-5)",
+    "conditions": [
+     "Alzheimer Disease",
+     "Psychosis"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07228338",
+    "title": "Cholinergic Enhancement of Theta",
+    "conditions": [
+     "Epilepsy",
+     "Seizures",
+     "Cognitive Impairment, Mild",
+     "Memory Disorder",
+     "Memory Loss"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT07061288",
+    "title": "A Study to Evaluate the Safety, Tolerability, and PK of an Injectable Form of KarXT",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07571148",
+    "title": "Real-world Patient Characteristics, Treatment Patterns, and Healthcare Utilization Among KarXT Users",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT07802132",
+    "title": "A Prospective, Observational, Single-Arm, Multicenter Real-World Study Evaluating the Treatment Pattern, Safety and Effectiveness of Xanomeline and Trospium Chloride Capsules (KarXT) in the Treatment of Chinese Adult Participants With Schizophrenia",
+    "conditions": [
+     "Schizophrenia Disorder"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT06929273",
+    "title": "A Study to Assess the Long-term Safety of KarXT for the Treatment of Manic Episodes in Bipolar-I Disorder (BALSAM-3)",
+    "conditions": [
+     "Bipolar Disorder Type I With Mania"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT04659174",
+    "title": "An Extension Study to Assess Long-term Safety, Tolerability, and Efficacy of KarXT in Adult Patients With Schizophrenia (EMERGENT-4)",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT05145413",
+    "title": "A Study to Assess Efficacy and Safety of Adjunctive KarXT in Subjects With Inadequately Controlled Symptoms of Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT06585787",
+    "title": "A Study to Evaluate KarXT as a Treatment for Psychosis Associated With Alzheimer's Disease (ADEPT-4)",
+    "conditions": [
+     "Alzheimer Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT05304767",
+    "title": "An Extension Study to Assess Long-Term Safety and Tolerability of Adjunctive KarXT in Subjects With Inadequately Controlled Symptoms of Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT06976203",
+    "title": "A Study to Evaluate the Efficacy and Safety of KarXT + KarX-EC for Cognitive Impairment in Alzheimer's Disease (MINDSET 2)",
+    "conditions": [
+     "Alzheimer's Disease"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07721272",
+    "title": "Human Cognition During Surgery: Stimulation-based and Cholinergic Modulation",
+    "conditions": [
+     "Epilepsy",
+     "Essential Tremor",
+     "Seizures",
+     "Memory Consolidation",
+     "Memory Disorders",
+     "Memory Replay",
+     "Memory Encoding",
+     "Cognitive Control",
+     "Motor Abilities"
+    ],
+    "status": "NOT_YET_RECRUITING"
+   },
+   {
+    "nct": "NCT07284745",
+    "title": "A Study of KarXT + KarX-EC for Treatment of Irritability in Children and Adolescents With Autism",
+    "conditions": [
+     "Irritability Associated With Autism Spectrum Disorder"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07288567",
+    "title": "A Study to Evaluate the Efficacy and Safety of KarXT for the Treatment of Schizophrenia in Adolescents (EMERGENT TEEN)",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07424404",
+    "title": "A Study to Evaluate the Long-term Safety and Tolerability of Xanomeline and Trospium Chloride for the Treatment of Psychiatric Disorders in Children and Adolescents",
+    "conditions": [
+     "Schizophrenia",
+     "Autism-Related Irritability"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07140913",
+    "title": "A Study to Evaluate the Efficacy and Safety of Adjunctive KarXT for the Treatment of Mania, With or Without Mixed Features, in Participants With Bipolar-I Disorder Taking Lithium, Valproate, or Lamotrigine",
+    "conditions": [
+     "Mania",
+     "Bipolar Disorder"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT05643170",
+    "title": "An Open-label Study to Assess the Long-term Safety, Tolerability, Effectiveness, and Durability of Effect of KarXT in Patients With DSM-5 Diagnosis of Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "TERMINATED"
+   },
+   {
+    "nct": "NCT07285798",
+    "title": "A Study of KarXT + KarX-EC for Treatment of Irritability in Children and Adolescents With Autism Spectrum Disorder",
+    "conditions": [
+     "Irritability Associated With Autism Spectrum Disorder"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06937229",
+    "title": "A Study to Evaluate the Long-term Efficacy and Safety of KarXT + KarX-EC for Agitation in Alzheimer's Disease (ADAGIO-3)",
+    "conditions": [
+     "Alzheimer Disease",
+     "Agitation"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT07101094",
+    "title": "Evaluation of Treatment Satisfaction and KarXT Utilization Registry (RESKU)",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT06951698",
+    "title": "A Study to Evaluate the Efficacy and Safety of KarXT for the Treatment of Manic Episodes in Bipolar-I Disorder",
+    "conditions": [
+     "Bipolar-I Disorder With Mania or Mania With Mixed Features"
+    ],
+    "status": "RECRUITING"
+   },
+   {
+    "nct": "NCT05919823",
+    "title": "A Study to Assess the Efficacy and Safety of KarXT in Acutely Psychotic Hospitalized Chinese Adult Subjects With DSM-5 Schizophrenia",
+    "conditions": [
+     "Schizophrenia"
+    ],
+    "status": "COMPLETED"
+   },
+   {
+    "nct": "NCT06951711",
+    "title": "A Study to Evaluate the Efficacy and Safety of KarXT for the Treatment of Manic Episodes in Bipolar-I Disorder (BALSAM-2)",
+    "conditions": [
+     "Bipolar Disorder Type I With Mania or Mania With Mixed Features"
+    ],
+    "status": "RECRUITING"
+   }
+  ]
+ }
+}

@@ -1,0 +1,50 @@
+outcome_id	url	build	ncase	nctrl
+SCZ	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_F5_SCHZPHR_meta_out.tsv.gz	38	7859.0	904682.0
+BIP	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_F5_BIPO_meta_out.tsv.gz	38	10111.0	854197.0
+MDD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_F5_DEPRESSIO_meta_out.tsv.gz	38	96173.0	816780.0
+ADHD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_F5_ADHD_meta_out.tsv.gz	38	4627.0	911000.0
+ASD	https://storage.googleapis.com/finngen-public-data-r12/summary_stats/release/finngen_R12_KRA_PSY_AUTISM_EXMORE.gz	38	888.0	362304.0
+PTSD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_F5_PTSD_meta_out.tsv.gz	38	3631.0	814344.0
+OCD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_F5_OCD_meta_out.tsv.gz	38	3006.0	814344.0
+AN	https://storage.googleapis.com/finngen-public-data-r12/summary_stats/release/finngen_R12_F5_ANOREX.gz	38	2621.0	484901.0
+TIC	https://storage.googleapis.com/finngen-public-data-r12/summary_stats/release/finngen_R12_KRA_PSY_TIC_EXMORE.gz	38	478.0	362304.0
+ANX	https://storage.googleapis.com/finngen-public-data-r12/summary_stats/release/finngen_R12_F5_ALLANXIOUS.gz	38	35875.0	444414.0
+AUD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_AUD_SWEDISH_meta_out.tsv.gz	38	37802.0	836637.0
+ALCFREQ	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-1558-both_sexes.tsv.bgz	37	420008.0	
+SMKINIT	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_EVER_SMOKER_meta_out.tsv.gz	38	400656.0	314072.0
+CPD	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-Smoking-both_sexes-CPD_combined_irnt.tsv.bgz	37	128434.0	
+CUD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_F5_CANNABIS_meta_out.tsv.gz	38	1339.0	911868.0
+OUD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_F5_OPIOIDS_meta_out.tsv.gz	38	1577.0	911906.0
+FI	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-20016-both_sexes-irnt.tsv.bgz	37	135088.0	
+EDU	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/categorical-6138-both_sexes-1.tsv.bgz	37	131540.0	284776.0
+RT	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-20023-both_sexes-irnt.tsv.bgz	37	417660.0	
+AD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_G6_ALZHEIMER_meta_out.tsv.gz	38	14795.0	906084.0
+ADPROXM	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/categorical-20110-both_sexes-10.tsv.bgz	37	33431.0	352239.0
+ADPROXF	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/categorical-20107-both_sexes-10.tsv.bgz	37	17571.0	346788.0
+PD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_G6_PARKINSON_meta_out.tsv.gz	38	7521.0	897736.0
+MIG	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_G6_MIGRAINE_meta_out.tsv.gz	38	32887.0	769702.0
+EPI	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_G6_EPLEPSY_meta_out.tsv.gz	38	19990.0	790791.0
+INSOM	https://storage.googleapis.com/finngen-public-data-r12/summary_stats/release/finngen_R12_F5_INSOMNIA.gz	38	6776.0	490763.0
+SLEEPLESS	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-1200-both_sexes.tsv.bgz	37	420013.0	
+CHRONO	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-1180-both_sexes.tsv.bgz	37	375390.0	
+SLEEPDUR	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-1160-both_sexes.tsv.bgz	37	418009.0	
+BMI	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-21001-both_sexes-irnt.tsv.bgz	37	419163.0	
+WHR	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-whr-both_sexes-irnt.tsv.bgz	37	420531.0	
+T2D	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_T2D_meta_out.tsv.gz	38	111546.0	790415.0
+HR	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-102-both_sexes-irnt.tsv.bgz	37	396667.0	
+SBP	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-4080-both_sexes-irnt.tsv.bgz	37	396663.0	
+DBP	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-4079-both_sexes-irnt.tsv.bgz	37	396667.0	
+CONSTIP	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_K11_CONSTIPATION_meta_out.tsv.gz	38	65795.0	778662.0
+URETEN	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_R18_RETEN_URINE_meta_out.tsv.gz	38	25059.0	849622.0
+UINCONT	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/phecode-599.4-both_sexes.tsv.bgz	37	4908.0	395845.0
+HYPERHID	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/phecode-705.8-both_sexes.tsv.bgz	37	733.0	409787.0
+ASTHMA	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_J10_ASTHMA_EXMORE_meta_out.tsv.gz	38	90269.0	639495.0
+COPD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_J10_COPD_meta_out.tsv.gz	38	44136.0	728133.0
+PUD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_K11_GASTRODUOULC_meta_out.tsv.gz	38	27013.0	737115.0
+GLAUC	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_H7_GLAUCOMA_meta_out.tsv.gz	38	32790.0	878292.0
+HAIRBL	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/categorical-1747-both_sexes-1.tsv.bgz	37	47976.0	371493.0
+HAIRRED	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/categorical-1747-both_sexes-2.tsv.bgz	37	19253.0	400216.0
+HEIGHT	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/continuous-50-both_sexes-irnt.tsv.bgz	37	419596.0	
+LACT	https://storage.googleapis.com/finngen-public-data-r12/summary_stats/release/finngen_R12_E4_LACTONAS.gz	38	1020.0	420066.0
+LDL	https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/biomarkers-30780-both_sexes-irnt.tsv.bgz	37	400223.0	
+CAD	https://storage.googleapis.com/finngen-public-data-r12/meta_analysis/ukbb/summary_stats/finngen_R12_I9_CHD_meta_out.tsv.gz	38	83622.0	790817.0

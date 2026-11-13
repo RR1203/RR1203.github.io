@@ -1,0 +1,593 @@
+---
+title: "Drug-target MR for muscarinic M1/M4 (CHRM1/CHRM4): what else might Cobenfy do?"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    df_print: kable
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 9, fig.height = 6)
+```
+
+<!--
+Heavy downloads are done by the scripts in scripts/ (run in order 01-07, see decisions_log.md):
+  01/02  GTEx v8 (EUR + all ancestry) and v10 eQTL, v8 sQTL, v10 SuSiE  -> data/clean/gtex_*target*
+  03     1000 Genomes phase 3 EUR (n = 503, GRCh38 positions) regional plink files -> data/raw/ld/
+  04/05  instrument selection, QC, clumping, exposure choice              -> data/clean/feasibility_*, instruments_mr.tsv
+  06     outcome region extraction (FinnGen R12, FinnGen+UKBB meta, Pan-UKB EUR) -> data/raw/outcomes/
+  07     other genes regulated by each instrument (all GTEx tissues)       -> data/clean/instrument_neighbour_genes.tsv
+This Rmd starts from those files.
+-->
+
+```{r libraries}
+library(tidyverse)
+library(data.table)
+library(TwoSampleMR)
+library(MendelianRandomization)
+library(coloc)
+library(susieR)
+library(ieugwasr)     # loaded for completeness; OpenGWAS was not reachable from this environment (see decisions_log.md)
+library(patchwork)
+library(writexl)
+```
+
+```{r paths}
+dir_clean <- "data/clean"
+dir_out   <- "data/raw/outcomes"
+dir_ld    <- "data/raw/ld"
+dir_fig   <- "figures"
+plink     <- "/opt/renv/bin/plink"
+dir.create(dir_fig, showWarnings = FALSE)
+```
+
+# 1. Data cleaning (raw → clean)
+
+```{r read-tables}
+#### ---- read the tables produced by scripts 01-07 ---- ####
+genes      <- fread(file.path(dir_clean, "genes.tsv"))
+exposures  <- fread(file.path(dir_clean, "exposures.tsv"))
+instr      <- fread(file.path(dir_clean, "instruments_mr.tsv"))
+outcomes   <- fread(file.path(dir_clean, "outcomes.tsv"))
+out_files  <- fread(file.path(dir_clean, "outcomes_files.tsv"))
+qtl_all    <- fread(file.path(dir_clean, "qtl_target_all.tsv"))
+feas       <- fread(file.path(dir_clean, "feasibility_all_tissues.tsv"))
+neighbours <- fread(file.path(dir_clean, "instrument_neighbour_genes.tsv"))
+outcomes   <- outcomes %>% left_join(out_files %>% select(outcome_id, ncase, nctrl, build), by = "outcome_id")
+```
+
+```{r read-1000G-freq}
+#### ---- 1000G EUR ALT-allele frequencies (plink --keep-allele-order: A1 = ALT) ---- ####
+frq <- map_dfr(genes$gene, function(g) {
+  fread(file.path(dir_ld, paste0(g, "_eur_alt.frq"))) %>% transmute(ld_id = SNP, alt_1kg = A1, af_alt_1kg = MAF)
+}) %>% distinct(ld_id, .keep_all = TRUE)
+```
+
+```{r helper-split-variant}
+#### ---- helper: split a GTEx variant id chr_pos_ref_alt_b38 ---- ####
+split_vid <- function(v) {
+  x <- str_split_fixed(v, "_", 5)
+  tibble(variant_id = v, chr = str_remove(x[, 1], "chr"), pos38 = as.integer(x[, 2]), ref = x[, 3], alt = x[, 4])
+}
+```
+
+```{r helper-read-outcome}
+#### ---- helper: read one outcome x gene region file ---- ####
+read_outcome <- function(oid, gene) {
+  f <- file.path(dir_out, paste0(oid, "__", gene, ".tsv.gz"))
+  if (!file.exists(f)) return(NULL)
+  d <- fread(f, colClasses = list(character = c("chr", "ref", "alt")))
+  d %>% mutate(beta = as.numeric(beta), se = as.numeric(se), p = as.numeric(p), af = as.numeric(af)) %>%
+    filter(!is.na(beta), !is.na(se), se > 0) %>%
+    distinct(pos38, ref, alt, .keep_all = TRUE)
+}
+```
+
+```{r helper-align}
+#### ---- helper: align outcome alleles to the GTEx ALT allele (same reference genome, forward strand) ---- ####
+align_to <- function(target, d) {
+  # target: variant_id, pos38, ref, alt ; d: outcome rows
+  m1 <- inner_join(target, d, by = c("pos38", "ref", "alt"))
+  m2 <- inner_join(target, d %>% rename(ref = alt, alt = ref), by = c("pos38", "ref", "alt")) %>%
+    mutate(beta = -beta, af = 1 - af)
+  bind_rows(m1, m2) %>% distinct(across(any_of(c("exposure_id", "variant_id"))), .keep_all = TRUE)
+}
+```
+
+```{r build-mr-input}
+#### ---- harmonised exposure-outcome table for every exposure x outcome ---- ####
+instr_x <- instr %>%
+  select(exposure_id, gene, variant_id, ld_id, slope, slope_se, pval_nominal, maf, n_samples) %>%
+  left_join(split_vid(unique(instr$variant_id)), by = "variant_id") %>%
+  left_join(frq, by = "ld_id") %>%
+  # 1000G ALT frequency expressed for the GTEx ALT allele (ld_id can be the allele-swapped id)
+  mutate(eaf_exp = if_else(ld_id == variant_id, af_alt_1kg, 1 - af_alt_1kg))
+
+mr_input <- map_dfr(seq_len(nrow(outcomes)), function(i) {
+  o <- outcomes[i, ]
+  map_dfr(unique(instr_x$gene), function(g) {
+    d <- read_outcome(o$outcome_id, g)
+    if (is.null(d)) return(NULL)
+    tg <- instr_x %>% filter(gene == g)
+    align_to(tg, d %>% select(pos38, ref, alt, beta, se, p, af)) %>%
+      mutate(outcome_id = o$outcome_id)
+  })
+})
+
+mr_input <- mr_input %>%
+  left_join(outcomes %>% select(outcome_id, label, category, source, type, ncase, nctrl), by = "outcome_id") %>%
+  mutate(palindromic = paste0(ref, alt) %in% c("AT", "TA", "CG", "GC"),
+         af_diff = abs(eaf_exp - af))
+```
+
+```{r qc-mr-input}
+#### ---- QC: allele-frequency agreement between 1000G EUR and the outcome GWAS ---- ####
+mr_input %>% summarise(n_rows = n(), n_af_diff_gt_0.2 = sum(af_diff > 0.2, na.rm = TRUE),
+                       n_palindromic = sum(palindromic), n_missing_af = sum(is.na(af)))
+# Drop rows whose frequency disagrees by > 0.2 (possible allele / liftover error)
+mr_input <- mr_input %>% filter(is.na(af_diff) | af_diff <= 0.2)
+```
+
+```{r coverage}
+#### ---- coverage: instruments found per exposure x outcome ---- ####
+coverage <- expand_grid(exposure_id = exposures$exposure_id, outcome_id = outcomes$outcome_id) %>%
+  left_join(exposures %>% select(exposure_id, n_clumped), by = "exposure_id") %>%
+  left_join(mr_input %>% count(exposure_id, outcome_id, name = "n_found"), by = c("exposure_id", "outcome_id")) %>%
+  mutate(n_found = replace_na(n_found, 0L))
+coverage %>% count(complete = n_found == n_clumped)
+coverage %>% filter(n_found < n_clumped)
+```
+
+```{r write-clean}
+#### ---- write the clean workbook ---- ####
+write_xlsx(list(exposures = exposures, instruments = instr_x, outcomes = outcomes,
+                mr_input = mr_input, coverage = coverage, feasibility = feas),
+           file.path(dir_clean, "chrm_mr_clean.xlsx"))
+```
+
+# 2. Step 0: feasibility
+
+```{r feasibility-table}
+#### ---- per gene x release x tissue: variants at p<5e-6, after QC, after clumping, F ---- ####
+feas_show <- feas %>%
+  filter(qtl_type == "eQTL" | gene %in% c("CHRM1", "CHRM4")) %>%
+  select(gene, release, tissue, tclass, qtl_type, n_samples, n_p5e6, n_p5e6_in_1000G, n_p5e6_qc,
+         top_ma_count, top_p, n_clumped, F_min, F_mean) %>%
+  arrange(gene, tclass, top_p)
+feas_show %>% filter(gene %in% c("CHRM1", "CHRM4"))
+```
+
+```{r feasibility-verdict}
+#### ---- stop rule: any CHRM1/CHRM4 brain/blood source with a QC-passing instrument with F > 10? ---- ####
+verdict <- feas %>% filter(gene %in% c("CHRM1", "CHRM4"), tclass %in% c("brain", "blood"), n_clumped > 0, F_min > 10)
+verdict
+stopifnot(nrow(verdict) > 0)   # if this fails the analysis stops here (negative feasibility)
+```
+
+```{r exposures-used}
+exposures %>% select(exposure_id, role, tclass, n_samples, n_clumped, F_min, F_mean, top_p)
+```
+
+# 3. MR estimates (Wald ratio / LD-aware generalised IVW)
+
+```{r helper-ld}
+#### ---- helper: signed LD correlation matrix (ALT-ALT, 1000G EUR) for a set of GTEx variants ---- ####
+ld_matrix <- function(gene, variant_ids, ld_ids) {
+  tmp <- tempfile()
+  writeLines(ld_ids, paste0(tmp, ".snps"))
+  system2(plink, c("--bfile", file.path(dir_ld, paste0(gene, "_eur")), "--keep-allele-order",
+                   "--extract", paste0(tmp, ".snps"), "--r", "square", "--write-snplist", "--out", tmp), stdout = FALSE)
+  R <- as.matrix(fread(paste0(tmp, ".ld"), header = FALSE))
+  ids <- readLines(paste0(tmp, ".snplist"))
+  dimnames(R) <- list(ids, ids)
+  # re-express on the GTEx ALT allele when the 1000G id is allele-swapped
+  flip <- setNames(ifelse(ld_ids == variant_ids, 1, -1), ld_ids)[ids]
+  R <- R * outer(flip, flip)
+  dimnames(R) <- list(variant_ids[match(ids, ld_ids)], variant_ids[match(ids, ld_ids)])
+  R
+}
+```
+
+```{r helper-mr-one}
+#### ---- helper: MR for one exposure x outcome ---- ####
+mr_one <- function(d) {
+  d <- d %>% arrange(variant_id)
+  k <- nrow(d)
+  res <- tibble(n_snp = k)
+  if (k == 1) {
+    w <- TwoSampleMR::mr_wald_ratio(d$slope, d$beta, d$slope_se, d$se)
+    return(res %>% mutate(method = "Wald ratio", b = w$b, se = w$se, p = w$pval))
+  }
+  R <- ld_matrix(d$gene[1], d$variant_id, d$ld_id)[d$variant_id, d$variant_id]
+  inp <- mr_input(bx = d$slope, bxse = d$slope_se, by = d$beta, byse = d$se, correlation = R)
+  g <- mr_ivw(inp, model = "fixed")
+  res <- res %>% mutate(method = "gIVW (LD-corrected)", b = g@Estimate, se = g@StdError, p = g@Pvalue,
+                        max_abs_r = max(abs(R[upper.tri(R)])))
+  ivw <- TwoSampleMR::mr_ivw(d$slope, d$beta, d$slope_se, d$se)
+  res <- res %>% mutate(ivw_b = ivw$b, ivw_p = ivw$pval)
+  if (k >= 3) {
+    eg <- TwoSampleMR::mr_egger_regression(d$slope, d$beta, d$slope_se, d$se)
+    wm <- TwoSampleMR::mr_weighted_median(d$slope, d$beta, d$slope_se, d$se)
+    res <- res %>% mutate(egger_b = eg$b, egger_p = eg$pval, egger_intercept_p = eg$pval_i,
+                          wm_b = wm$b, wm_p = wm$pval)
+  }
+  # leave-one-out (generalised IVW without each variant)
+  loo <- map_dbl(seq_len(k), function(j) {
+    if (k - 1 == 1) return(d$beta[-j] / d$slope[-j])
+    Rj <- R[-j, -j, drop = FALSE]
+    mr_ivw(mr_input(bx = d$slope[-j], bxse = d$slope_se[-j], by = d$beta[-j], byse = d$se[-j], correlation = Rj), model = "fixed")@Estimate
+  })
+  res %>% mutate(loo_min = min(loo), loo_max = max(loo), loo_same_sign = all(sign(loo) == sign(b)))
+}
+```
+
+```{r run-mr}
+mr_res <- mr_input %>%
+  group_by(exposure_id, outcome_id) %>%
+  group_modify(~ mr_one(.x %>% mutate(exposure_id = .y$exposure_id))) %>%
+  ungroup()
+nrow(mr_res)
+```
+
+```{r steiger}
+#### ---- Steiger directionality (exposure explains more variance in the instrument than the outcome) ---- ####
+steiger <- mr_input %>%
+  mutate(r_exp = get_r_from_bsen(slope, slope_se, n_samples),
+         r_out = if_else(type == "binary",
+                         get_r_from_lor(beta, pmin(pmax(af, 0.001), 0.999), ncase, nctrl, ncase / (ncase + nctrl)),
+                         get_r_from_bsen(beta, se, ncase))) %>%
+  group_by(exposure_id, outcome_id) %>%
+  summarise(r2_exp = sum(r_exp^2), r2_out = sum(r_out^2, na.rm = TRUE),
+            n_exp = mean(n_samples), n_out = mean(if_else(type == "binary", ncase + nctrl, ncase)), .groups = "drop") %>%
+  rowwise() %>%
+  mutate(st = list(mr_steiger(p_exp = NA, p_out = NA, n_exp = n_exp, n_out = n_out,
+                              r_exp = sqrt(r2_exp), r_out = sqrt(r2_out))),
+         steiger_correct = st$correct_causal_direction, steiger_p = st$steiger_test) %>%
+  ungroup() %>% select(-st)
+```
+
+# 4. Colocalisation (coloc.abf; SuSiE on the outcome where it has several signals)
+
+```{r helper-region}
+#### ---- helper: regional data for one exposure x outcome (cis window gene +/- 500 kb) ---- ####
+region_data <- function(eid, oid) {
+  ex <- exposures %>% filter(exposure_id == eid)
+  g  <- genes %>% filter(gene == ex$gene)
+  d  <- read_outcome(oid, ex$gene)
+  if (is.null(d)) return(NULL)
+  d  <- d %>% filter(pos38 >= g$start - 5e5, pos38 <= g$end + 5e5)
+  # variant universe: outcome variants present in 1000G EUR with 1% <= ALT AF <= 99%
+  d  <- d %>% mutate(variant_id = paste0("chr", chr, "_", pos38, "_", ref, "_", alt, "_b38"),
+                     variant_sw = paste0("chr", chr, "_", pos38, "_", alt, "_", ref, "_b38"),
+                     ld_id = case_when(variant_id %in% frq$ld_id ~ variant_id, variant_sw %in% frq$ld_id ~ variant_sw)) %>%
+    filter(!is.na(ld_id)) %>%
+    left_join(frq, by = "ld_id") %>%
+    mutate(af_1kg = if_else(ld_id == variant_id, af_alt_1kg, 1 - af_alt_1kg)) %>%
+    filter(af_1kg >= 0.01, af_1kg <= 0.99, abs(af_1kg - af) <= 0.2 | is.na(af)) %>%
+    distinct(pos38, .keep_all = TRUE)
+  q  <- qtl_all %>% filter(gene == ex$gene, release == ex$release, tissue == ex$tissue, qtl_type == "eQTL") %>%
+    select(variant_id, slope, slope_se, pval_nominal)
+  qs <- q %>% mutate(variant_id = map_chr(variant_id, function(v) { x <- str_split(v, "_")[[1]]; paste(x[1], x[2], x[4], x[3], x[5], sep = "_") }),
+                     slope = -slope)
+  d %>% left_join(bind_rows(q, qs) %>% distinct(variant_id, .keep_all = TRUE), by = "variant_id") %>%
+    mutate(in_signif = !is.na(slope),
+           maf_1kg = pmin(af_1kg, 1 - af_1kg),
+           # variants not in GTEx significant pairs: eQTL z set to 0 (conservative; full GTEx summary statistics not public)
+           e_beta = if_else(in_signif, slope, 0),
+           e_se = if_else(in_signif, slope_se, 1 / sqrt(2 * ex$n_samples * maf_1kg * (1 - maf_1kg))),
+           e_p = if_else(in_signif, pval_nominal, 1),
+           n_exp = ex$n_samples)
+}
+```
+
+```{r helper-coloc}
+#### ---- helper: coloc.abf for one exposure x outcome ---- ####
+coloc_one <- function(eid, oid) {
+  r <- region_data(eid, oid)
+  if (is.null(r) || sum(r$in_signif) == 0) return(tibble(n_snps_coloc = 0))
+  o <- outcomes %>% filter(outcome_id == oid)
+  d1 <- list(beta = r$e_beta, varbeta = r$e_se^2, snp = r$variant_id, MAF = r$maf_1kg, N = r$n_exp[1], type = "quant", sdY = 1)
+  if (o$type == "binary") {
+    d2 <- list(beta = r$beta, varbeta = r$se^2, snp = r$variant_id, MAF = r$maf_1kg, N = o$ncase + o$nctrl,
+               type = "cc", s = o$ncase / (o$ncase + o$nctrl))
+  } else {
+    d2 <- list(beta = r$beta, varbeta = r$se^2, snp = r$variant_id, MAF = r$maf_1kg, N = o$ncase, type = "quant")
+  }
+  cc <- suppressMessages(coloc.abf(d1, d2))
+  # sensitivity: restrict to variants in GTEx significant pairs (no zero-imputation)
+  rs <- r %>% filter(in_signif)
+  h4_sig <- NA_real_
+  if (nrow(rs) >= 2) {
+    d1s <- list(beta = rs$e_beta, varbeta = rs$e_se^2, snp = rs$variant_id, MAF = rs$maf_1kg, N = rs$n_exp[1], type = "quant", sdY = 1)
+    d2s <- d2; d2s$beta <- rs$beta; d2s$varbeta <- rs$se^2; d2s$snp <- rs$variant_id; d2s$MAF <- rs$maf_1kg
+    h4_sig <- suppressMessages(coloc.abf(d1s, d2s))$summary[["PP.H4.abf"]]
+  }
+  top <- cc$results %>% arrange(desc(SNP.PP.H4)) %>% slice(1)
+  tibble(n_snps_coloc = nrow(r), n_snps_eqtl_signif = sum(r$in_signif),
+         PP.H0 = cc$summary[["PP.H0.abf"]], PP.H1 = cc$summary[["PP.H1.abf"]], PP.H2 = cc$summary[["PP.H2.abf"]],
+         PP.H3 = cc$summary[["PP.H3.abf"]], PP.H4 = cc$summary[["PP.H4.abf"]],
+         PP.H4_signif_only = h4_sig, top_snp_H4 = top$snp, top_snp_PP = top$SNP.PP.H4,
+         outcome_min_p_region = min(r$p))
+}
+```
+
+```{r run-coloc}
+coloc_res <- mr_res %>% distinct(exposure_id, outcome_id) %>%
+  mutate(cc = map2(exposure_id, outcome_id, coloc_one)) %>%
+  unnest(cc)
+coloc_res %>% arrange(desc(PP.H4)) %>% head(15)
+```
+
+```{r helper-susie}
+#### ---- helper: SuSiE fine-mapping of the outcome region, coloc.bf_bf against the single-signal eQTL ---- ####
+susie_coloc_one <- function(eid, oid) {
+  r <- region_data(eid, oid)
+  o <- outcomes %>% filter(outcome_id == oid)
+  ex <- exposures %>% filter(exposure_id == eid)
+  R <- ld_matrix(ex$gene, r$variant_id, r$ld_id)
+  r <- r %>% filter(variant_id %in% rownames(R))
+  R <- R[r$variant_id, r$variant_id]
+  n_out <- if (o$type == "binary") o$ncase + o$nctrl else o$ncase
+  fit <- tryCatch(susie_rss(z = r$beta / r$se, R = R, n = n_out, L = 5, max_iter = 200), error = function(e) NULL)
+  if (is.null(fit) || is.null(fit$sets$cs)) return(tibble(susie_n_cs = 0, susie_PP.H4_max = NA_real_))
+  # eQTL single-causal-variant log Bayes factors (coloc ABF formula, prior sd 0.15, sdY = 1)
+  V <- r$e_se^2; W <- 0.15^2; z <- r$e_beta / r$e_se; rr <- W / (V + W)
+  lbf_e <- matrix(0.5 * (log(1 - rr) + rr * z^2), nrow = 1, dimnames = list("eqtl", r$variant_id))
+  lbf_o <- fit$lbf_variable[names(fit$sets$cs) %>% str_remove("L") %>% as.integer(), , drop = FALSE]
+  colnames(lbf_o) <- r$variant_id
+  bb <- suppressMessages(coloc.bf_bf(lbf_e, lbf_o))
+  tibble(susie_n_cs = length(fit$sets$cs), susie_PP.H4_max = max(bb$summary$PP.H4.abf),
+         susie_PP.H3_at_max = bb$summary$PP.H3.abf[which.max(bb$summary$PP.H4.abf)])
+}
+```
+
+```{r run-susie}
+#### ---- SuSiE only where the outcome has a regional signal (min p < 1e-6) ---- ####
+susie_res <- coloc_res %>% filter(outcome_min_p_region < 1e-6) %>%
+  distinct(exposure_id, outcome_id) %>%
+  mutate(s = map2(exposure_id, outcome_id, susie_coloc_one)) %>%
+  unnest(s)
+susie_res
+```
+
+# 5. Combine, FDR, candidates
+
+```{r combine}
+results <- mr_res %>%
+  left_join(exposures %>% select(exposure_id, gene, release, tissue, tclass, role, n_samples, F_min, F_mean), by = "exposure_id") %>%
+  left_join(outcomes %>% select(outcome_id, label, category, type, source, ncase, nctrl), by = "outcome_id") %>%
+  left_join(coloc_res, by = c("exposure_id", "outcome_id")) %>%
+  left_join(susie_res, by = c("exposure_id", "outcome_id")) %>%
+  left_join(steiger %>% select(exposure_id, outcome_id, r2_exp, r2_out, steiger_correct, steiger_p), by = c("exposure_id", "outcome_id")) %>%
+  mutate(lci = b - 1.96 * se, uci = b + 1.96 * se,
+         OR = if_else(type == "binary", exp(b), NA_real_),
+         OR_lci = if_else(type == "binary", exp(lci), NA_real_),
+         OR_uci = if_else(type == "binary", exp(uci), NA_real_),
+         q = p.adjust(p, method = "BH"))
+```
+
+```{r tissue-consistency}
+#### ---- tissue consistency: same gene, same outcome, different tissue/release ---- ####
+tissue_cons <- results %>% group_by(gene, outcome_id) %>%
+  summarise(n_sources = n(), signs = paste0(exposure_id, ":", sign(b), collapse = "; "),
+            consistent_sign = n_distinct(sign(b)) == 1, .groups = "drop")
+results <- results %>% left_join(tissue_cons %>% select(gene, outcome_id, n_sources, consistent_sign), by = c("gene", "outcome_id"))
+```
+
+```{r candidates}
+#### ---- candidate rule: q < 0.05 AND PP.H4 > 0.8 AND consistent direction across sensitivity methods ---- ####
+results <- results %>%
+  mutate(dir_methods_ok = case_when(
+           n_snp == 1 ~ TRUE,
+           n_snp == 2 ~ sign(ivw_b) == sign(b) & loo_same_sign,
+           TRUE ~ sign(ivw_b) == sign(b) & sign(egger_b) == sign(b) & sign(wm_b) == sign(b) & loo_same_sign),
+         candidate = q < 0.05 & PP.H4 > 0.8 & dir_methods_ok & consistent_sign)
+results %>% filter(candidate) %>% select(exposure_id, outcome_id, b, se, p, q, PP.H3, PP.H4, steiger_correct)
+```
+
+```{r nominal-target}
+#### ---- target-gene results at nominal p < 0.05 (for transparency, not candidates) ---- ####
+results %>% filter(gene %in% c("CHRM1", "CHRM4"), p < 0.05) %>%
+  select(exposure_id, label, b, se, p, q, PP.H3, PP.H4, PP.H4_signif_only) %>% arrange(p)
+```
+
+# 6. Built-in checks
+
+```{r positive-controls}
+#### ---- method positive controls: DRD2 -> schizophrenia; HMGCR -> LDL and CHD ---- ####
+results %>% filter((gene == "DRD2" & outcome_id == "SCZ") | (gene == "HMGCR" & outcome_id %in% c("LDL", "CAD"))) %>%
+  select(exposure_id, outcome_id, n_snp, method, b, se, p, q, PP.H3, PP.H4)
+```
+
+```{r positive-control-gwas-instrument}
+#### ---- pipeline sanity check: HMGCR LDL-GWAS instrument (Pan-UKB LDL, +/-100 kb, p<5e-8, clumped) -> CHD ---- ####
+g_h <- genes %>% filter(gene == "HMGCR")
+ldl <- read_outcome("LDL", "HMGCR") %>%
+  filter(pos38 >= g_h$start - 1e5, pos38 <= g_h$end + 1e5, p < 5e-8) %>%
+  mutate(variant_id = paste0("chr", chr, "_", pos38, "_", ref, "_", alt, "_b38"),
+         variant_sw = paste0("chr", chr, "_", pos38, "_", alt, "_", ref, "_b38"),
+         ld_id = case_when(variant_id %in% frq$ld_id ~ variant_id, variant_sw %in% frq$ld_id ~ variant_sw)) %>%
+  filter(!is.na(ld_id))
+tmp <- tempfile()
+fwrite(ldl %>% transmute(SNP = ld_id, P = p), paste0(tmp, ".txt"), sep = "\t")
+system2(plink, c("--bfile", file.path(dir_ld, "HMGCR_eur"), "--clump", paste0(tmp, ".txt"), "--clump-p1", "5e-8",
+                 "--clump-r2", "0.1", "--clump-kb", "500", "--out", tmp), stdout = FALSE)
+ldl_iv <- ldl %>% filter(ld_id %in% fread(paste0(tmp, ".clumped"))$SNP)
+chd <- read_outcome("CAD", "HMGCR")
+hmgcr_gwas <- align_to(ldl_iv %>% select(variant_id, pos38, ref, alt, b_ldl = beta, se_ldl = se), chd %>% select(pos38, ref, alt, beta, se, p, af))
+hmgcr_gwas
+if (nrow(hmgcr_gwas) == 1) {
+  pc_gwas <- TwoSampleMR::mr_wald_ratio(hmgcr_gwas$b_ldl, hmgcr_gwas$beta, hmgcr_gwas$se_ldl, hmgcr_gwas$se)
+} else {
+  pc_gwas <- TwoSampleMR::mr_ivw(hmgcr_gwas$b_ldl, hmgcr_gwas$beta, hmgcr_gwas$se_ldl, hmgcr_gwas$se)
+}
+pc_gwas <- tibble(check = "HMGCR LDL-GWAS instrument -> CHD (OR per 1 SD higher LDL)", n_snp = nrow(hmgcr_gwas),
+                  b = pc_gwas$b, se = pc_gwas$se, p = pc_gwas$pval, OR = exp(pc_gwas$b),
+                  OR_lci = exp(pc_gwas$b - 1.96 * pc_gwas$se), OR_uci = exp(pc_gwas$b + 1.96 * pc_gwas$se))
+pc_gwas
+```
+
+```{r mechanism-control}
+#### ---- mechanism control: CHRM3 -> peripheral outcomes ---- ####
+results %>% filter(gene == "CHRM3", category == "Safety") %>%
+  select(exposure_id, outcome_id, b, se, p, q, PP.H4) %>% arrange(p)
+```
+
+```{r indication-check}
+#### ---- indication check: CHRM1/CHRM4 -> schizophrenia (agonist-like = lower risk expected) ---- ####
+results %>% filter(gene %in% c("CHRM1", "CHRM4"), outcome_id == "SCZ") %>%
+  select(exposure_id, n_snp, OR, OR_lci, OR_uci, p, q, PP.H3, PP.H4)
+```
+
+```{r negative-controls}
+#### ---- negative controls: hair colour, height, lactose intolerance ---- ####
+results %>% filter(category == "Negative control") %>%
+  select(exposure_id, outcome_id, b, se, p, q, PP.H4) %>% arrange(p)
+```
+
+```{r helper-locus-specificity}
+#### ---- specificity at the CHRM4 locus: coloc of an outcome with EVERY gene's eQTL in the CHRM4 window ---- ####
+loc_all <- fread(file.path(dir_clean, "chrm4_locus_v10_all_genes.tsv")) %>% filter(ma_count >= 10)
+outcome_universe <- function(gene, oid) {
+  g <- genes %>% filter(gene == !!gene)
+  read_outcome(oid, gene) %>% filter(pos38 >= g$start - 5e5, pos38 <= g$end + 5e5) %>%
+    mutate(variant_id = paste0("chr", chr, "_", pos38, "_", ref, "_", alt, "_b38"),
+           variant_sw = paste0("chr", chr, "_", pos38, "_", alt, "_", ref, "_b38"),
+           ld_id = case_when(variant_id %in% frq$ld_id ~ variant_id, variant_sw %in% frq$ld_id ~ variant_sw)) %>%
+    filter(!is.na(ld_id)) %>% left_join(frq, by = "ld_id") %>%
+    mutate(af_1kg = if_else(ld_id == variant_id, af_alt_1kg, 1 - af_alt_1kg), maf_1kg = pmin(af_1kg, 1 - af_1kg)) %>%
+    filter(maf_1kg >= 0.01, abs(af_1kg - af) <= 0.2 | is.na(af)) %>% distinct(pos38, .keep_all = TRUE)
+}
+locus_coloc <- function(tissue, gene_name, oid) {
+  q <- loc_all %>% filter(tissue == !!tissue, gene_name == !!gene_name) %>% select(variant_id, slope, slope_se, n_samples)
+  qs <- q %>% mutate(variant_id = map_chr(variant_id, function(v) { x <- str_split(v, "_")[[1]]; paste(x[1], x[2], x[4], x[3], x[5], sep = "_") }), slope = -slope)
+  o <- outcomes %>% filter(outcome_id == oid)
+  n <- q$n_samples[1]
+  r <- outcome_universe("CHRM4", oid) %>% left_join(bind_rows(q, qs) %>% select(-n_samples) %>% distinct(variant_id, .keep_all = TRUE), by = "variant_id") %>%
+    mutate(in_signif = !is.na(slope), e_beta = if_else(in_signif, slope, 0),
+           e_se = if_else(in_signif, slope_se, 1 / sqrt(2 * n * maf_1kg * (1 - maf_1kg))))
+  if (sum(r$in_signif) == 0) return(tibble(n_eqtl_snps = 0))
+  d1 <- list(beta = r$e_beta, varbeta = r$e_se^2, snp = r$variant_id, MAF = r$maf_1kg, N = n, type = "quant", sdY = 1)
+  d2 <- if (o$type == "binary") list(beta = r$beta, varbeta = r$se^2, snp = r$variant_id, MAF = r$maf_1kg, N = o$ncase + o$nctrl, type = "cc", s = o$ncase / (o$ncase + o$nctrl)) else
+    list(beta = r$beta, varbeta = r$se^2, snp = r$variant_id, MAF = r$maf_1kg, N = o$ncase, type = "quant")
+  cc <- suppressMessages(coloc.abf(d1, d2))
+  tibble(n_eqtl_snps = sum(r$in_signif), eqtl_min_p = min(loc_all$pval_nominal[loc_all$tissue == tissue & loc_all$gene_name == gene_name]),
+         PP.H3 = cc$summary[["PP.H3.abf"]], PP.H4 = cc$summary[["PP.H4.abf"]])
+}
+```
+
+```{r run-locus-specificity}
+spec <- loc_all %>% group_by(tissue, gene_name) %>% filter(min(pval_nominal) < 5e-6) %>% ungroup() %>%
+  distinct(tissue, gene_name) %>%
+  filter(tissue %in% c("Skin_Sun_Exposed_Lower_leg", "Whole_Blood") | str_starts(tissue, "Brain_")) %>%
+  expand_grid(outcome_id = c("RT", "FI", "BMI")) %>%
+  mutate(cc = pmap(list(tissue, gene_name, outcome_id), locus_coloc)) %>% unnest(cc)
+fwrite(spec, file.path(dir_clean, "chrm4_locus_specificity_coloc.tsv"), sep = "\t")
+spec %>% filter(PP.H4 > 0.5) %>% arrange(outcome_id, desc(PP.H4))
+spec %>% group_by(outcome_id) %>% summarise(n_gene_tissue_tested = n(), n_H4_gt_0.8 = sum(PP.H4 > 0.8),
+                                           genes_H4_gt_0.8 = paste(unique(gene_name[PP.H4 > 0.8]), collapse = ", "))
+```
+
+```{r flag-specificity}
+#### ---- flag CHRM4 results whose outcome signal also colocalises (PP.H4 > 0.8) with another gene's eQTL at the locus ---- ####
+other_genes <- spec %>% filter(gene_name != "CHRM4", PP.H4 > 0.8) %>% group_by(outcome_id) %>%
+  summarise(other_genes_H4_gt_0.8 = paste(sort(unique(gene_name)), collapse = ", "), max_H4_other_gene = max(PP.H4))
+results <- results %>% left_join(other_genes, by = "outcome_id") %>%
+  mutate(other_genes_H4_gt_0.8 = if_else(gene == "CHRM4", other_genes_H4_gt_0.8, NA_character_),
+         max_H4_other_gene = if_else(gene == "CHRM4", max_H4_other_gene, NA_real_),
+         attributable_to_target = !(gene == "CHRM4" & !is.na(other_genes_H4_gt_0.8)))
+results %>% filter(candidate) %>% select(exposure_id, outcome_id, PP.H4, other_genes_H4_gt_0.8, max_H4_other_gene, attributable_to_target)
+```
+
+# 7. Outputs
+
+```{r write-results}
+results_out <- results %>%
+  select(exposure_id, gene, role, release, tissue, tclass, n_samples, F_min, F_mean,
+         outcome_id, outcome_label = label, category, outcome_type = type, outcome_source = source, ncase, nctrl,
+         n_snp, method, b, se, lci, uci, OR, OR_lci, OR_uci, p, q,
+         ivw_b, ivw_p, egger_b, egger_p, egger_intercept_p, wm_b, wm_p, loo_min, loo_max, loo_same_sign, max_abs_r,
+         PP.H0, PP.H1, PP.H2, PP.H3, PP.H4, PP.H4_signif_only, top_snp_H4, top_snp_PP, n_snps_coloc, n_snps_eqtl_signif,
+         susie_n_cs, susie_PP.H4_max, susie_PP.H3_at_max,
+         r2_exp, r2_out, steiger_correct, steiger_p, n_sources, consistent_sign, dir_methods_ok, candidate,
+         other_genes_H4_gt_0.8, max_H4_other_gene, attributable_to_target) %>%
+  arrange(gene, exposure_id, p)
+fwrite(results_out, "mr_results.csv")
+fwrite(pc_gwas, file.path(dir_clean, "positive_control_hmgcr_gwas.tsv"), sep = "\t")
+```
+
+```{r forest-data}
+#### ---- forest plot data: target-gene (CHRM1/CHRM4) estimates across all outcomes ---- ####
+fp <- results %>% filter(gene %in% c("CHRM1", "CHRM4")) %>%
+  mutate(est = if_else(type == "binary", OR, b), lo = if_else(type == "binary", OR_lci, lci), hi = if_else(type == "binary", OR_uci, uci),
+         source_lab = str_replace_all(exposure_id, "\\|eQTL", "") %>% str_replace_all("\\|", " "),
+         outcome_lab = fct_reorder(paste0(label, " [", category, "]"), as.integer(factor(category))),
+         sig = if_else(q < 0.05, "q < 0.05", if_else(p < 0.05, "p < 0.05", "n.s.")))
+```
+
+```{r forest-plot, fig.height = 14, fig.width = 12}
+pal <- c("CHRM4 v10 Whole_Blood" = "#2a6fdb", "CHRM4 v10 Skin_Sun_Exposed_Lower_leg" = "#e07a1f", "CHRM4 v8_ALL Skin_Sun_Exposed_Lower_leg" = "#7a52c7")
+forest <- function(dd, xlab, ref, logx) {
+  p <- ggplot(dd, aes(x = est, y = outcome_lab, colour = source_lab)) +
+    geom_vline(xintercept = ref, colour = "grey60", linewidth = 0.4) +
+    geom_pointrange(aes(xmin = lo, xmax = hi, shape = sig), position = position_dodge(width = 0.6), size = 0.35, linewidth = 0.6) +
+    scale_colour_manual(values = pal, name = "Instrument (gene, GTEx release, tissue)") +
+    scale_shape_manual(values = c("n.s." = 1, "p < 0.05" = 16, "q < 0.05" = 17), name = NULL, drop = FALSE) +
+    labs(x = xlab, y = NULL) + theme_minimal(base_size = 10) +
+    theme(legend.position = "bottom", legend.box = "vertical", panel.grid.minor = element_blank())
+  if (logx) p <- p + scale_x_log10()
+  p
+}
+f1 <- forest(fp %>% filter(type == "binary"), "Odds ratio per 1 SD higher genetically predicted CHRM4 expression (log scale)", 1, TRUE)
+f2 <- forest(fp %>% filter(type == "continuous"), "Beta (outcome units) per 1 SD higher CHRM4 expression", 0, FALSE)
+fig_forest <- f1 / f2 + plot_layout(heights = c(3, 1.4), guides = "collect") & theme(legend.position = "bottom")
+ggsave(file.path(dir_fig, "forest_CHRM1_CHRM4.png"), fig_forest, width = 12, height = 15, dpi = 200, bg = "white")
+fig_forest
+```
+
+```{r helper-locuszoom}
+#### ---- LocusZoom-style plot: eQTL and outcome -log10(p) by position, coloured by LD r2 with the eQTL lead ---- ####
+locus_plot <- function(eid, oid) {
+  r <- region_data(eid, oid)
+  ex <- exposures %>% filter(exposure_id == eid)
+  lead <- r %>% filter(in_signif) %>% arrange(e_p) %>% slice(1)
+  R <- ld_matrix(ex$gene, r$variant_id, r$ld_id)
+  r <- r %>% mutate(r2 = if_else(variant_id %in% rownames(R), R[lead$variant_id, ][variant_id]^2, NA_real_),
+                    r2_bin = cut(r2, c(-0.01, 0.2, 0.4, 0.6, 0.8, 1), labels = c("<0.2", "0.2-0.4", "0.4-0.6", "0.6-0.8", ">0.8")))
+  seq_pal <- c("<0.2" = "#c9d7ee", "0.2-0.4" = "#93b1df", "0.4-0.6" = "#5d8bd0", "0.6-0.8" = "#2f63b5", ">0.8" = "#163a73")
+  g <- genes %>% filter(gene == ex$gene)
+  base <- function(y, ttl) ggplot(r, aes(pos38 / 1e6, -log10(.data[[y]]), colour = r2_bin)) +
+    annotate("rect", xmin = g$start / 1e6, xmax = g$end / 1e6, ymin = -Inf, ymax = Inf, fill = "grey90") +
+    geom_point(size = 1.3) + scale_colour_manual(values = seq_pal, name = "LD r2 with eQTL lead", na.value = "grey75") +
+    labs(x = NULL, y = expression(-log[10](p)), title = ttl) + theme_minimal(base_size = 10)
+  cc <- coloc_res %>% filter(exposure_id == eid, outcome_id == oid)
+  p1 <- base("e_p", paste0(eid, " (GTEx significant pairs; others plotted at p = 1)"))
+  p2 <- base("p", paste0(oid, ": ", outcomes$label[outcomes$outcome_id == oid],
+                         sprintf("   coloc PP.H4 = %.2f, PP.H3 = %.2f", cc$PP.H4, cc$PP.H3))) +
+    labs(x = paste0("chr", g$chr %>% str_remove("chr"), " position (Mb, GRCh38); shaded = ", ex$gene))
+  p1 / p2 + plot_layout(guides = "collect")
+}
+```
+
+```{r locus-plots}
+#### ---- one plot per candidate; if none, the indication check and the strongest CHRM4 association ---- ####
+to_plot <- results %>% filter(candidate) %>% select(exposure_id, outcome_id)
+if (nrow(to_plot) == 0) {
+  to_plot <- bind_rows(
+    results %>% filter(exposure_id == "CHRM4|v10|Whole_Blood|eQTL", outcome_id == "SCZ"),
+    results %>% filter(gene == "CHRM4") %>% arrange(p) %>% slice(1),
+    results %>% filter(gene == "CHRM4") %>% arrange(desc(PP.H4)) %>% slice(1)) %>%
+    distinct(exposure_id, outcome_id)
+}
+for (i in seq_len(nrow(to_plot))) {
+  pp <- locus_plot(to_plot$exposure_id[i], to_plot$outcome_id[i])
+  fn <- paste0("locus_", str_replace_all(to_plot$exposure_id[i], "[|]", "_"), "__", to_plot$outcome_id[i], ".png")
+  ggsave(file.path(dir_fig, fn), pp, width = 9, height = 6.5, dpi = 200, bg = "white")
+  print(pp)
+}
+```
+
+```{r session}
+sessionInfo()
+```

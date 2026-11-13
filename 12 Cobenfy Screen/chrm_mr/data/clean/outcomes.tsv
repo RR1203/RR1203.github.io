@@ -1,0 +1,50 @@
+outcome_id	label	category	source	code	coding	type
+SCZ	Schizophrenia	Psychiatric	FG_UKBB_META	F5_SCHZPHR		binary
+BIP	Bipolar disorder	Psychiatric	FG_UKBB_META	F5_BIPO		binary
+MDD	Depression	Psychiatric	FG_UKBB_META	F5_DEPRESSIO		binary
+ADHD	ADHD	Psychiatric	FG_UKBB_META	F5_ADHD		binary
+ASD	Autism spectrum disorder	Psychiatric	FG	KRA_PSY_AUTISM_EXMORE		binary
+PTSD	PTSD	Psychiatric	FG_UKBB_META	F5_PTSD		binary
+OCD	OCD	Psychiatric	FG_UKBB_META	F5_OCD		binary
+AN	Anorexia nervosa	Psychiatric	FG	F5_ANOREX		binary
+TIC	Tic disorders (Tourette proxy)	Psychiatric	FG	KRA_PSY_TIC_EXMORE		binary
+ANX	Anxiety disorders	Psychiatric	FG	F5_ALLANXIOUS		binary
+AUD	Alcohol use disorder	Substance use	FG_UKBB_META	AUD_SWEDISH		binary
+ALCFREQ	Alcohol intake frequency (UKB 1558; higher = less frequent)	Substance use	PANUKB	1558		continuous
+SMKINIT	Ever smoker	Substance use	FG_UKBB_META	EVER_SMOKER		binary
+CPD	Cigarettes per day	Substance use	PANUKB	Smoking	CPD_combined_irnt	continuous
+CUD	Cannabis use disorder	Substance use	FG_UKBB_META	F5_CANNABIS		binary
+OUD	Opioid use disorder	Substance use	FG_UKBB_META	F5_OPIOIDS		binary
+FI	Fluid intelligence score	Cognition	PANUKB	20016	irnt	continuous
+EDU	College/university degree	Cognition	PANUKB	6138	1	binary
+RT	Reaction time (higher = slower)	Cognition	PANUKB	20023	irnt	continuous
+AD	Alzheimer's disease	Neurologic	FG_UKBB_META	G6_ALZHEIMER		binary
+ADPROXM	Alzheimer's/dementia in mother (proxy)	Neurologic	PANUKB	20110	10	binary
+ADPROXF	Alzheimer's/dementia in father (proxy)	Neurologic	PANUKB	20107	10	binary
+PD	Parkinson's disease	Neurologic	FG_UKBB_META	G6_PARKINSON		binary
+MIG	Migraine	Neurologic	FG_UKBB_META	G6_MIGRAINE		binary
+EPI	Epilepsy	Neurologic	FG_UKBB_META	G6_EPLEPSY		binary
+INSOM	Insomnia (diagnosis)	Sleep	FG	F5_INSOMNIA		binary
+SLEEPLESS	Sleeplessness/insomnia symptoms (UKB 1200)	Sleep	PANUKB	1200		continuous
+CHRONO	Chronotype (UKB 1180)	Sleep	PANUKB	1180		continuous
+SLEEPDUR	Sleep duration	Sleep	PANUKB	1160		continuous
+BMI	Body mass index	Metabolic	PANUKB	21001	irnt	continuous
+WHR	Waist-hip ratio	Metabolic	PANUKB	whr	irnt	continuous
+T2D	Type 2 diabetes	Metabolic	FG_UKBB_META	T2D		binary
+HR	Heart rate (pulse, automated)	Safety	PANUKB	102	irnt	continuous
+SBP	Systolic blood pressure	Safety	PANUKB	4080	irnt	continuous
+DBP	Diastolic blood pressure	Safety	PANUKB	4079	irnt	continuous
+CONSTIP	Constipation	Safety	FG_UKBB_META	K11_CONSTIPATION		binary
+URETEN	Urinary retention	Safety	FG_UKBB_META	R18_RETEN_URINE		binary
+UINCONT	Urinary incontinence	Safety	PANUKB	599.4		binary
+HYPERHID	Hyperhidrosis	Safety	PANUKB	705.8		binary
+ASTHMA	Asthma	Safety	FG_UKBB_META	J10_ASTHMA_EXMORE		binary
+COPD	COPD	Safety	FG_UKBB_META	J10_COPD		binary
+PUD	Gastroduodenal (peptic) ulcer	Safety	FG_UKBB_META	K11_GASTRODUOULC		binary
+GLAUC	Glaucoma	Safety	FG_UKBB_META	H7_GLAUCOMA		binary
+HAIRBL	Blonde hair (negative control)	Negative control	PANUKB	1747	1	binary
+HAIRRED	Red hair (negative control)	Negative control	PANUKB	1747	2	binary
+HEIGHT	Height (negative control)	Negative control	PANUKB	50	irnt	continuous
+LACT	Lactose intolerance (negative control)	Negative control	FG	E4_LACTONAS		binary
+LDL	LDL cholesterol (HMGCR positive control)	Positive control	PANUKB	30780	irnt	continuous
+CAD	Coronary heart disease (HMGCR positive control)	Positive control	FG_UKBB_META	I9_CHD		binary
