@@ -1,0 +1,1505 @@
+---
+title: "US stimulant shortage and fatal crashes: a natural experiment"
+output:
+  html_document: default
+---
+
+# 00. SETUP
+```{r setup}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+library(openxlsx)
+
+# Statistics
+library(fixest)
+
+# Options
+options(scipen = 999, width = 140)
+theme_set(theme_classic(base_size = 12))
+set.seed(1234)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+# 01. DATA CLEANING
+
+## 01.1 State lookup
+```{r clean-states}
+################################################################################
+# 01.1 State lookup (50 states + DC)
+################################################################################
+
+# FIPS codes and names come from the Census file header rows (read below);
+# here only the name/abbreviation key used to join ARCOS (upper-case names)
+states <- tibble(
+  state_name = c(state.name, "District of Columbia"),
+  state_abb  = c(state.abb, "DC")
+) %>%
+  mutate(state_upper = toupper(state_name))
+
+print(nrow(states))
+```
+
+## 01.2 Census population by age group
+```{r clean-census}
+################################################################################
+# 01.2 Census population, state x year x age group
+################################################################################
+
+# Vintage 2020 (2017-2019) and Vintage 2025 (2020-2025) state single-year-of-age files
+pop_v2020 <- read_csv("raw/census/SC-EST2020-ALLDATA6.csv", col_types = cols(.default = "c")) %>%
+  filter(SUMLEV == "040", SEX == "0", ORIGIN == "0") %>%
+  select(state_fips = STATE, state_name = NAME, age = AGE,
+         POPESTIMATE2017, POPESTIMATE2018, POPESTIMATE2019) %>%
+  pivot_longer(starts_with("POPESTIMATE"), names_to = "year", values_to = "pop")
+
+pop_v2025 <- read_csv("raw/census/sc-est2025-alldata6.csv", col_types = cols(.default = "c")) %>%
+  filter(SUMLEV == "040", SEX == "0", ORIGIN == "0") %>%
+  select(state_fips = STATE, state_name = NAME, age = AGE,
+         POPESTIMATE2020, POPESTIMATE2021, POPESTIMATE2022,
+         POPESTIMATE2023, POPESTIMATE2024, POPESTIMATE2025) %>%
+  pivot_longer(starts_with("POPESTIMATE"), names_to = "year", values_to = "pop")
+
+# Sum over race groups, then over age bands
+pop_state_year <- bind_rows(pop_v2020, pop_v2025) %>%
+  mutate(
+    year = as.integer(str_remove(year, "POPESTIMATE")),
+    age = as.integer(age),
+    pop = as.numeric(pop),
+    age_group = case_when(
+      age >= 18 & age <= 44 ~ "pop_18_44",
+      age >= 45 & age <= 54 ~ "pop_45_54",
+      age >= 55 & age <= 74 ~ "pop_55_74",
+      age >= 75             ~ "pop_75plus",
+      TRUE                  ~ "pop_0_17"
+    )
+  ) %>%
+  group_by(state_fips, state_name, year, age_group) %>%
+  summarise(pop = sum(pop), .groups = "drop") %>%
+  pivot_wider(names_from = age_group, values_from = pop) %>%
+  mutate(pop_total = pop_0_17 + pop_18_44 + pop_45_54 + pop_55_74 + pop_75plus,
+         state_fips = as.integer(state_fips)) %>%
+  inner_join(states, by = "state_name")
+
+print(nrow(pop_state_year))
+print(pop_state_year %>% group_by(year) %>% summarise(pop_18_44 = sum(pop_18_44), pop_55_74 = sum(pop_55_74)))
+```
+
+## 01.3 ARCOS retail distribution (Report 02, grams by state and quarter)
+```{r clean-arcos}
+################################################################################
+# 01.3 ARCOS Report 02, parsed from the DEA yearly PDFs (pdftotext -layout)
+################################################################################
+
+# All text lines of all yearly reports, tagged with file
+arcos_lines <- tibble(file = list.files("raw/arcos/txt", pattern = "\\.txt$", full.names = TRUE)) %>%
+  mutate(text = map(file, read_lines)) %>%
+  unnest(text) %>%
+  mutate(year = as.integer(str_extract(basename(file), "\\d{4}")))
+
+# Section marker (Report 02 only) and drug code, filled down
+arcos_parsed <- arcos_lines %>%
+  mutate(
+    section = case_when(
+      str_detect(text, "ARCOS 3 - REPORT 0?2( |$)") ~ "r02",
+      str_detect(text, "ARCOS 3 - REPORT 0?[13-9]( |$)") ~ "other",
+      TRUE ~ NA_character_
+    ),
+    drug_code = str_match(text, "DRUG(?: CODE)?: ?(\\d{4})")[, 2]
+  ) %>%
+  group_by(file) %>%
+  fill(section, drug_code) %>%
+  ungroup() %>%
+  filter(section == "r02") %>%
+  mutate(m = str_match(text, "^\\s*([A-Z][A-Z .']+?)\\s{2,}([\\d,.]+)\\s+([\\d,.]+)\\s+([\\d,.]+)\\s+([\\d,.]+)\\s+([\\d,.]+)\\s*$")) %>%
+  filter(!is.na(m[, 1])) %>%
+  transmute(
+    year, drug_code,
+    state_upper = str_trim(m[, 2]),
+    q1 = parse_number(m[, 3]), q2 = parse_number(m[, 4]),
+    q3 = parse_number(m[, 5]), q4 = parse_number(m[, 6]),
+    total = parse_number(m[, 7])
+  )
+
+# Keep the four stimulant classes and the 50 states + DC
+arcos_state_quarter <- arcos_parsed %>%
+  filter(drug_code %in% c("1100", "1205", "1724")) %>%
+  inner_join(states, by = "state_upper") %>%
+  distinct(year, drug_code, state_abb, .keep_all = TRUE) %>%
+  pivot_longer(q1:q4, names_to = "quarter", values_to = "grams") %>%
+  mutate(
+    quarter = as.integer(str_remove(quarter, "q")),
+    drug = recode(drug_code, "1100" = "amphetamine", "1205" = "lisdexamfetamine", "1724" = "methylphenidate")
+  ) %>%
+  select(state_abb, year, quarter, drug, grams) %>%
+  pivot_wider(names_from = drug, values_from = grams, names_prefix = "g_")
+
+# Check: one row per state x quarter, 51 states x 36 quarters
+print(nrow(arcos_state_quarter))
+print(arcos_state_quarter %>% count(year))
+print(arcos_parsed %>% filter(drug_code %in% c("1100", "1205", "1724")) %>%
+        inner_join(states, by = "state_upper") %>%
+        mutate(check = abs(q1 + q2 + q3 + q4 - total)) %>%
+        summarise(max_sum_error_grams = max(check)))
+```
+
+## 01.4 Label reference daily doses (DailyMed) and supply per 1,000 residents 18-44
+```{r clean-supply}
+################################################################################
+# 01.4 Supply in label-based daily doses per 1,000 residents aged 18-44 per day
+################################################################################
+
+# Reference daily doses from FDA labels (raw/other/dailymed), see decisions_log.md
+#   amphetamine: Adderall XR adult recommended 20 mg/day = 12.5 mg amphetamine base
+#   lisdexamfetamine: Vyvanse adult starting dose 30 mg/day
+#   methylphenidate: Ritalin adult average 20-30 mg/day, midpoint 25 mg
+rdd_mg <- c(amphetamine = 12.5, lisdexamfetamine = 30, methylphenidate = 25)
+print(rdd_mg)
+
+supply_state_quarter <- arcos_state_quarter %>%
+  left_join(pop_state_year %>% select(state_abb, state_fips, year, pop_18_44), by = c("state_abb", "year")) %>%
+  mutate(
+    days = case_when(quarter == 1 ~ 90, quarter == 2 ~ 91, TRUE ~ 92) + if_else(quarter == 1 & year %% 4 == 0, 1, 0),
+    d_amph   = g_amphetamine * 1000 / rdd_mg["amphetamine"],
+    d_lisdex = g_lisdexamfetamine * 1000 / rdd_mg["lisdexamfetamine"],
+    d_mph    = g_methylphenidate * 1000 / rdd_mg["methylphenidate"],
+    d_amph_class = d_amph + d_lisdex,
+    rdd_amph_class_per1000 = d_amph_class / days / pop_18_44 * 1000,
+    rdd_amph_per1000       = d_amph / days / pop_18_44 * 1000,
+    rdd_mph_per1000        = d_mph / days / pop_18_44 * 1000,
+    t = (year - 2017) * 4 + quarter,
+    yq = year + (quarter - 1) / 4
+  )
+
+print(summary(supply_state_quarter$rdd_amph_class_per1000))
+```
+
+## 01.5 Shortage intensity per state (observed vs own pre-trend)
+```{r clean-intensity}
+################################################################################
+# 01.5 Shortage intensity: observed vs expected from each state's 2017Q1-2022Q3 trend
+################################################################################
+
+# One linear trend + quarter-of-year seasonality per state, fitted on 2017Q1-2022Q3 (t <= 23)
+supply_pre <- supply_state_quarter %>% filter(t <= 23)
+
+pre_trend_amph_class <- feols(
+  log(rdd_amph_class_per1000) ~ i(state_abb, t) + i(state_abb, i.quarter, ref2 = 1) | state_abb,
+  data = supply_pre
+)
+pre_trend_amph <- feols(
+  log(rdd_amph_per1000) ~ i(state_abb, t) + i(state_abb, i.quarter, ref2 = 1) | state_abb,
+  data = supply_pre
+)
+pre_trend_mph <- feols(
+  log(rdd_mph_per1000) ~ i(state_abb, t) + i(state_abb, i.quarter, ref2 = 1) | state_abb,
+  data = supply_pre
+)
+print(r2(pre_trend_amph_class, "r2"))
+
+# Expected values for every quarter, and the quarterly gap
+supply_state_quarter <- supply_state_quarter %>%
+  mutate(
+    exp_amph_class = exp(predict(pre_trend_amph_class, newdata = supply_state_quarter)),
+    exp_amph = exp(predict(pre_trend_amph, newdata = supply_state_quarter)),
+    exp_mph = exp(predict(pre_trend_mph, newdata = supply_state_quarter)),
+    gap_amph_class = 1 - rdd_amph_class_per1000 / exp_amph_class,
+    gap_amph = 1 - rdd_amph_per1000 / exp_amph
+  )
+
+# Intensity = shortfall over the outcome window (2022Q4-2024Q4) and the full window (2022Q4-2025Q4)
+intensity_state <- supply_state_quarter %>%
+  group_by(state_abb, state_fips) %>%
+  summarise(
+    intensity = 1 - sum(rdd_amph_class_per1000[t >= 24 & t <= 32]) / sum(exp_amph_class[t >= 24 & t <= 32]),
+    intensity_to2025 = 1 - sum(rdd_amph_class_per1000[t >= 24]) / sum(exp_amph_class[t >= 24]),
+    intensity_amph_only = 1 - sum(rdd_amph_per1000[t >= 24 & t <= 32]) / sum(exp_amph[t >= 24 & t <= 32]),
+    intensity_net = (sum(exp_amph_class[t >= 24 & t <= 32]) - sum(rdd_amph_class_per1000[t >= 24 & t <= 32]) -
+                     (sum(rdd_mph_per1000[t >= 24 & t <= 32]) - sum(exp_mph[t >= 24 & t <= 32]))) /
+                    sum(exp_amph_class[t >= 24 & t <= 32]),
+    intensity_acute = 1 - sum(rdd_amph_class_per1000[t >= 24 & t <= 28]) / sum(exp_amph_class[t >= 24 & t <= 28]),
+    baseline_rdd_per1000 = mean(rdd_amph_class_per1000[t >= 20 & t <= 23]),
+    baseline_mph_per1000 = mean(rdd_mph_per1000[t >= 20 & t <= 23]),
+    .groups = "drop"
+  )
+
+print(intensity_state %>% arrange(desc(intensity)), n = 51)
+```
+
+## 01.6 FARS crash files 2017-2024
+```{r clean-fars-read}
+################################################################################
+# 01.6 FARS: accident, person, vehicle, driver factors, drugs
+################################################################################
+
+fars_dir <- "raw/fars/x"
+
+# Accident level
+fars_accident <- tibble(file = list.files(fars_dir, pattern = "^accident\\.csv$", recursive = TRUE, full.names = TRUE, ignore.case = TRUE)) %>%
+  mutate(d = map(file, ~ read_csv(.x, col_select = c(STATE, ST_CASE, YEAR, MONTH, HOUR, VE_FORMS, PEDS, FATALS), col_types = cols(.default = "i"), locale = locale(encoding = "latin1")))) %>%
+  unnest(d) %>%
+  select(-file)
+
+# Person level (drivers, pedestrians)
+fars_person <- tibble(file = list.files(fars_dir, pattern = "^person\\.csv$", recursive = TRUE, full.names = TRUE, ignore.case = TRUE)) %>%
+  mutate(d = map(file, ~ read_csv(.x, col_select = c(STATE, ST_CASE, VEH_NO, PER_NO, PER_TYP, AGE, INJ_SEV, ALC_RES), col_types = cols(.default = "i"), locale = locale(encoding = "latin1")))) %>%
+  unnest(d) %>%
+  mutate(year = as.integer(str_extract(file, "(?<=/)\\d{4}(?=/)"))) %>%
+  select(-file)
+
+# Vehicle level (speeding, 2017-2019 driver factors)
+fars_vehicle <- tibble(file = list.files(fars_dir, pattern = "^vehicle\\.csv$", recursive = TRUE, full.names = TRUE, ignore.case = TRUE)) %>%
+  mutate(d = map(file, ~ read_csv(.x, col_select = c(ST_CASE, VEH_NO, SPEEDREL, any_of(c("DR_SF1NAME", "DR_SF2NAME", "DR_SF3NAME", "DR_SF4NAME"))), col_types = cols(.default = "c"), locale = locale(encoding = "latin1")))) %>%
+  unnest(d) %>%
+  mutate(year = as.integer(str_extract(file, "(?<=/)\\d{4}(?=/)"))) %>%
+  select(-file)
+
+# Driver-related factors 2020-2024 (one row per factor)
+fars_driverrf <- tibble(file = list.files(fars_dir, pattern = "^driverrf\\.csv$", recursive = TRUE, full.names = TRUE, ignore.case = TRUE)) %>%
+  mutate(d = map(file, ~ read_csv(.x, col_select = c(ST_CASE, VEH_NO, DRIVERRFNAME), col_types = cols(.default = "c"), locale = locale(encoding = "latin1")))) %>%
+  unnest(d) %>%
+  mutate(year = as.integer(str_extract(file, "(?<=/)\\d{4}(?=/)"))) %>%
+  select(-file)
+
+# Drug test results 2018-2024 (one row per result)
+fars_drugs <- tibble(file = list.files(fars_dir, pattern = "^drugs\\.csv$", recursive = TRUE, full.names = TRUE, ignore.case = TRUE)) %>%
+  mutate(d = map(file, ~ read_csv(.x, col_select = c(ST_CASE, VEH_NO, PER_NO, DRUGRESNAME), col_types = cols(.default = "c"), locale = locale(encoding = "latin1")))) %>%
+  unnest(d) %>%
+  mutate(year = as.integer(str_extract(file, "(?<=/)\\d{4}(?=/)"))) %>%
+  select(-file)
+
+print(fars_accident %>% count(YEAR))
+print(fars_accident %>% group_by(YEAR) %>% summarise(deaths = sum(FATALS)))
+```
+
+```{r clean-fars-drivers}
+################################################################################
+# 01.6b FARS driver-level flags
+################################################################################
+
+# Driver error: any reported driver-related factor that is a driving behaviour
+driver_error_pattern <- "Careless|Inattent|Yield|Lane|Erratic|Reckless|Obey|Overcorrect|Wrong Side|Following|Aggressive|Racing|Speed|Improper|Passing|Turning|Fail"
+
+driver_error_2017_2019 <- fars_vehicle %>%
+  filter(year <= 2019) %>%
+  pivot_longer(starts_with("DR_SF"), values_to = "factor_name") %>%
+  group_by(year, ST_CASE, VEH_NO) %>%
+  summarise(driver_error = any(str_detect(factor_name, driver_error_pattern), na.rm = TRUE), .groups = "drop")
+
+driver_error_2020_2024 <- fars_driverrf %>%
+  group_by(year, ST_CASE, VEH_NO) %>%
+  summarise(driver_error = any(str_detect(DRIVERRFNAME, driver_error_pattern), na.rm = TRUE), .groups = "drop")
+
+# Drug results per person: tested, amphetamine-positive, methamphetamine-positive
+drug_person <- fars_drugs %>%
+  mutate(res = str_to_lower(str_trim(DRUGRESNAME))) %>%
+  group_by(year, ST_CASE, VEH_NO, PER_NO) %>%
+  summarise(
+    tested = any(!str_detect(res, "not given|unknown|not reported|^test refused") & res != ""),
+    amph_pos = any(res %in% c("amphetamine", "amphetamine sulfate", "dextroamphetamine", "lisdexamfetamine")),
+    meth_pos = any(res == "methamphetamine"),
+    .groups = "drop"
+  ) %>%
+  mutate(across(c(ST_CASE, VEH_NO, PER_NO), as.integer))
+
+# Drivers with flags
+drivers <- fars_person %>%
+  filter(PER_TYP == 1) %>%
+  left_join(fars_vehicle %>% transmute(year, ST_CASE = as.integer(ST_CASE), VEH_NO = as.integer(VEH_NO),
+                                       speeding = as.integer(SPEEDREL) %in% c(2, 3, 4, 5)),
+            by = c("year", "ST_CASE", "VEH_NO")) %>%
+  left_join(bind_rows(driver_error_2017_2019, driver_error_2020_2024) %>%
+              mutate(across(c(ST_CASE, VEH_NO), as.integer)),
+            by = c("year", "ST_CASE", "VEH_NO")) %>%
+  left_join(drug_person, by = c("year", "ST_CASE", "VEH_NO", "PER_NO")) %>%
+  mutate(
+    driver_error = coalesce(driver_error, FALSE),
+    tested = coalesce(tested, FALSE),
+    amph_only_pos = coalesce(amph_pos & !meth_pos, FALSE),
+    meth_pos = coalesce(meth_pos, FALSE),
+    bac_08 = ALC_RES >= 80 & ALC_RES < 995,
+    age_band = case_when(
+      AGE >= 18 & AGE <= 44 ~ "young",
+      AGE >= 45 & AGE <= 54 ~ "middle",
+      AGE >= 55 & AGE <= 74 ~ "older",
+      AGE >= 75 & AGE < 998 ~ "oldest",
+      TRUE ~ NA_character_
+    )
+  )
+
+print(nrow(drivers))
+print(drivers %>% count(year, age_band) %>% pivot_wider(names_from = age_band, values_from = n))
+print(drivers %>% filter(year >= 2018) %>% group_by(year) %>% summarise(tested = mean(tested), amph_only = sum(amph_only_pos), meth = sum(meth_pos)))
+```
+
+```{r clean-fars-crashes}
+################################################################################
+# 01.6c FARS crash-level flags and state x quarter counts
+################################################################################
+
+# Crash-level: which driver age bands are involved, and driver traits
+crash_flags <- drivers %>%
+  group_by(year, ST_CASE) %>%
+  summarise(
+    any_young = any(age_band == "young", na.rm = TRUE),
+    any_older = any(age_band == "older", na.rm = TRUE),
+    any_oldest = any(age_band == "oldest", na.rm = TRUE),
+    young_error = any(age_band == "young" & driver_error, na.rm = TRUE),
+    young_speed = any(age_band == "young" & speeding, na.rm = TRUE),
+    young_bac = any(age_band == "young" & bac_08, na.rm = TRUE),
+    older_error = any(age_band == "older" & driver_error, na.rm = TRUE),
+    older_speed = any(age_band == "older" & speeding, na.rm = TRUE),
+    young_tested = any(age_band == "young" & tested, na.rm = TRUE),
+    young_amph = any(age_band == "young" & amph_only_pos, na.rm = TRUE),
+    young_meth = any(age_band == "young" & meth_pos, na.rm = TRUE),
+    older_tested = any(age_band == "older" & tested, na.rm = TRUE),
+    older_amph = any(age_band == "older" & amph_only_pos, na.rm = TRUE),
+    older_meth = any(age_band == "older" & meth_pos, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Pedestrians killed per crash
+ped_deaths <- fars_person %>%
+  filter(PER_TYP == 5, INJ_SEV == 4) %>%
+  count(year, ST_CASE, name = "ped_killed")
+
+crashes <- fars_accident %>%
+  rename(year = YEAR) %>%
+  left_join(crash_flags, by = c("year", "ST_CASE")) %>%
+  left_join(ped_deaths, by = c("year", "ST_CASE")) %>%
+  mutate(
+    across(any_young:older_meth, ~ coalesce(.x, FALSE)),
+    ped_killed = coalesce(ped_killed, 0L),
+    quarter = (MONTH - 1) %/% 3 + 1,
+    single = VE_FORMS == 1,
+    daytime = HOUR >= 6 & HOUR <= 17
+  )
+
+# State x quarter counts
+fars_state_quarter <- crashes %>%
+  group_by(state_fips = STATE, year, quarter) %>%
+  summarise(
+    crash_young = sum(any_young),
+    deaths_young = sum(FATALS[any_young]),
+    crash_older = sum(any_older),
+    deaths_older = sum(FATALS[any_older]),
+    crash_oldest = sum(any_oldest),
+    crash_young_single = sum(any_young & single),
+    crash_young_multi = sum(any_young & !single),
+    crash_young_day = sum(any_young & daytime),
+    crash_young_night = sum(any_young & !daytime),
+    crash_young_error = sum(young_error),
+    crash_young_speed = sum(young_speed),
+    crash_young_bac = sum(young_bac),
+    crash_older_single = sum(any_older & single),
+    crash_older_day = sum(any_older & daytime),
+    crash_older_error = sum(older_error),
+    crash_older_speed = sum(older_speed),
+    crash_young_tested = sum(young_tested),
+    crash_young_amph = sum(young_amph),
+    crash_young_meth = sum(young_meth),
+    crash_older_tested = sum(older_tested),
+    crash_older_amph = sum(older_amph),
+    crash_older_meth = sum(older_meth),
+    ped_deaths_older_only = sum(ped_killed[any_older & !any_young]),
+    crash_all = n(),
+    deaths_all = sum(FATALS),
+    .groups = "drop"
+  )
+
+print(nrow(fars_state_quarter))
+print(fars_state_quarter %>% group_by(year) %>% summarise(across(c(crash_young, crash_older, crash_oldest, deaths_young), sum)))
+```
+
+## 01.7 FHWA vehicle miles traveled (Traffic Volume Trends, Table 5)
+```{r clean-vmt}
+################################################################################
+# 01.7 FHWA monthly state VMT (millions), current-month preliminary estimate
+################################################################################
+
+vmt_files <- list.files("raw/other/tvt", pattern = "tvt\\.xlsx?$", full.names = TRUE)
+
+vmt_state_month <- tibble(file = vmt_files) %>%
+  mutate(sheet = map(file, ~ read_excel(.x, sheet = "Page 6", col_names = FALSE, col_types = "text", .name_repair = "minimal") %>%
+                       select(state_name = 1, cmiles = 5))) %>%
+  unnest(sheet) %>%
+  mutate(
+    yy = as.integer(str_sub(basename(file), 1, 2)),
+    mon = str_sub(basename(file), 3, 5),
+    year = 2000L + yy,
+    month = match(mon, str_to_lower(month.abb)),
+    state_name = str_trim(state_name),
+    vmt_millions = suppressWarnings(as.numeric(cmiles))
+  ) %>%
+  inner_join(states %>% select(state_name, state_abb), by = "state_name") %>%
+  filter(!is.na(vmt_millions))
+
+vmt_state_quarter <- vmt_state_month %>%
+  mutate(quarter = (month - 1) %/% 3 + 1) %>%
+  group_by(state_abb, year, quarter) %>%
+  summarise(vmt_millions = sum(vmt_millions), n_months = n(), .groups = "drop")
+
+print(vmt_state_quarter %>% count(year, n_months))
+```
+
+## 01.8 Analysis panel: state x quarter, 2017Q1-2024Q4
+```{r clean-panel}
+################################################################################
+# 01.8 Merge into the state x quarter panel
+################################################################################
+
+panel <- fars_state_quarter %>%
+  filter(year <= 2024) %>%
+  inner_join(pop_state_year %>% select(state_fips, state_abb, state_name, year, pop_18_44, pop_55_74, pop_75plus, pop_total),
+             by = c("state_fips", "year")) %>%
+  left_join(vmt_state_quarter %>% select(state_abb, year, quarter, vmt_millions), by = c("state_abb", "year", "quarter")) %>%
+  left_join(intensity_state %>% select(-state_fips), by = "state_abb") %>%
+  left_join(supply_state_quarter %>% select(state_abb, year, quarter, rdd_amph_class_per1000, exp_amph_class, gap_amph_class),
+            by = c("state_abb", "year", "quarter")) %>%
+  mutate(
+    t = (year - 2017) * 4 + quarter,
+    yq = sprintf("%dQ%d", year, quarter),
+    rel_q = t - 24,
+    post = as.integer(t >= 24),
+    covid = as.integer(year %in% c(2020, 2021)),
+    late = as.integer(t >= 29),
+    post_quota = as.integer(t >= 32)
+  ) %>%
+  arrange(state_abb, t)
+
+print(nrow(panel))
+print(n_distinct(panel$state_abb))
+print(sum(is.na(panel$vmt_millions)))
+```
+
+## 01.9 CDC provisional overdose deaths (secondary outcome)
+```{r clean-cdc}
+################################################################################
+# 01.9 CDC VSRR provisional drug overdose deaths, 12-month ending December
+################################################################################
+
+cdc_overdose <- read_csv("raw/other/cdc_vsrr_overdose.csv", col_types = cols(.default = "c")) %>%
+  filter(Month == "December",
+         Indicator %in% c("Psychostimulants with abuse potential (T43.6)", "Number of Drug Overdose Deaths",
+                          "Number of Deaths")) %>%
+  transmute(
+    state_name = `State Name`,
+    year = as.integer(Year),
+    indicator = recode(Indicator,
+                       "Psychostimulants with abuse potential (T43.6)" = "od_psychostim",
+                       "Number of Drug Overdose Deaths" = "od_all",
+                       "Number of Deaths" = "deaths_all_causes"),
+    value = parse_number(`Data Value`)
+  ) %>%
+  inner_join(states %>% select(state_name, state_abb), by = "state_name") %>%
+  pivot_wider(names_from = indicator, values_from = value) %>%
+  left_join(pop_state_year %>% select(state_abb, year, pop_total, pop_18_44), by = c("state_abb", "year")) %>%
+  left_join(intensity_state %>% select(state_abb, intensity), by = "state_abb") %>%
+  filter(year >= 2017)
+
+print(cdc_overdose %>% group_by(year) %>% summarise(n = n(), psychostim = sum(od_psychostim, na.rm = TRUE), missing = sum(is.na(od_psychostim))))
+```
+
+## 01.10 Write clean data
+```{r clean-write}
+################################################################################
+# 01.10 Write analysis datasets, one sheet each
+################################################################################
+
+national_quarter <- panel %>%
+  group_by(year, quarter, t, yq) %>%
+  summarise(across(c(starts_with("crash_"), starts_with("deaths_"), pop_18_44, pop_55_74, pop_75plus, vmt_millions), sum),
+            .groups = "drop") %>%
+  left_join(supply_state_quarter %>% group_by(year, quarter) %>%
+              summarise(rdd_amph_class = sum(d_amph_class / days) / sum(pop_18_44) * 1000,
+                        rdd_amph = sum(d_amph / days) / sum(pop_18_44) * 1000,
+                        rdd_mph = sum(d_mph / days) / sum(pop_18_44) * 1000,
+                        exp_amph_class = sum(exp_amph_class * pop_18_44) / sum(pop_18_44),
+                        .groups = "drop"),
+            by = c("year", "quarter"))
+
+supply_national <- supply_state_quarter %>%
+  group_by(year, quarter, t) %>%
+  summarise(rdd_amph_class = sum(d_amph_class / days) / sum(pop_18_44) * 1000,
+            rdd_amph = sum(d_amph / days) / sum(pop_18_44) * 1000,
+            rdd_lisdex = sum(d_lisdex / days) / sum(pop_18_44) * 1000,
+            rdd_mph = sum(d_mph / days) / sum(pop_18_44) * 1000,
+            exp_amph_class = sum(exp_amph_class * pop_18_44) / sum(pop_18_44),
+            exp_mph = sum(exp_mph * pop_18_44) / sum(pop_18_44),
+            .groups = "drop")
+
+clean_wb <- createWorkbook()
+addWorksheet(clean_wb, "panel_state_quarter");   writeData(clean_wb, "panel_state_quarter", panel)
+addWorksheet(clean_wb, "supply_state_quarter");  writeData(clean_wb, "supply_state_quarter", supply_state_quarter)
+addWorksheet(clean_wb, "supply_national");       writeData(clean_wb, "supply_national", supply_national)
+addWorksheet(clean_wb, "intensity_state");       writeData(clean_wb, "intensity_state", intensity_state)
+addWorksheet(clean_wb, "national_quarter");      writeData(clean_wb, "national_quarter", national_quarter)
+addWorksheet(clean_wb, "cdc_overdose_state_year"); writeData(clean_wb, "cdc_overdose_state_year", cdc_overdose)
+addWorksheet(clean_wb, "population_state_year"); writeData(clean_wb, "population_state_year", pop_state_year)
+saveWorkbook(clean_wb, "clean_data.xlsx", overwrite = TRUE)
+
+print(getSheetNames("clean_data.xlsx"))
+```
+
+# F. FEASIBILITY: SHORTAGE INTENSITY
+
+## F.1 Data preparation
+```{r f1}
+################################################################################
+# F.1 Data preparation
+################################################################################
+
+f_supply_national <- read_excel("clean_data.xlsx", sheet = "supply_national")
+f_intensity <- read_excel("clean_data.xlsx", sheet = "intensity_state")
+f_supply_state <- read_excel("clean_data.xlsx", sheet = "supply_state_quarter")
+
+print(nrow(f_intensity))
+```
+
+## F.2 Analysis
+```{r f2}
+################################################################################
+# F.2 Analysis
+################################################################################
+
+# National observed vs expected amphetamine-class supply, by period
+f_national_gap <- f_supply_national %>%
+  mutate(period = case_when(
+    t <= 23 ~ "1 pre (2017Q1-2022Q3)",
+    t <= 28 ~ "2 acute (2022Q4-2023Q4)",
+    t <= 32 ~ "3 2024",
+    TRUE ~ "4 2025"
+  )) %>%
+  group_by(period) %>%
+  summarise(observed = mean(rdd_amph_class), expected = mean(exp_amph_class),
+            gap_pct = 100 * (1 - sum(rdd_amph_class) / sum(exp_amph_class)),
+            mph_observed = mean(rdd_mph), mph_expected = mean(exp_mph))
+print(f_national_gap)
+
+# National gap by quarter
+print(f_supply_national %>% filter(t >= 20) %>%
+        transmute(year, quarter, rdd_amph_class, exp_amph_class, gap_pct = 100 * (1 - rdd_amph_class / exp_amph_class),
+                  rdd_amph, rdd_lisdex, rdd_mph), n = 20)
+
+# Pooled shortfall 2022Q4-2024Q4 (population weighted)
+f_gap_window <- f_supply_state %>%
+  filter(t >= 24, t <= 32) %>%
+  summarise(gap = 1 - sum(rdd_amph_class_per1000 * pop_18_44) / sum(exp_amph_class * pop_18_44))
+print(f_gap_window)
+
+# Spread of state intensity
+print(summary(f_intensity$intensity))
+print(c(sd = sd(f_intensity$intensity),
+        mean = mean(f_intensity$intensity),
+        cv = sd(f_intensity$intensity) / abs(mean(f_intensity$intensity)),
+        range = diff(range(f_intensity$intensity))))
+print(cor(f_intensity %>% select(intensity, intensity_to2025, intensity_amph_only, intensity_net, intensity_acute)))
+print(f_intensity %>% arrange(desc(intensity)) %>% select(state_abb, intensity, intensity_acute, intensity_net), n = 51)
+```
+
+# E. EXPECTED EFFECT AND POWER (computed before outcome models)
+
+## E.1 Data preparation
+```{r e1}
+################################################################################
+# E.1 Data preparation
+################################################################################
+
+e_supply_state <- read_excel("clean_data.xlsx", sheet = "supply_state_quarter")
+e_intensity <- read_excel("clean_data.xlsx", sheet = "intensity_state")
+e_panel <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter")
+
+# Pre-2020 data only (no post-shortage outcomes used for power)
+e_pre <- e_panel %>% filter(year <= 2019)
+print(nrow(e_pre))
+```
+
+## E.2 Analysis
+```{r e2}
+################################################################################
+# E.2 Analysis
+################################################################################
+
+# Share of residents 18-44 on amphetamine-class stimulant on a given day (upper bound: all doses assigned to 18-44)
+e_share <- e_supply_state %>%
+  filter(t >= 20, t <= 23) %>%
+  summarise(share = sum(d_amph_class / days) / sum(pop_18_44)) %>%
+  pull(share)
+print(e_share)
+
+# Supply drop, population weighted: full window and acute window
+e_drop_window <- e_supply_state %>% filter(t >= 24, t <= 32) %>%
+  summarise(gap = 1 - sum(rdd_amph_class_per1000 * pop_18_44) / sum(exp_amph_class * pop_18_44)) %>% pull(gap)
+e_drop_acute <- e_supply_state %>% filter(t >= 24, t <= 28) %>%
+  summarise(gap = 1 - sum(rdd_amph_class_per1000 * pop_18_44) / sum(exp_amph_class * pop_18_44)) %>% pull(gap)
+print(c(drop_window = e_drop_window, drop_acute = e_drop_acute))
+
+# Expected % increase in young-driver fatal crashes = share x drop x (0.38 to 0.58)
+e_expected <- tibble(
+  window = c("2022Q4-2024Q4", "2022Q4-2024Q4", "2022Q4-2023Q4", "2022Q4-2023Q4"),
+  chang = c(0.38, 0.58, 0.38, 0.58),
+  drop = c(e_drop_window, e_drop_window, e_drop_acute, e_drop_acute)
+) %>%
+  mutate(
+    expected_pct_prompt = 100 * e_share * drop * chang,
+    expected_pct_rr = 100 * e_share * drop * (1 / (1 - chang) - 1)
+  )
+print(e_expected)
+
+# Baseline counts (2017-2019) for expected excess crashes per quarter
+e_baseline <- e_pre %>% group_by(year, quarter) %>% summarise(crash_young = sum(crash_young), deaths_young = sum(deaths_young), .groups = "drop") %>%
+  summarise(crash_young_q = mean(crash_young), deaths_young_q = mean(deaths_young))
+print(e_baseline)
+
+# Power: SE of the dose-response DiD in pre-period data with a placebo post at 2018Q3 (pre-2020 only)
+e_power_dose <- fepois(
+  crash_young ~ intensity:I(t >= 7) + log(vmt_millions) | state_abb + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = e_pre
+)
+print(summary(e_power_dose))
+e_se_dose <- se(e_power_dose)["intensity:I(t >= 7)"]
+
+# Power: SE of the age DiD (young vs 55-74) in pre-period data with placebo post at 2018Q3
+e_pre_long <- bind_rows(
+  e_pre %>% transmute(state_abb, t, young = 1, crashes = crash_young, pop = pop_18_44),
+  e_pre %>% transmute(state_abb, t, young = 0, crashes = crash_older, pop = pop_55_74)
+)
+e_power_age <- fepois(
+  crashes ~ young:I(t >= 7) | state_abb^young + t,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = e_pre_long
+)
+print(summary(e_power_age))
+e_se_age <- se(e_power_age)["young:I(t >= 7)"]
+
+# Minimum detectable effects (80% power, two-sided alpha 0.05: 2.80 x SE)
+e_mde <- tibble(
+  design = c("dose-response, per 1.0 shortfall", "dose-response, 87.5th vs 12.5th percentile state", "age DiD (national shock)"),
+  mde_log = c(2.80 * e_se_dose,
+              2.80 * e_se_dose * (quantile(e_intensity$intensity, 0.875) - quantile(e_intensity$intensity, 0.125)),
+              2.80 * e_se_age)
+) %>%
+  mutate(mde_pct = 100 * (exp(mde_log) - 1))
+print(e_mde)
+print(quantile(e_intensity$intensity, c(0.125, 0.875)))
+```
+
+## E.3 Updated power with state x quarter-of-year FE (added after first results; see decisions_log.md)
+```{r e3}
+################################################################################
+# E.3 Updated MDE, same pre-2020 placebo design, seasonal FE added
+################################################################################
+
+e_power_dose_season <- fepois(
+  crash_young ~ intensity:I(t >= 7) + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = e_pre
+)
+print(summary(e_power_dose_season))
+print(c(mde_pct_per_10pp = 100 * (exp(2.80 * se(e_power_dose_season)["intensity:I(t >= 7)"] / 10) - 1),
+        mde_pct_p875_vs_p125 = 100 * (exp(2.80 * se(e_power_dose_season)["intensity:I(t >= 7)"] *
+                                       (quantile(e_intensity$intensity, 0.875) - quantile(e_intensity$intensity, 0.125))) - 1)))
+```
+
+# A1. DESCRIPTIVE: NATIONAL SERIES
+
+## A1.1 Data preparation
+```{r a1-1}
+################################################################################
+# A1.1 Data preparation
+################################################################################
+
+a1_national <- read_excel("clean_data.xlsx", sheet = "national_quarter") %>%
+  mutate(rate_young = crash_young / pop_18_44 * 1e5,
+         rate_older = crash_older / pop_55_74 * 1e5,
+         ratio_young_older = rate_young / rate_older)
+
+print(nrow(a1_national))
+```
+
+## A1.2 Analysis
+```{r a1-2}
+################################################################################
+# A1.2 Analysis
+################################################################################
+
+# Quarterly series: supply and crash rates
+print(a1_national %>% select(yq, rdd_amph_class, exp_amph_class, crash_young, deaths_young, rate_young, rate_older, ratio_young_older), n = 32)
+
+# Annual totals
+print(a1_national %>% group_by(year) %>%
+        summarise(crash_young = sum(crash_young), deaths_young = sum(deaths_young), crash_older = sum(crash_older),
+                  rate_young = sum(crash_young) / mean(pop_18_44) * 1e5, rate_older = sum(crash_older) / mean(pop_55_74) * 1e5))
+```
+
+# A2. NATIONAL COMPARISON: DRIVERS 18-44 VS 55-74
+
+## A2.1 Data preparation
+```{r a2-1}
+################################################################################
+# A2.1 Data preparation
+################################################################################
+
+a2_panel <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter")
+
+# Long format: one row per state x quarter x age group
+a2_long <- bind_rows(
+  a2_panel %>% transmute(state_abb, year, quarter, t, yq, post, covid, young = 1, crashes = crash_young, deaths = deaths_young, pop = pop_18_44),
+  a2_panel %>% transmute(state_abb, year, quarter, t, yq, post, covid, young = 0, crashes = crash_older, deaths = deaths_older, pop = pop_55_74)
+)
+
+# Main sample excludes 2020-2021
+a2_main <- a2_long %>% filter(covid == 0)
+
+print(nrow(a2_long))
+print(nrow(a2_main))
+print(a2_main %>% count(young))
+```
+
+## A2.2 Analysis
+```{r a2-2}
+################################################################################
+# A2.2 Analysis
+################################################################################
+
+# DiD: young x post, state-quarter FE absorb all shocks common to both age groups (VMT, economy, policy)
+a2_model_did <- fepois(
+  crashes ~ young:post | state_abb^t + state_abb^young^quarter,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a2_main
+)
+print(summary(a2_model_did))
+print(coeftable(a2_model_did)["young:post", ])
+print(exp(confint(a2_model_did)["young:post", ]))
+print(exp(coef(a2_model_did)["young:post"]))
+
+# Event study: young x quarter, reference = one quarter of each season before the shortage (2019Q4, 2022Q1-Q3), because seasonal FE absorb one level per season
+a2_model_es <- fepois(
+  crashes ~ i(t, young, ref = c(12, 21, 22, 23)) | state_abb^t + state_abb^young^quarter,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a2_main
+)
+print(summary(a2_model_es))
+print(wald(a2_model_es, keep = "t::([1-9]|1[01]):young$"))
+
+# Deaths instead of crashes
+a2_model_deaths <- fepois(
+  deaths ~ young:post | state_abb^t + state_abb^young^quarter,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a2_main
+)
+print(summary(a2_model_deaths))
+print(exp(confint(a2_model_deaths)["young:post", ]))
+```
+
+## A2.3 Robustness
+```{r a2-3}
+################################################################################
+# A2.3 Robustness
+################################################################################
+
+# Include 2020-2021 with young x COVID-year dummy
+a2_model_covid <- fepois(
+  crashes ~ young:post + young:covid | state_abb^t + state_abb^young^quarter,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a2_long
+)
+print(summary(a2_model_covid))
+print(exp(confint(a2_model_covid)["young:post", ]))
+
+# Age-group specific linear trends (pre-existing divergence)
+a2_model_trend <- fepois(
+  crashes ~ young:post + young:t | state_abb^t + state_abb^young^quarter,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a2_main
+)
+print(summary(a2_model_trend))
+print(exp(confint(a2_model_trend)["young:post", ]))
+
+# Exclude 2022 (telehealth company collapse)
+a2_model_no2022 <- fepois(
+  crashes ~ young:post | state_abb^t + state_abb^young^quarter,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a2_main %>% filter(year != 2022)
+)
+print(summary(a2_model_no2022))
+print(exp(confint(a2_model_no2022)["young:post", ]))
+```
+
+# A3. MAIN DESIGN: DOSE-RESPONSE BY STATE
+
+## A3.1 Data preparation
+```{r a3-1}
+################################################################################
+# A3.1 Data preparation
+################################################################################
+
+a3_panel <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter") %>%
+  mutate(intensity_10 = intensity * 10,
+         intensity_net_10 = intensity_net * 10,
+         intensity_amph_only_10 = intensity_amph_only * 10,
+         intensity_acute_10 = intensity_acute * 10)
+
+print(nrow(a3_panel))
+print(summary(a3_panel$intensity_10))
+```
+
+## A3.2 Analysis
+```{r a3-2}
+################################################################################
+# A3.2 Analysis (intensity scaled per 10 percentage points of shortfall)
+################################################################################
+
+# Primary: Poisson, population offset, state x quarter-of-year FE, quarter FE, log VMT control
+a3_model_primary <- fepois(
+  crash_young ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel
+)
+print(summary(a3_model_primary))
+print(coeftable(a3_model_primary)["intensity_10:post", ])
+print(exp(confint(a3_model_primary)["intensity_10:post", ]))
+print(exp(coef(a3_model_primary)["intensity_10:post"]))
+
+# Event study: intensity x quarter, reference = 2021Q4-2022Q3 (one per season, absorbed by state x season FE)
+a3_model_es <- fepois(
+  crash_young ~ i(t, intensity_10, ref = c(20, 21, 22, 23)) + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel
+)
+print(summary(a3_model_es))
+print(wald(a3_model_es, keep = "t::([1-9]|1[0-2]):intensity_10$"))
+print(wald(a3_model_es, keep = "t::(1[3-9]):intensity_10$"))
+
+# Deaths
+a3_model_deaths <- fepois(
+  deaths_young ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel
+)
+print(summary(a3_model_deaths))
+print(exp(confint(a3_model_deaths)["intensity_10:post", ]))
+
+# Per vehicle miles traveled (VMT offset)
+a3_model_vmt <- fepois(
+  crash_young ~ intensity_10:post | state_abb^quarter + t,
+  offset = ~ log(vmt_millions),
+  cluster = ~ state_abb,
+  data = a3_panel
+)
+print(summary(a3_model_vmt))
+print(exp(confint(a3_model_vmt)["intensity_10:post", ]))
+```
+
+## A3.3 Robustness
+```{r a3-3}
+################################################################################
+# A3.3 Robustness
+################################################################################
+
+# Original specification without state x quarter-of-year FE (state + quarter FE only)
+a3_model_noseason <- fepois(
+  crash_young ~ intensity_10:post + log(vmt_millions) | state_abb + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel
+)
+print(summary(a3_model_noseason))
+print(exp(confint(a3_model_noseason)["intensity_10:post", ]))
+
+# Net intensity after methylphenidate substitution
+a3_model_net <- fepois(
+  crash_young ~ intensity_net_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel
+)
+print(summary(a3_model_net))
+print(exp(confint(a3_model_net)["intensity_net_10:post", ]))
+
+# Amphetamine (drug code 1100) only
+a3_model_amph_only <- fepois(
+  crash_young ~ intensity_amph_only_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel
+)
+print(summary(a3_model_amph_only))
+print(exp(confint(a3_model_amph_only)["intensity_amph_only_10:post", ]))
+
+# Acute-phase intensity (2022Q4-2023Q4)
+a3_model_acute <- fepois(
+  crash_young ~ intensity_acute_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel
+)
+print(summary(a3_model_acute))
+print(exp(confint(a3_model_acute)["intensity_acute_10:post", ]))
+
+# Excluding 2020-2021
+a3_model_nocovid <- fepois(
+  crash_young ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel %>% filter(covid == 0)
+)
+print(summary(a3_model_nocovid))
+print(exp(confint(a3_model_nocovid)["intensity_10:post", ]))
+
+# Excluding 2022 (telehealth collapse)
+a3_model_no2022 <- fepois(
+  crash_young ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel %>% filter(year != 2022)
+)
+print(summary(a3_model_no2022))
+print(exp(confint(a3_model_no2022)["intensity_10:post", ]))
+
+# State-specific linear trends
+a3_model_trends <- fepois(
+  crash_young ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + state_abb[t] + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel
+)
+print(summary(a3_model_trends))
+print(exp(confint(a3_model_trends)["intensity_10:post", ]))
+
+# Time-varying exposure: each state's quarterly supply gap (0 before 2022Q4)
+a3_model_gap <- fepois(
+  crash_young ~ I(10 * gap_amph_class * post) + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel
+)
+print(summary(a3_model_gap))
+print(exp(confint(a3_model_gap)))
+
+# Excluding Florida and Texas (largest intensity, large populations)
+a3_model_noflx <- fepois(
+  crash_young ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a3_panel %>% filter(!state_abb %in% c("FL", "TX"))
+)
+print(summary(a3_model_noflx))
+print(exp(confint(a3_model_noflx)["intensity_10:post", ]))
+```
+
+# A4. TRIPLE DIFFERENCE: INTENSITY x POST x YOUNG
+
+## A4.1 Data preparation
+```{r a4-1}
+################################################################################
+# A4.1 Data preparation
+################################################################################
+
+a4_panel <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter")
+
+a4_long <- bind_rows(
+  a4_panel %>% transmute(state_abb, year, quarter, t, post, covid, intensity, young = 1, crashes = crash_young, deaths = deaths_young, pop = pop_18_44),
+  a4_panel %>% transmute(state_abb, year, quarter, t, post, covid, intensity, young = 0, crashes = crash_older, deaths = deaths_older, pop = pop_55_74)
+) %>%
+  mutate(intensity_10 = intensity * 10,
+         intensity_young_10 = intensity_10 * young)
+
+print(nrow(a4_long))
+```
+
+## A4.2 Analysis
+```{r a4-2}
+################################################################################
+# A4.2 Analysis
+################################################################################
+
+# Triple difference: state x quarter FE, state x age FE, quarter x age FE
+a4_model_ddd <- fepois(
+  crashes ~ intensity_young_10:post | state_abb^t + state_abb^young^quarter + t^young,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a4_long
+)
+print(summary(a4_model_ddd))
+print(coeftable(a4_model_ddd)["intensity_young_10:post", ])
+print(exp(confint(a4_model_ddd)["intensity_young_10:post", ]))
+
+# Event-study version
+a4_model_es <- fepois(
+  crashes ~ i(t, intensity_young_10, ref = c(20, 21, 22, 23)) | state_abb^t + state_abb^young^quarter + t^young,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a4_long
+)
+print(summary(a4_model_es))
+print(wald(a4_model_es, keep = "t::([1-9]|1[0-2]):intensity_young_10$"))
+print(wald(a4_model_es, keep = "t::(1[3-9]):intensity_young_10$"))
+
+# Deaths
+a4_model_deaths <- fepois(
+  deaths ~ intensity_young_10:post | state_abb^t + state_abb^young^quarter + t^young,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a4_long
+)
+print(summary(a4_model_deaths))
+print(exp(confint(a4_model_deaths)["intensity_young_10:post", ]))
+```
+
+## A4.3 Robustness
+```{r a4-3}
+################################################################################
+# A4.3 Robustness
+################################################################################
+
+# Excluding 2020-2021
+a4_model_nocovid <- fepois(
+  crashes ~ intensity_young_10:post | state_abb^t + state_abb^young^quarter + t^young,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a4_long %>% filter(covid == 0)
+)
+print(summary(a4_model_nocovid))
+print(exp(confint(a4_model_nocovid)["intensity_young_10:post", ]))
+
+# Excluding 2022
+a4_model_no2022 <- fepois(
+  crashes ~ intensity_young_10:post | state_abb^t + state_abb^young^quarter + t^young,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a4_long %>% filter(year != 2022)
+)
+print(summary(a4_model_no2022))
+print(exp(confint(a4_model_no2022)["intensity_young_10:post", ]))
+```
+
+# A5. REVERSAL AFTER SUPPLY RECOVERY
+
+## A5.1 Data preparation
+```{r a5-1}
+################################################################################
+# A5.1 Data preparation
+################################################################################
+
+# Acute shortage 2022Q4-2023Q4; 2024Q1-Q4 = supply back near trend (ARCOS); 2024Q4 = after DEA lisdexamfetamine quota increase (effective 2024-09-05)
+a5_panel <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter") %>%
+  mutate(intensity_10 = intensity_acute * 10,
+         acute = as.integer(t >= 24 & t <= 28),
+         recovery = as.integer(t >= 29))
+
+a5_long <- bind_rows(
+  a5_panel %>% transmute(state_abb, quarter, t, acute, recovery, post_quota, intensity_10, young = 1, crashes = crash_young, pop = pop_18_44),
+  a5_panel %>% transmute(state_abb, quarter, t, acute, recovery, post_quota, intensity_10, young = 0, crashes = crash_older, pop = pop_55_74)
+) %>%
+  mutate(intensity_young_10 = intensity_10 * young)
+
+print(a5_panel %>% count(acute, recovery))
+```
+
+## A5.2 Analysis
+```{r a5-2}
+################################################################################
+# A5.2 Analysis
+################################################################################
+
+# Dose-response by phase
+a5_model_phase <- fepois(
+  crash_young ~ intensity_10:acute + intensity_10:recovery + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a5_panel
+)
+print(summary(a5_model_phase))
+print(exp(confint(a5_model_phase)))
+
+# Test: recovery effect smaller than acute effect
+print(wald(a5_model_phase, keep = "intensity_10:(acute|recovery)"))
+print(coef(a5_model_phase)["intensity_10:recovery"] - coef(a5_model_phase)["intensity_10:acute"])
+
+# Triple difference by phase
+a5_model_ddd_phase <- fepois(
+  crashes ~ intensity_young_10:acute + intensity_young_10:recovery | state_abb^t + state_abb^young^quarter + t^young,
+  offset = ~ log(pop),
+  cluster = ~ state_abb,
+  data = a5_long
+)
+print(summary(a5_model_ddd_phase))
+print(exp(confint(a5_model_ddd_phase)))
+
+# After the DEA quota increase (2024Q4 only)
+a5_model_quota <- fepois(
+  crash_young ~ intensity_10:acute + intensity_10:recovery + intensity_10:post_quota + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44),
+  cluster = ~ state_abb,
+  data = a5_panel
+)
+print(summary(a5_model_quota))
+print(exp(confint(a5_model_quota)))
+```
+
+# A6. MECHANISM CHECKS
+
+## A6.1 Data preparation
+```{r a6-1}
+################################################################################
+# A6.1 Data preparation
+################################################################################
+
+a6_panel <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter") %>%
+  mutate(intensity_10 = intensity * 10)
+
+# Drug tests: 2018-2024 only (no drugs file in 2017), state-quarters with at least one tested driver
+a6_drugs <- a6_panel %>%
+  filter(year >= 2018, crash_young_tested > 0)
+
+print(nrow(a6_panel))
+print(nrow(a6_drugs))
+print(a6_drugs %>% group_by(year) %>% summarise(tested = sum(crash_young_tested), amph = sum(crash_young_amph), meth = sum(crash_young_meth)))
+```
+
+## A6.2 Analysis
+```{r a6-2}
+################################################################################
+# A6.2 Analysis: dose-response DiD by crash type (young drivers)
+################################################################################
+
+# Single-vehicle
+a6_model_single <- fepois(
+  crash_young_single ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = a6_panel
+)
+print(summary(a6_model_single))
+print(exp(confint(a6_model_single)["intensity_10:post", ]))
+
+# Multi-vehicle
+a6_model_multi <- fepois(
+  crash_young_multi ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = a6_panel
+)
+print(summary(a6_model_multi))
+print(exp(confint(a6_model_multi)["intensity_10:post", ]))
+
+# Daytime (06:00-17:59)
+a6_model_day <- fepois(
+  crash_young_day ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = a6_panel
+)
+print(summary(a6_model_day))
+print(exp(confint(a6_model_day)["intensity_10:post", ]))
+
+# Night
+a6_model_night <- fepois(
+  crash_young_night ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = a6_panel
+)
+print(summary(a6_model_night))
+print(exp(confint(a6_model_night)["intensity_10:post", ]))
+
+# Young driver with a driver-error factor
+a6_model_error <- fepois(
+  crash_young_error ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = a6_panel
+)
+print(summary(a6_model_error))
+print(exp(confint(a6_model_error)["intensity_10:post", ]))
+
+# Young driver speeding
+a6_model_speed <- fepois(
+  crash_young_speed ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = a6_panel
+)
+print(summary(a6_model_speed))
+print(exp(confint(a6_model_speed)["intensity_10:post", ]))
+
+# Young driver BAC >= 0.08 (alcohol; not an ADHD-specific crash type)
+a6_model_bac <- fepois(
+  crash_young_bac ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = a6_panel
+)
+print(summary(a6_model_bac))
+print(exp(confint(a6_model_bac)["intensity_10:post", ]))
+```
+
+```{r a6-2b}
+################################################################################
+# A6.2b Analysis: drug-positive young drivers (within-state, per tested crash)
+################################################################################
+
+# Amphetamine-positive, methamphetamine-negative: national post shift within state
+a6_model_amph_post <- fepois(
+  crash_young_amph ~ post + t | state_abb^quarter,
+  offset = ~ log(crash_young_tested), cluster = ~ state_abb, data = a6_drugs
+)
+print(summary(a6_model_amph_post))
+print(exp(confint(a6_model_amph_post)["post", ]))
+
+# Methamphetamine-positive: national post shift within state
+a6_model_meth_post <- fepois(
+  crash_young_meth ~ post + t | state_abb^quarter,
+  offset = ~ log(crash_young_tested), cluster = ~ state_abb, data = a6_drugs
+)
+print(summary(a6_model_meth_post))
+print(exp(confint(a6_model_meth_post)["post", ]))
+
+# Amphetamine-positive: dose-response
+a6_model_amph_dose <- fepois(
+  crash_young_amph ~ intensity_10:post | state_abb^quarter + t,
+  offset = ~ log(crash_young_tested), cluster = ~ state_abb, data = a6_drugs
+)
+print(summary(a6_model_amph_dose))
+print(exp(confint(a6_model_amph_dose)["intensity_10:post", ]))
+
+# Methamphetamine-positive: dose-response
+a6_model_meth_dose <- fepois(
+  crash_young_meth ~ intensity_10:post | state_abb^quarter + t,
+  offset = ~ log(crash_young_tested), cluster = ~ state_abb, data = a6_drugs
+)
+print(summary(a6_model_meth_dose))
+print(exp(confint(a6_model_meth_dose)["intensity_10:post", ]))
+```
+
+```{r a6-2c}
+################################################################################
+# A6.2c Analysis: age DiD by crash type (young vs 55-74, 2020-2021 excluded)
+################################################################################
+
+a6_long <- bind_rows(
+  a6_panel %>% transmute(state_abb, quarter, t, post, covid, young = 1, single = crash_young_single, day = crash_young_day,
+                         error = crash_young_error, speed = crash_young_speed, pop = pop_18_44),
+  a6_panel %>% transmute(state_abb, quarter, t, post, covid, young = 0, single = crash_older_single, day = crash_older_day,
+                         error = crash_older_error, speed = crash_older_speed, pop = pop_55_74)
+) %>%
+  filter(covid == 0)
+
+a6_model_age_single <- fepois(single ~ young:post | state_abb^t + state_abb^young^quarter, offset = ~ log(pop), cluster = ~ state_abb, data = a6_long)
+print(summary(a6_model_age_single))
+print(exp(confint(a6_model_age_single)["young:post", ]))
+
+a6_model_age_day <- fepois(day ~ young:post | state_abb^t + state_abb^young^quarter, offset = ~ log(pop), cluster = ~ state_abb, data = a6_long)
+print(summary(a6_model_age_day))
+print(exp(confint(a6_model_age_day)["young:post", ]))
+
+a6_model_age_error <- fepois(error ~ young:post | state_abb^t + state_abb^young^quarter, offset = ~ log(pop), cluster = ~ state_abb, data = a6_long)
+print(summary(a6_model_age_error))
+print(exp(confint(a6_model_age_error)["young:post", ]))
+
+a6_model_age_speed <- fepois(speed ~ young:post | state_abb^t + state_abb^young^quarter, offset = ~ log(pop), cluster = ~ state_abb, data = a6_long)
+print(summary(a6_model_age_speed))
+print(exp(confint(a6_model_age_speed)["young:post", ]))
+```
+
+# S1. SECONDARY OUTCOMES: OVERDOSE DEATHS (CDC VSRR, STATE x YEAR, ALL AGES)
+
+## S1.1 Data preparation
+```{r s1-1}
+################################################################################
+# S1.1 Data preparation
+################################################################################
+
+s1_df <- read_excel("clean_data.xlsx", sheet = "cdc_overdose_state_year") %>%
+  filter(year <= 2025) %>%
+  mutate(post = as.integer(year >= 2023),
+         intensity_10 = intensity * 10)
+
+print(s1_df %>% summarise(n = n(), states_psychostim = n_distinct(state_abb[!is.na(od_psychostim)])))
+```
+
+## S1.2 Analysis
+```{r s1-2}
+################################################################################
+# S1.2 Analysis
+################################################################################
+
+# Psychostimulant overdose deaths (T43.6)
+s1_model_psychostim <- fepois(
+  od_psychostim ~ intensity_10:post | state_abb + year,
+  offset = ~ log(pop_total), cluster = ~ state_abb,
+  data = s1_df %>% filter(!is.na(od_psychostim))
+)
+print(summary(s1_model_psychostim))
+print(exp(confint(s1_model_psychostim)["intensity_10:post", ]))
+
+# All drug overdose deaths
+s1_model_all_od <- fepois(
+  od_all ~ intensity_10:post | state_abb + year,
+  offset = ~ log(pop_total), cluster = ~ state_abb,
+  data = s1_df %>% filter(!is.na(od_all))
+)
+print(summary(s1_model_all_od))
+print(exp(confint(s1_model_all_od)["intensity_10:post", ]))
+
+# All-cause deaths (placebo-like benchmark)
+s1_model_all_deaths <- fepois(
+  deaths_all_causes ~ intensity_10:post | state_abb + year,
+  offset = ~ log(pop_total), cluster = ~ state_abb,
+  data = s1_df %>% filter(!is.na(deaths_all_causes))
+)
+print(summary(s1_model_all_deaths))
+print(exp(confint(s1_model_all_deaths)["intensity_10:post", ]))
+```
+
+# P. PLACEBO TESTS
+
+## P.1 Data preparation
+```{r p1}
+################################################################################
+# P.1 Data preparation
+################################################################################
+
+p_panel <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter") %>%
+  mutate(intensity_10 = intensity * 10,
+         fake_post_2019 = as.integer(t >= 12),
+         fake_post_2021 = as.integer(t >= 20))
+
+p_long <- bind_rows(
+  p_panel %>% transmute(state_abb, quarter, t, fake_post_2019, fake_post_2021, young = 1, crashes = crash_young, pop = pop_18_44),
+  p_panel %>% transmute(state_abb, quarter, t, fake_post_2019, fake_post_2021, young = 0, crashes = crash_older, pop = pop_55_74)
+)
+
+print(nrow(p_panel))
+```
+
+## P.2 Analysis
+```{r p2}
+################################################################################
+# P.2 Analysis
+################################################################################
+
+# Placebo outcome: crashes with a driver aged 75+
+p_model_oldest <- fepois(
+  crash_oldest ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_75plus), cluster = ~ state_abb, data = p_panel
+)
+print(summary(p_model_oldest))
+print(exp(confint(p_model_oldest)["intensity_10:post", ]))
+
+# Placebo outcome: crashes with a driver aged 55-74
+p_model_older <- fepois(
+  crash_older ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_55_74), cluster = ~ state_abb, data = p_panel
+)
+print(summary(p_model_older))
+print(exp(confint(p_model_older)["intensity_10:post", ]))
+
+# Placebo outcome: pedestrian deaths in crashes with a 55-74 driver and no 18-44 driver
+p_model_ped <- fepois(
+  ped_deaths_older_only ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_total), cluster = ~ state_abb, data = p_panel
+)
+print(summary(p_model_ped))
+print(exp(confint(p_model_ped)["intensity_10:post", ]))
+
+# Placebo date 2019Q4 (sample 2017Q1-2020Q1, stops before the COVID lockdown quarters), dose-response
+p_model_date2019 <- fepois(
+  crash_young ~ intensity_10:fake_post_2019 + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = p_panel %>% filter(t <= 13)
+)
+print(summary(p_model_date2019))
+print(exp(confint(p_model_date2019)["intensity_10:fake_post_2019", ]))
+
+# Placebo date 2021Q4 (sample 2020Q1-2022Q3), dose-response
+p_model_date2021 <- fepois(
+  crash_young ~ intensity_10:fake_post_2021 + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = p_panel %>% filter(t >= 13, t <= 23)
+)
+print(summary(p_model_date2021))
+print(exp(confint(p_model_date2021)["intensity_10:fake_post_2021", ]))
+
+# Placebo date 2019Q4, age DiD (sample 2017Q1-2020Q1)
+p_model_age2019 <- fepois(
+  crashes ~ young:fake_post_2019 | state_abb^t + state_abb^young^quarter,
+  offset = ~ log(pop), cluster = ~ state_abb, data = p_long %>% filter(t <= 13)
+)
+print(summary(p_model_age2019))
+print(exp(confint(p_model_age2019)["young:fake_post_2019", ]))
+
+# Placebo date 2021Q4, age DiD (sample 2020Q1-2022Q3)
+p_model_age2021 <- fepois(
+  crashes ~ young:fake_post_2021 | state_abb^t + state_abb^young^quarter,
+  offset = ~ log(pop), cluster = ~ state_abb, data = p_long %>% filter(t >= 13, t <= 23)
+)
+print(summary(p_model_age2021))
+print(exp(confint(p_model_age2021)["young:fake_post_2021", ]))
+```
+
+# X. EXCESS CRASHES AND DEATHS ATTRIBUTABLE TO THE SHORTAGE
+
+## X.1 Data preparation
+```{r x1}
+################################################################################
+# X.1 Data preparation
+################################################################################
+
+x_panel <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter") %>%
+  mutate(intensity_10 = intensity * 10)
+
+x_post <- x_panel %>% filter(post == 1)
+print(c(crash_young_post = sum(x_post$crash_young), deaths_young_post = sum(x_post$deaths_young), quarters = n_distinct(x_post$t)))
+```
+
+## X.2 Analysis
+```{r x2}
+################################################################################
+# X.2 Analysis
+################################################################################
+
+# Refit primary dose-response and triple difference (copied from A3 and A4)
+x_model_dose <- fepois(
+  crash_young ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = x_panel
+)
+x_long <- bind_rows(
+  x_panel %>% transmute(state_abb, quarter, t, post, intensity_10, young = 1, crashes = crash_young, pop = pop_18_44),
+  x_panel %>% transmute(state_abb, quarter, t, post, intensity_10, young = 0, crashes = crash_older, pop = pop_55_74)
+) %>% mutate(intensity_young_10 = intensity_10 * young)
+x_model_ddd <- fepois(
+  crashes ~ intensity_young_10:post | state_abb^t + state_abb^young^quarter + t^young,
+  offset = ~ log(pop), cluster = ~ state_abb, data = x_long
+)
+
+# Excess = sum over post state-quarters of observed x (1 - exp(-beta x intensity)); point estimate and 95% CI
+x_beta <- tibble(
+  model = c("dose-response", "triple difference"),
+  est = c(coef(x_model_dose)["intensity_10:post"], coef(x_model_ddd)["intensity_young_10:post"]),
+  lo = c(confint(x_model_dose)["intensity_10:post", 1], confint(x_model_ddd)["intensity_young_10:post", 1]),
+  hi = c(confint(x_model_dose)["intensity_10:post", 2], confint(x_model_ddd)["intensity_young_10:post", 2])
+)
+
+x_excess <- x_beta %>%
+  mutate(
+    excess_crashes = c(sum(x_post$crash_young * (1 - exp(-est[1] * x_post$intensity_10))), sum(x_post$crash_young * (1 - exp(-est[2] * x_post$intensity_10)))),
+    excess_crashes_lo = c(sum(x_post$crash_young * (1 - exp(-lo[1] * x_post$intensity_10))), sum(x_post$crash_young * (1 - exp(-lo[2] * x_post$intensity_10)))),
+    excess_crashes_hi = c(sum(x_post$crash_young * (1 - exp(-hi[1] * x_post$intensity_10))), sum(x_post$crash_young * (1 - exp(-hi[2] * x_post$intensity_10)))),
+    excess_deaths = c(sum(x_post$deaths_young * (1 - exp(-est[1] * x_post$intensity_10))), sum(x_post$deaths_young * (1 - exp(-est[2] * x_post$intensity_10)))),
+    excess_deaths_lo = c(sum(x_post$deaths_young * (1 - exp(-lo[1] * x_post$intensity_10))), sum(x_post$deaths_young * (1 - exp(-lo[2] * x_post$intensity_10)))),
+    excess_deaths_hi = c(sum(x_post$deaths_young * (1 - exp(-hi[1] * x_post$intensity_10))), sum(x_post$deaths_young * (1 - exp(-hi[2] * x_post$intensity_10))))
+  )
+print(x_excess, width = 200)
+
+# Expected excess from expected_effect.md (0.07%-0.44% of post-period young-driver crashes and deaths)
+print(c(expected_crashes_low = 0.0007 * sum(x_post$crash_young), expected_crashes_high = 0.0044 * sum(x_post$crash_young),
+        expected_deaths_low = 0.0007 * sum(x_post$deaths_young), expected_deaths_high = 0.0044 * sum(x_post$deaths_young)))
+```
+
+# SESSION INFO
+```{r session}
+print(sessionInfo())
+```

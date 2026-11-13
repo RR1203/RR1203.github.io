@@ -1,0 +1,291 @@
+---
+title: "US stimulant shortage and fatal crashes: figures and tables"
+output:
+  html_document: default
+---
+
+# 00. SETUP
+```{r setup}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+
+# Statistics
+library(fixest)
+
+# Options
+options(scipen = 999, width = 140)
+theme_set(theme_minimal(base_size = 12) +
+            theme(panel.grid.minor = element_blank(),
+                  panel.grid.major = element_line(colour = "#e6e5e0", linewidth = 0.3),
+                  axis.text = element_text(colour = "#52514e"),
+                  plot.title = element_text(face = "bold"),
+                  plot.background = element_rect(fill = "white", colour = NA)))
+set.seed(1234)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+
+# Palette (reference categorical slots + diverging blue/red with gray midpoint)
+col_blue <- "#2a78d6"
+col_orange <- "#eb6834"
+col_red <- "#e34948"
+col_gray <- "#8a8984"
+col_mid <- "#f0efec"
+```
+
+# FIG1. NATIONAL SERIES
+```{r fig1}
+################################################################################
+# FIG1. National quarterly supply and young-driver fatal crash rate
+################################################################################
+
+fig1_df <- read_excel("clean_data.xlsx", sheet = "national_quarter") %>%
+  mutate(date = as.Date(sprintf("%d-%02d-15", year, (quarter - 1) * 3 + 2)))
+
+fig1_supply <- read_excel("clean_data.xlsx", sheet = "supply_national") %>%
+  mutate(date = as.Date(sprintf("%d-%02d-15", year, (quarter - 1) * 3 + 2))) %>%
+  select(date, Observed = rdd_amph_class, `Expected (2017Q1-2022Q3 trend)` = exp_amph_class) %>%
+  pivot_longer(-date, names_to = "series", values_to = "value") %>%
+  mutate(panel = "A. Amphetamine-class supply\n(daily doses per 1,000 residents 18-44)")
+
+fig1_crash <- fig1_df %>%
+  transmute(date,
+            `Drivers 18-44` = crash_young / pop_18_44 * 1e5,
+            `Drivers 55-74` = crash_older / pop_55_74 * 1e5) %>%
+  pivot_longer(-date, names_to = "series", values_to = "value") %>%
+  mutate(panel = "B. Fatal crashes per 100,000 residents\nof the same age, per quarter")
+
+fig1_national <- ggplot(bind_rows(fig1_supply, fig1_crash), aes(date, value, colour = series, linetype = series)) +
+  annotate("rect", xmin = as.Date("2020-01-01"), xmax = as.Date("2021-12-31"), ymin = -Inf, ymax = Inf, fill = "#f3f2ee") +
+  geom_vline(xintercept = as.Date("2022-10-01"), colour = col_red, linewidth = 0.5) +
+  geom_vline(xintercept = as.Date("2024-09-05"), colour = col_gray, linewidth = 0.5, linetype = "dashed") +
+  geom_line(linewidth = 0.8) +
+  facet_wrap(~panel, ncol = 1, scales = "free_y") +
+  scale_colour_manual(values = c("Observed" = col_blue, "Expected (2017Q1-2022Q3 trend)" = col_gray,
+                                 "Drivers 18-44" = col_blue, "Drivers 55-74" = col_orange)) +
+  scale_linetype_manual(values = c("Observed" = "solid", "Expected (2017Q1-2022Q3 trend)" = "dashed",
+                                   "Drivers 18-44" = "solid", "Drivers 55-74" = "solid")) +
+  labs(x = NULL, y = NULL, colour = NULL, linetype = NULL,
+       title = "Stimulant supply and fatal crashes, 2017-2025",
+       caption = "Red line: FDA shortage announcement (Oct 2022). Dashed gray: DEA lisdexamfetamine quota increase (5 Sep 2024).\nShaded: 2020-2021 (COVID). Sources: DEA ARCOS Report 02, NHTSA FARS 2017-2024, Census estimates.") +
+  theme(legend.position = "top", strip.text = element_text(hjust = 0, face = "bold"))
+
+print(fig1_national)
+```
+
+# FIG2. SHORTAGE-INTENSITY MAP
+```{r fig2}
+################################################################################
+# FIG2. State shortage intensity, tile-grid map
+################################################################################
+
+fig2_grid <- tribble(
+  ~state_abb, ~row, ~col,
+  "AK", 0, 0, "ME", 0, 11,
+  "VT", 1, 10, "NH", 1, 11,
+  "WA", 2, 1, "ID", 2, 2, "MT", 2, 3, "ND", 2, 4, "MN", 2, 5, "IL", 2, 6, "WI", 2, 7, "MI", 2, 8, "NY", 2, 9, "RI", 2, 10, "MA", 2, 11,
+  "OR", 3, 1, "NV", 3, 2, "WY", 3, 3, "SD", 3, 4, "IA", 3, 5, "IN", 3, 6, "OH", 3, 7, "PA", 3, 8, "NJ", 3, 9, "CT", 3, 10,
+  "CA", 4, 1, "UT", 4, 2, "CO", 4, 3, "NE", 4, 4, "MO", 4, 5, "KY", 4, 6, "WV", 4, 7, "VA", 4, 8, "MD", 4, 9, "DE", 4, 10,
+  "AZ", 5, 2, "NM", 5, 3, "KS", 5, 4, "AR", 5, 5, "TN", 5, 6, "NC", 5, 7, "SC", 5, 8, "DC", 5, 9,
+  "OK", 6, 4, "LA", 6, 5, "MS", 6, 6, "AL", 6, 7, "GA", 6, 8,
+  "HI", 7, 0, "TX", 7, 4, "FL", 7, 9
+)
+
+fig2_df <- read_excel("clean_data.xlsx", sheet = "intensity_state") %>%
+  inner_join(fig2_grid, by = "state_abb") %>%
+  mutate(label = sprintf("%s\n%+.0f", state_abb, 100 * intensity))
+
+print(nrow(fig2_df))
+
+fig2_map <- ggplot(fig2_df, aes(col, -row, fill = 100 * intensity)) +
+  geom_tile(colour = "white", linewidth = 1.2, width = 0.95, height = 0.95) +
+  geom_text(aes(label = label), size = 3, lineheight = 0.9, colour = "#0b0b0b") +
+  scale_fill_gradient2(low = col_blue, mid = col_mid, high = col_red, midpoint = 0,
+                       name = "Shortfall vs own\ntrend (%), 2022Q4-2024Q4") +
+  coord_equal() +
+  labs(title = "Amphetamine-class supply shortfall by state",
+       subtitle = "Positive (red) = supply below the state's 2017Q1-2022Q3 trend; negative (blue) = above trend",
+       caption = "Source: DEA ARCOS Report 02 (amphetamine + lisdexamfetamine, label-based daily doses).") +
+  theme_void(base_size = 12) +
+  theme(legend.position = "right", plot.title = element_text(face = "bold"),
+        plot.background = element_rect(fill = "white", colour = NA))
+
+print(fig2_map)
+```
+
+# FIG3. EVENT STUDIES
+```{r fig3}
+################################################################################
+# FIG3. Event studies (models copied from analysis.Rmd A2, A3, A4)
+################################################################################
+
+fig3_panel <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter") %>%
+  mutate(intensity_10 = intensity * 10)
+
+fig3_long <- bind_rows(
+  fig3_panel %>% transmute(state_abb, year, quarter, t, covid, intensity_10, young = 1, crashes = crash_young, pop = pop_18_44),
+  fig3_panel %>% transmute(state_abb, year, quarter, t, covid, intensity_10, young = 0, crashes = crash_older, pop = pop_55_74)
+) %>%
+  mutate(intensity_young_10 = intensity_10 * young)
+
+# A2 age event study (2020-2021 excluded)
+fig3_model_age <- fepois(
+  crashes ~ i(t, young, ref = c(12, 21, 22, 23)) | state_abb^t + state_abb^young^quarter,
+  offset = ~ log(pop), cluster = ~ state_abb, data = fig3_long %>% filter(covid == 0)
+)
+
+# A3 dose-response event study
+fig3_model_dose <- fepois(
+  crash_young ~ i(t, intensity_10, ref = c(20, 21, 22, 23)) + log(vmt_millions) | state_abb^quarter + t,
+  offset = ~ log(pop_18_44), cluster = ~ state_abb, data = fig3_panel
+)
+
+# A4 triple-difference event study
+fig3_model_ddd <- fepois(
+  crashes ~ i(t, intensity_young_10, ref = c(20, 21, 22, 23)) | state_abb^t + state_abb^young^quarter + t^young,
+  offset = ~ log(pop), cluster = ~ state_abb, data = fig3_long
+)
+
+fig3_coefs <- bind_rows(
+  as_tibble(coeftable(fig3_model_age), rownames = "term") %>% mutate(design = "A. Age comparison: drivers 18-44 vs 55-74 (2020-21 excluded)"),
+  as_tibble(coeftable(fig3_model_dose), rownames = "term") %>% mutate(design = "B. Dose-response: per 10 pp state shortfall, drivers 18-44"),
+  as_tibble(coeftable(fig3_model_ddd), rownames = "term") %>% mutate(design = "C. Triple difference: per 10 pp shortfall x young vs older")
+) %>%
+  filter(str_detect(term, "^t::")) %>%
+  mutate(t = as.integer(str_extract(term, "(?<=t::)\\d+")),
+         est = Estimate, lo = Estimate - 1.96 * `Std. Error`, hi = Estimate + 1.96 * `Std. Error`) %>%
+  bind_rows(tibble(design = rep(c("A. Age comparison: drivers 18-44 vs 55-74 (2020-21 excluded)",
+                                  "B. Dose-response: per 10 pp state shortfall, drivers 18-44",
+                                  "C. Triple difference: per 10 pp shortfall x young vs older"), times = c(4, 4, 4)),
+                   t = c(12, 21, 22, 23, 20, 21, 22, 23, 20, 21, 22, 23), est = 0, lo = 0, hi = 0)) %>%
+  mutate(date = as.Date(sprintf("%d-%02d-15", 2017 + (t - 1) %/% 4, ((t - 1) %% 4) * 3 + 2)))
+
+fig3_event <- ggplot(fig3_coefs, aes(date, 100 * (exp(est) - 1))) +
+  geom_hline(yintercept = 0, colour = col_gray, linewidth = 0.4) +
+  geom_vline(xintercept = as.Date("2022-10-01"), colour = col_red, linewidth = 0.5) +
+  geom_errorbar(aes(ymin = 100 * (exp(lo) - 1), ymax = 100 * (exp(hi) - 1)), width = 0, colour = col_blue, alpha = 0.6) +
+  geom_point(colour = col_blue, size = 1.8) +
+  facet_wrap(~design, ncol = 1, scales = "free_y") +
+  labs(x = NULL, y = "Difference in fatal crashes (%), 95% CI",
+       title = "Event studies around the October 2022 shortage",
+       caption = "Reference points (0): one quarter per season before the shortage (seasonal fixed effects absorb one level per season).\nPoisson, population offset, state-clustered SEs.") +
+  theme(strip.text = element_text(hjust = 0, face = "bold"))
+
+print(fig3_event)
+```
+
+# FIG4. DOSE-RESPONSE SCATTER
+```{r fig4}
+################################################################################
+# FIG4. State shortfall vs change in fatal-crash rate (post vs pre, 2020-2021 excluded)
+################################################################################
+
+fig4_df <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter") %>%
+  filter(covid == 0) %>%
+  group_by(state_abb, intensity, post) %>%
+  summarise(rate_young = sum(crash_young) / sum(pop_18_44), rate_older = sum(crash_older) / sum(pop_55_74),
+            pop = mean(pop_18_44), .groups = "drop") %>%
+  pivot_wider(names_from = post, values_from = c(rate_young, rate_older, pop)) %>%
+  transmute(state_abb, intensity, pop = pop_0,
+            `A. Drivers 18-44` = 100 * (rate_young_1 / rate_young_0 - 1),
+            `B. Drivers 18-44 minus drivers 55-74` = 100 * (rate_young_1 / rate_young_0 - rate_older_1 / rate_older_0)) %>%
+  pivot_longer(starts_with(c("A.", "B.")), names_to = "outcome", values_to = "change")
+
+print(fig4_df %>% group_by(outcome) %>% summarise(r = cor(intensity, change), r_weighted = cov.wt(cbind(intensity, change), wt = pop, cor = TRUE)$cor[1, 2]))
+
+fig4_scatter <- ggplot(fig4_df, aes(100 * intensity, change)) +
+  geom_hline(yintercept = 0, colour = col_gray, linewidth = 0.4) +
+  geom_vline(xintercept = 0, colour = col_gray, linewidth = 0.4) +
+  geom_smooth(aes(weight = pop), method = "lm", se = TRUE, colour = col_blue, fill = "#cfe0f5", linewidth = 0.8) +
+  geom_point(aes(size = pop), colour = col_blue, alpha = 0.55) +
+  geom_text(aes(label = state_abb), size = 2.6, colour = "#52514e", vjust = -1) +
+  facet_wrap(~outcome, ncol = 2) +
+  scale_size_area(max_size = 7, guide = "none") +
+  labs(x = "State supply shortfall vs own trend, 2022Q4-2024Q4 (%)",
+       y = "Change in fatal-crash rate, 2022Q4-2024Q4\nvs 2017-2019 + 2022Q1-Q3 (%)",
+       title = "No dose-response: states that lost more supply did not see more fatal crashes",
+       caption = "Points sized by population 18-44; line = population-weighted linear fit with 95% CI.") +
+  theme(strip.text = element_text(hjust = 0, face = "bold"))
+
+print(fig4_scatter)
+```
+
+# FIG5. MECHANISM PANEL
+```{r fig5}
+################################################################################
+# FIG5. Mechanism: dose-response IRR per 10 pp shortfall by crash type (models copied from analysis.Rmd A6, P)
+################################################################################
+
+fig5_panel <- read_excel("clean_data.xlsx", sheet = "panel_state_quarter") %>%
+  mutate(intensity_10 = intensity * 10)
+fig5_drugs <- fig5_panel %>% filter(year >= 2018, crash_young_tested > 0)
+
+fig5_m_all    <- fepois(crash_young ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t, offset = ~ log(pop_18_44), cluster = ~ state_abb, data = fig5_panel)
+fig5_m_single <- fepois(crash_young_single ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t, offset = ~ log(pop_18_44), cluster = ~ state_abb, data = fig5_panel)
+fig5_m_multi  <- fepois(crash_young_multi ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t, offset = ~ log(pop_18_44), cluster = ~ state_abb, data = fig5_panel)
+fig5_m_day    <- fepois(crash_young_day ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t, offset = ~ log(pop_18_44), cluster = ~ state_abb, data = fig5_panel)
+fig5_m_night  <- fepois(crash_young_night ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t, offset = ~ log(pop_18_44), cluster = ~ state_abb, data = fig5_panel)
+fig5_m_error  <- fepois(crash_young_error ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t, offset = ~ log(pop_18_44), cluster = ~ state_abb, data = fig5_panel)
+fig5_m_speed  <- fepois(crash_young_speed ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t, offset = ~ log(pop_18_44), cluster = ~ state_abb, data = fig5_panel)
+fig5_m_bac    <- fepois(crash_young_bac ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t, offset = ~ log(pop_18_44), cluster = ~ state_abb, data = fig5_panel)
+fig5_m_amph   <- fepois(crash_young_amph ~ intensity_10:post | state_abb^quarter + t, offset = ~ log(crash_young_tested), cluster = ~ state_abb, data = fig5_drugs)
+fig5_m_meth   <- fepois(crash_young_meth ~ intensity_10:post | state_abb^quarter + t, offset = ~ log(crash_young_tested), cluster = ~ state_abb, data = fig5_drugs)
+fig5_m_oldest <- fepois(crash_oldest ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t, offset = ~ log(pop_75plus), cluster = ~ state_abb, data = fig5_panel)
+fig5_m_older  <- fepois(crash_older ~ intensity_10:post + log(vmt_millions) | state_abb^quarter + t, offset = ~ log(pop_55_74), cluster = ~ state_abb, data = fig5_panel)
+
+fig5_table <- tribble(
+  ~group, ~outcome, ~model,
+  "Main", "All crashes, driver 18-44", fig5_m_all,
+  "Crash type (driver 18-44)", "Single-vehicle", fig5_m_single,
+  "Crash type (driver 18-44)", "Multi-vehicle", fig5_m_multi,
+  "Crash type (driver 18-44)", "Daytime (06-18h)", fig5_m_day,
+  "Crash type (driver 18-44)", "Night", fig5_m_night,
+  "Crash type (driver 18-44)", "Driver-error factor", fig5_m_error,
+  "Crash type (driver 18-44)", "Speeding", fig5_m_speed,
+  "Crash type (driver 18-44)", "BAC >= 0.08", fig5_m_bac,
+  "Drug test (per tested crash)", "Amphetamine+, meth-", fig5_m_amph,
+  "Drug test (per tested crash)", "Methamphetamine+", fig5_m_meth,
+  "Placebo outcome", "Driver 75+", fig5_m_oldest,
+  "Placebo outcome", "Driver 55-74", fig5_m_older
+) %>%
+  mutate(est = map_dbl(model, ~ coef(.x)["intensity_10:post"]),
+         lo = map_dbl(model, ~ confint(.x)["intensity_10:post", 1]),
+         hi = map_dbl(model, ~ confint(.x)["intensity_10:post", 2]),
+         p = map_dbl(model, ~ pvalue(.x)["intensity_10:post"])) %>%
+  select(-model) %>%
+  mutate(irr = exp(est), irr_lo = exp(lo), irr_hi = exp(hi),
+         outcome = factor(outcome, levels = rev(outcome)),
+         group = factor(group, levels = unique(group)))
+
+print(fig5_table %>% mutate(across(where(is.double), ~ round(.x, 3))))
+
+fig5_mechanism <- ggplot(fig5_table, aes(irr, outcome)) +
+  geom_vline(xintercept = 1, colour = col_gray, linewidth = 0.4) +
+  geom_errorbarh(aes(xmin = irr_lo, xmax = irr_hi), height = 0, colour = col_blue, linewidth = 0.7) +
+  geom_point(colour = col_blue, size = 2.4) +
+  facet_grid(group ~ ., scales = "free_y", space = "free_y", switch = "y") +
+  scale_x_log10() +
+  labs(x = "Rate ratio per 10 pp state supply shortfall (95% CI, log scale)", y = NULL,
+       title = "Mechanism and placebo checks",
+       caption = "Poisson DiD, state x season and quarter FE, log VMT, state-clustered SEs. Drug outcomes 2018-2024 only.") +
+  theme(strip.placement = "outside", strip.text.y.left = element_text(angle = 0, hjust = 1, face = "bold"))
+
+print(fig5_mechanism)
+```
+
+# SAVE
+```{r save}
+################################################################################
+# SAVE figures to figures/
+################################################################################
+
+ggsave("figures/fig1_national_series.png", fig1_national, width = 9, height = 7, dpi = 200)
+ggsave("figures/fig2_shortage_intensity_map.png", fig2_map, width = 10, height = 6.5, dpi = 200)
+ggsave("figures/fig3_event_studies.png", fig3_event, width = 9, height = 9, dpi = 200)
+ggsave("figures/fig4_dose_response_scatter.png", fig4_scatter, width = 11, height = 5.5, dpi = 200)
+ggsave("figures/fig5_mechanism_panel.png", fig5_mechanism, width = 9, height = 6.5, dpi = 200)
+write_csv(fig5_table %>% select(group, outcome, irr, irr_lo, irr_hi, p), "figures/fig5_mechanism_table.csv")
+```
