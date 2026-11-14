@@ -411,17 +411,40 @@ sdud <- sdud_raw %>%
   ) %>%
   left_join(fda_ndc, by = "ndc") %>%
   mutate(
+    product_upper = toupper(product_name),
+    units = as.numeric(units_reimbursed)
+  )
+
+# Units per prescription per NDC (non-suppressed rows), for NDCs without FDA route
+sdud_ndc_units <- sdud %>%
+  filter(!suppressed, prescriptions > 0) %>%
+  group_by(ndc) %>%
+  summarise(units_per_rx = sum(units, na.rm = TRUE) / sum(prescriptions), .groups = "drop")
+
+# Classify: FDA route first, then product name, then units per prescription
+# (tablets/films >= 7 units per Rx; patches and injectables 1-4)
+sdud <- sdud %>%
+  left_join(sdud_ndc_units, by = "ndc") %>%
+  mutate(
     formulation = case_when(
       !is.na(fda_formulation) & fda_formulation != "unknown" ~ fda_formulation,
-      str_detect(product_name, "^(SUBOX|SUBUT|ZUBSO|BUNAV|SUBLO|BRIXA)") ~ "oud",
-      str_detect(product_name, "BUPRENEX|BUTRANS|BELBUCA") ~ "pain",
+      str_detect(product_upper, "SUBOX|SUBUT|ZUBSO|BUNAV|SUBLO|BRIXA|&NAL|-NA|-N$|NALOX") ~ "oud",
+      str_detect(product_upper, "BUPRENEX|BUTRANS|BELBUCA") ~ "pain",
+      units_per_rx >= 7 ~ "oud",
+      units_per_rx < 7 ~ "pain",
       TRUE ~ "unknown"
+    ),
+    formulation_rule = case_when(
+      !is.na(fda_formulation) & fda_formulation != "unknown" ~ "FDA route",
+      str_detect(product_upper, "SUBOX|SUBUT|ZUBSO|BUNAV|SUBLO|BRIXA|&NAL|-NA|-N$|NALOX|BUPRENEX|BUTRANS|BELBUCA") ~ "product name",
+      !is.na(units_per_rx) ~ "units per Rx",
+      TRUE ~ "unclassified"
     )
   )
 
 print(nrow(sdud))
-print(table(sdud$formulation, useNA = "ifany"))
-print(sdud %>% group_by(formulation) %>% summarise(rx = sum(prescriptions, na.rm = TRUE), rows = n()))
+print(table(sdud$formulation, sdud$formulation_rule, useNA = "ifany"))
+print(sdud %>% group_by(formulation, formulation_rule) %>% summarise(rx = sum(prescriptions, na.rm = TRUE), rows = n(), .groups = "drop"))
 print(sdud %>% filter(formulation == "unknown") %>% count(product_name, sort = TRUE))
 
 # State-quarter totals of OUD buprenorphine; suppressed cells counted as 0

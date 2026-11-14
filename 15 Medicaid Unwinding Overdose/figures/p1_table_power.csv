@@ -1,0 +1,4 @@
+scenario,plausible_pct,mde_pct,mde_to_plausible
+"overdose excess, point estimate",0.07157971717754372,5.229126623371849,73.05318922121073
+"all-cause excess, point estimate",0.11631704041350854,5.229126623371849,44.9558087515143
+"all-cause excess, first-stage CI bound",0.3853361444319724,5.229126623371849,13.570298812949805
