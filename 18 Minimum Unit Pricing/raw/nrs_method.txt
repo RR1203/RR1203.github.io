@@ -1,0 +1,266 @@
+Alcohol-specific deaths:
+          Methodology
+
+             Published on 23 September 2025
+Contents
+What are alcohol-specific deaths?                                                         2
+Definition of alcohol-specific deaths                                                     3
+Which causes of death which are not covered by the definition?                            4
+Introduction of the alcohol-specific deaths definition                                    5
+Old definition: alcohol-related deaths                                                    6
+
+
+
+What are alcohol-specific deaths?
+The number of deaths that may be due to alcohol can be calculated in various ways.
+Definitions may be narrow and count only those deaths which are wholly specific to
+alcohol (e.g. from alcoholic liver disease). Whereas a wider definition may include
+deaths which may be only partially attributable to alcohol (e.g. from certain types of
+cancer).
+
+Alcohol-specific deaths is the definition used in these Accredited Official Statistics.
+These are the number of deaths from causes which are known to be direct
+consequences of alcohol consumption, meaning they are wholly attributable to
+alcohol use.
+
+The figures for alcohol deaths are produced based on the underlying cause of death.
+The underlying cause is the disease or injury which initiated the chain of morbid
+events leading directly to death. More information of the basis of the cause of death
+can be found on the NRS website.
+Definition of alcohol-specific deaths
+The underlying cause of death is one of the following codes from the International
+Statistical Classification of Diseases and Related Health Problems, Tenth Revision
+(ICD-10), which has been used by NRS since the start of 2000.
+
+Causes of death wholly specific to alcohol consumption, 2000 onwards
+
+ICD-10 Code         Description
+
+E24.4               Alcohol-induced pseudo-Cushing’s syndrome
+
+F10                 Mental and behavioural disorders due to use of alcohol
+
+G31.2               Degeneration of nervous system due to alcohol
+
+G62.1               Alcoholic polyneuropathy
+
+G72.1               Alcoholic myopathy
+
+I42.6               Alcoholic cardiomyopathy
+
+K29.2               Alcoholic gastritis
+
+K70                 Alcoholic liver disease
+
+K85.2               Alcohol-induced acute pancreatitis
+
+K86.0               Alcohol induced chronic pancreatitis
+
+Q86.0               Fetal induced alcohol syndrome (dysmorphic)
+
+R78.0               Excess alcohol blood levels
+
+X45                 Accidental poisoning by and exposure to alcohol
+
+X65                 Intentional self-poisoning by and exposure to alcohol
+
+Y15                 Poisoning by and exposure to alcohol, undetermined intent
+
+
+
+Causes of death wholly specific to alcohol consumption, 1979 to 1999
+
+The underlying cause of death is one of the following codes from the International
+Statistical Classification of Diseases and Related Health Problems, Ninth Revision
+(ICD-9), which NRS used from 1979 to 1999.
+
+ICD-9 Code          Description
+
+291                 Alcoholic psychoses
+
+303                 Alcohol dependence syndrome
+305.0                 Nondependent abuse of alcohol
+
+357.5                 Alcoholic polyneuropathy
+
+425.5                 Alcoholic cardiomyopathy
+
+535.3                 Alcoholic gastritis
+
+571.0                 Alcoholic fatty liver
+
+571.1                 Acute alcoholic hepatitis
+
+571.2                 Alcoholic cirrhosis of liver
+
+571.3                 Alcoholic liver damage, unspecified
+
+790.3                 Excessive blood level of alcohol
+
+E860                  Accidental poisoning by alcohol
+
+
+
+Which causes of death which are not covered by the
+definition?
+NRS figures for alcohol deaths do not include all deaths which may be caused by
+alcohol. For example, they do not include deaths:
+
+   •    as a result of road accidents, falls, fires, suicide or violence involving people
+        who had been drinking; or
+   •    from some medical conditions which are considered partly attributable to
+        alcohol, such as certain forms of cancer.
+
+The reasons for this include the need to be able to provide reasonably consistent
+trends over time and for different parts of the UK. The definition only includes causes
+of death which are regarded as being most directly due to alcohol consumption and
+for which figures can be obtained from the statistics of registered deaths, due to lack
+of consistent statistical information about (e.g.) accidental deaths, suicides and
+homicides which are directly due to the consumption of alcohol.
+
+Including appropriate proportions of deaths from causes such as road accidents and
+certain forms of cancer would produce considerably higher figures for alcohol-related
+deaths. Further information about this is available from (e.g.) the Information
+Services Division (ISD) Scotland paper 'Alcohol attributable mortality and morbidity:
+alcohol population attributable fractions for Scotland', which was published in June
+2009, and the Scottish Public Health Observatory (ScotPHO) report ‘Hospital
+admissions, deaths and overall burden of disease attributable to alcohol
+consumption in Scotland’, which was published in February 2018.
+Introduction of the alcohol-specific deaths definition
+Figures based on the alcohol-specific death definition were first published in 2017.
+This definition was introduced following a consultation organised by the Office for
+National Statistics (ONS), more information about which is given below.
+
+In Spring 2017, the ONS initiated discussions with NRS and other government
+bodies regarding the need to review the Accredited Official Statistics definition of
+alcohol-related deaths. This led to ONS consulting a range of interested parties on
+the definition of alcohol deaths that should be used in future. The relevant
+documents, which were all prepared by ONS (with input from NRS and others, who
+contributed as appropriate when necessary), are as follows:
+
+• ‘The impact of using the new definition of alcohol-specific deaths’ (published 27
+October 2017) – compared the numbers of deaths counted by the old and the new
+definitions, and the resulting age-standardised death rates, for the UK as a whole
+and for each of its four countries. It also provided several time-series of figures, on
+the basis of the new definition, for 2001 to 2015. Table 1 of this publication compares
+the causes of death which are covered by the two definitions.
+
+• ‘Alcohol-specific deaths in the UK: registered in 2016’ (published 7 November
+2017) – the first edition of ONS’s annual ‘alcohol deaths’ publication to use the new
+definition, it included comparisons of the age-standardised death rates for each sex
+for the four countries of the UK.
+
+
+
+Coding causes of death for 1979 to 1999
+
+When the alcohol-specific definition was introduced, figures were not available for
+1999 or earlier years. This is due to there not being exact equivalents of some of
+these ICD-10 codes in ICD-9. However, on 16 October 2018, following work by NHS
+Health Scotland, NRS extended the series available on this website back to 1979.
+
+In June 2018, NHS Health Scotland published a series of rates going back to 1981,
+which it produced using what it felt was a broadly comparable set of ICD-9 codes, in
+the ‘Monitoring and Evaluating Scotland’s Alcohol Strategy (MESAS) monitoring
+report 2018. NRS subsequently used its data for 1999, which had been ‘bridge
+coded ‘ using both ICD-9 and ICD-10 (see Appendix 2 of the Registrar General’s
+Annual Report for 2000) to assess the compatibility of NHS Health Scotland’s choice
+of ICD-9 codes with the ICD-10 codes used. NRS found that the figure for 1999
+produced using the ICD-10 codes was the larger, but only by 0.9%, so statistics of
+alcohol-specific deaths would have a very small break in series between 1999 and
+2000. NRS therefore used the ICD-9 codes listed below to produce its figures for
+alcohol-specific deaths for 1979 to 1999.
+
+The ICD-9 codes for alcohol-specific deaths that are listed above are the same as
+those that were used by NHS Health Scotland, with one exception: ICD-9 code 760.7
+“Noxious influences transmitted via placenta or breast milk” is omitted, as it would be
+used if other types of substance (such as medicines and drugs) were taken by the
+mother, and there is no evidence that, in most of the cases for which it was used, the
+noxious influence was alcohol.
+
+
+
+Old definition: alcohol-related deaths
+NRS previously published statistics on the old definition, referred to as alcohol-
+related deaths. These were deaths from a selection of causes which are related to
+alcohol consumption. Most of those causes are wholly attributable to alcohol
+consumption, but some are only partially attributable. This differs to the alcohol-
+specific definition which is solely based on wholly attributable causes.
+
+The numbers produced using the old and new definitions show broadly similar
+patterns of change over the period from 2000 to 2016, with the new definition’s
+figures for Scotland tending to be very roughly 10% lower (the difference is between
+about 7% and around 12%, depending upon the year concerned), as can be seen
+from the chart which is available on the archived alcohol deaths page. Pre-2000, the
+two definitions’ figures appear to differ more, but still show broadly similar long-term
+trends.
+
+The alcohol-related deaths definition was introduced in 2006, and figures on this
+basis are available from 1979 to 2019. The new alcohol-specific deaths definition
+was introduced in 2017.
+
+Causes of death related to alcohol consumption, (old definition) 2000 onwards
+
+ICD-10 Code          Description
+
+F10                  Mental and behavioural disorders due to use of alcohol
+
+G31.2                Degeneration of nervous system due to alcohol
+
+G62.1                Alcoholic polyneuropathy
+
+I42.6                Alcoholic cardiomyopathy
+
+K29.2                Alcoholic gastritis
+
+K70                  Alcoholic liver disease
+
+K73                  Chronic hepatitis, not elsewhere classified
+
+K74.0                Hepatic fibrosis
+
+K74.1                Hepatic sclerosis
+
+K74.2                Hepatic fibrosis with hepatitic sclerosis
+
+K74.6                Other and unspecified cirrhosis of liver
+
+K86.0                Alcohol induced chronic pancreatitis
+X45               Accidental poisoning by and exposure to alcohol
+
+X65               Intentional self-poisoning by and exposure to alcohol
+
+Y15               Poisoning by and exposure to alcohol, undetermined intent
+
+
+
+Causes of death related to alcohol consumption, (old definition) 1979-1999
+
+ICD-9 Code        Description
+
+291               Alcoholic psychoses
+
+303               Alcohol dependence syndrome
+
+305.0             Non-dependent abuse of alcohol
+
+425.5             Alcoholic cardiomyopathy
+
+571.0             Alcoholic fatty liver
+
+571.1             Acute alcoholic hepatitis
+
+571.2             Alcoholic cirrhosis of liver
+
+571.3             Alcoholic liver damage, unspecified
+
+571.4             Chronic hepatitis
+
+571.5             Cirrhosis of liver without mention of alcohol
+
+571.8             Other chronic nonalcoholic liver disease
+
+571.9             Unspecified chronic liver disease without mention of alcohol
+
+E860              Accidental poisoning by alcohol
+

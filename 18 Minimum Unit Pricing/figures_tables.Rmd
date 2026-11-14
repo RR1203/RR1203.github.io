@@ -1,0 +1,253 @@
+---
+title: "Minimum unit pricing: figures and tables"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 5)
+```
+
+# 00. SETUP
+
+```{r}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+
+# Statistics
+library(sandwich)
+library(lmtest)
+
+# Tables and figures
+library(patchwork)
+
+# Options
+options(scipen = 999)
+theme_set(theme_classic(base_size = 13) +
+            theme(panel.background = element_rect(fill = "#fcfcfb", colour = NA),
+                  plot.background = element_rect(fill = "#fcfcfb", colour = NA),
+                  legend.position = "top", legend.title = element_blank()))
+col_observed <- "#2a78d6"
+col_counterfactual <- "#eb6834"
+results <- readRDS("results.rds")
+dir.create("figures", showWarnings = FALSE)
+```
+
+# F1. OBSERVED VS COUNTERFACTUAL PER JURISDICTION
+
+```{r}
+################################################################################
+# F1. Observed vs counterfactual
+################################################################################
+
+# Scotland (primary CITS 2012-2024, control England)
+f1_scotland <- results$h0_df_main %>%
+  mutate(counterfactual = England * exp(predict(results$h0_model_main, newdata = mutate(results$h0_df_main, mup = 0)))) %>%
+  select(year, Observed = Scotland, Counterfactual = counterfactual) %>%
+  pivot_longer(-year) %>%
+  mutate(jurisdiction = "Scotland (MUP May 2018) vs England")
+
+# Wales (primary CITS 2012-2024, control England)
+f1_wales <- results$h3_df %>%
+  mutate(counterfactual = England * exp(predict(results$h3_model_main, newdata = mutate(results$h3_df, mup = 0)))) %>%
+  select(year, Observed = Wales, Counterfactual = counterfactual) %>%
+  pivot_longer(-year) %>%
+  mutate(jurisdiction = "Wales (MUP Mar 2020) vs England")
+
+# Ireland (primary CITS 2012-2024, control Northern Ireland)
+f1_ireland <- results$h4_df %>%
+  mutate(counterfactual = `Northern Ireland` * exp(predict(results$h4_model_ni, newdata = mutate(results$h4_df, mup = 0)))) %>%
+  select(year, Observed = Ireland, Counterfactual = counterfactual) %>%
+  pivot_longer(-year) %>%
+  mutate(jurisdiction = "Ireland (MUP Jan 2022) vs Northern Ireland")
+
+f1_df <- bind_rows(f1_scotland, f1_wales, f1_ireland) %>%
+  mutate(jurisdiction = factor(jurisdiction, levels = unique(jurisdiction)),
+         name = factor(name, levels = c("Observed", "Counterfactual")))
+f1_starts <- tibble(jurisdiction = factor(levels(f1_df$jurisdiction), levels = levels(f1_df$jurisdiction)), start = c(2018 + 4 / 12, 2020 + 2 / 12, 2022))
+
+h1_figure_counterfactual <- ggplot(f1_df, aes(year, value, colour = name, linetype = name)) +
+  geom_vline(data = f1_starts, aes(xintercept = start), colour = "grey60", linetype = "dotted") +
+  annotate("rect", xmin = 2019.9, xmax = 2021.9, ymin = -Inf, ymax = Inf, fill = "grey85", alpha = 0.4) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 1.8) +
+  facet_wrap(~ jurisdiction, ncol = 1, scales = "free_y") +
+  scale_colour_manual(values = c(Observed = col_observed, Counterfactual = col_counterfactual)) +
+  scale_linetype_manual(values = c(Observed = "solid", Counterfactual = "dashed")) +
+  labs(x = NULL, y = "Alcohol-specific deaths per 100,000 (ESP2013)",
+       caption = "Counterfactual = control rate x fitted gap without the MUP term (CITS, Newey-West).\nGrey band = 2020-21 (COVID term). Ireland: proxy definition F10+K70+X45+X65+Y15.")
+print(h1_figure_counterfactual)
+
+# Northern Territory (secondary; counts, vs all other states)
+f1_nt <- read_excel("clean_data.xlsx", sheet = "australia") %>%
+  filter(year <= 2024) %>%
+  group_by(year) %>%
+  mutate(others = sum(deaths) - deaths) %>%
+  ungroup() %>%
+  filter(state == "Northern Territory") %>%
+  mutate(Counterfactual = others * exp(coef(results$s3_model_nt)["(Intercept)"])) %>%
+  select(year, Observed = deaths, Counterfactual) %>%
+  pivot_longer(-year)
+h1_figure_nt <- ggplot(f1_nt, aes(year, value, colour = name, linetype = name)) +
+  geom_vline(xintercept = 2018.75, colour = "grey60", linetype = "dotted") +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 1.8) +
+  scale_colour_manual(values = c(Observed = col_observed, Counterfactual = col_counterfactual)) +
+  scale_linetype_manual(values = c(Observed = "solid", Counterfactual = "dashed")) +
+  labs(x = NULL, y = "Alcohol-induced deaths (count)",
+       title = "Northern Territory floor price (Oct 2018) - confounded, secondary",
+       caption = "Counterfactual = other states' deaths x pre-period ratio (2016-17).\nCo-policies: Banned Drinker Register (Sep 2017), PALIs (Oct 2018). Floor price repealed 1 Mar 2025.")
+print(h1_figure_nt)
+```
+
+# F2. FOREST PLOT
+
+```{r}
+################################################################################
+# F2. Forest plot
+################################################################################
+
+f2_df <- tribble(
+  ~label, ~group, ~b, ~lo, ~hi,
+  "Published: Wyper et al. 2023 (2012-2020)", "Scotland 2018", log(1 - 0.134), log(1 - 0.184), log(1 - 0.083),
+  "Scotland, Wyper-matched window 2012-2020", "Scotland 2018",
+    coef(results$h0_model_wyper)["mup"],
+    coefci(results$h0_model_wyper, vcov = results$h0_vcov_wyper, df = df.residual(results$h0_model_wyper))["mup", 1],
+    coefci(results$h0_model_wyper, vcov = results$h0_vcov_wyper, df = df.residual(results$h0_model_wyper))["mup", 2],
+  "Scotland, primary 2012-2024", "Scotland 2018",
+    coef(results$h0_model_main)["mup"],
+    coefci(results$h0_model_main, vcov = results$h0_vcov_main, df = df.residual(results$h0_model_main))["mup", 1],
+    coefci(results$h0_model_main, vcov = results$h0_vcov_main, df = df.residual(results$h0_model_main))["mup", 2],
+  "Scotland, pre-trend-only projection", "Scotland 2018",
+    results$h0_slope_avg$estimate, log(1 + results$h0_slope_avg$lcl_pct / 100), log(1 + results$h0_slope_avg$ucl_pct / 100),
+  "Wales, primary 2012-2024", "Replication",
+    coef(results$h3_model_main)["mup"],
+    coefci(results$h3_model_main, vcov = results$h3_vcov_main, df = df.residual(results$h3_model_main))["mup", 1],
+    coefci(results$h3_model_main, vcov = results$h3_vcov_main, df = df.residual(results$h3_model_main))["mup", 2],
+  "Ireland vs Northern Ireland", "Replication",
+    coef(results$h4_model_ni)["mup"],
+    coefci(results$h4_model_ni, vcov = results$h4_vcov_ni, df = df.residual(results$h4_model_ni))["mup", 1],
+    coefci(results$h4_model_ni, vcov = results$h4_vcov_ni, df = df.residual(results$h4_model_ni))["mup", 2],
+  "Ireland vs England", "Replication",
+    coef(results$h4_model_eng)["mup"],
+    coefci(results$h4_model_eng, vcov = results$h4_vcov_eng, df = df.residual(results$h4_model_eng))["mup", 1],
+    coefci(results$h4_model_eng, vcov = results$h4_vcov_eng, df = df.residual(results$h4_model_eng))["mup", 2],
+  "Pooled random effects (Scotland, Wales, Ireland vs NI)", "Pooled",
+    as.numeric(results$h5_model_pooled$b), results$h5_model_pooled$ci.lb, results$h5_model_pooled$ci.ub,
+  "Northern Territory vs other states (confounded)", "Secondary",
+    coef(results$s3_model_nt)["mup"],
+    coefci(results$s3_model_nt, vcov = results$s3_vcov_nt, df = df.residual(results$s3_model_nt))["mup", 1],
+    coefci(results$s3_model_nt, vcov = results$s3_vcov_nt, df = df.residual(results$s3_model_nt))["mup", 2]
+) %>%
+  mutate(across(c(b, lo, hi), ~ 100 * (exp(.x) - 1)),
+         label = factor(label, levels = rev(label)),
+         group = factor(group, levels = c("Scotland 2018", "Replication", "Pooled", "Secondary")),
+         text = sprintf("%+.1f%% (%+.1f to %+.1f)", b, lo, hi))
+print(f2_df)
+
+h2_figure_forest <- ggplot(f2_df, aes(b, label)) +
+  geom_vline(xintercept = 0, colour = "grey50") +
+  geom_errorbarh(aes(xmin = lo, xmax = hi), height = 0.25, colour = col_observed, linewidth = 0.8) +
+  geom_point(aes(shape = group == "Pooled"), size = 3, colour = col_observed) +
+  geom_text(aes(x = 190, label = text), hjust = 1, size = 3.3, colour = "grey20") +
+  scale_shape_manual(values = c(`FALSE` = 16, `TRUE` = 18), guide = "none") +
+  facet_grid(group ~ ., scales = "free_y", space = "free_y") +
+  coord_cartesian(xlim = c(-65, 190)) +
+  labs(x = "% change in alcohol-specific death rate vs counterfactual (95% CI)", y = NULL,
+       caption = "CITS on log rate ratio, Newey-West SE, t-based CI. Scotland's published estimate shown for reference (not pooled).") +
+  theme(strip.text.y = element_text(angle = 0))
+print(h2_figure_forest)
+```
+
+# F3. SCOTLAND 50P -> 65P DOSE PLOT
+
+```{r}
+################################################################################
+# F3. Dose plot
+################################################################################
+
+f3_df <- results$h6_monthly %>%
+  filter(date >= as.Date("2018-05-01")) %>%
+  mutate(fitted = exp(predict(results$h6_model_monthly, newdata = .)),
+         no_65p = exp(predict(results$h6_model_monthly, newdata = mutate(., step_65p = 0))))
+
+h3_figure_dose <- ggplot(f3_df, aes(date)) +
+  annotate("rect", xmin = as.Date("2020-03-01"), xmax = as.Date("2021-12-31"), ymin = -Inf, ymax = Inf,
+           fill = "grey85", alpha = 0.4) +
+  geom_vline(xintercept = as.Date("2024-10-01"), colour = "grey30", linetype = "dotted") +
+  geom_vline(xintercept = as.Date("2024-01-01"), colour = "grey60", linetype = "dotted") +
+  annotate("text", x = as.Date("2024-10-01"), y = 33, label = "65p (30 Sep 2024)", hjust = -0.05, size = 3.3) +
+  annotate("text", x = as.Date("2024-01-01"), y = 31, label = "placebo Jan 2024", hjust = 1.05, size = 3.3, colour = "grey40") +
+  geom_point(aes(y = rate), colour = "grey55", size = 1.2) +
+  geom_line(aes(y = no_65p, colour = "Projected without 65p step"), linetype = "dashed", linewidth = 0.9) +
+  geom_line(aes(y = fitted, colour = "Fitted (with 65p step)"), linewidth = 0.9) +
+  scale_colour_manual(values = c(`Fitted (with 65p step)` = col_observed, `Projected without 65p step` = col_counterfactual)) +
+  labs(x = NULL, y = "Monthly alcohol-specific ASMR per 100,000",
+       title = "Scotland: alcohol-specific deaths, May 2018 - Dec 2025 (15 months after 65p)",
+       caption = "Uncontrolled ITS (trend + month + COVID). The same model gives -11% at a placebo step in Jan 2024,\nand England fell 8% in 2024: the decline is not attributable to 65p. Grey points = observed (NRS).")
+print(h3_figure_dose)
+```
+
+# F4. DEPRIVATION GRADIENT
+
+```{r}
+################################################################################
+# F4. Deprivation gradient
+################################################################################
+
+h4_figure_deprivation <- ggplot(results$h7_gradient, aes(factor(quintile), effect_pct)) +
+  geom_hline(yintercept = 0, colour = "grey50") +
+  geom_errorbar(aes(ymin = lcl_pct, ymax = ucl_pct), width = 0.15, colour = col_observed, linewidth = 0.8) +
+  geom_point(size = 3, colour = col_observed) +
+  scale_x_discrete(labels = c("1\nmost deprived", "2", "3", "4", "5\nleast deprived")) +
+  labs(x = "Deprivation quintile (Scotland SIMD vs England IMD2019)", y = "% change vs counterfactual (95% CI)",
+       title = "Scotland 2018: effect by deprivation quintile",
+       caption = "CITS 2012-2024 per quintile, control = same England IMD quintile (mean of two deciles).")
+print(h4_figure_deprivation)
+```
+
+# F5. FIRST STAGE
+
+```{r}
+################################################################################
+# F5. First stage
+################################################################################
+
+h5_figure_below50p <- ggplot(results$h1_price %>% mutate(country = recode(country, "Eng&Wales" = "England & Wales")),
+                             aes(year, pct_below_50p, colour = country)) +
+  geom_vline(xintercept = 2018 + 4 / 12, colour = "grey60", linetype = "dotted") +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2) +
+  scale_colour_manual(values = c(Scotland = col_observed, `England & Wales` = col_counterfactual)) +
+  labs(x = NULL, y = "% of off-trade alcohol sold < 50p/unit",
+       caption = "PHS MESAS 2022 price-band tables (excl. discount retailers).")
+
+h5_figure_ireland_sales <- ggplot(read_excel("clean_data.xlsx", sheet = "sales_ireland") %>% filter(year >= 2007),
+                                  aes(year, litres_per_capita_15plus)) +
+  geom_vline(xintercept = 2022, colour = "grey60", linetype = "dotted") +
+  geom_line(linewidth = 0.9, colour = col_observed) +
+  geom_point(size = 2, colour = col_observed) +
+  labs(x = NULL, y = "Litres pure alcohol per person 15+",
+       caption = "Ireland, CSO/HRB ASD01 from Revenue sales.")
+h5_figure_first_stage <- h5_figure_below50p + h5_figure_ireland_sales
+print(h5_figure_first_stage)
+```
+
+# SAVE
+
+```{r, eval = FALSE}
+################################################################################
+# SAVE
+################################################################################
+
+ggsave("figures/fig1_observed_vs_counterfactual.png", h1_figure_counterfactual, width = 8, height = 9, dpi = 200)
+ggsave("figures/fig1b_northern_territory.png", h1_figure_nt, width = 8, height = 4.5, dpi = 200)
+ggsave("figures/fig2_forest.png", h2_figure_forest, width = 10, height = 5.5, dpi = 200)
+ggsave("figures/fig3_scotland_65p_dose.png", h3_figure_dose, width = 9, height = 5, dpi = 200)
+ggsave("figures/fig4_deprivation_gradient.png", h4_figure_deprivation, width = 7, height = 4.5, dpi = 200)
+ggsave("figures/fig5_first_stage.png", h5_figure_first_stage, width = 10, height = 4, dpi = 200)
+```

@@ -1,0 +1,1761 @@
+---
+title: "Minimum unit pricing for alcohol: four jurisdictions and the 65p dose"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# 00. SETUP
+
+```{r}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+library(writexl)
+
+# Statistics
+library(sandwich)
+library(lmtest)
+library(metafor)
+library(quadprog)
+
+# Options
+options(scipen = 999, width = 120)
+set.seed(1234)
+```
+
+# 01. DATA CLEANING
+
+```{r}
+################################################################################
+# 01. DATA CLEANING
+################################################################################
+
+raw_file <- "03_mup_raw.xlsx"
+
+# ESP2013 weights (validated against CSO MORT02, see DECISIONS.md)
+esp_2013 <- tibble(
+  age_group = c("Under 1 year", "1 - 4 years", "5 - 9 years", "10 - 14 years",
+                "15 - 19 years", "20 - 24 years", "25 - 29 years", "30 - 34 years",
+                "35 - 39 years", "40 - 44 years", "45 - 49 years", "50 - 54 years",
+                "55 - 59 years", "60 - 64 years", "65 - 69 years", "70 - 74 years",
+                "75 - 79 years", "80 - 84 years", "85 years and over"),
+  esp_weight = c(1000, 4000, 5500, 5500, 5500, 6000, 6000, 6500, 7000, 7000,
+                 7000, 7000, 6500, 6000, 5500, 5000, 4000, 2500, 2500)
+)
+print(sum(esp_2013$esp_weight))
+
+# ESP2013 collapsed to NRS broad cancer age bands
+esp_2013_broad <- tibble(
+  age_group = c("Under 25", "25 to 34", "35 to 44", "45 to 54", "55 to 64",
+                "65 to 74", "75 to 84", "85 to 89", "90 and over"),
+  esp_weight = c(27500, 12500, 14000, 14000, 12500, 10500, 6500, 1500, 1000)
+)
+print(sum(esp_2013_broad$esp_weight))
+
+# UK nations, alcohol-specific ASMR (ONS 2024 release)
+ons_nation <- read_excel(raw_file, sheet = "ons_nation") %>%
+  mutate(jurisdiction = area, outcome = "alcohol_specific", source = "ONS") %>%
+  select(jurisdiction, year, sex, outcome, deaths, rate = asmr, source)
+print(count(ons_nation, jurisdiction))
+
+# English regions, alcohol-specific ASMR
+ons_region <- read_excel(raw_file, sheet = "ons_region") %>%
+  mutate(jurisdiction = paste0("Eng: ", area), outcome = "alcohol_specific", source = "ONS") %>%
+  select(jurisdiction, year, sex, outcome, deaths, rate = asmr, source)
+print(count(ons_region, jurisdiction))
+
+# North East + North West combined (ratio of sums; standardised population proxy = deaths / ASMR)
+ons_ne_nw <- ons_region %>%
+  filter(jurisdiction %in% c("Eng: North East", "Eng: North West")) %>%
+  mutate(std_pop = deaths / rate) %>%
+  group_by(year, sex) %>%
+  summarise(deaths = sum(deaths), rate = sum(deaths) / sum(std_pop), .groups = "drop") %>%
+  mutate(jurisdiction = "Eng: NE+NW", outcome = "alcohol_specific", source = "ONS (derived)")
+print(head(ons_ne_nw))
+
+# Scotland 2025 from NRS (same ONS/NRS definition)
+nrs_annual <- read_excel(raw_file, sheet = "nrs_annual") %>%
+  filter(year == 2025) %>%
+  mutate(jurisdiction = "Scotland", outcome = "alcohol_specific", source = "NRS 2025",
+         rate = as.numeric(asmr)) %>%
+  select(jurisdiction, year, sex, outcome, deaths, rate, source)
+print(nrs_annual)
+
+# Ireland deaths by 3-character ICD-10 and age (CSO VSA35 2007-2018, VSA29 2019-2024)
+cso_deaths <- bind_rows(
+  read_excel(raw_file, sheet = "cso_vsa35"),
+  read_excel(raw_file, sheet = "cso_vsa29")
+) %>%
+  mutate(deaths = replace_na(deaths, 0)) %>%
+  filter(age_group != "All ages")
+print(count(cso_deaths, source_table, year) %>% head(20))
+
+# Ireland population (CSO PEA01, thousands -> persons)
+cso_pop <- read_excel(raw_file, sheet = "cso_population") %>%
+  mutate(population = population * 1000)
+
+# Ireland outcome groups (ICD-10, 3-character)
+ie_alcohol <- cso_deaths %>%
+  filter(icd10 %in% c("F10", "K70", "X45", "X65", "Y15")) %>%
+  mutate(outcome = "alcohol_specific")
+ie_k70 <- cso_deaths %>%
+  filter(icd10 == "K70") %>%
+  mutate(outcome = "k70")
+ie_cancer_nonalc <- cso_deaths %>%
+  filter(str_detect(icd10, "^C\\d\\d$"),
+         !icd10 %in% c(sprintf("C%02d", 0:15), sprintf("C%02d", 18:22), "C32", "C50")) %>%
+  mutate(outcome = "cancer_non_alcohol")
+ie_cancer_all <- cso_deaths %>%
+  filter(icd10 == "80005") %>%
+  mutate(outcome = "cancer_all")
+ie_oesophagus <- cso_deaths %>%
+  filter(icd10 == "C15") %>%
+  mutate(outcome = "oesophageal_cancer")
+
+# Ireland ASMR (ESP2013) by sex
+ireland <- bind_rows(ie_alcohol, ie_k70, ie_cancer_nonalc, ie_cancer_all, ie_oesophagus) %>%
+  group_by(outcome, year, sex, age_group) %>%
+  summarise(deaths = sum(deaths), .groups = "drop") %>%
+  inner_join(cso_pop, by = c("year", "sex", "age_group")) %>%
+  inner_join(esp_2013, by = "age_group") %>%
+  group_by(outcome, year, sex) %>%
+  summarise(rate = sum(deaths / population * 1e5 * esp_weight) / sum(esp_weight),
+            deaths = sum(deaths), .groups = "drop") %>%
+  mutate(jurisdiction = "Ireland", source = "CSO (computed)",
+         sex = recode(sex, "Both sexes" = "Persons", "Male" = "Males", "Female" = "Females"))
+print(filter(ireland, outcome == "alcohol_specific", sex == "Persons"), n = 30)
+
+# Validation: computed Irish cancer ASMR vs CSO published MORT02
+ie_check <- read_excel(raw_file, sheet = "cso_mort02") %>%
+  filter(cause == "Malignant neoplasms", statistic == "Age-standardised mortality rate") %>%
+  mutate(sex = recode(sex, "Both sexes" = "Persons", "Male" = "Males", "Female" = "Females")) %>%
+  inner_join(filter(ireland, outcome == "cancer_all"), by = c("year", "sex")) %>%
+  mutate(ratio = rate / value)
+print(summary(ie_check$ratio))
+
+# England cancer and oesophageal cancer DSR (Fingertips 93959, 94004)
+england_cancer <- bind_rows(
+  read_excel(raw_file, sheet = "ft_cancer") %>% mutate(outcome = "cancer_all"),
+  read_excel(raw_file, sheet = "ft_oesophageal") %>% mutate(outcome = "oesophageal_cancer")
+) %>%
+  filter(is.na(`Category Type`), str_detect(`Time period`, "^\\d{4}$")) %>%
+  mutate(jurisdiction = "England", year = as.numeric(`Time period`),
+         sex = recode(Sex, "Male" = "Males", "Female" = "Females"),
+         source = "Fingertips") %>%
+  select(jurisdiction, year, sex, outcome, deaths = Count, rate = Value, source)
+print(count(england_cancer, outcome, sex))
+
+# Scotland cancer ASMR from NRS broad age-specific rates (ESP2013 collapsed), by sex
+scotland_cancer <- read_excel(raw_file, sheet = "nrs_cancer_age") %>%
+  inner_join(esp_2013_broad, by = "age_group") %>%
+  group_by(icd10, year, sex) %>%
+  summarise(rate = sum(rate * esp_weight) / sum(esp_weight), .groups = "drop") %>%
+  mutate(jurisdiction = "Scotland", deaths = NA_real_, source = "NRS (computed)",
+         outcome = recode(icd10, "C00-C97" = "cancer_all", "C15" = "oesophageal_cancer")) %>%
+  select(-icd10)
+print(filter(scotland_cancer, outcome == "cancer_all", year >= 2015))
+
+# Persons for cancer = mean of male and female ASMR (same rule for both nations)
+cancer_persons <- bind_rows(
+  scotland_cancer,
+  filter(england_cancer, sex != "Persons")
+) %>%
+  group_by(jurisdiction, year, outcome) %>%
+  summarise(rate = mean(rate), .groups = "drop") %>%
+  mutate(sex = "Persons (mean of sexes)", deaths = NA_real_, source = "derived")
+
+# Harmonised annual panel
+panel <- bind_rows(ons_nation, ons_region, ons_ne_nw, nrs_annual, ireland,
+                   england_cancer, scotland_cancer, cancer_persons) %>%
+  filter(!is.na(rate), rate > 0) %>%
+  arrange(jurisdiction, outcome, sex, year)
+print(count(panel, jurisdiction, outcome), n = 50)
+
+# Scotland monthly ASMR (NRS Table 7)
+scotland_monthly <- read_excel(raw_file, sheet = "nrs_monthly") %>%
+  filter(sex == "Persons") %>%
+  mutate(date = as.Date(paste(year, month, "01"), format = "%Y %B %d"),
+         rate = as.numeric(asmr)) %>%
+  select(date, year, month, deaths, rate)
+print(range(scotland_monthly$date))
+
+# Deprivation: Scotland SIMD quintiles (NRS) and England IMD deciles -> quintiles (Fingertips)
+scotland_simd <- read_excel(raw_file, sheet = "nrs_simd") %>%
+  filter(sex == "Persons") %>%
+  mutate(nation = "Scotland", rate = as.numeric(asmr)) %>%
+  select(nation, year, quintile, rate, deaths)
+england_imd <- read_excel(raw_file, sheet = "ft_mortality_imd") %>%
+  filter(str_detect(`Category Type`, "4/23"), Sex == "Persons") %>%
+  mutate(year = as.numeric(`Time period`),
+         quintile = case_when(
+           Category %in% c("Most deprived decile (IMD2019)", "Second most deprived decile (IMD2019)") ~ 1,
+           Category %in% c("Third more deprived decile (IMD2019)", "Fourth more deprived decile (IMD2019)") ~ 2,
+           Category %in% c("Fifth more deprived decile (IMD2019)", "Fifth less deprived decile (IMD2019)") ~ 3,
+           Category %in% c("Fourth less deprived decile (IMD2019)", "Third less deprived decile (IMD2019)") ~ 4,
+           Category %in% c("Second least deprived decile (IMD2019)", "Least deprived decile (IMD2019)") ~ 5,
+           TRUE ~ NA_real_)) %>%
+  group_by(year, quintile) %>%
+  summarise(rate = mean(Value), deaths = sum(Count), .groups = "drop") %>%
+  mutate(nation = "England")
+deprivation <- bind_rows(scotland_simd, england_imd)
+print(count(deprivation, nation, quintile))
+
+# Admissions: Scotland ARHS (SMR01 EASR stays), England Fingertips 92906, Ireland HIPE (crude)
+admissions_scotland <- read_excel(raw_file, sheet = "phs_arhs") %>%
+  filter(SMRType == "SMR01") %>%
+  mutate(year = as.numeric(str_sub(FinancialYear, 1, 4)), jurisdiction = "Scotland") %>%
+  select(jurisdiction, year, rate = EASRStays, count = NumberOfStays)
+admissions_england <- read_excel(raw_file, sheet = "ft_admissions") %>%
+  filter(`Area Name` == "England", Sex == "Persons", is.na(`Category Type`)) %>%
+  mutate(year = as.numeric(str_sub(`Time period`, 1, 4)), jurisdiction = "England") %>%
+  select(jurisdiction, year, rate = Value, count = Count)
+admissions_ireland <- read_excel(raw_file, sheet = "cso_asd09_hipe") %>%
+  filter(str_detect(statistic, "^Number of discharges"), group == "Both sexes") %>%
+  inner_join(filter(cso_pop, sex == "Both sexes", age_group == "All ages") %>% select(year, population),
+             by = "year") %>%
+  mutate(jurisdiction = "Ireland", rate = value / population * 1e5) %>%
+  select(jurisdiction, year, rate, count = value)
+admissions <- bind_rows(admissions_scotland, admissions_england, admissions_ireland)
+print(count(admissions, jurisdiction))
+
+# First stage: sales per adult (MESAS 2022), off-trade price bands, Irish per-capita (ASD01)
+sales_uk <- read_excel(raw_file, sheet = "mesas_sales")
+price_bands <- read_excel(raw_file, sheet = "mesas_price_bands") %>%
+  mutate(lower_ppu = as.numeric(str_extract(price_band_ppu, "\\d+(\\.\\d+)?")),
+         lower_ppu = if_else(str_detect(price_band_ppu, "^<"), 0, lower_ppu))
+sales_ireland <- read_excel(raw_file, sheet = "cso_asd01_percapita") %>%
+  select(year, litres_per_capita_15plus = value)
+phs_2026 <- read_excel(raw_file, sheet = "phs2026_report_values")
+print(sales_uk %>% filter(year >= 2014))
+
+# Australia: alcohol-induced deaths by state, year of occurrence (persons)
+australia <- read_excel(raw_file, sheet = "abs_state_alcohol") %>%
+  filter(sex == "Persons", state != "Australia (f)")
+print(count(australia, state))
+
+# Write clean workbook (one sheet per source + harmonised panel)
+write_xlsx(
+  list(panel = panel,
+       scotland_monthly = scotland_monthly,
+       deprivation = deprivation,
+       admissions = admissions,
+       sales_uk = sales_uk,
+       price_bands = price_bands,
+       sales_ireland = sales_ireland,
+       phs_2026_report = phs_2026,
+       australia = australia,
+       ireland_validation = ie_check),
+  "clean_data.xlsx"
+)
+```
+
+# H0. POSITIVE CONTROL: SCOTLAND 2018 VS ENGLAND
+
+## H0.1 Data preparation
+
+```{r}
+################################################################################
+# H0.1 Data preparation
+################################################################################
+
+h0_df <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(outcome == "alcohol_specific", sex == "Persons",
+         jurisdiction %in% c("Scotland", "England"), year <= 2024) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Scotland) - log(England),
+         year_c = year - 2018,
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+h0_df_wyper <- h0_df %>% filter(year >= 2012, year <= 2020)
+h0_df_main <- h0_df %>% filter(year >= 2012)
+h0_df_2007 <- h0_df %>% filter(year >= 2007)
+
+print(nrow(h0_df_wyper))
+print(nrow(h0_df_main))
+print(h0_df_main)
+```
+
+## H0.2 Analysis
+
+```{r}
+################################################################################
+# H0.2 Analysis
+################################################################################
+
+# (a) Wyper-matched window 2012-2020, no COVID term
+h0_model_wyper <- lm(
+  log_gap ~ year_c + mup,
+  data = h0_df_wyper
+)
+h0_vcov_wyper <- NeweyWest(h0_model_wyper, lag = 1, prewhite = FALSE)
+print(summary(h0_model_wyper))
+print(coeftest(h0_model_wyper, vcov = h0_vcov_wyper)["mup", ])
+print(coefci(h0_model_wyper, vcov = h0_vcov_wyper, df = df.residual(h0_model_wyper))["mup", ])
+print(100 * (exp(coef(h0_model_wyper)["mup"]) - 1))
+print(100 * (exp(coefci(h0_model_wyper, vcov = h0_vcov_wyper, df = df.residual(h0_model_wyper))["mup", ]) - 1))
+
+# (b) Primary specification 2012-2024 with COVID term (start moved from 2007, see DECISIONS.md)
+h0_model_main <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = h0_df_main
+)
+h0_vcov_main <- NeweyWest(h0_model_main, lag = 1, prewhite = FALSE)
+print(summary(h0_model_main))
+print(coeftest(h0_model_main, vcov = h0_vcov_main)["mup", ])
+print(coefci(h0_model_main, vcov = h0_vcov_main, df = df.residual(h0_model_main))["mup", ])
+print(100 * (exp(coef(h0_model_main)["mup"]) - 1))
+print(100 * (exp(coefci(h0_model_main, vcov = h0_vcov_main, df = df.residual(h0_model_main))["mup", ]) - 1))
+
+# Gate: point estimate inside published 95% CI (-18.4 to -8.3)
+h0_gate <- tibble(
+  spec = c("Wyper window 2012-2020", "Primary 2012-2024"),
+  estimate_pct = c(100 * (exp(coef(h0_model_wyper)["mup"]) - 1),
+                   100 * (exp(coef(h0_model_main)["mup"]) - 1))
+) %>%
+  mutate(inside_published_ci = estimate_pct >= -18.4 & estimate_pct <= -8.3)
+print(h0_gate)
+```
+
+## H0.3 Robustness
+
+```{r}
+################################################################################
+# H0.3 Robustness
+################################################################################
+
+h0_panel <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(outcome == "alcohol_specific", year >= 2012, year <= 2024)
+
+# Original pre-specified window 2007-2024 (failed placebo; kept for transparency)
+h0_model_2007 <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = h0_df_2007
+)
+h0_vcov_2007 <- NeweyWest(h0_model_2007, lag = 1, prewhite = FALSE)
+print(summary(h0_model_2007))
+print(coeftest(h0_model_2007, vcov = h0_vcov_2007)["mup", ])
+print(coefci(h0_model_2007, vcov = h0_vcov_2007, df = df.residual(h0_model_2007))["mup", ])
+
+# Placebo 2016 on the 2007 window (diagnostic that motivated the 2012 start)
+h0_model_placebo_2007 <- lm(
+  log_gap ~ year_c + mup_placebo,
+  data = h0_df_2007 %>% filter(year <= 2017) %>% mutate(mup_placebo = if_else(year >= 2016, 1, 0))
+)
+h0_vcov_placebo_2007 <- NeweyWest(h0_model_placebo_2007, lag = 1, prewhite = FALSE)
+print(summary(h0_model_placebo_2007))
+print(coeftest(h0_model_placebo_2007, vcov = h0_vcov_placebo_2007)["mup_placebo", ])
+
+# Trend from pre-period only (slope-change term); average effect over full post years 2019-2024
+h0_df_slope <- h0_df_main %>%
+  mutate(post_slope = if_else(year >= 2018, year - 2018, 0))
+h0_model_slope <- lm(
+  log_gap ~ year_c + mup + post_slope + covid,
+  data = h0_df_slope
+)
+h0_vcov_slope <- NeweyWest(h0_model_slope, lag = 1, prewhite = FALSE)
+print(summary(h0_model_slope))
+h0_L_slope <- c(0, 0, 1, mean(2019:2024 - 2018), 0)
+h0_slope_avg <- tibble(
+  estimate = sum(h0_L_slope * coef(h0_model_slope)),
+  se = sqrt(as.numeric(t(h0_L_slope) %*% h0_vcov_slope %*% h0_L_slope))
+) %>%
+  mutate(effect_pct = 100 * (exp(estimate) - 1),
+         lcl_pct = 100 * (exp(estimate - qt(0.975, df.residual(h0_model_slope)) * se) - 1),
+         ucl_pct = 100 * (exp(estimate + qt(0.975, df.residual(h0_model_slope)) * se) - 1))
+print(h0_slope_avg)
+
+# Exclude 2020-2021
+h0_model_nocovid <- lm(
+  log_gap ~ year_c + mup,
+  data = filter(h0_df_main, !year %in% 2020:2021)
+)
+h0_vcov_nocovid <- NeweyWest(h0_model_nocovid, lag = 1, prewhite = FALSE)
+print(summary(h0_model_nocovid))
+print(coeftest(h0_model_nocovid, vcov = h0_vcov_nocovid)["mup", ])
+print(coefci(h0_model_nocovid, vcov = h0_vcov_nocovid, df = df.residual(h0_model_nocovid))["mup", ])
+
+# Placebo date 2016 (pre-period only, 2012-2017)
+h0_df_placebo <- h0_df_main %>%
+  filter(year <= 2017) %>%
+  mutate(mup_placebo = if_else(year >= 2016, 1, 0))
+h0_model_placebo <- lm(
+  log_gap ~ year_c + mup_placebo,
+  data = h0_df_placebo
+)
+h0_vcov_placebo <- NeweyWest(h0_model_placebo, lag = 1, prewhite = FALSE)
+print(summary(h0_model_placebo))
+print(coeftest(h0_model_placebo, vcov = h0_vcov_placebo)["mup_placebo", ])
+print(coefci(h0_model_placebo, vcov = h0_vcov_placebo, df = df.residual(h0_model_placebo))["mup_placebo", ])
+
+# Alternative control: North East + North West England
+h0_df_nenw <- h0_panel %>%
+  filter(sex == "Persons", jurisdiction %in% c("Scotland", "Eng: NE+NW")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Scotland) - log(`Eng: NE+NW`),
+         year_c = year - 2018,
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+h0_model_nenw <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = h0_df_nenw
+)
+h0_vcov_nenw <- NeweyWest(h0_model_nenw, lag = 1, prewhite = FALSE)
+print(summary(h0_model_nenw))
+print(coeftest(h0_model_nenw, vcov = h0_vcov_nenw)["mup", ])
+print(coefci(h0_model_nenw, vcov = h0_vcov_nenw, df = df.residual(h0_model_nenw))["mup", ])
+
+# Sex-specific
+h0_df_sex <- h0_panel %>%
+  filter(sex %in% c("Males", "Females"), jurisdiction %in% c("Scotland", "England")) %>%
+  select(jurisdiction, year, sex, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Scotland) - log(England),
+         year_c = year - 2018,
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+h0_model_males <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = filter(h0_df_sex, sex == "Males")
+)
+h0_vcov_males <- NeweyWest(h0_model_males, lag = 1, prewhite = FALSE)
+print(summary(h0_model_males))
+print(coeftest(h0_model_males, vcov = h0_vcov_males)["mup", ])
+print(coefci(h0_model_males, vcov = h0_vcov_males, df = df.residual(h0_model_males))["mup", ])
+h0_model_females <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = filter(h0_df_sex, sex == "Females")
+)
+h0_vcov_females <- NeweyWest(h0_model_females, lag = 1, prewhite = FALSE)
+print(summary(h0_model_females))
+print(coeftest(h0_model_females, vcov = h0_vcov_females)["mup", ])
+print(coefci(h0_model_females, vcov = h0_vcov_females, df = df.residual(h0_model_females))["mup", ])
+
+# Placebo-in-space: each English region vs England, same model (Scotland's dates)
+h0_placebo_space <- h0_panel %>%
+  filter(sex == "Persons", str_detect(jurisdiction, "^Eng: "), jurisdiction != "Eng: NE+NW") %>%
+  select(region = jurisdiction, year, rate) %>%
+  inner_join(filter(h0_panel, sex == "Persons", jurisdiction == "England") %>% select(year, england = rate),
+             by = "year") %>%
+  mutate(log_gap = log(rate) - log(england),
+         year_c = year - 2018,
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0)) %>%
+  group_by(region) %>%
+  group_modify(~ tibble(b = coef(lm(log_gap ~ year_c + mup + covid, data = .x))["mup"])) %>%
+  ungroup()
+print(h0_placebo_space)
+print(mean(abs(h0_placebo_space$b) >= abs(coef(h0_model_main)["mup"])))
+
+# Demeaned synthetic control: Scotland, donors = 9 English regions + Northern Ireland, fit 2012-2017
+h0_sc_wide <- h0_panel %>%
+  filter(sex == "Persons",
+         jurisdiction %in% c("Scotland", "Northern Ireland") |
+           (str_detect(jurisdiction, "^Eng: ") & jurisdiction != "Eng: NE+NW")) %>%
+  mutate(log_rate = log(rate)) %>%
+  select(jurisdiction, year, log_rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = log_rate) %>%
+  arrange(year) %>%
+  mutate(across(-year, ~ .x - mean(.x[year <= 2017])))
+h0_sc_donors <- setdiff(names(h0_sc_wide), c("year", "Scotland"))
+h0_sc_pre <- h0_sc_wide %>% filter(year <= 2017)
+h0_sc_X <- as.matrix(h0_sc_pre[, h0_sc_donors])
+h0_sc_y <- h0_sc_pre$Scotland
+h0_sc_fit <- solve.QP(
+  Dmat = t(h0_sc_X) %*% h0_sc_X + diag(1e-8, length(h0_sc_donors)),
+  dvec = as.vector(t(h0_sc_X) %*% h0_sc_y),
+  Amat = cbind(rep(1, length(h0_sc_donors)), diag(length(h0_sc_donors))),
+  bvec = c(1, rep(0, length(h0_sc_donors))),
+  meq = 1
+)
+h0_sc_weights <- tibble(donor = h0_sc_donors, weight = round(h0_sc_fit$solution, 3))
+print(h0_sc_weights)
+h0_sc_series <- h0_sc_wide %>%
+  mutate(synthetic = as.vector(as.matrix(h0_sc_wide[, h0_sc_donors]) %*% h0_sc_fit$solution),
+         gap = Scotland - synthetic)
+print(h0_sc_series %>% select(year, Scotland, synthetic, gap))
+h0_sc_effect <- h0_sc_series %>%
+  summarise(pre_rmspe = sqrt(mean(gap[year <= 2017]^2)),
+            post_gap = mean(gap[year >= 2019]),
+            pre_gap = mean(gap[year <= 2017])) %>%
+  mutate(effect_pct = 100 * (exp(post_gap - pre_gap) - 1))
+print(h0_sc_effect)
+
+# Leave-one-donor-out synthetic control
+h0_sc_loo <- tibble(dropped = h0_sc_donors) %>%
+  group_by(dropped) %>%
+  group_modify(~ {
+    keep <- setdiff(h0_sc_donors, .y$dropped)
+    X <- as.matrix(h0_sc_pre[, keep])
+    w <- solve.QP(t(X) %*% X + diag(1e-8, length(keep)), as.vector(t(X) %*% h0_sc_y),
+                  cbind(rep(1, length(keep)), diag(length(keep))), c(1, rep(0, length(keep))), meq = 1)$solution
+    synth <- as.vector(as.matrix(h0_sc_wide[, keep]) %*% w)
+    gap <- h0_sc_wide$Scotland - synth
+    tibble(effect_pct = 100 * (exp(mean(gap[h0_sc_wide$year >= 2019]) - mean(gap[h0_sc_wide$year <= 2017])) - 1))
+  }) %>%
+  ungroup()
+print(h0_sc_loo)
+print(range(h0_sc_loo$effect_pct))
+
+# Synthetic-control placebo-in-space (each donor treated, others as donors): post/pre RMSPE ratio
+h0_sc_placebo <- tibble(unit = c("Scotland", h0_sc_donors)) %>%
+  group_by(unit) %>%
+  group_modify(~ {
+    pool <- setdiff(h0_sc_donors, .y$unit)
+    X <- as.matrix(h0_sc_pre[, pool])
+    y <- h0_sc_pre[[.y$unit]]
+    w <- solve.QP(t(X) %*% X + diag(1e-8, length(pool)), as.vector(t(X) %*% y),
+                  cbind(rep(1, length(pool)), diag(length(pool))), c(1, rep(0, length(pool))), meq = 1)$solution
+    gap <- h0_sc_wide[[.y$unit]] - as.vector(as.matrix(h0_sc_wide[, pool]) %*% w)
+    tibble(pre_rmspe = sqrt(mean(gap[h0_sc_wide$year <= 2017]^2)),
+           post_rmspe = sqrt(mean(gap[h0_sc_wide$year >= 2019]^2)),
+           effect_pct = 100 * (exp(mean(gap[h0_sc_wide$year >= 2019]) - mean(gap[h0_sc_wide$year <= 2017])) - 1))
+  }) %>%
+  ungroup() %>%
+  mutate(ratio = post_rmspe / pre_rmspe) %>%
+  arrange(desc(ratio))
+print(h0_sc_placebo)
+print(mean(h0_sc_placebo$ratio >= h0_sc_placebo$ratio[h0_sc_placebo$unit == "Scotland"]))
+```
+
+# H1. FIRST STAGE
+
+## H1.1 Data preparation
+
+```{r}
+################################################################################
+# H1.1 Data preparation
+################################################################################
+
+h1_sales_uk <- read_excel("clean_data.xlsx", sheet = "sales_uk") %>%
+  select(country, year, litres = litres_per_adult_16plus) %>%
+  pivot_wider(names_from = country, values_from = litres) %>%
+  mutate(log_gap = log(Scotland) - log(`England & Wales`),
+         year_c = year - 2018,
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0)) %>%
+  filter(year >= 2012)
+
+h1_price <- read_excel("clean_data.xlsx", sheet = "price_bands") %>%
+  group_by(country, year) %>%
+  summarise(pct_below_50p = sum(pct_offtrade_volume[lower_ppu < 50]),
+            pct_below_65p = sum(pct_offtrade_volume[lower_ppu < 65]),
+            .groups = "drop")
+
+h1_sales_ie <- read_excel("clean_data.xlsx", sheet = "sales_ireland") %>%
+  filter(year >= 2012) %>%
+  mutate(year_c = year - 2022,
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+h1_phs_2026 <- read_excel("clean_data.xlsx", sheet = "phs_2026_report")
+
+print(nrow(h1_sales_uk))
+print(nrow(h1_sales_ie))
+```
+
+## H1.2 Analysis
+
+```{r}
+################################################################################
+# H1.2 Analysis
+################################################################################
+
+# Scotland 2018: share of off-trade volume sold below 50p and 65p
+print(h1_price)
+
+# Scotland 2018: per-adult sales vs England & Wales (CITS, 2012-2021)
+h1_model_sales_scot <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = h1_sales_uk
+)
+h1_vcov_sales_scot <- NeweyWest(h1_model_sales_scot, lag = 1, prewhite = FALSE)
+print(summary(h1_model_sales_scot))
+print(coeftest(h1_model_sales_scot, vcov = h1_vcov_sales_scot)["mup", ])
+print(coefci(h1_model_sales_scot, vcov = h1_vcov_sales_scot, df = df.residual(h1_model_sales_scot))["mup", ])
+print(100 * (exp(coef(h1_model_sales_scot)["mup"]) - 1))
+
+# Scotland 2024 (65p): published PHS 2026 values (report pp. 3 and 5)
+print(h1_phs_2026)
+print((78 / 72 - 1) * 100)
+print((69 / 67 - 1) * 100)
+
+# Ireland 2022: per-capita (15+) litres vs own pre-trend (ITS, 2012-2025)
+h1_model_sales_ie <- lm(
+  log(litres_per_capita_15plus) ~ year_c + mup + covid,
+  data = h1_sales_ie
+)
+h1_vcov_sales_ie <- NeweyWest(h1_model_sales_ie, lag = 1, prewhite = FALSE)
+print(summary(h1_model_sales_ie))
+print(coeftest(h1_model_sales_ie, vcov = h1_vcov_sales_ie)["mup", ])
+print(coefci(h1_model_sales_ie, vcov = h1_vcov_sales_ie, df = df.residual(h1_model_sales_ie))["mup", ])
+print(100 * (exp(coef(h1_model_sales_ie)["mup"]) - 1))
+```
+
+## H1.3 Robustness
+
+```{r}
+################################################################################
+# H1.3 Robustness
+################################################################################
+
+# Ireland: exclude 2020-2021
+h1_model_sales_ie_nocovid <- lm(
+  log(litres_per_capita_15plus) ~ year_c + mup,
+  data = filter(h1_sales_ie, !year %in% 2020:2021)
+)
+h1_vcov_sales_ie_nocovid <- NeweyWest(h1_model_sales_ie_nocovid, lag = 1, prewhite = FALSE)
+print(summary(h1_model_sales_ie_nocovid))
+print(coeftest(h1_model_sales_ie_nocovid, vcov = h1_vcov_sales_ie_nocovid)["mup", ])
+print(coefci(h1_model_sales_ie_nocovid, vcov = h1_vcov_sales_ie_nocovid,
+             df = df.residual(h1_model_sales_ie_nocovid))["mup", ])
+
+# Ireland: original pre-specified window from 2007 (includes 2008-2012 recession decline)
+h1_model_sales_ie_2013 <- lm(
+  log(litres_per_capita_15plus) ~ year_c + mup + covid,
+  data = read_excel("clean_data.xlsx", sheet = "sales_ireland") %>%
+    filter(year >= 2007) %>%
+    mutate(year_c = year - 2022, mup = if_else(year >= 2022, 1, 0), covid = if_else(year %in% 2020:2021, 1, 0))
+)
+h1_vcov_sales_ie_2013 <- NeweyWest(h1_model_sales_ie_2013, lag = 1, prewhite = FALSE)
+print(summary(h1_model_sales_ie_2013))
+print(coeftest(h1_model_sales_ie_2013, vcov = h1_vcov_sales_ie_2013)["mup", ])
+print(coefci(h1_model_sales_ie_2013, vcov = h1_vcov_sales_ie_2013, df = df.residual(h1_model_sales_ie_2013))["mup", ])
+```
+
+# H2. POWER (MINIMUM DETECTABLE EFFECT)
+
+## H2.1 Data preparation
+
+```{r}
+################################################################################
+# H2.1 Data preparation
+################################################################################
+
+h2_panel <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(outcome %in% c("alcohol_specific", "k70"), sex == "Persons", year >= 2012, year <= 2024)
+
+h2_df_scotland <- h2_panel %>%
+  filter(outcome == "alcohol_specific", jurisdiction %in% c("Scotland", "England")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Scotland) - log(England), year_c = year - 2018,
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+h2_df_wales <- h2_panel %>%
+  filter(outcome == "alcohol_specific", jurisdiction %in% c("Wales", "England")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Wales) - log(England), year_c = year - 2020,
+         mup = case_when(year < 2020 ~ 0, year == 2020 ~ 10 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+h2_df_ireland <- h2_panel %>%
+  filter((jurisdiction == "Ireland" & outcome == "alcohol_specific") |
+           (jurisdiction == "Northern Ireland" & outcome == "alcohol_specific")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Ireland) - log(`Northern Ireland`), year_c = year - 2022,
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+print(nrow(h2_df_scotland))
+print(nrow(h2_df_wales))
+print(nrow(h2_df_ireland))
+```
+
+## H2.2 Analysis
+
+```{r}
+################################################################################
+# H2.2 Analysis
+################################################################################
+
+# Pre-period residual SD (trend-only model on pre-policy years)
+h2_sigma_scotland <- sigma(lm(log_gap ~ year_c, data = filter(h2_df_scotland, year < 2018)))
+h2_sigma_wales <- sigma(lm(log_gap ~ year_c, data = filter(h2_df_wales, year < 2020)))
+h2_sigma_ireland <- sigma(lm(log_gap ~ year_c, data = filter(h2_df_ireland, year < 2022)))
+
+# Design-based SE of the level-change term in the primary model
+h2_X_scotland <- model.matrix(~ year_c + mup + covid, data = h2_df_scotland)
+h2_X_wales <- model.matrix(~ year_c + mup + covid, data = h2_df_wales)
+h2_X_ireland <- model.matrix(~ year_c + mup + covid, data = h2_df_ireland)
+
+h2_power <- tibble(
+  jurisdiction = c("Scotland", "Wales", "Ireland"),
+  control = c("England", "England", "Northern Ireland"),
+  pre_years = c(sum(h2_df_scotland$year < 2018), sum(h2_df_wales$year < 2020), sum(h2_df_ireland$year < 2022)),
+  post_years = c(sum(h2_df_scotland$mup > 0), sum(h2_df_wales$mup > 0), sum(h2_df_ireland$mup > 0)),
+  sigma_pre = c(h2_sigma_scotland, h2_sigma_wales, h2_sigma_ireland),
+  se_mup = c(h2_sigma_scotland * sqrt(solve(crossprod(h2_X_scotland))["mup", "mup"]),
+             h2_sigma_wales * sqrt(solve(crossprod(h2_X_wales))["mup", "mup"]),
+             h2_sigma_ireland * sqrt(solve(crossprod(h2_X_ireland))["mup", "mup"]))
+) %>%
+  mutate(mde_log = (qnorm(0.975) + qnorm(0.80)) * se_mup,
+         mde_pct = 100 * (1 - exp(-mde_log)),
+         powered_for_13pct = if_else(mde_pct <= 13, "powered", "underpowered"))
+print(h2_power)
+```
+
+# H3. Q1 REPLICATION: WALES 2020 VS ENGLAND
+
+## H3.1 Data preparation
+
+```{r}
+################################################################################
+# H3.1 Data preparation
+################################################################################
+
+h3_panel <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(outcome == "alcohol_specific", year >= 2012, year <= 2024)
+
+h3_df <- h3_panel %>%
+  filter(sex == "Persons", jurisdiction %in% c("Wales", "England")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Wales) - log(England),
+         year_c = year - 2020,
+         mup = case_when(year < 2020 ~ 0, year == 2020 ~ 10 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+print(nrow(h3_df))
+print(h3_df)
+```
+
+## H3.2 Analysis
+
+```{r}
+################################################################################
+# H3.2 Analysis
+################################################################################
+
+h3_model_main <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = h3_df
+)
+h3_vcov_main <- NeweyWest(h3_model_main, lag = 1, prewhite = FALSE)
+print(summary(h3_model_main))
+print(coeftest(h3_model_main, vcov = h3_vcov_main)["mup", ])
+print(coefci(h3_model_main, vcov = h3_vcov_main, df = df.residual(h3_model_main))["mup", ])
+print(100 * (exp(coef(h3_model_main)["mup"]) - 1))
+print(100 * (exp(coefci(h3_model_main, vcov = h3_vcov_main, df = df.residual(h3_model_main))["mup", ]) - 1))
+```
+
+## H3.3 Robustness
+
+```{r}
+################################################################################
+# H3.3 Robustness
+################################################################################
+
+# Exclude 2020-2021 (Wales' main limitation: MUP began 2 weeks before lockdown)
+h3_model_nocovid <- lm(
+  log_gap ~ year_c + mup,
+  data = filter(h3_df, !year %in% 2020:2021)
+)
+h3_vcov_nocovid <- NeweyWest(h3_model_nocovid, lag = 1, prewhite = FALSE)
+print(summary(h3_model_nocovid))
+print(coeftest(h3_model_nocovid, vcov = h3_vcov_nocovid)["mup", ])
+print(coefci(h3_model_nocovid, vcov = h3_vcov_nocovid, df = df.residual(h3_model_nocovid))["mup", ])
+
+# Placebo date 2018 (pre-period only, 2012-2019)
+h3_df_placebo <- h3_df %>%
+  filter(year <= 2019) %>%
+  mutate(mup_placebo = if_else(year >= 2018, 1, 0))
+h3_model_placebo <- lm(
+  log_gap ~ year_c + mup_placebo,
+  data = h3_df_placebo
+)
+h3_vcov_placebo <- NeweyWest(h3_model_placebo, lag = 1, prewhite = FALSE)
+print(summary(h3_model_placebo))
+print(coeftest(h3_model_placebo, vcov = h3_vcov_placebo)["mup_placebo", ])
+print(coefci(h3_model_placebo, vcov = h3_vcov_placebo, df = df.residual(h3_model_placebo))["mup_placebo", ])
+
+# Alternative control: North East + North West England
+h3_df_nenw <- h3_panel %>%
+  filter(sex == "Persons", jurisdiction %in% c("Wales", "Eng: NE+NW")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Wales) - log(`Eng: NE+NW`),
+         year_c = year - 2020,
+         mup = case_when(year < 2020 ~ 0, year == 2020 ~ 10 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+h3_model_nenw <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = h3_df_nenw
+)
+h3_vcov_nenw <- NeweyWest(h3_model_nenw, lag = 1, prewhite = FALSE)
+print(summary(h3_model_nenw))
+print(coeftest(h3_model_nenw, vcov = h3_vcov_nenw)["mup", ])
+print(coefci(h3_model_nenw, vcov = h3_vcov_nenw, df = df.residual(h3_model_nenw))["mup", ])
+
+# Sex-specific
+h3_df_sex <- h3_panel %>%
+  filter(sex %in% c("Males", "Females"), jurisdiction %in% c("Wales", "England")) %>%
+  select(jurisdiction, year, sex, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Wales) - log(England),
+         year_c = year - 2020,
+         mup = case_when(year < 2020 ~ 0, year == 2020 ~ 10 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+h3_model_males <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = filter(h3_df_sex, sex == "Males")
+)
+h3_vcov_males <- NeweyWest(h3_model_males, lag = 1, prewhite = FALSE)
+print(summary(h3_model_males))
+print(coeftest(h3_model_males, vcov = h3_vcov_males)["mup", ])
+print(coefci(h3_model_males, vcov = h3_vcov_males, df = df.residual(h3_model_males))["mup", ])
+h3_model_females <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = filter(h3_df_sex, sex == "Females")
+)
+h3_vcov_females <- NeweyWest(h3_model_females, lag = 1, prewhite = FALSE)
+print(summary(h3_model_females))
+print(coeftest(h3_model_females, vcov = h3_vcov_females)["mup", ])
+print(coefci(h3_model_females, vcov = h3_vcov_females, df = df.residual(h3_model_females))["mup", ])
+
+# Original pre-specified window 2007-2024
+h3_df_2007 <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(outcome == "alcohol_specific", sex == "Persons", jurisdiction %in% c("Wales", "England"),
+         year >= 2007, year <= 2024) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Wales) - log(England),
+         year_c = year - 2020,
+         mup = case_when(year < 2020 ~ 0, year == 2020 ~ 10 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+h3_model_2007 <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = h3_df_2007
+)
+h3_vcov_2007 <- NeweyWest(h3_model_2007, lag = 1, prewhite = FALSE)
+print(summary(h3_model_2007))
+print(coeftest(h3_model_2007, vcov = h3_vcov_2007)["mup", ])
+print(coefci(h3_model_2007, vcov = h3_vcov_2007, df = df.residual(h3_model_2007))["mup", ])
+
+# Trend from pre-period only (slope-change term); average effect over full post years 2021-2024
+h3_df_slope <- h3_df %>%
+  mutate(post_slope = if_else(year >= 2020, year - 2020, 0))
+h3_model_slope <- lm(
+  log_gap ~ year_c + mup + post_slope + covid,
+  data = h3_df_slope
+)
+h3_vcov_slope <- NeweyWest(h3_model_slope, lag = 1, prewhite = FALSE)
+print(summary(h3_model_slope))
+h3_L_slope <- c(0, 0, 1, mean(2021:2024 - 2020), 0)
+h3_slope_avg <- tibble(
+  estimate = sum(h3_L_slope * coef(h3_model_slope)),
+  se = sqrt(as.numeric(t(h3_L_slope) %*% h3_vcov_slope %*% h3_L_slope))
+) %>%
+  mutate(effect_pct = 100 * (exp(estimate) - 1),
+         lcl_pct = 100 * (exp(estimate - qt(0.975, df.residual(h3_model_slope)) * se) - 1),
+         ucl_pct = 100 * (exp(estimate + qt(0.975, df.residual(h3_model_slope)) * se) - 1))
+print(h3_slope_avg)
+
+# Demeaned synthetic control: Wales, donors = 9 English regions + Northern Ireland, fit 2012-2019
+h3_sc_wide <- h3_panel %>%
+  filter(sex == "Persons",
+         jurisdiction %in% c("Wales", "Northern Ireland") |
+           (str_detect(jurisdiction, "^Eng: ") & jurisdiction != "Eng: NE+NW")) %>%
+  mutate(log_rate = log(rate)) %>%
+  select(jurisdiction, year, log_rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = log_rate) %>%
+  arrange(year) %>%
+  mutate(across(-year, ~ .x - mean(.x[year <= 2019])))
+h3_sc_donors <- setdiff(names(h3_sc_wide), c("year", "Wales"))
+h3_sc_pre <- h3_sc_wide %>% filter(year <= 2019)
+h3_sc_X <- as.matrix(h3_sc_pre[, h3_sc_donors])
+h3_sc_fit <- solve.QP(
+  Dmat = t(h3_sc_X) %*% h3_sc_X + diag(1e-8, length(h3_sc_donors)),
+  dvec = as.vector(t(h3_sc_X) %*% h3_sc_pre$Wales),
+  Amat = cbind(rep(1, length(h3_sc_donors)), diag(length(h3_sc_donors))),
+  bvec = c(1, rep(0, length(h3_sc_donors))),
+  meq = 1
+)
+h3_sc_weights <- tibble(donor = h3_sc_donors, weight = round(h3_sc_fit$solution, 3))
+print(h3_sc_weights)
+h3_sc_series <- h3_sc_wide %>%
+  mutate(synthetic = as.vector(as.matrix(h3_sc_wide[, h3_sc_donors]) %*% h3_sc_fit$solution),
+         gap = Wales - synthetic)
+h3_sc_effect <- h3_sc_series %>%
+  summarise(pre_rmspe = sqrt(mean(gap[year <= 2019]^2)),
+            post_gap = mean(gap[year >= 2021]),
+            pre_gap = mean(gap[year <= 2019])) %>%
+  mutate(effect_pct = 100 * (exp(post_gap - pre_gap) - 1))
+print(h3_sc_effect)
+
+# Leave-one-donor-out
+h3_sc_loo <- tibble(dropped = h3_sc_donors) %>%
+  group_by(dropped) %>%
+  group_modify(~ {
+    keep <- setdiff(h3_sc_donors, .y$dropped)
+    X <- as.matrix(h3_sc_pre[, keep])
+    w <- solve.QP(t(X) %*% X + diag(1e-8, length(keep)), as.vector(t(X) %*% h3_sc_pre$Wales),
+                  cbind(rep(1, length(keep)), diag(length(keep))), c(1, rep(0, length(keep))), meq = 1)$solution
+    gap <- h3_sc_wide$Wales - as.vector(as.matrix(h3_sc_wide[, keep]) %*% w)
+    tibble(effect_pct = 100 * (exp(mean(gap[h3_sc_wide$year >= 2021]) - mean(gap[h3_sc_wide$year <= 2019])) - 1))
+  }) %>%
+  ungroup()
+print(h3_sc_loo)
+print(range(h3_sc_loo$effect_pct))
+
+# Synthetic-control placebo-in-space
+h3_sc_placebo <- tibble(unit = c("Wales", h3_sc_donors)) %>%
+  group_by(unit) %>%
+  group_modify(~ {
+    pool <- setdiff(h3_sc_donors, .y$unit)
+    X <- as.matrix(h3_sc_pre[, pool])
+    w <- solve.QP(t(X) %*% X + diag(1e-8, length(pool)), as.vector(t(X) %*% h3_sc_pre[[.y$unit]]),
+                  cbind(rep(1, length(pool)), diag(length(pool))), c(1, rep(0, length(pool))), meq = 1)$solution
+    gap <- h3_sc_wide[[.y$unit]] - as.vector(as.matrix(h3_sc_wide[, pool]) %*% w)
+    tibble(pre_rmspe = sqrt(mean(gap[h3_sc_wide$year <= 2019]^2)),
+           post_rmspe = sqrt(mean(gap[h3_sc_wide$year >= 2021]^2)),
+           effect_pct = 100 * (exp(mean(gap[h3_sc_wide$year >= 2021]) - mean(gap[h3_sc_wide$year <= 2019])) - 1))
+  }) %>%
+  ungroup() %>%
+  mutate(ratio = post_rmspe / pre_rmspe) %>%
+  arrange(desc(ratio))
+print(h3_sc_placebo)
+print(mean(h3_sc_placebo$ratio >= h3_sc_placebo$ratio[h3_sc_placebo$unit == "Wales"]))
+```
+
+# H4. Q1 REPLICATION: IRELAND 2022 VS NORTHERN IRELAND AND ENGLAND
+
+## H4.1 Data preparation
+
+```{r}
+################################################################################
+# H4.1 Data preparation
+################################################################################
+
+h4_panel <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(year >= 2012, year <= 2024)
+
+h4_df <- h4_panel %>%
+  filter(sex == "Persons", outcome == "alcohol_specific",
+         jurisdiction %in% c("Ireland", "Northern Ireland", "England")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap_ni = log(Ireland) - log(`Northern Ireland`),
+         log_gap_eng = log(Ireland) - log(England),
+         year_c = year - 2022,
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+print(nrow(h4_df))
+print(h4_df)
+```
+
+## H4.2 Analysis
+
+```{r}
+################################################################################
+# H4.2 Analysis
+################################################################################
+
+# Control: Northern Ireland (primary)
+h4_model_ni <- lm(
+  log_gap_ni ~ year_c + mup + covid,
+  data = h4_df
+)
+h4_vcov_ni <- NeweyWest(h4_model_ni, lag = 1, prewhite = FALSE)
+print(summary(h4_model_ni))
+print(coeftest(h4_model_ni, vcov = h4_vcov_ni)["mup", ])
+print(coefci(h4_model_ni, vcov = h4_vcov_ni, df = df.residual(h4_model_ni))["mup", ])
+print(100 * (exp(coef(h4_model_ni)["mup"]) - 1))
+print(100 * (exp(coefci(h4_model_ni, vcov = h4_vcov_ni, df = df.residual(h4_model_ni))["mup", ]) - 1))
+
+# Control: England
+h4_model_eng <- lm(
+  log_gap_eng ~ year_c + mup + covid,
+  data = h4_df
+)
+h4_vcov_eng <- NeweyWest(h4_model_eng, lag = 1, prewhite = FALSE)
+print(summary(h4_model_eng))
+print(coeftest(h4_model_eng, vcov = h4_vcov_eng)["mup", ])
+print(coefci(h4_model_eng, vcov = h4_vcov_eng, df = df.residual(h4_model_eng))["mup", ])
+print(100 * (exp(coef(h4_model_eng)["mup"]) - 1))
+print(100 * (exp(coefci(h4_model_eng, vcov = h4_vcov_eng, df = df.residual(h4_model_eng))["mup", ]) - 1))
+```
+
+## H4.3 Robustness
+
+```{r}
+################################################################################
+# H4.3 Robustness
+################################################################################
+
+# K70 alcoholic liver disease only (Ireland K70 vs NI all alcohol-specific; no NI K70 series)
+h4_df_k70 <- h4_panel %>%
+  filter(sex == "Persons",
+         (jurisdiction == "Ireland" & outcome == "k70") |
+           (jurisdiction == "Northern Ireland" & outcome == "alcohol_specific")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Ireland) - log(`Northern Ireland`),
+         year_c = year - 2022,
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+h4_model_k70 <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = h4_df_k70
+)
+h4_vcov_k70 <- NeweyWest(h4_model_k70, lag = 1, prewhite = FALSE)
+print(summary(h4_model_k70))
+print(coeftest(h4_model_k70, vcov = h4_vcov_k70)["mup", ])
+print(coefci(h4_model_k70, vcov = h4_vcov_k70, df = df.residual(h4_model_k70))["mup", ])
+
+# Exclude 2020-2021
+h4_model_nocovid <- lm(
+  log_gap_ni ~ year_c + mup,
+  data = filter(h4_df, !year %in% 2020:2021)
+)
+h4_vcov_nocovid <- NeweyWest(h4_model_nocovid, lag = 1, prewhite = FALSE)
+print(summary(h4_model_nocovid))
+print(coeftest(h4_model_nocovid, vcov = h4_vcov_nocovid)["mup", ])
+print(coefci(h4_model_nocovid, vcov = h4_vcov_nocovid, df = df.residual(h4_model_nocovid))["mup", ])
+
+# Placebo date 2020 (pre-period only, 2012-2021; no COVID term, so placebo absorbs COVID)
+h4_df_placebo <- h4_df %>%
+  filter(year <= 2021) %>%
+  mutate(mup_placebo = if_else(year >= 2020, 1, 0))
+h4_model_placebo <- lm(
+  log_gap_ni ~ year_c + mup_placebo,
+  data = h4_df_placebo
+)
+h4_vcov_placebo <- NeweyWest(h4_model_placebo, lag = 1, prewhite = FALSE)
+print(summary(h4_model_placebo))
+print(coeftest(h4_model_placebo, vcov = h4_vcov_placebo)["mup_placebo", ])
+print(coefci(h4_model_placebo, vcov = h4_vcov_placebo, df = df.residual(h4_model_placebo))["mup_placebo", ])
+
+# Original pre-specified window 2007-2024 (control NI)
+h4_df_2007 <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(outcome == "alcohol_specific", sex == "Persons", jurisdiction %in% c("Ireland", "Northern Ireland"),
+         year >= 2007, year <= 2024) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Ireland) - log(`Northern Ireland`),
+         year_c = year - 2022,
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+h4_model_2007 <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = h4_df_2007
+)
+h4_vcov_2007 <- NeweyWest(h4_model_2007, lag = 1, prewhite = FALSE)
+print(summary(h4_model_2007))
+print(coeftest(h4_model_2007, vcov = h4_vcov_2007)["mup", ])
+print(coefci(h4_model_2007, vcov = h4_vcov_2007, df = df.residual(h4_model_2007))["mup", ])
+
+# Trend from pre-period only (slope-change term); average effect over post years 2022-2024
+h4_df_slope <- h4_df %>%
+  mutate(post_slope = if_else(year >= 2022, year - 2022, 0))
+h4_model_slope <- lm(
+  log_gap_ni ~ year_c + mup + post_slope + covid,
+  data = h4_df_slope
+)
+h4_vcov_slope <- NeweyWest(h4_model_slope, lag = 1, prewhite = FALSE)
+print(summary(h4_model_slope))
+h4_L_slope <- c(0, 0, 1, mean(2022:2024 - 2022), 0)
+h4_slope_avg <- tibble(
+  estimate = sum(h4_L_slope * coef(h4_model_slope)),
+  se = sqrt(as.numeric(t(h4_L_slope) %*% h4_vcov_slope %*% h4_L_slope))
+) %>%
+  mutate(effect_pct = 100 * (exp(estimate) - 1),
+         lcl_pct = 100 * (exp(estimate - qt(0.975, df.residual(h4_model_slope)) * se) - 1),
+         ucl_pct = 100 * (exp(estimate + qt(0.975, df.residual(h4_model_slope)) * se) - 1))
+print(h4_slope_avg)
+
+# Sex-specific (control NI)
+h4_df_sex <- h4_panel %>%
+  filter(sex %in% c("Males", "Females"), outcome == "alcohol_specific",
+         jurisdiction %in% c("Ireland", "Northern Ireland")) %>%
+  select(jurisdiction, year, sex, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Ireland) - log(`Northern Ireland`),
+         year_c = year - 2022,
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+h4_model_males <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = filter(h4_df_sex, sex == "Males")
+)
+h4_vcov_males <- NeweyWest(h4_model_males, lag = 1, prewhite = FALSE)
+print(summary(h4_model_males))
+print(coeftest(h4_model_males, vcov = h4_vcov_males)["mup", ])
+print(coefci(h4_model_males, vcov = h4_vcov_males, df = df.residual(h4_model_males))["mup", ])
+h4_model_females <- lm(
+  log_gap ~ year_c + mup + covid,
+  data = filter(h4_df_sex, sex == "Females")
+)
+h4_vcov_females <- NeweyWest(h4_model_females, lag = 1, prewhite = FALSE)
+print(summary(h4_model_females))
+print(coeftest(h4_model_females, vcov = h4_vcov_females)["mup", ])
+print(coefci(h4_model_females, vcov = h4_vcov_females, df = df.residual(h4_model_females))["mup", ])
+```
+
+# H5. Q1 POOLED: RANDOM-EFFECTS ACROSS SCOTLAND, WALES, IRELAND
+
+## H5.1 Data preparation
+
+```{r}
+################################################################################
+# H5.1 Data preparation
+################################################################################
+
+h5_panel <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(outcome == "alcohol_specific", sex == "Persons", year >= 2012, year <= 2024)
+
+h5_df_scotland <- h5_panel %>%
+  filter(jurisdiction %in% c("Scotland", "England")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Scotland) - log(England), year_c = year - 2018,
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+h5_df_wales <- h5_panel %>%
+  filter(jurisdiction %in% c("Wales", "England")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Wales) - log(England), year_c = year - 2020,
+         mup = case_when(year < 2020 ~ 0, year == 2020 ~ 10 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+h5_df_ireland <- h5_panel %>%
+  filter(jurisdiction %in% c("Ireland", "Northern Ireland")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Ireland) - log(`Northern Ireland`), year_c = year - 2022,
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+print(nrow(h5_df_scotland))
+print(nrow(h5_df_wales))
+print(nrow(h5_df_ireland))
+```
+
+## H5.2 Analysis
+
+```{r}
+################################################################################
+# H5.2 Analysis
+################################################################################
+
+h5_model_scotland <- lm(log_gap ~ year_c + mup + covid, data = h5_df_scotland)
+h5_model_wales <- lm(log_gap ~ year_c + mup + covid, data = h5_df_wales)
+h5_model_ireland <- lm(log_gap ~ year_c + mup + covid, data = h5_df_ireland)
+
+h5_effects <- tibble(
+  jurisdiction = c("Scotland", "Wales", "Ireland"),
+  yi = c(coef(h5_model_scotland)["mup"], coef(h5_model_wales)["mup"], coef(h5_model_ireland)["mup"]),
+  sei = c(sqrt(NeweyWest(h5_model_scotland, lag = 1, prewhite = FALSE)["mup", "mup"]),
+          sqrt(NeweyWest(h5_model_wales, lag = 1, prewhite = FALSE)["mup", "mup"]),
+          sqrt(NeweyWest(h5_model_ireland, lag = 1, prewhite = FALSE)["mup", "mup"]))
+)
+print(h5_effects)
+
+h5_model_pooled <- rma(
+  yi = yi, sei = sei,
+  data = h5_effects,
+  method = "REML"
+)
+print(summary(h5_model_pooled))
+print(100 * (exp(c(h5_model_pooled$b, h5_model_pooled$ci.lb, h5_model_pooled$ci.ub)) - 1))
+```
+
+## H5.3 Robustness
+
+```{r}
+################################################################################
+# H5.3 Robustness
+################################################################################
+
+# Pooled excluding Scotland (replication sites only)
+h5_model_replication <- rma(
+  yi = yi, sei = sei,
+  data = filter(h5_effects, jurisdiction != "Scotland"),
+  method = "REML"
+)
+print(summary(h5_model_replication))
+print(100 * (exp(c(h5_model_replication$b, h5_model_replication$ci.lb, h5_model_replication$ci.ub)) - 1))
+
+# Fixed-effect pooled
+h5_model_fixed <- rma(
+  yi = yi, sei = sei,
+  data = h5_effects,
+  method = "FE"
+)
+print(summary(h5_model_fixed))
+print(100 * (exp(c(h5_model_fixed$b, h5_model_fixed$ci.lb, h5_model_fixed$ci.ub)) - 1))
+```
+
+# H6. Q2 DOSE: SCOTLAND 50P -> 65P (30 SEP 2024)
+
+## H6.1 Data preparation
+
+```{r}
+################################################################################
+# H6.1 Data preparation
+################################################################################
+
+h6_monthly <- read_excel("clean_data.xlsx", sheet = "scotland_monthly") %>%
+  mutate(date = as.Date(date),
+         t = (as.numeric(format(date, "%Y")) - 2018) * 12 + as.numeric(format(date, "%m")),
+         month_of_year = factor(format(date, "%m")),
+         step_50p = if_else(date >= as.Date("2018-05-01"), 1, 0),
+         step_65p = if_else(date >= as.Date("2024-10-01"), 1, 0),
+         covid = if_else(date >= as.Date("2020-03-01") & date <= as.Date("2021-12-01"), 1, 0))
+
+h6_df_50p_era <- h6_monthly %>% filter(date >= as.Date("2018-05-01"))
+h6_df_long <- h6_monthly %>% filter(date >= as.Date("2012-01-01"))
+
+h6_annual <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(outcome == "alcohol_specific", sex == "Persons",
+         jurisdiction %in% c("Scotland", "England"), year >= 2012, year <= 2024) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Scotland) - log(England),
+         year_c = year - 2018,
+         mup_50p = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         mup_65p = case_when(year < 2024 ~ 0, year == 2024 ~ 3 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+print(nrow(h6_df_50p_era))
+print(sum(h6_df_50p_era$step_65p))
+print(nrow(h6_annual))
+```
+
+## H6.2 Analysis
+
+```{r}
+################################################################################
+# H6.2 Analysis
+################################################################################
+
+# Primary: monthly ITS within the 50p era (May 2018 - Dec 2025), step at Oct 2024
+h6_model_monthly <- lm(
+  log(rate) ~ t + month_of_year + covid + step_65p,
+  data = h6_df_50p_era
+)
+h6_vcov_monthly <- NeweyWest(h6_model_monthly, lag = 3, prewhite = FALSE)
+print(summary(h6_model_monthly))
+print(coeftest(h6_model_monthly, vcov = h6_vcov_monthly)["step_65p", ])
+print(coefci(h6_model_monthly, vcov = h6_vcov_monthly, df = df.residual(h6_model_monthly))["step_65p", ])
+print(100 * (exp(coef(h6_model_monthly)["step_65p"]) - 1))
+print(100 * (exp(coefci(h6_model_monthly, vcov = h6_vcov_monthly, df = df.residual(h6_model_monthly))["step_65p", ]) - 1))
+
+# MDE for the 65p step (pre-65p residual SD, design-based SE)
+h6_sigma_pre <- sigma(lm(log(rate) ~ t + month_of_year + covid,
+                         data = filter(h6_df_50p_era, step_65p == 0)))
+h6_X <- model.matrix(~ t + month_of_year + covid + step_65p, data = h6_df_50p_era)
+h6_se_design <- h6_sigma_pre * sqrt(solve(crossprod(h6_X))["step_65p", "step_65p"])
+h6_mde_pct <- 100 * (1 - exp(-(qnorm(0.975) + qnorm(0.80)) * h6_se_design))
+print(h6_mde_pct)
+
+# Controlled annual (vs England, through 2024 = 3 post-65p months only)
+h6_model_annual <- lm(
+  log_gap ~ year_c + mup_50p + mup_65p + covid,
+  data = h6_annual
+)
+h6_vcov_annual <- NeweyWest(h6_model_annual, lag = 1, prewhite = FALSE)
+print(summary(h6_model_annual))
+print(coeftest(h6_model_annual, vcov = h6_vcov_annual)["mup_65p", ])
+print(coefci(h6_model_annual, vcov = h6_vcov_annual, df = df.residual(h6_model_annual))["mup_65p", ])
+```
+
+## H6.3 Robustness
+
+```{r}
+################################################################################
+# H6.3 Robustness
+################################################################################
+
+# Long series 2012-2025 with both steps
+h6_model_long <- lm(
+  log(rate) ~ t + month_of_year + covid + step_50p + step_65p,
+  data = h6_df_long
+)
+h6_vcov_long <- NeweyWest(h6_model_long, lag = 3, prewhite = FALSE)
+print(summary(h6_model_long))
+print(coeftest(h6_model_long, vcov = h6_vcov_long)["step_65p", ])
+print(coefci(h6_model_long, vcov = h6_vcov_long, df = df.residual(h6_model_long))["step_65p", ])
+
+# Exclude COVID months, 50p era only
+h6_model_nocovid <- lm(
+  log(rate) ~ t + month_of_year + step_65p,
+  data = filter(h6_df_50p_era, covid == 0)
+)
+h6_vcov_nocovid <- NeweyWest(h6_model_nocovid, lag = 3, prewhite = FALSE)
+print(summary(h6_model_nocovid))
+print(coeftest(h6_model_nocovid, vcov = h6_vcov_nocovid)["step_65p", ])
+print(coefci(h6_model_nocovid, vcov = h6_vcov_nocovid, df = df.residual(h6_model_nocovid))["step_65p", ])
+
+# Placebo step Oct 2022 (data up to Sep 2024 only)
+h6_df_placebo <- h6_df_50p_era %>%
+  filter(step_65p == 0) %>%
+  mutate(step_placebo = if_else(date >= as.Date("2022-10-01"), 1, 0))
+h6_model_placebo <- lm(
+  log(rate) ~ t + month_of_year + covid + step_placebo,
+  data = h6_df_placebo
+)
+h6_vcov_placebo <- NeweyWest(h6_model_placebo, lag = 3, prewhite = FALSE)
+print(summary(h6_model_placebo))
+print(coeftest(h6_model_placebo, vcov = h6_vcov_placebo)["step_placebo", ])
+print(coefci(h6_model_placebo, vcov = h6_vcov_placebo, df = df.residual(h6_model_placebo))["step_placebo", ])
+```
+
+
+```{r}
+################################################################################
+# H6.3 Robustness (continued): did the 2024 decline start before October 2024?
+################################################################################
+
+# Placebo step Jan 2024 (data up to Sep 2024 only)
+h6_df_placebo_2024 <- h6_df_50p_era %>%
+  filter(step_65p == 0) %>%
+  mutate(step_placebo_2024 = if_else(date >= as.Date("2024-01-01"), 1, 0))
+h6_model_placebo_2024 <- lm(
+  log(rate) ~ t + month_of_year + covid + step_placebo_2024,
+  data = h6_df_placebo_2024
+)
+h6_vcov_placebo_2024 <- NeweyWest(h6_model_placebo_2024, lag = 3, prewhite = FALSE)
+print(summary(h6_model_placebo_2024))
+print(coeftest(h6_model_placebo_2024, vcov = h6_vcov_placebo_2024)["step_placebo_2024", ])
+print(coefci(h6_model_placebo_2024, vcov = h6_vcov_placebo_2024,
+             df = df.residual(h6_model_placebo_2024))["step_placebo_2024", ])
+
+# Year-on-year change in annual ASMR, Scotland and England (England 2025 not yet published)
+h6_yoy <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(outcome == "alcohol_specific", sex == "Persons",
+         jurisdiction %in% c("Scotland", "England"), year >= 2021) %>%
+  arrange(jurisdiction, year) %>%
+  group_by(jurisdiction) %>%
+  mutate(pct_change = 100 * (rate / lag(rate) - 1)) %>%
+  ungroup() %>%
+  select(jurisdiction, year, rate, pct_change, source)
+print(h6_yoy)
+```
+
+# H7. Q3 DEPRIVATION: SCOTLAND SIMD VS ENGLAND IMD QUINTILES
+
+## H7.1 Data preparation
+
+```{r}
+################################################################################
+# H7.1 Data preparation
+################################################################################
+
+h7_df <- read_excel("clean_data.xlsx", sheet = "deprivation") %>%
+  filter(year >= 2012, year <= 2024) %>%
+  select(nation, year, quintile, rate) %>%
+  pivot_wider(names_from = nation, values_from = rate) %>%
+  mutate(log_gap = log(Scotland) - log(England),
+         year_c = year - 2018,
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+print(nrow(h7_df))
+print(table(h7_df$quintile))
+```
+
+## H7.2 Analysis
+
+```{r}
+################################################################################
+# H7.2 Analysis
+################################################################################
+
+# Quintile 1 (most deprived)
+h7_model_q1 <- lm(log_gap ~ year_c + mup + covid, data = filter(h7_df, quintile == 1))
+h7_vcov_q1 <- NeweyWest(h7_model_q1, lag = 1, prewhite = FALSE)
+print(summary(h7_model_q1))
+print(coeftest(h7_model_q1, vcov = h7_vcov_q1)["mup", ])
+print(coefci(h7_model_q1, vcov = h7_vcov_q1, df = df.residual(h7_model_q1))["mup", ])
+
+# Quintile 2
+h7_model_q2 <- lm(log_gap ~ year_c + mup + covid, data = filter(h7_df, quintile == 2))
+h7_vcov_q2 <- NeweyWest(h7_model_q2, lag = 1, prewhite = FALSE)
+print(summary(h7_model_q2))
+print(coeftest(h7_model_q2, vcov = h7_vcov_q2)["mup", ])
+print(coefci(h7_model_q2, vcov = h7_vcov_q2, df = df.residual(h7_model_q2))["mup", ])
+
+# Quintile 3
+h7_model_q3 <- lm(log_gap ~ year_c + mup + covid, data = filter(h7_df, quintile == 3))
+h7_vcov_q3 <- NeweyWest(h7_model_q3, lag = 1, prewhite = FALSE)
+print(summary(h7_model_q3))
+print(coeftest(h7_model_q3, vcov = h7_vcov_q3)["mup", ])
+print(coefci(h7_model_q3, vcov = h7_vcov_q3, df = df.residual(h7_model_q3))["mup", ])
+
+# Quintile 4
+h7_model_q4 <- lm(log_gap ~ year_c + mup + covid, data = filter(h7_df, quintile == 4))
+h7_vcov_q4 <- NeweyWest(h7_model_q4, lag = 1, prewhite = FALSE)
+print(summary(h7_model_q4))
+print(coeftest(h7_model_q4, vcov = h7_vcov_q4)["mup", ])
+print(coefci(h7_model_q4, vcov = h7_vcov_q4, df = df.residual(h7_model_q4))["mup", ])
+
+# Quintile 5 (least deprived)
+h7_model_q5 <- lm(log_gap ~ year_c + mup + covid, data = filter(h7_df, quintile == 5))
+h7_vcov_q5 <- NeweyWest(h7_model_q5, lag = 1, prewhite = FALSE)
+print(summary(h7_model_q5))
+print(coeftest(h7_model_q5, vcov = h7_vcov_q5)["mup", ])
+print(coefci(h7_model_q5, vcov = h7_vcov_q5, df = df.residual(h7_model_q5))["mup", ])
+
+# Gradient: meta-regression of quintile effects on quintile number
+h7_gradient <- tibble(
+  quintile = 1:5,
+  yi = c(coef(h7_model_q1)["mup"], coef(h7_model_q2)["mup"], coef(h7_model_q3)["mup"],
+         coef(h7_model_q4)["mup"], coef(h7_model_q5)["mup"]),
+  sei = c(sqrt(h7_vcov_q1["mup", "mup"]), sqrt(h7_vcov_q2["mup", "mup"]), sqrt(h7_vcov_q3["mup", "mup"]),
+          sqrt(h7_vcov_q4["mup", "mup"]), sqrt(h7_vcov_q5["mup", "mup"]))
+) %>%
+  mutate(effect_pct = 100 * (exp(yi) - 1),
+         lcl_pct = 100 * (exp(yi - 1.96 * sei) - 1),
+         ucl_pct = 100 * (exp(yi + 1.96 * sei) - 1))
+print(h7_gradient)
+h7_model_gradient <- rma(yi = yi, sei = sei, mods = ~ quintile, data = h7_gradient, method = "FE")
+print(summary(h7_model_gradient))
+```
+
+## H7.3 Robustness
+
+```{r}
+################################################################################
+# H7.3 Robustness
+################################################################################
+
+# Q1 and Q5 excluding 2020-2021
+h7_model_q1_nocovid <- lm(log_gap ~ year_c + mup, data = filter(h7_df, quintile == 1, !year %in% 2020:2021))
+h7_vcov_q1_nocovid <- NeweyWest(h7_model_q1_nocovid, lag = 1, prewhite = FALSE)
+print(summary(h7_model_q1_nocovid))
+print(coeftest(h7_model_q1_nocovid, vcov = h7_vcov_q1_nocovid)["mup", ])
+print(coefci(h7_model_q1_nocovid, vcov = h7_vcov_q1_nocovid, df = df.residual(h7_model_q1_nocovid))["mup", ])
+h7_model_q5_nocovid <- lm(log_gap ~ year_c + mup, data = filter(h7_df, quintile == 5, !year %in% 2020:2021))
+h7_vcov_q5_nocovid <- NeweyWest(h7_model_q5_nocovid, lag = 1, prewhite = FALSE)
+print(summary(h7_model_q5_nocovid))
+print(coeftest(h7_model_q5_nocovid, vcov = h7_vcov_q5_nocovid)["mup", ])
+print(coefci(h7_model_q5_nocovid, vcov = h7_vcov_q5_nocovid, df = df.residual(h7_model_q5_nocovid))["mup", ])
+
+# Wales WIMD: ONS deprivation series starts 2018 (only 2 pre-years) -> not estimable, descriptive only
+h7_wales_wimd <- read_excel("03_mup_raw.xlsx", sheet = "ons_deprivation") %>%
+  filter(nation == "Wales")
+print(h7_wales_wimd %>% group_by(quintile) %>% summarise(first_year = min(year), last_year = max(year)))
+```
+
+# S1. SECONDARY: NEGATIVE-CONTROL AND PARTLY ATTRIBUTABLE OUTCOMES
+
+## S1.1 Data preparation
+
+```{r}
+################################################################################
+# S1.1 Data preparation
+################################################################################
+
+s1_panel <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  filter(year >= 2012, year <= 2024)
+
+s1_df_scot_cancer <- s1_panel %>%
+  filter(outcome == "cancer_all", sex == "Persons (mean of sexes)", jurisdiction %in% c("Scotland", "England")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Scotland) - log(England), year_c = year - 2018,
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+# Oesophageal cancer: England annual series not published (Fingertips 3-year pooled only) -> own-trend ITS
+s1_df_scot_oes <- s1_panel %>%
+  filter(outcome == "oesophageal_cancer", sex == "Persons (mean of sexes)", jurisdiction == "Scotland") %>%
+  mutate(year_c = year - 2018,
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+s1_df_ie_cancer <- s1_panel %>%
+  filter((jurisdiction == "Ireland" & outcome == "cancer_non_alcohol" & sex == "Persons") |
+           (jurisdiction == "England" & outcome == "cancer_all" & sex == "Persons")) %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  mutate(log_gap = log(Ireland) - log(England), year_c = year - 2022,
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+s1_df_ie_oes <- s1_panel %>%
+  filter(outcome == "oesophageal_cancer", sex == "Persons", jurisdiction == "Ireland") %>%
+  mutate(year_c = year - 2022,
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+
+print(nrow(s1_df_scot_cancer))
+print(nrow(s1_df_scot_oes))
+print(nrow(s1_df_ie_cancer))
+print(nrow(s1_df_ie_oes))
+```
+
+## S1.2 Analysis
+
+```{r}
+################################################################################
+# S1.2 Analysis
+################################################################################
+
+# Negative control: Scotland all-cancer vs England
+s1_model_scot_cancer <- lm(log_gap ~ year_c + mup + covid, data = s1_df_scot_cancer)
+s1_vcov_scot_cancer <- NeweyWest(s1_model_scot_cancer, lag = 1, prewhite = FALSE)
+print(summary(s1_model_scot_cancer))
+print(coeftest(s1_model_scot_cancer, vcov = s1_vcov_scot_cancer)["mup", ])
+print(coefci(s1_model_scot_cancer, vcov = s1_vcov_scot_cancer, df = df.residual(s1_model_scot_cancer))["mup", ])
+
+# Negative control: Ireland non-alcohol cancers vs England all-cancer
+s1_model_ie_cancer <- lm(log_gap ~ year_c + mup + covid, data = s1_df_ie_cancer)
+s1_vcov_ie_cancer <- NeweyWest(s1_model_ie_cancer, lag = 1, prewhite = FALSE)
+print(summary(s1_model_ie_cancer))
+print(coeftest(s1_model_ie_cancer, vcov = s1_vcov_ie_cancer)["mup", ])
+print(coefci(s1_model_ie_cancer, vcov = s1_vcov_ie_cancer, df = df.residual(s1_model_ie_cancer))["mup", ])
+
+# Partly attributable (should not move short term): oesophageal cancer, Scotland own-trend ITS
+s1_model_scot_oes <- lm(log(rate) ~ year_c + mup + covid, data = s1_df_scot_oes)
+s1_vcov_scot_oes <- NeweyWest(s1_model_scot_oes, lag = 1, prewhite = FALSE)
+print(summary(s1_model_scot_oes))
+print(coeftest(s1_model_scot_oes, vcov = s1_vcov_scot_oes)["mup", ])
+print(coefci(s1_model_scot_oes, vcov = s1_vcov_scot_oes, df = df.residual(s1_model_scot_oes))["mup", ])
+
+# Partly attributable: oesophageal cancer, Ireland own-trend ITS
+s1_model_ie_oes <- lm(log(rate) ~ year_c + mup + covid, data = s1_df_ie_oes)
+s1_vcov_ie_oes <- NeweyWest(s1_model_ie_oes, lag = 1, prewhite = FALSE)
+print(summary(s1_model_ie_oes))
+print(coeftest(s1_model_ie_oes, vcov = s1_vcov_ie_oes)["mup", ])
+print(coefci(s1_model_ie_oes, vcov = s1_vcov_ie_oes, df = df.residual(s1_model_ie_oes))["mup", ])
+```
+
+# S2. SECONDARY: HOSPITAL ADMISSIONS
+
+## S2.1 Data preparation
+
+```{r}
+################################################################################
+# S2.1 Data preparation
+################################################################################
+
+s2_df <- read_excel("clean_data.xlsx", sheet = "admissions") %>%
+  select(jurisdiction, year, rate) %>%
+  pivot_wider(names_from = jurisdiction, values_from = rate) %>%
+  filter(!is.na(England))
+
+s2_df_scotland <- s2_df %>%
+  mutate(log_gap = log(Scotland) - log(England),
+         mup = if_else(year >= 2018, 11 / 12, 0),
+         mup = if_else(year >= 2019, 1, mup),
+         covid = if_else(year %in% 2020:2021, 1, 0)) %>%
+  filter(!is.na(log_gap))
+
+s2_df_ireland <- s2_df %>%
+  mutate(log_gap = log(Ireland) - log(England),
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0)) %>%
+  filter(!is.na(log_gap))
+
+print(s2_df_scotland)
+print(s2_df_ireland)
+```
+
+## S2.2 Analysis
+
+```{r}
+################################################################################
+# S2.2 Analysis
+################################################################################
+
+# Scotland (financial years 2016/17-2023/24; 2 pre-years, no trend term possible)
+s2_model_scotland <- lm(log_gap ~ mup + covid, data = s2_df_scotland)
+s2_vcov_scotland <- vcovHC(s2_model_scotland, type = "HC1")
+print(summary(s2_model_scotland))
+print(coeftest(s2_model_scotland, vcov = s2_vcov_scotland)["mup", ])
+print(coefci(s2_model_scotland, vcov = s2_vcov_scotland, df = df.residual(s2_model_scotland))["mup", ])
+
+# Ireland (HIPE crude rate vs England DSR, 2016-2023)
+s2_model_ireland <- lm(log_gap ~ mup + covid, data = s2_df_ireland)
+s2_vcov_ireland <- vcovHC(s2_model_ireland, type = "HC1")
+print(summary(s2_model_ireland))
+print(coeftest(s2_model_ireland, vcov = s2_vcov_ireland)["mup", ])
+print(coefci(s2_model_ireland, vcov = s2_vcov_ireland, df = df.residual(s2_model_ireland))["mup", ])
+```
+
+## S2.3 Robustness
+
+```{r}
+################################################################################
+# S2.3 Robustness
+################################################################################
+
+# Scotland admissions: own long series ITS 2012/13-2023/24 (no control)
+s2_df_scot_its <- read_excel("clean_data.xlsx", sheet = "admissions") %>%
+  filter(jurisdiction == "Scotland", year >= 2012) %>%
+  mutate(year_c = year - 2018,
+         mup = if_else(year >= 2018, 11 / 12, 0),
+         mup = if_else(year >= 2019, 1, mup),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+s2_model_scot_its <- lm(log(rate) ~ year_c + mup + covid, data = s2_df_scot_its)
+s2_vcov_scot_its <- NeweyWest(s2_model_scot_its, lag = 1, prewhite = FALSE)
+print(summary(s2_model_scot_its))
+print(coeftest(s2_model_scot_its, vcov = s2_vcov_scot_its)["mup", ])
+print(coefci(s2_model_scot_its, vcov = s2_vcov_scot_its, df = df.residual(s2_model_scot_its))["mup", ])
+
+# Ireland admissions: own long series ITS 2012-2024 (no control)
+s2_df_ie_its <- read_excel("clean_data.xlsx", sheet = "admissions") %>%
+  filter(jurisdiction == "Ireland", year >= 2012) %>%
+  mutate(year_c = year - 2022,
+         mup = if_else(year >= 2022, 1, 0),
+         covid = if_else(year %in% 2020:2021, 1, 0))
+s2_model_ie_its <- lm(log(rate) ~ year_c + mup + covid, data = s2_df_ie_its)
+s2_vcov_ie_its <- NeweyWest(s2_model_ie_its, lag = 1, prewhite = FALSE)
+print(summary(s2_model_ie_its))
+print(coeftest(s2_model_ie_its, vcov = s2_vcov_ie_its)["mup", ])
+print(coefci(s2_model_ie_its, vcov = s2_vcov_ie_its, df = df.residual(s2_model_ie_its))["mup", ])
+```
+
+# S3. SECONDARY: NORTHERN TERRITORY (CONFOUNDED)
+
+## S3.1 Data preparation
+
+```{r}
+################################################################################
+# S3.1 Data preparation
+################################################################################
+
+# 2025 excluded: floor price repealed 1 Mar 2025
+s3_df <- read_excel("clean_data.xlsx", sheet = "australia") %>%
+  filter(year <= 2024) %>%
+  group_by(year) %>%
+  mutate(others = sum(deaths) - deaths) %>%
+  ungroup() %>%
+  mutate(log_gap = log(deaths) - log(others),
+         mup = case_when(year < 2018 ~ 0, year == 2018 ~ 3 / 12, TRUE ~ 1))
+
+print(filter(s3_df, state == "Northern Territory"))
+```
+
+## S3.2 Analysis
+
+```{r}
+################################################################################
+# S3.2 Analysis
+################################################################################
+
+# NT vs all other states (log count ratio; 2016-2017 pre only, no trend term possible)
+s3_model_nt <- lm(log_gap ~ mup, data = filter(s3_df, state == "Northern Territory"))
+s3_vcov_nt <- vcovHC(s3_model_nt, type = "HC1")
+print(summary(s3_model_nt))
+print(coeftest(s3_model_nt, vcov = s3_vcov_nt)["mup", ])
+print(coefci(s3_model_nt, vcov = s3_vcov_nt, df = df.residual(s3_model_nt))["mup", ])
+print(100 * (exp(coef(s3_model_nt)["mup"]) - 1))
+```
+
+## S3.3 Robustness
+
+```{r}
+################################################################################
+# S3.3 Robustness
+################################################################################
+
+# Placebo-in-space: each state vs the rest, same model
+s3_placebo <- s3_df %>%
+  group_by(state) %>%
+  group_modify(~ tibble(b = coef(lm(log_gap ~ mup, data = .x))["mup"])) %>%
+  ungroup() %>%
+  mutate(effect_pct = 100 * (exp(b) - 1))
+print(s3_placebo)
+print(mean(abs(s3_placebo$b) >= abs(coef(s3_model_nt)["mup"])))
+```
+
+# RESULTS OBJECT
+
+```{r}
+################################################################################
+# RESULTS OBJECT
+################################################################################
+
+results <- list(
+  h0_gate = h0_gate,
+  h0_model_wyper = h0_model_wyper, h0_vcov_wyper = h0_vcov_wyper,
+  h0_model_main = h0_model_main, h0_vcov_main = h0_vcov_main,
+  h0_model_nocovid = h0_model_nocovid, h0_vcov_nocovid = h0_vcov_nocovid,
+  h0_model_placebo = h0_model_placebo, h0_vcov_placebo = h0_vcov_placebo,
+  h0_model_nenw = h0_model_nenw, h0_vcov_nenw = h0_vcov_nenw,
+  h0_model_males = h0_model_males, h0_vcov_males = h0_vcov_males,
+  h0_model_females = h0_model_females, h0_vcov_females = h0_vcov_females,
+  h0_placebo_space = h0_placebo_space,
+  h0_model_2007 = h0_model_2007, h0_vcov_2007 = h0_vcov_2007,
+  h0_model_placebo_2007 = h0_model_placebo_2007, h0_vcov_placebo_2007 = h0_vcov_placebo_2007,
+  h0_slope_avg = h0_slope_avg, h3_slope_avg = h3_slope_avg, h4_slope_avg = h4_slope_avg,
+  h3_model_2007 = h3_model_2007, h3_vcov_2007 = h3_vcov_2007,
+  h4_model_2007 = h4_model_2007, h4_vcov_2007 = h4_vcov_2007,
+  h0_sc_weights = h0_sc_weights, h0_sc_series = h0_sc_series, h0_sc_effect = h0_sc_effect,
+  h0_sc_loo = h0_sc_loo, h0_sc_placebo = h0_sc_placebo,
+  h0_df_main = h0_df_main,
+  h1_price = h1_price, h1_model_sales_scot = h1_model_sales_scot, h1_vcov_sales_scot = h1_vcov_sales_scot,
+  h1_model_sales_ie = h1_model_sales_ie, h1_vcov_sales_ie = h1_vcov_sales_ie,
+  h1_model_sales_ie_nocovid = h1_model_sales_ie_nocovid, h1_vcov_sales_ie_nocovid = h1_vcov_sales_ie_nocovid,
+  h1_model_sales_ie_2013 = h1_model_sales_ie_2013, h1_vcov_sales_ie_2013 = h1_vcov_sales_ie_2013,
+  h2_power = h2_power,
+  h3_df = h3_df,
+  h3_model_main = h3_model_main, h3_vcov_main = h3_vcov_main,
+  h3_model_nocovid = h3_model_nocovid, h3_vcov_nocovid = h3_vcov_nocovid,
+  h3_model_placebo = h3_model_placebo, h3_vcov_placebo = h3_vcov_placebo,
+  h3_model_nenw = h3_model_nenw, h3_vcov_nenw = h3_vcov_nenw,
+  h3_model_males = h3_model_males, h3_vcov_males = h3_vcov_males,
+  h3_model_females = h3_model_females, h3_vcov_females = h3_vcov_females,
+  h3_sc_weights = h3_sc_weights, h3_sc_series = h3_sc_series, h3_sc_effect = h3_sc_effect,
+  h3_sc_loo = h3_sc_loo, h3_sc_placebo = h3_sc_placebo,
+  h4_df = h4_df,
+  h4_model_ni = h4_model_ni, h4_vcov_ni = h4_vcov_ni,
+  h4_model_eng = h4_model_eng, h4_vcov_eng = h4_vcov_eng,
+  h4_model_k70 = h4_model_k70, h4_vcov_k70 = h4_vcov_k70,
+  h4_model_nocovid = h4_model_nocovid, h4_vcov_nocovid = h4_vcov_nocovid,
+  h4_model_placebo = h4_model_placebo, h4_vcov_placebo = h4_vcov_placebo,
+  h4_model_males = h4_model_males, h4_vcov_males = h4_vcov_males,
+  h4_model_females = h4_model_females, h4_vcov_females = h4_vcov_females,
+  h5_effects = h5_effects, h5_model_pooled = h5_model_pooled,
+  h5_model_replication = h5_model_replication, h5_model_fixed = h5_model_fixed,
+  h6_monthly = h6_monthly,
+  h6_model_monthly = h6_model_monthly, h6_vcov_monthly = h6_vcov_monthly, h6_mde_pct = h6_mde_pct,
+  h6_model_annual = h6_model_annual, h6_vcov_annual = h6_vcov_annual,
+  h6_model_long = h6_model_long, h6_vcov_long = h6_vcov_long,
+  h6_model_nocovid = h6_model_nocovid, h6_vcov_nocovid = h6_vcov_nocovid,
+  h6_model_placebo = h6_model_placebo, h6_vcov_placebo = h6_vcov_placebo,
+  h6_model_placebo_2024 = h6_model_placebo_2024, h6_vcov_placebo_2024 = h6_vcov_placebo_2024, h6_yoy = h6_yoy,
+  h7_gradient = h7_gradient, h7_model_gradient = h7_model_gradient,
+  h7_model_q1_nocovid = h7_model_q1_nocovid, h7_vcov_q1_nocovid = h7_vcov_q1_nocovid,
+  h7_model_q5_nocovid = h7_model_q5_nocovid, h7_vcov_q5_nocovid = h7_vcov_q5_nocovid,
+  s1_model_scot_cancer = s1_model_scot_cancer, s1_vcov_scot_cancer = s1_vcov_scot_cancer,
+  s1_model_ie_cancer = s1_model_ie_cancer, s1_vcov_ie_cancer = s1_vcov_ie_cancer,
+  s1_model_scot_oes = s1_model_scot_oes, s1_vcov_scot_oes = s1_vcov_scot_oes,
+  s1_model_ie_oes = s1_model_ie_oes, s1_vcov_ie_oes = s1_vcov_ie_oes,
+  s2_model_scotland = s2_model_scotland, s2_vcov_scotland = s2_vcov_scotland,
+  s2_model_ireland = s2_model_ireland, s2_vcov_ireland = s2_vcov_ireland,
+  s2_model_scot_its = s2_model_scot_its, s2_vcov_scot_its = s2_vcov_scot_its,
+  s2_model_ie_its = s2_model_ie_its, s2_vcov_ie_its = s2_vcov_ie_its,
+  s3_model_nt = s3_model_nt, s3_vcov_nt = s3_vcov_nt, s3_placebo = s3_placebo
+)
+saveRDS(results, "results.rds")
+print(names(results))
+```
+
+# SESSION INFO
+
+```{r}
+################################################################################
+# SESSION INFO
+################################################################################
+
+print(sessionInfo())
+```

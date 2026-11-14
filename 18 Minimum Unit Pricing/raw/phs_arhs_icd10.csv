@@ -1,0 +1,39 @@
+ICD10SubCondition,SubConditionDescription,ICD10Condition,ICD10ConditionQF,ConditionDescription
+F10.0,M&B - Acute Intoxication,F10,,Mental & behavioural disorders due to use of alcohol (M&B): All
+F10.1,M&B - Harmful Use,F10,,Mental & behavioural disorders due to use of alcohol (M&B): All
+F10.2,M&B - Alcohol Dependence syndrome,F10,,Mental & behavioural disorders due to use of alcohol (M&B): All
+F10.3,M&B - Withdrawal state,F10,,Mental & behavioural disorders due to use of alcohol (M&B): All
+F10.4,M&B - Withdrawal state with delirium,F10,,Mental & behavioural disorders due to use of alcohol (M&B): All
+"F10.5, F10.6, F10.7",M&B - Psychotic and amnesic disorders,F10,,Mental & behavioural disorders due to use of alcohol (M&B): All
+"F10.8, F10.9",M&B - Other/unspecified mental and behavioural disorders,F10,,Mental & behavioural disorders due to use of alcohol (M&B): All
+K70.0,ALD - Fatty Liver,K70,,Alcoholic Liver Disease (ALD): All
+K70.1,ALD - Alcoholic Hepatitis,K70,,Alcoholic Liver Disease (ALD): All
+"K70.2, K70.3",ALD - Cirrhosis,K70,,Alcoholic Liver Disease (ALD): All
+K70.4,ALD - Hepatic Failure,K70,,Alcoholic Liver Disease (ALD): All
+K70.9,ALD - Unspecified,K70,,Alcoholic Liver Disease (ALD): All
+E51.2,Wernicke encephalopathy,,z,Alcohol related brain damage
+"F10.6, F10.7",Psychotic & amnesic conditions,,z,Alcohol related brain damage
+G31.2,Degeneration of nervous system due to alcohol,,z,Alcohol related brain damage
+K85.2,Alcohol-induced acute pancreatitis,,z,Alcohol-induced pancreatitis
+K86.0,Alcohol-induced chronic pancreatitis,,z,Alcohol-induced pancreatitis
+T51.0,Ethanol,T51,,Toxic effect of alcohol
+T51.1,Methanol,T51,,Toxic effect of alcohol
+T51.9,"Alcohol, unspecified",T51,,Toxic effect of alcohol
+I42.6,Alcoholic Cardiomyopathy,,z,
+K29.2,Alcoholic Gastritis,,z,
+E24.4,Alcohol-induced pseudo-Cushing syndrome,,z,
+G62.1,Alcoholic polyneuropathy,,z,
+G72.1,Alcoholic myopathy,,z,
+O35.4,Maternal care for (suspected) damage to fetus from alcohol,,z,
+P04.3,Fetus and newborn affected by maternal use of alcohol,,z,
+Q86.0,Fetal alcohol syndrome (dysmorphic),,z,
+R78.0,Finding of alcohol in blood,,z,
+X45,Accidental poisoning by and exposure to alcohol,,z,
+X65,Intentional self-poisoning by and exposure to alcohol,,z,
+Y15,"Poisoning by and exposure to alcohol, undetermined intent",,z,
+Y57.3,Alcohol deterrents,,z,
+Y90,Evidence of alcohol involvement determined by blood alcohol level,,z,
+Y91,Evidence of alcohol involvement determined by level of intoxication,,z,
+Z50.2,Alcohol rehabilitation,,z,
+Z71.4,Alcohol abuse counselling and surveillance,,z,
+Z72.1,Alcohol use,,z,

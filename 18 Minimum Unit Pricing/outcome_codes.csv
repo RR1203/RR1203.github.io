@@ -1,0 +1,17 @@
+outcome,icd10_code,description,source
+alcohol_specific,E24.4,Alcohol-induced pseudo-Cushing's syndrome,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,F10,Mental and behavioural disorders due to use of alcohol,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,G31.2,Degeneration of nervous system due to alcohol,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,G62.1,Alcoholic polyneuropathy,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,G72.1,Alcoholic myopathy,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,I42.6,Alcoholic cardiomyopathy,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,K29.2,Alcoholic gastritis,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,K70,Alcoholic liver disease,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,K85.2,Alcohol-induced acute pancreatitis,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,K86.0,Alcohol induced chronic pancreatitis,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,Q86.0,Fetal alcohol syndrome (dysmorphic),ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,R78.0,Excess alcohol blood levels,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,X45,Accidental poisoning by and exposure to alcohol,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,X65,Intentional self-poisoning by and exposure to alcohol,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+alcohol_specific,Y15,Poisoning by and exposure to alcohol undetermined intent,ONS alcoholspecificdeaths2024.xlsx sheet Definition
+sensitivity_ald,K70,Alcoholic liver disease (cleaner sensitivity outcome),Prompt §4

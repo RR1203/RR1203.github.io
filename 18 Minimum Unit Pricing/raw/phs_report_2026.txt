@@ -1,0 +1,729 @@
+Alcohol Consumption & Harms
+Dashboard: Update Report
+This report supports the latest update to the Public Health Scotland (PHS) Alcohol
+Consumption and Harms Dashboard published on 30th June 2026.
+
+
+The report presents key trends in estimated alcohol retail sales and wholly alcohol
+attributable health harms and provides interpretation of some of the wholly and partially
+alcohol attributable health harms data presented on the dashboard.
+
+Data presented in this report are also available on the dashboard. The dashboard presents
+data and evidence around key trends in alcohol consumption and alcohol-related health
+and social harms, updated as data become available. Local reports showing indicators by
+health board or local authority can be downloaded from the dashboard, where data are
+available.
+
+
+
+
+Preventing alcohol harm
+
+Alcohol is a leading cause of poor health and early death in Scotland, and there are
+significant inequalities in this harm. However, this is preventable. The data presented in
+this report underline the urgency for a preventative and evidence-led approach to reducing
+alcohol harm in Scotland. Public Health Scotland's Policy briefing: alcohol outlines key
+policy proposals that could be enacted to prevent harm from alcohol in Scotland. For
+further information about alcohol and public health, visit Public Health Scotland’s web
+content on alcohol.
+
+
+
+
+                                                                                             1
+Key points
+
+Overall alcohol sales in Scotland have declined, but estimated consumption per adult
+drinker remains above the recommended guidance. Alcohol harms remain relatively
+high, and wide health inequalities remain.
+
+
+       In 2025, 8.6 litres of pure alcohol were sold per adult in Scotland.
+
+       In 2025, 10.7 litres of pure alcohol were sold per adult drinker, equivalent to 20.7
+       units per adult drinker per week in Scotland.
+
+   •   The majority (76.0%) of alcohol sold in Scotland in 2025 was sold in off-trade
+       premises such as supermarkets and other off-licence shops.
+
+   •   In 2024, 1,179 people in Scotland died from a cause wholly attributable to alcohol,
+       an average of almost 23 people per week.
+
+   •   In 2024/25, there were 27,126 wholly alcohol attributable hospital admissions in
+       general acute hospitals in Scotland.
+
+   •   There are stark inequalities in wholly alcohol attributable deaths and hospital
+       admissions in Scotland.
+
+              In the 10% most deprived areas of Scotland, the wholly alcohol attributable
+              death rate was almost six times higher than in the 10% least deprived areas.
+
+              In the 10% most deprived areas of Scotland, the wholly alcohol attributable
+              hospital admissions rate was over seven times higher than in the 10% least
+              deprived areas.
+
+          o Both wholly alcohol attributable death and hospital admissions rates were
+              twice as high for males as they were for females.
+
+
+
+
+                                                                                              2
+                        Total alcohol retail sales
+
+In 2025, an estimated total of 40.4 million litres of pure alcohol were sold in Scotland.
+
+
+This is equivalent to an average of 8.6 litres (L) sold per adult in Scotland per year. This is
+the lowest level in the time series, a decrease from 2024 (9.1 L per adult). It remains
+higher than the amount sold per adult in England & Wales (7.8 L per adult).
+
+Excluding the proportion of the population that does not drink alcohol, adult drinkers in
+Scotland in 2025 were estimated to drink 20.7 units of alcohol per week (10.7 L of alcohol
+per year). This is higher than the UK Chief Medical Officers' guidance which recommends
+drinking less than 14 units per week to keep health risks from alcohol to a low leveli.
+
+Between 2017 and 2025, volume of pure alcohol sold per adult declined by 18.9% in
+Scotland and by 16.0% in England & Wales.
+
+
+                             Volume of pure alcohol (litres) sold per adult (16+) per year in Scotland
+                                               and England & Wales, 2017-2025
+                                                    Scotland      England & Wales
+                   12
+
+
+                   10
+
+
+                    8
+Litres per adult
+
+
+
+
+                    6
+
+
+                    4
+
+
+                    2
+
+
+                    0
+                         2017       2018     2019       2020    2021     2022       2023   2024     2025
+
+          Source: Circana, Nielsen IQ
+
+
+
+
+i NHS Inform. Low-risk drinking guidelines. 2025. Low-risk drinking guidelines | NHS
+
+
+                   inform.
+
+
+                                                                                                         3
+Alcohol retail sales by on & off trade
+
+In 2025, an estimated 30.7 million litres of alcohol were sold in off-trade premises in
+Scotland, equivalent to 6.5 L sold per adult. This is a decrease from 2024 (32.1 million
+litres, 6.9 L sold per adult). This is the lowest level in the time series but is higher than the
+amount sold per adult in off-trade premises in England and Wales (5.7 L sold per adult).
+
+In 2025, the amount of alcohol sold in on-trade premises, such as pubs, clubs, and
+restaurants, was slightly lower than the amount sold in 2024 (9.7 million litres in 2025
+compared to 10.1 million litres in 2024). This is equivalent to 2.1 L sold per adult in 2025,
+which is the same as the amount sold per adult in on-trade premises in England & Wales.
+
+The majority (76.0%) of alcohol sold in Scotland in 2025 was sold in off-trade premises,
+such as supermarkets and other off-licences. While total off-trade sales have declined
+since 2017, the proportion of alcohol sold in the off-trade has increased from 72.9% in
+2017. In Scotland, on-trade sales have declined more quickly than off-trade sales;
+between 2017 and 2025, the total estimated volume of alcohol sold declined by 24.6% in
+the on-trade and by 11.2% in the off-trade.
+
+
+                        Volume of pure alcohol (litres) sold per adult (16+) in Scotland and
+                                  England & Wales, by trade sector, 2017-2025
+                               Scotland on-trade                           Scotland off-trade
+                               England & Wales on-trade                    England & Wales off-trade
+
+                   10
+
+                   9
+
+                   8
+
+                   7
+Litres per adult
+
+
+
+
+                   6
+
+                   5
+
+                   4
+
+                   3
+
+                   2
+
+                   1
+
+                   0
+                        2017     2018       2019      2020   2021   2022         2023       2024       2025
+
+       Source: Circana, Nielsen IQ
+
+
+
+
+                                                                                                              4
+Alcohol pricing
+
+In 2025, the average price per unit of alcohol in Scotland was 78p in the off-trade and
+£2.46 in the on-trade.
+
+The average price per unit of alcohol in the off-trade in Scotland has increased from 72p in
+2024. In England & Wales, it has increased from 67p in 2024 to 69p in 2025.
+
+The average on-trade price in Scotland has increased over time, from £1.80 in 2017 to
+£2.46 in 2025; in England & Wales, the trend in average on-trade price has been similar.
+
+
+                                                  Average price per unit of alcohol sold in
+                                                 Scotland and England & Wales, 2017-2025
+
+                                        Scotland on-trade                       England & Wales on-trade
+                                        Scotland off-trade                      England & Wales off-trade
+                          3.00
+
+
+                          2.50
+
+
+                          2.00
+     Price per unit (£)
+
+
+
+
+                                                                                       Minimum unit price
+                          1.50     50p minimum unit                                      raised to 65p in
+                                  pricing introduced in                                     Sept 2024
+                          1.00
+                                          May 2018
+
+                          0.50
+
+
+                          0.00
+                                 2017        2018      2019   2020   2021    2022    2023     2024      2025
+
+                  Source: Circana, Nielsen IQ
+
+Please note that duty changes impacting the whole of the UK and pricing changes
+affecting other devolved nations are not shown in this graph.
+
+In 2023, PHS published the final report on the independent evaluation of the impact of
+minimum unit pricing for alcohol in Scotland, Evaluating the impact of minimum unit
+pricing for alcohol in Scotland: A synthesis of the evidence.
+
+
+
+
+                                                                                                               5
+Alcohol health harms
+
+Alcohol health harms can be characterised as wholly or partially attributable to
+alcohol consumption. Wholly and partially alcohol attributable figures are measured
+in different ways and provide insight to the public health burden related to alcohol.
+
+
+Wholly attributable harms are directly and entirely related to alcohol consumption, for
+example, alcoholic liver disease. These are sometimes called ‘alcohol-specific’. Wholly
+alcohol attributable harms are measured by counting the deaths and hospital admissions
+that are caused by conditions directly and entirely related to alcohol. This provides a very
+consistent and stable measurement of the harm related to alcohol consumption.
+
+For deaths, this includes only deaths that have been registered with cause-of-death
+information that is directly and entirely related to alcohol consumption. For hospital
+admissions, only those that record a diagnosis wholly attributable to alcohol consumption
+are included in the calculation of wholly alcohol attributable hospital admissions.
+
+Partially attributable harms are those for which alcohol consumption is one of a range of
+possible causative factors, for example breast cancer. Partially attributable harms are
+estimates and are calculated using a range of data sources including population drinking
+patterns, alcohol consumption levels, associated health risks, and frequency of related
+health conditions. This provides an estimate of the wider public health burden related to
+alcohol consumption. Further information on how partially attributable harms are calculated
+can be found in the Notes on data sources and methods section.
+
+Trends in partially and wholly alcohol attributable harms are not exactly the same. This is
+because they tell us different things about the harms related to alcohol consumption.
+Differences may be due to population demographics, the time it takes for different health
+conditions to lead to a death or hospital admission (the latency period), and prevalence of
+other conditions where alcohol is a contributory factor.
+
+The Alcohol Harms and Consumption Dashboard presents alcohol health harms by
+Scottish Index of Multiple Deprivation (SIMD), including age, sex, and geographical area.
+Data on health conditions is available for wholly and partially attributable hospital
+admissions, and wholly attributable deaths.
+
+
+
+                                                                                               6
+                                      Wholly alcohol attributable deaths
+
+In 2024, 1,179 people resident in Scotland died from a cause wholly attributable to
+alcohol, which equates to an average of almost 23 people per week.
+
+
+This is a decrease from 1,272 wholly attributable deaths in 2023 and is the same as the
+rate of deaths as in 2016 (20.8 wholly alcohol attributable deaths per 100,000 population).
+
+In 2024, there remained large inequalities in wholly alcohol attributable death rates:
+
+                              •       The wholly alcohol attributable death rate in the 10% most deprived areas was
+                                      almost six times higher than in the 10% least deprived areas (44.7 and 7.7 deaths
+                                      per 100,000 population, respectively)
+
+                              •       The wholly alcohol attributable death rate was more than twice as high amongst
+                                      males than females (29.5 compared with 13.1, per 100,000 population)
+
+                              •       The 10-year age group with the highest wholly alcohol attributable death rate was
+                                      55 to 64 years (48.1 per 100,000 population). For males, the death rate in this age
+                                      group was 66.9 per 100,000 population, compared with 30.6 per 100,000 population
+                                      for females.
+                                       European age-sex standardised rate (EASR) per 100,000 population of
+                                        wholly alcohol attributable deaths by SIMD in Scotland, 1997 to 2024
+
+                                                        1 (most deprived)               10 (least deprived)           All
+                              100
+
+                               90
+EASR per 100,000 population
+
+
+
+
+                               80
+
+                               70
+
+                               60
+
+                               50
+
+                               40
+
+                               30
+
+                               20
+
+                               10
+
+                                  0
+                                      1997   1999    2001   2003   2005   2007   2009     2011   2013   2015   2017    2019   2021   2023
+
+
+
+
+                                                                                                                                        7
+                                     European age-sex standardised rate (EASR) per 100,000 population of
+                                      wholly alcohol attributable deaths by sex in Scotland, 1981 to 2024
+                                                                       Male          Female          All
+
+                              45
+
+                              40
+
+                              35
+EASR per 100,000 population
+
+
+
+
+                              30
+
+                              25
+
+                              20
+
+                              15
+
+                              10
+
+                              5
+
+                              0
+                                   1981   1984   1987   1990   1993   1996    1999   2002   2005   2008    2011   2014   2017   2020   2023
+
+
+Partially alcohol attributable deaths
+
+Both the wholly and partially alcohol attributable death rates increased between 2012 and
+2023. Between 2012 and 2018, the rate of partially alcohol attributable deaths followed a
+similar pattern to the rate of wholly alcohol attributable deaths.
+
+In 2019, the partially alcohol attributable death rate increased to a peak of 41.4 deaths per
+100,000 population before decreasing to 34.3 deaths per 100,000 population in 2022. The
+death rate then rose slightly to 35.7 deaths per 100,000 population in 2023.
+
+This is different to the rate of wholly alcohol attributable deaths, which decreased in 2019
+to 18.4 deaths per 100,000 population before rising to 22.4 deaths per 100,000 population
+in 2023.
+
+In 2024, the wholly alcohol attributable death rate fell to 20.8 deaths per 100,000
+population. Currently, partially attributable death figures are available up to 2023; the rate
+of partially alcohol attributable deaths for 2024 will be published on the dashboard later in
+the year (see Notes on methods and data sources).
+
+
+
+
+                                                                                                                                         8
+                                     European age-sex standardised rate (EASR) per 100,000 population of
+                                     partially alcohol attributable deaths by SIMD in Scotland, 2012 to 2023
+                                                          1 (most deprived)           10 (least deprived)          All
+
+                                80
+
+                                70
+
+                                60
+EASR per 100,000 population
+
+
+
+
+                                50
+
+                                40
+
+                                30
+
+                                20
+
+                                10
+
+                                0
+                                     2012   2013   2014       2015     2016    2017       2018     2019     2020         2021   2022   2023
+
+
+
+
+                                     European age-sex standardised rate (EASR) per 100,000 population of
+                                      partially alcohol attributable deaths by sex in Scotland, 1981 to 2023
+                                                                      Female           Male           All
+
+                                60
+
+
+                                50
+  EASR per 100,000 population
+
+
+
+
+                                40
+
+
+                                30
+
+
+                                20
+
+
+                                10
+
+
+                                0
+                                     2012   2013   2014       2015     2016    2017       2018     2019     2020         2021   2022   2023
+
+
+
+
+                                                                                                                                          9
+        Wholly alcohol attributable hospital admissions
+
+In 2024/25, there were 27,126 wholly attributable hospital inpatient stays in general
+acute hospitals; this is equivalent to an age-sex standardised rate of 493.6 stays per
+100,000 population.
+
+
+In total, 17,955 people in Scotland were admitted to a general acute hospital with a wholly
+attributable diagnosis in 2024/25, meaning that some people were admitted more than
+once.
+
+In 2024/25, there remain large inequalities in wholly attributable hospital admissions:
+
+   •    The rate of wholly attributable hospital admissions in the 10% most deprived areas
+        in Scotland was over seven times higher than in the 10% least deprived areas
+        (1,237.5 per 100,000 population compared with 170.0 per 100,000 population).
+
+   •    The wholly attributable hospital admissions rate was more than twice as high
+        amongst males than females (698.9 compared with 288.2 per 100,000 population)
+
+   •    Overall and for males, the 10-year age group with the highest wholly attributable
+        hospital admissions rate was 55 to 64 years (821.8 per 100,000 population overall,
+        1,156.4 per 100,000 population for males). For females, the 10-year age group with
+        the highest wholly attributable hospital admissions rate was 45-54 years (497.2 per
+        100,000 population).
+
+In 2024/25, the leading conditions for wholly alcohol attributable hospital stays in general
+acute hospitals were:
+
+   •    Withdrawal state, 140.1 per 100,000 population
+
+   •    Harmful use, 131.4 per 100,000 population
+
+   •    Acute intoxication, 99.0 per 100,000 population
+
+   •    Alcoholic dependence syndrome, 73.2 per 100,000 population
+
+   •    Cirrhosis, 59.4 per 100,000 population.
+
+
+
+                                                                                            10
+                                                     European age-sex standardised rate (EASR) per 100,000 population of
+                                                      wholly alcohol attributable hospital stays in general acute hospitals,
+                                                                   by SIMD, in Scotland, 1997/98 to 2024/25
+                                                                      1 (most deprived)   10 (least deprived)   All
+
+                                          2500
+            EASR per 100,000 population
+
+
+
+
+                                          2000
+
+
+                                          1500
+
+
+                                          1000
+
+
+                                           500
+
+
+                                                0
+
+
+
+
+                                                    European age-sex standardised rate (EASR) per 100,000 population of
+                                                    wholly alcohol attributable hospital stays in general acute hospitals by
+                                                                      sex, in Scotland, 1997/98 to 2024/25
+                                                                                 Female   Male           All
+
+                                  1400
+EASR per 100,000 population
+
+
+
+
+                                  1200
+
+                                  1000
+
+                                          800
+
+                                          600
+
+                                          400
+
+                                          200
+
+                                            0
+
+
+
+
+                              The overall rate of wholly alcohol attributable hospital admissions in Scotland has steadily
+                              declined since 2007/08. However, hospital admissions due to some alcohol liver disease
+                              conditions, such as alcoholic hepatitis, hepatic failure, and alcohol fatty liver disease, have
+                              increased over time.
+
+
+
+
+                                                                                                                               11
+Partially alcohol attributable hospital admissions
+
+Rates of partially alcohol attributable hospital admissions have followed a similar trend to
+rates of wholly alcohol attributable hospital admissions and have declined since 2012.
+
+However, the decline in rates of partially attributable hospital admissions has been more
+gradual; the rate of wholly alcohol attributable hospital admissions declined by 22%
+between 2012/13 and 2023/24 while the rate of partially alcohol attributable hospital
+admissions declined by just over 5% between 2012 and 2023. In 2023, the partially alcohol
+attributable hospital admission rate was 421.1 per 100,000 population.
+
+In 2024/25, the wholly alcohol attributable hospital admissions rate fell to 493.6 admissions
+per 100,000 population. Currently, partially attributable hospital admissions figures are
+available up to 2023; the rate of partially alcohol attributable hospital admissions for 2024
+will be published on the dashboard later in the year.
+
+
+                                     European age-sex standardised rate (EASR) per 100,000 population
+                                       of partially alcohol attributable hospital stays in general acute
+                                                  hospitals by sex, in Scotland, 2012 to 2023
+                                                                 Female          Male       All
+
+                               700
+
+
+                               600
+ EASR per 100,000 population
+
+
+
+
+                               500
+
+
+                               400
+
+
+                               300
+
+
+                               200
+
+
+                               100
+
+
+                                 0
+                                     2012   2013   2014   2015    2016    2017     2018   2019    2020   2021   2022   2023
+
+
+
+Please note that partially attributable rates of hospital admissions are calculated by
+calendar year while wholly attributable rates are calculated by financial year.
+
+
+
+
+                                                                                                                       12
+Notes on data sources and methods
+
+Detailed information on data sources and methods for calculating the figures presented in
+this report can be found on the PHS Alcohol Consumption and Harms Dashboard in
+the Data Sources & Methods tab.
+
+
+
+Alcohol retail sales
+
+Please note that the alcohol retail sales figures presented are estimates.
+
+Public Health Scotland uses off-trade alcohol retail sales data from Circana to produce per
+adult sales estimates contained in this briefing and the Alcohol Consumption and Harms
+Dashboard; copyright for off-trade data remains with Circana. Please note that the off-
+trade alcohol sales data presented in this report and in the dashboard are not comparable
+with data published in previous MESAS Monitoring Reports, as those data were obtained
+from a different data provider. For a comparison of different off-trade data sources for
+estimating alcohol retail sales, please see this report: Estimating population alcohol
+consumption in Scotland: the impact of using different sources of alcohol retail
+sales data.
+
+Public Health Scotland obtains on-trade alcohol retail sales data from Nielsen IQ to
+produce per adult sales estimates contained in this briefing and the Alcohol Consumption
+and Harms Dashboard; copyright for these data remains with Nielsen IQ. On-trade data
+used in this report/dashboard were produced in 2026, based on OPM data - 2025 Period
+13.
+
+Retail sales estimates may differ slightly to those previously published as they continue to
+be improved retrospectively after being supplied. Consequently, the most recent data
+provided are considered to be the best available because they provide the most robust
+picture of the alcohol sales market.
+
+
+
+Alcohol deaths
+
+Please note that in this report, and on the PHS Alcohol Consumption and Harms
+Dashboard, wholly alcohol attributable deaths are included if the deceased was resident
+
+
+
+                                                                                           13
+in Scotland while NRS include deaths which occur in Scotland regardless of the residence
+of the deceased. Mortality figures in this report and on the dashboard are rounded to a
+base of three. Therefore, the figures presented here are ~1% lower per annum than those
+reported by NRS.
+
+
+
+Alcohol hospital statistics
+
+For information around terminology used in the alcohol hospital statistics, please see this
+report: Background, glossary, and metadata.
+
+
+
+Partially attributable statistics
+
+Public Health Scotland have adopted the International Model of Alcohol Harms and
+Policies (InterMAHP) methodology for calculating Alcohol Attributable Fractions. Data
+used as inputs for this include relative risk functions from the World Health Organisation
+(WHO), prevalence data from the Scottish Health Survey, and annual per capita
+consumption data estimated using alcohol retail sales data, outlined above. Partially
+attributable harms data are updated on the dashboard later than wholly attributable harms
+data as they are reliant on publication and processing of survey data.
+
+The InterMAHP methodology includes conditions that are both wholly and partially
+attributable to alcohol. The conditions in the InterMAHP methodology that are wholly
+attributable to alcohol have not been included in the partially attributable statistics as these
+are available elsewhere on the dashboard.
+
+Further information on the methodology used for calculating wholly and partially
+attributable statistics can be found on the dashboard.
+
+
+
+
+                                                                                             14
+Contact
+
+Vicki Ponce Hardy | Public Health Intelligence Adviser | phs.alcohol@phs.scot
+
+Scott Kilgariff | Principal Information Analyst | phs.alcohol@phs.scot
+
+Lyn Morton | Information Analyst | phs.alcohol@phs.scot
+
+Mike Smith | Senior Information Analyst | phs.alcohol@phs.scot
+
+For all media enquiries please email phs.comms@phs.scot or call 0131 275 6105.
+
+
+
+
+Further information
+
+Data from this publication are available from the publication page on our website.
+
+
+
+
+  Translations and other formats are available on request at:
+  phs.otherformats@phs.scot or 0131 314 5300.
+
+  This publication is licensed for re-use under the Open Government Licence v3.0.
+  For more information, visit www.publichealthscotland.scot/ogl
+
+
+
+
+                                                                                     15
+
