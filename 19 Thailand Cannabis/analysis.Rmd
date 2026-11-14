@@ -242,7 +242,7 @@ print(p1_scenarios)
 ################################################################################
 
 # Simulation: one replicate = draw a negative binomial series, fit the planned
-# segmented quasi-Poisson model (model-based SE), test the 2025 level term.
+# segmented negative binomial model (model-based SE, as in H1), test the 2025 level term.
 # (Deviation from house style: a simulation needs one helper and replicate().)
 p1_power_one <- function(pre_mean, m1, m36, drop, theta, end_month, nsim) {
   d <- p1_grid %>% filter(month <= end_month)
@@ -256,7 +256,7 @@ p1_power_one <- function(pre_mean, m1, m36, drop, theta, end_month, nsim) {
   )
   hits <- replicate(nsim, {
     d$y <- rnbinom(nrow(d), mu = mu, size = theta)
-    m <- glm(y ~ t + cal_m + covid + post22 + t22 + post25 + t25, family = quasipoisson, data = d)
+    m <- glm.nb(y ~ t + cal_m + covid + post22 + t22 + post25 + t25, data = d)
     ct <- coeftest(m)
     ct["post25", "Pr(>|z|)"] < 0.05 & ct["post25", "Estimate"] < 0
   })
@@ -273,7 +273,7 @@ p1_design <- expand_grid(
 set.seed(1234)
 p1_power <- p1_design %>%
   rowwise() %>%
-  mutate(power = p1_power_one(pre_mean, post_month1, post_month36, drop, theta, end_month, nsim = 300)) %>%
+  mutate(power = p1_power_one(pre_mean, post_month1, post_month36, drop, theta, end_month, nsim = 200)) %>%
   ungroup()
 
 print(p1_power, n = 20)
@@ -314,7 +314,7 @@ p1_figure_power <- ggplot(
     x = "True level drop after Jun 2025, %", y = "Power (alpha 0.05)",
     linetype = "NB theta",
     title = "Approximate power for the 2025 level change (simulated)",
-    caption = "Quasi-Poisson model-based SE. Inputs: period means from HDC (advocacy letter) and Addiction 2026; trend, seasonality and theta assumed."
+    caption = "NB model-based SE, 200 simulations per point. Inputs: period means from HDC (advocacy letter) and Addiction 2026; trend, seasonality and theta assumed."
   ) +
   theme_bw(base_size = 11) +
   theme(legend.position = "bottom")
