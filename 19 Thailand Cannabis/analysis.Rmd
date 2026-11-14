@@ -242,7 +242,7 @@ print(p1_scenarios)
 ################################################################################
 
 # Simulation: one replicate = draw a negative binomial series, fit the planned
-# segmented Poisson model with Newey-West SE, test the 2025 level term.
+# segmented quasi-Poisson model (model-based SE), test the 2025 level term.
 # (Deviation from house style: a simulation needs one helper and replicate().)
 p1_power_one <- function(pre_mean, m1, m36, drop, theta, end_month, nsim) {
   d <- p1_grid %>% filter(month <= end_month)
@@ -256,8 +256,8 @@ p1_power_one <- function(pre_mean, m1, m36, drop, theta, end_month, nsim) {
   )
   hits <- replicate(nsim, {
     d$y <- rnbinom(nrow(d), mu = mu, size = theta)
-    m <- glm(y ~ t + cal_m + covid + post22 + t22 + post25 + t25, family = poisson, data = d)
-    ct <- coeftest(m, vcov. = NeweyWest(m, lag = 3, prewhite = FALSE))
+    m <- glm(y ~ t + cal_m + covid + post22 + t22 + post25 + t25, family = quasipoisson, data = d)
+    ct <- coeftest(m)
     ct["post25", "Pr(>|z|)"] < 0.05 & ct["post25", "Estimate"] < 0
   })
   mean(hits)
@@ -314,7 +314,7 @@ p1_figure_power <- ggplot(
     x = "True level drop after Jun 2025, %", y = "Power (alpha 0.05)",
     linetype = "NB theta",
     title = "Approximate power for the 2025 level change (simulated)",
-    caption = "Inputs: period means from HDC (advocacy letter) and Addiction 2026; trend, seasonality and theta assumed."
+    caption = "Quasi-Poisson model-based SE. Inputs: period means from HDC (advocacy letter) and Addiction 2026; trend, seasonality and theta assumed."
   ) +
   theme_bw(base_size = 11) +
   theme(legend.position = "bottom")
@@ -365,7 +365,7 @@ h1_model_primary <- glm.nb(
   data = h1_df
 )
 
-h1_vcov <- NeweyWest(h1_model_primary, lag = 3, prewhite = FALSE)
+h1_vcov <- vcov(h1_model_primary)
 
 print(summary(h1_model_primary))
 print(coeftest(h1_model_primary, vcov. = h1_vcov)[c("post22", "t22", "post25", "t25"), ])
@@ -423,6 +423,12 @@ print(summary(h1_model_es))
 ################################################################################
 # H1.3 Robustness
 ################################################################################
+
+# Newey-West HAC SE (sensitivity; anti-conservative with short post periods)
+print(coeftest(h1_model_primary, vcov. = NeweyWest(h1_model_primary, lag = 3, prewhite = FALSE))[c("post22", "t22", "post25", "t25"), ])
+
+# Residual autocorrelation
+print(acf(residuals(h1_model_primary, type = "pearson"), lag.max = 12, plot = FALSE))
 
 # Difference-in-differences vs F10 and F15 (national, outcome x time)
 h1_did_df <- read_excel("clean_data.xlsx", sheet = "admissions_panel") %>%
@@ -483,7 +489,7 @@ h1_model_placebo <- glm.nb(
   data = h1_placebo_df
 )
 
-print(coeftest(h1_model_placebo, vcov. = NeweyWest(h1_model_placebo, lag = 3, prewhite = FALSE))[c("plac20", "plac24"), ])
+print(coeftest(h1_model_placebo, vcov. = vcov(h1_model_placebo))[c("plac20", "plac24"), ])
 
 # Anticipation: breakpoints at relisting announcement (May 2024) and DTAM consultation (May 2025)
 h1_antic_df <- h1_df %>%
@@ -497,7 +503,7 @@ h1_model_antic <- glm.nb(
   data = h1_antic_df
 )
 
-print(coeftest(h1_model_antic, vcov. = NeweyWest(h1_model_antic, lag = 3, prewhite = FALSE))[c("antic24", "antic25", "post25"), ])
+print(coeftest(h1_model_antic, vcov. = vcov(h1_model_antic))[c("antic24", "antic25", "post25"), ])
 
 # Coding check: total admissions and F-chapter share
 h1_coding_df <- read_excel("clean_data.xlsx", sheet = "admissions_panel") %>%
@@ -642,8 +648,8 @@ h3_model_f125 <- glm.nb(
 )
 
 print(summary(h3_model_f125))
-print(coeftest(h3_model_f125, vcov. = NeweyWest(h3_model_f125, lag = 3, prewhite = FALSE))[c("post22", "post25"), ])
-print(exp(coefci(h3_model_f125, vcov. = NeweyWest(h3_model_f125, lag = 3, prewhite = FALSE))[c("post22", "post25"), ]))
+print(coeftest(h3_model_f125, vcov. = vcov(h3_model_f125))[c("post22", "post25"), ])
+print(exp(coefci(h3_model_f125, vcov. = vcov(h3_model_f125))[c("post22", "post25"), ]))
 
 # F20-F29 psychosis overall
 h3_model_f2029 <- glm.nb(
@@ -652,8 +658,8 @@ h3_model_f2029 <- glm.nb(
 )
 
 print(summary(h3_model_f2029))
-print(coeftest(h3_model_f2029, vcov. = NeweyWest(h3_model_f2029, lag = 3, prewhite = FALSE))[c("post22", "post25"), ])
-print(exp(coefci(h3_model_f2029, vcov. = NeweyWest(h3_model_f2029, lag = 3, prewhite = FALSE))[c("post22", "post25"), ]))
+print(coeftest(h3_model_f2029, vcov. = vcov(h3_model_f2029))[c("post22", "post25"), ])
+print(exp(coefci(h3_model_f2029, vcov. = vcov(h3_model_f2029))[c("post22", "post25"), ]))
 
 # T40.7 cannabis poisoning
 h3_model_t407 <- glm.nb(
@@ -662,8 +668,8 @@ h3_model_t407 <- glm.nb(
 )
 
 print(summary(h3_model_t407))
-print(coeftest(h3_model_t407, vcov. = NeweyWest(h3_model_t407, lag = 3, prewhite = FALSE))[c("post22", "post25"), ])
-print(exp(coefci(h3_model_t407, vcov. = NeweyWest(h3_model_t407, lag = 3, prewhite = FALSE))[c("post22", "post25"), ]))
+print(coeftest(h3_model_t407, vcov. = vcov(h3_model_t407))[c("post22", "post25"), ])
+print(exp(coefci(h3_model_t407, vcov. = vcov(h3_model_t407))[c("post22", "post25"), ]))
 ```
 
 # SAVE RESULTS
