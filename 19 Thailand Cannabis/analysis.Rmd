@@ -247,11 +247,11 @@ print(p1_scenarios)
 p1_power_one <- function(pre_mean, m1, m36, drop, theta, end_month, nsim) {
   d <- p1_grid %>% filter(month <= end_month)
   level22 <- log(m1 / pre_mean)
-  slope22 <- (log(m36) - log(m1)) / 35
+  slope22 <- (log(m36) - log(m1)) / 36
   mu <- exp(
     log(pre_mean) + log(1.08) / 12 * (d$t - 65) +
       0.05 * sin(2 * pi * as.numeric(d$cal_m) / 12) +
-      level22 * d$post22 + slope22 * pmin(d$t22, 36) +
+      level22 * d$post22 + slope22 * pmin(d$t22, 37) +
       log(1 - drop) * d$post25
   )
   hits <- replicate(nsim, {
