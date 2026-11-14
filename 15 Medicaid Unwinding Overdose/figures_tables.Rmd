@@ -1,0 +1,183 @@
+---
+title: "Medicaid unwinding and overdose deaths: figures and tables"
+output:
+  html_document:
+    toc: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 9, fig.height = 5.5)
+```
+
+# 00. SETUP
+
+```{r 00-setup}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+
+# Statistics
+library(fixest)
+
+# Options
+options(scipen = 999)
+theme_set(theme_classic(base_size = 14))
+
+# Colors: ordinal blue ramp for quartiles, one blue for single series
+quartile_colors <- c("1" = "#86b6ef", "2" = "#3987e5", "3" = "#1c5cab", "4" = "#0d366b")
+series_color <- "#2a78d6"
+```
+
+# E0. EXPOSURE
+
+```{r e0-figure}
+################################################################################
+# E0. Exposure: adult enrollment drop, March 2023 to June 2024
+################################################################################
+
+e0_df <- read_excel("clean_data.xlsx", sheet = "state") %>%
+  mutate(state = fct_reorder(state, drop_jun24))
+
+e0_figure_exposure <- ggplot(e0_df, aes(x = drop_jun24, y = state, color = factor(intensity_quartile))) +
+  geom_vline(xintercept = 0, color = "grey70") +
+  geom_point(size = 2.6) +
+  scale_color_manual(values = quartile_colors, name = "Quartile") +
+  labs(
+    x = "Drop in adult Medicaid enrollment, Mar 2023 to Jun 2024 (%)",
+    y = NULL,
+    caption = "Negative = enrollment grew (NC and SD expanded Medicaid during unwinding). AZ uses total enrollment."
+  ) +
+  theme(axis.text.y = element_text(size = 8), panel.grid.major.x = element_line(color = "grey92"))
+
+print(e0_figure_exposure)
+
+e0_table_exposure <- e0_df %>%
+  arrange(desc(drop_jun24)) %>%
+  select(state, drop_dec23, drop_jun24, drop_dec24, procedural_share, ex_parte_share, first_termination_month, exposure_source)
+
+print(e0_table_exposure, n = 60)
+```
+
+# F1. FIRST STAGE
+
+```{r f1-figures}
+################################################################################
+# F1. First stage figures
+################################################################################
+
+# Data (copied from analysis.Rmd F1.1)
+f1_df <- read_excel("clean_data.xlsx", sheet = "state_quarter") %>%
+  filter(year >= 2019) %>%
+  mutate(
+    quarter_id = paste0(year, "Q", quarter),
+    post = as.integer(year > 2023 | (year == 2023 & quarter >= 2)),
+    quarter_date = as.Date(paste0(year, "-", (quarter - 1) * 3 + 1, "-01"))
+  )
+
+# Raw trends: prescriptions per 100,000 residents by disenrollment quartile
+f1_trend <- f1_df %>%
+  group_by(intensity_quartile, quarter_date) %>%
+  summarise(rx_per_100k = sum(bup_rx) / sum(population) * 100000, .groups = "drop")
+
+f1_figure_trend <- ggplot(f1_trend, aes(x = quarter_date, y = rx_per_100k, color = factor(intensity_quartile))) +
+  geom_vline(xintercept = as.Date("2023-04-01"), linetype = "dashed", color = "grey60") +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  scale_color_manual(values = quartile_colors, name = "Disenrollment\nquartile", labels = c("1 (least)", "2", "3", "4 (most)")) +
+  labs(
+    x = NULL,
+    y = "Medicaid OUD buprenorphine Rx\nper 100,000 residents per quarter",
+    caption = "SDUD; suppressed cells counted as 0. Dashed line: unwinding starts (Apr 2023)."
+  )
+
+print(f1_figure_trend)
+
+# Event study (copied from analysis.Rmd F1.2)
+f1_model_event <- fepois(
+  bup_rx ~ i(year, intensity_z, ref = 2022) | state + quarter_id,
+  offset = ~ log(population),
+  cluster = ~ state,
+  data = f1_df
+)
+
+f1_event_table <- tibble(
+  term = names(coef(f1_model_event)),
+  estimate = coef(f1_model_event),
+  low = confint(f1_model_event)[, 1],
+  high = confint(f1_model_event)[, 2]
+) %>%
+  mutate(year = as.integer(str_extract(term, "\\d{4}"))) %>%
+  bind_rows(tibble(term = "ref", estimate = 0, low = 0, high = 0, year = 2022L)) %>%
+  mutate(across(c(estimate, low, high), ~ (exp(.x) - 1) * 100))
+
+print(f1_event_table)
+
+f1_figure_event <- ggplot(f1_event_table, aes(x = year, y = estimate)) +
+  geom_hline(yintercept = 0, color = "grey60") +
+  geom_vline(xintercept = 2022.5, linetype = "dashed", color = "grey60") +
+  geom_errorbar(aes(ymin = low, ymax = high), width = 0.15, color = series_color) +
+  geom_point(size = 3, color = series_color) +
+  scale_x_continuous(breaks = 2019:2025) +
+  labs(
+    x = NULL,
+    y = "% change in Medicaid buprenorphine Rx\nper 1 SD more disenrollment",
+    caption = "State x quarter Poisson, state and quarter FE, population offset, 95% CI clustered by state. Reference 2022."
+  )
+
+print(f1_figure_event)
+```
+
+# P1. POWER
+
+```{r p1-figure}
+################################################################################
+# P1. Power: MDE vs plausible effect
+################################################################################
+
+p1_results <- readRDS("results.rds")
+
+p1_table <- p1_results$p1_plausible %>%
+  select(scenario, plausible_pct, mde_pct, mde_to_plausible)
+
+print(p1_table)
+
+p1_plot_df <- bind_rows(
+  tibble(label = paste0("Plausible: ", p1_results$p1_plausible$scenario), value = p1_results$p1_plausible$plausible_pct, kind = "Plausible effect"),
+  tibble(label = paste0("MDE: ", p1_results$p1_mde$term), value = p1_results$p1_mde$mde_pct, kind = "Minimum detectable effect")
+) %>%
+  mutate(label = fct_reorder(label, value))
+
+p1_figure_power <- ggplot(p1_plot_df, aes(x = value, y = label, color = kind)) +
+  geom_segment(aes(x = 0, xend = value, yend = label), linewidth = 1) +
+  geom_point(size = 3) +
+  scale_color_manual(values = c("Plausible effect" = "#eb6834", "Minimum detectable effect" = "#2a78d6"), name = NULL) +
+  labs(
+    x = "% change in state overdose deaths per 1 SD more disenrollment",
+    y = NULL,
+    caption = "MDE: 80% power, alpha 0.05, from 2018-2022 placebo models. Plausible: first stage x excess mortality off buprenorphine."
+  ) +
+  theme(legend.position = "top")
+
+print(p1_figure_power)
+```
+
+# SAVE
+
+```{r save}
+################################################################################
+# SAVE
+################################################################################
+
+dir.create("figures", showWarnings = FALSE)
+ggsave("figures/e0_figure_exposure.png", e0_figure_exposure, width = 8, height = 10, dpi = 200)
+ggsave("figures/f1_figure_trend.png", f1_figure_trend, width = 9, height = 5.5, dpi = 200)
+ggsave("figures/f1_figure_event.png", f1_figure_event, width = 9, height = 5.5, dpi = 200)
+ggsave("figures/p1_figure_power.png", p1_figure_power, width = 10, height = 5, dpi = 200)
+write_csv(e0_table_exposure, "figures/e0_table_exposure.csv")
+write_csv(f1_event_table, "figures/f1_event_table.csv")
+write_csv(p1_table, "figures/p1_table_power.csv")
+```

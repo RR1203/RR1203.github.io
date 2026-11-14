@@ -1,0 +1,770 @@
+---
+title: "Medicaid unwinding and overdose deaths: gates (novelty, first stage, power)"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# 00. SETUP
+
+```{r 00-setup}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+library(writexl)
+
+# Statistics
+library(fixest)
+
+# Options
+options(scipen = 999)
+theme_set(theme_classic(base_size = 14))
+set.seed(1234)
+```
+
+# 01. DATA CLEANING
+
+## 01.1 Overdose deaths (CDC VSRR, 12 months ending December)
+
+```{r 01-1-deaths}
+################################################################################
+# 01.1 Overdose deaths (CDC VSRR, 12 months ending December)
+################################################################################
+
+# Read raw VSRR file (data.cdc.gov xkb8-kh2a)
+deaths_raw <- read_csv(
+  "raw/cdc_vsrr_xkb8-kh2a_raw.csv",
+  col_types = cols(.default = "c")
+)
+print(nrow(deaths_raw))
+
+# Keep December 12-month-ending values, 2018 onward, 50 states + DC
+# New York City (YC) is reported separately from the rest of New York (NY)
+deaths_long <- deaths_raw %>%
+  filter(
+    month == "December",
+    period == "12 month-ending",
+    as.integer(year) >= 2018,
+    !state %in% c("US", "PR")
+  ) %>%
+  mutate(
+    state = if_else(state == "YC", "NY", state),
+    year = as.integer(year),
+    data_value = as.numeric(data_value),
+    predicted_value = as.numeric(predicted_value),
+    percent_complete = as.numeric(percent_complete),
+    percent_pending = as.numeric(percent_pending_investigation),
+    outcome = case_when(
+      indicator == "Number of Drug Overdose Deaths" ~ "deaths_all",
+      indicator == "Opioids (T40.0-T40.4,T40.6)" ~ "deaths_opioid",
+      indicator == "Synthetic opioids, excl. methadone (T40.4)" ~ "deaths_synthetic",
+      indicator == "Psychostimulants with abuse potential (T43.6)" ~ "deaths_stimulant",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  filter(!is.na(outcome))
+
+# Sum NY + NYC; a state-year stays missing if any part is missing
+deaths_state_year <- deaths_long %>%
+  group_by(state, year, outcome) %>%
+  summarise(
+    value = if_else(any(is.na(data_value)), NA_real_, sum(data_value)),
+    predicted = if_else(any(is.na(predicted_value)), NA_real_, sum(predicted_value)),
+    percent_complete = min(percent_complete),
+    percent_pending = max(percent_pending),
+    .groups = "drop"
+  )
+
+# Wide: one row per state-year
+deaths_wide <- deaths_state_year %>%
+  select(state, year, outcome, value) %>%
+  pivot_wider(names_from = outcome, values_from = value)
+
+deaths_pred_wide <- deaths_state_year %>%
+  filter(outcome == "deaths_all") %>%
+  select(state, year, deaths_all_predicted = predicted, percent_complete, percent_pending)
+
+deaths_wide <- deaths_wide %>%
+  left_join(deaths_pred_wide, by = c("state", "year"))
+
+print(nrow(deaths_wide))
+print(table(deaths_wide$year))
+
+# Reporting log: state-years with missing values or incomplete reporting
+deaths_reporting_log <- deaths_state_year %>%
+  filter(is.na(value) | percent_complete < 100) %>%
+  mutate(issue = case_when(
+    is.na(value) ~ "value suppressed (low data quality)",
+    percent_complete < 100 ~ "percent_complete < 100",
+    TRUE ~ NA_character_
+  )) %>%
+  select(state, year, outcome, issue, percent_complete)
+
+print(deaths_reporting_log, n = 200)
+print(table(deaths_reporting_log$outcome, deaths_reporting_log$year))
+```
+
+## 01.2 Population (Census state estimates)
+
+```{r 01-2-population}
+################################################################################
+# 01.2 Population (Census state estimates)
+################################################################################
+
+# Vintage 2020 file for 2018-2019, Vintage 2025 file for 2020-2025
+pop_2010s <- read_csv("raw/census_nst_est2020_alldata.csv") %>%
+  filter(SUMLEV == "040") %>%
+  select(state_name = NAME, POPESTIMATE2018, POPESTIMATE2019)
+
+pop_2020s <- read_csv("raw/census_nst_est2025_alldata.csv") %>%
+  filter(SUMLEV == "040") %>%
+  select(state_name = NAME, POPESTIMATE2020:POPESTIMATE2025)
+
+state_lookup <- tibble(
+  state_name = c(state.name, "District of Columbia"),
+  state = c(state.abb, "DC")
+)
+
+population <- pop_2010s %>%
+  full_join(pop_2020s, by = "state_name") %>%
+  pivot_longer(-state_name, names_to = "year", values_to = "population") %>%
+  mutate(year = as.integer(str_sub(year, -4))) %>%
+  inner_join(state_lookup, by = "state_name") %>%
+  select(state, year, population)
+
+print(nrow(population))
+print(table(population$year))
+```
+
+## 01.3 Unemployment (FRED, annual mean of monthly rate)
+
+```{r 01-3-unemployment}
+################################################################################
+# 01.3 Unemployment (FRED, annual mean of monthly rate)
+################################################################################
+
+# Read the 51 monthly series (one file per state, e.g. CAUR.csv)
+unemployment_files <- list.files("raw/fred_unemployment", full.names = TRUE)
+print(length(unemployment_files))
+
+unemployment_monthly <- read_csv(
+  unemployment_files,
+  id = "file",
+  col_names = c("date", "rate"),
+  col_types = "Dd",
+  skip = 1
+) %>%
+  mutate(state = str_remove(basename(file), "UR\\.csv$"))
+
+unemployment <- unemployment_monthly %>%
+  mutate(year = as.integer(format(date, "%Y"))) %>%
+  filter(year >= 2018, year <= 2025) %>%
+  group_by(state, year) %>%
+  summarise(unemployment_rate = mean(rate), .groups = "drop")
+
+print(nrow(unemployment))
+```
+
+## 01.4 CMS Performance Indicator data: enrollment and expansion flag
+
+```{r 01-4-pi}
+################################################################################
+# 01.4 CMS Performance Indicator data: enrollment and expansion flag
+################################################################################
+
+# Read raw PI dataset (October 2026 release)
+pi_raw <- read_csv("raw/cms_pi_enrollment_raw.csv", col_types = cols(.default = "c"))
+print(nrow(pi_raw))
+
+# One row per state-month: prefer updated (U) over preliminary (P)
+# Zeros reported with "Unable to provide data" are set to missing
+pi_clean <- pi_raw %>%
+  transmute(
+    state = state_abbreviation,
+    month = reporting_period,
+    report_type = preliminary_or_updated,
+    expanded = state_expanded_medicaid,
+    total_enrollment = as.numeric(total_medicaid_and_chip_enrollment),
+    child_enrollment = as.numeric(medicaid_and_chip_child_enrollment),
+    adult_enrollment_reported = as.numeric(total_adult_medicaid_enrollment)
+  ) %>%
+  mutate(
+    total_enrollment = na_if(total_enrollment, 0),
+    child_enrollment = na_if(child_enrollment, 0),
+    report_rank = if_else(report_type == "U", 1, 2)
+  ) %>%
+  group_by(state, month) %>%
+  arrange(report_rank) %>%
+  slice(1) %>%
+  ungroup() %>%
+  mutate(adult_enrollment = total_enrollment - child_enrollment)
+
+print(nrow(pi_clean))
+
+# Check derived vs CMS-reported adult enrollment where both exist
+pi_adult_check <- pi_clean %>%
+  filter(!is.na(adult_enrollment_reported), adult_enrollment_reported > 0, !is.na(adult_enrollment))
+print(nrow(pi_adult_check))
+print(cor(pi_adult_check$adult_enrollment, pi_adult_check$adult_enrollment_reported))
+print(summary(pi_adult_check$adult_enrollment / pi_adult_check$adult_enrollment_reported))
+
+# Medicaid expansion: share of months in each year with expansion in effect
+expansion <- pi_clean %>%
+  mutate(year = as.integer(str_sub(month, 1, 4))) %>%
+  filter(year >= 2018, year <= 2025) %>%
+  group_by(state, year) %>%
+  summarise(expansion_share = mean(expanded == "Y"), .groups = "drop")
+
+expansion_date <- pi_clean %>%
+  filter(expanded == "Y") %>%
+  group_by(state) %>%
+  summarise(expansion_first_month = min(month), .groups = "drop")
+
+print(expansion_date, n = 60)
+```
+
+## 01.5 Exposure: adult enrollment change from March 2023
+
+```{r 01-5-exposure}
+################################################################################
+# 01.5 Exposure: adult enrollment change from March 2023
+################################################################################
+
+# Nearest earlier valid month for each target month (handles missing months)
+exposure_months <- pi_clean %>%
+  filter(month >= "202301", month <= "202412") %>%
+  select(state, month, adult_enrollment, total_enrollment)
+
+exposure_baseline <- exposure_months %>%
+  filter(month == "202303") %>%
+  select(state, adult_mar23 = adult_enrollment, total_mar23 = total_enrollment)
+
+exposure_dec23 <- exposure_months %>%
+  filter(month <= "202312", !is.na(total_enrollment)) %>%
+  group_by(state) %>%
+  filter(month == max(month)) %>%
+  ungroup() %>%
+  select(state, month_dec23 = month, adult_dec23 = adult_enrollment, total_dec23 = total_enrollment)
+
+exposure_jun24 <- exposure_months %>%
+  filter(month <= "202406", !is.na(total_enrollment)) %>%
+  group_by(state) %>%
+  filter(month == max(month)) %>%
+  ungroup() %>%
+  select(state, month_jun24 = month, adult_jun24 = adult_enrollment, total_jun24 = total_enrollment)
+
+exposure_dec24 <- exposure_months %>%
+  filter(month <= "202412", !is.na(total_enrollment)) %>%
+  group_by(state) %>%
+  filter(month == max(month)) %>%
+  ungroup() %>%
+  select(state, month_dec24 = month, adult_dec24 = adult_enrollment, total_dec24 = total_enrollment)
+
+# Percent change; fall back to total enrollment if adult baseline is missing
+exposure <- exposure_baseline %>%
+  left_join(exposure_dec23, by = "state") %>%
+  left_join(exposure_jun24, by = "state") %>%
+  left_join(exposure_dec24, by = "state") %>%
+  mutate(
+    exposure_source = if_else(is.na(adult_mar23) | is.na(adult_jun24), "total enrollment (adult missing)", "adult enrollment"),
+    total_pct_change_jun24 = (total_jun24 / total_mar23 - 1) * 100,
+    adult_pct_change_dec23 = if_else(exposure_source == "adult enrollment", (adult_dec23 / adult_mar23 - 1) * 100, (total_dec23 / total_mar23 - 1) * 100),
+    adult_pct_change_jun24 = if_else(exposure_source == "adult enrollment", (adult_jun24 / adult_mar23 - 1) * 100, total_pct_change_jun24),
+    adult_pct_change_dec24 = if_else(exposure_source == "adult enrollment", (adult_dec24 / adult_mar23 - 1) * 100, (total_dec24 / total_mar23 - 1) * 100),
+    drop_dec23 = -adult_pct_change_dec23,
+    drop_jun24 = -adult_pct_change_jun24,
+    drop_dec24 = -adult_pct_change_dec24,
+    drop_total_jun24 = -total_pct_change_jun24
+  ) %>%
+  filter(state %in% state_lookup$state)
+
+# Standardize (main exposure = June 2024)
+exposure <- exposure %>%
+  mutate(
+    intensity_z = (drop_jun24 - mean(drop_jun24)) / sd(drop_jun24),
+    intensity_dec23_z = (drop_dec23 - mean(drop_dec23)) / sd(drop_dec23),
+    intensity_dec24_z = (drop_dec24 - mean(drop_dec24)) / sd(drop_dec24),
+    intensity_total_z = (drop_total_jun24 - mean(drop_total_jun24)) / sd(drop_total_jun24),
+    intensity_quartile = ntile(drop_jun24, 4)
+  )
+
+print(nrow(exposure))
+print(table(exposure$exposure_source))
+print(exposure %>% filter(month_dec23 != "202312" | month_jun24 != "202406" | month_dec24 != "202412") %>% select(state, month_dec23, month_jun24, month_dec24))
+print(summary(exposure$drop_jun24))
+print(sd(exposure$drop_jun24))
+print(exposure %>% arrange(desc(drop_jun24)) %>% select(state, drop_dec23, drop_jun24, drop_dec24, exposure_source), n = 60)
+print(cor(exposure %>% select(drop_dec23, drop_jun24, drop_dec24, drop_total_jun24)))
+```
+
+## 01.6 Renewal outcomes: procedural share, ex parte share, start month
+
+```{r 01-6-renewals}
+################################################################################
+# 01.6 Renewal outcomes: procedural share, ex parte share, start month
+################################################################################
+
+# Read raw CAA reporting metrics (reporting months March 2023 - July 2024)
+caa_raw <- read_csv("raw/cms_caa_reporting_metrics_raw.csv", col_types = cols(.default = "c"))
+print(nrow(caa_raw))
+
+caa <- caa_raw %>%
+  mutate(
+    value = as.numeric(value),
+    metric = case_when(
+      str_detect(metric_name, "^Total number of beneficiaries due for renewal in the reporting month \\(Metric 5\\)") ~ "due",
+      str_detect(metric_name, "\\(Metric 5a1\\)") ~ "renewed_ex_parte",
+      str_detect(metric_name, "^Total beneficiaries determined ineligible.*\\(Metric 5b\\)") ~ "terminated_ineligible",
+      str_detect(metric_name, "^Total beneficiaries whose coverage was terminated.*\\(Metric 5c\\)") ~ "terminated_procedural",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  filter(!is.na(metric)) %>%
+  select(state, month = reporting_period, metric, value) %>%
+  pivot_wider(names_from = metric, values_from = value)
+
+print(nrow(caa))
+
+renewals <- caa %>%
+  group_by(state) %>%
+  summarise(
+    due_total = sum(due, na.rm = TRUE),
+    terminated_procedural_total = sum(terminated_procedural, na.rm = TRUE),
+    terminated_ineligible_total = sum(terminated_ineligible, na.rm = TRUE),
+    renewed_ex_parte_total = sum(renewed_ex_parte, na.rm = TRUE),
+    first_termination_month = min(month[(terminated_procedural + terminated_ineligible) > 0], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    procedural_share = terminated_procedural_total / (terminated_procedural_total + terminated_ineligible_total),
+    ex_parte_share = renewed_ex_parte_total / due_total,
+    delayed_unwinding = as.integer(first_termination_month > "202306"),
+    heavy_ex_parte = as.integer(ex_parte_share >= quantile(ex_parte_share, 0.75, na.rm = TRUE))
+  ) %>%
+  filter(state %in% state_lookup$state)
+
+print(nrow(renewals))
+print(summary(renewals$procedural_share))
+print(summary(renewals$ex_parte_share))
+print(table(renewals$first_termination_month))
+print(renewals %>% filter(delayed_unwinding == 1 | heavy_ex_parte == 1) %>% select(state, first_termination_month, ex_parte_share, delayed_unwinding, heavy_ex_parte), n = 60)
+```
+
+## 01.7 Medicaid buprenorphine prescriptions (SDUD)
+
+```{r 01-7-sdud}
+################################################################################
+# 01.7 Medicaid buprenorphine prescriptions (SDUD)
+################################################################################
+
+# FDA NDC directory extract (buprenorphine products, current + excluded files)
+fda_ndc <- read_csv("raw/fda_buprenorphine_ndc_raw.csv", col_types = cols(.default = "c")) %>%
+  separate(ndc_package_code, into = c("ndc_labeler", "ndc_product", "ndc_package"), sep = "-", remove = FALSE) %>%
+  mutate(
+    ndc = paste0(str_pad(ndc_labeler, 5, "left", "0"), str_pad(ndc_product, 4, "left", "0"), str_pad(ndc_package, 2, "left", "0")),
+    name_all = toupper(paste(proprietary_name, nonproprietary_name, substance)),
+    route = toupper(replace_na(route, "")),
+    formulation = case_when(
+      str_detect(route, "TRANSDERMAL") | str_detect(name_all, "BUTRANS|TRANSDERMAL") ~ "pain",
+      str_detect(name_all, "BELBUCA") ~ "pain",
+      route == "BUCCAL" & !str_detect(name_all, "NALOXONE") ~ "pain",
+      str_detect(route, "INTRAMUSCULAR|INTRAVENOUS") | str_detect(name_all, "BUPRENEX") ~ "pain",
+      str_detect(route, "SUBLINGUAL|SUBCUTANEOUS") ~ "oud",
+      str_detect(name_all, "NALOXONE|SUBOXONE|SUBUTEX|ZUBSOLV|BUNAVAIL|SUBLOCADE|BRIXADI") ~ "oud",
+      TRUE ~ "unknown"
+    ),
+    fda_source_rank = if_else(source == "current", 1, 2)
+  ) %>%
+  group_by(ndc) %>%
+  arrange(fda_source_rank) %>%
+  slice(1) %>%
+  ungroup() %>%
+  select(ndc, fda_name = proprietary_name, fda_route = route, fda_formulation = formulation)
+
+print(nrow(fda_ndc))
+print(table(fda_ndc$fda_formulation))
+
+# Read raw SDUD buprenorphine extract
+sdud_raw <- read_csv("raw/sdud_buprenorphine_2018_2025_raw.csv", col_types = cols(.default = "c"))
+print(nrow(sdud_raw))
+
+# Drop the national row (XX) and duplicates; classify each NDC
+sdud <- sdud_raw %>%
+  filter(state != "XX") %>%
+  distinct() %>%
+  mutate(
+    ndc = str_pad(ndc, 11, "left", "0"),
+    year = as.integer(year),
+    quarter = as.integer(quarter),
+    suppressed = suppression_used == "true",
+    prescriptions = as.numeric(number_of_prescriptions)
+  ) %>%
+  left_join(fda_ndc, by = "ndc") %>%
+  mutate(
+    formulation = case_when(
+      !is.na(fda_formulation) & fda_formulation != "unknown" ~ fda_formulation,
+      str_detect(product_name, "^(SUBOX|SUBUT|ZUBSO|BUNAV|SUBLO|BRIXA)") ~ "oud",
+      str_detect(product_name, "BUPRENEX|BUTRANS|BELBUCA") ~ "pain",
+      TRUE ~ "unknown"
+    )
+  )
+
+print(nrow(sdud))
+print(table(sdud$formulation, useNA = "ifany"))
+print(sdud %>% group_by(formulation) %>% summarise(rx = sum(prescriptions, na.rm = TRUE), rows = n()))
+print(sdud %>% filter(formulation == "unknown") %>% count(product_name, sort = TRUE))
+
+# State-quarter totals of OUD buprenorphine; suppressed cells counted as 0
+bup_state_quarter <- sdud %>%
+  filter(formulation == "oud", state %in% state_lookup$state) %>%
+  group_by(state, year, quarter) %>%
+  summarise(
+    bup_rx = sum(prescriptions, na.rm = TRUE),
+    bup_rx_suppressed_rows = sum(suppressed),
+    .groups = "drop"
+  ) %>%
+  mutate(bup_rx_upper = bup_rx + 10 * bup_rx_suppressed_rows)
+
+print(nrow(bup_state_quarter))
+print(table(bup_state_quarter$year, bup_state_quarter$quarter))
+print(sum(bup_state_quarter$bup_rx_suppressed_rows) * 10 / sum(bup_state_quarter$bup_rx))
+```
+
+## 01.8 Assemble and write clean Excel
+
+```{r 01-8-write}
+################################################################################
+# 01.8 Assemble and write clean Excel
+################################################################################
+
+# State-level table (exposure + renewals + expansion date)
+state_table <- exposure %>%
+  left_join(renewals, by = "state") %>%
+  left_join(expansion_date, by = "state")
+
+print(nrow(state_table))
+
+# State-year panel
+state_year <- deaths_wide %>%
+  inner_join(population, by = c("state", "year")) %>%
+  left_join(unemployment, by = c("state", "year")) %>%
+  left_join(expansion, by = c("state", "year")) %>%
+  left_join(state_table %>% select(state, drop_jun24, intensity_z, intensity_dec23_z, intensity_dec24_z, intensity_total_z, intensity_quartile, delayed_unwinding, heavy_ex_parte, procedural_share), by = "state")
+
+print(nrow(state_year))
+print(table(state_year$year))
+
+# State-quarter panel (population of the matching year)
+state_quarter <- bup_state_quarter %>%
+  inner_join(population, by = c("state", "year")) %>%
+  left_join(state_table %>% select(state, drop_jun24, intensity_z, intensity_quartile, delayed_unwinding, heavy_ex_parte), by = "state")
+
+print(nrow(state_quarter))
+
+write_xlsx(
+  list(
+    state_year = state_year,
+    state = state_table,
+    state_quarter = state_quarter,
+    reporting_log = deaths_reporting_log,
+    ndc_lookup = fda_ndc
+  ),
+  "clean_data.xlsx"
+)
+```
+
+# F1. FIRST STAGE: DISENROLLMENT → MEDICAID BUPRENORPHINE
+
+## F1.1 Data preparation
+
+```{r f1-1-prep}
+################################################################################
+# F1.1 Data preparation
+################################################################################
+
+f1_df <- read_excel("clean_data.xlsx", sheet = "state_quarter") %>%
+  filter(year >= 2019) %>%
+  mutate(
+    quarter_id = paste0(year, "Q", quarter),
+    post = as.integer(year > 2023 | (year == 2023 & quarter >= 2))
+  )
+
+print(nrow(f1_df))
+print(n_distinct(f1_df$state))
+print(range(f1_df$quarter_id))
+print(table(f1_df$post))
+```
+
+## F1.2 Analysis
+
+```{r f1-2-analysis}
+################################################################################
+# F1.2 Analysis
+################################################################################
+
+# Main first stage: intensity x post
+f1_model_main <- fepois(
+  bup_rx ~ intensity_z:post | state + quarter_id,
+  offset = ~ log(population),
+  cluster = ~ state,
+  data = f1_df
+)
+
+print(summary(f1_model_main))
+print(coeftable(f1_model_main)["intensity_z:post", ])
+print(confint(f1_model_main)["intensity_z:post", ])
+print((exp(coef(f1_model_main)["intensity_z:post"]) - 1) * 100)
+
+# Event study by year (reference 2022)
+f1_model_event <- fepois(
+  bup_rx ~ i(year, intensity_z, ref = 2022) | state + quarter_id,
+  offset = ~ log(population),
+  cluster = ~ state,
+  data = f1_df
+)
+
+print(summary(f1_model_event))
+print(confint(f1_model_event))
+
+# Pre-trend test (2019-2021 jointly zero)
+print(wald(f1_model_event, keep = "2019|2020|2021"))
+
+# Gate rule: negative and p < 0.05
+f1_gate_pass <- coef(f1_model_main)["intensity_z:post"] < 0 & pvalue(f1_model_main)["intensity_z:post"] < 0.05
+print(f1_gate_pass)
+```
+
+## F1.3 Robustness
+
+```{r f1-3-robustness}
+################################################################################
+# F1.3 Robustness
+################################################################################
+
+# Suppressed cells at upper bound (10 prescriptions each)
+f1_model_upper <- fepois(
+  bup_rx_upper ~ intensity_z:post | state + quarter_id,
+  offset = ~ log(population),
+  cluster = ~ state,
+  data = f1_df
+)
+
+print(summary(f1_model_upper))
+print(coeftable(f1_model_upper)["intensity_z:post", ])
+print(confint(f1_model_upper)["intensity_z:post", ])
+
+# Without North Carolina and South Dakota (expanded during unwinding)
+f1_model_no_expanders <- fepois(
+  bup_rx ~ intensity_z:post | state + quarter_id,
+  offset = ~ log(population),
+  cluster = ~ state,
+  data = f1_df %>% filter(!state %in% c("NC", "SD"))
+)
+
+print(summary(f1_model_no_expanders))
+print(coeftable(f1_model_no_expanders)["intensity_z:post", ])
+print(confint(f1_model_no_expanders)["intensity_z:post", ])
+
+# Quartiles of disenrollment (reference = lowest quartile)
+f1_model_quartile <- fepois(
+  bup_rx ~ i(intensity_quartile, post, ref = 1) | state + quarter_id,
+  offset = ~ log(population),
+  cluster = ~ state,
+  data = f1_df
+)
+
+print(summary(f1_model_quartile))
+print(confint(f1_model_quartile))
+```
+
+# P1. POWER: MINIMUM DETECTABLE EFFECT VS PLAUSIBLE EFFECT
+
+## P1.1 Data preparation
+
+```{r p1-1-prep}
+################################################################################
+# P1.1 Data preparation
+################################################################################
+
+# Deaths, 2018-2022 only
+p1_df <- read_excel("clean_data.xlsx", sheet = "state_year") %>%
+  filter(year <= 2022) %>%
+  mutate(
+    placebo_2021 = as.integer(year == 2021),
+    placebo_2022 = as.integer(year == 2022),
+    placebo_post = as.integer(year >= 2021)
+  )
+
+print(nrow(p1_df))
+print(table(p1_df$year))
+
+# Buprenorphine panel for the first-stage refit
+p1_bup <- read_excel("clean_data.xlsx", sheet = "state_quarter") %>%
+  filter(year >= 2019) %>%
+  mutate(
+    quarter_id = paste0(year, "Q", quarter),
+    post = as.integer(year > 2023 | (year == 2023 & quarter >= 2))
+  )
+
+print(nrow(p1_bup))
+
+# Baseline quantities (2022)
+p1_mean_deaths_2022 <- mean(p1_df$deaths_all[p1_df$year == 2022])
+p1_mean_bup_rx_2022 <- p1_bup %>%
+  filter(year == 2022) %>%
+  group_by(state) %>%
+  summarise(rx = sum(bup_rx)) %>%
+  pull(rx) %>%
+  mean()
+
+print(p1_mean_deaths_2022)
+print(p1_mean_bup_rx_2022)
+```
+
+## P1.2 Analysis
+
+```{r p1-2-analysis}
+################################################################################
+# P1.2 Analysis
+################################################################################
+
+# Placebo model mirroring the main model: separate fake post-year terms
+p1_model_years <- fepois(
+  deaths_all ~ intensity_z:placebo_2021 + intensity_z:placebo_2022 | state + year,
+  offset = ~ log(population),
+  cluster = ~ state,
+  data = p1_df
+)
+
+print(summary(p1_model_years))
+
+# Pooled placebo (one fake post term, 2021-2022)
+p1_model_pooled <- fepois(
+  deaths_all ~ intensity_z:placebo_post | state + year,
+  offset = ~ log(population),
+  cluster = ~ state,
+  data = p1_df
+)
+
+print(summary(p1_model_pooled))
+
+# MDE at 80% power, two-sided alpha 0.05, as % change per 1 SD of intensity
+p1_z_factor <- qnorm(0.975) + qnorm(0.80)
+p1_mde <- tibble(
+  term = c("placebo 2021", "placebo 2022", "pooled 2021-2022"),
+  se_log = c(se(p1_model_years)["intensity_z:placebo_2021"], se(p1_model_years)["intensity_z:placebo_2022"], se(p1_model_pooled)["intensity_z:placebo_post"])
+) %>%
+  mutate(mde_pct = (exp(p1_z_factor * se_log) - 1) * 100)
+
+print(p1_mde)
+p1_mde_gate <- min(p1_mde$mde_pct)
+print(p1_mde_gate)
+
+# First-stage refit (copied from F1.2)
+p1_model_first_stage <- fepois(
+  bup_rx ~ intensity_z:post | state + quarter_id,
+  offset = ~ log(population),
+  cluster = ~ state,
+  data = p1_bup
+)
+
+print(summary(p1_model_first_stage))
+print(confint(p1_model_first_stage)["intensity_z:post", ])
+
+# Plausible effect per 1 SD of intensity
+# Lost prescriptions per state-year = baseline annual Rx x proportional drop
+p1_fs_pct <- 1 - exp(coef(p1_model_first_stage)["intensity_z:post"])
+p1_fs_pct_ci <- 1 - exp(confint(p1_model_first_stage)["intensity_z:post", 1])
+p1_lost_rx <- p1_mean_bup_rx_2022 * p1_fs_pct
+p1_lost_rx_ci <- p1_mean_bup_rx_2022 * p1_fs_pct_ci
+
+# Each prescription = 30 days of treatment (generous)
+p1_lost_person_years <- p1_lost_rx * 30 / 365
+p1_lost_person_years_ci <- p1_lost_rx_ci * 30 / 365
+
+# Excess mortality off vs on buprenorphine per 1,000 person-years (Sordo 2017)
+p1_excess_overdose <- (4.6 - 1.4) / 1000
+p1_excess_allcause <- (9.5 - 4.3) / 1000
+
+p1_plausible <- tibble(
+  scenario = c(
+    "overdose excess, point estimate",
+    "all-cause excess, point estimate",
+    "all-cause excess, first-stage CI bound"
+  ),
+  lost_rx = c(p1_lost_rx, p1_lost_rx, p1_lost_rx_ci),
+  lost_person_years = c(p1_lost_person_years, p1_lost_person_years, p1_lost_person_years_ci),
+  excess_per_py = c(p1_excess_overdose, p1_excess_allcause, p1_excess_allcause)
+) %>%
+  mutate(
+    excess_deaths = lost_person_years * excess_per_py,
+    plausible_pct = excess_deaths / p1_mean_deaths_2022 * 100,
+    mde_pct = p1_mde_gate,
+    mde_to_plausible = mde_pct / plausible_pct
+  )
+
+print(p1_plausible)
+
+# Break-even: excess mortality per 1,000 person-years needed for plausible = MDE / 2
+p1_breakeven_per_1000py <- (p1_mde_gate / 2 / 100 * p1_mean_deaths_2022) / p1_lost_person_years * 1000
+print(p1_breakeven_per_1000py)
+
+# Gate rule: stop if MDE > 2 x plausible effect (most generous scenario)
+p1_gate_pass <- min(p1_plausible$mde_to_plausible) <= 2
+print(p1_gate_pass)
+```
+
+# GATE DECISION
+
+```{r gate}
+################################################################################
+# GATE DECISION
+################################################################################
+
+# Novelty passed (00_novelty.md); first stage and power from F1 and P1
+print(f1_gate_pass)
+print(p1_gate_pass)
+print(if_else(f1_gate_pass & p1_gate_pass, "CONTINUE to outcome models", "STOP: gate failed, outcome models not run"))
+```
+
+# SAVE RESULTS
+
+```{r save}
+################################################################################
+# SAVE RESULTS
+################################################################################
+
+saveRDS(
+  list(
+    f1_model_main = f1_model_main,
+    f1_model_event = f1_model_event,
+    f1_model_upper = f1_model_upper,
+    f1_model_no_expanders = f1_model_no_expanders,
+    f1_model_quartile = f1_model_quartile,
+    f1_gate_pass = f1_gate_pass,
+    p1_model_years = p1_model_years,
+    p1_model_pooled = p1_model_pooled,
+    p1_mde = p1_mde,
+    p1_plausible = p1_plausible,
+    p1_breakeven_per_1000py = p1_breakeven_per_1000py,
+    p1_gate_pass = p1_gate_pass
+  ),
+  "results.rds"
+)
+```
+
+# SESSION INFO
+
+```{r session-info}
+print(sessionInfo())
+```
