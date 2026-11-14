@@ -35,3 +35,5 @@ Thumbs.db
 # --- local scratch ----------------------------------------------------
 node_modules/
 *.log
+17 DST Abolition/MX/raw/edr/*.zip
+17 DST Abolition/MX/raw/census/*.zip

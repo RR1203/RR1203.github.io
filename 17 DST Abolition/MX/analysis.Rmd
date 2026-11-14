@@ -1,0 +1,1198 @@
+---
+title: "DST abolition natural experiment — Mexico arm"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 10, fig.height = 6)
+```
+
+# 00. SETUP
+
+```{r s00_setup}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(data.table)
+library(readxl)
+library(writexl)
+
+# Statistics
+library(fixest)
+
+# Sun position
+library(suncalc)
+
+# Figures
+library(patchwork)
+library(scales)
+
+# Options
+options(scipen = 999, dplyr.summarise.inform = FALSE)
+theme_set(theme_classic(base_size = 13))
+set.seed(1234)
+setFixest_nthreads(4)
+dir.create("figures", showWarnings = FALSE)
+
+# Key dates (Ley de los Husos Horarios, DOF 28-10-2022, in force 30-10-2022; reform DOF 29-11-2022, in force 30-11-2022)
+abolition_date <- as.Date("2022-10-30")
+chih_reform_date <- as.Date("2022-11-30")
+qroo_change_date <- as.Date("2015-02-01")
+covid_start <- as.Date("2020-03-01")
+covid_end <- as.Date("2021-12-31")
+study_start <- as.Date("2012-01-01")
+study_end <- as.Date("2024-12-31")
+```
+
+# 01. DATA CLEANING
+
+## 01.1 Municipalities: population and population-weighted centroids (Census 2020 ITER)
+
+```{r s01_1_municipalities}
+################################################################################
+# 01.1 Municipalities: population and centroids
+################################################################################
+
+# Read census localities
+iter_raw <- fread(
+  cmd = "unzip -p raw/census/iter_00_cpv2020_csv.zip iter_00_cpv2020/conjunto_de_datos/conjunto_de_datos_iter_00CSV20.csv",
+  select = c("ENTIDAD", "NOM_ENT", "MUN", "NOM_MUN", "LOC", "LONGITUD", "LATITUD", "POBTOT"),
+  colClasses = "character", encoding = "UTF-8"
+)
+print(nrow(iter_raw))
+
+# Municipality totals (LOC == 0000) and localities with coordinates
+mun_totals <- iter_raw %>%
+  filter(MUN != "000", LOC == "0000") %>%
+  transmute(cve_mun = paste0(ENTIDAD, MUN), ent = ENTIDAD, state_name = NOM_ENT,
+            mun_name = NOM_MUN, pop2020 = as.numeric(POBTOT))
+
+loc_coords <- iter_raw %>%
+  filter(MUN != "000", !LOC %in% c("0000", "9998", "9999"), LONGITUD != "") %>%
+  mutate(
+    lon_parts = str_match(LONGITUD, "(\\d+)[^0-9]+(\\d+)'([0-9.]+)"),
+    lat_parts = str_match(LATITUD, "(\\d+)[^0-9]+(\\d+)'([0-9.]+)"),
+    lon_d = as.numeric(lon_parts[, 2]), lon_m = as.numeric(lon_parts[, 3]), lon_s = as.numeric(lon_parts[, 4]),
+    lat_d = as.numeric(lat_parts[, 2]), lat_m = as.numeric(lat_parts[, 3]), lat_s = as.numeric(lat_parts[, 4]),
+    lon = -(lon_d + lon_m / 60 + lon_s / 3600),
+    lat = lat_d + lat_m / 60 + lat_s / 3600,
+    pop = as.numeric(POBTOT),
+    cve_mun = paste0(ENTIDAD, MUN)
+  ) %>%
+  filter(!is.na(lon), !is.na(lat), !is.na(pop))
+
+# Population-weighted centroid (localities with 0 population get weight 1)
+mun_centroids <- loc_coords %>%
+  group_by(cve_mun) %>%
+  summarise(lon = weighted.mean(lon, pmax(pop, 1)), lat = weighted.mean(lat, pmax(pop, 1)))
+
+mun_df <- mun_totals %>%
+  left_join(mun_centroids, by = "cve_mun")
+
+print(nrow(mun_df))
+print(sum(is.na(mun_df$lon)))
+print(summary(mun_df$lon))
+print(summary(mun_df$lat))
+```
+
+## 01.2 Clock-regime groups (exposure)
+
+```{r s01_2_regime_groups}
+################################################################################
+# 01.2 Clock-regime groups
+################################################################################
+
+# Art. 5 Ley de los Husos Horarios: border municipalities that keep US-aligned DST
+border_coah_nl_tamps <- c(
+  "05002", "05003", "05012", "05013", "05014", "05019", "05022", "05023", "05025", "05037", "05038", # Coahuila: Acuña, Allende, Guerrero, Hidalgo, Jiménez, Morelos, Nava, Ocampo, Piedras Negras, Villa Unión, Zaragoza
+  "19005",                                                                                          # Nuevo León: Anáhuac
+  "28027", "28014", "28024", "28025", "28007", "28015", "28032", "28033", "28040", "28022"           # Tamaulipas: Nuevo Laredo, Guerrero, Mier, Miguel Alemán, Camargo, Gustavo Díaz Ordaz, Reynosa, Río Bravo, Valle Hermoso, Matamoros
+)
+border_chih_105 <- c("08035", "08005", "08037", "08053", "08028") # Janos, Ascensión, Juárez, Praxedis G. Guerrero, Guadalupe
+ambiguous_chih_90 <- c("08015", "08052", "08042")                 # Coyame del Sotol, Ojinaga, Manuel Benavides
+
+# Assign group (A abolished, A2 Chihuahua non-border, B kept DST, C never DST, AMB ambiguous)
+mun_df <- mun_df %>%
+  mutate(
+    group = case_when(
+      cve_mun %in% ambiguous_chih_90 ~ "AMB",
+      ent == "02" ~ "B",
+      cve_mun %in% border_coah_nl_tamps ~ "B",
+      cve_mun %in% border_chih_105 ~ "B",
+      ent == "08" ~ "A2",
+      ent %in% c("26", "23") ~ "C",
+      TRUE ~ "A"
+    ),
+    zone_pre = case_when(
+      ent == "02" ~ "Noroeste (UTC-8)",
+      ent %in% c("03", "08", "25", "26") ~ "Pacifico (UTC-7)",
+      ent == "18" & cve_mun != "18020" ~ "Pacifico (UTC-7)",
+      TRUE ~ "Centro (UTC-6)"
+    ),
+    std_offset_pre = case_when(
+      zone_pre == "Noroeste (UTC-8)" ~ -480,
+      zone_pre == "Pacifico (UTC-7)" ~ -420,
+      TRUE ~ -360
+    ),
+    schedule_pre = case_when(
+      ent == "26" ~ "none",
+      group %in% c("B", "AMB") ~ "US",
+      TRUE ~ "national"
+    )
+  )
+
+print(table(mun_df$group))
+print(table(mun_df$group, mun_df$zone_pre))
+print(mun_df %>% group_by(group) %>% summarise(n_mun = n(), pop = sum(pop2020)))
+
+# Municipalities within 50 km of a municipality in a different clock group ("near" the regime boundary)
+dist_km <- 6371 * acos(pmin(1, outer(sin(mun_df$lat * pi / 180), sin(mun_df$lat * pi / 180)) +
+  outer(cos(mun_df$lat * pi / 180), cos(mun_df$lat * pi / 180)) * cos(outer(mun_df$lon * pi / 180, mun_df$lon * pi / 180, "-"))))
+other_group <- outer(mun_df$group, mun_df$group, "!=")
+mun_df$near_boundary <- rowSums(dist_km < 50 & other_group, na.rm = TRUE) > 0
+mun_df <- mun_df %>%
+  mutate(group_detail = if_else(near_boundary & group != "AMB", paste0(group, "_near"), group))
+
+print(table(mun_df$group_detail))
+```
+
+## 01.3 Calendar, DST schedules and transition events
+
+```{r s01_3_calendar}
+################################################################################
+# 01.3 Calendar and transition events
+################################################################################
+
+# Daily calendar
+cal_df <- tibble(date = seq(as.Date("2011-11-01"), as.Date("2025-01-31"), by = "day")) %>%
+  mutate(year = year(date), month = month(date), dow = lubridate::wday(date, week_start = 1), mday = mday(date))
+
+# Rule dates per year: national (1st Sun Apr / last Sun Oct), US (2nd Sun Mar / 1st Sun Nov)
+rule_dates <- cal_df %>%
+  filter(dow == 7) %>%
+  group_by(year) %>%
+  summarise(
+    nat_spring = min(date[month == 4]),
+    nat_fall = max(date[month == 10]),
+    us_spring = sort(date[month == 3])[2],
+    us_fall = min(date[month == 11])
+  )
+print(rule_dates, n = 20)
+
+# DST-active flags by date
+cal_df <- cal_df %>%
+  left_join(rule_dates, by = "year") %>%
+  mutate(
+    nat_dst = date >= nat_spring & date < nat_fall,
+    us_dst = date >= us_spring & date < us_fall
+  )
+
+# Mexican holidays (federal rest days + Holy Thu/Fri, Nov 1-2, Dec 12, Dec 24/31)
+easter_df <- tibble(year = 2011:2025) %>%
+  mutate(
+    a = year %% 19, b = year %/% 100, c = year %% 100, d = b %/% 4, e = b %% 4,
+    f = (b + 8) %/% 25, g = (b - f + 1) %/% 3, h = (19 * a + b - d - g + 15) %% 30,
+    i = c %/% 4, k = c %% 4, l = (32 + 2 * e + 2 * i - h - k) %% 7, m = (a + 11 * h + 22 * l) %/% 451,
+    easter = make_date(year, (h + l - 7 * m + 114) %/% 31, ((h + l - 7 * m + 114) %% 31) + 1)
+  ) %>%
+  select(year, easter)
+print(easter_df)
+
+cal_df <- cal_df %>%
+  left_join(easter_df, by = "year") %>%
+  group_by(year, month) %>%
+  mutate(monday_rank = cumsum(dow == 1)) %>%
+  ungroup() %>%
+  mutate(
+    holiday = (month == 1 & mday == 1) | (month == 2 & dow == 1 & monday_rank == 1) |
+      (month == 3 & dow == 1 & monday_rank == 3) | (month == 5 & mday == 1) |
+      (month == 9 & mday == 16) | (month == 11 & dow == 1 & monday_rank == 3) |
+      (month == 11 & mday %in% c(1, 2)) | (month == 12 & mday %in% c(12, 24, 25, 31)),
+    holy_week = date >= easter - 7 & date <= easter,
+    holy_thu_fri = date %in% c(easter - 3, easter - 2)
+  )
+
+# Transition events (one row per schedule x type x year)
+events_df <- bind_rows(
+  rule_dates %>% transmute(year, schedule = "national", type = "spring", t0 = nat_spring),
+  rule_dates %>% transmute(year, schedule = "national", type = "fall", t0 = nat_fall),
+  rule_dates %>% transmute(year, schedule = "US", type = "spring", t0 = us_spring),
+  rule_dates %>% transmute(year, schedule = "US", type = "fall", t0 = us_fall)
+) %>%
+  filter(year >= 2012, year <= 2024) %>%
+  mutate(
+    post_abolition = t0 > abolition_date,
+    covid = t0 + 27 >= covid_start & t0 - 21 <= covid_end,
+    event_id = paste(schedule, type, year, sep = "_")
+  )
+print(events_df, n = 60)
+```
+
+## 01.4 Deaths (INEGI EDR 2012–2024 registration files)
+
+```{r s01_4_deaths}
+################################################################################
+# 01.4 Deaths
+################################################################################
+
+# Registration-year files (each holds deaths registered that year, any occurrence year)
+edr_files <- tibble(
+  reg_year = 2012:2024,
+  inner = c(
+    "conjunto_de_datos/defunciones_generales_2012.csv",
+    "conjunto_de_datos/defunciones_generales_2013.csv",
+    "conjunto_de_datos/defunciones_generales_2014.csv",
+    "conjunto_de_datos/defunciones_generales_2015.csv",
+    "conjunto_de_datos/defunciones_generales_2016.csv",
+    "conjunto_de_datos/conjunto_de_datos_defunciones_generales_2017.CSV",
+    "conjunto_de_datos/conjunto_de_datos_defunciones_registradas_2018.CSV",
+    "conjunto_de_datos/conjunto_de_datos_defunciones_registradas_2019.CSV",
+    "conjunto_de_datos/conjunto_de_datos_defunciones_registrados_2020.csv",
+    "conjunto_de_datos/conjunto_de_datos_defunciones_registradas_2021.csv",
+    "conjunto_de_datos/conjunto_de_datos_defunciones_registradas_2022.csv",
+    "conjunto_de_datos/conjunto_de_datos_defunciones_registradas_2023_csv.CSV",
+    "conjunto_de_datos/conjunto_de_datos_defunciones_registradas24_csv.csv"
+  )
+)
+
+# Read the same columns from every file
+deaths_raw <- rbindlist(lapply(seq_len(nrow(edr_files)), function(j) {
+  fread(
+    cmd = sprintf("unzip -p raw/edr/edr_%d.zip '%s'", edr_files$reg_year[j], edr_files$inner[j]),
+    select = c("ent_resid", "mun_resid", "ent_ocurr", "mun_ocurr", "causa_def", "sexo", "edad",
+               "dia_ocurr", "mes_ocurr", "anio_ocur"),
+    colClasses = "character", encoding = "Latin-1"
+  )[, reg_year := edr_files$reg_year[j]]
+}))
+print(nrow(deaths_raw))
+print(table(deaths_raw$reg_year))
+
+# Clean codes, occurrence date and outcomes
+deaths_df <- deaths_raw %>%
+  mutate(
+    across(c(ent_resid, mun_resid, ent_ocurr, mun_ocurr, causa_def), ~ str_trim(.x)),
+    date = suppressWarnings(make_date(as.integer(anio_ocur), as.integer(mes_ocurr), as.integer(dia_ocurr))),
+    cve_res = if_else(as.integer(ent_resid) <= 32 & !mun_resid %in% c("999", "998"), paste0(ent_resid, mun_resid), NA_character_),
+    cve_occ = if_else(as.integer(ent_ocurr) <= 32 & !mun_ocurr %in% c("999", "998"), paste0(ent_ocurr, mun_ocurr), NA_character_),
+    icd3 = str_sub(causa_def, 1, 3),
+    outcome = case_when(
+      icd3 >= "X60" & icd3 <= "X84" ~ "suicide",
+      icd3 >= "I21" & icd3 <= "I22" ~ "ami",
+      icd3 >= "V01" & icd3 <= "V89" ~ "road",
+      (icd3 >= "X85" & icd3 <= "X99") | (icd3 >= "Y00" & icd3 <= "Y09") ~ "homicide",
+      (str_sub(icd3, 1, 1) == "C") | (icd3 >= "D00" & icd3 <= "D48") ~ "neoplasm",
+      TRUE ~ NA_character_
+    )
+  )
+
+# Exclusions
+print(nrow(deaths_df))
+print(sum(is.na(deaths_df$date)))
+deaths_df <- deaths_df %>% filter(!is.na(date), date >= study_start, date <= study_end)
+print(nrow(deaths_df))
+print(table(deaths_df$outcome, useNA = "ifany"))
+deaths_df <- deaths_df %>% filter(!is.na(outcome))
+print(nrow(deaths_df))
+print(sum(is.na(deaths_df$cve_res)))
+print(sum(!deaths_df$cve_res %in% mun_df$cve_mun & !is.na(deaths_df$cve_res)))
+print(table(deaths_df$cve_res[!deaths_df$cve_res %in% mun_df$cve_mun & !is.na(deaths_df$cve_res)]))
+
+# Municipalities created after the 2020 census mapped to parent (San Quintin 02006 exists; San Felipe 02007 -> Mexicali 02002)
+deaths_df <- deaths_df %>%
+  mutate(
+    cve_res = if_else(cve_res == "02007", "02002", cve_res),
+    cve_occ = if_else(cve_occ == "02007", "02002", cve_occ)
+  )
+print(table(year(deaths_df$date), deaths_df$outcome))
+rm(deaths_raw)
+gc()
+```
+
+## 01.5 Daily counts by state x group (Q1) and municipality-month counts (Q2)
+
+```{r s01_5_counts}
+################################################################################
+# 01.5 Count tables
+################################################################################
+
+# Residence- and occurrence-based group labels
+deaths_df <- deaths_df %>%
+  left_join(mun_df %>% select(cve_res = cve_mun, ent_res = ent, group_res = group_detail), by = "cve_res") %>%
+  left_join(mun_df %>% select(cve_occ = cve_mun, ent_occ = ent, group_occ = group_detail), by = "cve_occ")
+print(sum(is.na(deaths_df$group_res)))
+print(sum(is.na(deaths_df$group_occ)))
+
+# Daily counts: state x group_detail x date, one column per outcome (residence and occurrence)
+daily_res <- deaths_df %>%
+  filter(!is.na(group_res)) %>%
+  count(ent = ent_res, group_detail = group_res, date, outcome) %>%
+  pivot_wider(names_from = outcome, values_from = n, names_prefix = "res_", values_fill = 0)
+daily_occ <- deaths_df %>%
+  filter(!is.na(group_occ)) %>%
+  count(ent = ent_occ, group_detail = group_occ, date, outcome) %>%
+  pivot_wider(names_from = outcome, values_from = n, names_prefix = "occ_", values_fill = 0)
+
+daily_counts <- mun_df %>%
+  distinct(ent, group_detail) %>%
+  cross_join(tibble(date = seq(study_start, study_end, by = "day"))) %>%
+  left_join(daily_res, by = c("ent", "group_detail", "date")) %>%
+  left_join(daily_occ, by = c("ent", "group_detail", "date")) %>%
+  mutate(across(starts_with(c("res_", "occ_")), ~ replace_na(.x, 0)))
+print(nrow(daily_counts))
+print(colSums(daily_counts %>% select(starts_with(c("res_", "occ_")))))
+
+# Municipality-month counts
+mm_res <- deaths_df %>%
+  filter(!is.na(cve_res), cve_res %in% mun_df$cve_mun) %>%
+  mutate(ym = floor_date(date, "month")) %>%
+  count(cve_mun = cve_res, ym, outcome) %>%
+  pivot_wider(names_from = outcome, values_from = n, names_prefix = "res_", values_fill = 0)
+mm_occ <- deaths_df %>%
+  filter(!is.na(cve_occ), cve_occ %in% mun_df$cve_mun) %>%
+  mutate(ym = floor_date(date, "month")) %>%
+  count(cve_mun = cve_occ, ym, outcome) %>%
+  pivot_wider(names_from = outcome, values_from = n, names_prefix = "occ_", values_fill = 0)
+
+muni_month <- mun_df %>%
+  select(cve_mun) %>%
+  cross_join(tibble(ym = seq(study_start, as.Date("2024-12-01"), by = "month"))) %>%
+  left_join(mm_res, by = c("cve_mun", "ym")) %>%
+  left_join(mm_occ, by = c("cve_mun", "ym")) %>%
+  mutate(across(starts_with(c("res_", "occ_")), ~ replace_na(.x, 0)))
+print(nrow(muni_month))
+print(colSums(muni_month %>% select(starts_with(c("res_", "occ_")))))
+```
+
+## 01.6 Sun-clock exposure (dose)
+
+```{r s01_6_sun}
+################################################################################
+# 01.6 Sun-clock exposure
+################################################################################
+
+# Sunrise, sunset and solar noon (UTC) per municipality and day, 2021-11-01 to 2024-12-31
+sun_dates <- seq(as.Date("2021-11-01"), study_end, by = "day")
+sun_input <- mun_df %>%
+  select(cve_mun, lat, lon) %>%
+  cross_join(tibble(date = sun_dates))
+sun_raw <- getSunlightTimes(data = sun_input %>% select(date, lat, lon), keep = c("sunrise", "sunset", "solarNoon"), tz = "UTC")
+sun_df <- sun_input %>%
+  mutate(
+    sunrise_utc_min = as.numeric(difftime(sun_raw$sunrise, as.POSIXct(date, tz = "UTC"), units = "mins")),
+    sunset_utc_min = as.numeric(difftime(sun_raw$sunset, as.POSIXct(date, tz = "UTC"), units = "mins")),
+    sunset_utc_min = if_else(sunset_utc_min < sunrise_utc_min, sunset_utc_min + 1440, sunset_utc_min),
+    noon_utc_min = as.numeric(difftime(sun_raw$solarNoon, as.POSIXct(date, tz = "UTC"), units = "mins"))
+  )
+rm(sun_raw)
+
+# Actual and counterfactual (pre-2022 rules continued) clock offset in minutes from UTC
+sun_df <- sun_df %>%
+  left_join(mun_df %>% select(cve_mun, ent, group, std_offset_pre, schedule_pre), by = "cve_mun") %>%
+  left_join(cal_df %>% select(date, nat_dst, us_dst), by = "date") %>%
+  mutate(
+    offset_cf = case_when(
+      ent == "23" ~ -300,
+      schedule_pre == "national" ~ std_offset_pre + 60 * nat_dst,
+      schedule_pre == "US" ~ std_offset_pre + 60 * us_dst,
+      TRUE ~ std_offset_pre
+    ),
+    offset_actual = case_when(
+      date < abolition_date ~ offset_cf,
+      group == "A" ~ std_offset_pre,
+      group == "A2" ~ -360,
+      group == "C" ~ offset_cf,
+      group %in% c("B", "AMB") & ent == "08" & date < chih_reform_date ~ -360,
+      group == "B" & ent == "08" ~ -420 + 60 * us_dst,
+      group == "AMB" ~ -360 + 60 * us_dst,
+      group == "B" ~ offset_cf
+    ),
+    sunrise_clock_cf = sunrise_utc_min + offset_cf,
+    sunrise_clock = sunrise_utc_min + offset_actual,
+    sunset_clock_cf = sunset_utc_min + offset_cf,
+    sunset_clock = sunset_utc_min + offset_actual,
+    noon_clock = noon_utc_min + offset_actual,
+    noon_clock_cf = noon_utc_min + offset_cf,
+    morning_light = pmax(0, 420 - sunrise_clock),
+    morning_light_cf = pmax(0, 420 - sunrise_clock_cf),
+    evening_light = pmax(0, sunset_clock - 1140),
+    evening_light_cf = pmax(0, sunset_clock_cf - 1140)
+  )
+print(summary(sun_df$sunrise_clock / 60))
+print(summary(sun_df$sunset_clock / 60))
+print(table(sun_df$group, sun_df$offset_actual - sun_df$offset_cf))
+
+# Monthly dose per municipality (actual minus counterfactual), post-abolition months only
+sun_dose_month <- sun_df %>%
+  filter(date >= as.Date("2022-11-01")) %>%
+  mutate(ym = floor_date(date, "month")) %>%
+  group_by(cve_mun, ym) %>%
+  summarise(
+    d_clock_shift = mean(offset_actual - offset_cf),
+    d_morning_light = mean(morning_light - morning_light_cf),
+    d_evening_light = mean(evening_light - evening_light_cf),
+    noon_misalign = mean(noon_clock - 720),
+    noon_misalign_cf = mean(noon_clock_cf - 720)
+  ) %>%
+  ungroup()
+print(summary(sun_dose_month))
+
+# Example cities for the first-stage figure
+example_cities <- tibble(
+  cve_mun = c("09015", "14039", "31050", "02004", "08037", "28022", "26030", "23005", "26043", "08019"),
+  city = c("Mexico City (Cuauhtemoc)", "Guadalajara", "Merida", "Tijuana", "Ciudad Juarez", "Matamoros",
+           "Hermosillo", "Cancun (Benito Juarez)", "Nogales", "Chihuahua")
+)
+sun_examples <- sun_df %>%
+  inner_join(example_cities, by = "cve_mun") %>%
+  select(cve_mun, city, group, date, sunrise_clock, sunrise_clock_cf, sunset_clock, sunset_clock_cf)
+print(sun_examples %>% distinct(cve_mun, city, group))
+```
+
+## 01.7 Write clean data
+
+```{r s01_7_write}
+################################################################################
+# 01.7 Write clean data
+################################################################################
+
+# Exclusion / data log
+data_log <- tibble(
+  item = c("EDR registrations read 2012-2024", "deaths 2012-2024 with valid occurrence date and study outcome",
+           "study-outcome deaths with residence municipality not matched to a census municipality"),
+  value = c(sum(table(deaths_df$reg_year)), nrow(deaths_df), sum(is.na(deaths_df$group_res)))
+)
+
+write_xlsx(
+  list(
+    municipalities = mun_df,
+    transition_events = events_df,
+    calendar = cal_df %>% filter(date >= study_start, date <= study_end) %>%
+      select(date, year, month, dow, nat_dst, us_dst, holiday, holy_week, holy_thu_fri),
+    daily_counts = daily_counts,
+    muni_month = muni_month,
+    sun_dose_month = sun_dose_month,
+    sun_examples = sun_examples,
+    data_log = data_log
+  ),
+  "clean_data.xlsx"
+)
+rm(sun_df, deaths_df, dist_km, other_group)
+gc()
+```
+
+# S0. STEP 0: REGIME MAP, FIRST STAGE, POWER
+
+## S0.1 Data preparation
+
+```{r s0_1_prep}
+################################################################################
+# S0.1 Data preparation
+################################################################################
+
+s0_mun <- read_excel("clean_data.xlsx", sheet = "municipalities", guess_max = 1e6)
+s0_dose <- read_excel("clean_data.xlsx", sheet = "sun_dose_month", guess_max = 1e6) %>% mutate(ym = as.Date(ym))
+s0_examples <- read_excel("clean_data.xlsx", sheet = "sun_examples", guess_max = 1e6) %>% mutate(date = as.Date(date))
+
+print(table(s0_mun$group))
+print(s0_mun %>% group_by(group) %>% summarise(n_mun = n(), pop_million = sum(pop2020) / 1e6))
+```
+
+## S0.2 Regime map and first stage
+
+```{r s0_2_first_stage}
+################################################################################
+# S0.2 Regime map and first stage
+################################################################################
+
+# Regime map (municipality centroids)
+s0_figure_regime_map <- ggplot(s0_mun, aes(lon, lat, colour = group)) +
+  geom_point(aes(size = pop2020), alpha = 0.6) +
+  scale_size_area(max_size = 6, guide = "none") +
+  scale_colour_manual(values = c(A = "#2a6fdb", A2 = "#8e44ad", B = "#e67e22", C = "#27ae60", AMB = "black"),
+                      labels = c(A = "A: abolished DST 2022", A2 = "A2: Chihuahua (permanent UTC-6)",
+                                 B = "B: kept US-aligned DST", C = "C: never DST", AMB = "Ambiguous (excluded)")) +
+  coord_quickmap() +
+  labs(x = "Longitude", y = "Latitude", colour = NULL, title = "Clock-regime groups after 30 Oct 2022 (municipality centroids)")
+print(s0_figure_regime_map)
+
+# Sun-clock dose map: change in minutes of evening light after 19:00 and morning light before 07:00 (July 2023, January 2024)
+s0_dose_map_df <- s0_dose %>%
+  filter(ym %in% as.Date(c("2023-07-01", "2024-01-01"))) %>%
+  left_join(s0_mun %>% select(cve_mun, lon, lat, pop2020, group), by = "cve_mun") %>%
+  filter(group != "AMB") %>%
+  pivot_longer(c(d_morning_light, d_evening_light), names_to = "measure", values_to = "minutes") %>%
+  mutate(measure = recode(measure, d_morning_light = "Morning light before 07:00", d_evening_light = "Evening light after 19:00"),
+         month = format(ym, "%b %Y"))
+s0_figure_dose_map <- ggplot(s0_dose_map_df, aes(lon, lat, colour = minutes)) +
+  geom_point(size = 0.6) +
+  scale_colour_gradient2(low = "#b2182b", mid = "grey85", high = "#2166ac", midpoint = 0) +
+  facet_grid(month ~ measure) +
+  coord_quickmap() +
+  labs(x = NULL, y = NULL, colour = "Change\n(min/day)", title = "Sun-clock dose: actual minus counterfactual (pre-2022 rules)")
+print(s0_figure_dose_map)
+
+# Dose summary by group and month (post-abolition)
+print(s0_dose %>% left_join(s0_mun %>% select(cve_mun, group), by = "cve_mun") %>%
+        mutate(month = month(ym)) %>%
+        group_by(group, month) %>%
+        summarise(shift = mean(d_clock_shift), morning = mean(d_morning_light), evening = mean(d_evening_light),
+                  morning_min = min(d_morning_light), morning_max = max(d_morning_light)) %>%
+        print(n = 60))
+
+# First stage: clock time of sunrise and sunset, actual vs counterfactual
+s0_figure_first_stage <- s0_examples %>%
+  pivot_longer(c(sunrise_clock, sunrise_clock_cf, sunset_clock, sunset_clock_cf), names_to = "series", values_to = "minutes") %>%
+  mutate(event = if_else(str_detect(series, "sunrise"), "Sunrise", "Sunset"),
+         regime = if_else(str_detect(series, "_cf"), "Counterfactual (old rules)", "Actual")) %>%
+  ggplot(aes(date, minutes / 60, colour = event, linetype = regime)) +
+  geom_line() +
+  geom_vline(xintercept = as.Date("2022-10-30"), linetype = "dotted") +
+  facet_wrap(~ paste0(group, ": ", city), ncol = 5) +
+  scale_y_continuous(breaks = seq(5, 21, 2)) +
+  labs(x = NULL, y = "Clock time (h)", colour = NULL, linetype = NULL, title = "First stage: clock time of sunrise/sunset") +
+  theme(legend.position = "bottom")
+print(s0_figure_first_stage)
+```
+
+## S0.3 Power (minimum detectable effect from pre-abolition data)
+
+```{r s0_3_power}
+################################################################################
+# S0.3 Power
+################################################################################
+
+# Q1 data: national spring-forward events, pre-COVID, pre-abolition; placebo "post" = 2018-2019
+s0_cal <- read_excel("clean_data.xlsx", sheet = "calendar", guess_max = 1e6) %>% mutate(date = as.Date(date))
+s0_events <- read_excel("clean_data.xlsx", sheet = "transition_events", guess_max = 1e6) %>% mutate(t0 = as.Date(t0))
+s0_daily <- read_excel("clean_data.xlsx", sheet = "daily_counts", guess_max = 1e6) %>%
+  mutate(date = as.Date(date), group = str_remove(group_detail, "_near")) %>%
+  filter(group != "AMB", !(ent == "23" & date < as.Date("2016-01-01"))) %>%
+  mutate(group = if_else(group == "A2", "A", group)) %>%
+  group_by(group, date) %>%
+  summarise(across(starts_with("res_"), sum)) %>%
+  ungroup()
+
+s0_q1_df <- s0_events %>%
+  filter(type == "spring", year <= 2019) %>%
+  mutate(group = if_else(schedule == "US", "B", "A")) %>%
+  bind_rows(s0_events %>% filter(type == "spring", year <= 2019, schedule == "national") %>% mutate(group = "C")) %>%
+  cross_join(tibble(k = -21:27)) %>%
+  mutate(date = t0 + k, win = as.integer(k >= 0 & k <= 7), keep = (k >= 0 & k <= 7) | (k >= -21 & k <= -8) | (k >= 14 & k <= 27)) %>%
+  filter(keep) %>%
+  inner_join(s0_daily, by = c("group", "date")) %>%
+  left_join(s0_cal %>% select(date, dow, holiday, holy_week, holy_thu_fri), by = "date") %>%
+  mutate(placebo_post = as.integer(year >= 2018), grp_a = as.integer(group == "A"), ev = paste(group, event_id))
+
+# Q1 placebo DiD A vs B (all outcomes) -> SE of key term
+s0_q1_power <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:placebo_post:grp_a + win:placebo_post + win:grp_a + win +
+    holiday + holy_week + holy_thu_fri | ev + dow,
+  data = s0_q1_df %>% filter(group %in% c("A", "B")),
+  cluster = ~ev
+)
+print(etable(s0_q1_power, keep = "%win:placebo_post:grp_a"))
+
+# Q1 within-A placebo change (2018-2019 vs 2012-2017) -> SE
+s0_q1_power_within <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:placebo_post + win + holiday + holy_week + holy_thu_fri | ev + dow,
+  data = s0_q1_df %>% filter(group == "A"),
+  cluster = ~ev
+)
+print(etable(s0_q1_power_within, keep = "%win:placebo_post"))
+
+# Q1 single-group transition excess (A, pre-abolition, all years before 2020) -> SE
+s0_q1_power_single <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win + holiday + holy_week + holy_thu_fri | ev + dow,
+  data = s0_q1_df %>% filter(group == "A"),
+  cluster = ~ev
+)
+print(etable(s0_q1_power_single, keep = "%^win$"))
+
+# Q2 data: municipality-month, 2012-2019, placebo post = Nov 2017 onward (same 2-year post length as real)
+s0_mm <- read_excel("clean_data.xlsx", sheet = "muni_month", guess_max = 1e6) %>%
+  mutate(ym = as.Date(ym)) %>%
+  left_join(s0_mun %>% select(cve_mun, ent, group, pop2020), by = "cve_mun") %>%
+  filter(group %in% c("A", "C"), ym <= as.Date("2019-12-01"), !(ent == "23" & ym < as.Date("2016-01-01"))) %>%
+  mutate(year = year(ym), month = month(ym), dst_month = as.integer(month %in% 4:10),
+         placebo_post = as.integer(ym >= as.Date("2017-11-01")), grp_a = as.integer(group == "A"))
+
+s0_q2_power <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ dst_month:placebo_post:grp_a + placebo_post:grp_a + dst_month:placebo_post |
+    cve_mun + month^group + year,
+  data = s0_mm,
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(s0_q2_power, keep = "%dst_month:placebo_post:grp_a"))
+
+# MDE table (80% power, two-sided alpha 0.05: 2.80 x SE on the log scale)
+s0_power_table <- bind_rows(
+  coeftable(s0_q1_power, keep = "win:placebo_post:grp_a") %>% as_tibble() %>% mutate(question = "Q1 DiD (A vs B)"),
+  coeftable(s0_q1_power_within, keep = "win:placebo_post") %>% as_tibble() %>% mutate(question = "Q1 within-A change"),
+  coeftable(s0_q1_power_single, keep = "^win$") %>% as_tibble() %>% mutate(question = "Q1 single-group excess (A)"),
+  coeftable(s0_q2_power, keep = "dst_month:placebo_post:grp_a") %>% as_tibble() %>% mutate(question = "Q2 DDD (A vs C)")
+) %>%
+  transmute(question, outcome = str_remove(lhs, "res_"), se = `Std. Error`,
+            mde_pct = 100 * (exp(2.80 * se) - 1),
+            label = if_else(mde_pct <= 10, "powered", "underpowered"))
+print(s0_power_table, n = 30)
+```
+
+# H1. Q1 TRANSITION EFFECT
+
+## H1.1 Data preparation
+
+```{r h1_1_prep}
+################################################################################
+# H1.1 Data preparation
+################################################################################
+
+h1_cal <- read_excel("clean_data.xlsx", sheet = "calendar", guess_max = 1e6) %>% mutate(date = as.Date(date))
+h1_events <- read_excel("clean_data.xlsx", sheet = "transition_events", guess_max = 1e6) %>% mutate(t0 = as.Date(t0))
+
+# Group-date counts; A2 (Chihuahua non-border) joins A because its switching also stopped; QRoo before 2016 dropped
+h1_daily <- read_excel("clean_data.xlsx", sheet = "daily_counts", guess_max = 1e6) %>%
+  mutate(date = as.Date(date), group = str_remove(group_detail, "_near")) %>%
+  filter(group != "AMB", !(ent == "23" & date < as.Date("2016-01-01"))) %>%
+  mutate(group = if_else(group == "A2", "A", group)) %>%
+  group_by(group, date) %>%
+  summarise(across(starts_with(c("res_", "occ_")), sum)) %>%
+  ungroup()
+
+# Event windows: days 0-7 after each change vs days -21..-8 and +14..+27 (same weekdays 2-3 weeks away)
+h1_df <- bind_rows(
+  h1_events %>% filter(schedule == "national") %>% mutate(group = "A"),
+  h1_events %>% filter(schedule == "US") %>% mutate(group = "B"),
+  h1_events %>% filter(schedule == "national") %>% mutate(group = "C")
+) %>%
+  filter(!covid) %>%
+  cross_join(tibble(k = -21:27)) %>%
+  mutate(date = t0 + k, win = as.integer(k >= 0 & k <= 7)) %>%
+  filter((k >= 0 & k <= 7) | (k >= -21 & k <= -8) | (k >= 14 & k <= 27)) %>%
+  inner_join(h1_daily, by = c("group", "date")) %>%
+  left_join(h1_cal %>% select(date, dow, holiday, holy_week, holy_thu_fri), by = "date") %>%
+  mutate(post = as.integer(post_abolition), grp_a = as.integer(group == "A"), grp_c = as.integer(group == "C"),
+         ev = paste(group, event_id), grp_post = paste0(group, "_", post))
+
+print(nrow(h1_df))
+print(h1_df %>% distinct(group, type, year, post) %>% count(group, type, post))
+print(h1_df %>% group_by(group, type) %>% summarise(across(starts_with("res_"), sum)))
+```
+
+## H1.2 Analysis
+
+```{r h1_2_analysis}
+################################################################################
+# H1.2 Analysis
+################################################################################
+
+# Positive-control check: spring-forward excess before abolition, groups A and B pooled (own transition dates)
+h1_model_spring_pre <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win + holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "spring", post == 0, group %in% c("A", "B")),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_pre, keep = "%^win$", se.below = TRUE))
+
+# Same for fall-back
+h1_model_fall_pre <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win + holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "fall", post == 0, group %in% c("A", "B")),
+  cluster = ~ev
+)
+print(etable(h1_model_fall_pre, keep = "%^win$", se.below = TRUE))
+
+# Transition-week excess by group and period (spring)
+h1_model_spring_by_group <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ i(grp_post, win) + holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "spring"),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_by_group, se.below = TRUE))
+
+# Main DiD (spring): A (switching stopped) vs B (still switching)
+h1_model_spring_did_ab <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:post:grp_a + win:post + win:grp_a + win +
+    holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "spring", group %in% c("A", "B")),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_did_ab, keep = "%win:post:grp_a", se.below = TRUE))
+print(coeftable(h1_model_spring_did_ab, keep = "win:post:grp_a"))
+
+# Placebo DiD (spring): A vs C (never switched; C uses the national dates)
+h1_model_spring_did_ac <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:post:grp_a + win:post + win:grp_a + win +
+    holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "spring", group %in% c("A", "C")),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_did_ac, keep = "%win:post:grp_a", se.below = TRUE))
+
+# Fall-back DiD: A vs B
+h1_model_fall_did_ab <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:post:grp_a + win:post + win:grp_a + win +
+    holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "fall", group %in% c("A", "B")),
+  cluster = ~ev
+)
+print(etable(h1_model_fall_did_ab, keep = "%win:post:grp_a", se.below = TRUE))
+
+# Within-A change: spring-week excess after (phantom dates) vs before abolition, group A only
+h1_model_spring_within_a <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:post + win + holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "spring", group == "A"),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_within_a, keep = "%win:post", se.below = TRUE))
+
+# Phantom dates in group A after abolition: no spike expected
+h1_model_spring_phantom <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win + holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "spring", post == 1, group == "A"),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_phantom, keep = "%^win$", se.below = TRUE))
+```
+
+## H1.3 Robustness
+
+```{r h1_3_robustness}
+################################################################################
+# H1.3 Robustness
+################################################################################
+
+# Occurrence-based municipality
+h1_model_spring_did_ab_occ <- fepois(
+  c(occ_suicide, occ_ami, occ_road, occ_homicide, occ_neoplasm) ~ win:post:grp_a + win:post + win:grp_a + win +
+    holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "spring", group %in% c("A", "B")),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_did_ab_occ, keep = "%win:post:grp_a", se.below = TRUE))
+
+# Excluding municipalities within 50 km of the regime boundary (and ambiguous ones)
+h1_daily_strict <- read_excel("clean_data.xlsx", sheet = "daily_counts", guess_max = 1e6) %>%
+  mutate(date = as.Date(date)) %>%
+  filter(!str_detect(group_detail, "_near"), group_detail != "AMB", !(ent == "23" & date < as.Date("2016-01-01"))) %>%
+  mutate(group = if_else(group_detail == "A2", "A", group_detail)) %>%
+  group_by(group, date) %>%
+  summarise(across(starts_with("res_"), sum)) %>%
+  ungroup()
+h1_df_strict <- h1_df %>%
+  select(-starts_with(c("res_", "occ_"))) %>%
+  inner_join(h1_daily_strict, by = c("group", "date"))
+h1_model_spring_did_ab_strict <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:post:grp_a + win:post + win:grp_a + win +
+    holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df_strict %>% filter(type == "spring", group %in% c("A", "B")),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_did_ab_strict, keep = "%win:post:grp_a", se.below = TRUE))
+
+# Including ambiguous Chihuahua municipalities (Ojinaga, Coyame, Manuel Benavides) in B
+h1_daily_ambig <- read_excel("clean_data.xlsx", sheet = "daily_counts", guess_max = 1e6) %>%
+  mutate(date = as.Date(date), group = str_remove(group_detail, "_near")) %>%
+  filter(!(ent == "23" & date < as.Date("2016-01-01"))) %>%
+  mutate(group = case_when(group == "A2" ~ "A", group == "AMB" ~ "B", TRUE ~ group)) %>%
+  group_by(group, date) %>%
+  summarise(across(starts_with("res_"), sum)) %>%
+  ungroup()
+h1_df_ambig <- h1_df %>%
+  select(-starts_with(c("res_", "occ_"))) %>%
+  inner_join(h1_daily_ambig, by = c("group", "date"))
+h1_model_spring_did_ab_ambig <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:post:grp_a + win:post + win:grp_a + win +
+    holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df_ambig %>% filter(type == "spring", group %in% c("A", "B")),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_did_ab_ambig, keep = "%win:post:grp_a", se.below = TRUE))
+
+# Including COVID-period events with a COVID indicator
+h1_df_covid <- bind_rows(
+  h1_events %>% filter(schedule == "national") %>% mutate(group = "A"),
+  h1_events %>% filter(schedule == "US") %>% mutate(group = "B")
+) %>%
+  cross_join(tibble(k = -21:27)) %>%
+  mutate(date = t0 + k, win = as.integer(k >= 0 & k <= 7)) %>%
+  filter((k >= 0 & k <= 7) | (k >= -21 & k <= -8) | (k >= 14 & k <= 27)) %>%
+  inner_join(h1_daily, by = c("group", "date")) %>%
+  left_join(h1_cal %>% select(date, dow, holiday, holy_week, holy_thu_fri), by = "date") %>%
+  mutate(post = as.integer(post_abolition), grp_a = as.integer(group == "A"), covid_ev = as.integer(covid),
+         ev = paste(group, event_id))
+h1_model_spring_did_ab_covid <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:post:grp_a + win:post + win:grp_a + win + win:covid_ev +
+    holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df_covid %>% filter(type == "spring"),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_did_ab_covid, keep = "%win:post:grp_a", se.below = TRUE))
+
+# Placebo abolition 2 years earlier (Oct 2020): pre-abolition data only, placebo post = events after 2020-10-30
+h1_model_spring_placebo <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:placebo_post:grp_a + win:placebo_post + win:grp_a + win +
+    holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "spring", group %in% c("A", "B"), post == 0) %>%
+    mutate(placebo_post = as.integer(t0 > as.Date("2020-10-30"))),
+  cluster = ~ev
+)
+print(etable(h1_model_spring_placebo, keep = "%win:placebo_post:grp_a", se.below = TRUE))
+
+# Negative binomial version of the main DiD (suicide and AMI)
+h1_model_spring_did_ab_nb_suicide <- fenegbin(
+  res_suicide ~ win:post:grp_a + win:post + win:grp_a + win + holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "spring", group %in% c("A", "B")),
+  cluster = ~ev
+)
+print(coeftable(h1_model_spring_did_ab_nb_suicide)["win:post:grp_a", ])
+h1_model_spring_did_ab_nb_ami <- fenegbin(
+  res_ami ~ win:post:grp_a + win:post + win:grp_a + win + holiday + holy_week + holy_thu_fri | ev + dow,
+  data = h1_df %>% filter(type == "spring", group %in% c("A", "B")),
+  cluster = ~ev
+)
+print(coeftable(h1_model_spring_did_ab_nb_ami)["win:post:grp_a", ])
+
+# Leave-one-state-out (state-level counts; drop one A state at a time) — loop used only here
+h1_daily_state <- read_excel("clean_data.xlsx", sheet = "daily_counts", guess_max = 1e6) %>%
+  mutate(date = as.Date(date), group = str_remove(group_detail, "_near")) %>%
+  filter(group != "AMB", !(ent == "23" & date < as.Date("2016-01-01"))) %>%
+  mutate(group = if_else(group == "A2", "A", group))
+h1_states_a <- sort(unique(h1_daily_state$ent[h1_daily_state$group == "A"]))
+h1_loso <- map_dfr(h1_states_a, function(s) {
+  d <- h1_daily_state %>% filter(!(ent == s & group == "A")) %>%
+    group_by(group, date) %>% summarise(across(starts_with("res_"), sum), .groups = "drop")
+  m <- fepois(
+    c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ win:post:grp_a + win:post + win:grp_a + win +
+      holiday + holy_week + holy_thu_fri | ev + dow,
+    data = h1_df %>% select(-starts_with(c("res_", "occ_"))) %>% filter(type == "spring", group %in% c("A", "B")) %>%
+      inner_join(d, by = c("group", "date")),
+    cluster = ~ev
+  )
+  coeftable(m, keep = "win:post:grp_a") %>% as_tibble() %>% mutate(dropped_state = s)
+})
+print(h1_loso %>% group_by(lhs) %>% summarise(min_est = min(Estimate), max_est = max(Estimate),
+                                              n_sig = sum(`Pr(>|z|)` < 0.05), n = n()))
+```
+
+# H2. Q2 CHRONIC CLOCK EFFECT
+
+## H2.1 Data preparation
+
+```{r h2_1_prep}
+################################################################################
+# H2.1 Data preparation
+################################################################################
+
+h2_mun <- read_excel("clean_data.xlsx", sheet = "municipalities", guess_max = 1e6)
+h2_dose <- read_excel("clean_data.xlsx", sheet = "sun_dose_month", guess_max = 1e6) %>% mutate(ym = as.Date(ym))
+
+h2_all <- read_excel("clean_data.xlsx", sheet = "muni_month", guess_max = 1e6) %>%
+  mutate(ym = as.Date(ym)) %>%
+  left_join(h2_mun %>% select(cve_mun, ent, group, group_detail, pop2020), by = "cve_mun") %>%
+  left_join(h2_dose %>% select(cve_mun, ym, d_morning_light, d_evening_light, d_clock_shift), by = c("cve_mun", "ym")) %>%
+  mutate(
+    year = year(ym), month = month(ym),
+    dst_month = as.integer(month %in% 4:10),
+    post = as.integer(ym >= as.Date("2022-11-01")),
+    covid = as.integer(ym >= covid_start & ym <= covid_end),
+    grp_a = as.integer(group == "A"),
+    dst_a = dst_month * grp_a,
+    across(c(d_morning_light, d_evening_light, d_clock_shift), ~ replace_na(.x, 0) / 60)
+  ) %>%
+  filter(!(ent == "23" & ym < as.Date("2016-01-01")), group != "AMB") %>%
+  filter(!(ent == "08" & group == "B" & ym %in% as.Date(c("2022-10-01", "2022-11-01"))))
+
+# Main analytic sample: COVID months excluded
+h2_df <- h2_all %>% filter(covid == 0)
+
+print(nrow(h2_df))
+print(table(h2_df$group, h2_df$post))
+print(h2_df %>% group_by(group) %>% summarise(across(starts_with("res_"), sum)))
+```
+
+## H2.2 Analysis
+
+```{r h2_2_analysis}
+################################################################################
+# H2.2 Analysis
+################################################################################
+
+# Main triple difference: former-DST months x post x group A, vs C (never DST)
+h2_model_ddd_ac <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ dst_month:post:grp_a + post:grp_a + dst_month:post |
+    cve_mun + month^group + year,
+  data = h2_df %>% filter(group %in% c("A", "C")),
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_ddd_ac, keep = "%dst_month:post:grp_a", se.below = TRUE))
+print(coeftable(h2_model_ddd_ac, keep = "dst_month:post:grp_a"))
+
+# Triple difference vs B (kept DST)
+h2_model_ddd_ab <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ dst_month:post:grp_a + post:grp_a + dst_month:post |
+    cve_mun + month^group + year,
+  data = h2_df %>% filter(group %in% c("A", "B")),
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_ddd_ab, keep = "%dst_month:post:grp_a", se.below = TRUE))
+
+# Triple difference vs B and C pooled (summer clock unchanged in both)
+h2_model_ddd_abc <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ dst_month:post:grp_a + post:grp_a + dst_month:post |
+    cve_mun + month^group + year,
+  data = h2_df %>% filter(group %in% c("A", "B", "C")),
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_ddd_abc, keep = "%dst_month:post:grp_a", se.below = TRUE))
+
+# Dose-response: change in morning light before 07:00 (hours/day), all groups incl. A2
+h2_model_dose_morning <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ d_morning_light + i(group, post, ref = "C") |
+    cve_mun + month^group + year,
+  data = h2_df,
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_dose_morning, keep = "%d_morning_light", se.below = TRUE))
+
+# Dose-response: change in evening light after 19:00 (hours/day)
+h2_model_dose_evening <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ d_evening_light + i(group, post, ref = "C") |
+    cve_mun + month^group + year,
+  data = h2_df,
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_dose_evening, keep = "%d_evening_light", se.below = TRUE))
+
+# Event study by year (A vs C): year x former-DST month x A, reference 2019
+h2_model_event <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ i(year, dst_a, ref = 2019) + i(year, dst_month, ref = 2019) +
+    i(year, grp_a, ref = 2019) | cve_mun + month^group + year,
+  data = h2_df %>% filter(group %in% c("A", "C")),
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_event, keep = "%dst_a", se.below = TRUE))
+```
+
+## H2.3 Robustness
+
+```{r h2_3_robustness}
+################################################################################
+# H2.3 Robustness
+################################################################################
+
+# Occurrence-based municipality
+h2_model_ddd_ac_occ <- fepois(
+  c(occ_suicide, occ_ami, occ_road, occ_homicide, occ_neoplasm) ~ dst_month:post:grp_a + post:grp_a + dst_month:post |
+    cve_mun + month^group + year,
+  data = h2_df %>% filter(group %in% c("A", "C")),
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_ddd_ac_occ, keep = "%dst_month:post:grp_a", se.below = TRUE))
+
+# Excluding municipalities within 50 km of the regime boundary
+h2_model_ddd_ac_strict <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ dst_month:post:grp_a + post:grp_a + dst_month:post |
+    cve_mun + month^group + year,
+  data = h2_df %>% filter(group %in% c("A", "C"), !str_detect(group_detail, "_near")),
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_ddd_ac_strict, keep = "%dst_month:post:grp_a", se.below = TRUE))
+
+# Sonora only as control (Quintana Roo excluded)
+h2_model_ddd_ac_sonora <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ dst_month:post:grp_a + post:grp_a + dst_month:post |
+    cve_mun + month^group + year,
+  data = h2_df %>% filter(group %in% c("A", "C"), ent != "23"),
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_ddd_ac_sonora, keep = "%dst_month:post:grp_a", se.below = TRUE))
+
+# Including COVID months with a COVID x group x DST-month indicator
+h2_model_ddd_ac_covid <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ dst_month:post:grp_a + post:grp_a + dst_month:post +
+    covid:grp_a + dst_month:covid:grp_a + dst_month:covid | cve_mun + month^group + year,
+  data = h2_all %>% filter(group %in% c("A", "C")),
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_ddd_ac_covid, keep = "%dst_month:post:grp_a", se.below = TRUE))
+
+# End of follow-up 2023 (registration lag in 2024)
+h2_model_ddd_ac_2023 <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ dst_month:post:grp_a + post:grp_a + dst_month:post |
+    cve_mun + month^group + year,
+  data = h2_df %>% filter(group %in% c("A", "C"), year <= 2023),
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_ddd_ac_2023, keep = "%dst_month:post:grp_a", se.below = TRUE))
+
+# Placebo abolition 2 years earlier (Oct 2020), data before Nov 2022
+h2_model_ddd_ac_placebo <- fepois(
+  c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ dst_month:placebo_post:grp_a + placebo_post:grp_a + dst_month:placebo_post |
+    cve_mun + month^group + year,
+  data = h2_df %>% filter(group %in% c("A", "C"), post == 0) %>% mutate(placebo_post = as.integer(ym >= as.Date("2020-11-01"))),
+  offset = ~log(pop2020),
+  cluster = ~ent
+)
+print(etable(h2_model_ddd_ac_placebo, keep = "%dst_month:placebo_post:grp_a", se.below = TRUE))
+
+# Leave-one-state-out (drop one A state at a time) — loop used only here
+h2_states_a <- sort(unique(h2_df$ent[h2_df$group == "A"]))
+h2_loso <- map_dfr(h2_states_a, function(s) {
+  m <- fepois(
+    c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm) ~ dst_month:post:grp_a + post:grp_a + dst_month:post |
+      cve_mun + month^group + year,
+    data = h2_df %>% filter(group %in% c("A", "C"), ent != s),
+    offset = ~log(pop2020),
+    cluster = ~ent
+  )
+  coeftable(m, keep = "dst_month:post:grp_a") %>% as_tibble() %>% mutate(dropped_state = s)
+})
+print(h2_loso %>% group_by(lhs) %>% summarise(min_est = min(Estimate), max_est = max(Estimate),
+                                              n_sig = sum(`Pr(>|z|)` < 0.05), n = n()))
+```
+
+# RESULTS TABLES AND FIGURES
+
+```{r r1_results}
+################################################################################
+# Results tables
+################################################################################
+
+# Tidy key terms from every model
+r_tidy <- bind_rows(
+  coeftable(h1_model_spring_pre, keep = "^win$") %>% as_tibble() %>% mutate(model = "Q1 spring excess, pre-abolition, A+B (positive-control check)"),
+  coeftable(h1_model_fall_pre, keep = "^win$") %>% as_tibble() %>% mutate(model = "Q1 fall excess, pre-abolition, A+B"),
+  coeftable(h1_model_spring_phantom, keep = "^win$") %>% as_tibble() %>% mutate(model = "Q1 spring phantom dates, A post-abolition"),
+  coeftable(h1_model_spring_within_a, keep = "win:post") %>% as_tibble() %>% mutate(model = "Q1 spring within-A change (post vs pre)"),
+  coeftable(s0_q1_power_within, keep = "win:placebo_post") %>% as_tibble() %>% mutate(model = "Q1 spring within-A placebo (2018-19 vs 2012-17)"),
+  coeftable(s0_q1_power, keep = "win:placebo_post:grp_a") %>% as_tibble() %>% mutate(model = "Q1 spring DiD A vs B placebo (2018-19 vs 2012-17)"),
+  coeftable(s0_q2_power, keep = "dst_month:placebo_post:grp_a") %>% as_tibble() %>% mutate(model = "Q2 DDD A vs C placebo (Nov 2017, data to 2019)"),
+  coeftable(h1_model_spring_did_ab, keep = "win:post:grp_a") %>% as_tibble() %>% mutate(model = "Q1 spring DiD A vs B (MAIN)"),
+  coeftable(h1_model_spring_did_ac, keep = "win:post:grp_a") %>% as_tibble() %>% mutate(model = "Q1 spring DiD A vs C (placebo group)"),
+  coeftable(h1_model_fall_did_ab, keep = "win:post:grp_a") %>% as_tibble() %>% mutate(model = "Q1 fall DiD A vs B"),
+  coeftable(h1_model_spring_did_ab_occ, keep = "win:post:grp_a") %>% as_tibble() %>% mutate(model = "Q1 spring DiD A vs B, occurrence"),
+  coeftable(h1_model_spring_did_ab_strict, keep = "win:post:grp_a") %>% as_tibble() %>% mutate(model = "Q1 spring DiD A vs B, excl. boundary 50 km"),
+  coeftable(h1_model_spring_did_ab_ambig, keep = "win:post:grp_a") %>% as_tibble() %>% mutate(model = "Q1 spring DiD A vs B, ambiguous in B"),
+  coeftable(h1_model_spring_did_ab_covid, keep = "win:post:grp_a") %>% as_tibble() %>% mutate(model = "Q1 spring DiD A vs B, incl. COVID"),
+  coeftable(h1_model_spring_placebo, keep = "win:placebo_post:grp_a") %>% as_tibble() %>% mutate(model = "Q1 spring DiD A vs B, placebo Oct 2020"),
+  coeftable(h2_model_ddd_ac, keep = "dst_month:post:grp_a") %>% as_tibble() %>% mutate(model = "Q2 DDD A vs C (MAIN)"),
+  coeftable(h2_model_ddd_ab, keep = "dst_month:post:grp_a") %>% as_tibble() %>% mutate(model = "Q2 DDD A vs B"),
+  coeftable(h2_model_ddd_abc, keep = "dst_month:post:grp_a") %>% as_tibble() %>% mutate(model = "Q2 DDD A vs B+C"),
+  coeftable(h2_model_dose_morning, keep = "d_morning_light") %>% as_tibble() %>% mutate(model = "Q2 dose: per +1 h morning light before 07:00"),
+  coeftable(h2_model_dose_evening, keep = "d_evening_light") %>% as_tibble() %>% mutate(model = "Q2 dose: per +1 h evening light after 19:00"),
+  coeftable(h2_model_ddd_ac_occ, keep = "dst_month:post:grp_a") %>% as_tibble() %>% mutate(model = "Q2 DDD A vs C, occurrence"),
+  coeftable(h2_model_ddd_ac_strict, keep = "dst_month:post:grp_a") %>% as_tibble() %>% mutate(model = "Q2 DDD A vs C, excl. boundary 50 km"),
+  coeftable(h2_model_ddd_ac_sonora, keep = "dst_month:post:grp_a") %>% as_tibble() %>% mutate(model = "Q2 DDD A vs Sonora only"),
+  coeftable(h2_model_ddd_ac_covid, keep = "dst_month:post:grp_a") %>% as_tibble() %>% mutate(model = "Q2 DDD A vs C, incl. COVID"),
+  coeftable(h2_model_ddd_ac_2023, keep = "dst_month:post:grp_a") %>% as_tibble() %>% mutate(model = "Q2 DDD A vs C, to 2023"),
+  coeftable(h2_model_ddd_ac_placebo, keep = "dst_month:placebo_post:grp_a") %>% as_tibble() %>% mutate(model = "Q2 DDD A vs C, placebo Oct 2020")
+) %>%
+  transmute(model, outcome = str_remove(lhs, "^(res|occ)_"), estimate = Estimate, se = `Std. Error`, p = `Pr(>|z|)`,
+            irr = exp(estimate), irr_lo = exp(estimate - 1.96 * se), irr_hi = exp(estimate + 1.96 * se))
+print(r_tidy %>% mutate(across(c(irr, irr_lo, irr_hi), ~ round(.x, 3)), p = signif(p, 2)) %>% select(-estimate, -se), n = 200)
+
+# Event-study coefficients
+r_event <- coeftable(h2_model_event, keep = "dst_a") %>% as_tibble() %>%
+  transmute(outcome = str_remove(lhs, "res_"), year = as.integer(str_extract(coefficient, "\\d{4}")), estimate = Estimate, se = `Std. Error`) %>%
+  bind_rows(tibble(outcome = c("suicide", "ami", "road", "homicide", "neoplasm"), year = 2019L, estimate = 0, se = 0))
+
+# Group-by-period transition excess (spring)
+r_by_group <- coeftable(h1_model_spring_by_group) %>% as_tibble() %>%
+  filter(str_detect(coefficient, "grp_post::")) %>%
+  transmute(outcome = str_remove(lhs, "res_"), group = str_match(coefficient, "grp_post::([A-C])_")[, 2],
+            post = str_match(coefficient, "_([01]):win")[, 2], estimate = Estimate, se = `Std. Error`)
+print(r_by_group, n = 40)
+
+# Save results
+saveRDS(list(power = s0_power_table, key_terms = r_tidy, event_study = r_event, q1_by_group = r_by_group,
+             h1_loso = h1_loso, h2_loso = h2_loso), "results.rds")
+write_xlsx(list(power = s0_power_table, key_terms = r_tidy, event_study = r_event, q1_by_group = r_by_group,
+                h1_loso = h1_loso, h2_loso = h2_loso), "results_tables.xlsx")
+```
+
+```{r r2_figures, fig.height = 8}
+################################################################################
+# Figures
+################################################################################
+
+# Q1 transition-week event plot: daily ratio to control-day mean, by group and period (spring)
+r_q1_plot_df <- h1_df %>%
+  filter(type == "spring") %>%
+  pivot_longer(c(res_suicide, res_ami, res_road, res_homicide, res_neoplasm), names_to = "outcome", values_to = "n") %>%
+  group_by(ev, outcome) %>%
+  mutate(ratio = n / mean(n[win == 0])) %>%
+  ungroup() %>%
+  group_by(group, post, outcome, k) %>%
+  summarise(ratio = mean(ratio, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(period = if_else(post == 1, "After abolition (2023-24)", "Before abolition"),
+         outcome = str_remove(outcome, "res_"))
+r_figure_q1_event <- ggplot(r_q1_plot_df, aes(k, ratio, colour = period)) +
+  annotate("rect", xmin = -0.5, xmax = 7.5, ymin = -Inf, ymax = Inf, alpha = 0.1) +
+  geom_hline(yintercept = 1, linetype = "dotted") +
+  geom_point(size = 0.8) +
+  geom_line(alpha = 0.6) +
+  facet_grid(outcome ~ group, scales = "free_y") +
+  labs(x = "Days from spring-forward (real or phantom)", y = "Count / mean of control days", colour = NULL,
+       title = "Q1: spring-forward week, by group (A = abolished, B = kept DST, C = never DST)") +
+  theme(legend.position = "bottom")
+print(r_figure_q1_event)
+
+# Q2 event study
+r_figure_q2_event <- r_event %>%
+  ggplot(aes(year, exp(estimate), ymin = exp(estimate - 1.96 * se), ymax = exp(estimate + 1.96 * se))) +
+  annotate("rect", xmin = 2019.5, xmax = 2021.5, ymin = -Inf, ymax = Inf, alpha = 0.1) +
+  geom_hline(yintercept = 1, linetype = "dotted") +
+  geom_vline(xintercept = 2022.5, linetype = "dashed") +
+  geom_pointrange() +
+  facet_wrap(~outcome, scales = "free_y") +
+  labs(x = NULL, y = "IRR: former-DST months x group A (ref 2019)", title = "Q2 event study, A vs C (2020-21 COVID years excluded)")
+print(r_figure_q2_event)
+
+# Forest plot: Mexico per outcome; Brazil and pooled not run (FTP blocked)
+r_forest_df <- r_tidy %>%
+  filter(model %in% c("Q1 spring DiD A vs B (MAIN)", "Q2 DDD A vs C (MAIN)")) %>%
+  mutate(country = "Mexico") %>%
+  bind_rows(expand_grid(model = c("Q1 spring DiD A vs B (MAIN)", "Q2 DDD A vs C (MAIN)"),
+                        outcome = c("suicide", "ami", "road", "homicide", "neoplasm"),
+                        country = c("Brazil (not run)", "Pooled (not run)")))
+r_figure_forest <- ggplot(r_forest_df, aes(irr, fct_rev(country), xmin = irr_lo, xmax = irr_hi)) +
+  geom_vline(xintercept = 1, linetype = "dotted") +
+  geom_pointrange(na.rm = TRUE) +
+  facet_grid(outcome ~ model) +
+  scale_x_log10() +
+  labs(x = "IRR (95% CI, log scale)", y = NULL, title = "Mexico vs Brazil vs pooled (Brazil arm not run in this session)")
+print(r_figure_forest)
+
+# Save figures
+ggsave("figures/fig1_regime_map.png", s0_figure_regime_map, width = 10, height = 7, dpi = 200)
+ggsave("figures/fig2_sun_clock_dose_map.png", s0_figure_dose_map, width = 11, height = 8, dpi = 200)
+ggsave("figures/fig3_first_stage_sunrise_sunset.png", s0_figure_first_stage, width = 14, height = 7, dpi = 200)
+ggsave("figures/fig4_q1_transition_event_plot.png", r_figure_q1_event, width = 11, height = 11, dpi = 200)
+ggsave("figures/fig5_q2_event_study.png", r_figure_q2_event, width = 11, height = 7, dpi = 200)
+ggsave("figures/fig6_forest_mx_br_pooled.png", r_figure_forest, width = 10, height = 9, dpi = 200)
+```
+
+# SESSION INFO
+
+```{r session_info}
+print(sessionInfo())
+```

@@ -1,0 +1,9 @@
+outcome,label,role,source,icd10_from,icd10_to,field,available_MX_cloud_run
+suicide,Suicide (intentional self-harm),primary,deaths,X60,X84,underlying cause,yes
+selfharm_adm,Suicide + self-harm admissions (combined with suicide deaths),primary,admissions,X60,X84,external cause,no (DGIS not reachable)
+psych_adm,Mental and behavioural disorder admissions,secondary,admissions,F00,F99,principal diagnosis,no (DGIS not reachable)
+mood_adm,Mood disorder admissions,secondary,admissions,F30,F39,principal diagnosis,no (DGIS not reachable)
+ami,Acute myocardial infarction deaths,positive control,deaths,I21,I22,underlying cause,yes
+road,Road-traffic / transport deaths,positive control,deaths,V01,V89,underlying cause,yes
+homicide,Homicide (assault),exploratory,deaths,X85,Y09,underlying cause,yes
+neoplasm,Neoplasm deaths,negative control,deaths,C00,D48,underlying cause,yes
