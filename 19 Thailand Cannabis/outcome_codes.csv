@@ -1,0 +1,10 @@
+outcome_id,role,label,icd10_codes,match_rule,diagnosis_position,notes
+f12_any,primary,Mental and behavioural disorders due to use of cannabinoids,F12 (F12.0-F12.9),code starts with F12,any diagnosis,Matches protocol. Comparability with Addiction 2026 cannabis category: their full code list is in Supplementary Table S1 (not retrieved) [REF NEEDED]
+f12_5,key secondary,Cannabis-induced psychotic disorder,F12.5,code starts with F125,any diagnosis,4-character code needed; HDC IPD reports use 4-character (IPD-F12.5 per hfocus 2026 letter)
+f20_f29,key secondary,Schizophrenia schizotypal and delusional disorders (psychosis overall),F20-F29,code starts with F20..F29,principal diagnosis (primary) and any (sensitivity),Principal-diagnosis rule chosen to avoid counting chronic patients admitted for other reasons
+t40_7,key secondary,Poisoning by cannabis (derivatives),T40.7,code starts with T407,any diagnosis,Mostly unintentional edible exposures in children; low counts
+f10_any,comparison,Mental and behavioural disorders due to use of alcohol,F10 (F10.0-F10.9),code starts with F10,any diagnosis,Should not respond to cannabis law
+f15_any,comparison,Mental and behavioural disorders due to use of other stimulants incl. caffeine (methamphetamine),F15 (F15.0-F15.9),code starts with F15,any diagnosis,Should not respond to cannabis law; note Addiction 2026 found a post-2022 rise in youth stimulant admissions (possible COVID rebound)
+k35_k37,negative control (added),Acute appendicitis,K35-K37,code starts with K35/K36/K37,principal diagnosis,Added to mirror the Addiction 2026 negative control (deviation from protocol: addition only)
+all_ip,coding check,All inpatient admissions,all codes,all records,n/a,Denominator for coding check
+f_chapter,coding check,Chapter V mental and behavioural disorders,F00-F99,code starts with F,principal diagnosis,F-chapter share = f_chapter / all_ip

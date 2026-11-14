@@ -1,0 +1,692 @@
+---
+title: "Thailand cannabis on/off: admissions after decriminalisation (Jun 2022) and re-regulation (Jun 2025)"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup-options, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# 00. SETUP
+
+```{r setup}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+library(writexl)
+
+# Statistics
+library(MASS)
+library(sandwich)
+library(lmtest)
+
+# Options
+options(scipen = 999)
+theme_set(theme_classic(base_size = 14))
+set.seed(1234)
+
+# Switch: hypothesis blocks run only when real admissions data exist
+has_admissions <- file.exists("raw_admissions.csv")
+print(has_admissions)
+
+# Key dates
+date_on        <- as.Date("2022-06-01")   # delisting effective 9 Jun 2022; Jun 2022 coded post
+date_off       <- as.Date("2025-07-01")   # re-regulation effective 26 Jun 2025; Jul 2025 first post month
+date_announce  <- as.Date("2024-05-01")   # PM announcement to relist, 8 May 2024 (anticipation check)
+date_consult   <- as.Date("2025-05-01")   # DTAM public consultation on draft notice, 22 May 2025
+covid_start    <- as.Date("2020-03-01")
+covid_end      <- as.Date("2021-12-01")
+
+dir.create("figures", showWarnings = FALSE)
+```
+
+# 01. DATA CLEANING
+
+```{r cleaning}
+################################################################################
+# 01. DATA CLEANING
+################################################################################
+
+# Sourced first-stage values (hand-assembled from cited sources, see source_url)
+raw_first_stage <- read_csv("raw_first_stage.csv", show_col_types = FALSE)
+print(nrow(raw_first_stage))
+
+# Outcome code definitions
+codes <- read_csv("outcome_codes.csv", show_col_types = FALSE)
+print(codes %>% dplyr::select(outcome_id, role, icd10_codes))
+
+# Shop panel
+shop_panel <- raw_first_stage %>%
+  filter(table == "shops") %>%
+  mutate(date = as.Date(date)) %>%
+  dplyr::select(date, geography, measure, value, source_url, verification)
+
+print(shop_panel)
+
+# Survey prevalence
+survey_prevalence <- raw_first_stage %>%
+  filter(table == "survey") %>%
+  dplyr::select(date, geography, measure, value, unit, source_url, verification)
+
+print(survey_prevalence)
+
+# Context means from HDC (advocacy letter) and Addiction 2026
+hdc_context <- raw_first_stage %>%
+  filter(table == "hdc_context") %>%
+  dplyr::select(date, geography, measure, value, unit, source_url, source_type)
+
+print(hdc_context)
+
+# Admissions panel (only if obtained): month, province, age_group, outcome_id, admissions, population
+if (has_admissions) {
+  admissions_panel <- read_csv("raw_admissions.csv", show_col_types = FALSE) %>%
+    mutate(
+      month     = as.Date(paste0(month, "-01")),
+      age_group = factor(age_group, levels = c("<20", "20+"))
+    ) %>%
+    filter(month >= as.Date("2017-01-01"))
+} else {
+  admissions_panel <- tibble(
+    month = as.Date(character()), province = character(), age_group = character(),
+    outcome_id = character(), admissions = numeric(), population = numeric()
+  )
+}
+
+print(nrow(admissions_panel))
+
+# Write clean workbook
+write_xlsx(
+  list(
+    admissions_panel  = admissions_panel,
+    shop_panel        = shop_panel,
+    survey_prevalence = survey_prevalence,
+    hdc_context       = hdc_context,
+    codes             = codes
+  ),
+  "clean_data.xlsx"
+)
+```
+
+# F1. FIRST STAGE: SHOP COUNTS AND USE PREVALENCE
+
+## F1.1 Data preparation
+
+```{r f1-prep}
+################################################################################
+# F1.1 Data preparation
+################################################################################
+
+f1_shops <- read_excel("clean_data.xlsx", sheet = "shop_panel") %>%
+  mutate(date = as.Date(date)) %>%
+  filter(
+    geography == "Thailand",
+    measure %in% c(
+      "licensed cannabis establishments (cumulative)",
+      "establishments remaining after non-renewal",
+      "establishments on DTAM shop map (cumulative)",
+      "establishments remaining",
+      "licensed cannabis outlets"
+    )
+  ) %>%
+  mutate(
+    series = case_when(
+      str_detect(measure, "cumulative") ~ "Cumulative licensed",
+      TRUE                              ~ "Operating / licensed now"
+    )
+  )
+
+print(f1_shops %>% dplyr::select(date, series, value))
+
+f1_survey <- read_excel("clean_data.xlsx", sheet = "survey_prevalence") %>%
+  filter(geography == "Thailand age 18-65")
+
+print(f1_survey %>% dplyr::select(date, value))
+```
+
+## F1.2 Analysis
+
+```{r f1-analysis}
+################################################################################
+# F1.2 Analysis
+################################################################################
+
+# Share of 2025-expiring licences not renewed
+f1_expired     <- 8636
+f1_renewed     <- 1339
+f1_not_renewed <- f1_expired - f1_renewed
+print(f1_not_renewed)
+print(round(100 * f1_not_renewed / f1_expired, 1))
+
+# Share of all licensed establishments lost by end 2025
+print(round(100 * 7297 / 18433, 1))
+
+# Figure: shop counts
+f1_figure_shops <- ggplot(f1_shops, aes(x = date, y = value, shape = series)) +
+  geom_point(size = 3) +
+  geom_vline(xintercept = as.Date("2025-06-26"), linetype = "dashed") +
+  scale_y_continuous(limits = c(0, 20000)) +
+  scale_x_date(limits = c(as.Date("2022-01-01"), as.Date("2026-12-31"))) +
+  labs(
+    x = NULL, y = "Cannabis establishments",
+    shape = NULL,
+    title = "Licensed cannabis establishments, Thailand",
+    caption = "Points = news reports citing MoPH/DTAM (see clean_data.xlsx). No verified counts for 2022-mid 2025.\nDashed line = re-regulation effective 26 Jun 2025."
+  ) +
+  theme(legend.position = "bottom")
+
+print(f1_figure_shops)
+ggsave("figures/first_stage_shops.png", f1_figure_shops, width = 8, height = 5, dpi = 200)
+
+# Figure: survey prevalence (CADS series only, comparable design)
+f1_figure_survey <- ggplot(f1_survey, aes(x = as.Date(date), y = value)) +
+  geom_line() +
+  geom_point(size = 3) +
+  labs(
+    x = NULL, y = "Past-year cannabis use, %",
+    title = "Past-year cannabis use, age 18-65 (CADS annual survey)",
+    caption = "Kalayasiri & Boonthae, BMC Public Health 2023. Comparable 2022-2025 waves not found [REF NEEDED]."
+  )
+
+print(f1_figure_survey)
+ggsave("figures/first_stage_survey.png", f1_figure_survey, width = 7, height = 4.5, dpi = 200)
+```
+
+# P1. POWER: MINIMUM DETECTABLE LEVEL CHANGE AFTER JUNE 2025 (APPROXIMATE)
+
+## P1.1 Data preparation
+
+```{r p1-prep}
+################################################################################
+# P1.1 Data preparation
+################################################################################
+
+# Monthly grid Jan 2017 - Oct 2026 (16 post-reversal months); 12-month version ends Jun 2026
+p1_grid <- tibble(month = seq(as.Date("2017-01-01"), as.Date("2026-10-01"), by = "month")) %>%
+  mutate(
+    t        = row_number(),
+    cal_m    = factor(format(month, "%m")),
+    covid    = as.integer(month >= covid_start & month <= covid_end),
+    post22   = as.integer(month >= date_on),
+    t22      = pmax(0, t - t[month == date_on]),
+    post25   = as.integer(month >= date_off),
+    t25      = pmax(0, t - t[month == date_off])
+  )
+
+print(nrow(p1_grid))
+print(sum(p1_grid$month < date_on))
+
+# Scenario inputs (monthly national admissions; sources in clean_data.xlsx, sheet hdc_context)
+p1_scenarios <- tribble(
+  ~outcome,                        ~pre_mean, ~post_month1, ~post_month36,
+  "F12.5 psychosis (HDC IPD)",      85,        170,          556,
+  "F12.2 dependence (HDC IPD)",     130,       260,          830,
+  "T40.7 poisoning (HDC IPD)",      35,        115,          60,
+  "Cannabis, age 10-19 (THIP)",     27,        150,          150
+)
+
+print(p1_scenarios)
+```
+
+## P1.2 Analysis
+
+```{r p1-analysis}
+################################################################################
+# P1.2 Analysis
+################################################################################
+
+# Simulation: one replicate = draw a negative binomial series, fit the planned
+# segmented Poisson model with Newey-West SE, test the 2025 level term.
+# (Deviation from house style: a simulation needs one helper and replicate().)
+p1_power_one <- function(pre_mean, m1, m36, drop, theta, end_month, nsim) {
+  d <- p1_grid %>% filter(month <= end_month)
+  level22 <- log(m1 / pre_mean)
+  slope22 <- (log(m36) - log(m1)) / 35
+  mu <- exp(
+    log(pre_mean) + log(1.08) / 12 * (d$t - 65) +
+      0.05 * sin(2 * pi * as.numeric(d$cal_m) / 12) +
+      level22 * d$post22 + slope22 * pmin(d$t22, 36) +
+      log(1 - drop) * d$post25
+  )
+  hits <- replicate(nsim, {
+    d$y <- rnbinom(nrow(d), mu = mu, size = theta)
+    m <- glm(y ~ t + cal_m + covid + post22 + t22 + post25 + t25, family = poisson, data = d)
+    ct <- coeftest(m, vcov. = NeweyWest(m, lag = 3, prewhite = FALSE))
+    ct["post25", "Pr(>|z|)"] < 0.05 & ct["post25", "Estimate"] < 0
+  })
+  mean(hits)
+}
+
+p1_design <- expand_grid(
+  p1_scenarios,
+  theta     = c(25, 100),
+  end_month = as.Date(c("2026-06-01", "2026-10-01")),
+  drop      = c(0, 0.05, 0.10, 0.15, 0.20, 0.30, 0.40)
+)
+
+set.seed(1234)
+p1_power <- p1_design %>%
+  rowwise() %>%
+  mutate(power = p1_power_one(pre_mean, post_month1, post_month36, drop, theta, end_month, nsim = 300)) %>%
+  ungroup()
+
+print(p1_power, n = 20)
+
+# MDE = smallest simulated drop with power >= 0.80
+p1_mde <- p1_power %>%
+  filter(drop > 0) %>%
+  group_by(outcome, theta, end_month) %>%
+  summarise(
+    mde_drop_pct = ifelse(any(power >= 0.80), 100 * min(drop[power >= 0.80]), NA_real_),
+    .groups = "drop"
+  ) %>%
+  left_join(
+    p1_power %>% filter(drop == 0) %>% dplyr::select(outcome, theta, end_month, size = power),
+    by = c("outcome", "theta", "end_month")
+  ) %>%
+  mutate(
+    post_months = ifelse(end_month == as.Date("2026-06-01"), 12, 16),
+    label = case_when(
+      !is.na(mde_drop_pct) & mde_drop_pct <= 20 ~ "powered",
+      TRUE                                      ~ "underpowered"
+    )
+  ) %>%
+  dplyr::select(outcome, theta, post_months, mde_drop_pct, size, label)
+
+print(p1_mde, n = 20)
+
+# Figure: power curves
+p1_figure_power <- ggplot(
+  p1_power %>% mutate(post_months = ifelse(end_month == as.Date("2026-06-01"), "12 post months", "16 post months")),
+  aes(x = 100 * drop, y = power, linetype = factor(theta))
+) +
+  geom_line() +
+  geom_point() +
+  geom_hline(yintercept = 0.8, colour = "grey50") +
+  facet_grid(post_months ~ outcome) +
+  labs(
+    x = "True level drop after Jun 2025, %", y = "Power (alpha 0.05)",
+    linetype = "NB theta",
+    title = "Approximate power for the 2025 level change (simulated)",
+    caption = "Inputs: period means from HDC (advocacy letter) and Addiction 2026; trend, seasonality and theta assumed."
+  ) +
+  theme_bw(base_size = 11) +
+  theme(legend.position = "bottom")
+
+print(p1_figure_power)
+ggsave("figures/power_mde.png", p1_figure_power, width = 12, height = 6, dpi = 200)
+```
+
+# H1. SYMMETRY: F12 ADMISSIONS RISE AFTER 2022 AND FALL AFTER 2025
+
+## H1.1 Data preparation
+
+```{r h1-prep, eval = has_admissions}
+################################################################################
+# H1.1 Data preparation
+################################################################################
+
+h1_df <- read_excel("clean_data.xlsx", sheet = "admissions_panel") %>%
+  mutate(month = as.Date(month)) %>%
+  filter(outcome_id == "f12_any") %>%
+  group_by(month) %>%
+  summarise(admissions = sum(admissions), population = sum(population), .groups = "drop") %>%
+  arrange(month) %>%
+  mutate(
+    t      = row_number(),
+    cal_m  = factor(format(month, "%m")),
+    covid  = as.integer(month >= covid_start & month <= covid_end),
+    post22 = as.integer(month >= date_on),
+    t22    = pmax(0, t - t[month == date_on]),
+    post25 = as.integer(month >= date_off),
+    t25    = pmax(0, t - t[month == date_off])
+  )
+
+print(nrow(h1_df))
+print(table(h1_df$post22, h1_df$post25))
+```
+
+## H1.2 Analysis
+
+```{r h1-analysis, eval = has_admissions}
+################################################################################
+# H1.2 Analysis
+################################################################################
+
+# Primary model: segmented NB, two breakpoints, seasonality, COVID
+h1_model_primary <- glm.nb(
+  admissions ~ t + cal_m + covid + post22 + t22 + post25 + t25 + offset(log(population)),
+  data = h1_df
+)
+
+h1_vcov <- NeweyWest(h1_model_primary, lag = 3, prewhite = FALSE)
+
+print(summary(h1_model_primary))
+print(coeftest(h1_model_primary, vcov. = h1_vcov)[c("post22", "t22", "post25", "t25"), ])
+print(exp(coefci(h1_model_primary, vcov. = h1_vcov)[c("post22", "post25"), ]))
+
+# Symmetry ratio: 2025 level change / 2022 level change (log scale), parametric bootstrap
+set.seed(1234)
+h1_draws <- mvrnorm(2000, mu = coef(h1_model_primary), Sigma = h1_vcov)
+h1_ratio_level <- h1_draws[, "post25"] / h1_draws[, "post22"]
+h1_ratio_slope <- h1_draws[, "t25"] / h1_draws[, "t22"]
+
+print(coef(h1_model_primary)["post25"] / coef(h1_model_primary)["post22"])
+print(quantile(h1_ratio_level, c(0.025, 0.5, 0.975)))
+print(coef(h1_model_primary)["t25"] / coef(h1_model_primary)["t22"])
+print(quantile(h1_ratio_slope, c(0.025, 0.5, 0.975)))
+
+# Counterfactual figure (no 2025 change)
+h1_df <- h1_df %>%
+  mutate(
+    fitted = predict(h1_model_primary, type = "response"),
+    cf_off = predict(h1_model_primary, newdata = h1_df %>% mutate(post25 = 0, t25 = 0), type = "response")
+  )
+
+h1_figure_series <- ggplot(h1_df, aes(x = month)) +
+  geom_point(aes(y = admissions), size = 1) +
+  geom_line(aes(y = fitted)) +
+  geom_line(aes(y = cf_off), linetype = "dashed", data = h1_df %>% filter(month >= date_off)) +
+  geom_vline(xintercept = c(date_on, date_off), colour = "grey40") +
+  labs(x = NULL, y = "F12 admissions per month", title = "National F12 admissions with both breakpoints")
+
+print(h1_figure_series)
+ggsave("figures/h1_f12_series.png", h1_figure_series, width = 9, height = 5, dpi = 200)
+
+# Event study: monthly bins -24..+24 around each date (reference = month -1)
+h1_es <- h1_df %>%
+  mutate(
+    rel22 = as.integer(round(as.numeric(month - date_on) / 30.44)),
+    rel25 = as.integer(round(as.numeric(month - date_off) / 30.44)),
+    rel22_bin = factor(ifelse(rel22 >= -24 & rel22 <= 24 & month < date_off, rel22, -1)),
+    rel25_bin = factor(ifelse(rel25 >= -24 & rel25 <= 24 & month >= date_on, rel25, -1))
+  ) %>%
+  mutate(rel22_bin = relevel(rel22_bin, ref = "-1"), rel25_bin = relevel(rel25_bin, ref = "-1"))
+
+h1_model_es <- glm.nb(
+  admissions ~ cal_m + covid + rel22_bin + rel25_bin + offset(log(population)),
+  data = h1_es
+)
+
+print(summary(h1_model_es))
+```
+
+## H1.3 Robustness
+
+```{r h1-robustness, eval = has_admissions}
+################################################################################
+# H1.3 Robustness
+################################################################################
+
+# Difference-in-differences vs F10 and F15 (national, outcome x time)
+h1_did_df <- read_excel("clean_data.xlsx", sheet = "admissions_panel") %>%
+  mutate(month = as.Date(month)) %>%
+  filter(outcome_id %in% c("f12_any", "f10_any", "f15_any")) %>%
+  group_by(month, outcome_id) %>%
+  summarise(admissions = sum(admissions), population = sum(population), .groups = "drop") %>%
+  mutate(
+    is_f12 = as.integer(outcome_id == "f12_any"),
+    t      = as.integer(factor(month)),
+    post22 = as.integer(month >= date_on),
+    t22    = pmax(0, t - min(t[month == date_on])),
+    post25 = as.integer(month >= date_off),
+    t25    = pmax(0, t - min(t[month == date_off]))
+  )
+
+h1_model_did <- glm.nb(
+  admissions ~ factor(month) + outcome_id + outcome_id:t +
+    is_f12:post22 + is_f12:t22 + is_f12:post25 + is_f12:t25 + offset(log(population)),
+  data = h1_did_df
+)
+
+print(coeftest(h1_model_did, vcov. = vcovCL(h1_model_did, cluster = ~month))[c("is_f12:post22", "is_f12:t22", "is_f12:post25", "is_f12:t25"), ])
+
+# Age split: under 20 vs 20+
+h1_age_df <- read_excel("clean_data.xlsx", sheet = "admissions_panel") %>%
+  mutate(month = as.Date(month)) %>%
+  filter(outcome_id == "f12_any") %>%
+  group_by(month, age_group) %>%
+  summarise(admissions = sum(admissions), population = sum(population), .groups = "drop") %>%
+  mutate(
+    youth  = as.integer(age_group == "<20"),
+    t      = as.integer(factor(month)),
+    cal_m  = factor(format(month, "%m")),
+    covid  = as.integer(month >= covid_start & month <= covid_end),
+    post22 = as.integer(month >= date_on),
+    t22    = pmax(0, t - min(t[month == date_on])),
+    post25 = as.integer(month >= date_off),
+    t25    = pmax(0, t - min(t[month == date_off]))
+  )
+
+h1_model_age <- glm.nb(
+  admissions ~ youth * (t + cal_m + covid + post22 + t22 + post25 + t25) + offset(log(population)),
+  data = h1_age_df
+)
+
+print(coeftest(h1_model_age, vcov. = vcovCL(h1_model_age, cluster = ~month))[c("youth:post22", "youth:post25"), ])
+
+# Placebo breakpoints: June 2020 and June 2024
+h1_placebo_df <- h1_df %>%
+  mutate(
+    plac20 = as.integer(month >= as.Date("2020-06-01")),
+    plac24 = as.integer(month >= as.Date("2024-06-01"))
+  )
+
+h1_model_placebo <- glm.nb(
+  admissions ~ t + cal_m + covid + post22 + t22 + post25 + t25 + plac20 + plac24 + offset(log(population)),
+  data = h1_placebo_df
+)
+
+print(coeftest(h1_model_placebo, vcov. = NeweyWest(h1_model_placebo, lag = 3, prewhite = FALSE))[c("plac20", "plac24"), ])
+
+# Anticipation: breakpoints at relisting announcement (May 2024) and DTAM consultation (May 2025)
+h1_antic_df <- h1_df %>%
+  mutate(
+    antic24 = as.integer(month >= date_announce),
+    antic25 = as.integer(month >= date_consult)
+  )
+
+h1_model_antic <- glm.nb(
+  admissions ~ t + cal_m + covid + post22 + t22 + antic24 + antic25 + post25 + t25 + offset(log(population)),
+  data = h1_antic_df
+)
+
+print(coeftest(h1_model_antic, vcov. = NeweyWest(h1_model_antic, lag = 3, prewhite = FALSE))[c("antic24", "antic25", "post25"), ])
+
+# Coding check: total admissions and F-chapter share
+h1_coding_df <- read_excel("clean_data.xlsx", sheet = "admissions_panel") %>%
+  mutate(month = as.Date(month)) %>%
+  filter(outcome_id %in% c("all_ip", "f_chapter")) %>%
+  group_by(month, outcome_id) %>%
+  summarise(admissions = sum(admissions), .groups = "drop") %>%
+  pivot_wider(names_from = outcome_id, values_from = admissions) %>%
+  mutate(
+    f_share = f_chapter / all_ip,
+    t       = row_number(),
+    cal_m   = factor(format(month, "%m")),
+    covid   = as.integer(month >= covid_start & month <= covid_end),
+    post22  = as.integer(month >= date_on),
+    post25  = as.integer(month >= date_off)
+  )
+
+h1_model_coding <- glm(
+  cbind(f_chapter, all_ip - f_chapter) ~ t + cal_m + covid + post22 + post25,
+  family = quasibinomial,
+  data = h1_coding_df
+)
+
+print(summary(h1_model_coding)$coefficients[c("post22", "post25"), ])
+```
+
+# H2. DOSE: PROVINCES WITH MORE SHOPS SHOW BIGGER RISE AND FALL
+
+## H2.1 Data preparation
+
+```{r h2-prep, eval = has_admissions && file.exists("raw_shops_province_month.csv")}
+################################################################################
+# H2.1 Data preparation
+################################################################################
+
+h2_shops <- read_csv("raw_shops_province_month.csv", show_col_types = FALSE) %>%
+  mutate(month = as.Date(paste0(month, "-01")))
+
+h2_df <- read_excel("clean_data.xlsx", sheet = "admissions_panel") %>%
+  mutate(month = as.Date(month)) %>%
+  filter(outcome_id == "f12_any") %>%
+  group_by(month, province) %>%
+  summarise(admissions = sum(admissions), population = sum(population), .groups = "drop") %>%
+  left_join(h2_shops, by = c("month", "province")) %>%
+  mutate(
+    shops_per_100k = 1e5 * replace_na(shops, 0) / population,
+    tourism        = as.integer(province %in% c("Bangkok", "Phuket", "Chon Buri", "Chiang Mai", "Surat Thani"))
+  )
+
+print(nrow(h2_df))
+print(summary(h2_df$shops_per_100k))
+```
+
+## H2.2 Analysis
+
+```{r h2-analysis, eval = has_admissions && file.exists("raw_shops_province_month.csv")}
+################################################################################
+# H2.2 Analysis
+################################################################################
+
+# Primary dose model: province and month FE, time-varying shop density
+h2_model_primary <- glm.nb(
+  admissions ~ shops_per_100k + factor(province) + factor(month) + offset(log(population)),
+  data = h2_df
+)
+
+print(coeftest(h2_model_primary, vcov. = vcovCL(h2_model_primary, cluster = ~province))["shops_per_100k", ])
+print(exp(coefci(h2_model_primary, vcov. = vcovCL(h2_model_primary, cluster = ~province))["shops_per_100k", ]))
+```
+
+## H2.3 Robustness
+
+```{r h2-robustness, eval = has_admissions && file.exists("raw_shops_province_month.csv")}
+################################################################################
+# H2.3 Robustness
+################################################################################
+
+# Tourism provinces vs others: separate post-2022 and post-2025 changes
+h2_df <- h2_df %>%
+  mutate(post22 = as.integer(month >= date_on), post25 = as.integer(month >= date_off))
+
+h2_model_tourism <- glm.nb(
+  admissions ~ tourism:post22 + tourism:post25 + factor(province) + factor(month) + offset(log(population)),
+  data = h2_df
+)
+
+print(coeftest(h2_model_tourism, vcov. = vcovCL(h2_model_tourism, cluster = ~province))[c("tourism:post22", "tourism:post25"), ])
+
+# Leave-one-province-out (77 refits; loop is unavoidable here)
+h2_loo <- tibble(province = unique(h2_df$province)) %>%
+  rowwise() %>%
+  mutate(beta = coef(glm.nb(
+    admissions ~ shops_per_100k + factor(province) + factor(month) + offset(log(population)),
+    data = h2_df[h2_df$province != province, ]
+  ))["shops_per_100k"]) %>%
+  ungroup()
+
+print(summary(h2_loo$beta))
+```
+
+# H3. PSYCHOSIS: F12.5 AND F20-F29
+
+## H3.1 Data preparation
+
+```{r h3-prep, eval = has_admissions}
+################################################################################
+# H3.1 Data preparation
+################################################################################
+
+h3_df <- read_excel("clean_data.xlsx", sheet = "admissions_panel") %>%
+  mutate(month = as.Date(month)) %>%
+  filter(outcome_id %in% c("f12_5", "f20_f29", "t40_7")) %>%
+  group_by(month, outcome_id) %>%
+  summarise(admissions = sum(admissions), population = sum(population), .groups = "drop") %>%
+  arrange(outcome_id, month) %>%
+  group_by(outcome_id) %>%
+  mutate(
+    t      = row_number(),
+    cal_m  = factor(format(month, "%m")),
+    covid  = as.integer(month >= covid_start & month <= covid_end),
+    post22 = as.integer(month >= date_on),
+    t22    = pmax(0, t - t[month == date_on]),
+    post25 = as.integer(month >= date_off),
+    t25    = pmax(0, t - t[month == date_off])
+  ) %>%
+  ungroup()
+
+print(table(h3_df$outcome_id))
+```
+
+## H3.2 Analysis
+
+```{r h3-analysis, eval = has_admissions}
+################################################################################
+# H3.2 Analysis
+################################################################################
+
+# F12.5 cannabis-induced psychosis
+h3_model_f125 <- glm.nb(
+  admissions ~ t + cal_m + covid + post22 + t22 + post25 + t25 + offset(log(population)),
+  data = h3_df %>% filter(outcome_id == "f12_5")
+)
+
+print(summary(h3_model_f125))
+print(coeftest(h3_model_f125, vcov. = NeweyWest(h3_model_f125, lag = 3, prewhite = FALSE))[c("post22", "post25"), ])
+print(exp(coefci(h3_model_f125, vcov. = NeweyWest(h3_model_f125, lag = 3, prewhite = FALSE))[c("post22", "post25"), ]))
+
+# F20-F29 psychosis overall
+h3_model_f2029 <- glm.nb(
+  admissions ~ t + cal_m + covid + post22 + t22 + post25 + t25 + offset(log(population)),
+  data = h3_df %>% filter(outcome_id == "f20_f29")
+)
+
+print(summary(h3_model_f2029))
+print(coeftest(h3_model_f2029, vcov. = NeweyWest(h3_model_f2029, lag = 3, prewhite = FALSE))[c("post22", "post25"), ])
+print(exp(coefci(h3_model_f2029, vcov. = NeweyWest(h3_model_f2029, lag = 3, prewhite = FALSE))[c("post22", "post25"), ]))
+
+# T40.7 cannabis poisoning
+h3_model_t407 <- glm.nb(
+  admissions ~ t + cal_m + covid + post22 + t22 + post25 + t25 + offset(log(population)),
+  data = h3_df %>% filter(outcome_id == "t40_7")
+)
+
+print(summary(h3_model_t407))
+print(coeftest(h3_model_t407, vcov. = NeweyWest(h3_model_t407, lag = 3, prewhite = FALSE))[c("post22", "post25"), ])
+print(exp(coefci(h3_model_t407, vcov. = NeweyWest(h3_model_t407, lag = 3, prewhite = FALSE))[c("post22", "post25"), ]))
+```
+
+# SAVE RESULTS
+
+```{r save}
+################################################################################
+# SAVE RESULTS
+################################################################################
+
+results <- list(
+  status            = ifelse(has_admissions, "analysis run", "data-access gate failed: hypothesis blocks not run"),
+  first_stage_shops = shop_panel,
+  survey_prevalence = survey_prevalence,
+  power_grid        = p1_power,
+  power_mde         = p1_mde
+)
+
+saveRDS(results, "results.rds")
+print(names(results))
+```
+
+# SESSION INFO
+
+```{r session-info}
+print(sessionInfo())
+```
