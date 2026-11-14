@@ -1,0 +1,4 @@
+cause,effect_pct,lcl_pct,ucl_pct,p,p_holm,effect_wyper_pct,lcl_wyper_pct,ucl_wyper_pct,p_wyper,mde_pct,power_label
+k70,-5.31,-17.7,9.01,0.404,1,-8.7,-15.3,-1.53,0.0257,15.4,UNDERPOWERED
+f10,-23.3,-57.9,39.8,0.344,1,-33.5,-63,19.7,0.14,57.3,UNDERPOWERED
+poisoning,13,-16.3,52.6,0.381,1,6,-16.1,33.9,0.564,32.7,UNDERPOWERED

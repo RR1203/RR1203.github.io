@@ -504,6 +504,27 @@ Analysis</a></li>
 <li><a href="#s3.3-robustness" id="toc-s3.3-robustness">S3.3
 Robustness</a></li>
 </ul></li>
+<li><a href="#h8.-multiverse-scotland-2018-all-alcohol-specific-deaths" id="toc-h8.-multiverse-scotland-2018-all-alcohol-specific-deaths">H8.
+MULTIVERSE: SCOTLAND 2018, ALL ALCOHOL-SPECIFIC DEATHS</a>
+<ul>
+<li><a href="#h8.1-data-preparation" id="toc-h8.1-data-preparation">H8.1
+Data preparation</a></li>
+<li><a href="#h8.2-analysis" id="toc-h8.2-analysis">H8.2
+Analysis</a></li>
+<li><a href="#h8.3-robustness" id="toc-h8.3-robustness">H8.3
+Robustness</a></li>
+</ul></li>
+<li><a href="#h9.-cause-specific-split-k70-f10-acute-poisoning-scotland-vs-england" id="toc-h9.-cause-specific-split-k70-f10-acute-poisoning-scotland-vs-england">H9.
+CAUSE-SPECIFIC SPLIT: K70, F10, ACUTE POISONING (SCOTLAND VS
+ENGLAND)</a>
+<ul>
+<li><a href="#h9.1-data-preparation" id="toc-h9.1-data-preparation">H9.1
+Data preparation</a></li>
+<li><a href="#h9.2-analysis" id="toc-h9.2-analysis">H9.2
+Analysis</a></li>
+<li><a href="#h9.3-robustness" id="toc-h9.3-robustness">H9.3
+Robustness</a></li>
+</ul></li>
 <li><a href="#results-object" id="toc-results-object">RESULTS
 OBJECT</a></li>
 <li><a href="#session-info" id="toc-session-info">SESSION INFO</a></li>
@@ -910,6 +931,132 @@ print(count(australia, state))</code></pre>
 ## 6 Tasmania                        10
 ## 7 Victoria                        10
 ## 8 Western Australia               10</code></pre>
+<pre class="r"><code># Cause-specific deaths (H9): counts by age, Scotland / England / North East / North West
+raw_cause_file &lt;- &quot;03_mup_raw_cause.xlsx&quot;
+cause_deaths_age &lt;- read_excel(raw_cause_file, sheet = &quot;deaths_cause_age&quot;) %&gt;%
+  filter(
+    (area == &quot;Scotland&quot; &amp; source != &quot;NRS 2025 Table 8&quot;) |
+      (area == &quot;England&quot; &amp; ((source == &quot;ONS individual cause 2022&quot; &amp; year &lt;= 2021) |
+                              (source == &quot;Nomis NM_161_1&quot; &amp; year &gt;= 2022))) |
+      (area %in% c(&quot;North East&quot;, &quot;North West&quot;) &amp; ((source == &quot;ONS adhoc 11797&quot; &amp; year &lt;= 2018) |
+                                                    (source == &quot;Nomis NM_161_1&quot; &amp; year &gt;= 2019)))
+  ) %&gt;%
+  mutate(cause = case_when(
+    icd10 == &quot;K70&quot; ~ &quot;k70&quot;,
+    icd10 == &quot;F10&quot; ~ &quot;f10&quot;,
+    icd10 %in% c(&quot;X45&quot;, &quot;X65&quot;, &quot;Y15&quot;) ~ &quot;poisoning&quot;,
+    TRUE ~ NA_character_
+  ),
+  age_group = if_else(age_group %in% c(&quot;85-89&quot;, &quot;90+&quot;), &quot;85+&quot;, age_group),
+  area = if_else(area %in% c(&quot;North East&quot;, &quot;North West&quot;), &quot;Eng: NE+NW&quot;, area)) %&gt;%
+  group_by(area, year, cause, age_group) %&gt;%
+  summarise(deaths = sum(deaths), .groups = &quot;drop&quot;)
+print(count(cause_deaths_age, area, cause) %&gt;% head(12))</code></pre>
+<pre><code>## # A tibble: 9 x 3
+##   area       cause         n
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;int&gt;
+## 1 Eng: NE+NW f10         456
+## 2 Eng: NE+NW k70         456
+## 3 Eng: NE+NW poisoning   456
+## 4 England    f10         456
+## 5 England    k70         456
+## 6 England    poisoning   456
+## 7 Scotland   f10         437
+## 8 Scotland   k70         437
+## 9 Scotland   poisoning   437</code></pre>
+<pre class="r"><code># Scotland totals by cause from NRS Table 8 (all years, used for crude rates)
+cause_scotland_total &lt;- read_excel(raw_cause_file, sheet = &quot;nrs_cause_total&quot;) %&gt;%
+  mutate(cause = case_when(
+    icd10 == &quot;K70&quot; ~ &quot;k70&quot;,
+    icd10 == &quot;F10&quot; ~ &quot;f10&quot;,
+    icd10 %in% c(&quot;X45&quot;, &quot;X65&quot;, &quot;Y15&quot;) ~ &quot;poisoning&quot;,
+    TRUE ~ NA_character_
+  )) %&gt;%
+  group_by(area, year, cause) %&gt;%
+  summarise(deaths = sum(deaths), .groups = &quot;drop&quot;)
+
+# Populations by age (Nomis NM_31_1), NE and NW combined
+cause_pop_age &lt;- read_excel(raw_cause_file, sheet = &quot;population_age&quot;) %&gt;%
+  mutate(area = if_else(area %in% c(&quot;North East&quot;, &quot;North West&quot;), &quot;Eng: NE+NW&quot;, area),
+         age_group = case_when(
+           age_label == &quot;Aged under 1 year&quot; ~ &quot;&lt;1&quot;,
+           age_label == &quot;Aged 85 and over&quot; ~ &quot;85+&quot;,
+           TRUE ~ sprintf(&quot;%02d-%02d&quot;,
+                          as.numeric(str_extract(age_label, &quot;\\d+&quot;)),
+                          as.numeric(str_extract(age_label, &quot;\\d+(?= years)&quot;)))
+         )) %&gt;%
+  group_by(area, year, age_group) %&gt;%
+  summarise(population = sum(population), .groups = &quot;drop&quot;)
+print(sort(unique(cause_pop_age$age_group)))</code></pre>
+<pre><code>##  [1] &quot;01-04&quot; &quot;05-09&quot; &quot;10-14&quot; &quot;15-19&quot; &quot;20-24&quot; &quot;25-29&quot; &quot;30-34&quot; &quot;35-39&quot; &quot;40-44&quot; &quot;45-49&quot; &quot;50-54&quot; &quot;55-59&quot; &quot;60-64&quot; &quot;65-69&quot;
+## [15] &quot;70-74&quot; &quot;75-79&quot; &quot;80-84&quot; &quot;85+&quot;   &quot;&lt;1&quot;</code></pre>
+<pre class="r"><code># ESP2013 weights on the harmonised age groups (85+ = 2500)
+esp_2013_cause &lt;- tibble(
+  age_group = c(&quot;&lt;1&quot;, &quot;01-04&quot;, &quot;05-09&quot;, &quot;10-14&quot;, &quot;15-19&quot;, &quot;20-24&quot;, &quot;25-29&quot;, &quot;30-34&quot;, &quot;35-39&quot;, &quot;40-44&quot;,
+                &quot;45-49&quot;, &quot;50-54&quot;, &quot;55-59&quot;, &quot;60-64&quot;, &quot;65-69&quot;, &quot;70-74&quot;, &quot;75-79&quot;, &quot;80-84&quot;, &quot;85+&quot;),
+  esp_weight = esp_2013$esp_weight
+)
+
+# Crude rates per 100,000 (H9 primary, frozen hierarchy level 3, FLAG)
+cause_crude &lt;- bind_rows(
+  cause_scotland_total,
+  cause_deaths_age %&gt;% filter(area != &quot;Scotland&quot;) %&gt;%
+    group_by(area, year, cause) %&gt;% summarise(deaths = sum(deaths), .groups = &quot;drop&quot;)
+) %&gt;%
+  inner_join(cause_pop_age %&gt;% group_by(area, year) %&gt;% summarise(population = sum(population), .groups = &quot;drop&quot;),
+             by = c(&quot;area&quot;, &quot;year&quot;)) %&gt;%
+  mutate(rate = deaths / population * 1e5, rate_type = &quot;crude&quot;) %&gt;%
+  filter(year &gt;= 2007, year &lt;= 2024)
+print(count(cause_crude, area, cause))</code></pre>
+<pre><code>## # A tibble: 9 x 3
+##   area       cause         n
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;int&gt;
+## 1 Eng: NE+NW f10          18
+## 2 Eng: NE+NW k70          18
+## 3 Eng: NE+NW poisoning    18
+## 4 England    f10          18
+## 5 England    k70          18
+## 6 England    poisoning    18
+## 7 Scotland   f10          18
+## 8 Scotland   k70          18
+## 9 Scotland   poisoning    18</code></pre>
+<pre class="r"><code># ESP2013 ASMR (exploratory; Scotland 2022 has no age breakdown -&gt; missing)
+cause_asmr &lt;- cause_deaths_age %&gt;%
+  inner_join(cause_pop_age, by = c(&quot;area&quot;, &quot;year&quot;, &quot;age_group&quot;)) %&gt;%
+  inner_join(esp_2013_cause, by = &quot;age_group&quot;) %&gt;%
+  group_by(area, year, cause) %&gt;%
+  summarise(rate = sum(deaths / population * 1e5 * esp_weight) / sum(esp_weight),
+            deaths = sum(deaths), .groups = &quot;drop&quot;) %&gt;%
+  mutate(rate_type = &quot;asmr_esp2013&quot;) %&gt;%
+  filter(year &gt;= 2007, year &lt;= 2024)
+print(count(cause_asmr, area, cause))</code></pre>
+<pre><code>## # A tibble: 9 x 3
+##   area       cause         n
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;int&gt;
+## 1 Eng: NE+NW f10          18
+## 2 Eng: NE+NW k70          18
+## 3 Eng: NE+NW poisoning    18
+## 4 England    f10          18
+## 5 England    k70          18
+## 6 England    poisoning    18
+## 7 Scotland   f10          17
+## 8 Scotland   k70          17
+## 9 Scotland   poisoning    17</code></pre>
+<pre class="r"><code># Validation: computed England ASMR vs Nomis published ASMR (2013-2024, single codes)
+cause_validation &lt;- cause_deaths_age %&gt;%
+  filter(area == &quot;England&quot;, cause %in% c(&quot;k70&quot;, &quot;f10&quot;)) %&gt;%
+  inner_join(cause_pop_age, by = c(&quot;area&quot;, &quot;year&quot;, &quot;age_group&quot;)) %&gt;%
+  inner_join(esp_2013_cause, by = &quot;age_group&quot;) %&gt;%
+  group_by(year, cause) %&gt;%
+  summarise(asmr_computed = sum(deaths / population * 1e5 * esp_weight) / sum(esp_weight), .groups = &quot;drop&quot;) %&gt;%
+  inner_join(read_excel(raw_cause_file, sheet = &quot;nomis_asmr_published&quot;) %&gt;%
+               filter(area == &quot;England&quot;, icd10 %in% c(&quot;K70&quot;, &quot;F10&quot;)) %&gt;%
+               mutate(cause = tolower(icd10)) %&gt;% select(year, cause, asmr_published),
+             by = c(&quot;year&quot;, &quot;cause&quot;)) %&gt;%
+  mutate(ratio = asmr_computed / asmr_published)
+print(summary(cause_validation$ratio))</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.9966  0.9998  1.0001  1.0004  1.0009  1.0040</code></pre>
 <pre class="r"><code># Write clean workbook (one sheet per source + harmonised panel)
 write_xlsx(
   list(panel = panel,
@@ -921,7 +1068,10 @@ write_xlsx(
        sales_ireland = sales_ireland,
        phs_2026_report = phs_2026,
        australia = australia,
-       ireland_validation = ie_check),
+       ireland_validation = ie_check,
+       cause_crude = cause_crude,
+       cause_asmr = cause_asmr,
+       cause_validation = cause_validation),
   &quot;clean_data.xlsx&quot;
 )</code></pre>
 </div>
@@ -4007,6 +4157,777 @@ print(s3_placebo)</code></pre>
 <pre><code>## [1] 0.125</code></pre>
 </div>
 </div>
+<div id="h8.-multiverse-scotland-2018-all-alcohol-specific-deaths" class="section level1">
+<h1>H8. MULTIVERSE: SCOTLAND 2018, ALL ALCOHOL-SPECIFIC DEATHS</h1>
+<div id="h8.1-data-preparation" class="section level2">
+<h2>H8.1 Data preparation</h2>
+<pre class="r"><code>################################################################################
+# H8.1 Data preparation
+################################################################################
+
+h8_panel &lt;- read_excel(&quot;clean_data.xlsx&quot;, sheet = &quot;panel&quot;) %&gt;%
+  filter(outcome == &quot;alcohol_specific&quot;, sex == &quot;Persons&quot;,
+         jurisdiction %in% c(&quot;Scotland&quot;, &quot;England&quot;, &quot;Eng: NE+NW&quot;), year &gt;= 2007, year &lt;= 2024) %&gt;%
+  select(jurisdiction, year, rate) %&gt;%
+  pivot_wider(names_from = jurisdiction, values_from = rate)
+
+# Frozen grid (multiverse_specs.md): 8 x 5 x 2 x 2 x 2 = 320
+h8_grid &lt;- expand_grid(
+  start = 2007:2014,
+  end = 2020:2024,
+  trend = c(&quot;full&quot;, &quot;pre-only&quot;),
+  control = c(&quot;England&quot;, &quot;NE+NW&quot;),
+  covid = c(&quot;indicator&quot;, &quot;exclude&quot;)
+)
+print(nrow(h8_panel))</code></pre>
+<pre><code>## [1] 18</code></pre>
+<pre class="r"><code>print(nrow(h8_grid))</code></pre>
+<pre><code>## [1] 320</code></pre>
+</div>
+<div id="h8.2-analysis" class="section level2">
+<h2>H8.2 Analysis</h2>
+<pre class="r"><code>################################################################################
+# H8.2 Analysis
+################################################################################
+
+# CITS for every spec (same model as H0; pre-only trend adds post_slope)
+h8_cits &lt;- h8_grid %&gt;%
+  mutate(fit = pmap(list(start, end, trend, control, covid), \(start, end, trend, control, covid) {
+    d &lt;- h8_panel %&gt;%
+      filter(year &gt;= start, year &lt;= end) %&gt;%
+      mutate(log_gap = log(Scotland) - log(if (control == &quot;England&quot;) England else `Eng: NE+NW`),
+             year_c = year - 2018,
+             mup = case_when(year &lt; 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+             post_slope = pmax(0, year - 2018),
+             covid_term = if_else(year %in% 2020:2021, 1, 0))
+    if (covid == &quot;exclude&quot;) d &lt;- filter(d, !year %in% 2020:2021)
+    m &lt;- if (trend == &quot;full&quot; &amp; covid == &quot;indicator&quot;) lm(log_gap ~ year_c + mup + covid_term, data = d) else
+      if (trend == &quot;full&quot; &amp; covid == &quot;exclude&quot;) lm(log_gap ~ year_c + mup, data = d) else
+        if (trend == &quot;pre-only&quot; &amp; covid == &quot;indicator&quot;) lm(log_gap ~ year_c + mup + post_slope + covid_term, data = d) else
+          lm(log_gap ~ year_c + mup + post_slope, data = d)
+    if (any(is.na(coef(m))) || df.residual(m) &lt; 1) return(tibble(estimate = NA_real_, se = NA_real_, df = NA_real_, dropped = TRUE))
+    v &lt;- NeweyWest(m, lag = 1, prewhite = FALSE)
+    L &lt;- setNames(rep(0, length(coef(m))), names(coef(m)))
+    L[&quot;mup&quot;] &lt;- 1
+    if (trend == &quot;pre-only&quot;) L[&quot;post_slope&quot;] &lt;- mean(2019:end - 2018)
+    tibble(estimate = sum(L * coef(m)), se = sqrt(as.numeric(t(L) %*% v %*% L)), df = df.residual(m), dropped = FALSE)
+  })) %&gt;%
+  unnest(fit) %&gt;%
+  mutate(p = 2 * pt(-abs(estimate / se), df),
+         effect_pct = 100 * (exp(estimate) - 1),
+         lcl_pct = 100 * (exp(estimate - qt(0.975, df) * se) - 1),
+         ucl_pct = 100 * (exp(estimate + qt(0.975, df) * se) - 1),
+         wyper = start == 2012 &amp; end == 2020 &amp; control == &quot;England&quot; &amp; trend == &quot;full&quot;)
+print(count(h8_cits, dropped))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   dropped     n
+##   &lt;lgl&gt;   &lt;int&gt;
+## 1 FALSE     320</code></pre>
+<pre class="r"><code>print(filter(h8_cits, dropped))</code></pre>
+<pre><code>## # A tibble: 0 x 14
+## # i 14 variables: start &lt;int&gt;, end &lt;int&gt;, trend &lt;chr&gt;, control &lt;chr&gt;, covid &lt;chr&gt;, estimate &lt;dbl&gt;, se &lt;dbl&gt;, df &lt;int&gt;,
+## #   dropped &lt;lgl&gt;, p &lt;dbl&gt;, effect_pct &lt;dbl&gt;, lcl_pct &lt;dbl&gt;, ucl_pct &lt;dbl&gt;, wyper &lt;lgl&gt;</code></pre>
+<pre class="r"><code>print(filter(h8_cits, wyper))</code></pre>
+<pre><code>## # A tibble: 2 x 14
+##   start   end trend control covid     estimate     se    df dropped     p effect_pct lcl_pct ucl_pct wyper
+##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt; &lt;lgl&gt;   &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;lgl&gt;
+## 1  2012  2020 full  England indicator  -0.0996 0.0530     5 FALSE   0.119      -9.48   -21.0    3.73 TRUE 
+## 2  2012  2020 full  England exclude    -0.0996 0.0530     5 FALSE   0.119      -9.48   -21.0    3.73 TRUE</code></pre>
+<pre class="r"><code># Summary: overall and by each dimension
+h8_cits_kept &lt;- filter(h8_cits, !dropped)
+h8_summary_overall &lt;- h8_cits_kept %&gt;%
+  summarise(n_specs = n(),
+            median_pct = median(effect_pct),
+            q25_pct = quantile(effect_pct, 0.25),
+            q75_pct = quantile(effect_pct, 0.75),
+            pct_negative = 100 * mean(effect_pct &lt; 0),
+            pct_negative_p05 = 100 * mean(effect_pct &lt; 0 &amp; p &lt; 0.05)) %&gt;%
+  mutate(dimension = &quot;overall&quot;, level = &quot;all&quot;)
+h8_summary_dims &lt;- h8_cits_kept %&gt;%
+  mutate(across(c(start, end), as.character)) %&gt;%
+  pivot_longer(c(start, end, trend, control, covid), names_to = &quot;dimension&quot;, values_to = &quot;level&quot;) %&gt;%
+  group_by(dimension, level) %&gt;%
+  summarise(n_specs = n(),
+            median_pct = median(effect_pct),
+            q25_pct = quantile(effect_pct, 0.25),
+            q75_pct = quantile(effect_pct, 0.75),
+            pct_negative = 100 * mean(effect_pct &lt; 0),
+            pct_negative_p05 = 100 * mean(effect_pct &lt; 0 &amp; p &lt; 0.05),
+            .groups = &quot;drop&quot;)
+h8_summary &lt;- bind_rows(h8_summary_overall, h8_summary_dims) %&gt;%
+  select(dimension, level, everything())
+print(h8_summary, n = 40)</code></pre>
+<pre><code>## # A tibble: 20 x 8
+##    dimension level     n_specs median_pct  q25_pct q75_pct pct_negative pct_negative_p05
+##    &lt;chr&gt;     &lt;chr&gt;       &lt;int&gt;      &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;            &lt;dbl&gt;
+##  1 overall   all           320      -6.02 -14.0     -0.214         78.4             26.6
+##  2 control   England       160      -6.72 -14.2     -2.15          86.2             29.4
+##  3 control   NE+NW         160      -4.81 -13.9      1.63          70.6             23.8
+##  4 covid     exclude       160      -6.35 -15.0     -0.290         78.8             28.7
+##  5 covid     indicator     160      -5.71 -12.0     -0.148         78.1             24.4
+##  6 end       2020           64      -8.88 -14.3     -3.07          78.1             31.2
+##  7 end       2021           64      -8.73 -17.5     -2.81          78.1             35.9
+##  8 end       2022           64      -4.69  -9.55     0.217         73.4             20.3
+##  9 end       2023           64      -4.05  -9.83    -0.127         81.2             21.9
+## 10 end       2024           64      -3.55 -10.5     -0.141         81.2             23.4
+## 11 start     2007           40       2.69  -0.0915   4.63          30                5  
+## 12 start     2008           40       1.13  -2.41     3.15          45                5  
+## 13 start     2009           40      -1.73  -5.75     0.739         65               10  
+## 14 start     2010           40      -4.16  -9.13    -1.59          87.5             10  
+## 15 start     2011           40      -8.76 -14.2     -5.48         100               35  
+## 16 start     2012           40     -13.1  -19.1     -8.20         100               50  
+## 17 start     2013           40     -13.3  -19.6     -6.38         100               50  
+## 18 start     2014           40     -15.6  -22.9     -4.69         100               47.5
+## 19 trend     full          160      -2.31  -6.21     1.63          65.6              0  
+## 20 trend     pre-only      160     -13.4  -19.1     -5.04          91.2             53.1</code></pre>
+</div>
+<div id="h8.3-robustness" class="section level2">
+<h2>H8.3 Robustness</h2>
+<pre class="r"><code>################################################################################
+# H8.3 Robustness: demeaned synthetic control over start x end (40 specs)
+################################################################################
+
+h8_sc_panel &lt;- read_excel(&quot;clean_data.xlsx&quot;, sheet = &quot;panel&quot;) %&gt;%
+  filter(outcome == &quot;alcohol_specific&quot;, sex == &quot;Persons&quot;, year &gt;= 2007, year &lt;= 2024,
+         jurisdiction %in% c(&quot;Scotland&quot;, &quot;Northern Ireland&quot;) |
+           (str_detect(jurisdiction, &quot;^Eng: &quot;) &amp; jurisdiction != &quot;Eng: NE+NW&quot;)) %&gt;%
+  mutate(log_rate = log(rate)) %&gt;%
+  select(jurisdiction, year, log_rate) %&gt;%
+  pivot_wider(names_from = jurisdiction, values_from = log_rate) %&gt;%
+  arrange(year)
+h8_sc_units &lt;- setdiff(names(h8_sc_panel), &quot;year&quot;)
+
+h8_sc &lt;- expand_grid(start = 2007:2014, end = 2020:2024) %&gt;%
+  mutate(fit = pmap(list(start, end), \(start, end) {
+    w_df &lt;- h8_sc_panel %&gt;%
+      filter(year &gt;= start, year &lt;= end) %&gt;%
+      mutate(across(-year, ~ .x - mean(.x[year &lt;= 2017])))
+    placebo &lt;- map_dfr(h8_sc_units, \(unit) {
+      pool &lt;- setdiff(h8_sc_units, c(unit, if (unit != &quot;Scotland&quot;) &quot;Scotland&quot;))
+      X &lt;- as.matrix(w_df[w_df$year &lt;= 2017, pool])
+      w &lt;- solve.QP(t(X) %*% X + diag(1e-8, length(pool)), as.vector(t(X) %*% w_df[[unit]][w_df$year &lt;= 2017]),
+                    cbind(rep(1, length(pool)), diag(length(pool))), c(1, rep(0, length(pool))), meq = 1)$solution
+      gap &lt;- w_df[[unit]] - as.vector(as.matrix(w_df[, pool]) %*% w)
+      tibble(unit = unit,
+             effect_pct = 100 * (exp(mean(gap[w_df$year &gt;= 2019]) - mean(gap[w_df$year &lt;= 2017])) - 1),
+             ratio = sqrt(mean(gap[w_df$year &gt;= 2019]^2)) / sqrt(mean(gap[w_df$year &lt;= 2017]^2)))
+    })
+    tibble(effect_pct = placebo$effect_pct[placebo$unit == &quot;Scotland&quot;],
+           placebo_p = mean(placebo$ratio &gt;= placebo$ratio[placebo$unit == &quot;Scotland&quot;]))
+  })) %&gt;%
+  unnest(fit)
+print(h8_sc, n = 40)</code></pre>
+<pre><code>## # A tibble: 40 x 4
+##    start   end effect_pct placebo_p
+##    &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+##  1  2007  2020      -16.5    0.364 
+##  2  2007  2021      -17.2    0.182 
+##  3  2007  2022      -18.7    0.182 
+##  4  2007  2023      -19.9    0.273 
+##  5  2007  2024      -21.0    0.364 
+##  6  2008  2020      -12.1    0.364 
+##  7  2008  2021      -12.5    0.273 
+##  8  2008  2022      -14.1    0.273 
+##  9  2008  2023      -15.4    0.364 
+## 10  2008  2024      -16.6    0.364 
+## 11  2009  2020      -15.1    0.273 
+## 12  2009  2021      -15.5    0.182 
+## 13  2009  2022      -16.7    0.182 
+## 14  2009  2023      -17.6    0.273 
+## 15  2009  2024      -18.8    0.273 
+## 16  2010  2020      -13.4    0.182 
+## 17  2010  2021      -14.1    0.182 
+## 18  2010  2022      -15.8    0.0909
+## 19  2010  2023      -17.3    0.0909
+## 20  2010  2024      -18.6    0.0909
+## 21  2011  2020      -10.6    0.0909
+## 22  2011  2021      -11.2    0.0909
+## 23  2011  2022      -13.0    0.0909
+## 24  2011  2023      -14.7    0.0909
+## 25  2011  2024      -15.8    0.0909
+## 26  2012  2020      -14.4    0.182 
+## 27  2012  2021      -14.8    0.182 
+## 28  2012  2022      -15.4    0.182 
+## 29  2012  2023      -16.8    0.182 
+## 30  2012  2024      -17.7    0.182 
+## 31  2013  2020      -14.2    0.273 
+## 32  2013  2021      -14.6    0.273 
+## 33  2013  2022      -15.5    0.273 
+## 34  2013  2023      -16.5    0.273 
+## 35  2013  2024      -17.6    0.273 
+## 36  2014  2020      -14.2    0.364 
+## 37  2014  2021      -14.2    0.364 
+## 38  2014  2022      -15.0    0.364 
+## 39  2014  2023      -15.8    0.364 
+## 40  2014  2024      -17.2    0.364</code></pre>
+<pre class="r"><code>h8_sc_summary &lt;- bind_rows(
+  h8_sc %&gt;% mutate(dimension = &quot;overall&quot;, level = &quot;all&quot;),
+  h8_sc %&gt;% mutate(dimension = &quot;start&quot;, level = as.character(start)),
+  h8_sc %&gt;% mutate(dimension = &quot;end&quot;, level = as.character(end))
+) %&gt;%
+  group_by(dimension, level) %&gt;%
+  summarise(n_specs = n(),
+            median_pct = median(effect_pct),
+            q25_pct = quantile(effect_pct, 0.25),
+            q75_pct = quantile(effect_pct, 0.75),
+            pct_negative = 100 * mean(effect_pct &lt; 0),
+            pct_placebo_p05 = 100 * mean(placebo_p &lt; 0.05),
+            .groups = &quot;drop&quot;)
+print(h8_sc_summary, n = 20)</code></pre>
+<pre><code>## # A tibble: 14 x 8
+##    dimension level n_specs median_pct q25_pct q75_pct pct_negative pct_placebo_p05
+##    &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;
+##  1 end       2020        8      -14.2   -14.6   -13.1          100               0
+##  2 end       2021        8      -14.4   -14.9   -13.7          100               0
+##  3 end       2022        8      -15.4   -16.0   -14.8          100               0
+##  4 end       2023        8      -16.6   -17.4   -15.7          100               0
+##  5 end       2024        8      -17.7   -18.7   -17.1          100               0
+##  6 overall   all        40      -15.5   -17.2   -14.2          100               0
+##  7 start     2007        5      -18.7   -19.9   -17.2          100               0
+##  8 start     2008        5      -14.1   -15.4   -12.5          100               0
+##  9 start     2009        5      -16.7   -17.6   -15.5          100               0
+## 10 start     2010        5      -15.8   -17.3   -14.1          100               0
+## 11 start     2011        5      -13.0   -14.7   -11.2          100               0
+## 12 start     2012        5      -15.4   -16.8   -14.8          100               0
+## 13 start     2013        5      -15.5   -16.5   -14.6          100               0
+## 14 start     2014        5      -15.0   -15.8   -14.2          100               0</code></pre>
+<pre class="r"><code># Reference point outside grid: H0 Wyper spec (no COVID term)
+h8_reference_h0_wyper &lt;- tibble(
+  effect_pct = 100 * (exp(coef(h0_model_wyper)[&quot;mup&quot;]) - 1),
+  lcl_pct = 100 * (exp(coefci(h0_model_wyper, vcov = h0_vcov_wyper, df = df.residual(h0_model_wyper))[&quot;mup&quot;, 1]) - 1),
+  ucl_pct = 100 * (exp(coefci(h0_model_wyper, vcov = h0_vcov_wyper, df = df.residual(h0_model_wyper))[&quot;mup&quot;, 2]) - 1)
+)
+print(h8_reference_h0_wyper)</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   effect_pct lcl_pct ucl_pct
+##        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1      -11.8   -21.4  -0.943</code></pre>
+<pre class="r"><code>h8_multiverse &lt;- list(cits = h8_cits, summary = h8_summary, sc = h8_sc, sc_summary = h8_sc_summary,
+                      reference_h0_wyper = h8_reference_h0_wyper)</code></pre>
+</div>
+</div>
+<div id="h9.-cause-specific-split-k70-f10-acute-poisoning-scotland-vs-england" class="section level1">
+<h1>H9. CAUSE-SPECIFIC SPLIT: K70, F10, ACUTE POISONING (SCOTLAND VS
+ENGLAND)</h1>
+<div id="h9.1-data-preparation" class="section level2">
+<h2>H9.1 Data preparation</h2>
+<pre class="r"><code>################################################################################
+# H9.1 Data preparation
+################################################################################
+
+# Crude rates (frozen hierarchy level 3; FLAG in DECISIONS.md)
+h9_crude &lt;- read_excel(&quot;clean_data.xlsx&quot;, sheet = &quot;cause_crude&quot;) %&gt;%
+  select(area, year, cause, rate) %&gt;%
+  pivot_wider(names_from = area, values_from = rate) %&gt;%
+  mutate(year_c = year - 2018,
+         mup = case_when(year &lt; 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0),
+         log_gap = log(Scotland) - log(England))
+
+h9_df_k70 &lt;- h9_crude %&gt;% filter(cause == &quot;k70&quot;, year &gt;= 2012, year &lt;= 2024)
+h9_df_f10 &lt;- h9_crude %&gt;% filter(cause == &quot;f10&quot;, year &gt;= 2012, year &lt;= 2024)
+h9_df_poisoning &lt;- h9_crude %&gt;% filter(cause == &quot;poisoning&quot;, year &gt;= 2012, year &lt;= 2024)
+
+print(nrow(h9_df_k70))</code></pre>
+<pre><code>## [1] 13</code></pre>
+<pre class="r"><code>print(nrow(h9_df_f10))</code></pre>
+<pre><code>## [1] 13</code></pre>
+<pre class="r"><code>print(nrow(h9_df_poisoning))</code></pre>
+<pre><code>## [1] 13</code></pre>
+<pre class="r"><code>print(read_excel(&quot;clean_data.xlsx&quot;, sheet = &quot;cause_crude&quot;) %&gt;%
+        filter(year &gt;= 2012) %&gt;% group_by(area, cause) %&gt;% summarise(min_deaths = min(deaths), .groups = &quot;drop&quot;))</code></pre>
+<pre><code>## # A tibble: 9 x 3
+##   area       cause     min_deaths
+##   &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;
+## 1 Eng: NE+NW f10               78
+## 2 Eng: NE+NW k70             1132
+## 3 Eng: NE+NW poisoning         71
+## 4 England    f10              405
+## 5 England    k70             4080
+## 6 England    poisoning        321
+## 7 Scotland   f10              200
+## 8 Scotland   k70              646
+## 9 Scotland   poisoning         45</code></pre>
+</div>
+<div id="h9.2-analysis" class="section level2">
+<h2>H9.2 Analysis</h2>
+<pre class="r"><code>################################################################################
+# H9.2 Analysis
+################################################################################
+
+# Primary 2012-2024: K70
+h9_model_k70 &lt;- lm(log_gap ~ year_c + mup + covid, data = h9_df_k70)
+h9_vcov_k70 &lt;- NeweyWest(h9_model_k70, lag = 1, prewhite = FALSE)
+print(summary(h9_model_k70))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log_gap ~ year_c + mup + covid, data = h9_df_k70)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.055971 -0.037960  0.002949  0.024225  0.091070 
+## 
+## Coefficients:
+##              Estimate Std. Error t value   Pr(&gt;|t|)    
+## (Intercept)  0.432085   0.037746  11.447 0.00000115 ***
+## year_c      -0.011881   0.008813  -1.348      0.211    
+## mup         -0.054540   0.072593  -0.751      0.472    
+## covid       -0.018432   0.045189  -0.408      0.693    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.05138 on 9 degrees of freedom
+## Multiple R-squared:  0.7371, Adjusted R-squared:  0.6495 
+## F-statistic: 8.413 on 3 and 9 DF,  p-value: 0.005609</code></pre>
+<pre class="r"><code>print(coeftest(h9_model_k70, vcov = h9_vcov_k70)[&quot;mup&quot;, ])</code></pre>
+<pre><code>##    Estimate  Std. Error     t value    Pr(&gt;|t|) 
+## -0.05453972  0.06223110 -0.87640622  0.40359461</code></pre>
+<pre class="r"><code>print(coefci(h9_model_k70, vcov = h9_vcov_k70, df = df.residual(h9_model_k70))[&quot;mup&quot;, ])</code></pre>
+<pre><code>##       2.5 %      97.5 % 
+## -0.19531626  0.08623681</code></pre>
+<pre class="r"><code># Primary 2012-2024: F10
+h9_model_f10 &lt;- lm(log_gap ~ year_c + mup + covid, data = h9_df_f10)
+h9_vcov_f10 &lt;- NeweyWest(h9_model_f10, lag = 1, prewhite = FALSE)
+print(summary(h9_model_f10))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log_gap ~ year_c + mup + covid, data = h9_df_f10)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.27842 -0.09245 -0.00972  0.13198  0.31071 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1.73539    0.14921  11.631 0.000001 ***
+## year_c      -0.00974    0.03484  -0.280    0.786    
+## mup         -0.26522    0.28695  -0.924    0.379    
+## covid        0.20001    0.17863   1.120    0.292    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.2031 on 9 degrees of freedom
+## Multiple R-squared:  0.4329, Adjusted R-squared:  0.2439 
+## F-statistic:  2.29 on 3 and 9 DF,  p-value: 0.147</code></pre>
+<pre class="r"><code>print(coeftest(h9_model_f10, vcov = h9_vcov_f10)[&quot;mup&quot;, ])</code></pre>
+<pre><code>##   Estimate Std. Error    t value   Pr(&gt;|t|) 
+## -0.2652225  0.2654022 -0.9993231  0.3437467</code></pre>
+<pre class="r"><code>print(coefci(h9_model_f10, vcov = h9_vcov_f10, df = df.residual(h9_model_f10))[&quot;mup&quot;, ])</code></pre>
+<pre><code>##      2.5 %     97.5 % 
+## -0.8656039  0.3351589</code></pre>
+<pre class="r"><code># Primary 2012-2024: acute poisoning (X45 + X65 + Y15)
+h9_model_poisoning &lt;- lm(log_gap ~ year_c + mup + covid, data = h9_df_poisoning)
+h9_vcov_poisoning &lt;- NeweyWest(h9_model_poisoning, lag = 1, prewhite = FALSE)
+print(summary(h9_model_poisoning))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log_gap ~ year_c + mup + covid, data = h9_df_poisoning)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.11260 -0.05389  0.01273  0.02004  0.14401 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.35674    0.06330   5.636 0.000319 ***
+## year_c      -0.07625    0.01478  -5.159 0.000596 ***
+## mup          0.12230    0.12173   1.005 0.341296    
+## covid       -0.01854    0.07578  -0.245 0.812160    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.08616 on 9 degrees of freedom
+## Multiple R-squared:  0.9153, Adjusted R-squared:  0.8871 
+## F-statistic: 32.42 on 3 and 9 DF,  p-value: 0.00003738</code></pre>
+<pre class="r"><code>print(coeftest(h9_model_poisoning, vcov = h9_vcov_poisoning)[&quot;mup&quot;, ])</code></pre>
+<pre><code>##   Estimate Std. Error    t value   Pr(&gt;|t|) 
+##  0.1222998  0.1328264  0.9207489  0.3811994</code></pre>
+<pre class="r"><code>print(coefci(h9_model_poisoning, vcov = h9_vcov_poisoning, df = df.residual(h9_model_poisoning))[&quot;mup&quot;, ])</code></pre>
+<pre><code>##      2.5 %     97.5 % 
+## -0.1781745  0.4227740</code></pre>
+<pre class="r"><code># Wyper-matched 2012-2020, no COVID term: K70
+h9_model_k70_wyper &lt;- lm(log_gap ~ year_c + mup, data = filter(h9_df_k70, year &lt;= 2020))
+h9_vcov_k70_wyper &lt;- NeweyWest(h9_model_k70_wyper, lag = 1, prewhite = FALSE)
+print(summary(h9_model_k70_wyper))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log_gap ~ year_c + mup, data = filter(h9_df_k70, 
+##     year &lt;= 2020))
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.061528 -0.034225  0.000954  0.031223  0.069189 
+## 
+## Coefficients:
+##              Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)  0.478274   0.044605  10.722 0.0000389 ***
+## year_c       0.001664   0.011457   0.145     0.889    
+## mup         -0.091002   0.069000  -1.319     0.235    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.04864 on 6 degrees of freedom
+## Multiple R-squared:  0.4442, Adjusted R-squared:  0.2589 
+## F-statistic: 2.397 on 2 and 6 DF,  p-value: 0.1717</code></pre>
+<pre class="r"><code>print(coeftest(h9_model_k70_wyper, vcov = h9_vcov_k70_wyper)[&quot;mup&quot;, ])</code></pre>
+<pre><code>##    Estimate  Std. Error     t value    Pr(&gt;|t|) 
+## -0.09100211  0.03087834 -2.94711773  0.02570895</code></pre>
+<pre class="r"><code>print(coefci(h9_model_k70_wyper, vcov = h9_vcov_k70_wyper, df = df.residual(h9_model_k70_wyper))[&quot;mup&quot;, ])</code></pre>
+<pre><code>##       2.5 %      97.5 % 
+## -0.16655870 -0.01544553</code></pre>
+<pre class="r"><code># Wyper-matched 2012-2020, no COVID term: F10
+h9_model_f10_wyper &lt;- lm(log_gap ~ year_c + mup, data = filter(h9_df_f10, year &lt;= 2020))
+h9_vcov_f10_wyper &lt;- NeweyWest(h9_model_f10_wyper, lag = 1, prewhite = FALSE)
+print(summary(h9_model_f10_wyper))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log_gap ~ year_c + mup, data = filter(h9_df_f10, 
+##     year &lt;= 2020))
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.25051 -0.02842 -0.01595  0.06622  0.28392 
+## 
+## Coefficients:
+##             Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)  1.96916    0.16329  12.059 0.0000197 ***
+## year_c       0.05925    0.04194   1.413     0.207    
+## mup         -0.40780    0.25259  -1.614     0.158    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1781 on 6 degrees of freedom
+## Multiple R-squared:  0.3039, Adjusted R-squared:  0.07187 
+## F-statistic:  1.31 on 2 and 6 DF,  p-value: 0.3373</code></pre>
+<pre class="r"><code>print(coeftest(h9_model_f10_wyper, vcov = h9_vcov_f10_wyper)[&quot;mup&quot;, ])</code></pre>
+<pre><code>##   Estimate Std. Error    t value   Pr(&gt;|t|) 
+## -0.4078035  0.2401623 -1.6980332  0.1404204</code></pre>
+<pre class="r"><code>print(coefci(h9_model_f10_wyper, vcov = h9_vcov_f10_wyper, df = df.residual(h9_model_f10_wyper))[&quot;mup&quot;, ])</code></pre>
+<pre><code>##      2.5 %     97.5 % 
+## -0.9954594  0.1798524</code></pre>
+<pre class="r"><code># Wyper-matched 2012-2020, no COVID term: acute poisoning
+h9_model_poisoning_wyper &lt;- lm(log_gap ~ year_c + mup, data = filter(h9_df_poisoning, year &lt;= 2020))
+h9_vcov_poisoning_wyper &lt;- NeweyWest(h9_model_poisoning_wyper, lag = 1, prewhite = FALSE)
+print(summary(h9_model_poisoning_wyper))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log_gap ~ year_c + mup, data = filter(h9_df_poisoning, 
+##     year &lt;= 2020))
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.10090 -0.04606 -0.01430  0.05568  0.11459 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)  0.42656    0.07994   5.336  0.00177 **
+## year_c      -0.05587    0.02053  -2.721  0.03460 * 
+## mup          0.05831    0.12365   0.472  0.65391   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.08717 on 6 degrees of freedom
+## Multiple R-squared:  0.7525, Adjusted R-squared:   0.67 
+## F-statistic: 9.121 on 2 and 6 DF,  p-value: 0.01516</code></pre>
+<pre class="r"><code>print(coeftest(h9_model_poisoning_wyper, vcov = h9_vcov_poisoning_wyper)[&quot;mup&quot;, ])</code></pre>
+<pre><code>##   Estimate Std. Error    t value   Pr(&gt;|t|) 
+## 0.05830934 0.09557086 0.61011626 0.56416240</code></pre>
+<pre class="r"><code>print(coefci(h9_model_poisoning_wyper, vcov = h9_vcov_poisoning_wyper,
+             df = df.residual(h9_model_poisoning_wyper))[&quot;mup&quot;, ])</code></pre>
+<pre><code>##      2.5 %     97.5 % 
+## -0.1755441  0.2921628</code></pre>
+<pre class="r"><code># Results table with Holm adjustment across the 3 primary tests
+h9_table &lt;- tibble(
+  cause = c(&quot;k70&quot;, &quot;f10&quot;, &quot;poisoning&quot;),
+  estimate = c(coef(h9_model_k70)[&quot;mup&quot;], coef(h9_model_f10)[&quot;mup&quot;], coef(h9_model_poisoning)[&quot;mup&quot;]),
+  se = c(sqrt(h9_vcov_k70[&quot;mup&quot;, &quot;mup&quot;]), sqrt(h9_vcov_f10[&quot;mup&quot;, &quot;mup&quot;]), sqrt(h9_vcov_poisoning[&quot;mup&quot;, &quot;mup&quot;])),
+  df = c(df.residual(h9_model_k70), df.residual(h9_model_f10), df.residual(h9_model_poisoning)),
+  estimate_wyper = c(coef(h9_model_k70_wyper)[&quot;mup&quot;], coef(h9_model_f10_wyper)[&quot;mup&quot;], coef(h9_model_poisoning_wyper)[&quot;mup&quot;]),
+  se_wyper = c(sqrt(h9_vcov_k70_wyper[&quot;mup&quot;, &quot;mup&quot;]), sqrt(h9_vcov_f10_wyper[&quot;mup&quot;, &quot;mup&quot;]),
+               sqrt(h9_vcov_poisoning_wyper[&quot;mup&quot;, &quot;mup&quot;])),
+  df_wyper = c(df.residual(h9_model_k70_wyper), df.residual(h9_model_f10_wyper), df.residual(h9_model_poisoning_wyper))
+) %&gt;%
+  mutate(p = 2 * pt(-abs(estimate / se), df),
+         p_holm = p.adjust(p, method = &quot;holm&quot;),
+         effect_pct = 100 * (exp(estimate) - 1),
+         lcl_pct = 100 * (exp(estimate - qt(0.975, df) * se) - 1),
+         ucl_pct = 100 * (exp(estimate + qt(0.975, df) * se) - 1),
+         p_wyper = 2 * pt(-abs(estimate_wyper / se_wyper), df_wyper),
+         effect_wyper_pct = 100 * (exp(estimate_wyper) - 1),
+         lcl_wyper_pct = 100 * (exp(estimate_wyper - qt(0.975, df_wyper) * se_wyper) - 1),
+         ucl_wyper_pct = 100 * (exp(estimate_wyper + qt(0.975, df_wyper) * se_wyper) - 1))
+
+# MDE per cause (H2 method)
+h9_mde &lt;- tibble(
+  cause = c(&quot;k70&quot;, &quot;f10&quot;, &quot;poisoning&quot;),
+  sigma_pre = c(sigma(lm(log_gap ~ year_c, data = filter(h9_df_k70, year &lt; 2018))),
+                sigma(lm(log_gap ~ year_c, data = filter(h9_df_f10, year &lt; 2018))),
+                sigma(lm(log_gap ~ year_c, data = filter(h9_df_poisoning, year &lt; 2018)))),
+  xtx_mup = c(solve(crossprod(model.matrix(~ year_c + mup + covid, data = h9_df_k70)))[&quot;mup&quot;, &quot;mup&quot;],
+              solve(crossprod(model.matrix(~ year_c + mup + covid, data = h9_df_f10)))[&quot;mup&quot;, &quot;mup&quot;],
+              solve(crossprod(model.matrix(~ year_c + mup + covid, data = h9_df_poisoning)))[&quot;mup&quot;, &quot;mup&quot;])
+) %&gt;%
+  mutate(se_design = sigma_pre * sqrt(xtx_mup),
+         mde_pct = 100 * (1 - exp(-(qnorm(0.975) + qnorm(0.80)) * se_design)),
+         power_label = if_else(mde_pct &lt;= 13, &quot;powered&quot;, &quot;UNDERPOWERED&quot;))
+
+h9_table &lt;- h9_table %&gt;% left_join(select(h9_mde, cause, mde_pct, power_label), by = &quot;cause&quot;)
+print(h9_table %&gt;% select(cause, effect_pct, lcl_pct, ucl_pct, p, p_holm, effect_wyper_pct, lcl_wyper_pct,
+                          ucl_wyper_pct, p_wyper, mde_pct, power_label))</code></pre>
+<pre><code>## # A tibble: 3 x 12
+##   cause effect_pct lcl_pct ucl_pct     p p_holm effect_wyper_pct lcl_wyper_pct ucl_wyper_pct p_wyper mde_pct power_label
+##   &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      
+## 1 k70        -5.31   -17.7    9.01 0.404      1            -8.70         -15.3         -1.53  0.0257    15.4 UNDERPOWER~
+## 2 f10       -23.3    -57.9   39.8  0.344      1           -33.5          -63.0         19.7   0.140     57.3 UNDERPOWER~
+## 3 pois~      13.0    -16.3   52.6  0.381      1             6.00         -16.1         33.9   0.564     32.7 UNDERPOWER~</code></pre>
+<pre class="r"><code># Pre-specified predictions P1-P3
+h9_predictions &lt;- h9_table %&gt;%
+  transmute(cause,
+            prediction = c(&quot;P1: K70 falls&quot;, &quot;P2: F10 falls&quot;, &quot;P3: poisoning smaller or no effect&quot;),
+            uninformative = power_label == &quot;UNDERPOWERED&quot; &amp; lcl_pct &lt; -13 &amp; ucl_pct &gt; 0,
+            supported = case_when(
+              cause == &quot;k70&quot; ~ effect_pct &lt; 0,
+              cause == &quot;f10&quot; ~ effect_pct &lt; 0,
+              cause == &quot;poisoning&quot; ~ abs(effect_pct) &lt; min(abs(effect_pct[cause != &quot;poisoning&quot;])) |
+                (lcl_pct &lt; 0 &amp; ucl_pct &gt; 0)
+            )) %&gt;%
+  mutate(verdict = case_when(uninformative ~ &quot;uninformative&quot;,
+                             supported ~ &quot;supported&quot;,
+                             TRUE ~ &quot;not supported&quot;))
+print(h9_predictions)</code></pre>
+<pre><code>## # A tibble: 3 x 5
+##   cause     prediction                         uninformative supported verdict      
+##   &lt;chr&gt;     &lt;chr&gt;                              &lt;lgl&gt;         &lt;lgl&gt;     &lt;chr&gt;        
+## 1 k70       P1: K70 falls                      TRUE          TRUE      uninformative
+## 2 f10       P2: F10 falls                      TRUE          TRUE      uninformative
+## 3 poisoning P3: poisoning smaller or no effect TRUE          TRUE      uninformative</code></pre>
+</div>
+<div id="h9.3-robustness" class="section level2">
+<h2>H9.3 Robustness</h2>
+<pre class="r"><code>################################################################################
+# H9.3 Robustness
+################################################################################
+
+# Cause as an extra multiverse dimension (CITS only; crude rates; 3 x 320 = 960 specs)
+h9_crude_wide &lt;- read_excel(&quot;clean_data.xlsx&quot;, sheet = &quot;cause_crude&quot;) %&gt;%
+  select(area, year, cause, rate) %&gt;%
+  pivot_wider(names_from = area, values_from = rate)
+
+h9_multiverse &lt;- expand_grid(
+  cause = c(&quot;k70&quot;, &quot;f10&quot;, &quot;poisoning&quot;),
+  start = 2007:2014,
+  end = 2020:2024,
+  trend = c(&quot;full&quot;, &quot;pre-only&quot;),
+  control = c(&quot;England&quot;, &quot;NE+NW&quot;),
+  covid = c(&quot;indicator&quot;, &quot;exclude&quot;)
+) %&gt;%
+  mutate(fit = pmap(list(cause, start, end, trend, control, covid), \(cause_i, start, end, trend, control, covid) {
+    d &lt;- h9_crude_wide %&gt;%
+      filter(cause == cause_i, year &gt;= start, year &lt;= end) %&gt;%
+      mutate(log_gap = log(Scotland) - log(if (control == &quot;England&quot;) England else `Eng: NE+NW`),
+             year_c = year - 2018,
+             mup = case_when(year &lt; 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+             post_slope = pmax(0, year - 2018),
+             covid_term = if_else(year %in% 2020:2021, 1, 0))
+    if (covid == &quot;exclude&quot;) d &lt;- filter(d, !year %in% 2020:2021)
+    if (any(!is.finite(d$log_gap))) return(tibble(estimate = NA_real_, se = NA_real_, df = NA_real_, dropped = TRUE))
+    m &lt;- if (trend == &quot;full&quot; &amp; covid == &quot;indicator&quot;) lm(log_gap ~ year_c + mup + covid_term, data = d) else
+      if (trend == &quot;full&quot; &amp; covid == &quot;exclude&quot;) lm(log_gap ~ year_c + mup, data = d) else
+        if (trend == &quot;pre-only&quot; &amp; covid == &quot;indicator&quot;) lm(log_gap ~ year_c + mup + post_slope + covid_term, data = d) else
+          lm(log_gap ~ year_c + mup + post_slope, data = d)
+    if (any(is.na(coef(m))) || df.residual(m) &lt; 1) {
+      return(tibble(estimate = NA_real_, se = NA_real_, df = NA_real_, dropped = TRUE))
+    }
+    v &lt;- NeweyWest(m, lag = 1, prewhite = FALSE)
+    L &lt;- setNames(rep(0, length(coef(m))), names(coef(m)))
+    L[&quot;mup&quot;] &lt;- 1
+    if (trend == &quot;pre-only&quot;) L[&quot;post_slope&quot;] &lt;- mean(2019:end - 2018)
+    tibble(estimate = sum(L * coef(m)), se = sqrt(as.numeric(t(L) %*% v %*% L)), df = df.residual(m), dropped = FALSE)
+  })) %&gt;%
+  unnest(fit) %&gt;%
+  mutate(p = 2 * pt(-abs(estimate / se), df),
+         effect_pct = 100 * (exp(estimate) - 1),
+         lcl_pct = 100 * (exp(estimate - qt(0.975, df) * se) - 1),
+         ucl_pct = 100 * (exp(estimate + qt(0.975, df) * se) - 1),
+         wyper = start == 2012 &amp; end == 2020 &amp; control == &quot;England&quot; &amp; trend == &quot;full&quot;)
+print(count(h9_multiverse, cause, dropped))</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   cause     dropped     n
+##   &lt;chr&gt;     &lt;lgl&gt;   &lt;int&gt;
+## 1 f10       FALSE     320
+## 2 k70       FALSE     320
+## 3 poisoning FALSE     240
+## 4 poisoning TRUE       80</code></pre>
+<pre class="r"><code>h9_multiverse_summary &lt;- bind_rows(
+  h9_multiverse %&gt;% filter(!dropped) %&gt;% mutate(dimension = &quot;overall&quot;, level = &quot;all&quot;),
+  h9_multiverse %&gt;% filter(!dropped) %&gt;%
+    mutate(across(c(start, end), as.character)) %&gt;%
+    pivot_longer(c(start, end, trend, control, covid), names_to = &quot;dimension&quot;, values_to = &quot;level&quot;)
+) %&gt;%
+  group_by(cause, dimension, level) %&gt;%
+  summarise(n_specs = n(),
+            median_pct = median(effect_pct),
+            q25_pct = quantile(effect_pct, 0.25),
+            q75_pct = quantile(effect_pct, 0.75),
+            pct_negative = 100 * mean(effect_pct &lt; 0),
+            pct_negative_p05 = 100 * mean(effect_pct &lt; 0 &amp; p &lt; 0.05),
+            .groups = &quot;drop&quot;)
+print(filter(h9_multiverse_summary, dimension == &quot;overall&quot;))</code></pre>
+<pre><code>## # A tibble: 3 x 9
+##   cause     dimension level n_specs median_pct q25_pct q75_pct pct_negative pct_negative_p05
+##   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;            &lt;dbl&gt;
+## 1 f10       overall   all       320     -35.3   -44.0   -26.5          99.1            34.1 
+## 2 k70       overall   all       320      -3.38   -9.57    5.31         60.9            18.1 
+## 3 poisoning overall   all       240      -1.94  -72.1    15.0          53.8             8.75</code></pre>
+<pre class="r"><code># POST-HOC (FLAG): start &gt;= 2011 only, after the 2011 ICD-10 coding change (F10.0 -&gt; X45)
+h9_multiverse_summary_2011 &lt;- h9_multiverse %&gt;%
+  filter(!dropped, start &gt;= 2011) %&gt;%
+  group_by(cause) %&gt;%
+  summarise(n_specs = n(),
+            median_pct = median(effect_pct),
+            q25_pct = quantile(effect_pct, 0.25),
+            q75_pct = quantile(effect_pct, 0.75),
+            pct_negative = 100 * mean(effect_pct &lt; 0),
+            pct_negative_p05 = 100 * mean(effect_pct &lt; 0 &amp; p &lt; 0.05),
+            .groups = &quot;drop&quot;)
+print(h9_multiverse_summary_2011)</code></pre>
+<pre><code>## # A tibble: 3 x 7
+##   cause     n_specs median_pct q25_pct q75_pct pct_negative pct_negative_p05
+##   &lt;chr&gt;       &lt;int&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;            &lt;dbl&gt;
+## 1 f10           160     -36.6   -47.0   -23.5          98.1             21.9
+## 2 k70           160      -8.93  -14.9    -4.81        100               35  
+## 3 poisoning     160       9.37   -1.82   22.6          30.6              2.5</code></pre>
+<pre class="r"><code>print(h9_multiverse_summary, n = 80)</code></pre>
+<pre><code>## # A tibble: 58 x 9
+##    cause     dimension level     n_specs median_pct q25_pct q75_pct pct_negative pct_negative_p05
+##    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;       &lt;int&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;            &lt;dbl&gt;
+##  1 f10       control   England       160   -30.1    -34.5    -23.5          99.4            24.4 
+##  2 f10       control   NE+NW         160   -42.6    -52.3    -35.3          98.8            43.8 
+##  3 f10       covid     exclude       160   -35.9    -44.1    -26.8          98.8            34.4 
+##  4 f10       covid     indicator     160   -34.2    -43.4    -26.4          99.4            33.8 
+##  5 f10       end       2020           64   -31.4    -41.3    -24.9         100              34.4 
+##  6 f10       end       2021           64   -32.6    -43.3    -24.0         100              35.9 
+##  7 f10       end       2022           64   -34.5    -42.7    -28.0         100              28.1 
+##  8 f10       end       2023           64   -37.5    -46.4    -28.7         100              34.4 
+##  9 f10       end       2024           64   -39.4    -49.8    -27.4          95.3            37.5 
+## 10 f10       overall   all           320   -35.3    -44.0    -26.5          99.1            34.1 
+## 11 f10       start     2007           40   -30.8    -39.2    -25.6         100              40   
+## 12 f10       start     2008           40   -35.6    -41.5    -30.0         100              50   
+## 13 f10       start     2009           40   -36.8    -42.2    -29.7         100              50   
+## 14 f10       start     2010           40   -37.0    -42.8    -30.7         100              45   
+## 15 f10       start     2011           40   -35.3    -42.8    -29.7         100              27.5 
+## 16 f10       start     2012           40   -43.2    -52.8    -32.9         100              35   
+## 17 f10       start     2013           40   -41.3    -51.0    -29.2         100              25   
+## 18 f10       start     2014           40   -16.2    -29.1     -8.39         92.5             0   
+## 19 f10       trend     full          160   -28.4    -35.3    -23.4          98.1             0   
+## 20 f10       trend     pre-only      160   -43.2    -52.3    -35.1         100              68.1 
+## 21 k70       control   England       160    -3.64   -10.4      2.58         66.2            24.4 
+## 22 k70       control   NE+NW         160    -1.57    -7.90     7.29         55.6            11.9 
+## 23 k70       covid     exclude       160    -3.64    -9.89     5.31         62.5            20   
+## 24 k70       covid     indicator     160    -2.91    -8.48     5.38         59.4            16.2 
+## 25 k70       end       2020           64    -3.74   -10.9      1.54         68.8            25   
+## 26 k70       end       2021           64    -5.77   -12.2      3.53         67.2            28.1 
+## 27 k70       end       2022           64    -2.55    -6.91     5.97         56.2            12.5 
+## 28 k70       end       2023           64    -1.81    -5.41     6.14         56.2            12.5 
+## 29 k70       end       2024           64    -2.92    -6.31     6.33         56.2            12.5 
+## 30 k70       overall   all           320    -3.38    -9.57     5.31         60.9            18.1 
+## 31 k70       start     2007           40     8.64     6.54    12.0          10               0   
+## 32 k70       start     2008           40     6.92     4.72    10.8          10               0   
+## 33 k70       start     2009           40     3.67     0.463    7.09         17.5             2.5 
+## 34 k70       start     2010           40     0.727   -3.41     4.14         50               2.5 
+## 35 k70       start     2011           40    -4.39    -9.70    -2.88        100              10   
+## 36 k70       start     2012           40    -8.67   -13.2     -5.47        100              32.5 
+## 37 k70       start     2013           40   -10.3    -14.7     -5.48        100              27.5 
+## 38 k70       start     2014           40   -17.9    -24.6     -8.38        100              70   
+## 39 k70       trend     full          160    -0.591   -5.20     7.29         53.8             5   
+## 40 k70       trend     pre-only      160    -6.51   -14.0      1.69         68.1            31.2 
+## 41 poisoning control   England       120    -4.99   -75.1      8.03         65.8            11.7 
+## 42 poisoning control   NE+NW         120     9.09   -71.4     26.6          41.7             5.83
+## 43 poisoning covid     exclude       120    -1.69   -72.0     15.4          53.3             9.17
+## 44 poisoning covid     indicator     120    -2.59   -73.1     14.8          54.2             8.33
+## 45 poisoning end       2020           48     5.36   -65.9     15.6          45.8             0   
+## 46 poisoning end       2021           48     1.48   -67.0     18.3          47.9             8.33
+## 47 poisoning end       2022           48    -2.12   -78.0     12.7          50              10.4 
+## 48 poisoning end       2023           48    -4.80   -79.0     13.0          62.5            12.5 
+## 49 poisoning end       2024           48    -6.83   -77.6     12.8          62.5            12.5 
+## 50 poisoning overall   all           240    -1.94   -72.1     15.0          53.8             8.75
+## 51 poisoning start     2009           40   -83.3    -87.7    -78.3         100              42.5 
+## 52 poisoning start     2010           40   -73.9    -82.0    -69.5         100               0   
+## 53 poisoning start     2011           40    -2.46    -5.32    15.9          52.5             0   
+## 54 poisoning start     2012           40    12.8      8.55    27.8          10               0   
+## 55 poisoning start     2013           40    15.7      9.06    32.3          10               0   
+## 56 poisoning start     2014           40    -0.0314 -12.7     14.4          50              10   
+## 57 poisoning trend     full          120     8.55   -72.0     24.1          45               1.67
+## 58 poisoning trend     pre-only      120    -5.67   -72.6      8.05         62.5            15.8</code></pre>
+<pre class="r"><code># EXPLORATORY (not pre-specified): ESP2013 ASMR, Scotland 2022 missing, primary 2012-2024 model
+h9_asmr &lt;- read_excel(&quot;clean_data.xlsx&quot;, sheet = &quot;cause_asmr&quot;) %&gt;%
+  filter(area %in% c(&quot;Scotland&quot;, &quot;England&quot;), year &gt;= 2012, year &lt;= 2024) %&gt;%
+  select(area, year, cause, rate) %&gt;%
+  pivot_wider(names_from = area, values_from = rate) %&gt;%
+  filter(!is.na(Scotland)) %&gt;%
+  mutate(year_c = year - 2018,
+         mup = case_when(year &lt; 2018 ~ 0, year == 2018 ~ 8 / 12, TRUE ~ 1),
+         covid = if_else(year %in% 2020:2021, 1, 0),
+         log_gap = log(Scotland) - log(England))
+print(count(h9_asmr, cause))</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   cause         n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 f10          12
+## 2 k70          12
+## 3 poisoning    12</code></pre>
+<pre class="r"><code>h9_model_k70_asmr &lt;- lm(log_gap ~ year_c + mup + covid, data = filter(h9_asmr, cause == &quot;k70&quot;))
+h9_vcov_k70_asmr &lt;- NeweyWest(h9_model_k70_asmr, lag = 1, prewhite = FALSE)
+print(coeftest(h9_model_k70_asmr, vcov = h9_vcov_k70_asmr)[&quot;mup&quot;, ])</code></pre>
+<pre><code>##    Estimate  Std. Error     t value    Pr(&gt;|t|) 
+## -0.03751928  0.04949827 -0.75799171  0.47019309</code></pre>
+<pre class="r"><code>print(coefci(h9_model_k70_asmr, vcov = h9_vcov_k70_asmr, df = df.residual(h9_model_k70_asmr))[&quot;mup&quot;, ])</code></pre>
+<pre><code>##       2.5 %      97.5 % 
+## -0.15166251  0.07662394</code></pre>
+<pre class="r"><code>h9_model_f10_asmr &lt;- lm(log_gap ~ year_c + mup + covid, data = filter(h9_asmr, cause == &quot;f10&quot;))
+h9_vcov_f10_asmr &lt;- NeweyWest(h9_model_f10_asmr, lag = 1, prewhite = FALSE)
+print(coeftest(h9_model_f10_asmr, vcov = h9_vcov_f10_asmr)[&quot;mup&quot;, ])</code></pre>
+<pre><code>##   Estimate Std. Error    t value   Pr(&gt;|t|) 
+## -0.2499862  0.2705897 -0.9238573  0.3825806</code></pre>
+<pre class="r"><code>print(coefci(h9_model_f10_asmr, vcov = h9_vcov_f10_asmr, df = df.residual(h9_model_f10_asmr))[&quot;mup&quot;, ])</code></pre>
+<pre><code>##      2.5 %     97.5 % 
+## -0.8739671  0.3739947</code></pre>
+<pre class="r"><code>h9_model_poisoning_asmr &lt;- lm(log_gap ~ year_c + mup + covid, data = filter(h9_asmr, cause == &quot;poisoning&quot;))
+h9_vcov_poisoning_asmr &lt;- NeweyWest(h9_model_poisoning_asmr, lag = 1, prewhite = FALSE)
+print(coeftest(h9_model_poisoning_asmr, vcov = h9_vcov_poisoning_asmr)[&quot;mup&quot;, ])</code></pre>
+<pre><code>##   Estimate Std. Error    t value   Pr(&gt;|t|) 
+##  0.1177891  0.1435659  0.8204531  0.4357207</code></pre>
+<pre class="r"><code>print(coefci(h9_model_poisoning_asmr, vcov = h9_vcov_poisoning_asmr,
+             df = df.residual(h9_model_poisoning_asmr))[&quot;mup&quot;, ])</code></pre>
+<pre><code>##      2.5 %     97.5 % 
+## -0.2132744  0.4488526</code></pre>
+<pre class="r"><code>h9_asmr_table &lt;- tibble(
+  cause = c(&quot;k70&quot;, &quot;f10&quot;, &quot;poisoning&quot;),
+  estimate = c(coef(h9_model_k70_asmr)[&quot;mup&quot;], coef(h9_model_f10_asmr)[&quot;mup&quot;], coef(h9_model_poisoning_asmr)[&quot;mup&quot;]),
+  lcl = c(coefci(h9_model_k70_asmr, vcov = h9_vcov_k70_asmr, df = df.residual(h9_model_k70_asmr))[&quot;mup&quot;, 1],
+          coefci(h9_model_f10_asmr, vcov = h9_vcov_f10_asmr, df = df.residual(h9_model_f10_asmr))[&quot;mup&quot;, 1],
+          coefci(h9_model_poisoning_asmr, vcov = h9_vcov_poisoning_asmr, df = df.residual(h9_model_poisoning_asmr))[&quot;mup&quot;, 1]),
+  ucl = c(coefci(h9_model_k70_asmr, vcov = h9_vcov_k70_asmr, df = df.residual(h9_model_k70_asmr))[&quot;mup&quot;, 2],
+          coefci(h9_model_f10_asmr, vcov = h9_vcov_f10_asmr, df = df.residual(h9_model_f10_asmr))[&quot;mup&quot;, 2],
+          coefci(h9_model_poisoning_asmr, vcov = h9_vcov_poisoning_asmr, df = df.residual(h9_model_poisoning_asmr))[&quot;mup&quot;, 2])
+) %&gt;%
+  mutate(across(c(estimate, lcl, ucl), ~ 100 * (exp(.x) - 1)))
+print(h9_asmr_table)</code></pre>
+<pre><code>## # A tibble: 3 x 4
+##   cause     estimate   lcl   ucl
+##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 k70          -3.68 -14.1  7.96
+## 2 f10         -22.1  -58.3 45.4 
+## 3 poisoning    12.5  -19.2 56.7</code></pre>
+<pre class="r"><code>h9_cause &lt;- list(table = h9_table, mde = h9_mde, predictions = h9_predictions,
+                 multiverse = h9_multiverse, multiverse_summary = h9_multiverse_summary,
+                 multiverse_summary_2011_posthoc = h9_multiverse_summary_2011,
+                 asmr_exploratory = h9_asmr_table, crude = h9_crude,
+                 models = list(k70 = h9_model_k70, f10 = h9_model_f10, poisoning = h9_model_poisoning,
+                               k70_wyper = h9_model_k70_wyper, f10_wyper = h9_model_f10_wyper,
+                               poisoning_wyper = h9_model_poisoning_wyper))</code></pre>
+</div>
+</div>
 <div id="results-object" class="section level1">
 <h1>RESULTS OBJECT</h1>
 <pre class="r"><code>################################################################################
@@ -4073,7 +4994,9 @@ results &lt;- list(
   s2_model_ireland = s2_model_ireland, s2_vcov_ireland = s2_vcov_ireland,
   s2_model_scot_its = s2_model_scot_its, s2_vcov_scot_its = s2_vcov_scot_its,
   s2_model_ie_its = s2_model_ie_its, s2_vcov_ie_its = s2_vcov_ie_its,
-  s3_model_nt = s3_model_nt, s3_vcov_nt = s3_vcov_nt, s3_placebo = s3_placebo
+  s3_model_nt = s3_model_nt, s3_vcov_nt = s3_vcov_nt, s3_placebo = s3_placebo,
+  h8_multiverse = h8_multiverse,
+  h9_cause = h9_cause
 )
 saveRDS(results, &quot;results.rds&quot;)
 print(names(results))</code></pre>
@@ -4106,7 +5029,8 @@ print(names(results))</code></pre>
 ## [105] &quot;s1_vcov_ie_cancer&quot;         &quot;s1_model_scot_oes&quot;         &quot;s1_vcov_scot_oes&quot;          &quot;s1_model_ie_oes&quot;          
 ## [109] &quot;s1_vcov_ie_oes&quot;            &quot;s2_model_scotland&quot;         &quot;s2_vcov_scotland&quot;          &quot;s2_model_ireland&quot;         
 ## [113] &quot;s2_vcov_ireland&quot;           &quot;s2_model_scot_its&quot;         &quot;s2_vcov_scot_its&quot;          &quot;s2_model_ie_its&quot;          
-## [117] &quot;s2_vcov_ie_its&quot;            &quot;s3_model_nt&quot;               &quot;s3_vcov_nt&quot;                &quot;s3_placebo&quot;</code></pre>
+## [117] &quot;s2_vcov_ie_its&quot;            &quot;s3_model_nt&quot;               &quot;s3_vcov_nt&quot;                &quot;s3_placebo&quot;               
+## [121] &quot;h8_multiverse&quot;             &quot;h9_cause&quot;</code></pre>
 </div>
 <div id="session-info" class="section level1">
 <h1>SESSION INFO</h1>

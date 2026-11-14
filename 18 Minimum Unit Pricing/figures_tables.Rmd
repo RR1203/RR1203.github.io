@@ -237,6 +237,139 @@ h5_figure_first_stage <- h5_figure_below50p + h5_figure_ireland_sales
 print(h5_figure_first_stage)
 ```
 
+# F6. MULTIVERSE SPECIFICATION CURVE (H8, ALL ALCOHOL-SPECIFIC DEATHS)
+
+```{r, fig.width = 12, fig.height = 9}
+################################################################################
+# F6. Specification curve
+################################################################################
+
+f6_df <- results$h8_multiverse$cits %>%
+  filter(!dropped) %>%
+  arrange(effect_pct) %>%
+  mutate(rank = row_number(),
+         highlight = if_else(wyper, "Wyper-matched (2012-2020, England, full trend)", "Other specification"))
+
+h6_figure_curve_top <- ggplot(f6_df, aes(rank, effect_pct)) +
+  geom_hline(yintercept = 0, colour = "grey50") +
+  geom_hline(yintercept = -13.4, colour = "grey50", linetype = "dashed") +
+  annotate("text", x = 5, y = -13.4, label = "published -13.4%", vjust = -0.5, hjust = 0, size = 3.2, colour = "grey40") +
+  geom_linerange(aes(ymin = lcl_pct, ymax = ucl_pct), colour = "grey75", linewidth = 0.3) +
+  geom_point(aes(colour = highlight, size = highlight)) +
+  scale_colour_manual(values = c(`Other specification` = col_observed,
+                                 `Wyper-matched (2012-2020, England, full trend)` = col_counterfactual)) +
+  scale_size_manual(values = c(`Other specification` = 0.9, `Wyper-matched (2012-2020, England, full trend)` = 3)) +
+  labs(x = NULL, y = "% change vs counterfactual (95% CI)",
+       title = sprintf("Scotland 2018 vs control: %d CITS specifications", nrow(f6_df))) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+f6_indicators <- f6_df %>%
+  mutate(across(c(start, end), as.character)) %>%
+  pivot_longer(c(start, end, trend, control, covid), names_to = "dimension", values_to = "level") %>%
+  mutate(dimension = factor(dimension, levels = c("start", "end", "trend", "control", "covid")))
+
+h6_figure_curve_bottom <- ggplot(f6_indicators, aes(rank, level)) +
+  geom_point(shape = 15, size = 0.7, colour = "grey30") +
+  facet_grid(dimension ~ ., scales = "free_y", space = "free_y") +
+  labs(x = "Specifications, sorted by estimate", y = NULL) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        strip.text.y = element_text(angle = 0), panel.grid.major.y = element_line(colour = "grey92"))
+
+h6_figure_curve <- h6_figure_curve_top / h6_figure_curve_bottom + plot_layout(heights = c(1, 1.3))
+print(h6_figure_curve)
+```
+
+# T6. MULTIVERSE SUMMARY TABLES (H8)
+
+```{r}
+################################################################################
+# T6. Multiverse summary tables
+################################################################################
+
+h6_table_cits <- results$h8_multiverse$summary %>%
+  mutate(across(where(is.numeric), ~ round(.x, 1)))
+print(knitr::kable(h6_table_cits, caption = "CITS multiverse: overall and by dimension"))
+
+h6_table_sc <- results$h8_multiverse$sc_summary %>%
+  mutate(across(where(is.numeric), ~ round(.x, 1)))
+print(knitr::kable(h6_table_sc, caption = "Demeaned synthetic control: overall and by start / end year (placebo p minimum = 1/11)"))
+```
+
+# F7. CAUSE-SPECIFIC SPLIT (H9)
+
+```{r, fig.width = 10, fig.height = 8}
+################################################################################
+# F7. Cause-specific estimates and multiverse
+################################################################################
+
+f7_labels <- c(k70 = "Alcoholic liver disease (K70)", f10 = "Mental/behavioural, alcohol (F10)",
+               poisoning = "Acute poisoning (X45+X65+Y15)")
+
+f7_primary <- results$h9_cause$table %>%
+  select(cause, effect_pct, lcl_pct, ucl_pct, mde_pct) %>%
+  mutate(window = "Primary 2012-2024") %>%
+  bind_rows(results$h9_cause$table %>%
+              transmute(cause, effect_pct = effect_wyper_pct, lcl_pct = lcl_wyper_pct, ucl_pct = ucl_wyper_pct,
+                        mde_pct, window = "Wyper window 2012-2020")) %>%
+  mutate(cause = factor(f7_labels[cause], levels = rev(f7_labels)))
+
+h7_figure_cause_forest <- ggplot(f7_primary, aes(effect_pct, cause, colour = window)) +
+  geom_vline(xintercept = 0, colour = "grey50") +
+  geom_errorbarh(aes(xmin = lcl_pct, xmax = ucl_pct), height = 0.2, position = position_dodge(width = 0.5), linewidth = 0.8) +
+  geom_point(size = 2.6, position = position_dodge(width = 0.5)) +
+  scale_colour_manual(values = c(`Primary 2012-2024` = col_observed, `Wyper window 2012-2020` = col_counterfactual)) +
+  labs(x = "% change vs counterfactual (95% CI)", y = NULL,
+       title = "Scotland vs England by underlying cause (crude rates)",
+       caption = "All three causes underpowered (MDE: K70 15%, F10 57%, poisoning 33%). Holm-adjusted p = 1 for all primary tests.")
+
+f7_curve <- results$h9_cause$multiverse %>%
+  filter(!dropped) %>%
+  group_by(cause) %>%
+  arrange(effect_pct, .by_group = TRUE) %>%
+  mutate(rank = row_number()) %>%
+  ungroup() %>%
+  mutate(cause = factor(f7_labels[cause], levels = f7_labels),
+         window_start = if_else(start >= 2011, "Start 2011-2014", "Start 2007-2010 (spans 2011 coding change)"))
+
+h7_figure_cause_curve <- ggplot(f7_curve, aes(rank, effect_pct, colour = window_start)) +
+  geom_hline(yintercept = 0, colour = "grey50") +
+  geom_point(size = 0.8) +
+  facet_wrap(~ cause, ncol = 1, scales = "free") +
+  scale_colour_manual(values = c(`Start 2011-2014` = col_observed, `Start 2007-2010 (spans 2011 coding change)` = "grey70")) +
+  labs(x = "Specifications, sorted by estimate", y = "% change vs counterfactual",
+       title = "Cause-specific multiverse (CITS, crude rates)",
+       caption = "Poisoning specs including 2007-2008 dropped (zero Scottish deaths: X45 coding began 2011).") +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+h7_figure_cause <- h7_figure_cause_forest / h7_figure_cause_curve + plot_layout(heights = c(1, 2.2))
+print(h7_figure_cause)
+```
+
+# T7. CAUSE-SPECIFIC TABLES (H9)
+
+```{r}
+################################################################################
+# T7. Cause-specific tables
+################################################################################
+
+h7_table_cause <- results$h9_cause$table %>%
+  select(cause, effect_pct, lcl_pct, ucl_pct, p, p_holm, effect_wyper_pct, lcl_wyper_pct, ucl_wyper_pct, p_wyper,
+         mde_pct, power_label) %>%
+  mutate(across(where(is.numeric), ~ signif(.x, 3)))
+print(knitr::kable(h7_table_cause, caption = "Cause-specific CITS (crude rates), primary and Wyper window"))
+
+h7_table_predictions <- results$h9_cause$predictions
+print(knitr::kable(h7_table_predictions, caption = "Pre-specified predictions"))
+
+h7_table_cause_multiverse <- results$h9_cause$multiverse_summary %>%
+  mutate(across(where(is.numeric), ~ round(.x, 1)))
+print(knitr::kable(h7_table_cause_multiverse, caption = "Cause multiverse: overall and by dimension"))
+
+h7_table_cause_multiverse_2011 <- results$h9_cause$multiverse_summary_2011_posthoc %>%
+  mutate(across(where(is.numeric), ~ round(.x, 1)))
+print(knitr::kable(h7_table_cause_multiverse_2011, caption = "POST-HOC: cause multiverse restricted to start >= 2011"))
+```
+
 # SAVE
 
 ```{r, eval = FALSE}
@@ -250,4 +383,10 @@ ggsave("figures/fig2_forest.png", h2_figure_forest, width = 10, height = 5.5, dp
 ggsave("figures/fig3_scotland_65p_dose.png", h3_figure_dose, width = 9, height = 5, dpi = 200)
 ggsave("figures/fig4_deprivation_gradient.png", h4_figure_deprivation, width = 7, height = 4.5, dpi = 200)
 ggsave("figures/fig5_first_stage.png", h5_figure_first_stage, width = 10, height = 4, dpi = 200)
+ggsave("figures/fig6_multiverse_specification_curve.png", h6_figure_curve, width = 12, height = 9, dpi = 200)
+ggsave("figures/fig7_cause_specific.png", h7_figure_cause, width = 10, height = 9, dpi = 200)
+write_csv(h6_table_cits, "figures/table6_multiverse_cits_summary.csv")
+write_csv(h6_table_sc, "figures/table6b_multiverse_sc_summary.csv")
+write_csv(h7_table_cause, "figures/table7_cause_specific.csv")
+write_csv(h7_table_cause_multiverse, "figures/table7b_cause_multiverse_summary.csv")
 ```

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verifying your browser — MirrorWeb Archive</title>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#1a1a1a;color:#e0e0e0;display:flex;align-items:center;justify-content:center;min-height:100vh}
+    .container{text-align:center;padding:2rem;max-width:600px}
+    .logo{margin-bottom:2rem}.logo img{height:40px;width:auto}
+    h1{font-size:2rem;margin:0 0 1rem;color:#fff}
+    .message{font-size:1.15rem;margin-bottom:1.5rem;color:#a0a0a0;line-height:1.5}
+    .note{font-size:.85rem;color:#6f6f6f;margin-top:1.5rem;line-height:1.5}
+    .widget{display:flex;justify-content:center;margin:1.5rem 0}
+    footer{position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;border-top:1px solid #2d2d2d;padding:1.5rem;text-align:center}
+    .footer-content{max-width:1200px;margin:0 auto;color:#a0a0a0;font-size:.9rem}
+    .footer-content a{color:#a0a0a0;text-decoration:none}.footer-content a:hover{color:#fff}
+    .error{color:#ff8a8a}
+    .support-note{font-size:1rem;margin-bottom:1.5rem;color:#a0a0a0;line-height:1.5}.support-note a{color:#e0e0e0}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo"><img src="https://www.mirrorweb.com/hs-fs/hubfs/Master%20Logo%20-%20Colour%EF%80%A2White%20Landscape.png?width=178&height=40&name=Master%20Logo%20-%20Colour%EF%80%A2White%20Landscape.png" alt="MirrorWeb"></div>
+    <h1>Verifying your browser</h1>
+    <p class="message">Complete the check below to access the archive.</p>
+    <p class="message error" id="ts-error" style="display:none">Verification failed - please refresh and try again.</p>
+    <p class="support-note" id="ts-support" style="display:none">If the issue persists, please <a href="https://mirrorweb.atlassian.net/servicedesk/customer/portal/108">contact MirrorWeb Preservation support</a>.</p>
+    <form method="POST" action="/__mw_turnstile">
+      <input type="hidden" name="return" value="/public/20241128121908/https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-publications/vital-events-reference-tables">
+      <div class="widget"><div class="cf-turnstile" data-sitekey="0x4AAAAAADrX2XUN67vGxxM7" data-theme="dark" data-retry="never" data-callback="__tsDone" data-error-callback="__tsError"></div></div>
+      <noscript><p class="message">JavaScript is required to continue.</p></noscript>
+    </form>
+    <p class="note">Due to a recent increase in automated AI crawlers, we&rsquo;ve had to introduce some additional protection measures. Apologies for any inconvenience.</p>
+  </div>
+  <footer><div class="footer-content">
+    <a href="https://www.mirrorweb.com">MirrorWeb | Preservation Team</a>
+    &nbsp;&bull;&nbsp; <a href="https://www.mirrorweb.com/privacy-policy">Privacy Policy</a>
+  </div></footer>
+  <script>
+    
+    
+    
+    
+    window.__tsDone = function () { document.querySelector('input[name="return"]').form.submit(); };
+    
+    
+    
+    
+    
+    
+    
+    window.__tsErrCount = 0;
+    window.__tsError = function (code) {
+      try { console.warn("turnstile error", code); } catch (e) {}
+      var firstLoadBug = String(code).indexOf("1060") === 0;
+      if (firstLoadBug && ++window.__tsErrCount <= 2 && window.turnstile) {
+        setTimeout(function () { try { window.turnstile.reset(); } catch (e) {} }, 800);
+        return true; 
+      }
+      document.getElementById("ts-error").style.display = "";
+      document.getElementById("ts-support").style.display = "";
+      return false;
+    };
+  </script>
+</body>
+</html>
