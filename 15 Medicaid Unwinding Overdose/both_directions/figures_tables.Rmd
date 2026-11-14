@@ -1,0 +1,264 @@
+---
+title: "Figures: Medicaid coverage in both directions"
+output:
+  html_document:
+    toc: true
+---
+
+# 00. SETUP
+```{r setup}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+library(lubridate)
+
+# Figures
+library(ggrepel)
+
+# Options
+options(scipen = 999)
+theme_set(theme_classic(base_size = 13))
+
+# Colours: NC / gains = blue, SD / losses = orange, other states = grey
+col_nc <- "#2a78d6"
+col_sd <- "#eb6834"
+col_other <- "#a3a29c"
+
+# Results from analysis.Rmd (synthetic-control paths and event-study coefficients)
+results <- readRDS("results.rds")
+```
+
+# F1. EXPOSURE: NET ADULT ENROLLMENT CHANGE
+```{r f1}
+################################################################################
+# F1. Net % change in adult Medicaid/CHIP enrollment since March 2023
+################################################################################
+
+f1_df <- read_excel("clean_data.xlsx", sheet = "enrollment_month") %>%
+  mutate(
+    month = as_date(month),
+    group = case_when(state == "NC" ~ "North Carolina", state == "SD" ~ "South Dakota", TRUE ~ "Other states")
+  )
+
+f1_figure_enrollment <- ggplot(f1_df, aes(month, net_change_pct, group = state, colour = group)) +
+  geom_hline(yintercept = 0, colour = "grey40", linewidth = 0.4) +
+  geom_line(data = f1_df %>% filter(group == "Other states"), linewidth = 0.4, alpha = 0.6) +
+  geom_line(data = f1_df %>% filter(group != "Other states"), linewidth = 1.2) +
+  geom_vline(xintercept = as_date(c("2023-07-01", "2023-12-01")), linetype = "dashed", colour = c(col_sd, col_nc)) +
+  scale_colour_manual(values = c("North Carolina" = col_nc, "South Dakota" = col_sd, "Other states" = col_other)) +
+  labs(x = NULL, y = "Net change in adult enrollment\nvs March 2023 (%)", colour = NULL,
+       caption = "Adult = total Medicaid/CHIP minus child enrollment (CMS). AZ: total enrollment (proxy).\nDashed lines: SD expansion (1 Jul 2023), NC expansion (1 Dec 2023).") +
+  theme(legend.position = "top")
+
+print(f1_figure_enrollment)
+```
+
+# F2. BOTH-DIRECTIONS SCATTER WITH KINKED FIT
+```{r f2}
+################################################################################
+# F2. Change in Medicaid buprenorphine and overdose deaths vs net enrollment change
+################################################################################
+
+f2_df <- results$s0_change %>%
+  mutate(group = case_when(state == "NC" ~ "North Carolina", state == "SD" ~ "South Dakota", TRUE ~ "Other states"))
+
+# Kinked fits (same models as S0.2), predicted over the observed range
+f2_model_bup <- lm(delta_bup ~ gain_final + loss_final, data = f2_df)
+f2_model_od <- lm(delta_od ~ gain_final + loss_final, data = f2_df)
+f2_grid <- tibble(net_change_2024q4 = seq(min(f2_df$net_change_2024q4), max(f2_df$net_change_2024q4), length.out = 200)) %>%
+  mutate(gain_final = pmax(net_change_2024q4, 0), loss_final = pmax(-net_change_2024q4, 0))
+f2_grid <- f2_grid %>%
+  mutate(fit_bup = predict(f2_model_bup, newdata = f2_grid), fit_od = predict(f2_model_od, newdata = f2_grid))
+
+f2_figure_bup <- ggplot(f2_df, aes(net_change_2024q4, delta_bup)) +
+  geom_hline(yintercept = 0, colour = "grey70") +
+  geom_vline(xintercept = 0, colour = "grey70") +
+  geom_line(data = f2_grid, aes(y = fit_bup), colour = "grey20", linewidth = 0.8) +
+  geom_point(aes(colour = group), size = 2.6) +
+  geom_text_repel(aes(label = state), size = 3, colour = "grey30", max.overlaps = 20, seed = 1) +
+  scale_colour_manual(values = c("North Carolina" = col_nc, "South Dakota" = col_sd, "Other states" = col_other)) +
+  labs(x = "Net change in adult enrollment, Mar 2023 to 2024Q4 (%)",
+       y = "Change in Medicaid buprenorphine Rx\nper 100,000 adults per quarter",
+       colour = NULL,
+       caption = "Change = mean 2024Q3-2025Q2 minus mean 2022Q2-2023Q1 (SDUD). Line: piecewise-linear fit, kink at 0.") +
+  theme(legend.position = "top")
+
+print(f2_figure_bup)
+
+f2_figure_od <- ggplot(f2_df, aes(net_change_2024q4, delta_od)) +
+  geom_hline(yintercept = 0, colour = "grey70") +
+  geom_vline(xintercept = 0, colour = "grey70") +
+  geom_line(data = f2_grid, aes(y = fit_od), colour = "grey20", linewidth = 0.8) +
+  geom_point(aes(colour = group), size = 2.6) +
+  geom_text_repel(aes(label = state), size = 3, colour = "grey30", max.overlaps = 20, seed = 1) +
+  scale_colour_manual(values = c("North Carolina" = col_nc, "South Dakota" = col_sd, "Other states" = col_other)) +
+  labs(x = "Net change in adult enrollment, Mar 2023 to 2024Q4 (%)",
+       y = "Change in overdose deaths per 100,000\n(2025 minus 2022)",
+       colour = NULL,
+       caption = "CDC VSRR provisional 12-month-ending December counts. Line: piecewise-linear fit, kink at 0.") +
+  theme(legend.position = "top")
+
+print(f2_figure_od)
+```
+
+# F3. SYNTHETIC CONTROL PATHS (NC, SD)
+```{r f3}
+################################################################################
+# F3. Synthetic control: treated vs synthetic
+################################################################################
+
+f3_df <- results$h2_paths %>%
+  filter(!(outcome == "od_rate" & unit == "SD" & time == 2023)) %>%
+  mutate(
+    period = if_else(outcome == "bup_per100k", 2023.25 + time / 4, time),
+    outcome_label = if_else(outcome == "bup_per100k", "Buprenorphine Rx per 100,000 adults (quarter)", "Overdose deaths per 100,000 (year)"),
+    unit_label = if_else(unit == "NC", "North Carolina", "South Dakota")
+  ) %>%
+  select(unit_label, outcome_label, period, Treated = treated, Synthetic = synthetic) %>%
+  pivot_longer(c(Treated, Synthetic), names_to = "series", values_to = "value")
+
+f3_start <- tibble(
+  unit_label = c("North Carolina", "North Carolina", "South Dakota", "South Dakota"),
+  outcome_label = c("Buprenorphine Rx per 100,000 adults (quarter)", "Overdose deaths per 100,000 (year)",
+                    "Buprenorphine Rx per 100,000 adults (quarter)", "Overdose deaths per 100,000 (year)"),
+  start = c(2023.75, 2023.5, 2023.5, 2023.5)
+)
+
+f3_figure_sc <- ggplot(f3_df, aes(period, value, linetype = series)) +
+  geom_vline(data = f3_start, aes(xintercept = start), colour = "grey50", linetype = "dotted") +
+  geom_line(colour = "grey15", linewidth = 0.8) +
+  facet_wrap(outcome_label ~ unit_label, scales = "free_y", ncol = 2) +
+  scale_x_continuous(breaks = 2015:2025, labels = c("2015", "", "2017", "", "2019", "", "2021", "", "2023", "", "2025")) +
+  scale_linetype_manual(values = c(Treated = "solid", Synthetic = "dashed")) +
+  labs(x = NULL, y = NULL, linetype = NULL,
+       caption = "Proportional synthetic control (fit on % deviation from own pre-period mean); donors = no expansion change 2018-2025, middle tertile of unwinding loss.\nDotted line: expansion start. SD deaths: 2023 (transition year) omitted.") +
+  theme(legend.position = "top")
+
+print(f3_figure_sc)
+```
+
+# F4. EVENT STUDIES
+```{r f4}
+################################################################################
+# F4. Event studies: coefficient per pp gained and per pp lost (fixed 2024Q4 exposure)
+################################################################################
+
+f4_bup <- results$h3_bup_es %>%
+  mutate(
+    direction = if_else(str_detect(term, "gain_final"), "Per pp gained", "Per pp lost"),
+    rel = as.numeric(str_extract(term, "(?<=rel_q::)-?\\d+"))
+  ) %>%
+  bind_rows(tibble(direction = c("Per pp gained", "Per pp lost"), rel = -1, Estimate = 0, `Std. Error` = 0))
+
+f4_figure_es_bup <- ggplot(f4_bup, aes(rel, Estimate, colour = direction)) +
+  geom_hline(yintercept = 0, colour = "grey60") +
+  geom_vline(xintercept = -0.5, colour = "grey60", linetype = "dotted") +
+  geom_pointrange(aes(ymin = Estimate - 1.96 * `Std. Error`, ymax = Estimate + 1.96 * `Std. Error`),
+                  position = position_dodge(width = 0.5), size = 0.3) +
+  scale_colour_manual(values = c("Per pp gained" = col_nc, "Per pp lost" = col_sd)) +
+  labs(x = "Quarters since 2023Q2 (ref = 2023Q1)", y = "Buprenorphine Rx per 100,000 adults", colour = NULL,
+       caption = "Gain coefficients are identified by NC and SD only; 95% CIs cluster-robust by state.") +
+  theme(legend.position = "top")
+
+print(f4_figure_es_bup)
+
+f4_od <- results$h3_od_es %>%
+  mutate(
+    direction = if_else(str_detect(term, "gain_final"), "Per pp gained", "Per pp lost"),
+    year = 2023 + as.numeric(str_extract(term, "(?<=rel_y::)-?\\d+"))
+  ) %>%
+  bind_rows(tibble(direction = c("Per pp gained", "Per pp lost"), year = 2022, Estimate = 0, `Std. Error` = 0))
+
+f4_figure_es_od <- ggplot(f4_od, aes(year, Estimate, colour = direction)) +
+  geom_hline(yintercept = 0, colour = "grey60") +
+  geom_vline(xintercept = 2022.5, colour = "grey60", linetype = "dotted") +
+  geom_pointrange(aes(ymin = Estimate - 1.96 * `Std. Error`, ymax = Estimate + 1.96 * `Std. Error`),
+                  position = position_dodge(width = 0.4), size = 0.3) +
+  scale_colour_manual(values = c("Per pp gained" = col_nc, "Per pp lost" = col_sd)) +
+  labs(x = NULL, y = "Overdose deaths per 100,000", colour = NULL,
+       caption = "Reference year 2022. Gain coefficients identified by NC and SD only; 95% CIs cluster-robust by state.") +
+  theme(legend.position = "top")
+
+print(f4_figure_es_od)
+```
+
+# F5. GAIN VS LOSS SLOPE COMPARISON
+```{r f5}
+################################################################################
+# F5. Slope per pp gained vs mirrored slope per pp lost
+################################################################################
+
+f5_df <- results$h3_symmetry %>%
+  transmute(
+    outcome = if_else(outcome == "bup_per100k", "Buprenorphine Rx per 100,000 adults", "Overdose deaths per 100,000"),
+    gain_est = b_gain, gain_se = sqrt(v_gain),
+    loss_mirror_est = -b_loss, loss_mirror_se = sqrt(v_loss)
+  ) %>%
+  pivot_longer(-outcome, names_to = c("slope", ".value"), names_pattern = "(gain|loss_mirror)_(est|se)") %>%
+  mutate(slope = if_else(slope == "gain", "Per pp gained (b_gain)", "Minus per pp lost (-b_loss)"))
+
+f5_figure_slopes <- ggplot(f5_df, aes(est, slope, colour = slope)) +
+  geom_vline(xintercept = 0, colour = "grey60") +
+  geom_pointrange(aes(xmin = est - 1.96 * se, xmax = est + 1.96 * se), size = 0.4) +
+  facet_wrap(~outcome, scales = "free_x", ncol = 1) +
+  scale_colour_manual(values = c("Per pp gained (b_gain)" = col_nc, "Minus per pp lost (-b_loss)" = col_sd)) +
+  labs(x = "Effect per percentage point of net adult enrollment change", y = NULL,
+       caption = "Mirror-image symmetry = the two estimates coincide. 95% CIs cluster-robust by state.") +
+  theme(legend.position = "none")
+
+print(f5_figure_slopes)
+```
+
+# F6. MONTHLY OVERDOSE TIMING (12-MONTH-ENDING)
+```{r f6}
+################################################################################
+# F6. 12-month-ending overdose deaths per 100,000: NC, SD, other states
+################################################################################
+
+f6_pop <- read_excel("clean_data.xlsx", sheet = "deaths_year") %>% select(state, year, pop_total)
+
+f6_df <- read_excel("clean_data.xlsx", sheet = "deaths_month") %>%
+  mutate(month = as_date(month), year = year(month)) %>%
+  filter(month >= as_date("2019-01-01")) %>%
+  left_join(f6_pop, by = c("state", "year")) %>%
+  group_by(state) %>%
+  fill(pop_total) %>%
+  ungroup() %>%
+  mutate(
+    od_rate_12m = 100000 * od_deaths / pop_total,
+    group = case_when(state == "NC" ~ "North Carolina", state == "SD" ~ "South Dakota", TRUE ~ "Other states")
+  )
+
+f6_figure_monthly <- ggplot(f6_df, aes(month, od_rate_12m, group = state, colour = group)) +
+  geom_line(data = f6_df %>% filter(group == "Other states"), linewidth = 0.3, alpha = 0.5) +
+  geom_line(data = f6_df %>% filter(group != "Other states"), linewidth = 1.2) +
+  geom_vline(xintercept = as_date(c("2023-07-01", "2023-12-01")), linetype = "dashed", colour = c(col_sd, col_nc)) +
+  scale_colour_manual(values = c("North Carolina" = col_nc, "South Dakota" = col_sd, "Other states" = col_other)) +
+  labs(x = "12-month period ending", y = "Overdose deaths per 100,000\n(12-month-ending)", colour = NULL,
+       caption = "CDC VSRR provisional counts; each point sums the prior 12 months, so changes appear smoothed and delayed.") +
+  theme(legend.position = "top")
+
+print(f6_figure_monthly)
+```
+
+# SAVE FIGURES
+```{r save}
+################################################################################
+# SAVE FIGURES
+################################################################################
+
+dir.create("figures", showWarnings = FALSE)
+ggsave("figures/f1_enrollment_trajectories.png", f1_figure_enrollment, width = 8, height = 5, dpi = 300)
+ggsave("figures/f2a_scatter_enrollment_vs_bupe.png", f2_figure_bup, width = 8, height = 6, dpi = 300)
+ggsave("figures/f2b_scatter_enrollment_vs_deaths.png", f2_figure_od, width = 8, height = 6, dpi = 300)
+ggsave("figures/f3_synthetic_control_paths.png", f3_figure_sc, width = 9, height = 7, dpi = 300)
+ggsave("figures/f4a_event_study_bupe.png", f4_figure_es_bup, width = 8, height = 5, dpi = 300)
+ggsave("figures/f4b_event_study_deaths.png", f4_figure_es_od, width = 8, height = 5, dpi = 300)
+ggsave("figures/f5_gain_vs_loss_slopes.png", f5_figure_slopes, width = 8, height = 5, dpi = 300)
+ggsave("figures/f6_monthly_overdose_12m.png", f6_figure_monthly, width = 8, height = 5, dpi = 300)
+print(list.files("figures"))
+```

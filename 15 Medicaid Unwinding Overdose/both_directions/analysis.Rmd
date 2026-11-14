@@ -1,0 +1,1504 @@
+---
+title: "Medicaid coverage in both directions: unwinding losses vs NC/SD expansion gains"
+output:
+  html_document:
+    toc: true
+---
+
+# 00. SETUP
+```{r setup}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+library(lubridate)
+library(zoo)
+
+# Statistics
+library(fixest)
+library(quadprog)
+
+# Export
+library(writexl)
+
+# Options
+options(scipen = 999, width = 120)
+theme_set(theme_classic(base_size = 14))
+set.seed(1234)
+
+# Synthetic control helper (the only helper function in this file; see DECISIONS.md)
+# Proportional synthetic control: each unit as % deviation from its own pre-period
+# mean, then non-negative donor weights summing to 1 that minimise pre-period squared
+# error. Gaps are in % of the treated unit's pre-period mean (also returned in levels).
+sc_fit <- function(df, outcome, treated, donors, pre, post) {
+  treated_pre_mean <- mean(df[[outcome]][df$state == treated & df$time %in% pre])
+  wide <- df %>%
+    filter(state %in% c(treated, donors), time %in% c(pre, post)) %>%
+    select(state, time, y = all_of(outcome)) %>%
+    group_by(state) %>%
+    mutate(y = 100 * (y / mean(y[time %in% pre]) - 1)) %>%
+    ungroup() %>%
+    pivot_wider(names_from = state, values_from = y) %>%
+    arrange(time)
+  is_pre <- wide$time %in% pre
+  y1 <- wide[[treated]]
+  y0 <- as.matrix(wide[, donors])
+  d_mat <- crossprod(y0[is_pre, , drop = FALSE])
+  d_mat <- d_mat + diag(1e-6 * mean(diag(d_mat)), ncol(d_mat))
+  d_vec <- crossprod(y0[is_pre, , drop = FALSE], y1[is_pre])
+  a_mat <- cbind(rep(1, ncol(y0)), diag(ncol(y0)))
+  w <- solve.QP(d_mat, d_vec, a_mat, c(1, rep(0, ncol(y0))), meq = 1)$solution
+  w <- pmax(w, 0) / sum(pmax(w, 0))
+  gap <- y1 - as.vector(y0 %*% w)
+  list(
+    path = tibble(time = wide$time, treated = treated_pre_mean * (1 + y1 / 100),
+                  synthetic = treated_pre_mean * (1 + as.vector(y0 %*% w) / 100), gap = gap, post = !is_pre),
+    weights = tibble(state = donors, weight = round(w, 3)) %>% filter(weight > 0) %>% arrange(desc(weight)),
+    pre_rmspe = sqrt(mean(gap[is_pre]^2)),
+    post_rmspe = sqrt(mean(gap[!is_pre]^2)),
+    ratio = sqrt(mean(gap[!is_pre]^2)) / sqrt(mean(gap[is_pre]^2)),
+    mean_post_gap = mean(gap[!is_pre]),
+    mean_post_gap_level = mean(gap[!is_pre]) * treated_pre_mean / 100,
+    treated_pre_mean = treated_pre_mean
+  )
+}
+```
+
+# 01. DATA CLEANING
+```{r cleaning-states}
+################################################################################
+# 01. DATA CLEANING
+################################################################################
+
+# State names and abbreviations (50 states + DC)
+state_key <- tibble(
+  state = c(state.abb, "DC"),
+  state_name = c(state.name, "District of Columbia")
+)
+
+print(nrow(state_key))
+```
+
+```{r cleaning-enrollment}
+################################################################################
+# 01a. Enrollment (CMS PI dataset): adult = total Medicaid+CHIP - child
+################################################################################
+
+# Raw enrollment
+raw_pi <- read_csv("inputs/pi_enrollment.csv", col_types = cols(.default = "c"))
+print(nrow(raw_pi))
+
+# Final reports, monthly, 50 states + DC
+enroll_month <- raw_pi %>%
+  filter(`Final Report` == "Y") %>%
+  transmute(
+    state = `State Abbreviation`,
+    month = ymd(paste0(`Reporting Period`, "01")),
+    expanded_flag = `State Expanded Medicaid`,
+    total_enroll = parse_number(`Total Medicaid and CHIP Enrollment`),
+    child_enroll = parse_number(`Medicaid and CHIP Child Enrollment`)
+  ) %>%
+  filter(state %in% state_key$state) %>%
+  distinct(state, month, .keep_all = TRUE) %>%
+  arrange(state, month)
+
+print(nrow(enroll_month))
+
+# Adult enrollment; AZ has no child count Jan 2022-Apr 2024 -> total enrollment as proxy
+enroll_month <- enroll_month %>%
+  mutate(
+    child_enroll = if_else(child_enroll == 0, NA_real_, child_enroll),
+    adult_enroll = if_else(state == "AZ", total_enroll, total_enroll - child_enroll),
+    adult_is_proxy = state == "AZ"
+  ) %>%
+  filter(month >= ymd("2022-01-01")) %>%
+  group_by(state) %>%
+  mutate(adult_enroll = na.approx(adult_enroll, na.rm = FALSE)) %>%
+  ungroup()
+
+print(sum(is.na(enroll_month$adult_enroll)))
+
+# Net % change in adult enrollment vs March 2023
+enroll_baseline <- enroll_month %>%
+  filter(month == ymd("2023-03-01")) %>%
+  select(state, adult_enroll_mar2023 = adult_enroll)
+
+enroll_month <- enroll_month %>%
+  left_join(enroll_baseline, by = "state") %>%
+  mutate(
+    net_change_pct = 100 * (adult_enroll / adult_enroll_mar2023 - 1),
+    net_change_post = if_else(month >= ymd("2023-04-01"), net_change_pct, 0)
+  )
+
+print(range(enroll_month$month))
+print(enroll_month %>% filter(month == ymd("2024-12-01")) %>% arrange(net_change_pct) %>% select(state, net_change_pct), n = 51)
+```
+
+```{r cleaning-expansion}
+################################################################################
+# 01b. Expansion status from the CMS PI flag (2017-06 onward)
+################################################################################
+
+# Expansion flag by state-month
+expansion_month <- raw_pi %>%
+  filter(`Final Report` == "Y") %>%
+  transmute(
+    state = `State Abbreviation`,
+    month = ymd(paste0(`Reporting Period`, "01")),
+    expanded = `State Expanded Medicaid` == "Y"
+  ) %>%
+  filter(state %in% state_key$state) %>%
+  distinct(state, month, .keep_all = TRUE)
+
+# First expanded month, and status in Jan 2018 and Dec 2025
+expansion_state <- expansion_month %>%
+  group_by(state) %>%
+  summarise(
+    expanded_jan2018 = any(expanded[month == ymd("2018-01-01")]),
+    expanded_dec2025 = any(expanded[month == ymd("2025-12-01")]),
+    first_expanded_month = suppressWarnings(min(month[expanded])),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    expansion_changed_2018_2025 = expanded_jan2018 != expanded_dec2025
+  )
+
+print(expansion_state %>% filter(expansion_changed_2018_2025), n = 51)
+print(expansion_state %>% filter(!expanded_dec2025), n = 51)
+```
+
+```{r cleaning-renewals}
+################################################################################
+# 01c. Unwinding renewal outcomes (CMS, Mar 2023 - Mar 2024)
+################################################################################
+
+# Raw renewal outcomes
+raw_renewal <- read_csv("inputs/renewal_outcomes.csv", col_types = cols(.default = "c"))
+names(raw_renewal) <- c("state", "period", "release", "metric", "data_type", "value")
+print(nrow(raw_renewal))
+
+# Counts by state-month
+renewal_month <- raw_renewal %>%
+  mutate(
+    month = ymd(paste0(period, "01")),
+    value = parse_number(value),
+    metric_id = case_when(
+      str_detect(metric, "^Total number of beneficiaries due for renewal in the reporting month \\(Metric 5\\)") ~ "due",
+      str_detect(metric, "^Total beneficiaries renewed on an ex parte basis") ~ "ex_parte",
+      str_detect(metric, "^Total number of beneficiaries due for renewal .* terminated \\(Metric 5b \\+ 5c\\)") ~ "terminated",
+      str_detect(metric, "^Total beneficiaries whose coverage was terminated for a procedural") ~ "procedural",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  filter(!is.na(metric_id), state %in% state_key$state) %>%
+  select(state, month, metric_id, value) %>%
+  distinct(state, month, metric_id, .keep_all = TRUE) %>%
+  pivot_wider(names_from = metric_id, values_from = value)
+
+# State summaries: procedural share, ex parte share, first month with terminations
+renewal_state <- renewal_month %>%
+  group_by(state) %>%
+  summarise(
+    renewals_due = sum(due, na.rm = TRUE),
+    procedural_share = sum(procedural, na.rm = TRUE) / sum(due, na.rm = TRUE),
+    ex_parte_share = sum(ex_parte, na.rm = TRUE) / sum(due, na.rm = TRUE),
+    first_termination_month = suppressWarnings(min(month[terminated > 0 & !is.na(terminated)])),
+    .groups = "drop"
+  )
+
+print(renewal_state %>% arrange(first_termination_month), n = 51)
+```
+
+```{r cleaning-sdud}
+################################################################################
+# 01d. Medicaid buprenorphine prescriptions (SDUD, 2018 - latest)
+################################################################################
+
+# Raw SDUD rows (product names starting with buprenorphine-related strings)
+raw_sdud <- read_csv("inputs/sdud_bup_raw.csv", col_types = cols(.default = "c"))
+print(nrow(raw_sdud))
+
+# FDA NDC lookup (current + excluded directory)
+bup_lookup <- read_csv("inputs/bup_ndc_lookup.csv", col_types = cols(.default = "c"))
+print(nrow(bup_lookup))
+
+# Classify products: OUD sublingual/buccal, OUD long-acting injectable, pain, not buprenorphine
+sdud <- raw_sdud %>%
+  mutate(
+    labeler_code = str_pad(labeler_code, 5, pad = "0"),
+    product_code = str_pad(str_sub(ndc, 6, 9), 4, pad = "0"),
+    product_name = str_trim(str_to_upper(product_name))
+  ) %>%
+  left_join(bup_lookup %>% select(labeler_code, product_code, proprietary, route, dosage_form),
+            by = c("labeler_code", "product_code")) %>%
+  mutate(
+    proprietary = str_to_upper(proprietary),
+    bup_class = case_when(
+      str_detect(proprietary, "SUBLOCADE|BRIXADI") ~ "oud_lai",
+      str_detect(proprietary, "BELBUCA|BUTRANS|BUPRENEX") ~ "pain",
+      str_detect(proprietary, "BUNAVAIL") ~ "oud_sl",
+      str_detect(route, "SUBLINGUAL") ~ "oud_sl",
+      !is.na(route) ~ "pain",
+      str_detect(product_name, "^(SUBOX|SUBUT|ZUBSO|BUNAV)") ~ "oud_sl",
+      str_detect(product_name, "^(SUBLOC|BRIXA)") ~ "oud_lai",
+      str_detect(product_name, "^(BUTRAN|BELBU|BUPRENEX)") ~ "pain",
+      str_detect(product_name, "^BUP.*(NAL|NX|-N|-$)") ~ "oud_sl",
+      str_detect(product_name, "^BUPREN") ~ "bup_unmatched",
+      TRUE ~ "not_bup"
+    ),
+    rx = parse_number(number_of_prescriptions),
+    suppressed = suppression_used == "true",
+    year = as.integer(year),
+    quarter = as.integer(quarter)
+  )
+
+print(table(sdud$bup_class, useNA = "ifany"))
+print(sdud %>% filter(bup_class == "bup_unmatched") %>% count(product_name, sort = TRUE))
+print(sdud %>% filter(bup_class %in% c("oud_sl", "oud_lai")) %>% summarise(share_suppressed_rows = mean(suppressed)))
+```
+
+```{r cleaning-sdud-unmatched}
+################################################################################
+# 01e. Unmatched generic "BUPRENORPH" NDCs: classify by units per prescription
+################################################################################
+
+# Units per prescription for matched products (reference)
+print(sdud %>%
+  filter(!suppressed, rx > 0, bup_class %in% c("oud_sl", "pain")) %>%
+  mutate(units_per_rx = parse_number(units_reimbursed) / rx) %>%
+  group_by(bup_class) %>%
+  summarise(p10 = quantile(units_per_rx, 0.10), median = median(units_per_rx), p90 = quantile(units_per_rx, 0.90)))
+
+# Unmatched NDCs: median units per prescription across all their rows
+unmatched_ndc <- sdud %>%
+  filter(bup_class == "bup_unmatched", !suppressed, rx > 0) %>%
+  group_by(ndc) %>%
+  summarise(units_per_rx = median(parse_number(units_reimbursed) / rx), rx_total = sum(rx), .groups = "drop") %>%
+  mutate(unmatched_class = if_else(units_per_rx >= 10, "oud_sl", "pain"))
+
+print(unmatched_ndc %>% count(unmatched_class, wt = rx_total))
+
+# Apply: unmatched NDCs with >= 10 units per Rx are sublingual OUD products
+sdud <- sdud %>%
+  left_join(unmatched_ndc %>% select(ndc, unmatched_class), by = "ndc") %>%
+  mutate(
+    bup_class = case_when(
+      bup_class == "bup_unmatched" & !is.na(unmatched_class) ~ unmatched_class,
+      bup_class == "bup_unmatched" ~ "oud_sl",
+      TRUE ~ bup_class
+    )
+  )
+
+print(table(sdud$bup_class))
+```
+
+```{r cleaning-sdud-panel}
+################################################################################
+# 01f. SDUD state x quarter panel (FFSU + MCOU, national "XX" row dropped)
+################################################################################
+
+# Buprenorphine OUD rows, 50 states + DC
+sdud_bup <- sdud %>%
+  filter(bup_class %in% c("oud_sl", "oud_lai"), state %in% state_key$state) %>%
+  mutate(
+    rx_supp5 = if_else(suppressed | is.na(rx), 5, rx),
+    rx_supp0 = if_else(suppressed | is.na(rx), 0, rx)
+  )
+
+print(nrow(sdud_bup))
+
+# State x quarter sums
+sdud_q <- sdud_bup %>%
+  group_by(state, year, quarter) %>%
+  summarise(
+    bup_rx = sum(rx_supp5[bup_class == "oud_sl"]),
+    bup_rx_supp0 = sum(rx_supp0[bup_class == "oud_sl"]),
+    bup_rx_incl_lai = sum(rx_supp5),
+    share_rows_suppressed = mean(suppressed),
+    .groups = "drop"
+  )
+
+# Reporting completeness: states with data per quarter
+print(sdud_q %>% count(year, quarter), n = 40)
+```
+
+```{r cleaning-deaths}
+################################################################################
+# 01g. Overdose deaths (CDC VSRR provisional, 12-month-ending counts)
+################################################################################
+
+# Raw VSRR
+raw_vsrr <- read_csv("inputs/vsrr_xkb8-kh2a.csv", col_types = cols(.default = "c"))
+print(nrow(raw_vsrr))
+
+# Indicators used; NY = NY excl. NYC (NY) + NYC (YC)
+deaths_month <- raw_vsrr %>%
+  mutate(
+    indicator = case_when(
+      Indicator == "Number of Drug Overdose Deaths" ~ "od_deaths",
+      Indicator == "Opioids (T40.0-T40.4,T40.6)" ~ "opioid_deaths",
+      Indicator == "Synthetic opioids, excl. methadone (T40.4)" ~ "synth_deaths",
+      Indicator == "Psychostimulants with abuse potential (T43.6)" ~ "psychostim_deaths",
+      Indicator == "Number of Deaths" ~ "all_deaths",
+      TRUE ~ NA_character_
+    ),
+    state = if_else(State == "YC", "NY", State),
+    value = parse_number(`Data Value`),
+    month = ymd(paste(Year, Month, "01"))
+  ) %>%
+  filter(!is.na(indicator), state %in% state_key$state) %>%
+  group_by(state, month, indicator) %>%
+  summarise(value = if (any(is.na(value))) NA_real_ else sum(value), n_rows = n(), .groups = "drop") %>%
+  pivot_wider(id_cols = c(state, month), names_from = indicator, values_from = value) %>%
+  mutate(non_od_deaths = all_deaths - od_deaths)
+
+print(range(deaths_month$month))
+print(colSums(is.na(deaths_month %>% filter(month >= ymd("2018-01-01")) %>% select(-state, -month))))
+
+# CDC predicted (delay-adjusted) drug overdose deaths, for sensitivity
+deaths_pred_month <- raw_vsrr %>%
+  filter(Indicator == "Number of Drug Overdose Deaths") %>%
+  mutate(
+    state = if_else(State == "YC", "NY", State),
+    value = parse_number(`Predicted Value`),
+    month = ymd(paste(Year, Month, "01"))
+  ) %>%
+  filter(state %in% state_key$state) %>%
+  group_by(state, month) %>%
+  summarise(od_deaths_pred = if (any(is.na(value))) NA_real_ else sum(value), .groups = "drop")
+
+deaths_month <- deaths_month %>%
+  left_join(deaths_pred_month, by = c("state", "month"))
+
+print(deaths_month %>% filter(state == "NC", month(month) == 12) %>% select(month, od_deaths, od_deaths_pred))
+
+# Annual panel: 12-month-ending December
+deaths_year <- deaths_month %>%
+  filter(month(month) == 12) %>%
+  mutate(year = year(month)) %>%
+  select(-month)
+
+print(table(deaths_year$year))
+```
+
+```{r cleaning-population}
+################################################################################
+# 01h. Population (Census civilian, single year of age): total and 18+
+################################################################################
+
+# Vintage 2020 file (2015-2019) and vintage 2025 file (2020-2025)
+raw_pop_2010s <- read_csv("inputs/SC-EST2020-AGESEX-CIV.csv", col_types = cols(.default = "c"))
+raw_pop_2020s <- read_csv("inputs/sc-est2025-agesex-civ.csv", col_types = cols(.default = "c"))
+
+# Long format, both sexes
+pop_long <- bind_rows(
+  raw_pop_2010s %>%
+    filter(SEX == "0", SUMLEV == "040") %>%
+    select(NAME, AGE, POPEST2015_CIV:POPEST2019_CIV),
+  raw_pop_2020s %>%
+    filter(SEX == "0", SUMLEV == "040") %>%
+    select(NAME, AGE, POPEST2020_CIV:POPEST2025_CIV)
+) %>%
+  pivot_longer(starts_with("POPEST"), names_to = "year", values_to = "pop") %>%
+  filter(!is.na(pop)) %>%
+  mutate(
+    year = as.integer(str_extract(year, "\\d{4}")),
+    age = as.integer(AGE),
+    pop = as.numeric(pop)
+  ) %>%
+  inner_join(state_key, by = c("NAME" = "state_name"))
+
+# Total and adult population by state-year (2026 carries 2025 forward)
+pop_year <- pop_long %>%
+  group_by(state, year) %>%
+  summarise(
+    pop_total = sum(pop[age == 999]),
+    pop_adult = sum(pop[age >= 18 & age <= 85]),
+    .groups = "drop"
+  )
+
+pop_year <- bind_rows(pop_year, pop_year %>% filter(year == 2025) %>% mutate(year = 2026L))
+
+print(pop_year %>% count(year))
+print(pop_year %>% filter(state == "NC"))
+```
+
+```{r cleaning-unemployment}
+################################################################################
+# 01i. Unemployment rate (FRED <ST>UR, monthly)
+################################################################################
+
+# Read all state files
+unemp_files <- list.files("inputs/fred", pattern = "UR\\.csv$", full.names = TRUE)
+unemp_month <- read_csv(unemp_files, id = "file", col_names = c("date", "unemp"), skip = 1,
+                        col_types = cols(.default = "c")) %>%
+  transmute(
+    state = str_remove(basename(file), "UR\\.csv$"),
+    month = ymd(date),
+    unemp = as.numeric(unemp)
+  )
+
+print(nrow(unemp_month))
+
+```{r cleaning-panels}
+################################################################################
+# 01j. Analysis panels: state x quarter (buprenorphine) and state x year (deaths)
+################################################################################
+
+# Exposure by quarter: mean monthly net % change (0 before April 2023)
+exposure_q <- enroll_month %>%
+  mutate(year = year(month), quarter = quarter(month)) %>%
+  group_by(state, year, quarter) %>%
+  summarise(net_change_q = mean(net_change_post), .groups = "drop")
+
+# Exposure by year: mean monthly net % change (Jan-Mar 2023 count as 0)
+exposure_y <- enroll_month %>%
+  mutate(year = year(month)) %>%
+  group_by(state, year) %>%
+  summarise(net_change_y = mean(net_change_post), n_months = n(), .groups = "drop")
+
+print(exposure_y %>% filter(state %in% c("NC", "SD", "TX")), n = 20)
+
+# Unemployment by quarter and year
+unemp_q <- unemp_month %>%
+  mutate(year = year(month), quarter = quarter(month)) %>%
+  group_by(state, year, quarter) %>%
+  summarise(unemp = mean(unemp), .groups = "drop")
+
+unemp_y <- unemp_month %>%
+  mutate(year = year(month)) %>%
+  group_by(state, year) %>%
+  summarise(unemp = mean(unemp), .groups = "drop")
+
+# Last complete SDUD quarter: >= 50 of 51 states reporting AND national total >= 95% of prior quarter
+sdud_coverage <- sdud_q %>%
+  group_by(year, quarter) %>%
+  summarise(n_states = n(), national_rx = sum(bup_rx), .groups = "drop") %>%
+  arrange(year, quarter) %>%
+  mutate(ratio_to_prior = national_rx / lag(national_rx))
+print(tail(sdud_coverage, 6))
+
+sdud_last <- sdud_coverage %>%
+  filter(n_states >= 50, is.na(ratio_to_prior) | ratio_to_prior >= 0.95) %>%
+  slice_tail(n = 1)
+print(sdud_last)
+
+# State x quarter panel, 2018Q1 to last complete SDUD quarter
+panel_q <- expand_grid(state = state_key$state, year = 2018:2026, quarter = 1:4) %>%
+  filter(year * 10 + quarter <= sdud_last$year * 10 + sdud_last$quarter) %>%
+  left_join(sdud_q, by = c("state", "year", "quarter")) %>%
+  left_join(pop_year, by = c("state", "year")) %>%
+  left_join(unemp_q, by = c("state", "year", "quarter")) %>%
+  left_join(exposure_q, by = c("state", "year", "quarter")) %>%
+  mutate(
+    net_change_q = replace_na(net_change_q, 0),
+    gain_pp = pmax(net_change_q, 0),
+    loss_pp = pmax(-net_change_q, 0),
+    bup_per100k = 100000 * bup_rx / pop_adult,
+    bup_per100k_supp0 = 100000 * bup_rx_supp0 / pop_adult,
+    bup_per100k_incl_lai = 100000 * bup_rx_incl_lai / pop_adult,
+    qtr = paste0(year, "Q", quarter),
+    rel_q = (year - 2023) * 4 + quarter - 2
+  )
+
+print(nrow(panel_q))
+print(sum(is.na(panel_q$bup_per100k)))
+
+# State x year panel, 2015-2025
+panel_y <- expand_grid(state = state_key$state, year = 2015:2025) %>%
+  left_join(deaths_year, by = c("state", "year")) %>%
+  left_join(pop_year, by = c("state", "year")) %>%
+  left_join(unemp_y, by = c("state", "year")) %>%
+  left_join(exposure_y %>% select(state, year, net_change_y), by = c("state", "year")) %>%
+  mutate(
+    net_change_y = replace_na(net_change_y, 0),
+    gain_pp = pmax(net_change_y, 0),
+    loss_pp = pmax(-net_change_y, 0),
+    od_rate = 100000 * od_deaths / pop_total,
+    od_rate_pred = 100000 * od_deaths_pred / pop_total,
+    opioid_rate = 100000 * opioid_deaths / pop_total,
+    synth_rate = 100000 * synth_deaths / pop_total,
+    psychostim_rate = 100000 * psychostim_deaths / pop_total,
+    non_od_rate = 100000 * non_od_deaths / pop_total
+  )
+
+print(nrow(panel_y))
+print(colSums(is.na(panel_y %>% filter(year >= 2018) %>% select(od_rate, opioid_rate, synth_rate, psychostim_rate, non_od_rate))))
+```
+
+```{r cleaning-state-info}
+################################################################################
+# 01k. State-level exposure and design flags
+################################################################################
+
+# Final exposure: net % change at 2024Q4 (end of most unwinding) and latest quarter
+state_info <- exposure_q %>%
+  filter(year == 2024, quarter == 4) %>%
+  select(state, net_change_2024q4 = net_change_q) %>%
+  left_join(
+    enroll_month %>% filter(month == max(month)) %>% select(state, net_change_latest = net_change_pct),
+    by = "state"
+  ) %>%
+  left_join(expansion_state, by = "state") %>%
+  left_join(renewal_state, by = "state") %>%
+  mutate(
+    gain_final = pmax(net_change_2024q4, 0),
+    loss_final = pmax(-net_change_2024q4, 0),
+    expansion_group = case_when(state == "NC" ~ "NC", state == "SD" ~ "SD", TRUE ~ "Other"),
+    delayed_unwinding = first_termination_month >= ymd("2023-06-01"),
+    heavy_ex_parte = ex_parte_share >= quantile(ex_parte_share, 0.75, na.rm = TRUE),
+    adult_is_proxy = state == "AZ"
+  )
+
+# Loss tertiles among states with no expansion change 2018-2025
+loss_tertiles <- state_info %>%
+  filter(!expansion_changed_2018_2025) %>%
+  mutate(loss_tertile = ntile(loss_final, 3)) %>%
+  select(state, loss_tertile)
+
+state_info <- state_info %>%
+  left_join(loss_tertiles, by = "state") %>%
+  mutate(
+    donor_primary = !expansion_changed_2018_2025 & loss_tertile == 2,
+    donor_nonexpansion = !expanded_dec2025
+  )
+
+print(state_info %>% filter(donor_primary) %>% select(state, net_change_2024q4, expanded_dec2025), n = 51)
+print(state_info %>% filter(donor_nonexpansion) %>% select(state, net_change_2024q4), n = 51)
+print(state_info %>% filter(delayed_unwinding | heavy_ex_parte) %>% select(state, first_termination_month, ex_parte_share), n = 51)
+```
+
+```{r cleaning-write}
+################################################################################
+# 01l. Write clean data
+################################################################################
+
+# Clean workbook (one sheet per panel)
+write_xlsx(
+  list(
+    enrollment_month = enroll_month,
+    sdud_quarter = panel_q,
+    deaths_year = panel_y,
+    deaths_month = deaths_month,
+    state_info = state_info
+  ),
+  "clean_data.xlsx"
+)
+
+print(file.exists("clean_data.xlsx"))
+```
+
+# S0. STEP 0: FIRST STAGE AND POWER
+
+## S0.1 Data preparation
+```{r s0-prep}
+################################################################################
+# S0.1 Data preparation
+################################################################################
+
+# State-level exposure
+s0_states <- read_excel("clean_data.xlsx", sheet = "state_info")
+
+# Quarterly buprenorphine panel
+s0_q <- read_excel("clean_data.xlsx", sheet = "sdud_quarter")
+
+# Annual deaths panel
+s0_y <- read_excel("clean_data.xlsx", sheet = "deaths_year") %>%
+  filter(year >= 2018)
+
+# State change scores: bupe (2024Q3-2025Q2 minus 2022Q2-2023Q1), deaths (2025 minus 2022)
+s0_change <- s0_q %>%
+  group_by(state) %>%
+  summarise(
+    bup_pre = mean(bup_per100k[qtr %in% c("2022Q2", "2022Q3", "2022Q4", "2023Q1")]),
+    bup_post = mean(bup_per100k[qtr %in% c("2024Q3", "2024Q4", "2025Q1", "2025Q2")]),
+    .groups = "drop"
+  ) %>%
+  left_join(
+    s0_y %>%
+      group_by(state) %>%
+      summarise(od_2022 = od_rate[year == 2022], od_2025 = od_rate[year == 2025], .groups = "drop"),
+    by = "state"
+  ) %>%
+  left_join(s0_states %>% select(state, net_change_2024q4, gain_final, loss_final, expansion_group), by = "state") %>%
+  mutate(
+    delta_bup = bup_post - bup_pre,
+    delta_bup_pct = 100 * (bup_post / bup_pre - 1),
+    delta_od = od_2025 - od_2022
+  )
+
+print(nrow(s0_change))
+print(s0_change %>% filter(expansion_group != "Other") %>% select(state, net_change_2024q4, bup_pre, bup_post, delta_bup_pct, od_2022, od_2025))
+print(summary(s0_change %>% filter(expansion_group == "Other") %>% select(net_change_2024q4, delta_bup_pct, delta_od)))
+```
+
+## S0.2 Analysis
+```{r s0-analysis}
+################################################################################
+# S0.2 Analysis
+################################################################################
+
+# Cross-sectional kinked fit: change in bupe per 100k adults vs net enrollment change
+s0_model_bup_cs <- lm(
+  delta_bup ~ gain_final + loss_final,
+  data = s0_change
+)
+
+print(summary(s0_model_bup_cs))
+print(summary(s0_model_bup_cs)$coefficients[c("gain_final", "loss_final"), ])
+print(confint(s0_model_bup_cs)[c("gain_final", "loss_final"), ])
+
+# Cross-sectional kinked fit: change in overdose deaths per 100k vs net enrollment change
+s0_model_od_cs <- lm(
+  delta_od ~ gain_final + loss_final,
+  data = s0_change
+)
+
+print(summary(s0_model_od_cs))
+print(summary(s0_model_od_cs)$coefficients[c("gain_final", "loss_final"), ])
+print(confint(s0_model_od_cs)[c("gain_final", "loss_final"), ])
+
+# Panel first stage: kinked model, bupe per 100k adults by quarter (state + quarter FE)
+s0_model_first_stage <- feols(
+  bup_per100k ~ gain_pp + loss_pp | state + qtr,
+  data = s0_q,
+  cluster = ~state
+)
+
+print(summary(s0_model_first_stage))
+print(coeftable(s0_model_first_stage)[c("gain_pp", "loss_pp"), ])
+print(confint(s0_model_first_stage)[c("gain_pp", "loss_pp"), ])
+```
+
+## S0.3 Power (minimum detectable effects, 2018-2022 data)
+```{r s0-power-continuous}
+################################################################################
+# S0.3a MDE for the continuous kinked terms (fake unwinding two years early)
+################################################################################
+
+# Deaths: 2018-2022, each state's real 2023-2024 annual exposure shifted to 2021-2022
+s0_power_y <- s0_y %>%
+  filter(year <= 2022) %>%
+  select(state, year, od_rate) %>%
+  left_join(
+    s0_y %>% filter(year %in% c(2023, 2024)) %>% transmute(state, year = year - 2, fake_gain = gain_pp, fake_loss = loss_pp),
+    by = c("state", "year")
+  ) %>%
+  mutate(fake_gain = replace_na(fake_gain, 0), fake_loss = replace_na(fake_loss, 0))
+
+s0_model_power_od <- feols(
+  od_rate ~ fake_gain + fake_loss | state + year,
+  data = s0_power_y,
+  cluster = ~state
+)
+
+print(summary(s0_model_power_od))
+print(coeftable(s0_model_power_od)[c("fake_gain", "fake_loss"), ])
+
+# Buprenorphine: 2018Q1-2022Q4, real 2023Q2-2024Q4 exposure shifted 8 quarters earlier
+s0_power_q <- s0_q %>%
+  filter(year <= 2022) %>%
+  select(state, rel_q, qtr, bup_per100k) %>%
+  left_join(
+    s0_q %>% filter(rel_q >= 0, rel_q <= 7) %>% transmute(state, rel_q = rel_q - 8, fake_gain = gain_pp, fake_loss = loss_pp),
+    by = c("state", "rel_q")
+  ) %>%
+  mutate(fake_gain = replace_na(fake_gain, 0), fake_loss = replace_na(fake_loss, 0))
+
+s0_model_power_bup <- feols(
+  bup_per100k ~ fake_gain + fake_loss | state + qtr,
+  data = s0_power_q,
+  cluster = ~state
+)
+
+print(summary(s0_model_power_bup))
+print(coeftable(s0_model_power_bup)[c("fake_gain", "fake_loss"), ])
+
+# MDE (80% power, two-sided alpha 0.05) = 2.8 x SE, per pp and for a 30 pp change
+s0_mde_continuous <- tibble(
+  outcome = c("od_rate", "od_rate", "bup_per100k", "bup_per100k"),
+  term = c("gain", "loss", "gain", "loss"),
+  se = c(se(s0_model_power_od)[c("fake_gain", "fake_loss")], se(s0_model_power_bup)[c("fake_gain", "fake_loss")]),
+  mde_per_pp = 2.8 * se,
+  mde_per_30pp = 30 * mde_per_pp,
+  baseline_mean_2022 = c(rep(mean(s0_y$od_rate[s0_y$year == 2022]), 2),
+                         rep(mean(s0_q$bup_per100k[s0_q$year == 2022]), 2)),
+  mde_30pp_pct_of_baseline = 100 * mde_per_30pp / baseline_mean_2022
+)
+
+print(s0_mde_continuous)
+```
+
+```{r s0-power-sc}
+################################################################################
+# S0.3b Synthetic-control permutation MDE for NC and SD (fake post in pre-period)
+################################################################################
+
+# Donor pool and annual / quarterly data with a common time index
+s0_donors <- s0_states %>% filter(donor_primary) %>% pull(state)
+s0_sc_y <- read_excel("clean_data.xlsx", sheet = "deaths_year") %>% mutate(time = year)
+s0_sc_q <- s0_q %>% mutate(time = rel_q)
+
+# Placebo runs: each donor treated in turn, fake post = 2021-2022 (deaths) or 2021Q1-2022Q4 (bupe)
+s0_placebo <- tibble()
+for (s in s0_donors) {
+  fit_od <- sc_fit(s0_sc_y, "od_rate", s, setdiff(s0_donors, s), pre = 2015:2020, post = 2021:2022)
+  fit_bup <- sc_fit(s0_sc_q, "bup_per100k", s, setdiff(s0_donors, s), pre = -21:-10, post = -9:-2)
+  s0_placebo <- bind_rows(s0_placebo, tibble(
+    state = s,
+    od_ratio = fit_od$ratio, od_gap = fit_od$mean_post_gap,
+    bup_ratio = fit_bup$ratio, bup_gap = fit_bup$mean_post_gap
+  ))
+}
+
+print(s0_placebo)
+
+# Treated units in the same fake window
+s0_nc_od <- sc_fit(s0_sc_y, "od_rate", "NC", s0_donors, pre = 2015:2020, post = 2021:2022)
+s0_sd_od <- sc_fit(s0_sc_y, "od_rate", "SD", s0_donors, pre = 2015:2020, post = 2021:2022)
+s0_nc_bup <- sc_fit(s0_sc_q, "bup_per100k", "NC", s0_donors, pre = -21:-10, post = -9:-2)
+s0_sd_bup <- sc_fit(s0_sc_q, "bup_per100k", "SD", s0_donors, pre = -21:-10, post = -9:-2)
+
+# MDE (% of own pre-period mean) = 2.8 x SD of donor placebo mean post-period gaps in the
+# fake window; the treated unit's own fake-window gap (%) is shown beside it
+s0_mde_sc <- tibble(
+  unit = c("NC", "SD", "NC", "SD"),
+  outcome = c("od_rate", "od_rate", "bup_per100k", "bup_per100k"),
+  pre_rmspe = c(s0_nc_od$pre_rmspe, s0_sd_od$pre_rmspe, s0_nc_bup$pre_rmspe, s0_sd_bup$pre_rmspe),
+  own_fake_gap = c(s0_nc_od$mean_post_gap, s0_sd_od$mean_post_gap, s0_nc_bup$mean_post_gap, s0_sd_bup$mean_post_gap),
+  sd_placebo_gaps = c(sd(s0_placebo$od_gap), sd(s0_placebo$od_gap), sd(s0_placebo$bup_gap), sd(s0_placebo$bup_gap)),
+  mde_pct = 2.8 * sd_placebo_gaps,
+  pre_period_mean = c(s0_nc_od$treated_pre_mean, s0_sd_od$treated_pre_mean, s0_nc_bup$treated_pre_mean, s0_sd_bup$treated_pre_mean),
+  mde_level = mde_pct * pre_period_mean / 100,
+  min_p_value = 1 / (length(s0_donors) + 1)
+)
+
+print(s0_mde_sc)
+```
+
+# H1. LOSSES: UNWINDING INTENSITY (LOSS STATES ONLY, ANCHOR MODEL)
+
+## H1.1 Data preparation
+```{r h1-prep}
+################################################################################
+# H1.1 Data preparation
+################################################################################
+
+# Loss states only (NC and SD removed)
+h1_states <- read_excel("clean_data.xlsx", sheet = "state_info") %>%
+  filter(expansion_group == "Other")
+
+h1_q <- read_excel("clean_data.xlsx", sheet = "sdud_quarter") %>%
+  filter(state %in% h1_states$state) %>%
+  left_join(h1_states %>% select(state, loss_final), by = "state") %>%
+  mutate(post = as.integer(rel_q >= 0))
+
+h1_y <- read_excel("clean_data.xlsx", sheet = "deaths_year") %>%
+  filter(year >= 2018, state %in% h1_states$state) %>%
+  left_join(h1_states %>% select(state, loss_final), by = "state") %>%
+  mutate(post = as.integer(year >= 2023))
+
+print(n_distinct(h1_q$state))
+print(summary(h1_states$loss_final))
+```
+
+## H1.2 Analysis
+```{r h1-analysis}
+################################################################################
+# H1.2 Analysis
+################################################################################
+
+# Buprenorphine: time-varying pp lost (state + quarter FE)
+h1_model_bup <- feols(
+  bup_per100k ~ loss_pp | state + qtr,
+  data = h1_q,
+  cluster = ~state
+)
+
+print(summary(h1_model_bup))
+print(coeftable(h1_model_bup)["loss_pp", ])
+print(confint(h1_model_bup)["loss_pp", ])
+
+# Buprenorphine: fixed intensity (pp lost by 2024Q4) x post
+h1_model_bup_intensity <- feols(
+  bup_per100k ~ loss_final:post | state + qtr,
+  data = h1_q,
+  cluster = ~state
+)
+
+print(summary(h1_model_bup_intensity))
+print(coeftable(h1_model_bup_intensity)["loss_final:post", ])
+print(confint(h1_model_bup_intensity)["loss_final:post", ])
+
+# Overdose deaths: time-varying pp lost (state + year FE)
+h1_model_od <- feols(
+  od_rate ~ loss_pp | state + year,
+  data = h1_y,
+  cluster = ~state
+)
+
+print(summary(h1_model_od))
+print(coeftable(h1_model_od)["loss_pp", ])
+print(confint(h1_model_od)["loss_pp", ])
+
+# Overdose deaths: fixed intensity x post
+h1_model_od_intensity <- feols(
+  od_rate ~ loss_final:post | state + year,
+  data = h1_y,
+  cluster = ~state
+)
+
+print(summary(h1_model_od_intensity))
+print(coeftable(h1_model_od_intensity)["loss_final:post", ])
+print(confint(h1_model_od_intensity)["loss_final:post", ])
+```
+
+# H2. GAINS: NC AND SD EXPANSION (SYNTHETIC CONTROL)
+
+## H2.1 Data preparation
+```{r h2-prep}
+################################################################################
+# H2.1 Data preparation
+################################################################################
+
+# Donor pools
+h2_states <- read_excel("clean_data.xlsx", sheet = "state_info")
+h2_donors <- h2_states %>% filter(donor_primary) %>% pull(state)
+h2_donors_nonexp <- h2_states %>% filter(donor_nonexpansion) %>% pull(state)
+
+print(h2_donors)
+print(h2_donors_nonexp)
+
+# Quarterly bupe (time = quarters since 2023Q2) and annual deaths (time = year)
+h2_q <- read_excel("clean_data.xlsx", sheet = "sdud_quarter") %>%
+  mutate(time = rel_q)
+
+h2_y <- read_excel("clean_data.xlsx", sheet = "deaths_year") %>%
+  mutate(time = year)
+
+# Time windows: NC treated from 2023Q4 (rel_q 2), SD from 2023Q3 (rel_q 1)
+h2_last_q <- max(h2_q$rel_q)
+print(h2_q %>% filter(rel_q == h2_last_q) %>% distinct(qtr))
+```
+
+## H2.2 Analysis
+```{r h2-analysis}
+################################################################################
+# H2.2 Analysis
+################################################################################
+
+# NC buprenorphine (pre 2018Q1-2023Q3, post 2023Q4-latest)
+h2_nc_bup <- sc_fit(h2_q, "bup_per100k", "NC", h2_donors, pre = -21:1, post = 2:h2_last_q)
+print(h2_nc_bup$weights)
+print(h2_nc_bup[c("pre_rmspe", "post_rmspe", "ratio", "mean_post_gap")])
+
+# SD buprenorphine (pre 2018Q1-2023Q2, post 2023Q3-latest)
+h2_sd_bup <- sc_fit(h2_q, "bup_per100k", "SD", h2_donors, pre = -21:0, post = 1:h2_last_q)
+print(h2_sd_bup$weights)
+print(h2_sd_bup[c("pre_rmspe", "post_rmspe", "ratio", "mean_post_gap")])
+
+# NC overdose deaths (pre 2015-2023, post 2024-2025)
+h2_nc_od <- sc_fit(h2_y, "od_rate", "NC", h2_donors, pre = 2015:2023, post = 2024:2025)
+print(h2_nc_od$weights)
+print(h2_nc_od[c("pre_rmspe", "post_rmspe", "ratio", "mean_post_gap")])
+
+# SD overdose deaths (pre 2015-2022, 2023 = transition year left out, post 2024-2025)
+h2_sd_od <- sc_fit(h2_y, "od_rate", "SD", h2_donors, pre = 2015:2022, post = 2024:2025)
+print(h2_sd_od$weights)
+print(h2_sd_od[c("pre_rmspe", "post_rmspe", "ratio", "mean_post_gap")])
+
+# Permutation inference: each donor as placebo treated, same windows as the treated unit
+h2_placebo <- tibble()
+for (s in h2_donors) {
+  others <- setdiff(h2_donors, s)
+  h2_placebo <- bind_rows(h2_placebo, tibble(
+    state = s,
+    nc_bup_ratio = sc_fit(h2_q, "bup_per100k", s, others, pre = -21:1, post = 2:h2_last_q)$ratio,
+    nc_bup_gap = sc_fit(h2_q, "bup_per100k", s, others, pre = -21:1, post = 2:h2_last_q)$mean_post_gap,
+    sd_bup_ratio = sc_fit(h2_q, "bup_per100k", s, others, pre = -21:0, post = 1:h2_last_q)$ratio,
+    sd_bup_gap = sc_fit(h2_q, "bup_per100k", s, others, pre = -21:0, post = 1:h2_last_q)$mean_post_gap,
+    nc_od_ratio = sc_fit(h2_y, "od_rate", s, others, pre = 2015:2023, post = 2024:2025)$ratio,
+    nc_od_gap = sc_fit(h2_y, "od_rate", s, others, pre = 2015:2023, post = 2024:2025)$mean_post_gap,
+    sd_od_ratio = sc_fit(h2_y, "od_rate", s, others, pre = 2015:2022, post = 2024:2025)$ratio,
+    sd_od_gap = sc_fit(h2_y, "od_rate", s, others, pre = 2015:2022, post = 2024:2025)$mean_post_gap
+  ))
+}
+
+print(h2_placebo)
+
+# Summary table: gap, % of pre-period level, permutation p (ratio rank)
+h2_table <- tibble(
+  unit = c("NC", "SD", "NC", "SD"),
+  outcome = c("bup_per100k", "bup_per100k", "od_rate", "od_rate"),
+  gap_pct = c(h2_nc_bup$mean_post_gap, h2_sd_bup$mean_post_gap, h2_nc_od$mean_post_gap, h2_sd_od$mean_post_gap),
+  gap_level = c(h2_nc_bup$mean_post_gap_level, h2_sd_bup$mean_post_gap_level, h2_nc_od$mean_post_gap_level, h2_sd_od$mean_post_gap_level),
+  pre_period_mean = c(h2_nc_bup$treated_pre_mean, h2_sd_bup$treated_pre_mean, h2_nc_od$treated_pre_mean, h2_sd_od$treated_pre_mean),
+  pre_rmspe = c(h2_nc_bup$pre_rmspe, h2_sd_bup$pre_rmspe, h2_nc_od$pre_rmspe, h2_sd_od$pre_rmspe),
+  ratio = c(h2_nc_bup$ratio, h2_sd_bup$ratio, h2_nc_od$ratio, h2_sd_od$ratio),
+  p_perm = c(
+    (1 + sum(h2_placebo$nc_bup_ratio >= h2_nc_bup$ratio)) / (1 + nrow(h2_placebo)),
+    (1 + sum(h2_placebo$sd_bup_ratio >= h2_sd_bup$ratio)) / (1 + nrow(h2_placebo)),
+    (1 + sum(h2_placebo$nc_od_ratio >= h2_nc_od$ratio)) / (1 + nrow(h2_placebo)),
+    (1 + sum(h2_placebo$sd_od_ratio >= h2_sd_od$ratio)) / (1 + nrow(h2_placebo))
+  ),
+  p_perm_gap_onesided = c(
+    (1 + sum(h2_placebo$nc_bup_gap >= h2_nc_bup$mean_post_gap)) / (1 + nrow(h2_placebo)),
+    (1 + sum(h2_placebo$sd_bup_gap >= h2_sd_bup$mean_post_gap)) / (1 + nrow(h2_placebo)),
+    (1 + sum(h2_placebo$nc_od_gap <= h2_nc_od$mean_post_gap)) / (1 + nrow(h2_placebo)),
+    (1 + sum(h2_placebo$sd_od_gap <= h2_sd_od$mean_post_gap)) / (1 + nrow(h2_placebo))
+  )
+)
+
+print(h2_table)
+
+# NC pre-trend fit: NC pre-RMSPE vs placebo pre-RMSPEs (deaths and bupe)
+print(h2_nc_od$path)
+print(h2_nc_bup$path, n = 40)
+```
+
+## H2.3 Robustness
+```{r h2-robustness}
+################################################################################
+# H2.3 Robustness
+################################################################################
+
+# Placebo timing: NC bupe fake start 2022Q4 (data to 2023Q3)
+h2_nc_bup_fake <- sc_fit(h2_q, "bup_per100k", "NC", h2_donors, pre = -21:-3, post = -2:1)
+print(h2_nc_bup_fake[c("pre_rmspe", "ratio", "mean_post_gap")])
+
+# Placebo timing: SD bupe fake start 2022Q3 (data to 2023Q2)
+h2_sd_bup_fake <- sc_fit(h2_q, "bup_per100k", "SD", h2_donors, pre = -21:-4, post = -3:0)
+print(h2_sd_bup_fake[c("pre_rmspe", "ratio", "mean_post_gap")])
+
+# Placebo timing: NC deaths fake start 2023 (data to 2023)
+h2_nc_od_fake <- sc_fit(h2_y, "od_rate", "NC", h2_donors, pre = 2015:2022, post = 2023)
+print(h2_nc_od_fake[c("pre_rmspe", "ratio", "mean_post_gap")])
+
+# Placebo timing: SD deaths fake start 2022 (data to 2022)
+h2_sd_od_fake <- sc_fit(h2_y, "od_rate", "SD", h2_donors, pre = 2015:2021, post = 2022)
+print(h2_sd_od_fake[c("pre_rmspe", "ratio", "mean_post_gap")])
+
+# Donor sensitivity: all non-expansion states
+h2_nc_bup_nonexp <- sc_fit(h2_q, "bup_per100k", "NC", h2_donors_nonexp, pre = -21:1, post = 2:h2_last_q)
+h2_sd_bup_nonexp <- sc_fit(h2_q, "bup_per100k", "SD", h2_donors_nonexp, pre = -21:0, post = 1:h2_last_q)
+h2_nc_od_nonexp <- sc_fit(h2_y, "od_rate", "NC", h2_donors_nonexp, pre = 2015:2023, post = 2024:2025)
+h2_sd_od_nonexp <- sc_fit(h2_y, "od_rate", "SD", h2_donors_nonexp, pre = 2015:2022, post = 2024:2025)
+
+h2_table_robust <- tibble(
+  check = c(rep("placebo_timing", 4), rep("donors_nonexpansion", 4)),
+  unit = rep(c("NC", "SD", "NC", "SD"), 2),
+  outcome = rep(c("bup_per100k", "bup_per100k", "od_rate", "od_rate"), 2),
+  gap_pct = c(h2_nc_bup_fake$mean_post_gap, h2_sd_bup_fake$mean_post_gap, h2_nc_od_fake$mean_post_gap, h2_sd_od_fake$mean_post_gap,
+                    h2_nc_bup_nonexp$mean_post_gap, h2_sd_bup_nonexp$mean_post_gap, h2_nc_od_nonexp$mean_post_gap, h2_sd_od_nonexp$mean_post_gap),
+  pre_rmspe = c(h2_nc_bup_fake$pre_rmspe, h2_sd_bup_fake$pre_rmspe, h2_nc_od_fake$pre_rmspe, h2_sd_od_fake$pre_rmspe,
+                h2_nc_bup_nonexp$pre_rmspe, h2_sd_bup_nonexp$pre_rmspe, h2_nc_od_nonexp$pre_rmspe, h2_sd_od_nonexp$pre_rmspe)
+)
+
+print(h2_table_robust)
+
+# Opioid-involved deaths (NC, SD; primary donors with complete opioid data)
+h2_donors_opioid <- h2_y %>%
+  filter(state %in% h2_donors, year >= 2015, year <= 2025, year != 2023) %>%
+  group_by(state) %>%
+  summarise(complete = all(!is.na(opioid_rate)), .groups = "drop") %>%
+  filter(complete) %>%
+  pull(state)
+print(h2_donors_opioid)
+
+# NC opioid-involved deaths are missing for 2023 (VSRR low-quality flag): pre = 2015-2022
+h2_nc_opioid <- sc_fit(h2_y %>% filter(year != 2023), "opioid_rate", "NC", h2_donors_opioid, pre = 2015:2022, post = 2024:2025)
+print(h2_nc_opioid[c("pre_rmspe", "ratio", "mean_post_gap")])
+
+# CDC predicted (delay-adjusted) overdose deaths: NC reported 2023 count is far below CDC's prediction
+h2_nc_od_pred <- sc_fit(h2_y, "od_rate_pred", "NC", h2_donors, pre = 2015:2023, post = 2024:2025)
+print(h2_nc_od_pred[c("pre_rmspe", "ratio", "mean_post_gap")])
+h2_sd_od_pred <- sc_fit(h2_y, "od_rate_pred", "SD", h2_donors, pre = 2015:2022, post = 2024:2025)
+print(h2_sd_od_pred[c("pre_rmspe", "ratio", "mean_post_gap")])
+
+# NC deaths with 2023 dropped from the pre-period (reporting anomaly)
+h2_nc_od_no2023 <- sc_fit(h2_y %>% filter(year != 2023), "od_rate", "NC", h2_donors, pre = 2015:2022, post = 2024:2025)
+print(h2_nc_od_no2023[c("pre_rmspe", "ratio", "mean_post_gap")])
+
+# Placebo distributions for the two alternative NC/SD death specifications
+h2_placebo_alt <- tibble()
+for (s in h2_donors) {
+  others <- setdiff(h2_donors, s)
+  h2_placebo_alt <- bind_rows(h2_placebo_alt, tibble(
+    state = s,
+    nc_pred_ratio = sc_fit(h2_y, "od_rate_pred", s, others, pre = 2015:2023, post = 2024:2025)$ratio,
+    sd_pred_ratio = sc_fit(h2_y, "od_rate_pred", s, others, pre = 2015:2022, post = 2024:2025)$ratio,
+    nc_no2023_ratio = sc_fit(h2_y %>% filter(year != 2023), "od_rate", s, others, pre = 2015:2022, post = 2024:2025)$ratio
+  ))
+}
+
+h2_table_deaths_alt <- tibble(
+  spec = c("NC predicted counts", "SD predicted counts", "NC reported, 2023 dropped"),
+  gap_pct = c(h2_nc_od_pred$mean_post_gap, h2_sd_od_pred$mean_post_gap, h2_nc_od_no2023$mean_post_gap),
+  pre_rmspe = c(h2_nc_od_pred$pre_rmspe, h2_sd_od_pred$pre_rmspe, h2_nc_od_no2023$pre_rmspe),
+  p_perm = c(
+    (1 + sum(h2_placebo_alt$nc_pred_ratio >= h2_nc_od_pred$ratio)) / (1 + nrow(h2_placebo_alt)),
+    (1 + sum(h2_placebo_alt$sd_pred_ratio >= h2_sd_od_pred$ratio)) / (1 + nrow(h2_placebo_alt)),
+    (1 + sum(h2_placebo_alt$nc_no2023_ratio >= h2_nc_od_no2023$ratio)) / (1 + nrow(h2_placebo_alt))
+  )
+)
+
+print(h2_table_deaths_alt)
+```
+
+# H3. SYMMETRY: UNIFIED KINKED DOSE-RESPONSE (ALL STATES)
+
+## H3.1 Data preparation
+```{r h3-prep}
+################################################################################
+# H3.1 Data preparation
+################################################################################
+
+# State flags
+h3_states <- read_excel("clean_data.xlsx", sheet = "state_info")
+
+# Quarterly bupe panel (all 51)
+h3_q <- read_excel("clean_data.xlsx", sheet = "sdud_quarter") %>%
+  left_join(h3_states %>% select(state, gain_final, loss_final, procedural_share, expanded_jan2018,
+                                 delayed_unwinding, heavy_ex_parte, expansion_group), by = "state") %>%
+  mutate(
+    post = as.integer(rel_q >= 0),
+    log_bup = log(bup_per100k)
+  )
+
+# Annual deaths panel 2018-2025 (all 51)
+h3_y <- read_excel("clean_data.xlsx", sheet = "deaths_year") %>%
+  filter(year >= 2018) %>%
+  left_join(h3_states %>% select(state, gain_final, loss_final, procedural_share, expanded_jan2018,
+                                 delayed_unwinding, heavy_ex_parte, expansion_group), by = "state") %>%
+  mutate(
+    post = as.integer(year >= 2023),
+    rel_y = year - 2023,
+    log_od_rate = log(od_rate)
+  )
+
+print(n_distinct(h3_q$state))
+print(n_distinct(h3_y$state))
+print(h3_y %>% filter(gain_pp > 0) %>% distinct(state))
+print(h3_q %>% filter(gain_pp > 0) %>% distinct(state))
+```
+
+## H3.2 Analysis
+```{r h3-analysis}
+################################################################################
+# H3.2 Analysis
+################################################################################
+
+# Buprenorphine (first stage): separate slopes per pp gained and per pp lost
+h3_model_bup <- feols(
+  bup_per100k ~ gain_pp + loss_pp | state + qtr,
+  data = h3_q,
+  cluster = ~state
+)
+
+print(summary(h3_model_bup))
+print(coeftable(h3_model_bup)[c("gain_pp", "loss_pp"), ])
+print(confint(h3_model_bup)[c("gain_pp", "loss_pp"), ])
+
+# Overdose deaths: separate slopes per pp gained and per pp lost
+h3_model_od <- feols(
+  od_rate ~ gain_pp + loss_pp | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+
+print(summary(h3_model_od))
+print(coeftable(h3_model_od)[c("gain_pp", "loss_pp"), ])
+print(confint(h3_model_od)[c("gain_pp", "loss_pp"), ])
+
+# Symmetry test. Mirror image: effect per pp lost = minus effect per pp gained,
+# i.e. b_gain + b_loss = 0 (Wald, cluster-robust, t with G - 1 df) and ratio b_loss / b_gain = -1 (delta method)
+h3_symmetry <- tibble(
+  outcome = c("bup_per100k", "od_rate"),
+  b_gain = c(coef(h3_model_bup)["gain_pp"], coef(h3_model_od)["gain_pp"]),
+  b_loss = c(coef(h3_model_bup)["loss_pp"], coef(h3_model_od)["loss_pp"]),
+  v_gain = c(vcov(h3_model_bup)["gain_pp", "gain_pp"], vcov(h3_model_od)["gain_pp", "gain_pp"]),
+  v_loss = c(vcov(h3_model_bup)["loss_pp", "loss_pp"], vcov(h3_model_od)["loss_pp", "loss_pp"]),
+  cov_gl = c(vcov(h3_model_bup)["gain_pp", "loss_pp"], vcov(h3_model_od)["gain_pp", "loss_pp"])
+) %>%
+  mutate(
+    sum_est = b_gain + b_loss,
+    sum_se = sqrt(v_gain + v_loss + 2 * cov_gl),
+    wald_p = 2 * pt(-abs(sum_est / sum_se), df = 50),
+    ratio = b_loss / b_gain,
+    ratio_se = abs(ratio) * sqrt(v_loss / b_loss^2 + v_gain / b_gain^2 - 2 * cov_gl / (b_gain * b_loss)),
+    ratio_lo = ratio - qt(0.975, 50) * ratio_se,
+    ratio_hi = ratio + qt(0.975, 50) * ratio_se,
+    ratio_ci_includes_minus1 = ratio_lo <= -1 & ratio_hi >= -1
+  )
+
+print(h3_symmetry %>% select(outcome, b_gain, b_loss, sum_est, sum_se, wald_p, ratio, ratio_lo, ratio_hi, ratio_ci_includes_minus1))
+
+# Event study, buprenorphine by quarter (2021Q1 onward; ref = 2023Q1), exposure fixed at 2024Q4
+h3_model_bup_es <- feols(
+  bup_per100k ~ i(rel_q, gain_final, ref = -1) + i(rel_q, loss_final, ref = -1) | state + qtr,
+  data = h3_q %>% filter(rel_q >= -9),
+  cluster = ~state
+)
+
+print(coeftable(h3_model_bup_es))
+
+# Event study, overdose deaths by year (2018-2025; ref = 2022)
+h3_model_od_es <- feols(
+  od_rate ~ i(rel_y, gain_final, ref = -1) + i(rel_y, loss_final, ref = -1) | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+
+print(coeftable(h3_model_od_es))
+
+# Pre-period joint tests (event-study leads = 0)
+print(wald(h3_model_bup_es, keep = "rel_q::-[2-9]:"))
+print(wald(h3_model_od_es, keep = "rel_y::-[2-5]:"))
+```
+
+## H3.3 Robustness
+```{r h3-robustness-bup}
+################################################################################
+# H3.3a Robustness: buprenorphine
+################################################################################
+
+# Suppressed cells set to 0 instead of 5
+h3_bup_supp0 <- feols(
+  bup_per100k_supp0 ~ gain_pp + loss_pp | state + qtr,
+  data = h3_q,
+  cluster = ~state
+)
+print(coeftable(h3_bup_supp0)[c("gain_pp", "loss_pp"), ])
+
+# Including long-acting injectables (Sublocade, Brixadi)
+h3_bup_lai <- feols(
+  bup_per100k_incl_lai ~ gain_pp + loss_pp | state + qtr,
+  data = h3_q,
+  cluster = ~state
+)
+print(coeftable(h3_bup_lai)[c("gain_pp", "loss_pp"), ])
+
+# Adjusted for unemployment
+h3_bup_unemp <- feols(
+  bup_per100k ~ gain_pp + loss_pp + unemp | state + qtr,
+  data = h3_q,
+  cluster = ~state
+)
+print(coeftable(h3_bup_unemp)[c("gain_pp", "loss_pp"), ])
+
+# Prior (2018) expansion status x quarter FE
+h3_bup_priorexp <- feols(
+  bup_per100k ~ gain_pp + loss_pp | state + qtr^expanded_jan2018,
+  data = h3_q,
+  cluster = ~state
+)
+print(coeftable(h3_bup_priorexp)[c("gain_pp", "loss_pp"), ])
+
+# Procedural-disenrollment share x post
+h3_bup_procedural <- feols(
+  bup_per100k ~ gain_pp + loss_pp + procedural_share:post | state + qtr,
+  data = h3_q,
+  cluster = ~state
+)
+print(coeftable(h3_bup_procedural)[c("gain_pp", "loss_pp"), ])
+
+# Excluding loss states with delayed unwinding or heavy ex parte renewal (NC, SD kept)
+h3_bup_excl_delay <- feols(
+  bup_per100k ~ gain_pp + loss_pp | state + qtr,
+  data = h3_q %>% filter(expansion_group != "Other" | (!delayed_unwinding & !heavy_ex_parte)),
+  cluster = ~state
+)
+print(coeftable(h3_bup_excl_delay)[c("gain_pp", "loss_pp"), ])
+
+# Excluding AZ (proxy exposure)
+h3_bup_excl_az <- feols(
+  bup_per100k ~ gain_pp + loss_pp | state + qtr,
+  data = h3_q %>% filter(state != "AZ"),
+  cluster = ~state
+)
+print(coeftable(h3_bup_excl_az)[c("gain_pp", "loss_pp"), ])
+
+# Adult-population weighted
+h3_bup_weighted <- feols(
+  bup_per100k ~ gain_pp + loss_pp | state + qtr,
+  data = h3_q,
+  weights = ~pop_adult,
+  cluster = ~state
+)
+print(coeftable(h3_bup_weighted)[c("gain_pp", "loss_pp"), ])
+
+# Log buprenorphine rate (proportional change; added after first run, see DECISIONS.md)
+h3_bup_log <- feols(
+  log_bup ~ gain_pp + loss_pp | state + qtr,
+  data = h3_q,
+  cluster = ~state
+)
+print(coeftable(h3_bup_log)[c("gain_pp", "loss_pp"), ])
+
+# State-specific linear trends (added after event-study pre-trends; see DECISIONS.md)
+h3_bup_trend <- feols(
+  bup_per100k ~ gain_pp + loss_pp | state[rel_q] + qtr,
+  data = h3_q,
+  cluster = ~state
+)
+print(coeftable(h3_bup_trend)[c("gain_pp", "loss_pp"), ])
+
+# Fixed exposure (2024Q4) x post
+h3_bup_fixed <- feols(
+  bup_per100k ~ gain_final:post + loss_final:post | state + qtr,
+  data = h3_q,
+  cluster = ~state
+)
+print(coeftable(h3_bup_fixed))
+```
+
+```{r h3-robustness-od}
+################################################################################
+# H3.3b Robustness: overdose deaths
+################################################################################
+
+# Log overdose death rate
+h3_od_log <- feols(
+  log_od_rate ~ gain_pp + loss_pp | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_log)[c("gain_pp", "loss_pp"), ])
+
+# Opioid-involved deaths
+h3_od_opioid <- feols(
+  opioid_rate ~ gain_pp + loss_pp | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_opioid)[c("gain_pp", "loss_pp"), ])
+print(nobs(h3_od_opioid))
+
+# Synthetic-opioid deaths
+h3_od_synth <- feols(
+  synth_rate ~ gain_pp + loss_pp | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_synth)[c("gain_pp", "loss_pp"), ])
+
+# Placebo outcome: psychostimulant-involved deaths
+h3_od_psychostim <- feols(
+  psychostim_rate ~ gain_pp + loss_pp | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_psychostim)[c("gain_pp", "loss_pp"), ])
+
+# Placebo outcome: non-overdose deaths (all deaths minus drug overdose deaths)
+h3_od_nonod <- feols(
+  non_od_rate ~ gain_pp + loss_pp | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_nonod)[c("gain_pp", "loss_pp"), ])
+
+# CDC predicted (delay-adjusted) overdose death rate
+h3_od_pred <- feols(
+  od_rate_pred ~ gain_pp + loss_pp | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_pred)[c("gain_pp", "loss_pp"), ])
+
+# Adjusted for unemployment
+h3_od_unemp <- feols(
+  od_rate ~ gain_pp + loss_pp + unemp | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_unemp)[c("gain_pp", "loss_pp"), ])
+
+# Prior (2018) expansion status x year FE
+h3_od_priorexp <- feols(
+  od_rate ~ gain_pp + loss_pp | state + year^expanded_jan2018,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_priorexp)[c("gain_pp", "loss_pp"), ])
+
+# Procedural-disenrollment share x post
+h3_od_procedural <- feols(
+  od_rate ~ gain_pp + loss_pp + procedural_share:post | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_procedural)[c("gain_pp", "loss_pp"), ])
+
+# Excluding loss states with delayed unwinding or heavy ex parte renewal (NC, SD kept)
+h3_od_excl_delay <- feols(
+  od_rate ~ gain_pp + loss_pp | state + year,
+  data = h3_y %>% filter(expansion_group != "Other" | (!delayed_unwinding & !heavy_ex_parte)),
+  cluster = ~state
+)
+print(coeftable(h3_od_excl_delay)[c("gain_pp", "loss_pp"), ])
+
+# Excluding AZ (proxy exposure)
+h3_od_excl_az <- feols(
+  od_rate ~ gain_pp + loss_pp | state + year,
+  data = h3_y %>% filter(state != "AZ"),
+  cluster = ~state
+)
+print(coeftable(h3_od_excl_az)[c("gain_pp", "loss_pp"), ])
+
+# Population weighted
+h3_od_weighted <- feols(
+  od_rate ~ gain_pp + loss_pp | state + year,
+  data = h3_y,
+  weights = ~pop_total,
+  cluster = ~state
+)
+print(coeftable(h3_od_weighted)[c("gain_pp", "loss_pp"), ])
+
+# State-specific linear trends (added after event-study pre-trends; see DECISIONS.md)
+h3_od_trend <- feols(
+  od_rate ~ gain_pp + loss_pp | state[year] + year,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_trend)[c("gain_pp", "loss_pp"), ])
+
+# Fixed exposure (2024Q4) x post
+h3_od_fixed <- feols(
+  od_rate ~ gain_final:post + loss_final:post | state + year,
+  data = h3_y,
+  cluster = ~state
+)
+print(coeftable(h3_od_fixed))
+```
+
+```{r h3-robustness-loso}
+################################################################################
+# H3.3c Leave-one-state-out (both outcomes)
+################################################################################
+
+h3_loso <- tibble()
+for (s in unique(h3_y$state)) {
+  m_bup <- feols(bup_per100k ~ gain_pp + loss_pp | state + qtr, data = h3_q %>% filter(state != s), cluster = ~state)
+  m_od <- feols(od_rate ~ gain_pp + loss_pp | state + year, data = h3_y %>% filter(state != s), cluster = ~state)
+  h3_loso <- bind_rows(h3_loso, tibble(
+    dropped = s,
+    bup_gain = coef(m_bup)["gain_pp"], bup_loss = coef(m_bup)["loss_pp"],
+    od_gain = coef(m_od)["gain_pp"], od_loss = coef(m_od)["loss_pp"]
+  ))
+}
+
+print(h3_loso, n = 51)
+print(summary(h3_loso %>% select(-dropped)))
+```
+
+```{r h3-robustness-table}
+################################################################################
+# H3.3d Robustness summary table
+################################################################################
+
+h3_table_robust <- tibble(
+  outcome = c(rep("bup_per100k", 12), rep("od_rate", 11), rep("other_deaths", 4)),
+  check = c(
+    "main", "suppressed_0", "incl_LAI", "unemployment", "prior_exp_x_time", "procedural_x_post", "excl_delayed_exparte", "excl_AZ", "weighted", "fixed_exposure", "log_rate", "state_trends",
+    "main", "unemployment", "prior_exp_x_time", "procedural_x_post", "excl_delayed_exparte", "excl_AZ", "weighted", "fixed_exposure", "log_rate", "cdc_predicted", "state_trends",
+    "opioid", "synthetic_opioid", "placebo_psychostim", "placebo_non_od"
+  ),
+  b_gain = c(
+    coef(h3_model_bup)["gain_pp"], coef(h3_bup_supp0)["gain_pp"], coef(h3_bup_lai)["gain_pp"], coef(h3_bup_unemp)["gain_pp"],
+    coef(h3_bup_priorexp)["gain_pp"], coef(h3_bup_procedural)["gain_pp"], coef(h3_bup_excl_delay)["gain_pp"],
+    coef(h3_bup_excl_az)["gain_pp"], coef(h3_bup_weighted)["gain_pp"], coef(h3_bup_fixed)["gain_final:post"], coef(h3_bup_log)["gain_pp"], coef(h3_bup_trend)["gain_pp"],
+    coef(h3_model_od)["gain_pp"], coef(h3_od_unemp)["gain_pp"], coef(h3_od_priorexp)["gain_pp"], coef(h3_od_procedural)["gain_pp"],
+    coef(h3_od_excl_delay)["gain_pp"], coef(h3_od_excl_az)["gain_pp"], coef(h3_od_weighted)["gain_pp"],
+    coef(h3_od_fixed)["gain_final:post"], coef(h3_od_log)["gain_pp"], coef(h3_od_pred)["gain_pp"], coef(h3_od_trend)["gain_pp"],
+    coef(h3_od_opioid)["gain_pp"], coef(h3_od_synth)["gain_pp"], coef(h3_od_psychostim)["gain_pp"], coef(h3_od_nonod)["gain_pp"]
+  ),
+  se_gain = c(
+    se(h3_model_bup)["gain_pp"], se(h3_bup_supp0)["gain_pp"], se(h3_bup_lai)["gain_pp"], se(h3_bup_unemp)["gain_pp"],
+    se(h3_bup_priorexp)["gain_pp"], se(h3_bup_procedural)["gain_pp"], se(h3_bup_excl_delay)["gain_pp"],
+    se(h3_bup_excl_az)["gain_pp"], se(h3_bup_weighted)["gain_pp"], se(h3_bup_fixed)["gain_final:post"], se(h3_bup_log)["gain_pp"], se(h3_bup_trend)["gain_pp"],
+    se(h3_model_od)["gain_pp"], se(h3_od_unemp)["gain_pp"], se(h3_od_priorexp)["gain_pp"], se(h3_od_procedural)["gain_pp"],
+    se(h3_od_excl_delay)["gain_pp"], se(h3_od_excl_az)["gain_pp"], se(h3_od_weighted)["gain_pp"],
+    se(h3_od_fixed)["gain_final:post"], se(h3_od_log)["gain_pp"], se(h3_od_pred)["gain_pp"], se(h3_od_trend)["gain_pp"],
+    se(h3_od_opioid)["gain_pp"], se(h3_od_synth)["gain_pp"], se(h3_od_psychostim)["gain_pp"], se(h3_od_nonod)["gain_pp"]
+  ),
+  b_loss = c(
+    coef(h3_model_bup)["loss_pp"], coef(h3_bup_supp0)["loss_pp"], coef(h3_bup_lai)["loss_pp"], coef(h3_bup_unemp)["loss_pp"],
+    coef(h3_bup_priorexp)["loss_pp"], coef(h3_bup_procedural)["loss_pp"], coef(h3_bup_excl_delay)["loss_pp"],
+    coef(h3_bup_excl_az)["loss_pp"], coef(h3_bup_weighted)["loss_pp"], coef(h3_bup_fixed)["post:loss_final"], coef(h3_bup_log)["loss_pp"], coef(h3_bup_trend)["loss_pp"],
+    coef(h3_model_od)["loss_pp"], coef(h3_od_unemp)["loss_pp"], coef(h3_od_priorexp)["loss_pp"], coef(h3_od_procedural)["loss_pp"],
+    coef(h3_od_excl_delay)["loss_pp"], coef(h3_od_excl_az)["loss_pp"], coef(h3_od_weighted)["loss_pp"],
+    coef(h3_od_fixed)["post:loss_final"], coef(h3_od_log)["loss_pp"], coef(h3_od_pred)["loss_pp"], coef(h3_od_trend)["loss_pp"],
+    coef(h3_od_opioid)["loss_pp"], coef(h3_od_synth)["loss_pp"], coef(h3_od_psychostim)["loss_pp"], coef(h3_od_nonod)["loss_pp"]
+  ),
+  se_loss = c(
+    se(h3_model_bup)["loss_pp"], se(h3_bup_supp0)["loss_pp"], se(h3_bup_lai)["loss_pp"], se(h3_bup_unemp)["loss_pp"],
+    se(h3_bup_priorexp)["loss_pp"], se(h3_bup_procedural)["loss_pp"], se(h3_bup_excl_delay)["loss_pp"],
+    se(h3_bup_excl_az)["loss_pp"], se(h3_bup_weighted)["loss_pp"], se(h3_bup_fixed)["post:loss_final"], se(h3_bup_log)["loss_pp"], se(h3_bup_trend)["loss_pp"],
+    se(h3_model_od)["loss_pp"], se(h3_od_unemp)["loss_pp"], se(h3_od_priorexp)["loss_pp"], se(h3_od_procedural)["loss_pp"],
+    se(h3_od_excl_delay)["loss_pp"], se(h3_od_excl_az)["loss_pp"], se(h3_od_weighted)["loss_pp"],
+    se(h3_od_fixed)["post:loss_final"], se(h3_od_log)["loss_pp"], se(h3_od_pred)["loss_pp"], se(h3_od_trend)["loss_pp"],
+    se(h3_od_opioid)["loss_pp"], se(h3_od_synth)["loss_pp"], se(h3_od_psychostim)["loss_pp"], se(h3_od_nonod)["loss_pp"]
+  )
+) %>%
+  mutate(
+    p_gain = 2 * pt(-abs(b_gain / se_gain), df = 50),
+    p_loss = 2 * pt(-abs(b_loss / se_loss), df = 50)
+  )
+
+print(h3_table_robust, n = 30)
+```
+
+# SAVE RESULTS
+```{r save-results}
+################################################################################
+# SAVE RESULTS
+################################################################################
+
+results <- list(
+  s0_change = s0_change,
+  s0_model_bup_cs = coef(summary(s0_model_bup_cs)),
+  s0_model_od_cs = coef(summary(s0_model_od_cs)),
+  s0_first_stage = coeftable(s0_model_first_stage),
+  s0_mde_continuous = s0_mde_continuous,
+  s0_mde_sc = s0_mde_sc,
+  h1_bup = coeftable(h1_model_bup),
+  h1_bup_intensity = coeftable(h1_model_bup_intensity),
+  h1_od = coeftable(h1_model_od),
+  h1_od_intensity = coeftable(h1_model_od_intensity),
+  h2_table = h2_table,
+  h2_table_robust = h2_table_robust,
+  h2_table_deaths_alt = h2_table_deaths_alt,
+  h2_placebo = h2_placebo,
+  h2_paths = bind_rows(
+    h2_nc_bup$path %>% mutate(unit = "NC", outcome = "bup_per100k"),
+    h2_sd_bup$path %>% mutate(unit = "SD", outcome = "bup_per100k"),
+    h2_nc_od$path %>% mutate(unit = "NC", outcome = "od_rate"),
+    h2_sd_od$path %>% mutate(unit = "SD", outcome = "od_rate")
+  ),
+  h2_weights = bind_rows(
+    h2_nc_bup$weights %>% mutate(unit = "NC", outcome = "bup_per100k"),
+    h2_sd_bup$weights %>% mutate(unit = "SD", outcome = "bup_per100k"),
+    h2_nc_od$weights %>% mutate(unit = "NC", outcome = "od_rate"),
+    h2_sd_od$weights %>% mutate(unit = "SD", outcome = "od_rate")
+  ),
+  h3_bup = coeftable(h3_model_bup),
+  h3_od = coeftable(h3_model_od),
+  h3_symmetry = h3_symmetry,
+  h3_bup_es = as_tibble(coeftable(h3_model_bup_es), rownames = "term"),
+  h3_od_es = as_tibble(coeftable(h3_model_od_es), rownames = "term"),
+  h3_table_robust = h3_table_robust,
+  h3_loso = h3_loso
+)
+
+saveRDS(results, "results.rds")
+print(names(results))
+```
+
+# SESSION INFO
+```{r session-info}
+print(sessionInfo())
+```

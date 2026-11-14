@@ -1,0 +1,6 @@
+# Large raw downloads (>10 MB): not committed; re-create with scripts/ (checksums in inputs/CHECKSUMS.md)
+inputs/vsrr_xkb8-kh2a.csv
+inputs/fda/*.zip
+inputs/sdud_bup_raw.csv
+inputs/sdud_bup_raw_2018_2021_pull.csv
+inputs/sdud_parts/
