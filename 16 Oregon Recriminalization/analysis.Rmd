@@ -1,0 +1,843 @@
+---
+title: "Recriminalization of drug possession and overdose deaths: Oregon (HB 4002) and Washington (SB 5536)"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    df_print: paged
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 9, fig.height = 5)
+```
+
+# 00. SETUP
+
+```{r setup_libraries}
+################################################################################
+# 00. SETUP
+################################################################################
+
+# Data management
+library(tidyverse)
+library(readxl)
+library(writexl)
+library(jsonlite)
+
+# Statistics
+library(osqp)     # simplex-constrained SCM weights
+library(fixest)   # DiD cross-check
+
+# Options
+options(scipen = 999)
+theme_set(theme_classic(base_size = 13))
+set.seed(1234)
+
+# Key dates
+or_recrim_date   <- as.Date("2024-09-01")
+wa_recrim_date   <- as.Date("2023-07-01")
+decrim_date      <- as.Date("2021-02-01")
+main_pre_from    <- as.Date("2019-01-01")
+main_end         <- as.Date("2025-12-01")
+fully_post_event <- 11:15
+
+# Estimator: ridge-augmented synthetic control (Ben-Michael, Feller & Rothstein 2021)
+# (see DECISIONS.md D02: augsynth not installable; one function reused for all placebos)
+ascm_fit <- function(panel, treated, donors, start, pre_from, end, match_synth = TRUE,
+                     lambda_grid = 10^seq(-5, 2, by = 0.5)) {
+
+  # Wide matrices: units x months
+  months <- sort(unique(panel$date[panel$date >= pre_from & panel$date <= end]))
+  units <- c(treated, donors)
+  to_wide <- function(var) {
+    m <- panel %>%
+      filter(state %in% units, date %in% months) %>%
+      select(state, date, value = all_of(var)) %>%
+      pivot_wider(names_from = date, values_from = value) %>%
+      column_to_rownames("state") %>%
+      as.matrix()
+    m[units, as.character(months), drop = FALSE]
+  }
+  y <- to_wide("rate")
+  s <- to_wide("synth_rate")
+  pre_cols <- which(months < start)
+
+  # SCM weights on pre-period columns, plus ingredients of the ridge correction
+  scm_weights <- function(cols) {
+    x <- y[, cols, drop = FALSE] / sd(y[, cols])
+    if (match_synth) x <- cbind(x, s[, cols, drop = FALSE] / sd(s[, cols]))
+    x1 <- x[treated, ]
+    x0 <- x[donors, , drop = FALSE]
+    n_donor <- length(donors)
+    p_mat <- 2 * (x0 %*% t(x0) + 1e-6 * diag(n_donor))
+    q_vec <- -2 * as.vector(x0 %*% x1)
+    a_mat <- rbind(rep(1, n_donor), diag(n_donor))
+    sol <- solve_osqp(p_mat, q_vec, a_mat, c(1, rep(0, n_donor)), c(1, rep(1, n_donor)),
+                      osqpSettings(verbose = FALSE, eps_abs = 1e-9, eps_rel = 1e-9,
+                                   max_iter = 50000L, polish = TRUE))
+    w <- pmax(sol$x, 0)
+    w <- w / sum(w)
+    x0c <- sweep(x0, 2, colMeans(x0))
+    list(w = w, x0c = x0c, imbalance = x1 - as.vector(t(x0) %*% w))
+  }
+  ridge_gamma <- function(fw, lambda_rel) {
+    gram <- fw$x0c %*% t(fw$x0c)
+    lambda <- lambda_rel * mean(diag(gram))
+    fw$w + as.vector(solve(gram + lambda * diag(length(fw$w)), fw$x0c %*% fw$imbalance))
+  }
+
+  # Choose lambda on the last 12 pre-period months (holdout)
+  train_cols <- head(pre_cols, -12)
+  valid_cols <- tail(pre_cols, 12)
+  fw_train <- scm_weights(train_cols)
+  valid_rmse <- sapply(lambda_grid, function(l) {
+    g <- ridge_gamma(fw_train, l)
+    sqrt(mean((y[treated, valid_cols] - as.vector(t(y[donors, valid_cols, drop = FALSE]) %*% g))^2))
+  })
+  lambda_best <- lambda_grid[which.min(valid_rmse)]
+
+  # Final fit on the full pre-period
+  fw <- scm_weights(pre_cols)
+  gamma <- ridge_gamma(fw, lambda_best)
+  synthetic <- as.vector(t(y[donors, , drop = FALSE]) %*% gamma)
+  synthetic_scm <- as.vector(t(y[donors, , drop = FALSE]) %*% fw$w)
+  path <- tibble(
+    date = months,
+    event = (as.integer(format(months, "%Y")) - as.integer(format(start, "%Y"))) * 12 +
+      as.integer(format(months, "%m")) - as.integer(format(start, "%m")),
+    actual = y[treated, ],
+    synthetic = synthetic,
+    synthetic_scm = synthetic_scm,
+    gap = actual - synthetic
+  )
+  list(
+    treated = treated,
+    path = path,
+    weights = tibble(state = donors, w_scm = fw$w, w_ascm = gamma),
+    lambda = lambda_best,
+    pre_rmspe = sqrt(mean(path$gap[path$event < 0]^2))
+  )
+}
+
+# Effect summary over a set of event months (12-month-ending windows)
+ascm_effect <- function(fit, events = fully_post_event) {
+  post <- fit$path %>% filter(event %in% events)
+  tibble(
+    state = fit$treated,
+    gap_per100k = mean(post$gap),
+    pct = 100 * mean(post$gap) / mean(post$synthetic),
+    rmspe_ratio = sqrt(mean(post$gap^2)) / fit$pre_rmspe,
+    pre_rmspe = fit$pre_rmspe,
+    n_events = nrow(post)
+  )
+}
+
+# In-space placebos: every donor in turn as the treated unit
+ascm_placebos <- function(panel, donors, start, pre_from, end, match_synth = TRUE,
+                          events = fully_post_event) {
+  map_dfr(donors, function(s) {
+    ascm_effect(ascm_fit(panel, s, setdiff(donors, s), start, pre_from, end, match_synth), events)
+  })
+}
+
+# Two-sided permutation p-value (treated unit counted in the reference set)
+perm_p <- function(treated_value, placebo_values) {
+  (1 + sum(abs(placebo_values) >= abs(treated_value))) / (1 + length(placebo_values))
+}
+```
+
+# 01. DATA CLEANING
+
+```{r data_cleaning}
+################################################################################
+# 01. DATA CLEANING
+################################################################################
+
+# Raw CDC VSRR provisional overdose deaths (12-month-ending counts)
+raw_vsrr <- read_csv("raw/vsrr_xkb8-kh2a.csv", show_col_types = FALSE)
+print(nrow(raw_vsrr))
+
+# Keep total deaths and synthetic opioids (T40.4); one row per state-month
+vsrr <- raw_vsrr %>%
+  rename(
+    state = State, year = Year, month_name = Month, indicator = Indicator,
+    reported = `Data Value`, predicted = `Predicted Value`, state_name = `State Name`,
+    footnote = Footnote
+  ) %>%
+  filter(indicator %in% c("Number of Drug Overdose Deaths", "Synthetic opioids, excl. methadone (T40.4)")) %>%
+  mutate(
+    month = match(month_name, month.name),
+    date = as.Date(sprintf("%d-%02d-01", year, month)),
+    deaths = coalesce(predicted, reported),
+    measure = case_when(
+      indicator == "Number of Drug Overdose Deaths" ~ "deaths_total",
+      indicator == "Synthetic opioids, excl. methadone (T40.4)" ~ "deaths_synth",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  filter(!state %in% c("US", "YC", "PR")) %>%
+  select(state, state_name, year, date, measure, deaths) %>%
+  pivot_wider(names_from = measure, values_from = deaths)
+
+print(nrow(vsrr))
+print(max(vsrr$date))
+
+# Latest month with underreporting flag, all states (D06)
+print(raw_vsrr %>%
+  filter(str_detect(Footnote, "Underreported")) %>%
+  mutate(date = as.Date(sprintf("%d-%02d-01", Year, match(Month, month.name)))) %>%
+  summarise(first_flagged = min(date), last_available = max(date)))
+
+# Analysis window: Jan 2015 - Dec 2025 (D06)
+vsrr <- vsrr %>%
+  filter(date >= as.Date("2015-01-01"), date <= main_end)
+print(nrow(vsrr))
+
+# Census population (July 1), Vintage 2020 for 2015-2019, Vintage 2025 for 2020-2025 (D08)
+pop_2010s <- read_csv("raw/NST-EST2020-ALLDATA.csv", show_col_types = FALSE) %>%
+  filter(SUMLEV == "040") %>%
+  select(state_name = NAME, POPESTIMATE2015:POPESTIMATE2019)
+pop_2020s <- read_csv("raw/NST-EST2025-ALLDATA.csv", show_col_types = FALSE) %>%
+  filter(SUMLEV == "040") %>%
+  select(state_name = NAME, POPESTIMATE2020:POPESTIMATE2025)
+population <- pop_2010s %>%
+  inner_join(pop_2020s, by = "state_name") %>%
+  pivot_longer(-state_name, names_to = "year", values_to = "population") %>%
+  mutate(year = as.integer(str_remove(year, "POPESTIMATE")))
+print(nrow(population))
+
+# Census region (West) for robustness
+west_states <- c("AK", "AZ", "CA", "CO", "HI", "ID", "MT", "NV", "NM", "OR", "UT", "WA", "WY")
+
+# Donor exclusions: treated states and states with hard-drug possession-law changes (D12)
+excluded_states <- c("OR", "WA", "CA", "CO", "NV")
+
+# Merge, compute rates per 100,000 (12-month-ending)
+df_clean <- vsrr %>%
+  left_join(population, by = c("state_name", "year")) %>%
+  mutate(
+    rate = deaths_total / population * 1e5,
+    synth_rate = deaths_synth / population * 1e5,
+    west = state %in% west_states,
+    excluded = state %in% excluded_states
+  )
+print(sum(is.na(df_clean$population)))
+print(n_distinct(df_clean$state))
+
+# Synthetic-opioid completeness, 2019-2025 and 2015-2022 windows (D13)
+synth_complete <- df_clean %>%
+  group_by(state) %>%
+  summarise(
+    synth_complete_main = all(!is.na(synth_rate[date >= main_pre_from])),
+    synth_complete_decrim = all(!is.na(synth_rate[date <= as.Date("2022-12-01")]))
+  )
+print(synth_complete %>% filter(!synth_complete_main | !synth_complete_decrim), n = 60)
+
+df_clean <- df_clean %>%
+  left_join(synth_complete, by = "state")
+
+# Oregon CJC PCS-only arrests, quarterly (D04)
+or_arrests_cjc <- read_csv("raw/cjc_or_pcs_only_arrests_quarterly.csv", show_col_types = FALSE) %>%
+  mutate(quarter_start = as.Date(quarter_start))
+print(or_arrests_cjc, n = 40)
+
+# FBI CDE drug-abuse-violation arrests, monthly (D05), whichever files were obtained
+fbi_files <- list.files("raw", pattern = "^fbi_arrest_.*_18\\.json$", full.names = TRUE)
+print(fbi_files)
+fbi_arrests <- map_dfr(fbi_files, function(f) {
+  js <- fromJSON(f)
+  if (is.null(js$actuals)) return(tibble())
+  key <- names(js$actuals)[str_detect(names(js$actuals), "Arrests") & !str_detect(names(js$actuals), "United States")]
+  tibble(
+    state = str_extract(basename(f), "(?<=fbi_arrest_)[A-Z]{2}"),
+    month_key = names(js$actuals[[key]]),
+    arrests = unlist(js$actuals[[key]]),
+    rate_per100k = unlist(js$rates[[key]][names(js$actuals[[key]])]),
+    us_rate_per100k = unlist(js$rates[["United States Arrests"]][names(js$actuals[[key]])])
+  )
+})
+if (nrow(fbi_arrests) > 0) {
+  fbi_arrests <- fbi_arrests %>%
+    mutate(date = as.Date(paste0(str_sub(month_key, 4, 7), "-", str_sub(month_key, 1, 2), "-01"))) %>%
+    select(state, date, arrests, rate_per100k, us_rate_per100k) %>%
+    arrange(state, date)
+} else {
+  fbi_arrests <- tibble(note = "FBI CDE arrests not obtained; see DECISIONS.md D05")
+}
+print(fbi_arrests)
+
+# Save clean data
+write_xlsx(
+  list(panel = df_clean, or_arrests_cjc = or_arrests_cjc, fbi_arrests = fbi_arrests),
+  "clean_data.xlsx"
+)
+```
+
+# G1. STEP 0 GATE: FIRST STAGE (ARRESTS)
+
+## G1.1 Data preparation
+
+```{r g1_prep}
+################################################################################
+# G1.1 Data preparation
+################################################################################
+
+g1_cjc <- read_excel("clean_data.xlsx", sheet = "or_arrests_cjc") %>%
+  mutate(
+    quarter_start = as.Date(quarter_start),
+    period = case_when(
+      quarter_start < as.Date("2021-01-01") ~ "1 pre-M110 (2018Q1-2020Q4)",
+      quarter_start >= as.Date("2021-04-01") & quarter_start < as.Date("2024-07-01") ~ "2 M110 (2021Q2-2024Q2)",
+      quarter_start >= as.Date("2024-10-01") ~ "3 HB 4002 (2024Q4-2025Q4)",
+      TRUE ~ "transition quarter"
+    )
+  )
+print(nrow(g1_cjc))
+
+g1_fbi <- read_excel("clean_data.xlsx", sheet = "fbi_arrests")
+print(nrow(g1_fbi))
+```
+
+## G1.2 Analysis
+
+```{r g1_analysis}
+################################################################################
+# G1.2 Analysis
+################################################################################
+
+# Oregon PCS-only arrests per quarter, by period
+g1_cjc_summary <- g1_cjc %>%
+  group_by(period) %>%
+  summarise(mean_per_quarter = mean(pcs_only_arrests), n_quarters = n())
+print(g1_cjc_summary)
+
+# Ratio HB 4002 / M110 and HB 4002 / pre-M110
+g1_ratio_vs_m110 <- g1_cjc_summary$mean_per_quarter[3] / g1_cjc_summary$mean_per_quarter[2]
+g1_ratio_vs_pre <- g1_cjc_summary$mean_per_quarter[3] / g1_cjc_summary$mean_per_quarter[1]
+print(g1_ratio_vs_m110)
+print(g1_ratio_vs_pre)
+
+# FBI drug-abuse-violation arrests (possession + sale), 12 months before vs after each date
+if ("arrests" %in% names(g1_fbi)) {
+  g1_fbi_summary <- g1_fbi %>%
+    mutate(
+      date = as.Date(date),
+      policy_date = if_else(state == "OR", or_recrim_date, wa_recrim_date),
+      window = case_when(
+        date >= policy_date - months(12) & date < policy_date ~ "12 m before",
+        date >= policy_date & date < policy_date + months(12) ~ "12 m after",
+        TRUE ~ NA_character_
+      )
+    ) %>%
+    filter(!is.na(window)) %>%
+    group_by(state, window) %>%
+    summarise(mean_monthly_arrests = mean(arrests), mean_rate = mean(rate_per100k),
+              mean_us_rate = mean(us_rate_per100k), .groups = "drop")
+  print(g1_fbi_summary)
+} else {
+  g1_fbi_summary <- tibble()
+  print("FBI arrests not obtained (rate limit); see DECISIONS.md D05")
+}
+```
+
+# G2. STEP 0 GATE: POWER
+
+## G2.1 Data preparation
+
+```{r g2_prep}
+################################################################################
+# G2.1 Data preparation
+################################################################################
+
+g2_df <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  mutate(date = as.Date(date)) %>%
+  filter(date >= main_pre_from, date <= main_end)
+g2_donors <- g2_df %>% filter(!excluded, synth_complete_main) %>% distinct(state) %>% pull(state)
+print(length(g2_donors))
+```
+
+## G2.2 Analysis
+
+```{r g2_power}
+################################################################################
+# G2.2 Analysis: placebo distribution at fake start dates in the pre-period (D17)
+################################################################################
+
+g2_fake_dates <- as.Date(c("2021-09-01", "2022-01-01", "2022-09-01", "2023-01-01"))
+g2_power <- map_dfr(g2_fake_dates, function(d) {
+  ascm_placebos(g2_df, c("OR", g2_donors), d, main_pre_from, d + months(15), match_synth = TRUE) %>%
+    mutate(fake_start = d)
+})
+print(g2_power %>% group_by(fake_start) %>% summarise(q95_abs_pct = quantile(abs(pct), 0.95), n = n()))
+
+# Minimum detectable effect: 95th percentile of |placebo % effect|
+g2_mde <- quantile(abs(g2_power$pct), 0.95)
+print(g2_mde)
+print(g2_mde > 20)
+
+# Sensitivity of the gate: total-deaths-only matching, all non-excluded donors
+g2_donors_all_power <- g2_df %>% filter(!excluded) %>% distinct(state) %>% pull(state)
+g2_power_total_only <- map_dfr(g2_fake_dates, function(d) {
+  ascm_placebos(g2_df, c("OR", g2_donors_all_power), d, main_pre_from, d + months(15), match_synth = FALSE) %>%
+    mutate(fake_start = d)
+})
+g2_mde_total_only <- quantile(abs(g2_power_total_only$pct), 0.95)
+print(g2_mde_total_only)
+
+# Sensitivity of the gate: Washington design (event 11-15), main matching
+g2_power_wa <- map_dfr(as.Date(c("2021-09-01", "2022-01-01")), function(d) {
+  ascm_placebos(g2_df, c("WA", g2_donors), d, main_pre_from, d + months(15), match_synth = TRUE) %>%
+    mutate(fake_start = d)
+})
+print(quantile(abs(g2_power_wa$pct), 0.95))
+
+# Gate decision (pre-specified main specification)
+gate_power_passed <- g2_mde <= 20
+print(gate_power_passed)
+```
+
+# H1. OREGON: RECRIMINALIZATION (SEPT 2024) (EXPLORATORY: POWER GATE FAILED)
+
+## H1.1 Data preparation
+
+```{r h1_prep}
+################################################################################
+# H1.1 Data preparation
+################################################################################
+
+h1_df <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  mutate(date = as.Date(date)) %>%
+  filter(date >= main_pre_from, date <= main_end)
+
+# Main donor pool: not excluded, complete synthetic-opioid series (D12, D13)
+h1_donors <- h1_df %>% filter(!excluded, synth_complete_main) %>% distinct(state) %>% pull(state)
+h1_donors_all <- h1_df %>% filter(!excluded) %>% distinct(state) %>% pull(state)
+h1_donors_west <- h1_df %>% filter(!excluded, west) %>% distinct(state) %>% pull(state)
+print(length(h1_donors))
+print(h1_donors)
+print(setdiff(h1_donors_all, h1_donors))
+print(h1_donors_west)
+print(nrow(h1_df))
+```
+
+## H1.2 Analysis
+
+```{r h1_analysis}
+################################################################################
+# H1.2 Analysis
+################################################################################
+
+# Main ASCM: match on total and synthetic-opioid trajectories
+h1_fit <- ascm_fit(h1_df, "OR", h1_donors, or_recrim_date, main_pre_from, main_end, match_synth = TRUE)
+print(h1_fit$lambda)
+print(h1_fit$pre_rmspe)
+print(h1_fit$weights %>% filter(w_scm > 0.01) %>% arrange(desc(w_scm)))
+print(h1_fit$path %>% filter(event >= -3), n = 30)
+
+# Primary estimate (event months 11-15, Aug-Dec 2025)
+h1_effect <- ascm_effect(h1_fit)
+print(h1_effect)
+
+# Calendar 2025 window (event 15) and excess deaths in 2025
+h1_effect_2025 <- ascm_effect(h1_fit, events = 15)
+h1_pop_2025 <- h1_df %>% filter(state == "OR", date == main_end) %>% pull(population)
+print(h1_effect_2025)
+print(h1_effect_2025$gap_per100k * h1_pop_2025 / 1e5)
+
+# In-space placebos and permutation p-value
+h1_placebos <- ascm_placebos(h1_df, h1_donors, or_recrim_date, main_pre_from, main_end, match_synth = TRUE)
+print(h1_placebos %>% arrange(desc(abs(pct))), n = 60)
+h1_p_pct <- perm_p(h1_effect$pct, h1_placebos$pct)
+h1_p_ratio <- (1 + sum(h1_placebos$rmspe_ratio >= h1_effect$rmspe_ratio)) / (1 + nrow(h1_placebos))
+print(h1_p_pct)
+print(h1_p_ratio)
+```
+
+## H1.3 Robustness
+
+```{r h1_robustness}
+################################################################################
+# H1.3 Robustness
+################################################################################
+
+# In-time placebos: fake starts Sept 2022 and Jan 2023
+h1_intime_2022 <- ascm_effect(ascm_fit(h1_df, "OR", h1_donors, as.Date("2022-09-01"), main_pre_from, as.Date("2023-12-01"), match_synth = TRUE))
+h1_intime_2023 <- ascm_effect(ascm_fit(h1_df, "OR", h1_donors, as.Date("2023-01-01"), main_pre_from, as.Date("2024-04-01"), match_synth = TRUE))
+print(h1_intime_2022)
+print(h1_intime_2023)
+
+# Match on total deaths only, all non-excluded donors
+h1_fit_total_only <- ascm_fit(h1_df, "OR", h1_donors_all, or_recrim_date, main_pre_from, main_end, match_synth = FALSE)
+h1_effect_total_only <- ascm_effect(h1_fit_total_only)
+h1_placebos_total_only <- ascm_placebos(h1_df, h1_donors_all, or_recrim_date, main_pre_from, main_end, match_synth = FALSE)
+print(h1_effect_total_only)
+print(perm_p(h1_effect_total_only$pct, h1_placebos_total_only$pct))
+
+# Western donors only (total deaths only, too few with complete T40.4)
+h1_fit_west <- ascm_fit(h1_df, "OR", h1_donors_west, or_recrim_date, main_pre_from, main_end, match_synth = FALSE)
+h1_effect_west <- ascm_effect(h1_fit_west)
+print(h1_fit_west$weights %>% arrange(desc(w_scm)))
+print(h1_effect_west)
+
+# Leave-one-donor-out (donors with SCM weight > 1%)
+h1_loo_donors <- h1_fit$weights %>% filter(w_scm > 0.01) %>% pull(state)
+h1_loo <- map_dfr(h1_loo_donors, function(d) {
+  ascm_effect(ascm_fit(h1_df, "OR", setdiff(h1_donors, d), or_recrim_date, main_pre_from, main_end, match_synth = TRUE)) %>%
+    mutate(dropped = d)
+})
+print(h1_loo)
+
+# Synthetic-opioid deaths as the outcome (secondary)
+h1_df_synth_outcome <- h1_df %>% mutate(rate = synth_rate)
+h1_fit_synth_outcome <- ascm_fit(h1_df_synth_outcome, "OR", h1_donors, or_recrim_date, main_pre_from, main_end, match_synth = FALSE)
+print(ascm_effect(h1_fit_synth_outcome))
+
+# DiD cross-check: OR vs Western donors, log rate, partially-post windows dropped (D20)
+h1_did_df <- h1_df %>%
+  filter(state %in% c("OR", h1_donors_west)) %>%
+  mutate(
+    event = (as.integer(format(date, "%Y")) - 2024) * 12 + as.integer(format(date, "%m")) - 9,
+    treat_post = as.integer(state == "OR" & event >= 11)
+  ) %>%
+  filter(!(event >= 0 & event <= 10))
+h1_did <- feols(
+  log(rate) ~ treat_post | state + date,
+  data = h1_did_df,
+  cluster = ~state
+)
+print(summary(h1_did))
+print(coeftable(h1_did)["treat_post", ])
+print(confint(h1_did)["treat_post", ])
+print(100 * (exp(coef(h1_did)["treat_post"]) - 1))
+```
+
+# H2. WASHINGTON: RECRIMINALIZATION (JULY 2023) (EXPLORATORY: POWER GATE FAILED)
+
+## H2.1 Data preparation
+
+```{r h2_prep}
+################################################################################
+# H2.1 Data preparation
+################################################################################
+
+h2_df <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  mutate(date = as.Date(date)) %>%
+  filter(date >= main_pre_from, date <= main_end)
+
+h2_donors <- h2_df %>% filter(!excluded, synth_complete_main) %>% distinct(state) %>% pull(state)
+h2_donors_all <- h2_df %>% filter(!excluded) %>% distinct(state) %>% pull(state)
+h2_donors_west <- h2_df %>% filter(!excluded, west) %>% distinct(state) %>% pull(state)
+print(length(h2_donors))
+print(nrow(h2_df))
+```
+
+## H2.2 Analysis
+
+```{r h2_analysis}
+################################################################################
+# H2.2 Analysis
+################################################################################
+
+# Main ASCM
+h2_fit <- ascm_fit(h2_df, "WA", h2_donors, wa_recrim_date, main_pre_from, main_end, match_synth = TRUE)
+print(h2_fit$lambda)
+print(h2_fit$pre_rmspe)
+print(h2_fit$weights %>% filter(w_scm > 0.01) %>% arrange(desc(w_scm)))
+
+# Aligned estimate (event 11-15, June-Oct 2024) and all fully-post windows (event 11-29)
+h2_effect <- ascm_effect(h2_fit)
+h2_effect_all_post <- ascm_effect(h2_fit, events = 11:29)
+print(h2_effect)
+print(h2_effect_all_post)
+
+# Calendar 2024 (event 17) and 2025 (event 29) windows, excess deaths
+h2_effect_2024 <- ascm_effect(h2_fit, events = 17)
+h2_effect_2025 <- ascm_effect(h2_fit, events = 29)
+h2_pop <- h2_df %>% filter(state == "WA", date %in% as.Date(c("2024-12-01", "2025-12-01"))) %>% pull(population)
+print(h2_effect_2024)
+print(h2_effect_2025)
+print(c(h2_effect_2024$gap_per100k, h2_effect_2025$gap_per100k) * h2_pop / 1e5)
+
+# In-space placebos
+h2_placebos <- ascm_placebos(h2_df, h2_donors, wa_recrim_date, main_pre_from, main_end, match_synth = TRUE)
+h2_placebos_all_post <- ascm_placebos(h2_df, h2_donors, wa_recrim_date, main_pre_from, main_end, match_synth = TRUE, events = 11:29)
+print(perm_p(h2_effect$pct, h2_placebos$pct))
+print(perm_p(h2_effect_all_post$pct, h2_placebos_all_post$pct))
+print((1 + sum(h2_placebos$rmspe_ratio >= h2_effect$rmspe_ratio)) / (1 + nrow(h2_placebos)))
+```
+
+## H2.3 Robustness
+
+```{r h2_robustness}
+################################################################################
+# H2.3 Robustness
+################################################################################
+
+# In-time placebo: fake start Jan 2022 (window ends Apr 2023)
+print(ascm_effect(ascm_fit(h2_df, "WA", h2_donors, as.Date("2022-01-01"), main_pre_from, as.Date("2023-04-01"), match_synth = TRUE)))
+
+# Total deaths only, all non-excluded donors
+h2_effect_total_only <- ascm_effect(ascm_fit(h2_df, "WA", h2_donors_all, wa_recrim_date, main_pre_from, main_end, match_synth = FALSE))
+print(h2_effect_total_only)
+
+# Western donors only
+h2_effect_west <- ascm_effect(ascm_fit(h2_df, "WA", h2_donors_west, wa_recrim_date, main_pre_from, main_end, match_synth = FALSE))
+print(h2_effect_west)
+
+# Leave-one-donor-out
+h2_loo_donors <- h2_fit$weights %>% filter(w_scm > 0.01) %>% pull(state)
+h2_loo <- map_dfr(h2_loo_donors, function(d) {
+  ascm_effect(ascm_fit(h2_df, "WA", setdiff(h2_donors, d), wa_recrim_date, main_pre_from, main_end, match_synth = TRUE)) %>%
+    mutate(dropped = d)
+})
+print(h2_loo)
+
+# DiD cross-check vs Western donors
+h2_did_df <- h2_df %>%
+  filter(state %in% c("WA", h2_donors_west)) %>%
+  mutate(
+    event = (as.integer(format(date, "%Y")) - 2023) * 12 + as.integer(format(date, "%m")) - 7,
+    treat_post = as.integer(state == "WA" & event >= 11)
+  ) %>%
+  filter(!(event >= 0 & event <= 10))
+h2_did <- feols(
+  log(rate) ~ treat_post | state + date,
+  data = h2_did_df,
+  cluster = ~state
+)
+print(summary(h2_did))
+print(coeftable(h2_did)["treat_post", ])
+print(confint(h2_did)["treat_post", ])
+print(100 * (exp(coef(h2_did)["treat_post"]) - 1))
+```
+
+# H3. STACKED OR + WA (EXPLORATORY: POWER GATE FAILED)
+
+```{r h3_stacked}
+################################################################################
+# H3. Stacked estimate (event months 11-15, D19)
+################################################################################
+
+# Average of the two % effects
+h3_effect <- mean(c(h1_effect$pct, h2_effect$pct))
+print(h3_effect)
+
+# Placebo: each donor's average across both designs
+h3_placebos <- h1_placebos %>%
+  select(state, pct_or = pct) %>%
+  inner_join(h2_placebos %>% select(state, pct_wa = pct), by = "state") %>%
+  mutate(pct = (pct_or + pct_wa) / 2)
+print(nrow(h3_placebos))
+h3_p <- perm_p(h3_effect, h3_placebos$pct)
+print(h3_p)
+
+# Stacked gap path by event time
+h3_path <- bind_rows(
+  h1_fit$path %>% mutate(state = "OR"),
+  h2_fit$path %>% mutate(state = "WA")
+) %>%
+  mutate(pct_gap = 100 * gap / synthetic) %>%
+  group_by(event) %>%
+  summarise(mean_pct_gap = mean(pct_gap), n_states = n()) %>%
+  filter(n_states == 2)
+print(h3_path %>% filter(event >= -6), n = 40)
+```
+
+# S1. SECONDARY: DECRIMINALIZATION REPLICATION (FEB 2021) (EXPLORATORY)
+
+## S1.1 Data preparation
+
+```{r s1_prep}
+################################################################################
+# S1.1 Data preparation
+################################################################################
+
+s1_df <- read_excel("clean_data.xlsx", sheet = "panel") %>%
+  mutate(date = as.Date(date)) %>%
+  filter(date >= as.Date("2015-01-01"), date <= as.Date("2023-12-01"))
+
+s1_donors <- s1_df %>% filter(!excluded, synth_complete_decrim) %>% distinct(state) %>% pull(state)
+s1_donors_all <- s1_df %>% filter(!excluded) %>% distinct(state) %>% pull(state)
+print(length(s1_donors))
+print(length(s1_donors_all))
+```
+
+## S1.2 Analysis
+
+```{r s1_analysis}
+################################################################################
+# S1.2 Analysis
+################################################################################
+
+# Oregon M110, matched on total + synthetic opioids (end Dec 2022)
+s1_fit_or <- ascm_fit(s1_df, "OR", s1_donors, decrim_date, as.Date("2015-01-01"), as.Date("2022-12-01"), match_synth = TRUE)
+s1_effect_or <- ascm_effect(s1_fit_or, events = 11:22)
+s1_placebos_or <- ascm_placebos(s1_df, s1_donors, decrim_date, as.Date("2015-01-01"), as.Date("2022-12-01"), match_synth = TRUE, events = 11:22)
+print(s1_effect_or)
+print(perm_p(s1_effect_or$pct, s1_placebos_or$pct))
+
+# Oregon M110, matched on total only (crude analogue)
+s1_fit_or_total <- ascm_fit(s1_df, "OR", s1_donors_all, decrim_date, as.Date("2015-01-01"), as.Date("2022-12-01"), match_synth = FALSE)
+s1_effect_or_total <- ascm_effect(s1_fit_or_total, events = 11:22)
+s1_placebos_or_total <- ascm_placebos(s1_df, s1_donors_all, decrim_date, as.Date("2015-01-01"), as.Date("2022-12-01"), match_synth = FALSE, events = 11:22)
+print(s1_effect_or_total)
+print(perm_p(s1_effect_or_total$pct, s1_placebos_or_total$pct))
+
+# Washington Blake, matched on total + synthetic opioids
+s1_fit_wa <- ascm_fit(s1_df, "WA", s1_donors, decrim_date, as.Date("2015-01-01"), as.Date("2022-12-01"), match_synth = TRUE)
+s1_effect_wa <- ascm_effect(s1_fit_wa, events = 11:22)
+s1_placebos_wa <- ascm_placebos(s1_df, s1_donors, decrim_date, as.Date("2015-01-01"), as.Date("2022-12-01"), match_synth = TRUE, events = 11:22)
+print(s1_effect_wa)
+print(perm_p(s1_effect_wa$pct, s1_placebos_wa$pct))
+
+# Washington Blake, total only
+s1_fit_wa_total <- ascm_fit(s1_df, "WA", s1_donors_all, decrim_date, as.Date("2015-01-01"), as.Date("2022-12-01"), match_synth = FALSE)
+s1_effect_wa_total <- ascm_effect(s1_fit_wa_total, events = 11:22)
+print(s1_effect_wa_total)
+
+# Excess deaths in calendar 2022 window (event 22), OR and WA, main and total-only
+s1_pop_2022 <- s1_df %>% filter(date == as.Date("2022-12-01"), state %in% c("OR", "WA")) %>% select(state, population)
+print(s1_pop_2022)
+s1_excess_2022 <- tibble(
+  state = c("OR", "OR", "WA", "WA"),
+  spec = c("total+synth", "total only", "total+synth", "total only"),
+  gap_per100k_2022 = c(
+    ascm_effect(s1_fit_or, events = 22)$gap_per100k,
+    ascm_effect(s1_fit_or_total, events = 22)$gap_per100k,
+    ascm_effect(s1_fit_wa, events = 22)$gap_per100k,
+    ascm_effect(s1_fit_wa_total, events = 22)$gap_per100k
+  )
+) %>%
+  left_join(s1_pop_2022, by = "state") %>%
+  mutate(excess_deaths_2022 = gap_per100k_2022 * population / 1e5)
+print(s1_excess_2022)
+
+# Monthly-rate equivalent of the first-year gap (compare Joshi et al.: per 100k per month)
+print(ascm_effect(s1_fit_or, events = 12)$gap_per100k / 12)
+print(ascm_effect(s1_fit_wa, events = 12)$gap_per100k / 12)
+```
+
+# FIGURES
+
+```{r figures}
+################################################################################
+# FIGURES
+################################################################################
+
+dir.create("figures", showWarnings = FALSE)
+
+# Figure 1: first stage, Oregon PCS-only arrests (CJC/LEDS)
+fig1_arrests <- ggplot(g1_cjc, aes(quarter_start, pcs_only_arrests)) +
+  geom_line(linewidth = 1) +
+  geom_point() +
+  geom_vline(xintercept = c(decrim_date, or_recrim_date), linetype = "dashed") +
+  annotate("text", x = decrim_date, y = 1450, label = "M110", hjust = -0.1) +
+  annotate("text", x = or_recrim_date, y = 1450, label = "HB 4002", hjust = 1.1) +
+  labs(x = NULL, y = "PCS-only arrests per quarter", title = "Oregon possession-only arrests (CJC / LEDS)")
+print(fig1_arrests)
+ggsave("figures/fig1_first_stage_arrests_OR.png", fig1_arrests, width = 9, height = 5, dpi = 200)
+
+# Figure 1b: FBI drug-abuse-violation arrests, OR and WA (if obtained)
+if ("arrests" %in% names(g1_fbi)) {
+  fig1b_fbi <- g1_fbi %>%
+    mutate(date = as.Date(date)) %>%
+    ggplot(aes(date, rate_per100k, colour = state)) +
+    geom_line() +
+    geom_line(aes(y = us_rate_per100k), colour = "grey50", linetype = "dotted") +
+    geom_vline(xintercept = c(decrim_date, wa_recrim_date, or_recrim_date), linetype = "dashed") +
+    labs(x = NULL, y = "Drug-abuse-violation arrests per 100k (monthly)", colour = NULL,
+         title = "FBI CDE drug arrests (possession + sale); dotted = US")
+  print(fig1b_fbi)
+  ggsave("figures/fig1b_first_stage_arrests_FBI.png", fig1b_fbi, width = 9, height = 5, dpi = 200)
+}
+
+# Figure 2: synthetic control paths, OR and WA
+fig2_paths <- bind_rows(
+  h1_fit$path %>% mutate(state = "Oregon (HB 4002, Sept 2024)"),
+  h2_fit$path %>% mutate(state = "Washington (SB 5536, July 2023)")
+) %>%
+  select(state, date, actual, synthetic) %>%
+  pivot_longer(c(actual, synthetic), names_to = "series", values_to = "rate") %>%
+  ggplot(aes(date, rate, linetype = series)) +
+  geom_line(linewidth = 0.9) +
+  geom_vline(data = tibble(state = c("Oregon (HB 4002, Sept 2024)", "Washington (SB 5536, July 2023)"),
+                           d = c(or_recrim_date, wa_recrim_date)),
+             aes(xintercept = d), colour = "red") +
+  geom_vline(data = tibble(state = c("Oregon (HB 4002, Sept 2024)", "Washington (SB 5536, July 2023)"),
+                           d = c(or_recrim_date, wa_recrim_date) + months(11)),
+             aes(xintercept = d), colour = "red", linetype = "dotted") +
+  facet_wrap(~state, ncol = 1, scales = "free_y") +
+  labs(x = NULL, y = "Overdose deaths per 100k (12-month ending)", linetype = NULL,
+       title = "Augmented synthetic control: actual vs synthetic",
+       subtitle = "Solid red = policy start; dotted red = first fully post-policy 12-month window")
+print(fig2_paths)
+ggsave("figures/fig2_synthetic_control_paths.png", fig2_paths, width = 9, height = 8, dpi = 200)
+
+# Figure 3: placebo distributions
+fig3_placebo <- bind_rows(
+  h1_placebos %>% mutate(design = "Oregon design"),
+  h2_placebos %>% mutate(design = "Washington design"),
+  h3_placebos %>% select(state, pct) %>% mutate(design = "Stacked")
+) %>%
+  ggplot(aes(pct)) +
+  geom_histogram(bins = 25, fill = "grey70", colour = "white") +
+  geom_vline(data = tibble(design = c("Oregon design", "Washington design", "Stacked"),
+                           pct = c(h1_effect$pct, h2_effect$pct, h3_effect)),
+             aes(xintercept = pct), colour = "red", linewidth = 1) +
+  facet_wrap(~design, ncol = 1) +
+  labs(x = "% gap, event months 11-15 (12-month-ending rate)", y = "Placebo states",
+       title = "In-space placebo distribution (red = treated state)")
+print(fig3_placebo)
+ggsave("figures/fig3_placebo_distribution.png", fig3_placebo, width = 8, height = 8, dpi = 200)
+
+# Figure 4: decriminalization replication paths
+fig4_decrim <- bind_rows(
+  s1_fit_or$path %>% mutate(state = "Oregon (M110)"),
+  s1_fit_wa$path %>% mutate(state = "Washington (Blake)")
+) %>%
+  select(state, date, actual, synthetic) %>%
+  pivot_longer(c(actual, synthetic), names_to = "series", values_to = "rate") %>%
+  ggplot(aes(date, rate, linetype = series)) +
+  geom_line(linewidth = 0.9) +
+  geom_vline(xintercept = decrim_date, colour = "red") +
+  facet_wrap(~state, ncol = 1, scales = "free_y") +
+  labs(x = NULL, y = "Overdose deaths per 100k (12-month ending)", linetype = NULL,
+       title = "Decriminalization replication (matched on total + synthetic-opioid deaths)")
+print(fig4_decrim)
+ggsave("figures/fig4_decriminalization_replication.png", fig4_decrim, width = 9, height = 8, dpi = 200)
+```
+
+# SAVE RESULTS
+
+```{r save_results}
+################################################################################
+# SAVE RESULTS
+################################################################################
+
+results <- list(
+  first_stage = list(cjc = g1_cjc_summary, ratio_vs_m110 = g1_ratio_vs_m110,
+                     ratio_vs_pre = g1_ratio_vs_pre, fbi = g1_fbi_summary),
+  oregon = list(fit = h1_fit, effect = h1_effect, effect_2025 = h1_effect_2025,
+                placebos = h1_placebos, p_pct = h1_p_pct, p_ratio = h1_p_ratio,
+                power = g2_power, mde = g2_mde, mde_total_only = g2_mde_total_only,
+                power_wa_q95 = quantile(abs(g2_power_wa$pct), 0.95), gate_power_passed = gate_power_passed,
+                intime_2022 = h1_intime_2022, intime_2023 = h1_intime_2023,
+                total_only = h1_effect_total_only, west = h1_effect_west, loo = h1_loo,
+                did = coeftable(h1_did)),
+  washington = list(fit = h2_fit, effect = h2_effect, effect_all_post = h2_effect_all_post,
+                    effect_2024 = h2_effect_2024, effect_2025 = h2_effect_2025,
+                    placebos = h2_placebos, total_only = h2_effect_total_only,
+                    west = h2_effect_west, loo = h2_loo, did = coeftable(h2_did)),
+  stacked = list(effect = h3_effect, placebos = h3_placebos, p = h3_p, path = h3_path),
+  decrim = list(or = s1_effect_or, or_total = s1_effect_or_total, wa = s1_effect_wa,
+                wa_total = s1_effect_wa_total, excess_2022 = s1_excess_2022)
+)
+saveRDS(results, "results.rds")
+print(names(results))
+```
+
+# SESSION INFO
+
+```{r session_info}
+print(sessionInfo())
+```
